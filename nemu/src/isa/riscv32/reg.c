@@ -24,8 +24,10 @@ const char *regs[] = {
 };
 
 void isa_reg_display() {
-	int i=strlen(*regs);
-	printf("%d",i);
+	int i=32;
+	for(;i>0;i--) {
+		printf("%s \n",regs[32-i]);
+	}
 
 }
 
