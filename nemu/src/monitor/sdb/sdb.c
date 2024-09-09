@@ -44,9 +44,9 @@ static char* rl_gets() {
 
 static int cmd_si(char *args) {
 	unsigned int num;
-//	char command[5];
+	char command[5];
 
-	sscanf("si 1", "%u",&num);
+	sscanf(args, "%s %u",command,&num);
 	printf("%d",num);
 
 	return 0;
