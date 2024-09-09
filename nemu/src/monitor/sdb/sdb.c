@@ -43,10 +43,10 @@ static char* rl_gets() {
 }
 
 static int cmd_si(char *args) {
-	int num;
+	unsigned int num;
 //	char command[5];
 
-	sscanf("si 1", "%d",&num);
+	sscanf("si 1", "%u",&num);
 	printf("%d",num);
 
 	return 0;
