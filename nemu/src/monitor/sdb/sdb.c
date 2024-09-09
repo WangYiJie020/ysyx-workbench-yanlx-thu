@@ -47,12 +47,12 @@ static int cmd_si(char *args) {
 	char num_c[5];
 	int num;
 	if (arg == NULL) {
-		num=10;
+		num=1;
 	}
 	else {
 		strcpy( num_c, arg);
 		sscanf(num_c,"%d",&num);
-		printf("%d",num);
+		//printf("%d",num);
 	}
 	cpu_exec(num);
 
@@ -61,6 +61,24 @@ static int cmd_si(char *args) {
 }
 
 static int cmd_info(char *args) {
+	char *arg = strtok(NULL, " ");
+       
+        if (arg == NULL) {
+                printf("please add sub command and try again\n");
+        }
+        else {
+		if(strcmp(arg,"r")==0){
+			isa_reg_display();
+
+		}
+		else if(strcmp(arg,"w")==0){
+			printf("www");
+		}
+		else{
+			printf("Unknown command '%s'\n", arg);
+		}
+	}
+        
         return 0;
 }
 
