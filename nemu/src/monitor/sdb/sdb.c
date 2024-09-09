@@ -46,11 +46,11 @@ static int cmd_si(char *args) {
 	char *arg = strtok(NULL, " ");
 	char num_c[5];
 	int num;
-	strcpy( num_c, "10");
 	if (arg == NULL) {
 		printf("null\n");
 	}
 	else {
+		strcpy( num_c, arg);
 		sscanf(num_c,"%d",&num);
 		printf("%d",num);
 	}
