@@ -47,13 +47,14 @@ static int cmd_si(char *args) {
 	char num_c[5];
 	int num;
 	if (arg == NULL) {
-		printf("null\n");
+		num=10;
 	}
 	else {
 		strcpy( num_c, arg);
 		sscanf(num_c,"%d",&num);
 		printf("%d",num);
 	}
+	cpu_exec(num);
 
 
 	return 0;
