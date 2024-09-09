@@ -44,11 +44,15 @@ static char* rl_gets() {
 
 static int cmd_si(char *args) {
 	char *arg = strtok(NULL, " ");
+	char num_c[5];
+	int num;
+	strcpy( num_c, "10");
 	if (arg == NULL) {
 		printf("null\n");
 	}
 	else {
-		printf("%d",*arg);
+		sscanf(num_c,"%d",&num);
+		printf("%d",num);
 	}
 
 
