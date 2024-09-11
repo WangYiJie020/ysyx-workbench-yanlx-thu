@@ -104,7 +104,7 @@ static int cmd_x(char *args) {
                 	//printf("%s\n",line);
                 	sscanf(line,"%x",&place);
                 	//printf("%d %x",num,place);
-			printf("%x",vaddr_read(place,4));
+			printf("%8x",vaddr_read(place,4));
 		}
 
                 
