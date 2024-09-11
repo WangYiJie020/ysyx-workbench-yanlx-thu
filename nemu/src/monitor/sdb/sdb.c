@@ -83,7 +83,21 @@ static int cmd_info(char *args) {
 }
 
 static int cmd_x(char *args) {
-        return 0;
+        char *arg = strtok(NULL, " ");
+	unsigned int num,place;
+	char line[10];
+
+        if (arg == NULL) {
+                printf("please add sub command and try again\n");
+        }
+        else {
+		strcpy( line, arg);
+                sscanf(line,"%d %x",&num,&place);
+                printf("%d %x",num,place);
+
+                
+	}
+	return 0;
 }
 
 static int cmd_p(char *args) {
