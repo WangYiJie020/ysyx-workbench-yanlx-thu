@@ -92,13 +92,18 @@ static int cmd_x(char *args) {
         }
         else {
 		strcpy( line, arg);
-		printf("%s\n",line);
+		//printf("%s\n",line);
 		sscanf(line,"%d",&num);
 		arg = strtok(NULL, " ");
-		strcpy( line, arg);
-                printf("%s\n",line);
-                sscanf(line,"%x",&place);
-                printf("%d %x",num,place);
+		if(arg==NULL) {
+			printf("please add sub command and try again\n");
+		}
+		else {
+			strcpy( line, arg);
+                	//printf("%s\n",line);
+                	sscanf(line,"%x",&place);
+                	//printf("%d %x",num,place);
+		}
 
                 
 	}
