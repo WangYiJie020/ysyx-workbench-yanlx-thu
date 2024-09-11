@@ -106,7 +106,7 @@ static int cmd_x(char *args) {
                 	//printf("%d %x",num,place);
 			int i,j;
 			for(i=0;i<num;i++) {
-				printf("0x%8u: ",addr);
+				printf("0x%8x: ",addr);
 				for(j=3;j>=0;j--) {
 					printf("%02x ",vaddr_read(addr+j,1));
 				}
