@@ -85,7 +85,7 @@ static int cmd_info(char *args) {
 
 static int cmd_x(char *args) {
         char *arg = strtok(NULL, " ");
-	unsigned int num,place;
+	unsigned int num,addr;
 	char line[10];
 
         if (arg == NULL) {
@@ -102,9 +102,19 @@ static int cmd_x(char *args) {
 		else {
 			strcpy( line, arg);
                 	//printf("%s\n",line);
-                	sscanf(line,"%x",&place);
+                	sscanf(line,"%x",&addr);
                 	//printf("%d %x",num,place);
-			printf("%02x\n",vaddr_read(place,1));
+			int i,j;
+			for(i=0;i<num;i++) {
+				printf("0x%8u: ",addr);
+				for(j=3;j>=0;j--) {
+					printf("%02x ",vaddr_read(addr+j,1));
+				}
+				addr+=4;
+				printf("\n");
+				
+			}
+			
 		}
 
                 
