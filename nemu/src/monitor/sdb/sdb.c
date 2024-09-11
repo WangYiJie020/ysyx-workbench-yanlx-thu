@@ -92,6 +92,7 @@ static int cmd_x(char *args) {
         }
         else {
 		strcpy( line, arg);
+		printf("%s\n",line);
                 sscanf(line,"%d %x",&num,&place);
                 printf("%d %x",num,place);
 
