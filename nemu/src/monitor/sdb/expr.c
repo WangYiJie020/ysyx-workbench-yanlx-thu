@@ -102,6 +102,14 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
+		case TK_NOTYPE: printf("notype\n"); break;
+		case '+': printf("add\n"); break;
+		case '-': printf("sub\n"); break;
+		case '*': printf("mult\n"); break;
+		case '/': printf("div\n"); break;
+		case TK_NUM: printf("NUM\n"); break;
+		case '(': printf("kuohao\n"); break;
+		case ')': printf("kuohao2\n"); break;
           default: printf("aa\n");
         }
 
