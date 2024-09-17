@@ -110,7 +110,7 @@ static bool make_token(char *e) {
 			//printf("add\n"); 
 			break;
 		case '-': 
-			tokens[nr_token].type='-';
+			tokens[nr_token].type=2;
 			nr_token++;
 			//printf("sub\n"); 
 			break;
@@ -142,7 +142,7 @@ static bool make_token(char *e) {
 			break;
           default: printf("error!\n");
         }
-	tokens[nr_token].type=i;
+	
 	
         break;
       }
