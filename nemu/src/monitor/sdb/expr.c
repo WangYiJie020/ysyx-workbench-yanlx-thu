@@ -142,6 +142,7 @@ static bool make_token(char *e) {
 			break;
           default: printf("error!\n");
         }
+	tokens[nr_token].type=i;
 	
         break;
       }
@@ -166,7 +167,7 @@ word_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   int i;
   for(i=0;i<nr_token;i++) {
-	  printf("%c,%s\n",tokens[nr_token].type,tokens[nr_token].str);
+	  printf("%d,%s\n",tokens[nr_token].type,tokens[nr_token].str);
 
   }
 
