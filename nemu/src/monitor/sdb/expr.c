@@ -102,43 +102,43 @@ static bool make_token(char *e) {
          */
         switch (rules[i].token_type) {
 		case TK_NOTYPE:
-		       	printf("notype\n"); 
+		       	//printf("notype\n"); 
 			break;
 		case '+': 
 			tokens[nr_token].type='+';
 			nr_token++;
-			printf("add\n"); 
+			//printf("add\n"); 
 			break;
 		case '-': 
 			tokens[nr_token].type='-';
 			nr_token++;
-			printf("sub\n"); 
+			//printf("sub\n"); 
 			break;
 		case '*': 
 			tokens[nr_token].type='*';
 			nr_token++;
-			printf("mult\n"); 
+			//printf("mult\n"); 
 			break;
 		case '/': 
 			tokens[nr_token].type='/';
 			nr_token++;
-			printf("div\n"); 
+			//printf("div\n"); 
 			break;
 		case TK_NUM: 
 			tokens[nr_token].type=TK_NUM;
-			strcpy(substr_start,tokens[nr_token].str);
+			strcpy(tokens[nr_token].str,substr_start);
 			nr_token++;
-			printf("NUM\n"); 
+			printf("NUM:%s\n",tokens[nr_token].str); 
 			break;
 		case '(': 
 			tokens[nr_token].type='(';
 			nr_token++;
-			printf("kuohao\n"); 
+			//printf("kuohao\n"); 
 			break;
 		case ')': 
 			tokens[nr_token].type=')';
 			nr_token++;
-			printf("kuohao2\n"); 
+			//printf("kuohao2\n"); 
 			break;
           default: printf("error!\n");
         }
