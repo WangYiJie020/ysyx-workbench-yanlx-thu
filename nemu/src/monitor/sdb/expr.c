@@ -100,19 +100,49 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-
         switch (rules[i].token_type) {
-		case TK_NOTYPE: printf("notype\n"); break;
-		case '+': printf("add\n"); break;
-		case '-': printf("sub\n"); break;
-		case '*': printf("mult\n"); break;
-		case '/': printf("div\n"); break;
-		case TK_NUM: printf("NUM\n"); break;
-		case '(': printf("kuohao\n"); break;
-		case ')': printf("kuohao2\n"); break;
-          default: printf("aa\n");
+		case TK_NOTYPE:
+		       	printf("notype\n"); 
+			break;
+		case '+': 
+			tokens[nr_token].type='+';
+			nr_token++;
+			printf("add\n"); 
+			break;
+		case '-': 
+			tokens[nr_token].type='-';
+			nr_token++;
+			printf("sub\n"); 
+			break;
+		case '*': 
+			tokens[nr_token].type='*';
+			nr_token++;
+			printf("mult\n"); 
+			break;
+		case '/': 
+			tokens[nr_token].type='/';
+			nr_token++;
+			printf("div\n"); 
+			break;
+		case TK_NUM: 
+			tokens[nr_token].type=TK_NUM;
+			strcpy(substr_start,tokens[nr_token].str);
+			nr_token++;
+			printf("NUM\n"); 
+			break;
+		case '(': 
+			tokens[nr_token].type='(';
+			nr_token++;
+			printf("kuohao\n"); 
+			break;
+		case ')': 
+			tokens[nr_token].type=')';
+			nr_token++;
+			printf("kuohao2\n"); 
+			break;
+          default: printf("error!\n");
         }
-
+	
         break;
       }
     }
@@ -134,7 +164,10 @@ word_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  printf("add\n");
+  int i;
+  for(i=0;i<nr_token;i++) {
+	  printf("%d,%s\n",tokens[nr_token].type,tokens[nr_token].str);
+  }
 
   return 0;
 }
