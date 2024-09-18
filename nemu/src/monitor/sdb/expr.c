@@ -19,7 +19,7 @@
  * Type 'man regex' for more information about POSIX regex functions.
  */
 #include <regex.h>
-
+#include <stdlib.h>
 enum {
   TK_NOTYPE = 256, TK_EQ, TK_NUM, 
 
@@ -126,7 +126,9 @@ static bool make_token(char *e) {
 			break;
 		case TK_NUM: 
 			tokens[nr_token].type=TK_NUM;
-			strcpy(tokens[nr_token].str,substr_start);
+			int mynum;
+			sscanf(substr_start,"%d",&mynum);
+			//itoa(mynum,tokens[nr_token].str,10);
 			nr_token++;
 			printf("NUM:%s\n",tokens[nr_token].str); 
 			break;
