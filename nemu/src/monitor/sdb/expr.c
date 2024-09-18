@@ -127,9 +127,10 @@ static bool make_token(char *e) {
 		case TK_NUM: 
 			tokens[nr_token].type=TK_NUM;
 			//int mynum;
-			strcpy(tokens[nr_token].str,strtok(NULL,"+-*/() "));
+			//strcpy(tokens[nr_token].str,strtok(NULL,"+-*/() "));
 			//sscanf(substr_len,substr_start,"%.*s",tokens[nr_token].str);
 			//itoa(mynum,tokens[nr_token].str,10);
+			printf("%.*s\n",substr_len,substr_start);
 			nr_token++;
 			printf("NUM:%s\n",tokens[nr_token].str); 
 			break;
