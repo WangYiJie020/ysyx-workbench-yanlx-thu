@@ -106,21 +106,25 @@ static bool make_token(char *e) {
 			break;
 		case '+': 
 			tokens[nr_token].type='+';
+			tokens[nr_token].str[0]='+';
 			nr_token++;
 			//printf("add\n"); 
 			break;
 		case '-': 
-			tokens[nr_token].type=2;
+			tokens[nr_token].type='-';
+			tokens[nr_token].str[0]='-';
 			nr_token++;
 			//printf("sub\n"); 
 			break;
 		case '*': 
 			tokens[nr_token].type='*';
+			tokens[nr_token].str[0]='*';
 			nr_token++;
 			//printf("mult\n"); 
 			break;
 		case '/': 
 			tokens[nr_token].type='/';
+			tokens[nr_token].str[0]='/';
 			nr_token++;
 			//printf("div\n"); 
 			break;
@@ -137,11 +141,13 @@ static bool make_token(char *e) {
 			break;
 		case '(': 
 			tokens[nr_token].type='(';
+			tokens[nr_token].str[0]='(';
 			nr_token++;
 			//printf("kuohao\n"); 
 			break;
 		case ')': 
 			tokens[nr_token].type=')';
+			tokens[nr_token].str[0]=')';
 			nr_token++;
 			//printf("kuohao2\n"); 
 			break;
