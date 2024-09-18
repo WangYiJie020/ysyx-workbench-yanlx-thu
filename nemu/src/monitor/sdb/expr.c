@@ -130,7 +130,7 @@ static bool make_token(char *e) {
 			sscanf(substr_start,"%d",&mynum);
 			//itoa(mynum,tokens[nr_token].str,10);
 			nr_token++;
-			printf("NUM:%s\n",tokens[nr_token].str); 
+			printf("NUM:%d\n",mynum);//tokens[nr_token].str); 
 			break;
 		case '(': 
 			tokens[nr_token].type='(';
