@@ -164,6 +164,80 @@ static bool make_token(char *e) {
 
   return true;
 }
+bool check_parentheses(int p, int q){
+	int i,stack=0;
+
+	for(i=p;i<=q;i++) {
+		if(tokens[i].type=='(') {
+			stack++;
+		}
+		if(tokens[i].type==')') {
+			stack--;
+		}
+		if(stack<=0){
+			break;
+		}
+	}
+
+	if(i==q) return true;
+	else return false;
+	
+
+}
+uint32_t eval(int p,int q) {
+  if (p > q) {
+    /* Bad expression */
+	  assert(0);
+  }
+  else if (p == q) {
+    /* Single token.
+     * For now this token should be a number.
+     * Return the value of the number.
+     */
+	  uint32_t num;
+	  sscanf(tokens[p].str,"%u",&num);
+	  return num;
+  }
+  else if (check_parentheses(p, q) == true) {
+    /* The expression is surrounded by a matched pair of parentheses.
+     * If that is the case, just throw away the parentheses.
+     */
+    return eval(p + 1, q - 1);
+  }
+  else {
+	  uint32_t val1,val2;
+	  int i,op=0,flag=1;
+	  for(i=p;i<=q;i++) {
+		  if(tokens[i].type=='(') {
+			  flag = 0;
+		  }
+		  if(tokens[i].type==')') {
+                          flag = 1;
+		  }
+
+		  if(flag==1) {
+		    if(tokens[i].type=='+' || tokens[i].type=='-') {
+			  op=i;
+			  break;
+		    }
+		    if(tokens[i].type=='*' || tokens[i].type=='/') {
+			  op=i;
+		    }
+		  }
+	  }
+    //op = the position of 主运算符 in the token expression;
+    val1 = eval(p, op - 1);
+    val2 = eval(op + 1, q);
+
+    switch (tokens[op].type) {
+      case '+': return val1 + val2;
+      case '-': return val1 - val2;/* ... */
+      case '*': return val1 * val2;/* ... */
+      case '/': return val1 /(float) val2;/* ... */
+      default: assert(0);
+    }
+  }
+}
 
 
 word_t expr(char *e, bool *success) {
@@ -173,11 +247,12 @@ word_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  int i;
-  for(i=0;i<nr_token;i++) {
-	  printf("%d,%s\n",tokens[i].type,tokens[i].str);
+  //int i;
+  
+  //for(i=0;i<nr_token;i++) {
+  //	  printf("%d,%s\n",tokens[i].type,tokens[i].str);
 
-  }
+  //}
+  return eval(0,nr_token-1);
 
-  return 0;
 }

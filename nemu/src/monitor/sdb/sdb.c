@@ -126,8 +126,10 @@ static int cmd_p(char *args) {
 	char *arg = strtok(NULL, "\0");
 	bool success;
 	bool *ptr_success = &success;
+	uint32_t result;
 	//printf("%s\n",arg);
-	expr(arg,ptr_success);
+	result=expr(arg,ptr_success);
+	printf("result=%u",result);
         return 0;
 }
 
