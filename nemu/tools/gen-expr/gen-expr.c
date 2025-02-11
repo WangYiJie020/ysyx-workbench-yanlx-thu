@@ -20,6 +20,9 @@
 #include <assert.h>
 #include <string.h>
 
+#define GEN_NUM_SIZE 10
+#define GEN_EXPR_SIZE 5
+
 // this should be enough
 static char buf[65536] = {};
 static char code_buf[65536 + 128] = {}; // a little larger than `buf`
@@ -31,9 +34,81 @@ static char *code_format =
 "  return 0; "
 "}";
 
-static void gen_rand_expr() {
-  buf[0] = '\0';
+static int pos=0;
+
+int choose(int times) {
+	return rand() % times;
 }
+
+void gen_num(int depth) {
+	int num;
+	depth++;
+	num = rand() % 9;
+	num++;
+	sprintf(&buf[pos],"%d",num);
+	pos++;
+	if(choose(2)==0) {
+		if(depth < GEN_NUM_SIZE) gen_num(depth);
+
+	}
+	/*switch(choose(9)) {
+		case 0: buf[pos]='1';break;
+		case 1: buf[pos]='2';break;
+		case 2: buf[pos]='3';break;
+		case 3: buf[pos]='4';break;
+		case 4: buf[pos]='5';break;
+		case 5: buf[pos]='6';break;
+		case 6: buf[pos]='7';break;
+		case 7: buf[pos]='8';break;
+		case 8: buf[pos]='9';break;
+		default: assert(0);break;
+	}
+	pos++;*/
+}
+
+void gen(char signal) {
+	buf[pos]=signal;
+	pos++;
+}
+
+void gen_rand_op() {
+	switch(choose(4)) {
+		case 0: buf[pos]='+';
+			break;
+		case 1: buf[pos]='-';
+                        break;
+		case 2: buf[pos]='*';
+                        break;
+		case 3: buf[pos]='/';
+                        break;
+		default: assert(0);break;
+	}
+	pos++;
+}
+
+static void gen_rand_expr(int depth) {
+  //buf[0] = '\0';
+  if(depth < GEN_EXPR_SIZE) {
+	  depth++;
+    switch (choose(3)) {
+      case 0: gen_num(0); break;
+      case 1: gen('('); gen_rand_expr(depth); gen(')'); break;
+      case 2: gen_rand_expr(depth); 
+	      gen_rand_op(); 
+	      gen_rand_expr(depth); 
+	      break;
+      //case 3: gen(' '); break;
+      default: assert(0);break;
+    }
+    //buf[pos]= '\0';
+  }
+  else{
+	  gen_num(0);
+  }
+  buf[pos]= '\0';
+}
+
+
 
 int main(int argc, char *argv[]) {
   int seed = time(0);
@@ -44,8 +119,9 @@ int main(int argc, char *argv[]) {
   }
   int i;
   for (i = 0; i < loop; i ++) {
-    gen_rand_expr();
-
+    pos=0;
+    gen_rand_expr(0);
+    
     sprintf(code_buf, code_format, buf);
 
     FILE *fp = fopen("/tmp/.code.c", "w");
