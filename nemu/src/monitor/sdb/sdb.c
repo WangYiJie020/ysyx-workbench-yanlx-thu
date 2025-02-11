@@ -86,7 +86,7 @@ static int cmd_info(char *args) {
 static int cmd_x(char *args) {
         char *arg = strtok(NULL, " ");
 	unsigned int num,addr;
-	char line[100];
+	char line[10];
 
         if (arg == NULL) {
                 printf("please add sub command and try again\n");
