@@ -84,38 +84,38 @@ static int cmd_info(char *args) {
 }
 
 static int cmd_x(char *args) {
-        char *arg = strtok(NULL, " ");
+  char *arg = strtok(NULL, " ");
 	unsigned int num,addr;
 	char line[100];
 
-        if (arg == NULL) {
-                printf("please add sub command and try again\n");
+  if (arg == NULL) {
+          printf("please add sub command and try again\n");
+  }
+  else {
+    strcpy( line, arg);
+    //printf("%s\n",line);
+    sscanf(line,"%d",&num);
+    arg = strtok(NULL, " ");
+    if(arg==NULL) {
+      printf("please add sub command and try again\n");
+    }
+    else {
+      strcpy( line, arg);
+      //printf("%s\n",line);
+      sscanf(line,"%x",&addr);
+      //printf("%d %x",num,place);
+      int i,j;
+      for(i=0;i<num;i++) {
+        printf("0x%8x: ",addr);
+        for(j=3;j>=0;j--) {
+          printf("%02x ",vaddr_read(addr+j,1));
         }
-        else {
-		strcpy( line, arg);
-		//printf("%s\n",line);
-		sscanf(line,"%d",&num);
-		arg = strtok(NULL, " ");
-		if(arg==NULL) {
-			printf("please add sub command and try again\n");
-		}
-		else {
-			strcpy( line, arg);
-                	//printf("%s\n",line);
-                	sscanf(line,"%x",&addr);
-                	//printf("%d %x",num,place);
-			int i,j;
-			for(i=0;i<num;i++) {
-				printf("0x%8x: ",addr);
-				for(j=3;j>=0;j--) {
-					printf("%02x ",vaddr_read(addr+j,1));
-				}
-				addr+=4;
-				printf("\n");
-				
-			}
-			
-		}
+        addr+=4;
+        printf("\n");
+        
+      }
+      
+    }
 
                 
 	}

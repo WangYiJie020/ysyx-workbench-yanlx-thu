@@ -122,7 +122,7 @@ int main(int argc, char *argv[]) {
     pos=0;
     gen_rand_expr(0);
     
-    sprintf(code_buf, code_format, buf);
+    sprintf(code_buf, code_format, buf); //将buf中的表达式以code_format格式输入到code_buf中
 
     FILE *fp = fopen("/tmp/.code.c", "w");
     assert(fp != NULL);
@@ -141,5 +141,6 @@ int main(int argc, char *argv[]) {
 
     printf("%u %s\n", result, buf);
   }
+
   return 0;
 }
