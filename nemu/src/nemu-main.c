@@ -78,14 +78,14 @@ int read_line(char *path)
     word_t expr(char *e, bool *success);
     uint32_t result_raw;
     char arg[200] = {0};
-    sscanf(buf,"%d %s",&result_raw,arg);
+    sscanf(buf,"%u %s",&result_raw,arg);
     //printf("%d - %s\n",result_raw,arg);
     bool success;
     bool *ptr_success = &success;
     uint32_t result;
     result=expr(arg,ptr_success);
     if(result==result_raw) {
-      printf("%d\n",result);
+      printf("%u\n",result);
     }
     
 	}
