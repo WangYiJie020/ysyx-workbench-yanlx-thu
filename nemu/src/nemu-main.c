@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
 
   //return is_exit_status_bad();
   int read_line(char *path);
-  read_line("input1");
+  read_line("input.txt");
 
 
 }
