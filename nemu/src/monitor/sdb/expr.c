@@ -21,7 +21,7 @@
 #include <regex.h>
 #include <stdlib.h>
 enum {
-  TK_NOTYPE = 256, TK_EQ, TK_NUM, 
+  TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_UNEQ, TK_AND, TK_POINT, TK_DEREF
 
   /* TODO: Add more token types */
 
@@ -46,6 +46,9 @@ static struct rule {
 	  {"[0-9]*", TK_NUM},
 	  
 	  {"==", TK_EQ},        // equal
+	  {"!=", TK_UNEQ},
+	  {"&&", TK_AND},
+	  //{"\\*", TK_POINT},
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -91,8 +94,8 @@ static bool make_token(char *e) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
-        //Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
-        //    i, rules[i].regex, position, substr_len, substr_len, substr_start);
+        Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
+            i, rules[i].regex, position, substr_len, substr_len, substr_start);
 
         position += substr_len;
 
@@ -147,6 +150,24 @@ static bool make_token(char *e) {
 			tokens[nr_token].str[0]=')';
 			nr_token++;
 			//printf("kuohao2\n"); 
+			break;
+		case TK_EQ: 
+			tokens[nr_token].type=TK_EQ;
+			tokens[nr_token].str[0]='=';
+			tokens[nr_token].str[1]='=';
+			nr_token++;
+			break;
+		case TK_UNEQ: 
+			tokens[nr_token].type=TK_UNEQ;
+			tokens[nr_token].str[0]='!';
+			tokens[nr_token].str[1]='=';
+			nr_token++;
+			break;
+		case TK_AND: 
+			tokens[nr_token].type=TK_AND;
+			tokens[nr_token].str[0]='&';
+			tokens[nr_token].str[1]='&';
+			nr_token++;
 			break;
           default: printf("error!\n");
         }
@@ -205,26 +226,39 @@ uint32_t eval(int p,int q) {
     return eval(p + 1, q - 1);
   }
   else {
-	  uint32_t val1,val2;
-	  int i,op=0,flag=1;
-	  for(i=p;i<=q;i++) {
-		  if(tokens[i].type=='(') {
-			  flag = 0;
-		  }
-		  if(tokens[i].type==')') {
-                          flag = 1;
-		  }
+	uint32_t val1,val2;
+	int i,op=0,flag=1,flagb=0;
+	//find the position of 主运算符
+	for(i=p;i<=q;i++) {
+		//if there are parentheses, skip it
+		if(tokens[i].type=='(') {
+			flag = 0;
+		}
+		if(tokens[i].type==')') {
+			flag = 1;
+		}
 
-		  if(flag==1) {
-		    if(tokens[i].type=='+' || tokens[i].type=='-') {
-			  op=i;
-			  break;
-		    }
-		    if(tokens[i].type=='*' || tokens[i].type=='/') {
-			  op=i;
-		    }
-		  }
-	  }
+		//out of parentheses
+		if(flag==1) {
+			if(tokens[i].type==TK_AND){
+				op=i;
+				break;
+			}
+			if(tokens[i].type==TK_EQ || tokens[i].type==TK_UNEQ) {
+				op=i;
+				flagb=1;
+				continue;
+			}
+			if((tokens[i].type=='+' || tokens[i].type=='-') && flagb == 0) {
+				op=i;
+				flagb=1;
+				continue;
+			}
+			if((tokens[i].type=='*' || tokens[i].type=='/') && flagb == 0) {
+				op=i;
+			}
+		}
+	}
     //op = the position of 主运算符 in the token expression;
     val1 = eval(p, op - 1);
     val2 = eval(op + 1, q);
@@ -234,6 +268,9 @@ uint32_t eval(int p,int q) {
       case '-': return val1 - val2;/* ... */
       case '*': return val1 * val2;/* ... */
       case '/': return val1 / val2;/* ... */
+	  case TK_EQ: return val1 == val2;
+	  case TK_UNEQ: return val1 != val2;
+	  case TK_AND: return val1 && val2;
       default: assert(0);
     }
   }
@@ -253,6 +290,14 @@ word_t expr(char *e, bool *success) {
   //	  printf("%d,%s\n",tokens[i].type,tokens[i].str);
 
   //}
+  int i;
+
+  for (i = 0; i < nr_token; i ++) {
+  if (tokens[i].type == '*' && (i == 0 || tokens[i - 1].type != TK_NUM) ) {
+    tokens[i].type = TK_DEREF;
+  }
+}
+
   return eval(0,nr_token-1);
 
 }

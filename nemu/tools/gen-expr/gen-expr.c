@@ -43,8 +43,8 @@ int choose(int times) {
 void gen_num(int depth) {
 	int num;
 	depth++;
-	num = rand() % 9;
-	num++;
+	num = rand() % 10;
+	//num++;
 	sprintf(&buf[pos],"%d",num);
 	pos++;
 	if(choose(2)==0) {
