@@ -293,7 +293,7 @@ word_t expr(char *e, bool *success) {
   int i;
 
   for (i = 0; i < nr_token; i ++) {
-  if (tokens[i].type == '*' && (i == 0 || tokens[i - 1].type != TK_NUM) ) {
+  if (tokens[i].type == '*' && (i == 0 || (tokens[i - 1].type != TK_NUM || tokens[i - 1].type != ')')) ) {
     tokens[i].type = TK_DEREF;
   }
 }
