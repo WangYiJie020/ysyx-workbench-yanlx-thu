@@ -184,7 +184,7 @@ static bool make_token(char *e) {
 			bool success;
 			bool *ptr_success = &success;
 			if(success)
-				regValue = isa_reg_str2val(substr_start+1, ptr_success);
+				regValue = isa_reg_str2val(++substr_start, ptr_success);
 			else 
 				assert(0);
 			sprintf(tokens[nr_token].str,"%d",regValue);
