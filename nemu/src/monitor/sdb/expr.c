@@ -134,9 +134,9 @@ static bool make_token(char *e) {
 			break;
 		case TK_NUM: 
 			tokens[nr_token].type=TK_NUM;
-			int mynum2;
-			sscanf(substr_start,"%x",&mynum2);
-			sprintf(tokens[nr_token].str,"%x",mynum2);
+			int mynum;
+			sscanf(substr_start,"%d",&mynum);
+			sprintf(tokens[nr_token].str,"%d",mynum);
 			nr_token++;
 			//printf("NUM:%s\n",tokens[nr_token].str); 
 			break;
@@ -172,9 +172,9 @@ static bool make_token(char *e) {
 			break;
 		case TK_HEX: 
 			tokens[nr_token].type=TK_HEX;
-			int mynum;
-			sscanf(substr_start,"%d",&mynum);
-			sprintf(tokens[nr_token].str,"%d",mynum);
+			int mynum2;
+			sscanf(substr_start,"%x",&mynum2);
+			sprintf(tokens[nr_token].str,"%x",mynum2);
 			nr_token++;
 			break;
           default: printf("error!\n");
