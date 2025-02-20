@@ -183,15 +183,16 @@ static bool make_token(char *e) {
 			word_t regValue;
 			bool success;
 			bool *ptr_success = &success;
-			regValue = isa_reg_str2val(substr_start, ptr_success);
-			if(!success)
+			regValue = isa_reg_str2val(++substr_start, ptr_success);
+			if(!success) {
 				assert(0);
+			}
 			sprintf(tokens[nr_token].str,"%d",regValue);
 			nr_token++;
 			break;
           default: printf("error!\n");
         }
-	tokens[nr_token].type=rules[i].token_type;	
+		tokens[nr_token].type=rules[i].token_type;	
 	
         break;
       }
