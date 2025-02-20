@@ -48,7 +48,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 	}
   if(!flag) {
     *success=0;
-    assert(0);
+    //assert(0);
   }
   return value;
 }
