@@ -38,18 +38,17 @@ word_t isa_reg_str2val(const char *s, bool *success) {
   int value=0;
   char reg[10]={0};
   sscanf(s,"%s",reg);
-  printf("ttt\n");
-  printf("%s\n",reg);
+  //printf("%s\n",reg);
   for(;i>0;i--) {
     if(strcmp(regs[32-i], reg) == 0){
       flag=1;
-      printf("%s\t%x\n",regs[32-i],cpu.gpr[32-i]);
+      //printf("%s\t%x\n",regs[32-i],cpu.gpr[32-i]);
       value=cpu.gpr[32-i];      
     }	
 	}
   if(!flag) {
     *success=0;
-    //assert(0);
+    assert(0);
   }
   return value;
 }
