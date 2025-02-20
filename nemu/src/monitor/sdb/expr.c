@@ -21,7 +21,7 @@
 #include <regex.h>
 #include <stdlib.h>
 enum {
-  TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_UNEQ, TK_AND, TK_POINT, TK_DEREF
+  TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_UNEQ, TK_AND, TK_POINT, TK_DEREF, TK_HEX
 
   /* TODO: Add more token types */
 
@@ -46,7 +46,8 @@ static struct rule {
 	  {"==", TK_EQ}, // equal
 	  {"!=", TK_UNEQ},
 	  {"&&", TK_AND},
-	  {"[0-9]*", TK_NUM},
+	  {"0x[0-9]+", TK_HEX},
+	  {"[0-9]+", TK_NUM},
 
 	  //{"\\*", TK_POINT},
 };
@@ -133,9 +134,9 @@ static bool make_token(char *e) {
 			break;
 		case TK_NUM: 
 			tokens[nr_token].type=TK_NUM;
-			int mynum;
-			sscanf(substr_start,"%d",&mynum);
-			sprintf(tokens[nr_token].str,"%d",mynum);
+			int mynum2;
+			sscanf(substr_start+2,"%x",&mynum2);
+			sprintf(tokens[nr_token].str,"%x",mynum2);
 			nr_token++;
 			//printf("NUM:%s\n",tokens[nr_token].str); 
 			break;
@@ -167,6 +168,13 @@ static bool make_token(char *e) {
 			tokens[nr_token].type=TK_AND;
 			tokens[nr_token].str[0]='&';
 			tokens[nr_token].str[1]='&';
+			nr_token++;
+			break;
+		case TK_HEX: 
+			tokens[nr_token].type=TK_HEX;
+			int mynum;
+			sscanf(substr_start,"%d",&mynum);
+			sprintf(tokens[nr_token].str,"%d",mynum);
 			nr_token++;
 			break;
           default: printf("error!\n");
