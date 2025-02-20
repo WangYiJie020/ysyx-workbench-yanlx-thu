@@ -173,7 +173,7 @@ static bool make_token(char *e) {
 		case TK_HEX: 
 			tokens[nr_token].type=TK_HEX;
 			int mynum2;
-			sscanf(substr_start,"%x",&mynum2);
+			sscanf(substr_start+2,"%x",&mynum2);
 			sprintf(tokens[nr_token].str,"%x",mynum2);
 			nr_token++;
 			break;
