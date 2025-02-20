@@ -174,7 +174,7 @@ static bool make_token(char *e) {
 			tokens[nr_token].type=TK_HEX;
 			int mynum2;
 			sscanf(substr_start+2,"%x",&mynum2);
-			sprintf(tokens[nr_token].str,"%x",mynum2);
+			sprintf(tokens[nr_token].str,"%d",mynum2);
 			nr_token++;
 			break;
           default: printf("error!\n");
