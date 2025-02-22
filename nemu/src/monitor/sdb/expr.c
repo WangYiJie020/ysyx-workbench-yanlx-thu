@@ -183,8 +183,8 @@ static bool make_token(char *e) {
 			word_t regValue;
 			int i;
 			char name[10];
-			for(i=0;i<substr_len;i++) {
-				name[i]=*(substr_start+i);
+			for(i=0;i<substr_len-1;i++) {
+				name[i]=*(substr_start+i+1);
 			}
 			//sscanf(++substr_start,"%.*s",&substr_len,name);
 			bool success;
