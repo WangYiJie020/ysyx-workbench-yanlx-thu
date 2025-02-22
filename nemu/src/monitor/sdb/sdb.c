@@ -101,14 +101,19 @@ static int cmd_x(char *args) {
     }
     else {
       strcpy( line, arg);
+      bool success;
+      bool *ptr_success = &success;
+      uint32_t result;
+      //printf("%s\n",arg);
+      result=expr(line,ptr_success);
       //printf("%s\n",line);
-      sscanf(line,"%x",&addr);
+      //sscanf(result,"%x",&addr);
       //printf("%d %x",num,place);
       int i,j;
       for(i=0;i<num;i++) {
-        printf("0x%8x: ",addr);
+        printf("0x%8x: ",result);
         for(j=3;j>=0;j--) {
-          printf("%02x ",vaddr_read(addr+j,1));
+          printf("%02x ",vaddr_read(result+j,1));
         }
         addr+=4;
         printf("\n");
