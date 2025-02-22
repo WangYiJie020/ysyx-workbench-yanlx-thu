@@ -181,9 +181,11 @@ static bool make_token(char *e) {
 		case TK_REG: 
 			tokens[nr_token].type=TK_HEX;
 			word_t regValue;
+			char name[10];
+			sscanf(++substr_start,"%s",name);
 			bool success;
 			bool *ptr_success = &success;
-			regValue = isa_reg_str2val(++substr_start, ptr_success);
+			regValue = isa_reg_str2val(name, ptr_success);
 			if(!success) {
 				assert(0);
 			}
