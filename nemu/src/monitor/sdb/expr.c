@@ -186,7 +186,6 @@ static bool make_token(char *e) {
 			for(i=0;i<substr_len-1;i++) {
 				name[i]=*(substr_start+i+1);
 			}
-			//sscanf(++substr_start,"%.*s",&substr_len,name);
 			bool success;
 			bool *ptr_success = &success;
 			regValue = isa_reg_str2val(name, ptr_success);
@@ -317,15 +316,15 @@ word_t expr(char *e, bool *success) {
   //	  printf("%d,%s\n",tokens[i].type,tokens[i].str);
 
   //}
-  /*
+ 
   int i;
 
   for (i = 0; i < nr_token; i++) {
-  if (tokens[i].type == '*' && (i == 0 || (tokens[i - 1].type != TK_NUM || tokens[i - 1].type != ')')) ) {
+  if (tokens[i].type == '*' && (i == 0 || (tokens[i - 1].type != TK_NUM && tokens[i - 1].type != ')')) ) {
     tokens[i].type = TK_DEREF;
   }
 }
-*/
+
   return eval(0,nr_token-1);
 
 }
