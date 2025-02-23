@@ -20,6 +20,7 @@
  */
 #include <regex.h>
 #include <stdlib.h>
+#include <memory/vaddr.h>
 enum {
   TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_UNEQ, TK_AND, TK_DEREF, TK_HEX, TK_REG
 
@@ -252,53 +253,62 @@ uint32_t eval(int p,int q) {
     return eval(p + 1, q - 1);
   }
   else {
-	uint32_t val1,val2;
-	int i,op=0,flag=1,flagb=0;
-	//find the position of 主运算符
-	for(i=p;i<=q;i++) {
-		//if there are parentheses, skip it
-		if(tokens[i].type=='(') {
-			flag = 0;
-		}
-		if(tokens[i].type==')') {
-			flag = 1;
-		}
+	//pointer
+	if(tokens[p].type==TK_DEREF && q==p+1) {
+		uint32_t num;
+	  	sscanf(tokens[q].str,"%u",&num);
+		return vaddr_read(num,1);
+	}
+	//
+	else{
+		uint32_t val1,val2;
+		int i,op=0,flag=1,flagb=0;
+		//find the position of 主运算符
+		for(i=p;i<=q;i++) {
+			//if there are parentheses, skip it
+			if(tokens[i].type=='(') {
+				flag = 0;
+			}
+			if(tokens[i].type==')') {
+				flag = 1;
+			}
 
-		//out of parentheses
-		if(flag==1) {
-			if(tokens[i].type==TK_AND){
-				op=i;
-				break;
+			//out of parentheses
+			if(flag==1) {
+				if(tokens[i].type==TK_AND){
+					op=i;
+					break;
+				}
+				if(tokens[i].type==TK_EQ || tokens[i].type==TK_UNEQ) {
+					op=i;
+					flagb=1;
+					continue;
+				}
+				if((tokens[i].type=='+' || tokens[i].type=='-') && flagb == 0) {
+					op=i;
+					flagb=1;
+					continue;
+				}
+				if((tokens[i].type=='*' || tokens[i].type=='/') && flagb == 0) {
+					op=i;
+				}
 			}
-			if(tokens[i].type==TK_EQ || tokens[i].type==TK_UNEQ) {
-				op=i;
-				flagb=1;
-				continue;
-			}
-			if((tokens[i].type=='+' || tokens[i].type=='-') && flagb == 0) {
-				op=i;
-				flagb=1;
-				continue;
-			}
-			if((tokens[i].type=='*' || tokens[i].type=='/') && flagb == 0) {
-				op=i;
-			}
+		}
+		//op = the position of 主运算符 in the token expression;
+		val1 = eval(p, op - 1);
+		val2 = eval(op + 1, q);
+
+		switch (tokens[op].type) {
+		case '+': return val1 + val2;
+		case '-': return val1 - val2;/* ... */
+		case '*': return val1 * val2;/* ... */
+		case '/': return val1 / val2;/* ... */
+		case TK_EQ: return val1 == val2;
+		case TK_UNEQ: return val1 != val2;
+		case TK_AND: return val1 && val2;
+		default: assert(0);
 		}
 	}
-    //op = the position of 主运算符 in the token expression;
-    val1 = eval(p, op - 1);
-    val2 = eval(op + 1, q);
-
-    switch (tokens[op].type) {
-      case '+': return val1 + val2;
-      case '-': return val1 - val2;/* ... */
-      case '*': return val1 * val2;/* ... */
-      case '/': return val1 / val2;/* ... */
-	  case TK_EQ: return val1 == val2;
-	  case TK_UNEQ: return val1 != val2;
-	  case TK_AND: return val1 && val2;
-      default: assert(0);
-    }
   }
 }
 
@@ -320,10 +330,12 @@ word_t expr(char *e, bool *success) {
   int i;
 
   for (i = 0; i < nr_token; i++) {
-  if (tokens[i].type == '*' && (i == 0 || (tokens[i - 1].type != TK_NUM && tokens[i - 1].type != ')')) ) {
-    tokens[i].type = TK_DEREF;
+	if (tokens[i].type == '*' && (i == 0 || (tokens[i - 1].type != TK_NUM && tokens[i - 1].type != ')')) ) {
+		tokens[i].type = TK_DEREF;
+		
+	}
   }
-}
+
 
   return eval(0,nr_token-1);
 
