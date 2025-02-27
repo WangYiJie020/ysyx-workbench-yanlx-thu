@@ -25,6 +25,7 @@ static int is_batch_mode = false;
 void init_regex();
 void init_wp_pool();
 
+
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
   static char *line_read = NULL;
@@ -73,7 +74,8 @@ static int cmd_info(char *args) {
 
 		}
 		else if(strcmp(arg,"w")==0){
-			printf("www");
+      print_wp();
+			//printf("www");
 		}
 		else{
 			printf("Unknown command '%s'\n", arg);
@@ -139,10 +141,29 @@ static int cmd_p(char *args) {
 }
 
 static int cmd_w(char *args) {
+  //char *arg = strtok(NULL, "\0");
+	//bool success;
+	//bool *ptr_success = &success;
+	//uint32_t result;
+	//printf("%s\n",arg);
+	//result=expr(arg,ptr_success);
+  new_wp();
         return 0;
 }
 
 static int cmd_d(char *args) {
+  char *arg = strtok(NULL, " ");
+	char num_c[5];
+	int num;
+	if (arg == NULL) {
+		assert(0);
+	}
+	else {
+		strcpy( num_c, arg);
+		sscanf(num_c,"%d",&num);
+		//printf("%d",num);
+	}
+  free_wp(&wp_pool[num]);
         return 0;
 }
 
