@@ -141,13 +141,13 @@ static int cmd_p(char *args) {
 }
 
 static int cmd_w(char *args) {
-  //char *arg = strtok(NULL, "\0");
-	//bool success;
-	//bool *ptr_success = &success;
-	//uint32_t result;
-	//printf("%s\n",arg);
-	//result=expr(arg,ptr_success);
-  new_wp();
+  char *arg = strtok(NULL, "\0");
+	bool success;
+	bool *ptr_success = &success;
+	uint32_t result;
+	printf("%s\n",arg);
+	result=expr(arg,ptr_success);
+  new_wp(arg,result);
         return 0;
 }
 
@@ -161,7 +161,7 @@ static int cmd_d(char *args) {
 	else {
 		strcpy( num_c, arg);
 		sscanf(num_c,"%d",&num);
-		printf("%d",num);
+		//printf("%d",num);
 	}
   free_wp(num);
         return 0;

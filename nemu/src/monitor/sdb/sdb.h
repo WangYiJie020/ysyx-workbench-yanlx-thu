@@ -21,7 +21,7 @@
 typedef struct watchpoint {
   int NO;
   char tokens[100];
-  uint32_t value,next_value;
+  uint32_t value;
   struct watchpoint *next;
 
   /* TODO: Add more members if necessary */
