@@ -145,9 +145,9 @@ static int cmd_w(char *args) {
 	bool success;
 	bool *ptr_success = &success;
 	uint32_t result;
-	printf("%s\n",arg);
+	//printf("%s\n",arg);
 	result=expr(arg,ptr_success);
-  printf("result=%u\n",result);
+  //printf("result=%u\n",result);
   new_wp(arg,result);
         return 0;
 }
