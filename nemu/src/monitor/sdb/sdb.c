@@ -161,7 +161,7 @@ static int cmd_d(char *args) {
 	else {
 		strcpy( num_c, arg);
 		sscanf(num_c,"%d",&num);
-		//printf("%d",num);
+		printf("%d",num);
 	}
   free_wp(&wp_pool[num]);
         return 0;
