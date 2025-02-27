@@ -80,15 +80,16 @@ void free_wp(int num){
       while(q->NO!=num) {
         p=p->next;
         q=q->next;
+        if(q==NULL){
+          printf("no NO.%d watchpoint\n\r",num);
+          assert(0);
+        }
       }
-      if(q==NULL)  {
-        printf("no NO.%d watchpoint\n\r",num);
-      }
-      else {
-        p->next = q->next;
-        q->next=free_;
-        free_ = q;
-      }
+
+      p->next = q->next;
+      q->next=free_;
+      free_ = q;
+
     }
     
   }
