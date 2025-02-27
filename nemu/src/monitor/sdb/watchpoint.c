@@ -110,7 +110,7 @@ void print_wp(){
   }
   else {
     while(p!=NULL) {
-      printf("watchpoint NO.%d %s 0x%x\n\r",p->NO,p->tokens,p->value);
+      printf("watchpoint NO.%d %s 0x%8x\n\r",p->NO,p->tokens,p->value);
       p = p->next;
     }
     
