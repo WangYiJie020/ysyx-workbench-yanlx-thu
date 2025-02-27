@@ -15,6 +15,9 @@
 
 #include "sdb.h"
 
+#define NR_WP 32
+
+static WP wp_pool[NR_WP] = {};//pool
 static WP *head = NULL, *free_ = NULL;
 
 void init_wp_pool() {
@@ -57,25 +60,27 @@ WP* new_wp(){
 
 
 
-void free_wp(WP *wp){
+void free_wp(int num){
   WP *tmp,*p,*q;
+  p = head;
   if(head == NULL) {
     assert(0);
   }
   else {
-    if(wp==head){
-      wp->next = free_;
-      free_ = wp;
+    if(p->NO == num){
       head = head->next;
+      p->next = free_;
+      free_ = p;
       printf("wp==head\n\r");
     }
     else {
-      tmp = wp->next;
-      wp->next = free_;
-      free_ = wp;
       p=head;
       q=head->next;
-      while(q!=wp) {
+      tmp = p->next;
+      p->next = free_;
+      free_ = p;
+      
+      while(q->NO!=num) {
         p=p->next;
         q=q->next;
       }
@@ -91,7 +96,7 @@ void print_wp(){
   WP *p;
   p = head;
   if(p==NULL) {
-    printf("no watchpoint!");
+    printf("no watchpoint!\n\r");
   }
   else {
     while(p!=NULL) {

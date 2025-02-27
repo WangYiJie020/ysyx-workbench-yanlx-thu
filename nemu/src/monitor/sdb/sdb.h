@@ -29,14 +29,12 @@ typedef struct watchpoint {
 
 } WP;
 
-#define NR_WP 32
 
-static WP wp_pool[NR_WP] = {};//pool
 
 
 word_t expr(char *e, bool *success);
 WP* new_wp();
-void free_wp(WP *wp);
+void free_wp(int num);
 void print_wp();
 
 #endif
