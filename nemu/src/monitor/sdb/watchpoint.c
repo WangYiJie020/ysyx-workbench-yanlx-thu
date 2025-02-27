@@ -63,6 +63,7 @@ WP* new_wp(){
 void free_wp(int num){
   WP *p,*q;
   p = head;
+  int flag=0;
   if(head == NULL) {
     assert(0);
   }
@@ -77,18 +78,18 @@ void free_wp(int num){
       p=head;
       q=head->next;
 
-      while(q->NO!=num) {
+      while(q!=NULL) { 
+        if(q->NO==num){
+          p->next = q->next;
+          q->next=free_;
+          free_ = q;
+          flag=1;
+          break;
+        }
         p=p->next;
         q=q->next;
-        if(q==NULL){
-          printf("no NO.%d watchpoint\n\r",num);
-          assert(0);
-        }
       }
-
-      p->next = q->next;
-      q->next=free_;
-      free_ = q;
+      if(flag==0) printf("no watchpoint numbered %d\n\r",num);
 
     }
     
