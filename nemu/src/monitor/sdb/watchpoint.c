@@ -38,6 +38,7 @@ WP* new_wp(){
   else {
     if(head==NULL) {
       head = free_;
+      head->next=NULL;
     }
     else {
       tmp = free_;
@@ -90,7 +91,7 @@ void print_wp(){
   }
   else {
     while(p!=NULL) {
-      printf("watchpoint NO.%d",p->NO);
+      printf("watchpoint NO.%d\n\r",p->NO);
       p = p->next;
     }
     
