@@ -36,13 +36,15 @@ WP* new_wp(){
     assert(0);
   }
   else {
-    free_ = free_->next;
+    
     if(head==NULL) {
       head = free_;
+      free_ = free_->next;
       head->next=NULL;
     }
     else {
       tmp = free_;
+      free_ = free_->next;
       tmp->next = head;
       head = tmp;
     }
