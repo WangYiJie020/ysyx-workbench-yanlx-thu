@@ -61,7 +61,7 @@ WP* new_wp(){
 
 
 void free_wp(int num){
-  WP *tmp,*p,*q;
+  WP *p,*q;
   p = head;
   if(head == NULL) {
     assert(0);
@@ -76,15 +76,17 @@ void free_wp(int num){
     else {
       p=head;
       q=head->next;
-      tmp = p->next;
-      p->next = free_;
-      free_ = p;
-      
+
       while(q->NO!=num) {
         p=p->next;
         q=q->next;
       }
-      p->next = tmp;
+      if(q==NULL) printf("no NO.%d watchpoint\n\r",num);
+      else {
+        p->next = q->next;
+        q->next=free_;
+        free_ = q;
+      }
     }
     
   }
