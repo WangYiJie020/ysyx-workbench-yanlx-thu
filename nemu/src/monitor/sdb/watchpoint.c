@@ -18,7 +18,7 @@
 #define NR_WP 32
 
 static WP wp_pool[NR_WP] = {};//pool
-static WP *head = NULL, *free_ = NULL;
+WP *head = NULL,*free_ = NULL;
 
 void init_wp_pool() {
   int i;
@@ -110,7 +110,7 @@ void print_wp(){
   }
   else {
     while(p!=NULL) {
-      printf("watchpoint NO.%d %s 0x%8x\n\r",p->NO,p->tokens,p->value);
+      printf("watchpoint NO.%d %s 0x%x\n\r",p->NO,p->tokens,p->value);
       p = p->next;
     }
     

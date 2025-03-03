@@ -28,7 +28,7 @@ typedef struct watchpoint {
 
 
 } WP;
-
+extern WP *head;
 
 
 
