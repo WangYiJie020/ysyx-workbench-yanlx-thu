@@ -51,7 +51,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
     bool *ptr_success = &success;
     word_t value_new;
     
-    printf("%s\n",p->tokens);
+    printf("name:%s\n",p->tokens);
     value_new=expr(p->tokens,ptr_success);
 
     if(success) {
