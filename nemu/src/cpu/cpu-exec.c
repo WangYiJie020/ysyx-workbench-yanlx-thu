@@ -64,6 +64,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
         printf("expr error.\n");
         assert(0);
     }
+    p=p->next;
   }
   return ;
 
