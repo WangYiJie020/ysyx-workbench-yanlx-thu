@@ -49,10 +49,13 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
     
     bool success;
     bool *ptr_success = &success;
+    char str[100]={'\0'};
     word_t value_new;
     
     printf("name:%s\n",p->tokens);
-    value_new=expr(p->tokens,ptr_success);
+    strcpy(str,p->tokens);
+    printf("name2:%s\n",str);
+    value_new=expr(str,ptr_success);
 
     if(success) {
       if(value_new != p->value) {
