@@ -57,17 +57,14 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
     printf("name2:%s\n",str);
     value_new=expr(str,ptr_success);
 
-    if(success) {
-      if(value_new != p->value) {
-        nemu_state.state = NEMU_STOP;
-        printf("触发监视点\n");
-        
-      }
+
+    if(value_new != p->value) {
+      nemu_state.state = NEMU_STOP;
+      printf("触发监视点\n");
+      
     }
-    else {
-        printf("expr error.\n");
-        assert(0);
-    }
+
+    
     p=p->next;
   }
   return ;
