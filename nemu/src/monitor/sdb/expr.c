@@ -183,7 +183,7 @@ static bool make_token(char *e) {
 			tokens[nr_token].type=TK_HEX;
 			word_t regValue;
 			int i;
-			char name[10];
+			char name[10]={'\0'};
 			for(i=0;i<substr_len-1;i++) {
 				name[i]=*(substr_start+i+1);
 			}
