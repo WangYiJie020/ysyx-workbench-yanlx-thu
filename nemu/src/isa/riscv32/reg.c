@@ -38,7 +38,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
   int value=0;
   char reg1[10]={'\0'};
   sscanf(s,"%s",reg1);
-  //printf("%s\n",reg1);
+  printf("%s\n",reg1);
   for(;i>0;i--) {
     if(strcmp(regs[32-i], reg1) == 0){
       flag=1;
