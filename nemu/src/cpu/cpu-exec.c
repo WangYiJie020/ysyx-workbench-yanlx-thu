@@ -54,7 +54,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
     
     //printf("name:%s\n",p->tokens);
     strcpy(str,p->tokens);
-    printf("name2:%s\n",str);
+    //printf("name2:%s\n",str);
     value_new=expr(str,ptr_success);
 
 
