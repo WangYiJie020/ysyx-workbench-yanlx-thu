@@ -36,7 +36,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
   bool flag=0;
   int i=32;
   int value=0;
-  char reg1[3]={'x','\0'};
+  char reg1[10]={'x','\0'};
   //printf("%s\n",reg1);
   sscanf(s,"%s",reg1);
   //printf("%s\n",reg1);
