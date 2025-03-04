@@ -59,9 +59,10 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 
 
     if(value_new != p->value) {
+      p->value = value_new;
       nemu_state.state = NEMU_STOP;
       printf("触发监视点\n");
-      p->value = value_new;
+      
       
     }
 
