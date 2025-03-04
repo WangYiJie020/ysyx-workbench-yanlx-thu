@@ -36,11 +36,11 @@ word_t isa_reg_str2val(const char *s, bool *success) {
   bool flag=0;
   int i=32;
   int value=0;
-  char reg[10]={'\0'};
-  sscanf(s,"%s",reg);
-  printf("%s\n",reg);
+  char reg1[10]={'\0'};
+  sscanf(s,"%s",reg1);
+  //printf("%s\n",reg1);
   for(;i>0;i--) {
-    if(strcmp(regs[32-i], reg) == 0){
+    if(strcmp(regs[32-i], reg1) == 0){
       flag=1;
       //printf("%s\t%x\n",regs[32-i],cpu.gpr[32-i]);
       value=cpu.gpr[32-i];      

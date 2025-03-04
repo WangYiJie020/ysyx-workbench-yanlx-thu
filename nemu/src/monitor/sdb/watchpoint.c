@@ -24,7 +24,7 @@ void init_wp_pool() {
   int i;
   for (i = 0; i < NR_WP; i ++) {
     wp_pool[i].NO = i;
-    strcpy(wp_pool[i].tokens,"\0");
+    strcpy(wp_pool[i].tokens,"\0\0\0\0\0\0\0\0\0\0\0\0");
     wp_pool[i].next = (i == NR_WP - 1 ? NULL : &wp_pool[i + 1]);
   }
 
