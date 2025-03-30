@@ -177,7 +177,8 @@ static int cmd_c(char *args) {
 
 static int cmd_q(char *args) {
   //exit(0);
-  return 0;
+  
+  return NEMU_QUIT;
 }
 
 static int cmd_help(char *args);
