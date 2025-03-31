@@ -84,9 +84,12 @@ int read_line(char *path)
     bool *ptr_success = &success;
     uint32_t result;
     result=expr(arg,ptr_success);
-    if(result!=result_raw) {
+    if(result==result_raw) {
       printf("%u %u %d\n",result,result_raw,line_num);
     }
+	else {
+		printf("error!\n");
+	}
     
 	}
 
