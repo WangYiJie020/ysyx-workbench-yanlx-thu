@@ -265,12 +265,12 @@ uint32_t eval(int p,int q) {
 		uint32_t val1,val2;
 		int i,op=0,flag=1,flagb=0;
 		//find the position of 主运算符
-		for(i=p;i<=q;i++) {
+		for(i=q;i>=p;i--) {
 			//if there are parentheses, skip it
-			if(tokens[i].type=='(') {
+			if(tokens[i].type==')') {
 				flag = 0;
 			}
-			if(tokens[i].type==')') {
+			if(tokens[i].type=='(') {
 				flag = 1;
 			}
 
