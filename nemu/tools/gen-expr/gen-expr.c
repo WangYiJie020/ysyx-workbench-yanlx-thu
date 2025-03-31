@@ -129,8 +129,11 @@ int main(int argc, char *argv[]) {
     fputs(code_buf, fp);
     fclose(fp);
 
-    int ret = system("gcc /tmp/.code.c -o /tmp/.expr");
-    if (ret != 0) continue;
+    int ret = system("gcc -Wall -Werror /tmp/.code.c -o /tmp/.expr");
+    if (ret != 0) {
+      i = i-1;
+      continue;//如果有错误，进入下一个循环
+    }
 
     fp = popen("/tmp/.expr", "r");
     assert(fp != NULL);
