@@ -88,7 +88,7 @@ int read_line(char *path)
       printf("%u %u %d\n",result,result_raw,line_num);
     }
 	else {
-		printf("True!\n");
+		printf("True!%d\n",line_num);
 	}
     
 	}
