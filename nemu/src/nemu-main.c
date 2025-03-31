@@ -15,7 +15,7 @@
 
 #include <common.h>
 
-#define LINE_MAX 1024
+#define LINE_MAX 1000
 
 void init_monitor(int, char *[]);
 void am_init_monitor();
@@ -77,7 +77,7 @@ int read_line(char *path)
 		/** 对每行数据(buf)进行处理 **/
     word_t expr(char *e, bool *success);
     uint32_t result_raw;
-    char arg[200] = {0};
+    char arg[300] = {0};
     sscanf(buf,"%u %s",&result_raw,arg);
     //printf("%d - %s\n",result_raw,arg);
     bool success;
