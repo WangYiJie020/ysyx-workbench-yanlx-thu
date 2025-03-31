@@ -34,8 +34,8 @@ int main(int argc, char *argv[]) {
   //engine_start();	
 
   //return is_exit_status_bad();
-  //int read_line(char *path);
-  //read_line("input3");
+  int read_line(char *path);
+  read_line("input3");
 
 
 }
