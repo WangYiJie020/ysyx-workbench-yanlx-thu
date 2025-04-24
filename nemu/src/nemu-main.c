@@ -31,11 +31,11 @@ int main(int argc, char *argv[]) {
 #endif
 
   /* Start engine. */
-  engine_start();	
+  //engine_start();	
 
-  return is_exit_status_bad();
-  //int read_line(char *path);
-  //read_line("input3");
+  //return is_exit_status_bad();
+  int read_line(char *path);
+  read_line("input3");
 
 
 }
