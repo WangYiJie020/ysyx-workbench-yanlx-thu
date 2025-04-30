@@ -237,6 +237,7 @@ uint32_t eval(int p,int q) {
   if (p > q) {
     /* Bad expression */
 		printf("%d,%s\n",p,tokens[p].str);
+		printf("%d,%s\n",q,tokens[q].str);
 	  assert(0);
 
   }
@@ -338,7 +339,7 @@ word_t expr(char *e, bool *success) {
 		
 	}
   }
-  printf("nrtoken:%d\n",nr_token);
+  //printf("nrtoken:%d\n",nr_token);
 
 
   return eval(0,nr_token-1);
