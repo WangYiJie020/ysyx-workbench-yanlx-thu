@@ -265,7 +265,7 @@ uint32_t eval(int p,int q) {
 	//
 	else{
 		uint32_t val1,val2;
-		int i,op=0,flag=1,flagb=0;
+		int i,op=p,flag=1,flagb=0;
 		//find the position of 主运算符
 		for(i=p;i<=q;i++) {
 			//if there are parentheses, skip it
