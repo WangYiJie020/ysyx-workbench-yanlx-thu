@@ -286,15 +286,16 @@ uint32_t eval(int p,int q) {
 				if(tokens[i].type==TK_EQ || tokens[i].type==TK_UNEQ) {
 					op=i;
 					flagb=1;
-					continue;
+					//continue;
 				}
 				if((tokens[i].type=='+' || tokens[i].type=='-') && flagb == 0) {
 					op=i;
 					flagb=1;
-					continue;
+					//continue;
 				}
 				if((tokens[i].type=='*' || tokens[i].type=='/') && flagb == 0) {
 					op=i;
+
 				}
 			}
 		}
