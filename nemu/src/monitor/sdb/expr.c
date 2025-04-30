@@ -266,19 +266,19 @@ uint32_t eval(int p,int q) {
 	//
 	else{
 		uint32_t val1,val2;
-		int i,op=p,flag=1,flagb=0;
+		int i,op=p,flag=0,flagb=0;
 		//find the position of 主运算符
 		for(i=p;i<=q;i++) {
 			//if there are parentheses, skip it
 			if(tokens[i].type=='(') {
-				flag = 0;
+				flag++;
 			}
 			if(tokens[i].type==')') {
-				flag = 1;
+				flag--;
 			}
 
 			//out of parentheses
-			if(flag==1) {
+			if(flag==0) {
 				if(tokens[i].type==TK_AND){
 					op=i;
 					break;
@@ -291,19 +291,19 @@ uint32_t eval(int p,int q) {
 				if((tokens[i].type=='+' || tokens[i].type=='-') && flagb == 0) {
 					op=i;
 					flagb=1;
-					printf("op%d\n",op);
+					//printf("op%d\n",op);
 					//continue;
 				}
 				if((tokens[i].type=='*' || tokens[i].type=='/') && flagb == 0) {
 					op=i;
-					printf("op%d\n",op);
+					//printf("op%d\n",op);
 
 				}
 			}
 		}
 		//op = the position of 主运算符 in the token expression;
-		printf("p %d,op %d\n",p,op - 1);
-		printf("op %d,q %d\n",op + 1,q);
+		//printf("p %d,op %d\n",p,op - 1);
+		//printf("op %d,q %d\n",op + 1,q);
 		val1 = eval(p, op - 1);
 		val2 = eval(op + 1, q);
 
