@@ -295,6 +295,7 @@ uint32_t eval(int p,int q) {
 				}
 				if((tokens[i].type=='*' || tokens[i].type=='/') && flagb == 0) {
 					op=i;
+					printf("op%d\n",op);
 
 				}
 			}
