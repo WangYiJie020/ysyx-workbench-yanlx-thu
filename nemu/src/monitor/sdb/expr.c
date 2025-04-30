@@ -302,6 +302,8 @@ uint32_t eval(int p,int q) {
 			}
 		}
 		//op = the position of 主运算符 in the token expression;
+		printf("p %d,op %d\n",p,op - 1);
+		printf("op %d,q %d\n",op + 1,q);
 		val1 = eval(p, op - 1);
 		val2 = eval(op + 1, q);
 
