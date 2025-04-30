@@ -266,7 +266,7 @@ uint32_t eval(int p,int q) {
 	//
 	else{
 		uint32_t val1,val2;
-		int i,op=p,flag=0,flagb=0;
+		int i,op=p,flag=0,flagb=0,flagc=0;
 		//find the position of 主运算符
 		for(i=p;i<=q;i++) {
 			//if there are parentheses, skip it
@@ -290,11 +290,11 @@ uint32_t eval(int p,int q) {
 				}
 				if((tokens[i].type=='+' || tokens[i].type=='-') && flagb == 0) {
 					op=i;
-					flagb=1;
+					flagc=1;
 					//printf("op%d\n",op);
 					//continue;
 				}
-				if((tokens[i].type=='*' || tokens[i].type=='/') && flagb == 0) {
+				if((tokens[i].type=='*' || tokens[i].type=='/') && flagb == 0 && flagc == 0) {
 					op=i;
 					//printf("op%d\n",op);
 
