@@ -236,7 +236,7 @@ bool check_parentheses(int p, int q){
 uint32_t eval(int p,int q) {
   if (p > q) {
     /* Bad expression */
-		printf("%s\n",tokens[p].str);
+		printf("%d,%s\n",p,tokens[p].str);
 	  assert(0);
 
   }
