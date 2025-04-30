@@ -47,7 +47,7 @@ void gen_num(int depth) {
 	//num++;
 	sprintf(&buf[pos],"%d",num);
 	pos++;
-	if(choose(2)==0) {
+	if(choose(2)==0 && num != 0) {
 		if(depth < GEN_NUM_SIZE) gen_num(depth);
 
 	}
