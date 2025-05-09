@@ -23,7 +23,7 @@
 #define Mw vaddr_write
 
 enum {
-  TYPE_I, TYPE_U, TYPE_S, TYPE_UJ, TYPE_SB, TYPE_R, TYPE_SRAI,
+  TYPE_I, TYPE_U, TYPE_S, TYPE_UJ, TYPE_SB, TYPE_R, TYPE_ShiftI,
   TYPE_N, // none
 };
 
@@ -40,7 +40,7 @@ enum {
                             | (BITS(i, 30, 25) << 5) \
                             | (BITS(i, 11, 8) << 1) \
                             | (BITS(i, 7, 7) << 11); } while(0)
-#define immSRAI() do { *imm = SEXT(BITS(i, 24, 20), 5); } while(0)
+#define immShiftI() do { *imm = SEXT(BITS(i, 24, 20), 5); } while(0)
 
 static void decode_operand(Decode *s, int *rd, word_t *src1, word_t *src2, word_t *imm, int type) {
   uint32_t i = s->isa.inst.val;
@@ -54,7 +54,7 @@ static void decode_operand(Decode *s, int *rd, word_t *src1, word_t *src2, word_
     case TYPE_S: src1R(); src2R(); immS(); break;
     case TYPE_UJ:                  immUJ(); break;
     case TYPE_SB:src1R(); src2R(); immSB(); break;
-    case TYPE_SRAI: src1R();       immSRAI(); break;
+    case TYPE_ShiftI: src1R();     immShiftI(); break;
   }
 }
 
@@ -98,7 +98,9 @@ static int decode_exec(Decode *s) {
             if(src1 < imm) R(rd) = 1;\
             else R(rd) = 0;); 
   INSTPAT("??????? ????? ????? 100 ????? 00100 11", xori   , I, R(rd) = src1 ^ imm;);
-  INSTPAT("0100000 ????? ????? 101 ????? 00100 11", srai   , SRAI, R(rd) = src1 >> ((sword_t)imm););
+  INSTPAT("0000000 ????? ????? 001 ????? 00100 11", slli   , ShiftI, R(rd) = src1 << imm;);
+  INSTPAT("0000000 ????? ????? 101 ????? 00100 11", srli   , ShiftI, R(rd) = src1 >> imm;);
+  INSTPAT("0100000 ????? ????? 101 ????? 00100 11", srai   , ShiftI, R(rd) = src1 >> ((sword_t)imm););
   INSTPAT("0000000 ????? ????? 000 ????? 01100 11", add    , R, R(rd) = src1 + src2;);
   INSTPAT("0100000 ????? ????? 000 ????? 01100 11", sub    , R, R(rd) = src1 - src2;);
   INSTPAT("0000000 ????? ????? 001 ????? 01100 11", sll    , R, R(rd) = src1 << src2;);
