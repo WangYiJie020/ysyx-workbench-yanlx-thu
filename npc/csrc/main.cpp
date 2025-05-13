@@ -7,7 +7,7 @@
 
 #include "verilated_vcd_c.h" //可选，如果要导出vcd则需要加上
 
-int mem = {0x00160413,0x00160413};
+int mem[100] = {0x00160413,0x00160413};
 
 int pmem_read(int pc) {
   return 0x00160413;
