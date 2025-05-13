@@ -30,13 +30,13 @@ int main(int argc, char** argv) {
   reset(10);  // 复位10个周期
   int n = 10;
 
-  top->rst = 1;
+  top->rst_n = 0;
   while (n > 0) {
     top->clk = 0; top->eval();
     top->clk = 1; top->eval();
     n--;
   }
-  top->rst = 0;
+  top->rst_n = 1;
 
   while (!contextp->gotFinish()) {
     top->inst = pmem_read(top->pc);
