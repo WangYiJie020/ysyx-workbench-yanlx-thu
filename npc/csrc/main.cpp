@@ -27,7 +27,6 @@ int main(int argc, char** argv) {
   void single_cycle();
   void reset(int n);
 
-  reset(10);  // 复位10个周期
   int n = 10;
 
   top->rst_n = 0;
