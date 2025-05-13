@@ -2,7 +2,8 @@ module sext #(DATA_WIDTH = 32)(
     input [31:0] inst,
     output reg [DATA_WIDTH-1:0]data
 );
-    wire [6:0] op = {inst[14:12],inst[6:0]};
+    wire [6:0] op;
+    assign op = {inst[14:12],inst[6:0]};
 
     always@(*) begin
         case (op)
