@@ -16,7 +16,7 @@ module top(
     .dout(pc)
   );
 
-  regfile u1 #(5,32)(
+  regfile u1 (
     .clk(clk),
     .wdata(imm+rdata),
     .waddr(inst[11:7]),
