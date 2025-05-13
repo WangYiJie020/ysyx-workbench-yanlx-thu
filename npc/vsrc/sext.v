@@ -4,7 +4,7 @@ module sext #(DATA_WIDTH = 32)(
 );
     wire [6:0] op = {inst[14:12],inst[6:0]};
 
-    always@() begin
+    always@(*) begin
         case (op)
             10'b000_0010011: data = {20{inst[31]},inst[31:20]};
             default: data = 0;
