@@ -1,3 +1,5 @@
+import "DPI-C" function void ebreak();
+
 module top(
   input clk,
   input rst_n,
@@ -29,6 +31,11 @@ module top(
     .inst(inst),
     .data(imm)
   );
+
+  always@(posedge clk) begin
+    if(inst == 32'h00100073)
+      ebreak();
+  end
 
 endmodule
 

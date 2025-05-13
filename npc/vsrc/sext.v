@@ -1,3 +1,5 @@
+
+
 module sext #(DATA_WIDTH = 32)(
     input [31:0] inst,
     output reg [DATA_WIDTH-1:0]data

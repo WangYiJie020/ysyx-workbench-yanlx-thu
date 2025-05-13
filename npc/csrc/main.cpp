@@ -7,11 +7,15 @@
 
 #include "verilated_vcd_c.h" //可选，如果要导出vcd则需要加上
 
-int mem[100] = {0x00160413,0x02010113};
+int mem[100] = {0x02010113,0x02010113,,0x02010113,0x02010113,0x00100073};
 
 int pmem_read(int pc) {
-  return 0x02010113;
+  return mem[(pc-0x80000000)/4];
 
+}
+
+extern "C" void ebreak() {
+  $finish;
 }
 
 int main(int argc, char** argv) {
