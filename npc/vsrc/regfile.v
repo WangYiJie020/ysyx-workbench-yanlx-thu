@@ -1,4 +1,4 @@
-module regfile #(ADDR_WIDTH = 1, DATA_WIDTH = 1) (
+module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
   input clk,
   input [DATA_WIDTH-1:0] wdata,
   input [ADDR_WIDTH-1:0] waddr,
@@ -11,7 +11,7 @@ module regfile #(ADDR_WIDTH = 1, DATA_WIDTH = 1) (
   assign rdata = rf[raddr];
 
   always @(posedge clk) begin
-    if (wen) rf[waddr] <= wdata;
+    if (wen && waddr != 0) rf[waddr] <= wdata;
   end
 endmodule
 

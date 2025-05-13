@@ -1,5 +1,4 @@
-module sext #(IMM_WIDTH = 1, DATA_WIDTH = 1)(
-    input [IMM_WIDTH-1:0] imm,
+module sext #(DATA_WIDTH = 32)(
     input [31:0] inst,
     output reg [DATA_WIDTH-1:0]data
 );
