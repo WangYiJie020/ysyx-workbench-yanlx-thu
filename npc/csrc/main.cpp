@@ -28,10 +28,20 @@ int main(int argc, char** argv) {
   void reset(int n);
 
   reset(10);  // 复位10个周期
+  int n = 10;
+
+  top->rst = 1;
+  while (n > 0) {
+    top->clk = 0; top->eval();
+    top->clk = 1; top->eval();
+    n--;
+  }
+  top->rst = 0;
 
   while (!contextp->gotFinish()) {
     top->inst = pmem_read(top->pc);
-    single_cycle();
+    top->clk = 0; top->eval();
+    top->clk = 1; top->eval();
     printf("pc=%x\n",top->pc);
     tfp->dump(contextp->time()); //dump wave
     contextp->timeInc(1); //推动仿真时间
@@ -41,14 +51,4 @@ int main(int argc, char** argv) {
   tfp->close();
   delete contextp;
   return 0;
-}
-
-void single_cycle() {
-  top->clk = 0; top->eval();
-  top->clk = 1; top->eval();
-}
-void reset(int n) {
-  top->rst = 1;
-  while (n -- > 0) single_cycle();
-  top->rst = 0;
 }
