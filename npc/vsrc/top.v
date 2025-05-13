@@ -30,6 +30,5 @@ module top(
     .data(imm)
   );
 
-
-
 endmodule
+
