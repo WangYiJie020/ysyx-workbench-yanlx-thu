@@ -47,8 +47,11 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     if ((0U != (0x1fU & (vlSelf->inst >> 7U)))) {
         __Vdlyvval__top__DOT__u1__DOT__rf__v0 = (((0x13U 
                                                    == 
-                                                   (0x7fU 
-                                                    & vlSelf->inst))
+                                                   ((0x380U 
+                                                     & (vlSelf->inst 
+                                                        >> 5U)) 
+                                                    | (0x7fU 
+                                                       & vlSelf->inst)))
                                                    ? 
                                                   (((- (IData)(
                                                                (vlSelf->inst 

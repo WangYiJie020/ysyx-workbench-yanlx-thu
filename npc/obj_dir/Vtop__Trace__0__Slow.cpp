@@ -48,7 +48,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBus(c+45,"DATA_WIDTH", false,-1, 31,0);
     tracep->declBus(c+36,"inst", false,-1, 31,0);
     tracep->declBus(c+37,"data", false,-1, 31,0);
-    tracep->declBus(c+43,"op", false,-1, 6,0);
+    tracep->declBus(c+43,"op", false,-1, 9,0);
     tracep->popNamePrefix(2);
 }
 
@@ -128,7 +128,10 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullBit(oldp+34,(vlSelf->rst_n));
     bufp->fullIData(oldp+35,(vlSelf->pc),32);
     bufp->fullIData(oldp+36,(vlSelf->inst),32);
-    bufp->fullIData(oldp+37,(((0x13U == (0x7fU & vlSelf->inst))
+    bufp->fullIData(oldp+37,(((0x13U == ((0x380U & 
+                                          (vlSelf->inst 
+                                           >> 5U)) 
+                                         | (0x7fU & vlSelf->inst)))
                                ? (((- (IData)((vlSelf->inst 
                                                >> 0x1fU))) 
                                    << 0xcU) | (vlSelf->inst 
@@ -138,7 +141,11 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
                              [(0x1fU & (vlSelf->inst 
                                         >> 0xfU))]),32);
     bufp->fullIData(oldp+39,(((IData)(4U) + vlSelf->pc)),32);
-    bufp->fullIData(oldp+40,((((0x13U == (0x7fU & vlSelf->inst))
+    bufp->fullIData(oldp+40,((((0x13U == ((0x380U & 
+                                           (vlSelf->inst 
+                                            >> 5U)) 
+                                          | (0x7fU 
+                                             & vlSelf->inst)))
                                 ? (((- (IData)((vlSelf->inst 
                                                 >> 0x1fU))) 
                                     << 0xcU) | (vlSelf->inst 
@@ -150,7 +157,9 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
                                        >> 7U))),5);
     bufp->fullCData(oldp+42,((0x1fU & (vlSelf->inst 
                                        >> 0xfU))),5);
-    bufp->fullCData(oldp+43,((0x7fU & vlSelf->inst)),7);
+    bufp->fullSData(oldp+43,(((0x380U & (vlSelf->inst 
+                                         >> 5U)) | 
+                              (0x7fU & vlSelf->inst))),10);
     bufp->fullBit(oldp+44,(1U));
     bufp->fullIData(oldp+45,(0x20U),32);
     bufp->fullIData(oldp+46,(0x80000000U),32);

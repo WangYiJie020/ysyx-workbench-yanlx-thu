@@ -7,17 +7,7 @@
 
 #include "verilated_vcd_c.h" //可选，如果要导出vcd则需要加上
 
-void single_cycle() {
-  top->clk = 0; top->eval();
-  top->clk = 1; top->eval();
-}
-void reset(int n) {
-  top->rst = 1;
-  while (n -- > 0) single_cycle();
-  top->rst = 0;
-}
-
-int mem = {0x00160413,0x00160413}
+int mem = {0x00160413,0x00160413};
 
 int pmem_read(int pc) {
   return 0x00160413;
@@ -34,6 +24,9 @@ int main(int argc, char** argv) {
   top->trace(tfp, 0); //
   tfp->open("wave.vcd"); //设置输出的文件wave.vcd
 
+  void single_cycle();
+  void reset(int n);
+
   reset(10);  // 复位10个周期
 
   while (!contextp->gotFinish()) {
@@ -48,4 +41,14 @@ int main(int argc, char** argv) {
   tfp->close();
   delete contextp;
   return 0;
+}
+
+void single_cycle() {
+  top->clk = 0; top->eval();
+  top->clk = 1; top->eval();
+}
+void reset(int n) {
+  top->rst = 1;
+  while (n -- > 0) single_cycle();
+  top->rst = 0;
 }
