@@ -33,8 +33,10 @@ module top(
   );
 
   always@(posedge clk) begin
-    if(inst == 32'h00100073)
+    if(inst == 32'h00100073) begin
       ebreak();
+      $finish;
+    end
   end
 
 endmodule
