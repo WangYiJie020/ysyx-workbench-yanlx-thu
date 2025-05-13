@@ -124,7 +124,7 @@ static int decode_exec(Decode *s) {
             R(rd) = BITS(tmp, 31, 0););
   INSTPAT("0000001 ????? ????? 001 ????? 01100 11", mulh   , R, \
             int64_t tmp = SEXT(BITS((sword_t)src1, 31, 0), 32) * SEXT(BITS((sword_t)src2, 31, 0), 32);
-            ///(int64_t)( * (int64_t)((sword_t)src2);
+            ///int64_t tmp = (int64_t)((sword_t)src1) * (int64_t)((sword_t)src2);
             R(rd) = BITS(tmp, 63, 32););
   INSTPAT("0000001 ????? ????? 100 ????? 01100 11", div    , R, R(rd) = (sword_t)src1 / (sword_t)src2;);
   INSTPAT("0000001 ????? ????? 101 ????? 01100 11", divu   , R, R(rd) = src1 / src2;);
