@@ -7,6 +7,23 @@
 
 #include "verilated_vcd_c.h" //可选，如果要导出vcd则需要加上
 
+void single_cycle() {
+  top->clk = 0; top->eval();
+  top->clk = 1; top->eval();
+}
+void reset(int n) {
+  top->rst = 1;
+  while (n -- > 0) single_cycle();
+  top->rst = 0;
+}
+
+int mem = {0x00160413,0x00160413}
+
+int pmem_read(int pc) {
+  return 0x00160413;
+
+}
+
 int main(int argc, char** argv) {
   VerilatedContext* contextp = new VerilatedContext;
   contextp->commandArgs(argc, argv);
@@ -17,17 +34,15 @@ int main(int argc, char** argv) {
   top->trace(tfp, 0); //
   tfp->open("wave.vcd"); //设置输出的文件wave.vcd
 
+  reset(10);  // 复位10个周期
 
   while (!contextp->gotFinish()) {
-    int a = rand() & 1;
-    int b = rand() & 1;
-    top->a = a;
-    top->b = b;
-    top->eval();
-    printf("a = %d, b = %d, f = %d\n", a, b, top->f);
+    top->inst = pmem_read(top->pc);
+    single_cycle();
+    printf("pc=%x\n",top->pc);
     tfp->dump(contextp->time()); //dump wave
     contextp->timeInc(1); //推动仿真时间
-    assert(top->f == (a ^ b));
+    
   }
   delete top;
   tfp->close();
