@@ -6,7 +6,7 @@ module sext #(DATA_WIDTH = 32)(
 
     always@(*) begin
         case (op)
-            10'b000_0010011: data = {20{inst[31]},inst[31:20]};
+            10'b000_0010011: data = {{20{inst[31]}},inst[31:20]};
             default: data = 0;
         endcase
     end
