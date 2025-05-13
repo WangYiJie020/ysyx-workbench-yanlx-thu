@@ -22,7 +22,6 @@ $(SRC_AUTO_BIND): $(NXDC_FILES)
 # project source
 VSRCS = $(shell find $(abspath ./vsrc) -name "*.v")
 CSRCS = $(shell find $(abspath ./csrc) -name "*.c" -or -name "*.cc" -or -name "*.cpp")
-CSRCS += $(SRC_AUTO_BIND)
 
 # rules for NVBoard
 include $(NVBOARD_HOME)/scripts/nvboard.mk
@@ -43,9 +42,9 @@ $(BIN): $(VSRCS) $(CSRCS) $(NVBOARD_ARCHIVE)
 all:
 	@echo "Write this Makefile by your self."
 
-sim:
+sim: $(VSRCS) $(CSRCS)
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-	verilator -Wall vsrc/top.v csrc/main.cpp --cc --trace --exe --build
+	verilator -Wall $(VSRCS) csrc/main.cpp --cc --trace --exe --build
 	./obj_dir/Vtop
 
 include ../Makefile
