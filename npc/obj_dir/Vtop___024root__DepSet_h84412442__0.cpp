@@ -58,8 +58,9 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     CData/*0:0*/ __Vdlyvset__top__DOT__u1__DOT__rf__v0;
     __Vdlyvset__top__DOT__u1__DOT__rf__v0 = 0;
     // Body
-    if ((0x100073U == vlSelf->inst)) {
+    if (VL_UNLIKELY((0x100073U == vlSelf->inst))) {
         Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();
+        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 38, "");
     }
     __Vdlyvset__top__DOT__u1__DOT__rf__v0 = 0U;
     if ((0U != (0x1fU & (vlSelf->inst >> 7U)))) {
