@@ -5,10 +5,10 @@
 
 typedef struct {
     uint32_t pc;
-    uint32_t inst;
+    char logbuf[128];
 } IRingBuffer;
 
-void iringbuf_write(uint32_t pc, uint32_t inst);
+void iringbuf_write(uint32_t pc, char* logbuf);
 void iringbuf_print();
 
 #endif
