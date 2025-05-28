@@ -16,6 +16,7 @@
 #include <cpu/cpu.h>
 #include <cpu/decode.h>
 #include <cpu/difftest.h>
+#include <cpu/iringbuf.h>
 #include <locale.h>
 #include <../src/monitor/sdb/sdb.h>
 
@@ -27,6 +28,8 @@
 #define MAX_INST_TO_PRINT 10
 
 #define CONFIG_WATCHPOINT
+
+
 
 CPU_state cpu = {};
 uint64_t g_nr_guest_inst = 0;
@@ -79,12 +82,13 @@ static void exec_once(Decode *s, vaddr_t pc) {
   s->pc = pc;
   s->snpc = pc;
   isa_exec_once(s);
+  iringbuf_write(s->pc, s->isa.inst.val);
   cpu.pc = s->dnpc;
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
   p += snprintf(p, sizeof(s->logbuf), FMT_WORD ":", s->pc);
   int ilen = s->snpc - s->pc;
-  int i;
+  int i; 
   uint8_t *inst = (uint8_t *)&s->isa.inst.val;
   for (i = ilen - 1; i >= 0; i --) {
     p += snprintf(p, 4, " %02x", inst[i]);
@@ -102,6 +106,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
       MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.inst.val, ilen);
 #else
   p[0] = '\0'; // the upstream llvm does not support loongarch32r
+
 #endif
 #endif
 }
@@ -157,6 +162,7 @@ void cpu_exec(uint64_t n) {
            (nemu_state.halt_ret == 0 ? ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN) :
             ANSI_FMT("HIT BAD TRAP", ANSI_FG_RED))),
           nemu_state.halt_pc);
+      iringbuf_print();
       // fall through
     case NEMU_QUIT: statistic();
   }
