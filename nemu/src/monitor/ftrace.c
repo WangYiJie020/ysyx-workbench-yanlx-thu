@@ -148,7 +148,7 @@ void trace_call(paddr_t pc, paddr_t target){
     if(call_depth <= 2) return;
 
     int i = find_symbol_func(target,true);
-    Log(FMT_PADDR ": %*scall [%s@" FMT_PADDR "]\n",
+    log_write(FMT_PADDR ": %*scall [%s@" FMT_PADDR "]\n",
 		pc,
 		(call_depth-3)*2, "",
 		i>=0?symbol_tbl[i].name:"???",
@@ -165,7 +165,7 @@ void trace_ret(paddr_t pc) {
     if(call_depth <= 2) return;
 
     int i = find_symbol_func(pc,false);
-    Log(FMT_PADDR ": %*sret [%s]\n",
+    log_write(FMT_PADDR ": %*sret [%s]\n",
 		pc,
 		(call_depth-3)*2, "",
 		i>=0?symbol_tbl[i].name:"???"
