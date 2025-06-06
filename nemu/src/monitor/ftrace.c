@@ -84,7 +84,7 @@ void parse_elf(const char * elf_file){
     // 确定符号表的条数
     size_t num_symbols = symtab_header.sh_size / symtab_header.sh_entsize;
     // 分配内存用于存储符号表
-    symbol_tbl = malloc(num_symbols * sizeof(symbol_tbl));
+    symbol_tbl = malloc(num_symbols * sizeof(SymElf));
 
     for (size_t i = 0; i < num_symbols; ++i) {
         if (fread(&symbol, sizeof(Elf32_Sym), 1, fp) <= 0 ) {
@@ -131,7 +131,7 @@ int find_symbol_func(paddr_t target, bool is_call){
 
 void trace_call(paddr_t pc, paddr_t target){
     if(symbol_tbl == NULL) {
-        printf("no table\n");
+        //printf("no table\n");
         return ;
     }
 
@@ -142,7 +142,7 @@ void trace_call(paddr_t pc, paddr_t target){
     int i = find_symbol_func(target,true);
     //Log(FMT_PADDR ":%*scall [%s@" FMT_PADDR "]\n",pc,(call_depth-3)*2,i>=0?symbol_tbl[i].name:"???",target);
     Log("%s\n",i>=0?symbol_tbl[i].name:"???");
-    //printf("call\n")
+    printf("call\n");
 }
 
 void trace_ret(paddr_t pc) {
