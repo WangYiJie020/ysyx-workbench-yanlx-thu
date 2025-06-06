@@ -77,15 +77,16 @@ static int decode_exec(Decode *s) {
   INSTPAT("??????? ????? ????? ??? ????? 00101 11", auipc  , U, R(rd) = s->pc + imm;);
   INSTPAT("??????? ????? ????? ??? ????? 11011 11", jal    ,UJ, \
           s->dnpc = s->pc + imm;R(rd)=s->pc + 4;\
-          //IFDEF(CONFIG_FTRACE, 
+          IFDEF(CONFIG_FTRACE, \
           {\
             if(rd == 1) {\
               trace_call(s->pc, s->dnpc);\
             }\
-          }\
+          })\
           );
   INSTPAT("??????? ????? ????? 000 ????? 11001 11", jalr   , I, \
           s->dnpc = src1 + imm;R(rd)=s->pc + 4;\
+          IFDEF(CONFIG_FTRACE, \
           {\
             if (s->isa.inst.val == 0x00008067){\
               trace_ret(s->pc);\
@@ -93,7 +94,7 @@ static int decode_exec(Decode *s) {
             }
             else if (rd == 1)\
               trace_call(s->pc, s->dnpc);\
-          }\
+          })\
           );
   INSTPAT("??????? ????? ????? 000 ????? 11000 11", beq    ,SB, \
           if(src1 == src2){s->dnpc = s->pc + imm;});
