@@ -82,7 +82,7 @@ void parse_elf(const char * elf_file){
     /* 读取符号表中的每个符号项 */ 
 
     fseek(fp, symtab_header.sh_offset, SEEK_SET);
-    Elf64_Sym symbol;
+    Elf32_Sym symbol;
     // 确定符号表的条数
     size_t num_symbols = symtab_header.sh_size / symtab_header.sh_entsize;
     // 分配内存用于存储符号表
@@ -91,7 +91,7 @@ void parse_elf(const char * elf_file){
     Log("%d",(int)num_symbols);
 
     for (size_t i = 0; i < num_symbols; ++i) {
-        if (fread(&symbol, sizeof(Elf64_Sym), 1, fp) <= 0 ) {
+        if (fread(&symbol, sizeof(Elf32_Sym), 1, fp) <= 0 ) {
             fclose(fp);
             exit(EXIT_FAILURE);
         }
