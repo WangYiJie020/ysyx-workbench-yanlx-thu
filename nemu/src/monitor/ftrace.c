@@ -105,7 +105,7 @@ void parse_elf(const char * elf_file){
             symbol_tbl[i].addr = symbol.st_value;
             symbol_tbl[i].info = symbol.st_info;
             symbol_tbl[i].size = symbol.st_size;
-            printf("%s,%x,%x,%d",symbol_tbl[i].name,symbol_tbl[i].addr,symbol_tbl[i].info,(int)symbol_tbl[i].size);
+            printf("%s,%x,%x,%d\n",symbol_tbl[i].name,symbol_tbl[i].addr,symbol_tbl[i].info,(int)symbol_tbl[i].size);
         }
         symbol_tbl_size = num_symbols;
     }
@@ -148,8 +148,14 @@ void trace_call(paddr_t pc, paddr_t target){
     if(call_depth <= 2) return;
 
     int i = find_symbol_func(target,true);
+    Log(FMT_PADDR ": %*scall [%s@" FMT_PADDR "]\n",
+		pc,
+		(call_depth-3)*2, "",
+		i>=0?symbol_tbl[i].name:"???",
+		target
+	);
     //Log(FMT_PADDR ":%*scall [%s@" FMT_PADDR "]\n",pc,(call_depth-3)*2,i>=0?symbol_tbl[i].name:"???",target);
-    Log("%s\n",i>=0?symbol_tbl[i].name:"???");
+    //Log("%s\n",i>=0?symbol_tbl[i].name:"???");
     //printf("call\n");
 }
 
@@ -159,9 +165,13 @@ void trace_ret(paddr_t pc) {
     if(call_depth <= 2) return;
 
     int i = find_symbol_func(pc,false);
-
-    //Log(FMT_PADDR ":%*sret [%s]\n",pc,(call_depth-3)*2,i>=0?symbol_tbl[i].name:"???",);
-    Log("%s\n",i>=0?symbol_tbl[i].name:"???");
+    Log(FMT_PADDR ": %*sret [%s]\n",
+		pc,
+		(call_depth-3)*2, "",
+		i>=0?symbol_tbl[i].name:"???"
+	);
+    //Log(FMT_PADDR ":%*sret [%s]\n",pc,(call_depth-3)*2,i>=0?symbol_tbl[i].name:"???");
+    //Log("%s\n",i>=0?symbol_tbl[i].name:"???");
 
     --call_depth;
 
