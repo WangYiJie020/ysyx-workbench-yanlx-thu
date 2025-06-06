@@ -11,7 +11,7 @@ typedef struct {
     Elf64_Xword size;
 }SymElf;
 
-SymElf symbol_tbl[100];
+SymElf *symbol_tbl;
 int symbol_tbl_size = 0;
 int call_depth = 0;
 
@@ -86,7 +86,7 @@ void parse_elf(const char * elf_file){
     // 确定符号表的条数
     size_t num_symbols = symtab_header.sh_size / symtab_header.sh_entsize;
     // 分配内存用于存储符号表
-    //symbol_tbl = malloc(num_symbols * sizeof(SymElf));
+    symbol_tbl = malloc(num_symbols * sizeof(SymElf));
 
     Log("%d",(int)num_symbols);
 
