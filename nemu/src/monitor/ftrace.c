@@ -28,6 +28,7 @@ void parse_elf(const char * elf_file){
         printf("failed to open the elf file!\n");
         assert(0);
     }
+    printf("0");
 
 
     Elf32_Ehdr elf_header;
