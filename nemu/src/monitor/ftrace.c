@@ -20,7 +20,7 @@ void parse_elf(const char * elf_file){
     Log("elf file is :%s",elf_file);
     // 读取ELF header
 
-    FILE *fp;
+    FILE *fp = NULL;
     fp = fopen(elf_file, "rb");
     
     if(fp == NULL)
