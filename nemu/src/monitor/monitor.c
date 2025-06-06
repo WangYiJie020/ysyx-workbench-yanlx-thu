@@ -106,12 +106,11 @@ static int parse_args(int argc, char *argv[]) {
 
 void init_monitor(int argc, char *argv[]) {
   /* Perform some global initialization. */
-  parse_elf(elf_file);
   
   /* Parse arguments. */
   parse_args(argc, argv);
 
-
+  
   /* Set random seed. */
   init_rand();
 
@@ -135,6 +134,8 @@ void init_monitor(int argc, char *argv[]) {
 
   /* Initialize the simple debugger. */
   init_sdb();
+
+  parse_elf(elf_file);
 
 #ifndef CONFIG_ISA_loongarch32r
   IFDEF(CONFIG_ITRACE, init_disasm(
