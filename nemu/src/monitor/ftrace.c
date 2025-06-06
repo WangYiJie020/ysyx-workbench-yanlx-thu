@@ -88,6 +88,8 @@ void parse_elf(const char * elf_file){
     // 分配内存用于存储符号表
     symbol_tbl = malloc(num_symbols * sizeof(SymElf));
 
+    Log("%d",(int)num_symbols);
+
     for (size_t i = 0; i < num_symbols; ++i) {
         if (fread(&symbol, sizeof(Elf32_Sym), 1, fp) <= 0 ) {
             fclose(fp);
@@ -110,7 +112,7 @@ void parse_elf(const char * elf_file){
     // 关闭文件并释放内存
     fclose(fp);
     free(string_table);
-    Log("0");
+    
 
 }
 
