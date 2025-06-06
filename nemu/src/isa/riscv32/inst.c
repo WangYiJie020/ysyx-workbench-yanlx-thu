@@ -87,8 +87,10 @@ static int decode_exec(Decode *s) {
   INSTPAT("??????? ????? ????? 000 ????? 11001 11", jalr   , I, \
           s->dnpc = src1 + imm;R(rd)=s->pc + 4;\
           {\
-            if (s->isa.inst.val == 0x00008067)\
+            if (s->isa.inst.val == 0x00008067){\
               trace_ret(s->pc);\
+              printf("ret\n");\
+            }
             else if (rd == 1)\
               trace_call(s->pc, s->dnpc);\
           }\
