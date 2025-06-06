@@ -59,7 +59,7 @@ void parse_elf(const char * elf_file){
     }
 
     // 读取字符串表内容
-    char string_table[200];
+    char *string_table = malloc(strtab_header.sh_size);
     fseek(fp, strtab_header.sh_offset, SEEK_SET);
     if (fread(string_table, strtab_header.sh_size, 1, fp) <= 0) {
         fclose(fp);
@@ -82,7 +82,7 @@ void parse_elf(const char * elf_file){
     /* 读取符号表中的每个符号项 */ 
 
     fseek(fp, symtab_header.sh_offset, SEEK_SET);
-    Elf32_Sym symbol;
+    Elf64_Sym symbol;
     // 确定符号表的条数
     size_t num_symbols = symtab_header.sh_size / symtab_header.sh_entsize;
     // 分配内存用于存储符号表
@@ -112,7 +112,7 @@ void parse_elf(const char * elf_file){
 
     // 关闭文件并释放内存
     fclose(fp);
-    //free(string_table);
+    free(string_table);
 
 
     
