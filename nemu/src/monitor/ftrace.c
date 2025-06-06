@@ -22,14 +22,14 @@ void parse_elf(const char * elf_file){
     
     FILE *fp;
     fp = fopen(elf_file, "rb");
-    Log("0");
+    
     
     if(fp == NULL)
     {
         printf("failed to open the elf file!\n");
         assert(0);
     }
-    
+    Log("0");
 
 
     Elf32_Ehdr elf_header;
