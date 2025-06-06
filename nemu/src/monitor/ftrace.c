@@ -19,11 +19,11 @@ void parse_elf(const char * elf_file){
     if(elf_file == NULL) return;
     Log("elf file is :%s",elf_file);
     // 读取ELF header
-
+    Log("0");
     FILE *fp;
     fp = fopen(elf_file, "rb");
     
-    Log("0");
+    
     if(fp == NULL)
     {
         printf("failed to open the elf file!\n");
