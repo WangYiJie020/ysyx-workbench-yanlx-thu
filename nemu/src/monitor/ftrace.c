@@ -141,6 +141,7 @@ void trace_call(paddr_t pc, paddr_t target){
     int i = find_symbol_func(target,true);
     //Log(FMT_PADDR ":%*scall [%s@" FMT_PADDR "]\n",pc,(call_depth-3)*2,i>=0?symbol_tbl[i].name:"???",target);
     Log("%s\n",i>=0?symbol_tbl[i].name:"???");
+    printf("call\n");
 }
 
 void trace_ret(paddr_t pc) {

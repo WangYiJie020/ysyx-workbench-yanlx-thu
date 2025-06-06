@@ -89,7 +89,7 @@ static int decode_exec(Decode *s) {
           {\
             if (s->isa.inst.val == 0x00008067){\
               trace_ret(s->pc);\
-              printf("ret\n");\
+              //printf("ret\n");
             }
             else if (rd == 1)\
               trace_call(s->pc, s->dnpc);\
