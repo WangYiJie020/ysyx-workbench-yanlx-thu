@@ -140,7 +140,7 @@ void trace_call(paddr_t pc, paddr_t target){
         return ;
     }
 
-    call_depth++;
+    ++call_depth;
 
     if(call_depth <= 2) return;
 
@@ -160,6 +160,6 @@ void trace_ret(paddr_t pc) {
     //Log(FMT_PADDR ":%*sret [%s]\n",pc,(call_depth-3)*2,i>=0?symbol_tbl[i].name:"???",);
     Log("%s\n",i>=0?symbol_tbl[i].name:"???");
 
-    call_depth--;
+    --call_depth;
 
 }
