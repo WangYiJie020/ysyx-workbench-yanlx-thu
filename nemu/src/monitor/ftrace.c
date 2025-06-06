@@ -105,7 +105,7 @@ void parse_elf(const char * elf_file){
             symbol_tbl[i].addr = symbol.st_value;
             symbol_tbl[i].info = symbol.st_info;
             symbol_tbl[i].size = symbol.st_size;
-            //printf("%s,%x,%x,%d",symbol_tbl[i].name,symbol_tbl[i].addr,symbol_tbl[i].info,(int)symbol_tbl[i].size);
+            Log("%s,%x,%x,%d",symbol_tbl[i].name,symbol_tbl[i].addr,symbol_tbl[i].info,(int)symbol_tbl[i].size);
         }
         symbol_tbl_size = num_symbols;
     }
