@@ -91,7 +91,7 @@ void parse_elf(const char * elf_file){
     Log("%d",(int)num_symbols);
 
     for (size_t i = 0; i < num_symbols; ++i) {
-        if (fread(&symbol, sizeof(Elf32_Sym), 1, fp) <= 0 ) {
+        if (fread(&symbol, sizeof(Elf64_Sym), 1, fp) <= 0 ) {
             fclose(fp);
             exit(EXIT_FAILURE);
         }
