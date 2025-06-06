@@ -17,7 +17,7 @@ int call_depth = 0;
 
 void parse_elf(const char * elf_file){
     if(elf_file == NULL) return;
-    Log("elf file is :%s/n",elf_file);
+    Log("elf file is :%s",elf_file);
     // 读取ELF header
 
     FILE *fp;
