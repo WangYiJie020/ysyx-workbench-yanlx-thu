@@ -29,7 +29,7 @@ void parse_elf(const char * elf_file){
         printf("failed to open the elf file!\n");
         assert(0);
     }
-    Log("0");
+    
 
 
     Elf32_Ehdr elf_header;
@@ -110,6 +110,7 @@ void parse_elf(const char * elf_file){
     // 关闭文件并释放内存
     fclose(fp);
     free(string_table);
+    Log("0");
 
 }
 
