@@ -136,7 +136,7 @@ int find_symbol_func(paddr_t target, bool is_call){
 
 void trace_call(paddr_t pc, paddr_t target){
     if(symbol_tbl == NULL) {
-        //printf("no table\n");
+        printf("no table\n");
         return ;
     }
 
