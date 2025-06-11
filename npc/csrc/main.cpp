@@ -52,7 +52,7 @@ static int parse_args(int argc, char *argv[]) {
   const struct option table[] = {
     {"diff"     , 1, NULL, 'd'},
     {"port"     , 1, NULL, 'p'},
-    {0          , 0, NULL,  0 },
+    {0          , 0, NULL,  0 }
   };
   int o;
   while ( (o = getopt_long(argc, argv, "-hd:p:", table, NULL)) != -1) {
