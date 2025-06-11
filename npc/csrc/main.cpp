@@ -49,6 +49,7 @@ static long load_img() {
 static int parse_args(int argc, char *argv[]) {
   
   const struct option table[] = {
+    {"help"     , no_argument      , NULL, 'h'},
     {"diff"     , required_argument, NULL, 'd'},
     {"port"     , required_argument, NULL, 'p'},
     {0          , 0, NULL,  0 },
