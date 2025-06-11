@@ -26,7 +26,7 @@ static int difftest_port = 1234;
 
 static long load_img() {
   if (img_file == NULL) {
-    printf("No image is given. Use the default build-in image.\n");
+    printf("No image is given. 111Use the default build-in image.\n");
     return 4096; // built-in image size
   }
 
