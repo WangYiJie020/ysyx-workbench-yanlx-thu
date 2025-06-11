@@ -101,7 +101,7 @@ int main(int argc, char** argv) {
     top->inst = pmem_read(top->pc);
     top->clk = 0; top->eval();
     top->clk = 1; top->eval();
-    printf("pc=%x\n",top->pc);
+    //printf("pc=%x\n",top->pc);
     tfp->dump(contextp->time()); //dump wave
     contextp->timeInc(1); //推动仿真时间
     
