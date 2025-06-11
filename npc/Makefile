@@ -10,6 +10,8 @@ BUILD_DIR = ./build
 OBJ_DIR = $(BUILD_DIR)/obj_dir
 BIN = $(BUILD_DIR)/$(TOPNAME)
 
+NPC_HOME := $(shell pwd) 
+
 default: $(BIN)
 
 $(shell mkdir -p $(BUILD_DIR))
