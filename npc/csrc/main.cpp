@@ -45,16 +45,17 @@ static long load_img() {
   return size;
 }
 
+
+
 static int parse_args(int argc, char *argv[]) {
+  int getopt_long(int argc, char * const argv[], const char *optstring, const struct option *longopts, int *longindex); 
   const struct option table[] = {
-    {"log"      , required_argument, NULL, 'l'},
-    {"diff"     , required_argument, NULL, 'd'},
-    {"port"     , required_argument, NULL, 'p'},
-    {"help"     , no_argument      , NULL, 'h'},
-    {0          , 0                , NULL,  0 },
+    {"diff"     , 1, NULL, 'd'},
+    {"port"     , 1, NULL, 'p'},
+    {0          , 0, NULL,  0 },
   };
   int o;
-  while ( (o = getopt_long(argc, argv, "-bhl:d:p:e:", table, NULL)) != -1) {
+  while ( (o = getopt_long(argc, argv, "-hd:p:", table, NULL)) != -1) {
     switch (o) {
       case 'p': sscanf(optarg, "%d", &difftest_port); break;
       case 'd': diff_so_file = optarg; break;
