@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <getopt.h>
 #include <assert.h>
 #include "Vtop.h"
 #include "verilated.h"
@@ -45,20 +46,11 @@ static long load_img() {
   return size;
 }
 
-struct option 
-{  
-     const char *name;  
-     int         has_arg;  
-     int        *flag;  
-     int         val;  
-};  
-
-
 static int parse_args(int argc, char *argv[]) {
   int getopt_long(int argc, char * const argv[], const char *optstring, const struct option *longopts, int *longindex); 
   const struct option table[3] = {
-    {"diff"     , 1, NULL, 'd'},
-    {"port"     , 1, NULL, 'p'},
+    {"diff"     , required_argument, NULL, 'd'},
+    {"port"     , required_argument, NULL, 'p'},
     {0          , 0, NULL,  0 },
   };
   int o;
