@@ -47,8 +47,8 @@ static long load_img() {
 }
 
 static int parse_args(int argc, char *argv[]) {
-  int getopt_long(int argc, char * const argv[], const char *optstring, const struct option *longopts, int *longindex); 
-  const struct option table[3] = {
+  
+  const struct option table[] = {
     {"diff"     , required_argument, NULL, 'd'},
     {"port"     , required_argument, NULL, 'p'},
     {0          , 0, NULL,  0 },
@@ -56,6 +56,7 @@ static int parse_args(int argc, char *argv[]) {
   int o;
   while ( (o = getopt_long(argc, argv, "-hd:p:", table, NULL)) != -1) {
     switch (o) {
+      printf("%c,%d\n",o,o);
       case 'p': sscanf(optarg, "%d", &difftest_port); break;
       case 'd': diff_so_file = optarg; break;
       case 1: img_file = optarg; return 0;
