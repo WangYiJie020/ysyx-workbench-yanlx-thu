@@ -55,9 +55,6 @@ static int parse_args(int argc, char *argv[]) {
     {0          , 0, NULL,  0 },
   };
   int o;
-  printf("hhhhh\n");
-  o = getopt_long(argc, argv, "-hd:p:", table, NULL);
-  printf("%c,%d\n",o,o);
   while ( (o = getopt_long(argc, argv, "-hd:p:", table, NULL)) != -1) {
     printf("%c,%d\n",o,o);
     switch (o) {
@@ -104,7 +101,7 @@ int main(int argc, char** argv) {
     top->inst = pmem_read(top->pc);
     top->clk = 0; top->eval();
     top->clk = 1; top->eval();
-    printf("pc=%x\n",top->pc);
+    //printf("pc=%x\n",top->pc);
     tfp->dump(contextp->time()); //dump wave
     contextp->timeInc(1); //推动仿真时间
     
