@@ -1,6 +1,6 @@
 
 #include <stdio.h>
-//#include <stdlib.h>
+#include <stdlib.h>
 #include <assert.h>
 #include "Vtop.h"
 #include "verilated.h"
@@ -45,6 +45,13 @@ static long load_img() {
   return size;
 }
 
+struct option 
+{  
+     const char *name;  
+     int         has_arg;  
+     int        *flag;  
+     int         val;  
+};  
 
 
 static int parse_args(int argc, char *argv[]) {
