@@ -56,6 +56,8 @@ static int parse_args(int argc, char *argv[]) {
   };
   int o;
   printf("hhhhh\n");
+  o = getopt_long(argc, argv, "-hd:p:", table, NULL)
+  printf("%c,%d\n",o,o);
   while ( (o = getopt_long(argc, argv, "-hd:p:", table, NULL)) != -1) {
     printf("%c,%d\n",o,o);
     switch (o) {
