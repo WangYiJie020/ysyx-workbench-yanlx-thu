@@ -44,10 +44,10 @@ $(BIN): $(VSRCS) $(CSRCS) $(NVBOARD_ARCHIVE)
 all:
 	@echo "Write this Makefile by your self."
 
-sim: $(VSRCS) $(CSRCS)
+sim: $(VSRCS) $(CSRCS) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	verilator $(VSRCS) csrc/main.cpp --cc --trace --exe --build
-	./obj_dir/Vtop ARGS IMG
+	./obj_dir/Vtop $(ARGS) $(IMG)
 
 include ../Makefile
 
