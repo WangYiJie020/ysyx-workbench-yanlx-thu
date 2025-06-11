@@ -49,10 +49,10 @@ static long load_img() {
 
 static int parse_args(int argc, char *argv[]) {
   int getopt_long(int argc, char * const argv[], const char *optstring, const struct option *longopts, int *longindex); 
-  const struct option table[] = {
+  const struct option table[3] = {
     {"diff"     , 1, NULL, 'd'},
     {"port"     , 1, NULL, 'p'},
-    {0          , 0, NULL,  0 }
+    {0          , 0, NULL,  0 },
   };
   int o;
   while ( (o = getopt_long(argc, argv, "-hd:p:", table, NULL)) != -1) {
