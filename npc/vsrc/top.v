@@ -62,7 +62,7 @@ module top(
     .data(imm)
   );
 
-  mux21 adder_a_src(
+  mux21 Adder_A_Src(
     .d0(pc),
     .d1(rs1),
     .sel(adder_a_src),
@@ -75,14 +75,14 @@ module top(
     .out(pc_new)
   );
 
-  mux21 alu_a_src(
+  mux21 ALU_A_Src(
     .d0(rs1),
     .d1(pc),
     .sel(a_in_src),
     .out(a_in)
   );
 
-  mux41 alu_b_src(
+  mux41 ALU_B_Src(
     .d0(rs2),
     .d1(imm),
     .d2(32'd4),
