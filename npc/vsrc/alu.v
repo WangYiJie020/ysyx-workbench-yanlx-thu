@@ -1,7 +1,7 @@
 module alu(
     input [31:0]a,
     input [31:0]b,
-    input [3:0]op;
+    input [3:0]op,
     output [31:0]alu_result,
     output zero
 );
