@@ -5,8 +5,8 @@ module top(
   input rst_n,
   output [31:0]pc,
   input [31:0] inst,
-  output [31:0] datamem_addr,
-  input [31:0] datamem_data
+  //output [31:0] datamem_addr,
+  //input [31:0] datamem_data
 
 );
 
@@ -106,6 +106,7 @@ module top(
 
   assign datamem_addr = alu_result;
 
+  wire [31:0]datamem_data;
   mux21 WB(
     .d0(alu_result),
     .d1(datamem_data),
