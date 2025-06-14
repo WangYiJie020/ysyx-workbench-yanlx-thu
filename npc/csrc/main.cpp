@@ -22,7 +22,7 @@ int pmem_read(int pc) {
   do { \
     printf(__VA_ARGS__); \
     log_write(__VA_ARGS__); \
-  } while (0)
+  } while (0);
 
 extern "C" void ebreak() {
   Log(ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN));
