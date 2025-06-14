@@ -18,7 +18,6 @@ int pmem_read(int pc) {
 extern "C" void ebreak() {
   
   printf("HIT GOOD TRAP\n");
-  break;
 }
 
 static char *log_file = NULL;
