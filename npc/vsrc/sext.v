@@ -14,6 +14,7 @@ module sext #(DATA_WIDTH = 32)(
             7'b0010011: begin
                 case(funct3)
                     3'b000: data = {{20{inst[31]}},inst[31:20]}; //addi
+                    default: data = 0;
                 endcase
             end
             7'b0110111: begin //lui
@@ -28,6 +29,7 @@ module sext #(DATA_WIDTH = 32)(
             7'b1100111: begin
                 case(funct3)
                     3'b000: data = {{20{inst[31]}},inst[31:20]}; //jalr
+                    default: data = 0;
                 endcase
             end
             default: data = 0;

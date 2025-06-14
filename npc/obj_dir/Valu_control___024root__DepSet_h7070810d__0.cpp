@@ -7,9 +7,7 @@
 
 #include "Valu_control___024root.h"
 
-extern const VlUnpacked<CData/*0:0*/, 1024> Valu_control__ConstPool__TABLE_hece115b5_0;
 extern const VlUnpacked<CData/*3:0*/, 1024> Valu_control__ConstPool__TABLE_h1baa5ab3_0;
-extern const VlUnpacked<CData/*4:0*/, 1024> Valu_control__ConstPool__TABLE_h21f206d8_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Valu_control__ConstPool__TABLE_h7b4d463a_0;
 extern const VlUnpacked<CData/*1:0*/, 1024> Valu_control__ConstPool__TABLE_hf9dc518c_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Valu_control__ConstPool__TABLE_h0874e4f8_0;
@@ -28,10 +26,8 @@ VL_INLINE_OPT void Valu_control___024root___ico_sequent__TOP__0(Valu_control___0
     // Body
     __Vtableidx2 = ((0x380U & (vlSelf->inst >> 5U)) 
                     | (0x7fU & vlSelf->inst));
-    if (Valu_control__ConstPool__TABLE_hece115b5_0[__Vtableidx2]) {
-        vlSelf->top__DOT__alu_op = Valu_control__ConstPool__TABLE_h1baa5ab3_0
-            [__Vtableidx2];
-    }
+    vlSelf->top__DOT__alu_op = Valu_control__ConstPool__TABLE_h1baa5ab3_0
+        [__Vtableidx2];
     if ((0x40U & vlSelf->inst)) {
         if ((0x20U & vlSelf->inst)) {
             if ((0x10U & vlSelf->inst)) {
@@ -128,31 +124,16 @@ VL_INLINE_OPT void Valu_control___024root___ico_sequent__TOP__0(Valu_control___0
         [(0x1fU & (vlSelf->inst >> 0xfU))];
     __Vtableidx1 = ((0x380U & (vlSelf->inst >> 5U)) 
                     | (0x7fU & vlSelf->inst));
-    if ((1U & Valu_control__ConstPool__TABLE_h21f206d8_0
-         [__Vtableidx1])) {
-        vlSelf->top__DOT__a_in_src = Valu_control__ConstPool__TABLE_h7b4d463a_0
-            [__Vtableidx1];
-    }
-    if ((2U & Valu_control__ConstPool__TABLE_h21f206d8_0
-         [__Vtableidx1])) {
-        vlSelf->top__DOT__b_in_src = Valu_control__ConstPool__TABLE_hf9dc518c_0
-            [__Vtableidx1];
-    }
-    if ((4U & Valu_control__ConstPool__TABLE_h21f206d8_0
-         [__Vtableidx1])) {
-        vlSelf->top__DOT__reg_write = Valu_control__ConstPool__TABLE_h0874e4f8_0
-            [__Vtableidx1];
-    }
-    if ((8U & Valu_control__ConstPool__TABLE_h21f206d8_0
-         [__Vtableidx1])) {
-        vlSelf->top__DOT__pc_srcs = Valu_control__ConstPool__TABLE_h1b521792_0
-            [__Vtableidx1];
-    }
-    if ((0x10U & Valu_control__ConstPool__TABLE_h21f206d8_0
-         [__Vtableidx1])) {
-        vlSelf->top__DOT__adder_a_src = Valu_control__ConstPool__TABLE_h757488f1_0
-            [__Vtableidx1];
-    }
+    vlSelf->top__DOT__a_in_src = Valu_control__ConstPool__TABLE_h7b4d463a_0
+        [__Vtableidx1];
+    vlSelf->top__DOT__b_in_src = Valu_control__ConstPool__TABLE_hf9dc518c_0
+        [__Vtableidx1];
+    vlSelf->top__DOT__reg_write = Valu_control__ConstPool__TABLE_h0874e4f8_0
+        [__Vtableidx1];
+    vlSelf->top__DOT__pc_srcs = Valu_control__ConstPool__TABLE_h1b521792_0
+        [__Vtableidx1];
+    vlSelf->top__DOT__adder_a_src = Valu_control__ConstPool__TABLE_h757488f1_0
+        [__Vtableidx1];
     vlSelf->top__DOT__npc = ((IData)(vlSelf->top__DOT__pc_srcs)
                               ? (((IData)(vlSelf->top__DOT__adder_a_src)
                                    ? vlSelf->top__DOT__rs1
