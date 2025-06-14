@@ -15,17 +15,9 @@ int pmem_read(int pc) {
 
 }
 
-#define ANSI_FMT(str, fmt) fmt str ANSI_NONE
-#define ANSI_FG_RED     "\33[1;31m"
-#define ANSI_FG_GREEN   "\33[1;32m"
-#define _Log(...) \
-  do { \
-    printf(__VA_ARGS__); \
-    log_write(__VA_ARGS__); \
-  } while (0);
 
 extern "C" void ebreak() {
-  Log(ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN));
+  printf("HIT GOOD TRAP\n");
   
 }
 
