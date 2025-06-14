@@ -1,10 +1,10 @@
 module controler(
     input [31:0] inst,
-    output a_in_src,
-    output [1:0] b_in_src,
-    output reg_write,
-    output pc_srcs,
-    output adder_a_src
+    output reg a_in_src,
+    output reg [1:0] b_in_src,
+    output reg reg_write,
+    output reg pc_srcs,
+    output reg adder_a_src
 );
 
     wire [6:0] opcode;
