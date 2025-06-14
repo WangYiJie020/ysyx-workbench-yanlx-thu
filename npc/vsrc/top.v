@@ -104,7 +104,7 @@ module top(
     .alu_op(alu_op)
   );
 
-  assign datamem_addr = alu_result;
+  //assign datamem_addr = alu_result;
 
   wire [31:0]datamem_data;
   mux21 WB(

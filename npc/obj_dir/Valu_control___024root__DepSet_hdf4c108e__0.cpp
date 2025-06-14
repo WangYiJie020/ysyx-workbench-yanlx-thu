@@ -60,7 +60,7 @@ VL_INLINE_OPT void Valu_control___024root___nba_sequent__TOP__0(Valu_control___0
     // Body
     if (VL_UNLIKELY((0x100073U == vlSelf->inst))) {
         Valu_control___024unit____Vdpiimwrap_ebreak_TOP____024unit();
-        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 119, "");
+        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 120, "");
     }
     __Vdlyvset__top__DOT__Rgefile__DOT__rf__v0 = 0U;
     if (((IData)(vlSelf->top__DOT__reg_write) & (0U 
@@ -69,7 +69,52 @@ VL_INLINE_OPT void Valu_control___024root___nba_sequent__TOP__0(Valu_control___0
                                                   & (vlSelf->inst 
                                                      >> 7U))))) {
         __Vdlyvval__top__DOT__Rgefile__DOT__rf__v0 
-            = vlSelf->datamem_addr;
+            = ((8U & (IData)(vlSelf->top__DOT__alu_op))
+                ? vlSelf->top__DOT__b_in : ((4U & (IData)(vlSelf->top__DOT__alu_op))
+                                             ? ((2U 
+                                                 & (IData)(vlSelf->top__DOT__alu_op))
+                                                 ? 
+                                                ((1U 
+                                                  & (IData)(vlSelf->top__DOT__alu_op))
+                                                  ? vlSelf->top__DOT__b_in
+                                                  : 
+                                                 ((0x1fU 
+                                                   >= vlSelf->top__DOT__b_in)
+                                                   ? 
+                                                  (vlSelf->top__DOT__a_in 
+                                                   >> vlSelf->top__DOT__b_in)
+                                                   : 0U))
+                                                 : 
+                                                ((1U 
+                                                  & (IData)(vlSelf->top__DOT__alu_op))
+                                                  ? 
+                                                 ((0x1fU 
+                                                   >= vlSelf->top__DOT__b_in)
+                                                   ? 
+                                                  (vlSelf->top__DOT__a_in 
+                                                   << vlSelf->top__DOT__b_in)
+                                                   : 0U)
+                                                  : 
+                                                 (vlSelf->top__DOT__a_in 
+                                                  - vlSelf->top__DOT__b_in)))
+                                             : ((2U 
+                                                 & (IData)(vlSelf->top__DOT__alu_op))
+                                                 ? 
+                                                ((1U 
+                                                  & (IData)(vlSelf->top__DOT__alu_op))
+                                                  ? 
+                                                 (vlSelf->top__DOT__a_in 
+                                                  + vlSelf->top__DOT__b_in)
+                                                  : 
+                                                 (vlSelf->top__DOT__a_in 
+                                                  | vlSelf->top__DOT__b_in))
+                                                 : 
+                                                ((1U 
+                                                  & (IData)(vlSelf->top__DOT__alu_op))
+                                                  ? 
+                                                 (vlSelf->top__DOT__a_in 
+                                                  & vlSelf->top__DOT__b_in)
+                                                  : vlSelf->top__DOT__b_in))));
         __Vdlyvset__top__DOT__Rgefile__DOT__rf__v0 = 1U;
         __Vdlyvdim0__top__DOT__Rgefile__DOT__rf__v0 
             = (0x1fU & (vlSelf->inst >> 7U));

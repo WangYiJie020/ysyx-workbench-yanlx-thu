@@ -161,11 +161,6 @@ VL_INLINE_OPT void Valu_control___024root___ico_sequent__TOP__0(Valu_control___0
         [__Vtableidx1];
     vlSelf->top__DOT__adder_a_src = Valu_control__ConstPool__TABLE_h757488f1_0
         [__Vtableidx1];
-    vlSelf->top__DOT__npc = ((IData)(vlSelf->top__DOT__pc_srcs)
-                              ? (((IData)(vlSelf->top__DOT__adder_a_src)
-                                   ? vlSelf->top__DOT__rs1
-                                   : vlSelf->pc) + vlSelf->top__DOT__imm)
-                              : ((IData)(4U) + vlSelf->pc));
     vlSelf->top__DOT__a_in = ((IData)(vlSelf->top__DOT__a_in_src)
                                ? vlSelf->pc : vlSelf->top__DOT__rs1);
     vlSelf->top__DOT__b_in = ((2U & (IData)(vlSelf->top__DOT__b_in_src))
@@ -178,35 +173,11 @@ VL_INLINE_OPT void Valu_control___024root___ico_sequent__TOP__0(Valu_control___0
                                                  [(0x1fU 
                                                    & (vlSelf->inst 
                                                       >> 0x14U))]));
-    vlSelf->datamem_addr = ((8U & (IData)(vlSelf->top__DOT__alu_op))
-                             ? vlSelf->top__DOT__b_in
-                             : ((4U & (IData)(vlSelf->top__DOT__alu_op))
-                                 ? ((2U & (IData)(vlSelf->top__DOT__alu_op))
-                                     ? ((1U & (IData)(vlSelf->top__DOT__alu_op))
-                                         ? vlSelf->top__DOT__b_in
-                                         : ((0x1fU 
-                                             >= vlSelf->top__DOT__b_in)
-                                             ? (vlSelf->top__DOT__a_in 
-                                                >> vlSelf->top__DOT__b_in)
-                                             : 0U))
-                                     : ((1U & (IData)(vlSelf->top__DOT__alu_op))
-                                         ? ((0x1fU 
-                                             >= vlSelf->top__DOT__b_in)
-                                             ? (vlSelf->top__DOT__a_in 
-                                                << vlSelf->top__DOT__b_in)
-                                             : 0U) : 
-                                        (vlSelf->top__DOT__a_in 
-                                         - vlSelf->top__DOT__b_in)))
-                                 : ((2U & (IData)(vlSelf->top__DOT__alu_op))
-                                     ? ((1U & (IData)(vlSelf->top__DOT__alu_op))
-                                         ? (vlSelf->top__DOT__a_in 
-                                            + vlSelf->top__DOT__b_in)
-                                         : (vlSelf->top__DOT__a_in 
-                                            | vlSelf->top__DOT__b_in))
-                                     : ((1U & (IData)(vlSelf->top__DOT__alu_op))
-                                         ? (vlSelf->top__DOT__a_in 
-                                            & vlSelf->top__DOT__b_in)
-                                         : vlSelf->top__DOT__b_in))));
+    vlSelf->top__DOT__npc = ((IData)(vlSelf->top__DOT__pc_srcs)
+                              ? (((IData)(vlSelf->top__DOT__adder_a_src)
+                                   ? vlSelf->top__DOT__rs1
+                                   : vlSelf->pc) + vlSelf->top__DOT__imm)
+                              : ((IData)(4U) + vlSelf->pc));
 }
 
 void Valu_control___024root___eval_ico(Valu_control___024root* vlSelf) {
@@ -231,11 +202,6 @@ VL_INLINE_OPT void Valu_control___024root___nba_sequent__TOP__1(Valu_control___0
     Valu_control__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Valu_control___024root___nba_sequent__TOP__1\n"); );
     // Body
-    vlSelf->top__DOT__npc = ((IData)(vlSelf->top__DOT__pc_srcs)
-                              ? (((IData)(vlSelf->top__DOT__adder_a_src)
-                                   ? vlSelf->top__DOT__rs1
-                                   : vlSelf->pc) + vlSelf->top__DOT__imm)
-                              : ((IData)(4U) + vlSelf->pc));
     vlSelf->top__DOT__a_in = ((IData)(vlSelf->top__DOT__a_in_src)
                                ? vlSelf->pc : vlSelf->top__DOT__rs1);
     vlSelf->top__DOT__b_in = ((2U & (IData)(vlSelf->top__DOT__b_in_src))
@@ -248,35 +214,11 @@ VL_INLINE_OPT void Valu_control___024root___nba_sequent__TOP__1(Valu_control___0
                                                  [(0x1fU 
                                                    & (vlSelf->inst 
                                                       >> 0x14U))]));
-    vlSelf->datamem_addr = ((8U & (IData)(vlSelf->top__DOT__alu_op))
-                             ? vlSelf->top__DOT__b_in
-                             : ((4U & (IData)(vlSelf->top__DOT__alu_op))
-                                 ? ((2U & (IData)(vlSelf->top__DOT__alu_op))
-                                     ? ((1U & (IData)(vlSelf->top__DOT__alu_op))
-                                         ? vlSelf->top__DOT__b_in
-                                         : ((0x1fU 
-                                             >= vlSelf->top__DOT__b_in)
-                                             ? (vlSelf->top__DOT__a_in 
-                                                >> vlSelf->top__DOT__b_in)
-                                             : 0U))
-                                     : ((1U & (IData)(vlSelf->top__DOT__alu_op))
-                                         ? ((0x1fU 
-                                             >= vlSelf->top__DOT__b_in)
-                                             ? (vlSelf->top__DOT__a_in 
-                                                << vlSelf->top__DOT__b_in)
-                                             : 0U) : 
-                                        (vlSelf->top__DOT__a_in 
-                                         - vlSelf->top__DOT__b_in)))
-                                 : ((2U & (IData)(vlSelf->top__DOT__alu_op))
-                                     ? ((1U & (IData)(vlSelf->top__DOT__alu_op))
-                                         ? (vlSelf->top__DOT__a_in 
-                                            + vlSelf->top__DOT__b_in)
-                                         : (vlSelf->top__DOT__a_in 
-                                            | vlSelf->top__DOT__b_in))
-                                     : ((1U & (IData)(vlSelf->top__DOT__alu_op))
-                                         ? (vlSelf->top__DOT__a_in 
-                                            & vlSelf->top__DOT__b_in)
-                                         : vlSelf->top__DOT__b_in))));
+    vlSelf->top__DOT__npc = ((IData)(vlSelf->top__DOT__pc_srcs)
+                              ? (((IData)(vlSelf->top__DOT__adder_a_src)
+                                   ? vlSelf->top__DOT__rs1
+                                   : vlSelf->pc) + vlSelf->top__DOT__imm)
+                              : ((IData)(4U) + vlSelf->pc));
 }
 
 void Valu_control___024root___nba_sequent__TOP__0(Valu_control___024root* vlSelf);
@@ -382,5 +324,7 @@ void Valu_control___024root___eval_debug_assertions(Valu_control___024root* vlSe
         Verilated::overWidthError("clk");}
     if (VL_UNLIKELY((vlSelf->rst_n & 0xfeU))) {
         Verilated::overWidthError("rst_n");}
+    if (VL_UNLIKELY((vlSelf->__pinNumber5 & 0xfeU))) {
+        Verilated::overWidthError("__pinNumber5");}
 }
 #endif  // VL_DEBUG

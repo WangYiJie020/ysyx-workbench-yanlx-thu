@@ -19,6 +19,7 @@ class Valu_control___024root final : public VerilatedModule {
     // DESIGN SPECIFIC STATE
     VL_IN8(clk,0,0);
     VL_IN8(rst_n,0,0);
+    VL_IN8(__pinNumber5,0,0);
     CData/*1:0*/ top__DOT__b_in_src;
     CData/*0:0*/ top__DOT__a_in_src;
     CData/*0:0*/ top__DOT__adder_a_src;
@@ -29,13 +30,12 @@ class Valu_control___024root final : public VerilatedModule {
     CData/*0:0*/ __VactContinue;
     VL_OUT(pc,31,0);
     VL_IN(inst,31,0);
-    VL_OUT(datamem_addr,31,0);
-    VL_IN(datamem_data,31,0);
     IData/*31:0*/ top__DOT__imm;
     IData/*31:0*/ top__DOT__rs1;
     IData/*31:0*/ top__DOT__a_in;
     IData/*31:0*/ top__DOT__b_in;
     IData/*31:0*/ top__DOT__npc;
+    IData/*31:0*/ top__DOT__datamem_data;
     IData/*31:0*/ __VstlIterCount;
     IData/*31:0*/ __VicoIterCount;
     IData/*31:0*/ __VactIterCount;

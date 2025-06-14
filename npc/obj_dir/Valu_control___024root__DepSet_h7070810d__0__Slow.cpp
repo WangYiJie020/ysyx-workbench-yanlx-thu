@@ -144,8 +144,7 @@ VL_ATTR_COLD void Valu_control___024root___ctor_var_reset(Valu_control___024root
     vlSelf->rst_n = VL_RAND_RESET_I(1);
     vlSelf->pc = VL_RAND_RESET_I(32);
     vlSelf->inst = VL_RAND_RESET_I(32);
-    vlSelf->datamem_addr = VL_RAND_RESET_I(32);
-    vlSelf->datamem_data = VL_RAND_RESET_I(32);
+    vlSelf->__pinNumber5 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__imm = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__rs1 = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__a_in = VL_RAND_RESET_I(32);
@@ -157,6 +156,7 @@ VL_ATTR_COLD void Valu_control___024root___ctor_var_reset(Valu_control___024root
     vlSelf->top__DOT__alu_op = VL_RAND_RESET_I(4);
     vlSelf->top__DOT__npc = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__pc_srcs = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__datamem_data = VL_RAND_RESET_I(32);
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
         vlSelf->top__DOT__Rgefile__DOT__rf[__Vi0] = VL_RAND_RESET_I(32);
     }
