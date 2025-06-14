@@ -1,6 +1,6 @@
-module sext #(DATA_WIDTH = 32)(
+module alu_control(
     input [31:0] inst,
-    output reg [DATA_WIDTH-1:0]data
+    output [3:0] alu_op
 );
     wire [6:0] opcode;
     wire [2:0] funct3;
@@ -9,28 +9,28 @@ module sext #(DATA_WIDTH = 32)(
     assign funct3 = inst[14:12];
     assign funct7 = inst[31:25];
 
-    always@(*) begin
-        case (opcode)
+    always@(*)begin
+        case(opcode)
             7'b0010011: begin
                 case(funct3)
-                    3'b000: data = {{20{inst[31]}},inst[31:20]}; //addi
+                    3'b000: alu_op = 4'b0011; //addi +
                 endcase
             end
             7'b0110111: begin //lui
-                data = {inst[31:12],12'd0};
+                alu_op = 4'b0000; //pass b
             end
             7'b0010111: begin //auipc
-                data = {inst[31:12],12'd0};
+                alu_op = 4'b0011; //+
             end
             7'b1101111: begin //jal
-                data = {{12{inst[31]}},inst[19:12],inst[20],inst[30:21],1'b0};
+                alu_op = 4'b0011; //+
             end
             7'b1100111: begin
                 case(funct3)
-                    3'b000: data = {{20{inst[31]}},inst[31:20]}; //jalr
+                    3'b000: alu_op = 4'b0011; //+ //jalr
                 endcase
             end
-            default: data = 0;
+            default: alu_op = 0;
         endcase
     end
 
