@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <getopt.h>
 #include <assert.h>
-#include <Vtop.h>
-#include <verilated.h>
+#include "Vtop.h"
+#include "verilated.h"
 
 #include "verilated_vcd_c.h" //可选，如果要导出vcd则需要加上
 
@@ -26,7 +26,7 @@ static int difftest_port = 1234;
 
 static long load_img() {
   if (img_file == NULL) {
-    printf("No image is given. 111Use the default build-in image.\n");
+    printf("No image is given. Use the default build-in image.\n");
     return 4096; // built-in image size
   }
 
@@ -73,7 +73,8 @@ static int parse_args(int argc, char *argv[]) {
 }
 
 int main(int argc, char** argv) {
-
+  parse_args(argc, argv);
+  long img_size = load_img();
   VerilatedContext* contextp = new VerilatedContext;
   contextp->commandArgs(argc, argv);
   Vtop* top = new Vtop{contextp};
@@ -87,10 +88,6 @@ int main(int argc, char** argv) {
   void reset(int n);
 
   int n = 10;
-
-  //parse_args(argc, argv);
-  //long img_size = load_img();
-
   top->rst_n = 0;
   while (n > 0) {
     top->clk = 0; top->eval();
