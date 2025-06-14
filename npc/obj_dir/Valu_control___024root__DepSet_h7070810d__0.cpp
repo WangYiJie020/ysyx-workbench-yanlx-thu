@@ -28,98 +28,125 @@ VL_INLINE_OPT void Valu_control___024root___ico_sequent__TOP__0(Valu_control___0
                     | (0x7fU & vlSelf->inst));
     vlSelf->top__DOT__alu_op = Valu_control__ConstPool__TABLE_h1baa5ab3_0
         [__Vtableidx2];
-    if ((0x40U & vlSelf->inst)) {
-        if ((0x20U & vlSelf->inst)) {
-            if ((0x10U & vlSelf->inst)) {
-                vlSelf->top__DOT__imm = 0U;
-            } else if ((8U & vlSelf->inst)) {
-                vlSelf->top__DOT__imm = ((4U & vlSelf->inst)
-                                          ? ((2U & vlSelf->inst)
-                                              ? ((1U 
-                                                  & vlSelf->inst)
-                                                  ? 
-                                                 (((- (IData)(
-                                                              (vlSelf->inst 
-                                                               >> 0x1fU))) 
-                                                   << 0x14U) 
-                                                  | ((0xff000U 
-                                                      & vlSelf->inst) 
-                                                     | ((0x800U 
-                                                         & (vlSelf->inst 
-                                                            >> 9U)) 
-                                                        | (0x7feU 
-                                                           & (vlSelf->inst 
-                                                              >> 0x14U)))))
-                                                  : 0U)
-                                              : 0U)
-                                          : 0U);
-            } else if ((4U & vlSelf->inst)) {
-                if ((2U & vlSelf->inst)) {
-                    if ((1U & vlSelf->inst)) {
-                        if ((0U == (7U & (vlSelf->inst 
-                                          >> 0xcU)))) {
-                            vlSelf->top__DOT__imm = 
-                                (((- (IData)((vlSelf->inst 
-                                              >> 0x1fU))) 
-                                  << 0xcU) | (vlSelf->inst 
-                                              >> 0x14U));
-                        }
-                    } else {
-                        vlSelf->top__DOT__imm = 0U;
-                    }
-                } else {
-                    vlSelf->top__DOT__imm = 0U;
-                }
-            } else {
-                vlSelf->top__DOT__imm = 0U;
-            }
-        } else {
-            vlSelf->top__DOT__imm = 0U;
-        }
-    } else if ((0x20U & vlSelf->inst)) {
-        vlSelf->top__DOT__imm = ((0x10U & vlSelf->inst)
-                                  ? ((8U & vlSelf->inst)
-                                      ? 0U : ((4U & vlSelf->inst)
-                                               ? ((2U 
+    vlSelf->top__DOT__imm = ((0x40U & vlSelf->inst)
+                              ? ((0x20U & vlSelf->inst)
+                                  ? ((0x10U & vlSelf->inst)
+                                      ? 0U : ((8U & vlSelf->inst)
+                                               ? ((4U 
                                                    & vlSelf->inst)
                                                    ? 
-                                                  ((1U 
+                                                  ((2U 
                                                     & vlSelf->inst)
                                                     ? 
-                                                   (0xfffff000U 
-                                                    & vlSelf->inst)
+                                                   ((1U 
+                                                     & vlSelf->inst)
+                                                     ? 
+                                                    (((- (IData)(
+                                                                 (vlSelf->inst 
+                                                                  >> 0x1fU))) 
+                                                      << 0x14U) 
+                                                     | ((0xff000U 
+                                                         & vlSelf->inst) 
+                                                        | ((0x800U 
+                                                            & (vlSelf->inst 
+                                                               >> 9U)) 
+                                                           | (0x7feU 
+                                                              & (vlSelf->inst 
+                                                                 >> 0x14U)))))
+                                                     : 0U)
                                                     : 0U)
                                                    : 0U)
-                                               : 0U))
-                                  : 0U);
-    } else if ((0x10U & vlSelf->inst)) {
-        if ((8U & vlSelf->inst)) {
-            vlSelf->top__DOT__imm = 0U;
-        } else if ((4U & vlSelf->inst)) {
-            vlSelf->top__DOT__imm = ((2U & vlSelf->inst)
-                                      ? ((1U & vlSelf->inst)
-                                          ? (0xfffff000U 
-                                             & vlSelf->inst)
-                                          : 0U) : 0U);
-        } else if ((2U & vlSelf->inst)) {
-            if ((1U & vlSelf->inst)) {
-                if ((0U == (7U & (vlSelf->inst >> 0xcU)))) {
-                    vlSelf->top__DOT__imm = (((- (IData)(
-                                                         (vlSelf->inst 
-                                                          >> 0x1fU))) 
-                                              << 0xcU) 
-                                             | (vlSelf->inst 
-                                                >> 0x14U));
-                }
-            } else {
-                vlSelf->top__DOT__imm = 0U;
-            }
-        } else {
-            vlSelf->top__DOT__imm = 0U;
-        }
-    } else {
-        vlSelf->top__DOT__imm = 0U;
-    }
+                                               : ((4U 
+                                                   & vlSelf->inst)
+                                                   ? 
+                                                  ((2U 
+                                                    & vlSelf->inst)
+                                                    ? 
+                                                   ((1U 
+                                                     & vlSelf->inst)
+                                                     ? 
+                                                    ((0U 
+                                                      == 
+                                                      (7U 
+                                                       & (vlSelf->inst 
+                                                          >> 0xcU)))
+                                                      ? 
+                                                     (((- (IData)(
+                                                                  (vlSelf->inst 
+                                                                   >> 0x1fU))) 
+                                                       << 0xcU) 
+                                                      | (vlSelf->inst 
+                                                         >> 0x14U))
+                                                      : 0U)
+                                                     : 0U)
+                                                    : 0U)
+                                                   : 0U)))
+                                  : 0U) : ((0x20U & vlSelf->inst)
+                                            ? ((0x10U 
+                                                & vlSelf->inst)
+                                                ? (
+                                                   (8U 
+                                                    & vlSelf->inst)
+                                                    ? 0U
+                                                    : 
+                                                   ((4U 
+                                                     & vlSelf->inst)
+                                                     ? 
+                                                    ((2U 
+                                                      & vlSelf->inst)
+                                                      ? 
+                                                     ((1U 
+                                                       & vlSelf->inst)
+                                                       ? 
+                                                      (0xfffff000U 
+                                                       & vlSelf->inst)
+                                                       : 0U)
+                                                      : 0U)
+                                                     : 0U))
+                                                : 0U)
+                                            : ((0x10U 
+                                                & vlSelf->inst)
+                                                ? (
+                                                   (8U 
+                                                    & vlSelf->inst)
+                                                    ? 0U
+                                                    : 
+                                                   ((4U 
+                                                     & vlSelf->inst)
+                                                     ? 
+                                                    ((2U 
+                                                      & vlSelf->inst)
+                                                      ? 
+                                                     ((1U 
+                                                       & vlSelf->inst)
+                                                       ? 
+                                                      (0xfffff000U 
+                                                       & vlSelf->inst)
+                                                       : 0U)
+                                                      : 0U)
+                                                     : 
+                                                    ((2U 
+                                                      & vlSelf->inst)
+                                                      ? 
+                                                     ((1U 
+                                                       & vlSelf->inst)
+                                                       ? 
+                                                      ((0U 
+                                                        == 
+                                                        (7U 
+                                                         & (vlSelf->inst 
+                                                            >> 0xcU)))
+                                                        ? 
+                                                       (((- (IData)(
+                                                                    (vlSelf->inst 
+                                                                     >> 0x1fU))) 
+                                                         << 0xcU) 
+                                                        | (vlSelf->inst 
+                                                           >> 0x14U))
+                                                        : 0U)
+                                                       : 0U)
+                                                      : 0U)))
+                                                : 0U)));
     vlSelf->top__DOT__rs1 = vlSelf->top__DOT__Rgefile__DOT__rf
         [(0x1fU & (vlSelf->inst >> 0xfU))];
     __Vtableidx1 = ((0x380U & (vlSelf->inst >> 5U)) 

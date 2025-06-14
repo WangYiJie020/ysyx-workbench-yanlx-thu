@@ -17,6 +17,7 @@ always@(*) begin
         4'b0100: alu_result = a - b;
         4'b0101: alu_result = a << b;
         4'b0110: alu_result = a >> b;
+        default: alu_result = b; 
     endcase
 
 end
