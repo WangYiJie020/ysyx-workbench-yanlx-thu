@@ -16,8 +16,8 @@ int pmem_read(int pc) {
 }
 
 extern "C" void ebreak() {
+  Log(ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN));
   
-  printf("HIT GOOD TRAP\n");
 }
 
 static char *log_file = NULL;
