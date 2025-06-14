@@ -3,7 +3,8 @@ module controler(
     output a_in_src,
     output [1:0] b_in_src,
     output reg_write,
-    output pc_srcs
+    output pc_srcs,
+    output adder_a_src
 );
 
     wire [6:0] opcode;
