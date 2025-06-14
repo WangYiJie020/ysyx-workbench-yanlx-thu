@@ -1,6 +1,6 @@
 module alu_control(
     input [31:0] inst,
-    output [3:0] alu_op
+    output reg [3:0] alu_op
 );
     wire [6:0] opcode;
     wire [2:0] funct3;
