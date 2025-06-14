@@ -35,7 +35,6 @@ class Valu_control___024root final : public VerilatedModule {
     IData/*31:0*/ top__DOT__rs1;
     IData/*31:0*/ top__DOT__a_in;
     IData/*31:0*/ top__DOT__b_in;
-    IData/*31:0*/ top__DOT__alu_result;
     IData/*31:0*/ top__DOT__npc;
     IData/*31:0*/ __VstlIterCount;
     IData/*31:0*/ __VicoIterCount;

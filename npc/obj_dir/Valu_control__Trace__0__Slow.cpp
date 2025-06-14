@@ -191,8 +191,86 @@ VL_ATTR_COLD void Valu_control___024root__trace_full_sub_0(Valu_control___024roo
     bufp->fullIData(oldp+8,(vlSelf->top__DOT__rs1),32);
     bufp->fullIData(oldp+9,(vlSelf->top__DOT__a_in),32);
     bufp->fullIData(oldp+10,(vlSelf->top__DOT__b_in),32);
-    bufp->fullIData(oldp+11,(vlSelf->top__DOT__alu_result),32);
-    bufp->fullBit(oldp+12,((1U & (~ (IData)((0U != vlSelf->top__DOT__alu_result))))));
+    bufp->fullIData(oldp+11,(((8U & (IData)(vlSelf->top__DOT__alu_op))
+                               ? vlSelf->top__DOT__b_in
+                               : ((4U & (IData)(vlSelf->top__DOT__alu_op))
+                                   ? ((2U & (IData)(vlSelf->top__DOT__alu_op))
+                                       ? ((1U & (IData)(vlSelf->top__DOT__alu_op))
+                                           ? vlSelf->top__DOT__b_in
+                                           : ((0x1fU 
+                                               >= vlSelf->top__DOT__b_in)
+                                               ? (vlSelf->top__DOT__a_in 
+                                                  >> vlSelf->top__DOT__b_in)
+                                               : 0U))
+                                       : ((1U & (IData)(vlSelf->top__DOT__alu_op))
+                                           ? ((0x1fU 
+                                               >= vlSelf->top__DOT__b_in)
+                                               ? (vlSelf->top__DOT__a_in 
+                                                  << vlSelf->top__DOT__b_in)
+                                               : 0U)
+                                           : (vlSelf->top__DOT__a_in 
+                                              - vlSelf->top__DOT__b_in)))
+                                   : ((2U & (IData)(vlSelf->top__DOT__alu_op))
+                                       ? ((1U & (IData)(vlSelf->top__DOT__alu_op))
+                                           ? (vlSelf->top__DOT__a_in 
+                                              + vlSelf->top__DOT__b_in)
+                                           : (vlSelf->top__DOT__a_in 
+                                              | vlSelf->top__DOT__b_in))
+                                       : ((1U & (IData)(vlSelf->top__DOT__alu_op))
+                                           ? (vlSelf->top__DOT__a_in 
+                                              & vlSelf->top__DOT__b_in)
+                                           : vlSelf->top__DOT__b_in))))),32);
+    bufp->fullBit(oldp+12,((1U & (~ (IData)((0U != 
+                                             ((8U & (IData)(vlSelf->top__DOT__alu_op))
+                                               ? vlSelf->top__DOT__b_in
+                                               : ((4U 
+                                                   & (IData)(vlSelf->top__DOT__alu_op))
+                                                   ? 
+                                                  ((2U 
+                                                    & (IData)(vlSelf->top__DOT__alu_op))
+                                                    ? 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__alu_op))
+                                                     ? vlSelf->top__DOT__b_in
+                                                     : 
+                                                    ((0x1fU 
+                                                      >= vlSelf->top__DOT__b_in)
+                                                      ? 
+                                                     (vlSelf->top__DOT__a_in 
+                                                      >> vlSelf->top__DOT__b_in)
+                                                      : 0U))
+                                                    : 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__alu_op))
+                                                     ? 
+                                                    ((0x1fU 
+                                                      >= vlSelf->top__DOT__b_in)
+                                                      ? 
+                                                     (vlSelf->top__DOT__a_in 
+                                                      << vlSelf->top__DOT__b_in)
+                                                      : 0U)
+                                                     : 
+                                                    (vlSelf->top__DOT__a_in 
+                                                     - vlSelf->top__DOT__b_in)))
+                                                   : 
+                                                  ((2U 
+                                                    & (IData)(vlSelf->top__DOT__alu_op))
+                                                    ? 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__alu_op))
+                                                     ? 
+                                                    (vlSelf->top__DOT__a_in 
+                                                     + vlSelf->top__DOT__b_in)
+                                                     : 
+                                                    (vlSelf->top__DOT__a_in 
+                                                     | vlSelf->top__DOT__b_in))
+                                                    : 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__alu_op))
+                                                     ? 
+                                                    (vlSelf->top__DOT__a_in 
+                                                     & vlSelf->top__DOT__b_in)
+                                                     : vlSelf->top__DOT__b_in))))))))));
     bufp->fullIData(oldp+13,(vlSelf->top__DOT__Rgefile__DOT__rf[0]),32);
     bufp->fullIData(oldp+14,(vlSelf->top__DOT__Rgefile__DOT__rf[1]),32);
     bufp->fullIData(oldp+15,(vlSelf->top__DOT__Rgefile__DOT__rf[2]),32);

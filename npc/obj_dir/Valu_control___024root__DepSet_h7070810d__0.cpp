@@ -178,32 +178,35 @@ VL_INLINE_OPT void Valu_control___024root___ico_sequent__TOP__0(Valu_control___0
                                                  [(0x1fU 
                                                    & (vlSelf->inst 
                                                       >> 0x14U))]));
-    if ((0U == (IData)(vlSelf->top__DOT__alu_op))) {
-        vlSelf->top__DOT__alu_result = vlSelf->top__DOT__b_in;
-    } else if ((1U == (IData)(vlSelf->top__DOT__alu_op))) {
-        vlSelf->top__DOT__alu_result = (vlSelf->top__DOT__a_in 
-                                        & vlSelf->top__DOT__b_in);
-    } else if ((2U == (IData)(vlSelf->top__DOT__alu_op))) {
-        vlSelf->top__DOT__alu_result = (vlSelf->top__DOT__a_in 
-                                        | vlSelf->top__DOT__b_in);
-    } else if ((3U == (IData)(vlSelf->top__DOT__alu_op))) {
-        vlSelf->top__DOT__alu_result = (vlSelf->top__DOT__a_in 
-                                        + vlSelf->top__DOT__b_in);
-    } else if ((4U == (IData)(vlSelf->top__DOT__alu_op))) {
-        vlSelf->top__DOT__alu_result = (vlSelf->top__DOT__a_in 
-                                        - vlSelf->top__DOT__b_in);
-    } else if ((5U == (IData)(vlSelf->top__DOT__alu_op))) {
-        vlSelf->top__DOT__alu_result = ((0x1fU >= vlSelf->top__DOT__b_in)
+    vlSelf->datamem_addr = ((8U & (IData)(vlSelf->top__DOT__alu_op))
+                             ? vlSelf->top__DOT__b_in
+                             : ((4U & (IData)(vlSelf->top__DOT__alu_op))
+                                 ? ((2U & (IData)(vlSelf->top__DOT__alu_op))
+                                     ? ((1U & (IData)(vlSelf->top__DOT__alu_op))
+                                         ? vlSelf->top__DOT__b_in
+                                         : ((0x1fU 
+                                             >= vlSelf->top__DOT__b_in)
+                                             ? (vlSelf->top__DOT__a_in 
+                                                >> vlSelf->top__DOT__b_in)
+                                             : 0U))
+                                     : ((1U & (IData)(vlSelf->top__DOT__alu_op))
+                                         ? ((0x1fU 
+                                             >= vlSelf->top__DOT__b_in)
+                                             ? (vlSelf->top__DOT__a_in 
+                                                << vlSelf->top__DOT__b_in)
+                                             : 0U) : 
+                                        (vlSelf->top__DOT__a_in 
+                                         - vlSelf->top__DOT__b_in)))
+                                 : ((2U & (IData)(vlSelf->top__DOT__alu_op))
+                                     ? ((1U & (IData)(vlSelf->top__DOT__alu_op))
                                          ? (vlSelf->top__DOT__a_in 
-                                            << vlSelf->top__DOT__b_in)
-                                         : 0U);
-    } else if ((6U == (IData)(vlSelf->top__DOT__alu_op))) {
-        vlSelf->top__DOT__alu_result = ((0x1fU >= vlSelf->top__DOT__b_in)
+                                            + vlSelf->top__DOT__b_in)
+                                         : (vlSelf->top__DOT__a_in 
+                                            | vlSelf->top__DOT__b_in))
+                                     : ((1U & (IData)(vlSelf->top__DOT__alu_op))
                                          ? (vlSelf->top__DOT__a_in 
-                                            >> vlSelf->top__DOT__b_in)
-                                         : 0U);
-    }
-    vlSelf->datamem_addr = vlSelf->top__DOT__alu_result;
+                                            & vlSelf->top__DOT__b_in)
+                                         : vlSelf->top__DOT__b_in))));
 }
 
 void Valu_control___024root___eval_ico(Valu_control___024root* vlSelf) {
@@ -245,32 +248,35 @@ VL_INLINE_OPT void Valu_control___024root___nba_sequent__TOP__1(Valu_control___0
                                                  [(0x1fU 
                                                    & (vlSelf->inst 
                                                       >> 0x14U))]));
-    if ((0U == (IData)(vlSelf->top__DOT__alu_op))) {
-        vlSelf->top__DOT__alu_result = vlSelf->top__DOT__b_in;
-    } else if ((1U == (IData)(vlSelf->top__DOT__alu_op))) {
-        vlSelf->top__DOT__alu_result = (vlSelf->top__DOT__a_in 
-                                        & vlSelf->top__DOT__b_in);
-    } else if ((2U == (IData)(vlSelf->top__DOT__alu_op))) {
-        vlSelf->top__DOT__alu_result = (vlSelf->top__DOT__a_in 
-                                        | vlSelf->top__DOT__b_in);
-    } else if ((3U == (IData)(vlSelf->top__DOT__alu_op))) {
-        vlSelf->top__DOT__alu_result = (vlSelf->top__DOT__a_in 
-                                        + vlSelf->top__DOT__b_in);
-    } else if ((4U == (IData)(vlSelf->top__DOT__alu_op))) {
-        vlSelf->top__DOT__alu_result = (vlSelf->top__DOT__a_in 
-                                        - vlSelf->top__DOT__b_in);
-    } else if ((5U == (IData)(vlSelf->top__DOT__alu_op))) {
-        vlSelf->top__DOT__alu_result = ((0x1fU >= vlSelf->top__DOT__b_in)
+    vlSelf->datamem_addr = ((8U & (IData)(vlSelf->top__DOT__alu_op))
+                             ? vlSelf->top__DOT__b_in
+                             : ((4U & (IData)(vlSelf->top__DOT__alu_op))
+                                 ? ((2U & (IData)(vlSelf->top__DOT__alu_op))
+                                     ? ((1U & (IData)(vlSelf->top__DOT__alu_op))
+                                         ? vlSelf->top__DOT__b_in
+                                         : ((0x1fU 
+                                             >= vlSelf->top__DOT__b_in)
+                                             ? (vlSelf->top__DOT__a_in 
+                                                >> vlSelf->top__DOT__b_in)
+                                             : 0U))
+                                     : ((1U & (IData)(vlSelf->top__DOT__alu_op))
+                                         ? ((0x1fU 
+                                             >= vlSelf->top__DOT__b_in)
+                                             ? (vlSelf->top__DOT__a_in 
+                                                << vlSelf->top__DOT__b_in)
+                                             : 0U) : 
+                                        (vlSelf->top__DOT__a_in 
+                                         - vlSelf->top__DOT__b_in)))
+                                 : ((2U & (IData)(vlSelf->top__DOT__alu_op))
+                                     ? ((1U & (IData)(vlSelf->top__DOT__alu_op))
                                          ? (vlSelf->top__DOT__a_in 
-                                            << vlSelf->top__DOT__b_in)
-                                         : 0U);
-    } else if ((6U == (IData)(vlSelf->top__DOT__alu_op))) {
-        vlSelf->top__DOT__alu_result = ((0x1fU >= vlSelf->top__DOT__b_in)
+                                            + vlSelf->top__DOT__b_in)
+                                         : (vlSelf->top__DOT__a_in 
+                                            | vlSelf->top__DOT__b_in))
+                                     : ((1U & (IData)(vlSelf->top__DOT__alu_op))
                                          ? (vlSelf->top__DOT__a_in 
-                                            >> vlSelf->top__DOT__b_in)
-                                         : 0U);
-    }
-    vlSelf->datamem_addr = vlSelf->top__DOT__alu_result;
+                                            & vlSelf->top__DOT__b_in)
+                                         : vlSelf->top__DOT__b_in))));
 }
 
 void Valu_control___024root___nba_sequent__TOP__0(Valu_control___024root* vlSelf);

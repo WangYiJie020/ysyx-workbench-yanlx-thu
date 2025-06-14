@@ -37,9 +37,91 @@ void Valu_control___024root__trace_chg_sub_0(Valu_control___024root* vlSelf, Ver
         bufp->chgIData(oldp+7,(vlSelf->top__DOT__rs1),32);
         bufp->chgIData(oldp+8,(vlSelf->top__DOT__a_in),32);
         bufp->chgIData(oldp+9,(vlSelf->top__DOT__b_in),32);
-        bufp->chgIData(oldp+10,(vlSelf->top__DOT__alu_result),32);
+        bufp->chgIData(oldp+10,(((8U & (IData)(vlSelf->top__DOT__alu_op))
+                                  ? vlSelf->top__DOT__b_in
+                                  : ((4U & (IData)(vlSelf->top__DOT__alu_op))
+                                      ? ((2U & (IData)(vlSelf->top__DOT__alu_op))
+                                          ? ((1U & (IData)(vlSelf->top__DOT__alu_op))
+                                              ? vlSelf->top__DOT__b_in
+                                              : ((0x1fU 
+                                                  >= vlSelf->top__DOT__b_in)
+                                                  ? 
+                                                 (vlSelf->top__DOT__a_in 
+                                                  >> vlSelf->top__DOT__b_in)
+                                                  : 0U))
+                                          : ((1U & (IData)(vlSelf->top__DOT__alu_op))
+                                              ? ((0x1fU 
+                                                  >= vlSelf->top__DOT__b_in)
+                                                  ? 
+                                                 (vlSelf->top__DOT__a_in 
+                                                  << vlSelf->top__DOT__b_in)
+                                                  : 0U)
+                                              : (vlSelf->top__DOT__a_in 
+                                                 - vlSelf->top__DOT__b_in)))
+                                      : ((2U & (IData)(vlSelf->top__DOT__alu_op))
+                                          ? ((1U & (IData)(vlSelf->top__DOT__alu_op))
+                                              ? (vlSelf->top__DOT__a_in 
+                                                 + vlSelf->top__DOT__b_in)
+                                              : (vlSelf->top__DOT__a_in 
+                                                 | vlSelf->top__DOT__b_in))
+                                          : ((1U & (IData)(vlSelf->top__DOT__alu_op))
+                                              ? (vlSelf->top__DOT__a_in 
+                                                 & vlSelf->top__DOT__b_in)
+                                              : vlSelf->top__DOT__b_in))))),32);
         bufp->chgBit(oldp+11,((1U & (~ (IData)((0U 
-                                                != vlSelf->top__DOT__alu_result))))));
+                                                != 
+                                                ((8U 
+                                                  & (IData)(vlSelf->top__DOT__alu_op))
+                                                  ? vlSelf->top__DOT__b_in
+                                                  : 
+                                                 ((4U 
+                                                   & (IData)(vlSelf->top__DOT__alu_op))
+                                                   ? 
+                                                  ((2U 
+                                                    & (IData)(vlSelf->top__DOT__alu_op))
+                                                    ? 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__alu_op))
+                                                     ? vlSelf->top__DOT__b_in
+                                                     : 
+                                                    ((0x1fU 
+                                                      >= vlSelf->top__DOT__b_in)
+                                                      ? 
+                                                     (vlSelf->top__DOT__a_in 
+                                                      >> vlSelf->top__DOT__b_in)
+                                                      : 0U))
+                                                    : 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__alu_op))
+                                                     ? 
+                                                    ((0x1fU 
+                                                      >= vlSelf->top__DOT__b_in)
+                                                      ? 
+                                                     (vlSelf->top__DOT__a_in 
+                                                      << vlSelf->top__DOT__b_in)
+                                                      : 0U)
+                                                     : 
+                                                    (vlSelf->top__DOT__a_in 
+                                                     - vlSelf->top__DOT__b_in)))
+                                                   : 
+                                                  ((2U 
+                                                    & (IData)(vlSelf->top__DOT__alu_op))
+                                                    ? 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__alu_op))
+                                                     ? 
+                                                    (vlSelf->top__DOT__a_in 
+                                                     + vlSelf->top__DOT__b_in)
+                                                     : 
+                                                    (vlSelf->top__DOT__a_in 
+                                                     | vlSelf->top__DOT__b_in))
+                                                    : 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__alu_op))
+                                                     ? 
+                                                    (vlSelf->top__DOT__a_in 
+                                                     & vlSelf->top__DOT__b_in)
+                                                     : vlSelf->top__DOT__b_in))))))))));
     }
     if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[2U])) {
         bufp->chgIData(oldp+12,(vlSelf->top__DOT__Rgefile__DOT__rf[0]),32);

@@ -73,8 +73,7 @@ static int parse_args(int argc, char *argv[]) {
 }
 
 int main(int argc, char** argv) {
-  parse_args(argc, argv);
-  long img_size = load_img();
+
   VerilatedContext* contextp = new VerilatedContext;
   contextp->commandArgs(argc, argv);
   Vtop* top = new Vtop{contextp};
@@ -88,6 +87,9 @@ int main(int argc, char** argv) {
   void reset(int n);
 
   int n = 10;
+
+  parse_args(argc, argv);
+  long img_size = load_img();
 
   top->rst_n = 0;
   while (n > 0) {
