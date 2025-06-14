@@ -51,48 +51,80 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___nba_sequent__TOP__0\n"); );
     // Init
-    CData/*4:0*/ __Vdlyvdim0__top__DOT__u1__DOT__rf__v0;
-    __Vdlyvdim0__top__DOT__u1__DOT__rf__v0 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__u1__DOT__rf__v0;
-    __Vdlyvval__top__DOT__u1__DOT__rf__v0 = 0;
-    CData/*0:0*/ __Vdlyvset__top__DOT__u1__DOT__rf__v0;
-    __Vdlyvset__top__DOT__u1__DOT__rf__v0 = 0;
+    CData/*4:0*/ __Vdlyvdim0__top__DOT__Rgefile__DOT__rf__v0;
+    __Vdlyvdim0__top__DOT__Rgefile__DOT__rf__v0 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__Rgefile__DOT__rf__v0;
+    __Vdlyvval__top__DOT__Rgefile__DOT__rf__v0 = 0;
+    CData/*0:0*/ __Vdlyvset__top__DOT__Rgefile__DOT__rf__v0;
+    __Vdlyvset__top__DOT__Rgefile__DOT__rf__v0 = 0;
     // Body
     if (VL_UNLIKELY((0x100073U == vlSelf->inst))) {
         Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();
-        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 38, "");
+        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 120, "");
     }
-    __Vdlyvset__top__DOT__u1__DOT__rf__v0 = 0U;
-    if ((0U != (0x1fU & (vlSelf->inst >> 7U)))) {
-        __Vdlyvval__top__DOT__u1__DOT__rf__v0 = (((0x13U 
-                                                   == 
-                                                   ((0x380U 
-                                                     & (vlSelf->inst 
-                                                        >> 5U)) 
-                                                    | (0x7fU 
-                                                       & vlSelf->inst)))
-                                                   ? 
-                                                  (((- (IData)(
-                                                               (vlSelf->inst 
-                                                                >> 0x1fU))) 
-                                                    << 0xcU) 
-                                                   | (vlSelf->inst 
-                                                      >> 0x14U))
-                                                   : 0U) 
-                                                 + vlSelf->top__DOT__rdata);
-        __Vdlyvset__top__DOT__u1__DOT__rf__v0 = 1U;
-        __Vdlyvdim0__top__DOT__u1__DOT__rf__v0 = (0x1fU 
+    __Vdlyvset__top__DOT__Rgefile__DOT__rf__v0 = 0U;
+    if (((IData)(vlSelf->top__DOT__reg_write) & (0U 
+                                                 != 
+                                                 (0x1fU 
                                                   & (vlSelf->inst 
-                                                     >> 7U));
+                                                     >> 7U))))) {
+        __Vdlyvval__top__DOT__Rgefile__DOT__rf__v0 
+            = ((8U & (IData)(vlSelf->top__DOT__alu_op))
+                ? vlSelf->top__DOT__b_in : ((4U & (IData)(vlSelf->top__DOT__alu_op))
+                                             ? ((2U 
+                                                 & (IData)(vlSelf->top__DOT__alu_op))
+                                                 ? 
+                                                ((1U 
+                                                  & (IData)(vlSelf->top__DOT__alu_op))
+                                                  ? vlSelf->top__DOT__b_in
+                                                  : 
+                                                 ((0x1fU 
+                                                   >= vlSelf->top__DOT__b_in)
+                                                   ? 
+                                                  (vlSelf->top__DOT__a_in 
+                                                   >> vlSelf->top__DOT__b_in)
+                                                   : 0U))
+                                                 : 
+                                                ((1U 
+                                                  & (IData)(vlSelf->top__DOT__alu_op))
+                                                  ? 
+                                                 ((0x1fU 
+                                                   >= vlSelf->top__DOT__b_in)
+                                                   ? 
+                                                  (vlSelf->top__DOT__a_in 
+                                                   << vlSelf->top__DOT__b_in)
+                                                   : 0U)
+                                                  : 
+                                                 (vlSelf->top__DOT__a_in 
+                                                  - vlSelf->top__DOT__b_in)))
+                                             : ((2U 
+                                                 & (IData)(vlSelf->top__DOT__alu_op))
+                                                 ? 
+                                                ((1U 
+                                                  & (IData)(vlSelf->top__DOT__alu_op))
+                                                  ? 
+                                                 (vlSelf->top__DOT__a_in 
+                                                  + vlSelf->top__DOT__b_in)
+                                                  : 
+                                                 (vlSelf->top__DOT__a_in 
+                                                  | vlSelf->top__DOT__b_in))
+                                                 : 
+                                                ((1U 
+                                                  & (IData)(vlSelf->top__DOT__alu_op))
+                                                  ? 
+                                                 (vlSelf->top__DOT__a_in 
+                                                  & vlSelf->top__DOT__b_in)
+                                                  : vlSelf->top__DOT__b_in))));
+        __Vdlyvset__top__DOT__Rgefile__DOT__rf__v0 = 1U;
+        __Vdlyvdim0__top__DOT__Rgefile__DOT__rf__v0 
+            = (0x1fU & (vlSelf->inst >> 7U));
     }
-    vlSelf->pc = ((IData)(vlSelf->rst_n) ? vlSelf->top__DOT____Vcellinp__u0__din
+    vlSelf->pc = ((IData)(vlSelf->rst_n) ? vlSelf->top__DOT__npc
                    : 0x80000000U);
-    if (__Vdlyvset__top__DOT__u1__DOT__rf__v0) {
-        vlSelf->top__DOT__u1__DOT__rf[__Vdlyvdim0__top__DOT__u1__DOT__rf__v0] 
-            = __Vdlyvval__top__DOT__u1__DOT__rf__v0;
+    if (__Vdlyvset__top__DOT__Rgefile__DOT__rf__v0) {
+        vlSelf->top__DOT__Rgefile__DOT__rf[__Vdlyvdim0__top__DOT__Rgefile__DOT__rf__v0] 
+            = __Vdlyvval__top__DOT__Rgefile__DOT__rf__v0;
     }
-    vlSelf->top__DOT__rdata = vlSelf->top__DOT__u1__DOT__rf
+    vlSelf->top__DOT__rs1 = vlSelf->top__DOT__Rgefile__DOT__rf
         [(0x1fU & (vlSelf->inst >> 0xfU))];
-    vlSelf->top__DOT____Vcellinp__u0__din = ((IData)(4U) 
-                                             + vlSelf->pc);
 }

@@ -92,6 +92,8 @@ int main(int argc, char** argv) {
   while (n > 0) {
     top->clk = 0; top->eval();
     top->clk = 1; top->eval();
+    tfp->dump(contextp->time()); //dump wave
+    contextp->timeInc(1); //推动仿真时间
     n--;
   }
   top->rst_n = 1;
