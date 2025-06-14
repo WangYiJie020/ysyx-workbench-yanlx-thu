@@ -22,6 +22,9 @@ module controler(
                         a_in_src = 1'b0; b_in_src = 2'b01; reg_write = 1; pc_srcs = 1'b0; 
                         adder_a_src = 1'b0;
                     end //addi +
+                    default: begin 
+                        a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 1'b0; adder_a_src = 1'b0;
+                    end
                 endcase
             end
             7'b0110111: begin //lui
@@ -39,6 +42,9 @@ module controler(
                         a_in_src = 1'b1; b_in_src = 2'b10; reg_write = 1; pc_srcs = 1'b1; 
                         adder_a_src = 1'b1;
                     end //jalr
+                    default: begin 
+                        a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 1'b0; adder_a_src = 1'b0;
+                    end
                 endcase
             end
             default: begin a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 1'b0; adder_a_src = 1'b0;end

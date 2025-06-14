@@ -14,6 +14,7 @@ module alu_control(
             7'b0010011: begin
                 case(funct3)
                     3'b000: alu_op = 4'b0011; //addi +
+                    default: alu_op = 0;
                 endcase
             end
             7'b0110111: begin //lui
@@ -28,6 +29,7 @@ module alu_control(
             7'b1100111: begin
                 case(funct3)
                     3'b000: alu_op = 4'b0011; //+ //jalr
+                    default: alu_op = 0;
                 endcase
             end
             default: alu_op = 0;
