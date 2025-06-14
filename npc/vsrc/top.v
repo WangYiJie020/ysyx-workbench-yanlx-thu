@@ -54,7 +54,7 @@ module top(
     .raddr1(inst[19:15]), //rs1
     .rdata1(rs1),
     .raddr2(inst[24:20]), //rs2
-    .rdata2(rs2),
+    .rdata2(rs2)
   );
 
   sext SEXT (
