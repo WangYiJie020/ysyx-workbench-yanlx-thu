@@ -41,7 +41,7 @@ module top(
     .a_in_src(a_in_src),
     .b_in_src(b_in_src),
     .reg_write(reg_write)
-    .adder_a_src(adder_a_src)
+    .adder_a_src(adder_a_src),
     .pc_srcs(pc_srcs)
 
   );
