@@ -19,44 +19,6 @@ extern "C" void ebreak() {
   printf("finish\n");
 }
 
-int main(int argc, char** argv) {
-  //parse_args(argc, argv);
-  //long img_size = load_img();
-  VerilatedContext* contextp = new VerilatedContext;
-  contextp->commandArgs(argc, argv);
-  Vtop* top = new Vtop{contextp};
-
-  VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
-  contextp->traceEverOn(true); //打开追踪功能
-  top->trace(tfp, 0); //
-  tfp->open("wave.vcd"); //设置输出的文件wave.vcd
-
-  void single_cycle();
-  void reset(int n);
-
-  int n = 10;
-  top->rst_n = 0;
-  while (n > 0) {
-    top->clk = 0; top->eval();
-    top->clk = 1; top->eval();
-    n--;
-  }
-  top->rst_n = 1;
-
-  while (!contextp->gotFinish()) {
-    top->inst = pmem_read(top->pc);
-    top->clk = 0; top->eval();
-    top->clk = 1; top->eval();
-    //printf("pc=%x\n",top->pc);
-    tfp->dump(contextp->time()); //dump wave
-    contextp->timeInc(1); //推动仿真时间
-    
-  }
-  delete top;
-  tfp->close();
-  delete contextp;
-  return 0;
-}
 static char *log_file = NULL;
 static char *diff_so_file = NULL;
 static char *img_file = NULL;
@@ -107,5 +69,44 @@ static int parse_args(int argc, char *argv[]) {
         exit(0);
     }
   }
+  return 0;
+}
+
+int main(int argc, char** argv) {
+  parse_args(argc, argv);
+  long img_size = load_img();
+  VerilatedContext* contextp = new VerilatedContext;
+  contextp->commandArgs(argc, argv);
+  Vtop* top = new Vtop{contextp};
+
+  VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
+  contextp->traceEverOn(true); //打开追踪功能
+  top->trace(tfp, 0); //
+  tfp->open("wave.vcd"); //设置输出的文件wave.vcd
+
+  void single_cycle();
+  void reset(int n);
+
+  int n = 10;
+  top->rst_n = 0;
+  while (n > 0) {
+    top->clk = 0; top->eval();
+    top->clk = 1; top->eval();
+    n--;
+  }
+  top->rst_n = 1;
+
+  while (!contextp->gotFinish()) {
+    top->inst = pmem_read(top->pc);
+    top->clk = 0; top->eval();
+    top->clk = 1; top->eval();
+    //printf("pc=%x\n",top->pc);
+    tfp->dump(contextp->time()); //dump wave
+    contextp->timeInc(1); //推动仿真时间
+    
+  }
+  delete top;
+  tfp->close();
+  delete contextp;
   return 0;
 }
