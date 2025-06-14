@@ -30,7 +30,6 @@ class Valu_control VL_NOT_FINAL : public VerilatedModel {
     // propagate new values into/out from the Verilated model.
     VL_IN8(&clk,0,0);
     VL_IN8(&rst_n,0,0);
-    VL_IN8(&__pinNumber5,0,0);
     VL_OUT(&pc,31,0);
     VL_IN(&inst,31,0);
 

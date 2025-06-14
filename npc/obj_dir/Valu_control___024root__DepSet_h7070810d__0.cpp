@@ -324,7 +324,5 @@ void Valu_control___024root___eval_debug_assertions(Valu_control___024root* vlSe
         Verilated::overWidthError("clk");}
     if (VL_UNLIKELY((vlSelf->rst_n & 0xfeU))) {
         Verilated::overWidthError("rst_n");}
-    if (VL_UNLIKELY((vlSelf->__pinNumber5 & 0xfeU))) {
-        Verilated::overWidthError("__pinNumber5");}
 }
 #endif  // VL_DEBUG

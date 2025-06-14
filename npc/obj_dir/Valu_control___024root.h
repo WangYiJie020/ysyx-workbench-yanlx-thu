@@ -19,7 +19,6 @@ class Valu_control___024root final : public VerilatedModule {
     // DESIGN SPECIFIC STATE
     VL_IN8(clk,0,0);
     VL_IN8(rst_n,0,0);
-    VL_IN8(__pinNumber5,0,0);
     CData/*1:0*/ top__DOT__b_in_src;
     CData/*0:0*/ top__DOT__a_in_src;
     CData/*0:0*/ top__DOT__adder_a_src;

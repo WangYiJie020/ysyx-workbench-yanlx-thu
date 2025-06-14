@@ -144,7 +144,6 @@ VL_ATTR_COLD void Valu_control___024root___ctor_var_reset(Valu_control___024root
     vlSelf->rst_n = VL_RAND_RESET_I(1);
     vlSelf->pc = VL_RAND_RESET_I(32);
     vlSelf->inst = VL_RAND_RESET_I(32);
-    vlSelf->__pinNumber5 = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__imm = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__rs1 = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__a_in = VL_RAND_RESET_I(32);
