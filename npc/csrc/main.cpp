@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <getopt.h>
 #include <assert.h>
-#include "Vtop.h"
-#include "verilated.h"
+#include <Vtop.h>
+#include <verilated.h>
 
 #include "verilated_vcd_c.h" //可选，如果要导出vcd则需要加上
 
