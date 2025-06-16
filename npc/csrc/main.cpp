@@ -50,8 +50,8 @@ word_t expr(char *e, bool *success);
 WP* new_wp(char * arg, uint32_t value);
 void free_wp(int num);
 
-int pmem_read(int pc) {
-  int tmp = pc;
+uint32_t pmem_read(uint32_t pc) {
+  uint32_t tmp = pc / 4 ;
   printf("%x",tmp);
   return 0;
 
