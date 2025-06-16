@@ -51,7 +51,7 @@ WP* new_wp(char * arg, uint32_t value);
 void free_wp(int num);
 
 int pmem_read(int pc) {
-  return mem[(pc-0x80000000)/4];
+  return mem[pc/4];
 
 }
 
@@ -137,7 +137,7 @@ static long load_img() {
   int ret = fread(&(mem[0x20000000]), size, 1, fp);
   assert(ret == 1);
 
-  printf("%x\n",mem[0x20000000]);
+  printf("%x\n",mem[0x20000001]);
 
   fclose(fp);
   return size;
