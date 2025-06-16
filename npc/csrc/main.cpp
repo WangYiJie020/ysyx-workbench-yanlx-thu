@@ -22,11 +22,32 @@ VerilatedContext* contextp = new VerilatedContext;
 Vtop* top = new Vtop{contextp};
 VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
 
+typedef struct watchpoint {
+  int NO;
+  char tokens[100];
+  uint32_t value;
+  struct watchpoint *next;
+
+  /* TODO: Add more members if necessary */
+
+
+} WP;
+extern WP *head;
+
+
+
+word_t expr(char *e, bool *success);
+WP* new_wp();
+void free_wp(int num);
+void print_wp();
+
 void cpu_exec(int num);
 void engine_start();
 int is_exit_status_bad();
 static bool make_token(char *e);
 word_t expr(char *e, bool *success);
+WP* new_wp(char * arg, uint32_t value);
+void free_wp(int num);
 
 int pmem_read(int pc) {
   return mem[(pc-0x80000000)/4];
@@ -142,7 +163,7 @@ void init_regex() {
     ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);
     if (ret != 0) {
       regerror(ret, &re[i], error_msg, 128);
-      panic("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
+      printf("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
     }
   }
 }
@@ -269,8 +290,8 @@ static bool make_token(char *e) {
 			sprintf(tokens[nr_token].str,"%d",regValue);
 			nr_token++;
 			break;
-          default: printf("error!\n");
-        }
+    default: printf("error!\n");
+    }
 		tokens[nr_token].type=rules[i].token_type;	
 	
         break;
