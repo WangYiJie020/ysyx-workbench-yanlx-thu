@@ -808,7 +808,7 @@ void cpu_exec(int num) {
       printf("finish\n");
       break;
     }
-    top->inst = pmem_read(top->pc);
+    //top->inst = pmem_read(top->pc);
     top->clk = 0; top->eval();
     top->clk = 1; top->eval();
     //printf("pc=%x\n",top->pc);
