@@ -14,6 +14,10 @@ int mem[10000] = {0x02010113,0x02010113,0x02010113,0x02010113,0x00100073};
 
 int cpu_state = 0;
 
+VerilatedContext* contextp = new VerilatedContext;
+Vtop* top = new Vtop{contextp};
+VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
+
 void cpu_exec(int num);
 void engine_start();
 int is_exit_status_bad();
@@ -461,8 +465,8 @@ static int cmd_info(char *args) {
 
 		}
 		else if(strcmp(arg,"w")==0){
-      print_wp();
-			//printf("www");
+      //print_wp();
+			printf("www");
 		}
 		else{
 			printf("Unknown command '%s'\n", arg);
@@ -613,9 +617,7 @@ static int cmd_help(char *args) {
   return 0;
 }
 
-VerilatedContext* contextp = new VerilatedContext;
-Vtop* top = new Vtop{contextp};
-VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
+
 
 void cpu_exec(int num) {
   int i;
@@ -673,7 +675,6 @@ int main(int argc, char** argv) {
   top->trace(tfp, 0); //
   tfp->open("wave.vcd"); //设置输出的文件wave.vcd
 
-  init_sdb();
 
   int n = 10;
   top->rst_n = 0;
