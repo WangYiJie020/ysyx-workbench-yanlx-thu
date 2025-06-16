@@ -170,7 +170,13 @@ static int parse_args(int argc, char *argv[]) {
   }
   return 0;
 }
+void init_sdb() {
+  /* Compile the regular expressions. */
+  init_regex();
 
+  /* Initialize the watchpoint pool. */
+  init_wp_pool();
+}
 enum {
   TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_UNEQ, TK_AND, TK_DEREF, TK_HEX, TK_REG
 
@@ -852,6 +858,8 @@ void sdb_mainloop() {
 int main(int argc, char** argv) {
   parse_args(argc, argv);
   long img_size = load_img();
+
+  init_sdb();
   
   contextp->commandArgs(argc, argv);
   
