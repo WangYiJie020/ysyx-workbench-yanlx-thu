@@ -45,6 +45,7 @@ void Vtop___024root___eval_triggers__act(Vtop___024root* vlSelf) {
 }
 
 void Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();
+void Vtop___024unit____Vdpiimwrap_reg_return_value_TOP____024unit(IData/*31:0*/ regvalue);
 
 VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
@@ -62,6 +63,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();
         VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 120, "");
     }
+    Vtop___024unit____Vdpiimwrap_reg_return_value_TOP____024unit(vlSelf->top__DOT__Rgefile__DOT__rf);
     __Vdlyvset__top__DOT__Rgefile__DOT__rf__v0 = 0U;
     if (((IData)(vlSelf->top__DOT__reg_write) & (0U 
                                                  != 

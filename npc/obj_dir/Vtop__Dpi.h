@@ -18,6 +18,8 @@ extern "C" {
     // DPI IMPORTS
     // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/top.v:1:30
     extern void ebreak();
+    // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/regfile.v:1:30
+    extern void reg_return_value(const svLogicVecVal* regvalue);
 
 #ifdef __cplusplus
 }
