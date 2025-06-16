@@ -14,7 +14,8 @@
 #define ARRLEN(arr) (int)(sizeof(arr) / sizeof(arr[0]))
 #define word_t uint32_t 
 
-int mem[4294967295];
+//int mem[4294967295];
+int mem[10000];
 
 
 int cpu_state = 0;
@@ -50,7 +51,7 @@ WP* new_wp(char * arg, uint32_t value);
 void free_wp(int num);
 
 int pmem_read(int pc) {
-  return mem[(pc)/4];
+  return mem[(pc-0x80000000)/4];
 
 }
 
@@ -133,7 +134,7 @@ static long load_img() {
   printf("The image is %s, size = %ld\n", img_file, size);
 
   fseek(fp, 0, SEEK_SET);
-  int ret = fread(mem+0x20000000, size, 1, fp);
+  int ret = fread(mem, size, 1, fp);
   assert(ret == 1);
 
   fclose(fp);
@@ -808,7 +809,7 @@ void cpu_exec(int num) {
       printf("finish\n");
       break;
     }
-    //top->inst = pmem_read(top->pc);
+    top->inst = pmem_read(top->pc);
     top->clk = 0; top->eval();
     top->clk = 1; top->eval();
     //printf("pc=%x\n",top->pc);
