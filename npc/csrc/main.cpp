@@ -12,7 +12,11 @@
 
 int mem[10000] = {0x02010113,0x02010113,0x02010113,0x02010113,0x00100073};
 
-void cpu_exec(int num)
+int cpu_state = 0;
+
+void cpu_exec(int num);
+void engine_start();
+int is_exit_status_bad();
 
 int pmem_read(int pc) {
   return mem[(pc-0x80000000)/4];
@@ -22,6 +26,7 @@ int pmem_read(int pc) {
 
 extern "C" void ebreak() {
   printf("HIT GOOD TRAP\n");
+  cpu_state = 1;
   
 }
 
@@ -556,11 +561,9 @@ static int cmd_c(char *args) {
   return 0;
 }
 
-int npc_state=1;
 
 static int cmd_q(char *args) {
   //exit(0);
-  npc_state = 0;
   return -1;
 }
 
@@ -585,7 +588,7 @@ static struct {
 
 };
 
-#define NR_CMD ARRLEN(cmd_table)
+#define NR_CMD 9
 
 static int cmd_help(char *args) {
   /* extract the first argument */
@@ -617,12 +620,46 @@ VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
 void cpu_exec(int num) {
   int i;
   for(i = 0; i < num; i++) {
+    if(cpu_state == 1){ //stop
+      printf("finish\n");
+      break;
+    }
     top->inst = pmem_read(top->pc);
     top->clk = 0; top->eval();
     top->clk = 1; top->eval();
     //printf("pc=%x\n",top->pc);
     tfp->dump(contextp->time()); //dump wave
     contextp->timeInc(1); //推动仿真时间
+    
+  }
+}
+
+void sdb_mainloop() {
+
+  for (char *str; (str = rl_gets()) != NULL; ) {
+    char *str_end = str + strlen(str);
+
+    /* extract the first token as the command */
+    char *cmd = strtok(str, " ");
+    if (cmd == NULL) { continue; }
+
+    /* treat the remaining string as the arguments,
+     * which may need further parsing
+     */
+    char *args = cmd + strlen(cmd) + 1;
+    if (args >= str_end) {
+      args = NULL;
+    }
+
+    int i;
+    for (i = 0; i < NR_CMD; i ++) {
+      if (strcmp(cmd, cmd_table[i].name) == 0) {
+        if (cmd_table[i].handler(args) < 0) { return; }
+        break;
+      }
+    }
+
+    if (i == NR_CMD) { printf("Unknown command '%s'\n", cmd); }
   }
 }
 
@@ -649,34 +686,9 @@ int main(int argc, char** argv) {
   }
   top->rst_n = 1;
 
-  while (!contextp->gotFinish() || npc_state==0) {
-    for (char *str; (str = rl_gets()) != NULL; ) {
-      char *str_end = str + strlen(str);
+  sdb_mainloop();
 
-      /* extract the first token as the command */
-      char *cmd = strtok(str, " ");
-      if (cmd == NULL) { continue; }
 
-      /* treat the remaining string as the arguments,
-      * which may need further parsing
-      */
-      char *args = cmd + strlen(cmd) + 1;
-      if (args >= str_end) {
-        args = NULL;
-      }
-      int i;
-      for (i = 0; i < NR_CMD; i ++) {
-        if (strcmp(cmd, cmd_table[i].name) == 0) {
-          if (cmd_table[i].handler(args) < 0) { return; }
-          break;
-        }
-      }
-
-      if (i == NR_CMD) { printf("Unknown command '%s'\n", cmd); }
-    }
-    
-    
-  }
   delete top;
   tfp->close();
   delete contextp;
