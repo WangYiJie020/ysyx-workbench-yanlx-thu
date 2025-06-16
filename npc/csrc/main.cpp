@@ -531,7 +531,7 @@ static int cmd_si(char *args) {
 	else {
 		strcpy( num_c, arg);
 		sscanf(num_c,"%d",&num);
-		printf("%d",num);
+		//printf("%d",num);
 	}
 	cpu_exec(num);
 
