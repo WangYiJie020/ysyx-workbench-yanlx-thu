@@ -49,6 +49,9 @@ static bool make_token(char *e);
 word_t expr(char *e, bool *success);
 WP* new_wp(char * arg, uint32_t value);
 void free_wp(int num);
+void init_wp_pool();
+void init_regex();
+
 
 uint32_t pmem_read(uint32_t pc) {
   uint32_t tmp = pc / 4 ;
