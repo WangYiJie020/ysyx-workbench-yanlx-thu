@@ -588,11 +588,11 @@ static int cmd_x(char *args) {
       //printf("%s\n",line);
       //sscanf(result,"%x",&addr);
       //printf("%d %x",num,place);
-      int i,j;
+      uint32_t i,j;
       for(i=0;i<num;i++) {
         printf("0x%8x: ",result);
         for(j=3;j>=0;j--) {
-          printf("%02x ",mem[result+j]);
+          printf("%02x ",mem[(result+j)/4]);
         }
         result+=4;
         printf("\n");
