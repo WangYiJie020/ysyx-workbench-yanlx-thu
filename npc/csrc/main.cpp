@@ -352,7 +352,7 @@ static bool make_token(char *e) {
 			
 			//printf("%s",name);
 			regValue = isa_reg_str2val(name, ptr_success);
-      printf("%x",regValue)
+      printf("%x",regValue);
 			if(!success) {
 				assert(0);
 			}
