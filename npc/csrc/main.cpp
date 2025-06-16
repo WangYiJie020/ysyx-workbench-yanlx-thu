@@ -587,7 +587,7 @@ static int cmd_x(char *args) {
       //result=expr(line,ptr_success);
       
       //printf("%s\n",line);
-      sscanf(result,"%x",&line);
+      sscanf(line,"%x",&result);
       //printf("%d %x",num,place);
       uint32_t i,j;
       for(i=0;i<num;i++) {
