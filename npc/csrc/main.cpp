@@ -52,7 +52,7 @@ void free_wp(int num);
 
 uint32_t pmem_read(uint32_t pc) {
   uint32_t tmp = pc / 4 ;
-  printf("pc=%x,%8x\n",tmp,mem[tmp]);
+  printf("pc=%x,%8x\n",pc,mem[tmp]);
   return mem[tmp];
 
 }
