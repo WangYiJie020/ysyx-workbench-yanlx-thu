@@ -584,9 +584,10 @@ static int cmd_x(char *args) {
       bool *ptr_success = &success;
       uint32_t result;
       printf("%s\n",arg);
-      result=expr(line,ptr_success);
+      //result=expr(line,ptr_success);
+      
       //printf("%s\n",line);
-      //sscanf(result,"%x",&addr);
+      sscanf(result,"%x",&line);
       //printf("%d %x",num,place);
       uint32_t i,j;
       for(i=0;i<num;i++) {
