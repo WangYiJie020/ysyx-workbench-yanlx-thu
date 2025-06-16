@@ -52,8 +52,8 @@ void free_wp(int num);
 
 uint32_t pmem_read(uint32_t pc) {
   uint32_t tmp = pc / 4 ;
-  printf("%x",tmp);
-  return 0;
+  printf("pc=%x,%x",tmp,mem[tmp]);
+  return mem[tmp];
 
 }
 
