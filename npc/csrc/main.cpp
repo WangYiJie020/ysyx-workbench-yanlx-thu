@@ -134,8 +134,10 @@ static long load_img() {
   printf("The image is %s, size = %ld\n", img_file, size);
 
   fseek(fp, 0, SEEK_SET);
-  int ret = fread(&(mem[2]), size, 1, fp);
+  int ret = fread(&(mem[0x20000000]), size, 1, fp);
   assert(ret == 1);
+
+  printf("%x\n",mem[0x20000000]);
 
   fclose(fp);
   return size;
