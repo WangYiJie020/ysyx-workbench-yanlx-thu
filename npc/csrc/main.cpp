@@ -4,7 +4,7 @@
 #include <getopt.h>
 #include <assert.h>
 #include <regex.h>
-#include <readline/readline.h>
+#include <readline.h>
 #include <readline/history.h>
 #include "Vtop.h"
 #include "verilated.h"
