@@ -496,7 +496,7 @@ word_t expr(char *e, bool *success) {
 		
 	}
   }
-  //printf("nrtoken:%d\n",nr_token);
+  printf("nrtoken:%d\n",nr_token);
 
 
   return eval(0,nr_token-1);
@@ -583,15 +583,14 @@ static int cmd_x(char *args) {
       bool success;
       bool *ptr_success = &success;
       uint32_t result;
-      printf("%s\n",arg);
+      //printf("%s\n",arg);
       //result=expr(line,ptr_success);
       
-      //printf("%s\n",line);
       sscanf(line,"%x",&result);
-      //printf("%d %x",num,place);
+      
       uint32_t i,j;
       for(i=0;i<num;i++) {
-        printf("0x%8x: %08x",result,mem[result/4+i]);
+        printf("0x%8x: %08x",result+4*i,mem[result/4+i]);
         
         printf("\n");
         
@@ -609,7 +608,7 @@ static int cmd_p(char *args) {
 	bool success;
 	bool *ptr_success = &success;
 	uint32_t result;
-	//printf("%s\n",arg);
+	printf("%s\n",arg);
 	result=expr(arg,ptr_success);
 	printf("result=%u\n",result);
         return 0;
