@@ -3,12 +3,16 @@
 #include <stdlib.h>
 #include <getopt.h>
 #include <assert.h>
+#include <regex.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "Vtop.h"
 #include "verilated.h"
 
 #include "verilated_vcd_c.h" //可选，如果要导出vcd则需要加上
+
+#define ARRLEN(arr) (int)(sizeof(arr) / sizeof(arr[0]))
+#define uint32_t word_t
 
 int mem[10000] = {0x02010113,0x02010113,0x02010113,0x02010113,0x00100073};
 
@@ -21,6 +25,8 @@ VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
 void cpu_exec(int num);
 void engine_start();
 int is_exit_status_bad();
+static bool make_token(char *e);
+word_t expr(char *e, bool *success);
 
 int pmem_read(int pc) {
   return mem[(pc-0x80000000)/4];
