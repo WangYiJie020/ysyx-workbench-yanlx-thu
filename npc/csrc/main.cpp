@@ -259,8 +259,8 @@ static bool make_token(char *e) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
-        printf("match rules[%d] = \"%s\" at position %d with len %d: %.*s\n",
-          i, rules[i].regex, position, substr_len, substr_len, substr_start);
+        //printf("match rules[%d] = \"%s\" at position %d with len %d: %.*s\n",
+        //  i, rules[i].regex, position, substr_len, substr_len, substr_start);
 
         position += substr_len;
 
@@ -505,7 +505,7 @@ word_t expr(char *e, bool *success) {
 		
 	}
   }
-  printf("nrtoken:%d\n",nr_token);
+  //printf("nrtoken:%d\n",nr_token);
 
 
   return eval(0,nr_token-1);
@@ -593,9 +593,9 @@ static int cmd_x(char *args) {
       bool *ptr_success = &success;
       uint32_t result;
       //printf("%s\n",arg);
-      //result=expr(line,ptr_success);
+      result=expr(line,ptr_success);
       
-      sscanf(line,"%x",&result);
+      //sscanf(line,"%x",&result);
       
       uint32_t i,j;
       for(i=0;i<num;i++) {
