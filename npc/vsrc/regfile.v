@@ -1,3 +1,5 @@
+import "DPI-C" function void reg_return_value(int regvalue[32]);
+
 module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
   input clk,
   input [DATA_WIDTH-1:0] wdata,
@@ -15,6 +17,10 @@ module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
 
   always @(posedge clk) begin
     if (wen && waddr != 0) rf[waddr] <= wdata;
+  end
+
+  always@(posedge clk) begin
+    reg_return_value(rf);
   end
 endmodule
 

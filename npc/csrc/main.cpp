@@ -14,7 +14,8 @@
 #define ARRLEN(arr) (int)(sizeof(arr) / sizeof(arr[0]))
 #define word_t uint32_t 
 
-int mem[10000] = {0x02010113,0x02010113,0x02010113,0x02010113,0x00100073};
+int mem[4294967295];
+
 
 int cpu_state = 0;
 
@@ -50,7 +51,7 @@ WP* new_wp(char * arg, uint32_t value);
 void free_wp(int num);
 
 int pmem_read(int pc) {
-  return mem[(pc-0x80000000)/4];
+  return mem[(pc)/4];
 
 }
 
@@ -60,6 +61,58 @@ extern "C" void ebreak() {
   cpu_state = 1;
   
 }
+
+int reg_value[32];
+
+const char *regs[] = {
+  "$0", "ra", "sp", "gp", "tp", "t0", "t1", "t2",
+  "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5",
+  "a6", "a7", "s2", "s3", "s4", "s5", "s6", "s7",
+  "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6"
+};
+
+void isa_reg_display() {
+	int i=32;
+	//printf("%d",cpu.gpr[1]);
+	for(;i>0;i--) {
+		printf("%s\t%x\n",regs[32-i],reg_value[32-i]);
+	}
+
+}
+
+word_t isa_reg_str2val(const char *s, bool *success) {
+  bool flag=0;
+  int i=32;
+  int value=0;
+  char reg1[10]={'x','\0'};
+  //printf("%s\n",reg1);
+  //sscanf(s,"%s",reg1);
+  strcpy(reg1,s);
+  //printf("%s\n",reg1);
+  for(;i>0;i--) {
+    if(strcmp(regs[32-i], reg1) == 0){
+      flag=1;
+      printf("%s\t%x\n",regs[32-i],reg_value[32-i]);
+      value=reg_value[32-i];      
+    }	
+	}
+
+  if(!flag) {
+    *success=0;
+    assert(0);
+  }
+  return value;
+}
+
+extern "C" void reg_return_value(int regvalue[32]) {
+  int i;
+  for(i=0; i<32; i++) {
+    reg_value[i] = regvalue[i];
+  }
+  
+}
+
+
 
 static char *log_file = NULL;
 static char *diff_so_file = NULL;
@@ -81,7 +134,7 @@ static long load_img() {
   printf("The image is %s, size = %ld\n", img_file, size);
 
   fseek(fp, 0, SEEK_SET);
-  int ret = fread(mem, size, 1, fp);
+  int ret = fread(mem+0x80000000, size, 1, fp);
   assert(ret == 1);
 
   fclose(fp);
@@ -354,7 +407,7 @@ uint32_t eval(int p,int q) {
 	if(tokens[p].type==TK_DEREF && q==p+1) {
 		uint32_t num;
 	  	sscanf(tokens[q].str,"%u",&num);
-		return vaddr_read(num,1);
+		return mem[num];
 	}
 	//
 	else{
@@ -533,7 +586,7 @@ static int cmd_x(char *args) {
       for(i=0;i<num;i++) {
         printf("0x%8x: ",result);
         for(j=3;j>=0;j--) {
-          printf("%02x ",vaddr_read(result+j,1));
+          printf("%02x ",mem[result+j]);
         }
         result+=4;
         printf("\n");
