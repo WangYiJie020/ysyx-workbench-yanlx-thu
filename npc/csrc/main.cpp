@@ -43,7 +43,6 @@ void free_wp(int num);
 void print_wp();
 
 void cpu_exec(int num);
-void engine_start();
 int is_exit_status_bad();
 static bool make_token(char *e);
 word_t expr(char *e, bool *success);
@@ -547,8 +546,8 @@ static int cmd_info(char *args) {
 
 		}
 		else if(strcmp(arg,"w")==0){
-      //print_wp();
-			printf("www");
+      print_wp();
+			//printf("www");
 		}
 		else{
 			printf("Unknown command '%s'\n", arg);
