@@ -282,6 +282,18 @@ VerilatedContext* contextp = new VerilatedContext;
 Vtop* top = new Vtop{contextp};
 VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
 
+void cpu_exec(int num) {
+  int i;
+  for(i = 0; i < num; i++) {
+    top->inst = pmem_read(top->pc);
+    top->clk = 0; top->eval();
+    top->clk = 1; top->eval();
+    //printf("pc=%x\n",top->pc);
+    tfp->dump(contextp->time()); //dump wave
+    contextp->timeInc(1); //推动仿真时间
+  }
+}
+
 int main(int argc, char** argv) {
   parse_args(argc, argv);
   long img_size = load_img();
@@ -330,12 +342,7 @@ int main(int argc, char** argv) {
 
       if (i == NR_CMD) { printf("Unknown command '%s'\n", cmd); }
     }
-    top->inst = pmem_read(top->pc);
-    top->clk = 0; top->eval();
-    top->clk = 1; top->eval();
-    //printf("pc=%x\n",top->pc);
-    tfp->dump(contextp->time()); //dump wave
-    contextp->timeInc(1); //推动仿真时间
+    
     
   }
   delete top;
