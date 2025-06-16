@@ -12,7 +12,7 @@
 #include "verilated_vcd_c.h" //可选，如果要导出vcd则需要加上
 
 #define ARRLEN(arr) (int)(sizeof(arr) / sizeof(arr[0]))
-#define uint32_t word_t
+#define word_t uint32_t 
 
 int mem[10000] = {0x02010113,0x02010113,0x02010113,0x02010113,0x00100073};
 
