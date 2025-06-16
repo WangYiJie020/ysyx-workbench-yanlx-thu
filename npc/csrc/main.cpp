@@ -832,7 +832,7 @@ static void trace_and_difftest() {
 
     if(value_new != p->value) {
       p->value = value_new;
-      cpu_state = 1;
+      cpu_state = 2;
       printf("触发监视点\n");
       
     }
@@ -845,8 +845,12 @@ static void trace_and_difftest() {
 void cpu_exec(int num) {
   int i;
   for(i = 0; i < num; i++) {
-    if(cpu_state == 1){ //stop
+    if(cpu_state == 1){ //finish
       printf("finish\n");
+      break;
+    }
+    if(cpu_state == 2) { //stop
+      cpu_state = 0;
       break;
     }
     top->inst = pmem_read(top->pc);
