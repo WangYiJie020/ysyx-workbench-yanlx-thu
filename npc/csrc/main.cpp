@@ -53,7 +53,7 @@ void free_wp(int num);
 int pmem_read(int pc) {
   int tmp = pc / 0x4;
   printf("%x",tmp);
-  return mem[tmp];
+  return 0;
 
 }
 
