@@ -528,7 +528,7 @@ static int cmd_si(char *args) {
 		sscanf(num_c,"%d",&num);
 		//printf("%d",num);
 	}
-	cpu_exec(num);
+	//cpu_exec(num);
 
 
 	return 0;
