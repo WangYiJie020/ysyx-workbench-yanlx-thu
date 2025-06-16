@@ -14,7 +14,7 @@
 #define ARRLEN(arr) (int)(sizeof(arr) / sizeof(arr[0]))
 #define word_t uint32_t 
 
-int mem[4294967295];
+int mem[0xffffffff];
 //int mem[10000];
 
 
