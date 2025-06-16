@@ -51,7 +51,7 @@ WP* new_wp(char * arg, uint32_t value);
 void free_wp(int num);
 
 int pmem_read(int pc) {
-  int tmp = pc / 4;
+  int tmp = pc;
   printf("%x",tmp);
   return 0;
 
