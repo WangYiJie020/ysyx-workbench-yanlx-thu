@@ -46,7 +46,7 @@ all:
 
 sim: $(VSRCS) $(CSRCS) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-	CXXFLAGS="-fPIC -mcmodel=medium" verilator $(VSRCS) csrc/main.cpp --cc --trace --exe --build --top-module top 
+	verilator $(VSRCS) csrc/main.cpp --cc --trace --exe --build --top-module top -CFLAGS "-mcmodel=medium" -LDFLAGS "-lreadline"
 	./obj_dir/Vtop $(IMG) 
 
 include ../Makefile
