@@ -46,7 +46,7 @@ all:
 
 sim: $(VSRCS) $(CSRCS) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-	verilator $(VSRCS) csrc/main.cpp -Wl,--enable-auto-import --cc --trace --exe --build --top-module top 
+	verilator $(VSRCS) csrc/main.cpp --enable-auto-import --cc --trace --exe --build --top-module top 
 	./obj_dir/Vtop $(IMG) 
 
 include ../Makefile
