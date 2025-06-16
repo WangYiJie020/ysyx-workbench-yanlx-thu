@@ -45,7 +45,7 @@ void Vtop___024root___eval_triggers__act(Vtop___024root* vlSelf) {
 }
 
 void Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();
-void Vtop___024unit____Vdpiimwrap_reg_return_value_TOP____024unit(IData/*31:0*/ regvalue);
+void Vtop___024unit____Vdpiimwrap_reg_return_value_TOP____024unit(VlUnpacked<IData/*31:0*/, 32> regvalue);
 
 VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused

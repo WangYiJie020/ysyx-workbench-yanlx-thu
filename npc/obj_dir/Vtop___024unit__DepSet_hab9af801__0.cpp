@@ -18,10 +18,10 @@ VL_INLINE_OPT void Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit() {
 
 extern "C" void reg_return_value(const svLogicVecVal* regvalue);
 
-VL_INLINE_OPT void Vtop___024unit____Vdpiimwrap_reg_return_value_TOP____024unit(IData/*31:0*/ regvalue) {
+VL_INLINE_OPT void Vtop___024unit____Vdpiimwrap_reg_return_value_TOP____024unit(VlUnpacked<IData/*31:0*/, 32> regvalue) {
     VL_DEBUG_IF(VL_DBG_MSGF("+        Vtop___024unit____Vdpiimwrap_reg_return_value_TOP____024unit\n"); );
     // Body
-    svLogicVecVal regvalue__Vcvt[1];
-    for (size_t regvalue__Vidx = 0; regvalue__Vidx < 1; ++regvalue__Vidx) VL_SET_SVLV_I(32, regvalue__Vcvt + 1 * regvalue__Vidx, regvalue);
+    svLogicVecVal regvalue__Vcvt[32];
+    for (size_t regvalue__Vidx = 0; regvalue__Vidx < 32; ++regvalue__Vidx) VL_SET_SVLV_I(32, regvalue__Vcvt + 1 * regvalue__Vidx, (&regvalue[0])[regvalue__Vidx]);
     reg_return_value(regvalue__Vcvt);
 }
