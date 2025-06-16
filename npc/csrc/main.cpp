@@ -235,6 +235,9 @@ static bool make_token(char *e) {
   regmatch_t pmatch;
 
   nr_token = 0;
+  bool success;
+	bool *ptr_success = &success;
+  char name[10]={'\0'};
 
   while (e[position] != '\0') {
     /* Try all rules one by one. */
@@ -329,12 +332,11 @@ static bool make_token(char *e) {
 			tokens[nr_token].type=TK_HEX;
 			word_t regValue;
 			int i;
-			char name[10]={'\0'};
+			
 			for(i=0;i<substr_len-1;i++) {
 				name[i]=*(substr_start+i+1);
 			}
-			bool success;
-			bool *ptr_success = &success;
+			
 			//printf("%s",name);
 			regValue = isa_reg_str2val(name, ptr_success);
 			if(!success) {
