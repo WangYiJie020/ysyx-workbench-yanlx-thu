@@ -55,7 +55,7 @@ void init_regex();
 
 uint32_t pmem_read(uint32_t pc) {
   uint32_t tmp = pc / 4 ;
-  printf("pc=%x,%8x\n",pc,mem[tmp]);
+  printf("pc=%x,%08x\n",pc,mem[tmp]);
   return mem[tmp];
 
 }
@@ -142,7 +142,7 @@ static long load_img() {
   int ret = fread(&(mem[0x20000000]), size, 1, fp);
   assert(ret == 1);
 
-  printf("%x\n",mem[0x20000001]);
+  //printf("%x\n",mem[0x20000001]);
 
   fclose(fp);
   return size;
@@ -350,7 +350,7 @@ static bool make_token(char *e) {
 				name[i]=*(substr_start+i+1);
 			}
 			
-			//printf("%s",name);
+			printf("%s",name);
 			regValue = isa_reg_str2val(name, ptr_success);
 			if(!success) {
 				assert(0);
