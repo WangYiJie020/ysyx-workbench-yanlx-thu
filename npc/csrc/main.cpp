@@ -352,7 +352,7 @@ static bool make_token(char *e) {
 			success = 1;
 			//printf("%s",name);
 			regValue = isa_reg_str2val(name, ptr_success);
-      printf("%x",regValue);
+      //printf("%x",regValue);
 			if(!success) {
 				assert(0);
 			}
@@ -813,6 +813,35 @@ void print_wp(){
   }
 }
 
+static void trace_and_difftest() {
+
+  WP * p = head;
+  word_t expr(char *e, bool *success);
+  while(p!=NULL) {
+    
+    bool success;
+    bool *ptr_success = &success;
+    char str[100]={'\0'};
+    word_t value_new;
+    
+    //printf("name:%s\n",p->tokens);
+    strcpy(str,p->tokens);
+    //printf("name2:%s\n",str);
+    value_new=expr(str,ptr_success);
+
+
+    if(value_new != p->value) {
+      p->value = value_new;
+      cpu_state = 1;
+      printf("触发监视点\n");
+      
+    }
+    p=p->next;
+  }
+  return ;
+
+}
+
 void cpu_exec(int num) {
   int i;
   for(i = 0; i < num; i++) {
@@ -826,7 +855,7 @@ void cpu_exec(int num) {
     //printf("pc=%x\n",top->pc);
     tfp->dump(contextp->time()); //dump wave
     contextp->timeInc(1); //推动仿真时间
-    
+    trace_and_difftest();
   }
 }
 
