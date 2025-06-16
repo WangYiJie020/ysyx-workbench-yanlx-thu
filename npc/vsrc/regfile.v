@@ -1,4 +1,4 @@
-import "DPI-C" function void reg_return_value(int regvalue[32]);
+import "DPI-C" function void reg_return_value(logic[31:0] regvalue);
 
 module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
   input clk,

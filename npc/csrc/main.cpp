@@ -104,7 +104,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
   return value;
 }
 
-extern "C" void reg_return_value(int regvalue[32]) {
+extern "C" void reg_return_value(logic[31:0] regvalue) {
   int i;
   for(i=0; i<32; i++) {
     reg_value[i] = regvalue[i];
