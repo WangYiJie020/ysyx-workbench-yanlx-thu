@@ -154,6 +154,8 @@ void trace_call(paddr_t pc, paddr_t target){
 		i>=0?symbol_tbl[i].name:"???",
 		target
 	);
+
+    i=i;
     
 }
 
@@ -169,6 +171,7 @@ void trace_ret(paddr_t pc) {
 		i>=0?symbol_tbl[i].name:"???"
 	);
     
+    i=i;
 
     --call_depth;
 
