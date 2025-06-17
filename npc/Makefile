@@ -32,6 +32,9 @@ include $(NVBOARD_HOME)/scripts/nvboard.mk
 INCFLAGS = $(addprefix -I, $(INC_PATH))
 CXXFLAGS += $(INCFLAGS) -DTOP_NAME="\"V$(TOPNAME)\""
 
+
+DIFFTEST := ${NEMU_HOME}/build/riscv32-nemu-interpreter-so#	
+
 $(BIN): $(VSRCS) $(CSRCS) $(NVBOARD_ARCHIVE)
 	@rm -rf $(OBJ_DIR)
 	$(VERILATOR) $(VERILATOR_CFLAGS) \
@@ -46,8 +49,8 @@ all:
 
 sim: $(VSRCS) $(CSRCS) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-	verilator $(VSRCS) $(CSRCS) --cc --trace --exe --build --top-module top -CFLAGS "-mcmodel=medium" -LDFLAGS "-lreadline"
-	./obj_dir/Vtop $(IMG) 
+	verilator $(VSRCS) $(CSRCS) --cc --trace --exe --build --top-module top -CFLAGS "-mcmodel=medium" -LDFLAGS "-lreadline" 
+	./obj_dir/Vtop $(IMG) --diff=${DIFFTEST}
 
 include ../Makefile
 

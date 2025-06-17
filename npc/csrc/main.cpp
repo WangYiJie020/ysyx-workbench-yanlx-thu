@@ -8,6 +8,7 @@
 #include <readline/history.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <dlfcn.h>
 #include <elf.h>
 #include "Vtop.h"
 #include "verilated.h"
@@ -40,7 +41,15 @@ typedef struct watchpoint {
 } WP;
 extern WP *head;
 
+#ifdef  DIFFTEST_ON
 
+extern regfile dut_reg;
+
+enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF};
+void (*ref_difftest_memcpy)(uint64_t addr, void *buf, size_t n, bool direction) = NULL;
+void (*ref_difftest_regcpy)(void *dut, bool direction) = NULL;
+void (*ref_difftest_exec)(uint64_t n) = NULL;
+void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 
 word_t expr(char *e, bool *success);
 WP* new_wp();
@@ -121,6 +130,50 @@ extern "C" void reg_return_value(uint32_t regvalue[32]) {
   
 }
 
+void difftest_init(char *ref_so_file, long img_size) {
+  assert(ref_so_file != NULL);
+
+  void *handle;
+  handle = dlopen(ref_so_file, RTLD_LAZY);
+  assert(handle);
+
+  ref_difftest_memcpy = (void (*)(uint64_t addr, void *buf, size_t n, bool direction))dlsym(handle , "difftest_memcpy");
+  assert(ref_difftest_memcpy);
+
+  ref_difftest_regcpy = (void (*)(void *dut, bool direction))dlsym(handle, "difftest_regcpy");
+  assert(ref_difftest_regcpy);
+
+  ref_difftest_exec = (void (*)(uint64_t n))dlsym(handle, "difftest_exec");
+  assert(ref_difftest_exec);
+
+  ref_difftest_raise_intr = (void (*)(uint64_t NO))dlsym(handle, "difftest_raise_intr");
+  assert(ref_difftest_raise_intr);
+
+  void (*ref_difftest_init)() = (void (*)())dlsym(handle, "difftest_init");
+  assert(ref_difftest_init);
+
+  ref_difftest_init();
+
+  ref_difftest_memcpy(PMEM_START,guest_to_host(PMEM_START), img_size, DIFFTEST_TO_REF);
+
+  dut_reg.pc = INST_START;
+  ref_difftest_regcpy(&dut_reg, DIFFTEST_TO_REF);
+
+}
+
+bool difftest_check() {
+  regfile ref;
+  ref_difftest_regcpy(&ref, DIFFTEST_TO_DUT);
+  return checkregs(&ref, &dut_reg);
+}
+
+void difftest_step() {
+  ref_difftest_exec(1);
+}
+
+void diff_cpdutreg2ref() {
+  ref_difftest_regcpy(&dut_reg, DIFFTEST_TO_REF);
+}
 
 
 static char *log_file = NULL;
@@ -162,7 +215,7 @@ static int parse_args(int argc, char *argv[]) {
   };
   int o;
   while ( (o = getopt_long(argc, argv, "-hd:p:", table, NULL)) != -1) {
-    //printf("%c,%d\n",o,o);
+    printf("%c,%d\n",o,o);
     switch (o) {
       case 'p': sscanf(optarg, "%d", &difftest_port); break;
       case 'd': diff_so_file = optarg; break;
@@ -923,7 +976,7 @@ int main(int argc, char** argv) {
   long img_size = load_img();
 
   init_log("npc-log.txt");
-  //init_difftest(diff_so_file, img_size, difftest_port);
+  init_difftest(diff_so_file, img_size);
   init_sdb();
   
   contextp->commandArgs(argc, argv);
