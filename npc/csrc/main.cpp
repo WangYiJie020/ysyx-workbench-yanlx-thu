@@ -37,11 +37,8 @@
 #define log_write(...)  \
   do { \
     extern FILE* log_fp; \
-    extern bool log_enable(); \
-    if (log_enable()) { \
       fprintf(log_fp, __VA_ARGS__); \
       fflush(log_fp); \
-    } \
   } while (0) 
 
 
@@ -865,10 +862,6 @@ void init_log(const char *log_file) {
   Log("Log is written to %s", log_file ? log_file : "stdout");
 }
 
-bool log_enable() {
-  return (g_nr_guest_inst >= CONFIG_TRACE_START) &&
-         (g_nr_guest_inst <= CONFIG_TRACE_END);
-}
 
 static void trace_and_difftest() {
   log_write("%s\n", top->inst); 
