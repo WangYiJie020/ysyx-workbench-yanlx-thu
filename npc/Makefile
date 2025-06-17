@@ -50,7 +50,7 @@ all:
 sim: $(VSRCS) $(CSRCS) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	verilator $(VSRCS) $(CSRCS) --cc --trace --exe --build --top-module top -CFLAGS "-mcmodel=medium" -LDFLAGS "-lreadline" 
-	./obj_dir/Vtop $(IMG) --diff=${DIFFTEST}
+	./obj_dir/Vtop --diff=${DIFFTEST} $(IMG) 
 
 include ../Makefile
 
