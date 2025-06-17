@@ -52,6 +52,9 @@ regfile cpu;
 
 #define  DIFFTEST_ON
 
+#define PMEM_LEFT  0x80000000
+#define PMEM_RIGHT 0x87ffffff
+
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
 
 void (*ref_difftest_memcpy)(paddr_t addr, void *buf, size_t n, bool direction) = NULL;
@@ -167,7 +170,7 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
       "If it is not necessary, you can turn it off in menuconfig.", ref_so_file);
 
   ref_difftest_init();
-  ref_difftest_memcpy(RESET_VECTOR, guest_to_host(RESET_VECTOR), img_size, DIFFTEST_TO_REF);
+  ref_difftest_memcpy(PMEM_LEFT, guest_to_host(PMEM_LEFT), img_size, DIFFTEST_TO_REF);
   ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
 }
 
