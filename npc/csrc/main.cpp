@@ -18,6 +18,9 @@
 #include "debug.h"
 #include "macro.h"
 #include "utils.h"
+#include "host.h"
+#include "paddr.h"
+#include "vaddr.h"
 
 
 
@@ -37,9 +40,15 @@ typedef struct watchpoint {
 
   /* TODO: Add more members if necessary */
 
-
 } WP;
 extern WP *head;
+
+typedef struct {
+  uint32_t gpr[32];
+  uint32_t pc;
+} regfile;
+
+regfile cpu;
 
 #define  DIFFTEST_ON
 
@@ -79,7 +88,6 @@ extern "C" void ebreak() {
   
 }
 
-int reg_value[32];
 
 const char *regs[] = {
   "$0", "ra", "sp", "gp", "tp", "t0", "t1", "t2",
@@ -92,7 +100,7 @@ void isa_reg_display() {
 	int i=32;
 	//printf("%d",cpu.gpr[1]);
 	for(;i>0;i--) {
-		printf("%s\t%x\n",regs[32-i],reg_value[32-i]);
+		printf("%s\t%x\n",regs[32-i],cpu.gpr[32-i]);
 	}
 
 }
@@ -109,8 +117,8 @@ word_t isa_reg_str2val(const char *s, bool *success) {
   for(;i>0;i--) {
     if(strcmp(regs[32-i], reg1) == 0){
       flag=1;
-      printf("%s\t%x\n",regs[32-i],reg_value[32-i]);
-      value=reg_value[32-i];      
+      printf("%s\t%x\n",regs[32-i],cpu.gpr[32-i]);
+      value=cpu.gpr[32-i];      
     }	
 	}
 
@@ -124,8 +132,9 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 extern "C" void reg_return_value(uint32_t regvalue[32]) {
   int i;
   for(i=0; i<32; i++) {
-    reg_value[i] = regvalue[i];
+    cpu.gpr[i] = regvalue[i];
   }
+  cpu.pc = top->pc;
   
 }
 
