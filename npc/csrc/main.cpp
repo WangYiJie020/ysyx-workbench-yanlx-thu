@@ -137,16 +137,16 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
   handle = dlopen(ref_so_file, RTLD_LAZY);
   assert(handle);
 
-  ref_difftest_memcpy = dlsym(handle , "difftest_memcpy");
+  ref_difftest_memcpy = (void (*)(unsigned int, void*, long unsigned int, bool))dlsym(handle , "difftest_memcpy");
   assert(ref_difftest_memcpy);
 
   ref_difftest_regcpy = (void (*)(void *dut, bool direction))dlsym(handle, "difftest_regcpy");
   assert(ref_difftest_regcpy);
 
-  ref_difftest_exec = (void (*)(uint32_t n))dlsym(handle, "difftest_exec");
+  ref_difftest_exec = (void (*)(uint64_t n))dlsym(handle, "difftest_exec");
   assert(ref_difftest_exec);
 
-  ref_difftest_raise_intr = (void (*)(uint32_t NO))dlsym(handle, "difftest_raise_intr");
+  ref_difftest_raise_intr = (void (*)(uint64_t NO))dlsym(handle, "difftest_raise_intr");
   assert(ref_difftest_raise_intr);
 
   void (*ref_difftest_init)() = (void (*)())dlsym(handle, "difftest_init");
