@@ -862,7 +862,7 @@ void init_log(const char *log_file) {
       printf("Can not open '%s'", log_file);
     log_fp = fp;
   }
-  printf("Log is written to %s", log_file ? log_file : "stdout");
+  printf("Log is written to %s\n", log_file ? log_file : "stdout");
 }
 
 
