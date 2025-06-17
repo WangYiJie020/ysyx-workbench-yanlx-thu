@@ -137,7 +137,7 @@ static long load_img() {
   fseek(fp, 0, SEEK_END);
   long size = ftell(fp);
 
-  printf("The image is %s, size = %ld\n", img_file, size);
+  Log("The image is %s, size = %ld", img_file, size);
 
   fseek(fp, 0, SEEK_SET);
   int ret = fread(&(mem[0x20000000]), size, 1, fp);
@@ -920,6 +920,7 @@ int main(int argc, char** argv) {
   long img_size = load_img();
 
   init_log("npc-log.txt");
+  init_difftest(diff_so_file, img_size, difftest_port);
   init_sdb();
   
   contextp->commandArgs(argc, argv);
