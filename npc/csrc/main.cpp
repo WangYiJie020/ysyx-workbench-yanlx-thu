@@ -6,6 +6,9 @@
 #include <regex.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <elf.h>
 #include "Vtop.h"
 #include "verilated.h"
 
