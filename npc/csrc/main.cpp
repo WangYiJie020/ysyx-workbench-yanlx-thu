@@ -867,7 +867,7 @@ void init_log(const char *log_file) {
 
 
 static void trace_and_difftest() {
-  log_write("%x,%x\n", top->pc,top->inst); 
+  log_write("%08x,%08x\n", top->pc,top->inst); 
 
   //puts(_this->logbuf); 
   //difftest_step(_this->pc, dnpc);
@@ -910,12 +910,13 @@ void cpu_exec(int num) {
       break;
     }
     top->inst = pmem_read(top->pc);
+    trace_and_difftest();
     top->clk = 0; top->eval();
     top->clk = 1; top->eval();
     //printf("pc=%x\n",top->pc);
     tfp->dump(contextp->time()); //dump wave
     contextp->timeInc(1); //推动仿真时间
-    trace_and_difftest();
+    
   }
 }
 
