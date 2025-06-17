@@ -850,6 +850,11 @@ void print_wp(){
   }
 }
 
+extern uint64_t g_nr_guest_inst;
+
+FILE *log_fp = NULL;
+
+
 void init_log(const char *log_file) {
   log_fp = stdout;
   if (log_file != NULL) {
