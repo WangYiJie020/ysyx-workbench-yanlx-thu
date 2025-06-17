@@ -1,3 +1,8 @@
+#include <regex.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+
 enum {
   TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_UNEQ, TK_AND, TK_DEREF, TK_HEX, TK_REG
 
