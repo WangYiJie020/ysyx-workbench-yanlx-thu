@@ -41,7 +41,7 @@ typedef struct watchpoint {
 } WP;
 extern WP *head;
 
-#ifdef  DIFFTEST_ON
+#define  DIFFTEST_ON
 
 extern regfile dut_reg;
 
