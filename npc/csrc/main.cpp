@@ -34,6 +34,8 @@
 
 #define ANSI_FMT(str, fmt) fmt str ANSI_NONE
 
+#define __KEEP(...) __VA_ARGS__
+
 #define log_write(...)  \
   do { \
     extern FILE* log_fp; \
@@ -865,7 +867,7 @@ void init_log(const char *log_file) {
 
 
 static void trace_and_difftest() {
-  log_write("%s\n", top->inst); 
+  log_write("%x,%x\n", top->pc,top->inst); 
 
   //puts(_this->logbuf); 
   //difftest_step(_this->pc, dnpc);
