@@ -33,8 +33,6 @@ VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
 
 #define  DIFFTEST_ON
 
-#define PMEM_LEFT  0x80000000
-#define PMEM_RIGHT 0x87ffffff
 
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
 
