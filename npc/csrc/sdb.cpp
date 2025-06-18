@@ -3,7 +3,8 @@
 #include "macro.h"
 #include "utils.h"
 #include "include.h"
-
+#include <readline/readline.h>
+#include <readline/history.h>
 
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
