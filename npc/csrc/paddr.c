@@ -15,6 +15,7 @@
 
 #include "host.h"
 #include "paddr.h"
+#include "include.h"
 
 //#define CONFIG_MTRACE
 

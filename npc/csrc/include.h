@@ -7,6 +7,8 @@
 #include "macro.h"
 #include "utils.h"
 
+#define CONFIG_MBASE 0x80000000
+#define CONFIG_MSIZE 0x8000000
 typedef struct {
   uint32_t gpr[32];
   uint32_t pc;
