@@ -21,6 +21,9 @@
 #include "include.h"
 
 
+regfile cpu;
+int cpu_state;
+int mem[0xffffffff];
 
 VerilatedContext* contextp = new VerilatedContext;
 Vtop* top = new Vtop{contextp};
