@@ -45,8 +45,10 @@ VM_USER_LDLIBS = \
 VM_USER_CLASSES = \
 	expr \
 	main \
+	paddr \
 	reg \
 	sdb \
+	vaddr \
 	watchpoint \
 
 # User .cpp directories (from .cpp's on Verilator command line)
@@ -67,9 +69,13 @@ expr.o: /home/yanlx/ysyx-workbench/npc/csrc/expr.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 main.o: /home/yanlx/ysyx-workbench/npc/csrc/main.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+paddr.o: /home/yanlx/ysyx-workbench/npc/csrc/paddr.c
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 reg.o: /home/yanlx/ysyx-workbench/npc/csrc/reg.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 sdb.o: /home/yanlx/ysyx-workbench/npc/csrc/sdb.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+vaddr.o: /home/yanlx/ysyx-workbench/npc/csrc/vaddr.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 watchpoint.o: /home/yanlx/ysyx-workbench/npc/csrc/watchpoint.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<

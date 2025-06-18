@@ -19,6 +19,7 @@
 #include "macro.h"
 #include "utils.h"
 #include "include.h"
+#include "paddr.h"
 
 
 regfile cpu;
