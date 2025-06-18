@@ -51,8 +51,6 @@ uint32_t pmem_read(uint32_t pc) {
 
 }
 
-extern uint64_t g_nr_guest_inst;
-
 FILE *log_fp = NULL;
 
 
