@@ -1,3 +1,9 @@
+#include "common.h"
+#include "debug.h"
+#include "macro.h"
+#include "utils.h"
+#include "include.h"
+
 enum {
   TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_UNEQ, TK_AND, TK_DEREF, TK_HEX, TK_REG
 
