@@ -1,4 +1,8 @@
-#inlcude "common.h"
+#include "common.h"
+#include "debug.h"
+#include "macro.h"
+#include "utils.h"
+#include "include.h"
 
 typedef struct watchpoint {
   int NO;

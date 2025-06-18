@@ -12,6 +12,16 @@ typedef struct {
   uint32_t pc;
 } regfile;
 
+typedef struct watchpoint {
+  int NO;
+  char tokens[100];
+  uint32_t value;
+  struct watchpoint *next;
+
+  /* TODO: Add more members if necessary */
+
+} WP;
+extern WP *head;
 regfile cpu;
 int cpu_state;
 int mem[0xffffffff];
