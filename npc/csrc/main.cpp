@@ -22,17 +22,9 @@
 
 
 
-
-
-
-
-
 VerilatedContext* contextp = new VerilatedContext;
 Vtop* top = new Vtop{contextp};
 VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
-
-
-
 
 
 #define  DIFFTEST_ON
@@ -54,6 +46,23 @@ uint32_t pmem_read(uint32_t pc) {
   printf("pc=%x,%08x\n",pc,mem[tmp]);
   return mem[tmp];
 
+}
+
+extern uint64_t g_nr_guest_inst;
+
+FILE *log_fp = NULL;
+
+
+void init_log(const char *log_file) {
+  log_fp = stdout;
+  if (log_file != NULL) {
+    FILE *fp = fopen(log_file, "w");
+    if(fp == NULL)
+      printf("Can not open '%s'", log_file);
+    log_fp = fp;
+  }
+  Log("Log is written to %s", log_file ? log_file : "stdout");
+  //printf("Log is written to %s\n", log_file ? log_file : "stdout");
 }
 
 extern "C" void reg_return_value(uint32_t regvalue[32]) {
