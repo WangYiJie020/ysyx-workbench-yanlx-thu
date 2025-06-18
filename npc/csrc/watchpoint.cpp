@@ -4,16 +4,7 @@
 #include "utils.h"
 #include "include.h"
 
-typedef struct watchpoint {
-  int NO;
-  char tokens[100];
-  uint32_t value;
-  struct watchpoint *next;
 
-  /* TODO: Add more members if necessary */
-
-} WP;
-extern WP *head;
 
 #define NR_WP 32
 
