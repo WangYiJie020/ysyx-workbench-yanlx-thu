@@ -169,7 +169,7 @@ static int parse_args(int argc, char *argv[]) {
 }
 
 static void trace_and_difftest() {
-  log_write("%08x,%08x\n", top->pc,top->inst); 
+  //log_write("%08x,%08x\n", top->pc,top->inst); 
 
   //puts(_this->logbuf); 
   //difftest_step(_this->pc, dnpc);
@@ -228,7 +228,7 @@ int main(int argc, char** argv) {
   parse_args(argc, argv);
   long img_size = load_img();
 
-  //init_log("npc-log1.txt");
+  init_log("npc-log1.txt");
   //init_difftest(diff_so_file, img_size, difftest_port);
   init_sdb();
   cpu_state = 0;
