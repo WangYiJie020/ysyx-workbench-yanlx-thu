@@ -22,9 +22,6 @@ typedef struct watchpoint {
 
 } WP;
 extern WP *head;
-regfile cpu;
-int cpu_state;
-int mem[0xffffffff];
 
 extern regfile cpu;
 extern int cpu_state;
