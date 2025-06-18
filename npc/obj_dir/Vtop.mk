@@ -48,7 +48,6 @@ VM_USER_CLASSES = \
 	paddr \
 	reg \
 	sdb \
-	vaddr \
 	watchpoint \
 
 # User .cpp directories (from .cpp's on Verilator command line)
@@ -74,8 +73,6 @@ paddr.o: /home/yanlx/ysyx-workbench/npc/csrc/paddr.c
 reg.o: /home/yanlx/ysyx-workbench/npc/csrc/reg.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 sdb.o: /home/yanlx/ysyx-workbench/npc/csrc/sdb.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-vaddr.o: /home/yanlx/ysyx-workbench/npc/csrc/vaddr.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 watchpoint.o: /home/yanlx/ysyx-workbench/npc/csrc/watchpoint.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
