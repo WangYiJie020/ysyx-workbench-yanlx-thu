@@ -43,6 +43,8 @@ WP* new_wp(char * arg, uint32_t value);
 void free_wp(int num);
 void init_wp_pool();
 void init_regex();
+void init_sdb();
+void sdb_mainloop();
 word_t isa_reg_str2val(const char *s, bool *success);
 
 
