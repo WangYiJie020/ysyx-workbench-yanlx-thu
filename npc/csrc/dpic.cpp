@@ -13,7 +13,8 @@ extern "C" void reg_return_value(uint32_t regvalue[32]) {
   
 }
 
-extern int cpu_state = 0;
+
+
 extern "C" void ebreak() {
   printf("HIT GOOD TRAP\n");
   cpu_state = 1;

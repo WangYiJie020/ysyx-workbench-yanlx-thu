@@ -13,7 +13,7 @@ typedef struct {
 } regfile;
 
 regfile cpu;
-int cpu_state = 0;
+int cpu_state;
 
 extern regfile cpu;
 extern int cpu_state;
