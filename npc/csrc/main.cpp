@@ -73,7 +73,7 @@ extern "C" void reg_return_value(uint32_t regvalue[32]) {
   for(i=0; i<32; i++) {
     cpu.gpr[i] = regvalue[i];
   }
-  
+  cpu.pc = top->pc;
 }
 
 
@@ -111,7 +111,7 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
       "If it is not necessary, you can turn it off in menuconfig.", ref_so_file);
 
   ref_difftest_init();
-  //ref_difftest_memcpy(PMEM_LEFT, guest_to_host(PMEM_LEFT), img_size, DIFFTEST_TO_REF);
+  ref_difftest_memcpy(PMEM_LEFT, guest_to_host(PMEM_LEFT), img_size, DIFFTEST_TO_REF);
   ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
 }
 
