@@ -10,11 +10,10 @@ extern "C" void reg_return_value(uint32_t regvalue[32]) {
   for(i=0; i<32; i++) {
     cpu.gpr[i] = regvalue[i];
   }
-  cpu.pc = top->pc;
   
 }
 
-
+extern int cpu_state = 0;
 extern "C" void ebreak() {
   printf("HIT GOOD TRAP\n");
   cpu_state = 1;
