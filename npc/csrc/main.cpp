@@ -23,9 +23,9 @@
 
 
 
-extern int mem[0xffffffff];
 
-int cpu_state = 0;
+
+
 
 VerilatedContext* contextp = new VerilatedContext;
 Vtop* top = new Vtop{contextp};
@@ -47,19 +47,6 @@ void (*ref_difftest_regcpy)(void *dut, bool direction) = NULL;
 void (*ref_difftest_exec)(uint64_t n) = NULL;
 void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 
-word_t expr(char *e, bool *success);
-WP* new_wp();
-void free_wp(int num);
-void print_wp();
-
-void cpu_exec(int num);
-int is_exit_status_bad();
-static bool make_token(char *e);
-word_t expr(char *e, bool *success);
-WP* new_wp(char * arg, uint32_t value);
-void free_wp(int num);
-void init_wp_pool();
-void init_regex();
 
 
 uint32_t pmem_read(uint32_t pc) {
@@ -220,6 +207,7 @@ int main(int argc, char** argv) {
   init_log("npc-log.txt");
   init_difftest(diff_so_file, img_size, difftest_port);
   init_sdb();
+  cpu_state = 0;
   
   contextp->commandArgs(argc, argv);
   
