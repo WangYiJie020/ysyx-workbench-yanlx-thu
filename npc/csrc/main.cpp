@@ -23,7 +23,7 @@
 
 
 int cpu_state;
-int mem[0x8000000];
+int mem[0xffffffff];
 
 
 VerilatedContext* contextp = new VerilatedContext;
