@@ -30,8 +30,7 @@ import "DPI-C" function void reg_return_value(input logic[31:0] gpr_0,
                                               input logic[31:0] gpr_28,
                                               input logic[31:0] gpr_29,
                                               input logic[31:0] gpr_30,
-                                              input logic[31:0] gpr_31,
-                                              input logic[31:0] pc);
+                                              input logic[31:0] gpr_31);
 
 
 module top(
@@ -163,7 +162,7 @@ module top(
       reg_file[7],reg_file[8],reg_file[9],reg_file[10],reg_file[11],reg_file[12],reg_file[13],reg_file[14],
       reg_file[15],reg_file[16],reg_file[17],reg_file[18],reg_file[19],reg_file[20],reg_file[21],reg_file[22],
       reg_file[23],reg_file[24],reg_file[25],reg_file[26],reg_file[27],reg_file[28],reg_file[29],reg_file[30],
-      reg_file[31],pc);
+      reg_file[31]);
   end
 
 endmodule
