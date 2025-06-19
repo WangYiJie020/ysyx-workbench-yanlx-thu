@@ -47,19 +47,20 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 }
 
 bool checkregs(regfile *ref, regfile *dut) {
+    bool check = true;
   if(ref->pc != dut->pc){
     printf("difftest error: ");
     printf("next reg pc is diff: ref = 0x%x, dut = 0x%x\n",ref->pc,dut->pc);
-    return false;
+    check = false;
   }
   for (int i = 0; i < ARRLEN(regs); i++) {
     if(ref->gpr[i] != dut->gpr[i]){
       printf("difftest error at nextpc = 0x%x, ",dut->pc);
       printf("reg %s is diff: ref = 0x%x, dut = 0x%x\n",regs[i],ref->gpr[i],dut->gpr[i]);
-      return false;
+      check = false;
     }
   }
-  return true;
+  return check;
 }
 
 void print_regs(){
