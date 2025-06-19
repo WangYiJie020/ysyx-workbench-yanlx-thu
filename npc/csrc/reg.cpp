@@ -52,7 +52,7 @@ bool checkregs(regfile *ref, regfile *dut) {
     printf("next reg pc is diff: ref = 0x%x, dut = 0x%x\n",ref->pc,dut->pc);
     return false;
   }
-  for (int i = 0; i < 16; i++) {
+  for (int i = 0; i < ARRLEN(regs); i++) {
     if(ref->gpr[i] != dut->gpr[i]){
       printf("difftest error at nextpc = 0x%x, ",dut->pc);
       printf("reg %s is diff: ref = 0x%x, dut = 0x%x\n",regs[i],ref->gpr[i],dut->gpr[i]);
@@ -64,7 +64,7 @@ bool checkregs(regfile *ref, regfile *dut) {
 
 void print_regs(){
   printf("dut pc = 0x%x\n",cpu.pc);
-  for (int i = 0; i < 16; i++) {
+  for (int i = 0; i < ARRLEN(regs); i++) {
     printf("dut reg %3s = 0x%x\n",regs[i],cpu.gpr[i]);
   }
 }
