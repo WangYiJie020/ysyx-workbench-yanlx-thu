@@ -103,7 +103,7 @@ uint32_t gpr_29,uint32_t gpr_30,uint32_t gpr_31){
   cpu.gpr[31] = gpr_31;
   cpu.pc = top->pc;
 
-  prinf("gpr0 = %x",gpr_0);
+  printf("gpr0 = %x",gpr_0);
 
 }
 
