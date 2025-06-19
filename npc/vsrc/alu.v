@@ -13,7 +13,7 @@ always@(*) begin
         4'b0000: alu_result = b; 
         4'b0001: alu_result = a & b;
         4'b0010: alu_result = a | b;
-        4'b0011: alu_result = a + b+ 1;
+        4'b0011: alu_result = a + b;
         4'b0100: alu_result = a - b;
         4'b0101: alu_result = a << b;
         4'b0110: alu_result = a >> b;
