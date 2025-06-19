@@ -1,13 +1,13 @@
 import "DPI-C" function void ebreak();
-import "DPI-C" function void reg_return_value(input int gpr_0,input logic[31:0] gpr_1,
-input logic[31:0] gpr_2,input logic[31:0] gpr_3,input logic[31:0] gpr_4,input logic[31:0] gpr_5,
-input logic[31:0] gpr_6,input logic[31:0] gpr_7,input logic[31:0] gpr_8,input logic[31:0] gpr_9,
-input logic[31:0] gpr_10,input logic[31:0] gpr_11,input logic[31:0] gpr_12,input logic[31:0] gpr_13,
-input logic[31:0] gpr_14,input logic[31:0] gpr_15,input logic[31:0] gpr_16,input logic[31:0] gpr_17,
-input logic[31:0] gpr_18,input logic[31:0] gpr_19,input logic[31:0] gpr_20,input logic[31:0] gpr_21,
-input logic[31:0] gpr_22,input logic[31:0] gpr_23,input logic[31:0] gpr_24,input logic[31:0] gpr_25,
-input logic[31:0] gpr_26,input logic[31:0] gpr_27,input logic[31:0] gpr_28,input logic[31:0] gpr_29,
-input logic[31:0] gpr_30,input logic[31:0] gpr_31);
+import "DPI-C" function void reg_return_value(input int gpr_0,input int gpr_1,
+input int gpr_2,input int gpr_3,input int gpr_4,input int gpr_5,
+input int gpr_6,input int gpr_7,input int gpr_8,input int gpr_9,
+input int gpr_10,input int gpr_11,input int gpr_12,input int gpr_13,
+input int gpr_14,input int gpr_15,input int gpr_16,input int gpr_17,
+input int gpr_18,input int gpr_19,input int gpr_20,input int gpr_21,
+input int gpr_22,input int gpr_23,input int gpr_24,input int gpr_25,
+input int gpr_26,input int gpr_27,input int gpr_28,input int gpr_29,
+input int gpr_30,input int gpr_31);
 
 
 module top(

@@ -16,13 +16,13 @@ VL_INLINE_OPT void Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit() {
     ebreak();
 }
 
-extern "C" void reg_return_value(const svLogicVecVal* gpr_0, const svLogicVecVal* gpr_1, const svLogicVecVal* gpr_2, const svLogicVecVal* gpr_3, const svLogicVecVal* gpr_4, const svLogicVecVal* gpr_5, const svLogicVecVal* gpr_6, const svLogicVecVal* gpr_7, const svLogicVecVal* gpr_8, const svLogicVecVal* gpr_9, const svLogicVecVal* gpr_10, const svLogicVecVal* gpr_11, const svLogicVecVal* gpr_12, const svLogicVecVal* gpr_13, const svLogicVecVal* gpr_14, const svLogicVecVal* gpr_15, const svLogicVecVal* gpr_16, const svLogicVecVal* gpr_17, const svLogicVecVal* gpr_18, const svLogicVecVal* gpr_19, const svLogicVecVal* gpr_20, const svLogicVecVal* gpr_21, const svLogicVecVal* gpr_22, const svLogicVecVal* gpr_23, const svLogicVecVal* gpr_24, const svLogicVecVal* gpr_25, const svLogicVecVal* gpr_26, const svLogicVecVal* gpr_27, const svLogicVecVal* gpr_28, const svLogicVecVal* gpr_29, const svLogicVecVal* gpr_30, const svLogicVecVal* gpr_31);
+extern "C" void reg_return_value(int gpr_0, const svLogicVecVal* gpr_1, const svLogicVecVal* gpr_2, const svLogicVecVal* gpr_3, const svLogicVecVal* gpr_4, const svLogicVecVal* gpr_5, const svLogicVecVal* gpr_6, const svLogicVecVal* gpr_7, const svLogicVecVal* gpr_8, const svLogicVecVal* gpr_9, const svLogicVecVal* gpr_10, const svLogicVecVal* gpr_11, const svLogicVecVal* gpr_12, const svLogicVecVal* gpr_13, const svLogicVecVal* gpr_14, const svLogicVecVal* gpr_15, const svLogicVecVal* gpr_16, const svLogicVecVal* gpr_17, const svLogicVecVal* gpr_18, const svLogicVecVal* gpr_19, const svLogicVecVal* gpr_20, const svLogicVecVal* gpr_21, const svLogicVecVal* gpr_22, const svLogicVecVal* gpr_23, const svLogicVecVal* gpr_24, const svLogicVecVal* gpr_25, const svLogicVecVal* gpr_26, const svLogicVecVal* gpr_27, const svLogicVecVal* gpr_28, const svLogicVecVal* gpr_29, const svLogicVecVal* gpr_30, const svLogicVecVal* gpr_31);
 
 VL_INLINE_OPT void Vtop___024unit____Vdpiimwrap_reg_return_value_TOP____024unit(IData/*31:0*/ gpr_0, IData/*31:0*/ gpr_1, IData/*31:0*/ gpr_2, IData/*31:0*/ gpr_3, IData/*31:0*/ gpr_4, IData/*31:0*/ gpr_5, IData/*31:0*/ gpr_6, IData/*31:0*/ gpr_7, IData/*31:0*/ gpr_8, IData/*31:0*/ gpr_9, IData/*31:0*/ gpr_10, IData/*31:0*/ gpr_11, IData/*31:0*/ gpr_12, IData/*31:0*/ gpr_13, IData/*31:0*/ gpr_14, IData/*31:0*/ gpr_15, IData/*31:0*/ gpr_16, IData/*31:0*/ gpr_17, IData/*31:0*/ gpr_18, IData/*31:0*/ gpr_19, IData/*31:0*/ gpr_20, IData/*31:0*/ gpr_21, IData/*31:0*/ gpr_22, IData/*31:0*/ gpr_23, IData/*31:0*/ gpr_24, IData/*31:0*/ gpr_25, IData/*31:0*/ gpr_26, IData/*31:0*/ gpr_27, IData/*31:0*/ gpr_28, IData/*31:0*/ gpr_29, IData/*31:0*/ gpr_30, IData/*31:0*/ gpr_31) {
     VL_DEBUG_IF(VL_DBG_MSGF("+        Vtop___024unit____Vdpiimwrap_reg_return_value_TOP____024unit\n"); );
     // Body
-    svLogicVecVal gpr_0__Vcvt[1];
-    for (size_t gpr_0__Vidx = 0; gpr_0__Vidx < 1; ++gpr_0__Vidx) VL_SET_SVLV_I(32, gpr_0__Vcvt + 1 * gpr_0__Vidx, gpr_0);
+    int gpr_0__Vcvt;
+    for (size_t gpr_0__Vidx = 0; gpr_0__Vidx < 1; ++gpr_0__Vidx) gpr_0__Vcvt = gpr_0;
     svLogicVecVal gpr_1__Vcvt[1];
     for (size_t gpr_1__Vidx = 0; gpr_1__Vidx < 1; ++gpr_1__Vidx) VL_SET_SVLV_I(32, gpr_1__Vcvt + 1 * gpr_1__Vidx, gpr_1);
     svLogicVecVal gpr_2__Vcvt[1];
