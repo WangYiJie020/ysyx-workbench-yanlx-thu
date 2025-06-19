@@ -22,9 +22,10 @@
 #include "paddr.h"
 
 
-regfile cpu;
+regfile 
 int cpu_state;
 int mem[0xffffffff];
+
 
 VerilatedContext* contextp = new VerilatedContext;
 Vtop* top = new Vtop{contextp};
@@ -112,6 +113,20 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
   ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
 }
 
+bool difftest_check() {
+  regfile ref;
+  ref_difftest_regcpy(&ref, DIFFTEST_TO_DUT);
+  return checkregs(&ref, &cpu);
+}
+
+void difftest_step() {
+  ref_difftest_exec(1);
+}
+
+void diff_cpdutreg2ref() {
+  ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
+}
+
 static char *log_file = NULL;
 static char *diff_so_file = NULL;
 static char *img_file = NULL;
@@ -170,6 +185,13 @@ static int parse_args(int argc, char *argv[]) {
 static void trace_and_difftest() {
   log_write("%08x,%08x\n", top->pc,top->inst); 
 
+  bool check = difftest_check();
+  if(check==0) {
+    return;
+  }
+  else {
+    difftest_step();
+  }
   //puts(_this->logbuf); 
   //difftest_step(_this->pc, dnpc);
   WP * p = head;

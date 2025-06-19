@@ -46,7 +46,7 @@ void init_sdb();
 void sdb_mainloop();
 word_t isa_reg_str2val(const char *s, bool *success);
 void isa_reg_display();
-
+bool checkregs(regfile *ref, regfile *dut);
 
 
 #endif

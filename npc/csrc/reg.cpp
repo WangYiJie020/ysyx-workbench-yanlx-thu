@@ -4,6 +4,7 @@
 #include "utils.h"
 #include "include.h"
 
+regfile cpu;
 
 const char *regs[] = {
   "$0", "ra", "sp", "gp", "tp", "t0", "t1", "t2",
@@ -43,4 +44,27 @@ word_t isa_reg_str2val(const char *s, bool *success) {
     assert(0);
   }
   return value;
+}
+
+bool checkregs(regfile *ref, regfile *dut) {
+  if(ref->pc != dut->pc){
+    printf("difftest error: ");
+    printf("next reg pc is diff: ref = 0x%lx, dut = 0x%lx\n",ref->pc,dut->pc);
+    return false;
+  }
+  for (int i = 0; i < ARRLEN(regs); i++) {
+    if(ref->gpr[i] != dut->gpr[i]){
+      printf("difftest error at nextpc = 0x%lx, ",dut->pc);
+      printf("reg %s is diff: ref = 0x%lx, dut = 0x%lx\n",regs[i],ref->x[i],dut->x[i]);
+      return false;
+    }
+  }
+  return true;
+}
+
+void print_regs(){
+  printf("dut pc = 0x%lx\n",dut_reg.pc);
+  for (int i = 0; i < ARRLEN(regs); i++) {
+    printf("dut reg %3s = 0x%lx\n",regs[i],dut_reg.x[i]);
+  }
 }
