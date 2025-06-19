@@ -272,7 +272,7 @@ void cpu_exec(int num) {
     top->inst = pmem_read_new(top->pc);
     top->clk = 0; top->eval();
     top->clk = 1; top->eval();
-    trace_and_difftest();
+    //trace_and_difftest();
     //printf("pc=%x\n",top->pc);
     tfp->dump(contextp->time()); //dump wave
     contextp->timeInc(1); //推动仿真时间
