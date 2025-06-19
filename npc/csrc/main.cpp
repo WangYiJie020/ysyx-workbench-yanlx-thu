@@ -68,7 +68,7 @@ extern "C" void reg_return_value(uint32_t gpr_0,uint32_t gpr_1,uint32_t gpr_2,ui
 uint32_t gpr_5,uint32_t gpr_6,uint32_t gpr_7,uint32_t gpr_8,uint32_t gpr_9,uint32_t gpr_10,uint32_t gpr_11,uint32_t gpr_12,\
 uint32_t gpr_13,uint32_t gpr_14,uint32_t gpr_15,uint32_t gpr_16,uint32_t gpr_17,uint32_t gpr_18,uint32_t gpr_19,uint32_t gpr_20,\
 uint32_t gpr_21,uint32_t gpr_22,uint32_t gpr_23,uint32_t gpr_24,uint32_t gpr_25,uint32_t gpr_26,uint32_t gpr_27,uint32_t gpr_28,\
-uint32_t gpr_29,uint32_t gpr_30,uint32_t gpr_31){
+uint32_t gpr_29,uint32_t gpr_30,uint32_t gpr_31,uint32_t pc){
   cpu.gpr[0] = gpr_0;
   cpu.gpr[1] = gpr_1;
   cpu.gpr[2] = gpr_2;
@@ -101,7 +101,7 @@ uint32_t gpr_29,uint32_t gpr_30,uint32_t gpr_31){
   cpu.gpr[29] = gpr_29;
   cpu.gpr[30] = gpr_30;
   cpu.gpr[31] = gpr_31;
-  cpu.pc = top->pc;
+  cpu.pc = pc;
 
   //printf("gpr0 = %x",gpr_0);
 

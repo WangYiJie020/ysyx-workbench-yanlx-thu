@@ -1,5 +1,5 @@
 import "DPI-C" function void ebreak();
-import "DPI-C" function void reg_return_value(input int gpr_0,input int gpr_1,
+import "DPI-C" function void reg_return_value(input uint32_t gpr_0,input int gpr_1,
 input int gpr_2,input int gpr_3,input int gpr_4,input int gpr_5,
 input int gpr_6,input int gpr_7,input int gpr_8,input int gpr_9,
 input int gpr_10,input int gpr_11,input int gpr_12,input int gpr_13,
@@ -7,7 +7,7 @@ input int gpr_14,input int gpr_15,input int gpr_16,input int gpr_17,
 input int gpr_18,input int gpr_19,input int gpr_20,input int gpr_21,
 input int gpr_22,input int gpr_23,input int gpr_24,input int gpr_25,
 input int gpr_26,input int gpr_27,input int gpr_28,input int gpr_29,
-input int gpr_30,input int gpr_31);
+input int gpr_30,input int gpr_31,input int pc);
 
 
 module top(
