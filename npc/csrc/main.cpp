@@ -43,7 +43,7 @@ void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 
 
 
-uint32_t pmem_read(uint32_t pc) {
+uint32_t pmem_read_new(uint32_t pc) {
   uint32_t tmp = pc / 4 ;
   printf("pc=%x,%08x\n",pc,mem[tmp]);
   return mem[tmp];
@@ -269,7 +269,7 @@ void cpu_exec(int num) {
       printf("abort! at pc=%x\n",top->pc);
       break;
     }
-    top->inst = pmem_read(top->pc);
+    top->inst = pmem_read_new(top->pc);
     top->clk = 0; top->eval();
     top->clk = 1; top->eval();
     trace_and_difftest();
