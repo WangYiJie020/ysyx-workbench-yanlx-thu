@@ -1,36 +1,13 @@
 import "DPI-C" function void ebreak();
-import "DPI-C" function void reg_return_value(input logic[31:0] gpr_0,
-                                              input logic[31:0] gpr_1,
-                                              input logic[31:0] gpr_2,
-                                              input logic[31:0] gpr_3,
-                                              input logic[31:0] gpr_4,
-                                              input logic[31:0] gpr_5,
-                                              input logic[31:0] gpr_6,
-                                              input logic[31:0] gpr_7,
-                                              input logic[31:0] gpr_8,
-                                              input logic[31:0] gpr_9,
-                                              input logic[31:0] gpr_10,
-                                              input logic[31:0] gpr_11,
-                                              input logic[31:0] gpr_12,
-                                              input logic[31:0] gpr_13,
-                                              input logic[31:0] gpr_14,
-                                              input logic[31:0] gpr_15,
-                                              input logic[31:0] gpr_16,
-                                              input logic[31:0] gpr_17,
-                                              input logic[31:0] gpr_18,
-                                              input logic[31:0] gpr_19,
-                                              input logic[31:0] gpr_20,
-                                              input logic[31:0] gpr_21,
-                                              input logic[31:0] gpr_22,
-                                              input logic[31:0] gpr_23,
-                                              input logic[31:0] gpr_24,
-                                              input logic[31:0] gpr_25,
-                                              input logic[31:0] gpr_26,
-                                              input logic[31:0] gpr_27,
-                                              input logic[31:0] gpr_28,
-                                              input logic[31:0] gpr_29,
-                                              input logic[31:0] gpr_30,
-                                              input logic[31:0] gpr_31);
+import "DPI-C" function void reg_return_value(input logic[31:0] gpr_0,input logic[31:0] gpr_1,
+input logic[31:0] gpr_2,input logic[31:0] gpr_3,input logic[31:0] gpr_4,input logic[31:0] gpr_5,
+input logic[31:0] gpr_6,input logic[31:0] gpr_7,input logic[31:0] gpr_8,input logic[31:0] gpr_9,
+input logic[31:0] gpr_10,input logic[31:0] gpr_11,input logic[31:0] gpr_12,input logic[31:0] gpr_13,
+input logic[31:0] gpr_14,input logic[31:0] gpr_15,input logic[31:0] gpr_16,input logic[31:0] gpr_17,
+input logic[31:0] gpr_18,input logic[31:0] gpr_19,input logic[31:0] gpr_20,input logic[31:0] gpr_21,
+input logic[31:0] gpr_22,input logic[31:0] gpr_23,input logic[31:0] gpr_24,input logic[31:0] gpr_25,
+input logic[31:0] gpr_26,input logic[31:0] gpr_27,input logic[31:0] gpr_28,input logic[31:0] gpr_29,
+input logic[31:0] gpr_30,input logic[31:0] gpr_31);
 
 
 module top(
@@ -55,7 +32,7 @@ module top(
 
   wire [31:0] pc_new,npc;
   wire pc_srcs;
-  reg [31:0] reg_file [31:0];
+  wire [31:0] reg_file [31:0];
   mux21 PC_Srcs(
     .d0(pc+4),
     .d1(pc_new),
