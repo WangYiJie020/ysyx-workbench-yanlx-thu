@@ -64,15 +64,46 @@ void init_log(const char *log_file) {
   Log("Log is written to %s", log_file ? log_file : "stdout");
   //printf("Log is written to %s\n", log_file ? log_file : "stdout");
 }
+extern "C" void reg_return_value(uint32_t gpr_0,uint32_t gpr_1,uint32_t gpr_2,uint32_t gpr_3,uint32_t gpr_4,\
+uint32_t gpr_5,uint32_t gpr_6,uint32_t gpr_7,uint32_t gpr_8,uint32_t gpr_9,uint32_t gpr_10,uint32_t gpr_11,uint32_t gpr_12,\
+uint32_t gpr_13,uint32_t gpr_14,uint32_t gpr_15,uint32_t gpr_16,uint32_t gpr_17,uint32_t gpr_18,uint32_t gpr_19,uint32_t gpr_20,\
+uint32_t gpr_21,uint32_t gpr_22,uint32_t gpr_23,uint32_t gpr_24,uint32_t gpr_25,uint32_t gpr_26,uint32_t gpr_27,uint32_t gpr_28,\
+uint32_t gpr_29,uint32_t gpr_30,uint32_t gpr_31 uint32_t pc){
+  cpu.gpr[0] = gpr_0;
+  cpu.gpr[1] = gpr_1;
+  cpu.gpr[2] = gpr_2;
+  cpu.gpr[3] = gpr_3;
+  cpu.gpr[4] = gpr_4;
+  cpu.gpr[5] = gpr_5;
+  cpu.gpr[6] = gpr_6;
+  cpu.gpr[7] = gpr_7;
+  cpu.gpr[8] = gpr_8;
+  cpu.gpr[9] = gpr_9;
+  cpu.gpr[10] = gpr_10;
+  cpu.gpr[11] = gpr_11;
+  cpu.gpr[12] = gpr_12;
+  cpu.gpr[13] = gpr_13;
+  cpu.gpr[14] = gpr_14;
+  cpu.gpr[15] = gpr_15;
+  cpu.gpr[16] = gpr_16;
+  cpu.gpr[17] = gpr_17;
+  cpu.gpr[18] = gpr_18;
+  cpu.gpr[19] = gpr_19;
+  cpu.gpr[20] = gpr_20;
+  cpu.gpr[21] = gpr_21;
+  cpu.gpr[22] = gpr_22;
+  cpu.gpr[23] = gpr_23;
+  cpu.gpr[24] = gpr_24;
+  cpu.gpr[25] = gpr_25;
+  cpu.gpr[26] = gpr_26;
+  cpu.gpr[27] = gpr_27;
+  cpu.gpr[28] = gpr_28;
+  cpu.gpr[29] = gpr_29;
+  cpu.gpr[30] = gpr_30;
+  cpu.gpr[31] = gpr_31;
+  cpu.pc = pc;
 
-extern "C" void reg_return_value(uint32_t regvalue[32]) {
-  int i;
-  for(i=0; i<32; i++) {
-    cpu.gpr[i] = regvalue[i];
-  }
-  cpu.pc = top->pc;
 }
-
 
 extern "C" void ebreak() {
   printf("HIT GOOD TRAP\n");
