@@ -187,12 +187,12 @@ static void trace_and_difftest() {
 
   bool check = difftest_check();
   //bool check = true;
-  //difftest_step();
+  difftest_step();
   if(check==false) {
     return;
   }
   else {
-    difftest_step();
+    //difftest_step();
   }
   WP * p = head;
   word_t expr(char *e, bool *success);
