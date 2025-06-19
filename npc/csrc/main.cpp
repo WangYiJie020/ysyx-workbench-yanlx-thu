@@ -45,7 +45,7 @@ void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 
 uint32_t pmem_read_new(uint32_t pc) {
   uint32_t tmp = pc / 4 ;
-  printf("pc=%x,%08x\n",pc,mem[tmp]);
+  printf("pc=%x,inst=%08x\n",pc,mem[tmp]);
   return mem[tmp];
 
 }
@@ -103,7 +103,7 @@ uint32_t gpr_29,uint32_t gpr_30,uint32_t gpr_31){
   cpu.gpr[31] = gpr_31;
   cpu.pc = top->pc;
 
-  printf("gpr0 = %x",gpr_0);
+  //printf("gpr0 = %x",gpr_0);
 
 }
 
@@ -149,7 +149,7 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
 bool difftest_check() {
   regfile ref;
   ref_difftest_regcpy(&ref, DIFFTEST_TO_DUT);
-  printf("%x,%x,%x\n",ref.pc,ref.gpr[2],ref.gpr[4]);
+  //printf("%x,%x,%x\n",ref.pc,ref.gpr[2],ref.gpr[4]);
   return checkregs(&ref, &cpu);
 }
 
@@ -223,12 +223,10 @@ static void trace_and_difftest() {
   //bool check = true;
   difftest_step();
   if(check==false) {
-    //cpu_state = NPC_ABORT;
-    //return;
+    cpu_state = NPC_ABORT;
+    return;
   }
-  else {
-    //difftest_step();
-  }
+  
   WP * p = head;
   word_t expr(char *e, bool *success);
   while(p!=NULL) {
