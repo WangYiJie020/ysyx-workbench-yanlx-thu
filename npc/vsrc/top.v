@@ -30,7 +30,7 @@ import "DPI-C" function void reg_return_value(input logic[31:0] gpr_0,
                                               input logic[31:0] gpr_28,
                                               input logic[31:0] gpr_29,
                                               input logic[31:0] gpr_30,
-                                              input logic[31:0] gpr_31
+                                              input logic[31:0] gpr_31,
                                               input logic[31:0] pc);
 
 
