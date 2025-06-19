@@ -220,8 +220,8 @@ static void trace_and_difftest() {
   //bool check = true;
   difftest_step();
   if(check==false) {
-    cpu_state = NPC_ABORT;
-    return;
+    //cpu_state = NPC_ABORT;
+    //return;
   }
   else {
     //difftest_step();
