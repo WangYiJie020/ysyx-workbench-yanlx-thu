@@ -20,7 +20,7 @@
 
 // ----------- state -----------
 
-enum { NPC_RUNNING, NPC_STOP, NPC_END, NPC_ABORT, NEMU_QUIT };
+enum { NPC_RUNNING, NPC_STOP, NPC_END, NPC_ABORT, NPC_QUIT };
 
 typedef struct {
   int state;

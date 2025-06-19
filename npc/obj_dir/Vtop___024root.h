@@ -27,6 +27,8 @@ class Vtop___024root final : public VerilatedModule {
     CData/*0:0*/ top__DOT__pc_srcs;
     CData/*0:0*/ __Vtrigrprev__TOP__clk;
     CData/*0:0*/ __VactContinue;
+    SData/*9:0*/ __Vtableidx1;
+    SData/*9:0*/ __Vtableidx2;
     VL_OUT(pc,31,0);
     VL_IN(inst,31,0);
     IData/*31:0*/ top__DOT__imm;
