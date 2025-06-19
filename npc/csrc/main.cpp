@@ -233,13 +233,13 @@ void cpu_exec(int num) {
       break;
     }
     top->inst = pmem_read(top->pc);
-    
+    trace_and_difftest();
     top->clk = 0; top->eval();
     top->clk = 1; top->eval();
     //printf("pc=%x\n",top->pc);
     tfp->dump(contextp->time()); //dump wave
     contextp->timeInc(1); //推动仿真时间
-    trace_and_difftest();
+    
   }
 }
 
