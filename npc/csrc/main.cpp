@@ -76,7 +76,7 @@ extern "C" void reg_return_value(uint32_t regvalue[32]) {
 
 extern "C" void ebreak() {
   printf("HIT GOOD TRAP\n");
-  cpu_state = 1;
+  cpu_state = NPC_END;
   
 }
 
@@ -189,6 +189,7 @@ static void trace_and_difftest() {
   //bool check = true;
   difftest_step();
   if(check==false) {
+    cpu_state = NPC_ABORT;
     return;
   }
   else {
@@ -211,7 +212,7 @@ static void trace_and_difftest() {
 
     if(value_new != p->value) {
       p->value = value_new;
-      cpu_state = 2;
+      cpu_state = NPC_STOP;
       printf("触发监视点\n");
       
     }
@@ -224,12 +225,16 @@ static void trace_and_difftest() {
 void cpu_exec(int num) {
   int i;
   for(i = 0; i < num; i++) {
-    if(cpu_state == 1){ //finish
+    if(cpu_state == NPC_END){ //finish
       printf("finish\n");
       break;
     }
-    if(cpu_state == 2) { //stop
-      cpu_state = 0;
+    if(cpu_state == NPC_STOP) { //stop
+      cpu_state = NPC_RUNNING;
+      break;
+    }
+    if(cpu_state == NPC_ABORT) {
+      printf("abort! at pc=%x",top->pc);
       break;
     }
     top->inst = pmem_read(top->pc);
@@ -252,7 +257,7 @@ int main(int argc, char** argv) {
   init_log("npc-log.txt");
   
   init_sdb();
-  cpu_state = 0;
+  cpu_state = NPC_RUNNING;
   
   contextp->commandArgs(argc, argv);
   
