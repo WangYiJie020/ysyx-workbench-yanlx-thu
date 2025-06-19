@@ -1,5 +1,5 @@
 import "DPI-C" function void ebreak();
-import "DPI-C" function void reg_return_value(input logic[31:0] gpr_0,input logic[31:0] gpr_1,
+import "DPI-C" function void reg_return_value(input int gpr_0,input logic[31:0] gpr_1,
 input logic[31:0] gpr_2,input logic[31:0] gpr_3,input logic[31:0] gpr_4,input logic[31:0] gpr_5,
 input logic[31:0] gpr_6,input logic[31:0] gpr_7,input logic[31:0] gpr_8,input logic[31:0] gpr_9,
 input logic[31:0] gpr_10,input logic[31:0] gpr_11,input logic[31:0] gpr_12,input logic[31:0] gpr_13,
