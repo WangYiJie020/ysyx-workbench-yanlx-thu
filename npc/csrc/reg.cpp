@@ -49,13 +49,13 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 bool checkregs(regfile *ref, regfile *dut) {
   if(ref->pc != dut->pc){
     printf("difftest error: ");
-    printf("next reg pc is diff: ref = 0x%lx, dut = 0x%lx\n",ref->pc,dut->pc);
+    printf("next reg pc is diff: ref = 0x%x, dut = 0x%x\n",ref->pc,dut->pc);
     return false;
   }
   for (int i = 0; i < ARRLEN(regs); i++) {
     if(ref->gpr[i] != dut->gpr[i]){
-      printf("difftest error at nextpc = 0x%lx, ",dut->pc);
-      printf("reg %s is diff: ref = 0x%lx, dut = 0x%lx\n",regs[i],ref->x[i],dut->x[i]);
+      printf("difftest error at nextpc = 0x%x, ",dut->pc);
+      printf("reg %s is diff: ref = 0x%x, dut = 0x%x\n",regs[i],ref->gpr[i],dut->gpr[i]);
       return false;
     }
   }
@@ -63,8 +63,8 @@ bool checkregs(regfile *ref, regfile *dut) {
 }
 
 void print_regs(){
-  printf("dut pc = 0x%lx\n",dut_reg.pc);
+  printf("dut pc = 0x%x\n",dut_reg.pc);
   for (int i = 0; i < ARRLEN(regs); i++) {
-    printf("dut reg %3s = 0x%lx\n",regs[i],dut_reg.x[i]);
+    printf("dut reg %3s = 0x%x\n",regs[i],dut_reg.grp[i]);
   }
 }
