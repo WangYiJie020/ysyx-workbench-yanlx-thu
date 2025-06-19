@@ -19,7 +19,7 @@ module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
     if (wen && waddr != 0) rf[waddr] <= wdata;
   end
 
-  always@(posedge clk) begin
+  always@(posedge *) begin
     reg_return_value(rf);
   end
 endmodule
