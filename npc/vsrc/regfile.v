@@ -1,5 +1,3 @@
-
-
 module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
   input clk,
   input [DATA_WIDTH-1:0] wdata,
@@ -27,8 +25,5 @@ module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
     if (wen && waddr != 0) rf[waddr] <= wdata;
   end
 
-  always@(*) begin
-    reg_return_value(rf);
-  end
 endmodule
 
