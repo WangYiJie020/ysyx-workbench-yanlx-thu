@@ -65,6 +65,6 @@ bool checkregs(regfile *ref, regfile *dut) {
 void print_regs(){
   printf("dut pc = 0x%x\n",cpu.pc);
   for (int i = 0; i < ARRLEN(regs); i++) {
-    printf("dut reg %3s = 0x%x\n",regs[i],cpu.grp[i]);
+    printf("dut reg %3s = 0x%x\n",regs[i],cpu.gpr[i]);
   }
 }
