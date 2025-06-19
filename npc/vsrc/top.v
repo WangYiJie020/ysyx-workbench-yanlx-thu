@@ -1,5 +1,5 @@
 import "DPI-C" function void ebreak();
-import "DPI-C" function void reg_return_value(input uint32_t gpr_0,input int gpr_1,
+import "DPI-C" function void reg_return_value(input int gpr_0,input int gpr_1,
 input int gpr_2,input int gpr_3,input int gpr_4,input int gpr_5,
 input int gpr_6,input int gpr_7,input int gpr_8,input int gpr_9,
 input int gpr_10,input int gpr_11,input int gpr_12,input int gpr_13,
