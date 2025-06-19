@@ -186,7 +186,7 @@ static void trace_and_difftest() {
 
   //bool check = difftest_check();
   bool check = true;
-  if(check==0) {
+  if(check==false) {
     return;
   }
   else {
