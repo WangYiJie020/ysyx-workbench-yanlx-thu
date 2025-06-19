@@ -114,7 +114,7 @@ module top(
     .out(wdata)
   );
 
-  always@(posedge *) begin
+  always@(*) begin
     if(inst == 32'h00100073) begin
       ebreak();
       $finish;
