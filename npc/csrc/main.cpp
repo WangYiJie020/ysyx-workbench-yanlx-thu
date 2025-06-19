@@ -234,7 +234,7 @@ void cpu_exec(int num) {
       break;
     }
     if(cpu_state == NPC_ABORT) {
-      printf("abort! at pc=%x",top->pc);
+      printf("abort! at pc=%x\n",top->pc);
       break;
     }
     top->inst = pmem_read(top->pc);
