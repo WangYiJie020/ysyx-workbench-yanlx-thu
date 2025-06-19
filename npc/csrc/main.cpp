@@ -233,10 +233,10 @@ void cpu_exec(int num) {
       cpu_state = NPC_RUNNING;
       break;
     }
-    //if(cpu_state == NPC_ABORT) {
-    //  printf("abort! at pc=%x\n",top->pc);
-    //  break;
-    //}
+    if(cpu_state == NPC_ABORT) {
+      printf("abort! at pc=%x\n",top->pc);
+      break;
+    }
     
     trace_and_difftest();
     top->clk = 0; top->eval();
