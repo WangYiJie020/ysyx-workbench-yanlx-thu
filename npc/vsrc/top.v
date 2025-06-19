@@ -151,15 +151,19 @@ module top(
   );
 
   always@(*) begin
+    
+    if(inst == 32'h00100073) begin
+      ebreak();
+      $finish;
+    end
+  end
+
+  always(*) begin
     reg_return_value(reg_file[0],reg_file[1],reg_file[2],reg_file[3],reg_file[4],reg_file[5],reg_file[6],
       reg_file[7],reg_file[8],reg_file[9],reg_file[10],reg_file[11],reg_file[12],reg_file[13],reg_file[14],
       reg_file[15],reg_file[16],reg_file[17],reg_file[18],reg_file[19],reg_file[20],reg_file[21],reg_file[22],
       reg_file[23],reg_file[24],reg_file[25],reg_file[26],reg_file[27],reg_file[28],reg_file[29],reg_file[30],
       reg_file[31],pc);
-    if(inst == 32'h00100073) begin
-      ebreak();
-      $finish;
-    end
   end
 
 endmodule
