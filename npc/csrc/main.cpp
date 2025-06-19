@@ -187,6 +187,7 @@ static void trace_and_difftest() {
 
   bool check = difftest_check();
   //bool check = true;
+  difftest_step();
   if(check==false) {
     return;
   }
