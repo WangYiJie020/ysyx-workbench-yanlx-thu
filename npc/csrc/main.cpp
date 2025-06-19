@@ -22,7 +22,6 @@
 #include "paddr.h"
 
 
-regfile 
 int cpu_state;
 int mem[0xffffffff];
 
