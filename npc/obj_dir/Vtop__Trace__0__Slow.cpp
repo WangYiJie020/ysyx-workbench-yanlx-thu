@@ -262,13 +262,7 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullIData(oldp+48,(vlSelf->top__DOT__reg_file[29]),32);
     bufp->fullIData(oldp+49,(vlSelf->top__DOT__reg_file[30]),32);
     bufp->fullIData(oldp+50,(vlSelf->top__DOT__reg_file[31]),32);
-    bufp->fullIData(oldp+51,(((vlSelf->top__DOT__Data_Mem__DOT__read_data__out__strong__out0 
-                               & (((~ (IData)(vlSelf->top__DOT__mem_write)) 
-                                   & (IData)(vlSelf->top__DOT__mem_read))
-                                   ? 0xffffffffU : 0U)) 
-                              & (((~ (IData)(vlSelf->top__DOT__mem_write)) 
-                                  & (IData)(vlSelf->top__DOT__mem_read))
-                                  ? 0xffffffffU : 0U))),32);
+    bufp->fullIData(oldp+51,(vlSelf->top__DOT__datamem_readdata),32);
     bufp->fullBit(oldp+52,(vlSelf->top__DOT__mem_read));
     bufp->fullBit(oldp+53,(vlSelf->top__DOT__mem_write));
     bufp->fullCData(oldp+54,(vlSelf->top__DOT__wmask),8);

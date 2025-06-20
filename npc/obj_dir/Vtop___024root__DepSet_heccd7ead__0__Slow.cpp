@@ -143,6 +143,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
         vlSelf->top__DOT__reg_file[__Vi0] = VL_RAND_RESET_I(32);
     }
+    vlSelf->top__DOT__datamem_readdata = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__mem_read = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__mem_write = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__wmask = VL_RAND_RESET_I(8);
@@ -152,7 +153,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
         vlSelf->top__DOT__Rgefile__DOT__rf[__Vi0] = VL_RAND_RESET_I(32);
     }
-    vlSelf->top__DOT__Data_Mem__DOT__read_data__out__strong__out0 = 0;
     vlSelf->__Vfunc_pmem_read__2__Vfuncout = 0;
     vlSelf->__Vfunc_pmem_read__3__Vfuncout = 0;
     vlSelf->__Vtableidx1 = 0;

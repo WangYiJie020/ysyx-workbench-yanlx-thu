@@ -7,11 +7,19 @@ module data_mem(
     input [31:0] address,
     input [31:0] write_data,
     input [7:0] wmask,
-    output [31:0] read_data
+    output reg [31:0] read_data
 
 );
 
-    assign read_data = (!MemWrite && MemRead) ? pmem_read(address) : 'b0;
+    always@(*) begin
+        if(!MemWrite && MemRead) begin
+            read_data = pmem_read(address);
+        end
+        else read_data = 0;
+
+    end
+    
+    //assign read_data = (!MemWrite && MemRead) ? pmem_read(address) : 'b0;
 
     always@(*)begin 
         if(MemWrite && !MemRead) begin
