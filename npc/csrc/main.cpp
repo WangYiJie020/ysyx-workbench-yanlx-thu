@@ -45,7 +45,7 @@ extern "C" int pmem_read(int raddr) {
   // 总是读取地址为`raddr & ~0x3u`的4字节返回
   
   uint32_t tmp = (uint32_t)raddr /4; //int类型是有符号的，要转成无符号的
-  printf("raddr = %x,data= %x\n",raddr,mem[tmp]);
+  //printf("raddr = %x,data= %x\n",raddr,mem[tmp]);
   return mem[tmp];
 }
 extern "C" void pmem_write(int waddr, int wdata, char wmask) {
@@ -57,7 +57,7 @@ extern "C" void pmem_write(int waddr, int wdata, char wmask) {
 
 uint32_t pmem_read_new(uint32_t pc) {
   uint32_t tmp = pc / 4 ;
-  //printf("pc=%x,inst=%08x\n",pc,mem[tmp]);
+  printf("pc=%x,inst=%08x\n",pc,mem[tmp]);
   return mem[tmp];
 
 }
