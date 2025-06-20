@@ -45,21 +45,13 @@ extern "C" int pmem_read(int raddr) {
   // 总是读取地址为`raddr & ~0x3u`的4字节返回
   
   uint32_t tmp = (uint32_t)raddr /4; //int类型是有符号的，要转成无符号的
-  //printf("raddr = %x,data= %x\n",raddr,mem[tmp]);
+  log_write("raddr = %x,data= %x\n",raddr,mem[tmp]);
   return mem[tmp];
 }
 extern "C" void pmem_write(int waddr, int wdata, char wmask) {
   // 总是往地址为`waddr & ~0x3u`的4字节按写掩码`wmask`写入`wdata`
   // `wmask`中每比特表示`wdata`中1个字节的掩码,
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
-}
-
-
-uint32_t pmem_read_new(uint32_t pc) {
-  uint32_t tmp = pc / 4 ;
-  printf("pc=%x,inst=%08x\n",pc,mem[tmp]);
-  return mem[tmp];
-
 }
 
 FILE *log_fp = NULL;
