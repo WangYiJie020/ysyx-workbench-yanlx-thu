@@ -322,7 +322,7 @@ int main(int argc, char** argv) {
   }
   top->rst_n = 1;
   
-  sdb_mainloop();
+  //sdb_mainloop();
 
 
   delete top;
