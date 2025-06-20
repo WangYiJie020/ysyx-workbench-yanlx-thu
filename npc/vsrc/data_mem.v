@@ -11,7 +11,7 @@ module data_mem(
 
 );
 
-    assign read_data = (!MemWrite && MemRead) ? pmem_read(address) : 'bz;
+    assign read_data = (!MemWrite && MemRead) ? pmem_read(address) : 'b0;
 
     always@(*)begin 
         if(MemWrite && !MemRead) begin
