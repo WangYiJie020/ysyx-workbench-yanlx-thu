@@ -43,8 +43,10 @@ void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 
 extern "C" int pmem_read(int raddr) {
   // 总是读取地址为`raddr & ~0x3u`的4字节返回
+  
+  uint32_t tmp = (uint32_t)raddr /4; //int类型是有符号的，要转成无符号的
   printf("raddr = %x,data= %x\n",raddr,mem[raddr/4]);
-  return mem[raddr / 4];
+  return mem[tmp];
 }
 extern "C" void pmem_write(int waddr, int wdata, char wmask) {
   // 总是往地址为`waddr & ~0x3u`的4字节按写掩码`wmask`写入`wdata`
