@@ -17,6 +17,10 @@
 #define __UTILS_H__
 
 #include "common.h"
+#include "debug.h"
+#include "macro.h"
+#include "utils.h"
+#include "include.h"
 
 // ----------- state -----------
 
