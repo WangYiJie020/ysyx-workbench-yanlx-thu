@@ -13,7 +13,7 @@ module data_mem(
 
     assign read_data = (!MemWrite && MemRead) ? pmem_read(address) : 'bz;
 
-    always@(posedge clk)begin 
+    always@(*)begin 
         if(MemWrite && !MemRead) begin
             pmem_write(address,write_data,wmask);
         end
