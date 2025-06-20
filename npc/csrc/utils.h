@@ -60,7 +60,7 @@ uint64_t get_time();
 
 #define ANSI_FMT(str, fmt) fmt str ANSI_NONE
 
-#define log_write(...) \
+//#define log_write(...) \
   do { \
     extern FILE* log_fp; \
       fprintf(log_fp, __VA_ARGS__); \
