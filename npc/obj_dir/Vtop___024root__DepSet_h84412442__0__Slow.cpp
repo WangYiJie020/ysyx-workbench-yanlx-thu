@@ -455,9 +455,10 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                                 & (vlSelf->top__DOT__inst 
                                                                    >> 0x14U))], vlSelf->top__DOT__wmask);
     }
-    Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__alu_result, vlSelf->__Vfunc_pmem_read__3__Vfuncout);
-    vlSelf->top__DOT__datamem_readdata = (((~ (IData)(vlSelf->top__DOT__mem_write)) 
-                                           & (IData)(vlSelf->top__DOT__mem_read))
-                                           ? vlSelf->__Vfunc_pmem_read__3__Vfuncout
-                                           : 0U);
+    if (((~ (IData)(vlSelf->top__DOT__mem_write)) & (IData)(vlSelf->top__DOT__mem_read))) {
+        Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__alu_result, vlSelf->__Vfunc_pmem_read__3__Vfuncout);
+        vlSelf->top__DOT__datamem_readdata = vlSelf->__Vfunc_pmem_read__3__Vfuncout;
+    } else {
+        vlSelf->top__DOT__datamem_readdata = 0U;
+    }
 }

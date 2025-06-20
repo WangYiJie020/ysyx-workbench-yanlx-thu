@@ -52,6 +52,14 @@ extern "C" void pmem_write(int waddr, int wdata, char wmask) {
   // 总是往地址为`waddr & ~0x3u`的4字节按写掩码`wmask`写入`wdata`
   // `wmask`中每比特表示`wdata`中1个字节的掩码,
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
+  uint32_t addr_tmp = (uint32_t)waddr /4;
+  switch(wmask) {
+    case 0x1:  mem[addr_tmp] = mem[addr_tmp] & 0xffffff00 + wdata & 0x000000ff;break;
+    case 0x3:  mem[addr_tmp] = mem[addr_tmp] & 0xffff0000 + wdata & 0x0000ffff;break;
+    case 0x15: mem[addr_tmp] = mem[addr_tmp] & 0x00000000 + wdata & 0xffffffff;break;
+    default: mem[addr_tmp] = mem[addr_tmp];
+  }
+  log_write("waddr = %08x,data= %08x\n",addr_tmp,mem[addr_tmp]);
 }
 
 FILE *log_fp = NULL;
