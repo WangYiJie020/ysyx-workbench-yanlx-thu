@@ -45,7 +45,7 @@ extern "C" int pmem_read(int raddr) {
   // 总是读取地址为`raddr & ~0x3u`的4字节返回
   
   uint32_t tmp = (uint32_t)raddr /4; //int类型是有符号的，要转成无符号的
-  //log_write("raddr = %x,data= %x\n",raddr,mem[tmp]);
+  log_write("raddr = %x,data= %x\n",raddr,mem[tmp]);
   return mem[tmp];
 }
 extern "C" void pmem_write(int waddr, int wdata, char wmask) {
@@ -301,8 +301,8 @@ int main(int argc, char** argv) {
   long img_size = load_img();
 
   
-  //init_difftest(diff_so_file, img_size, difftest_port);
-  //init_sdb();
+  init_difftest(diff_so_file, img_size, difftest_port);
+  init_sdb();
   cpu_state = NPC_RUNNING;
   
   contextp->commandArgs(argc, argv);
@@ -323,7 +323,7 @@ int main(int argc, char** argv) {
   }
   top->rst_n = 1;
   
-  //sdb_mainloop();
+  sdb_mainloop();
 
 
   delete top;
