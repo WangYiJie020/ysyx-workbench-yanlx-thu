@@ -300,8 +300,8 @@ int main(int argc, char** argv) {
   long img_size = load_img();
 
   init_log("npc-log.txt");
-  init_difftest(diff_so_file, img_size, difftest_port);
-  init_sdb();
+  //init_difftest(diff_so_file, img_size, difftest_port);
+  //init_sdb();
   cpu_state = NPC_RUNNING;
   
   contextp->commandArgs(argc, argv);
