@@ -6,7 +6,7 @@ module data_mem(
     input MemWrite,
     input [31:0] address,
     input [31:0] write_data,
-    input [7:0] wmask;
+    input [7:0] wmask,
     output [31:0] read_data
 
 );
