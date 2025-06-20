@@ -55,15 +55,16 @@ extern "C" void pmem_write(int waddr, int wdata, char wmask) {
 }
 
 FILE *log_fp = NULL;
-
+uint64_t g_nr_guest_inst = 0;
+extern uint64_t g_nr_guest_inst;
 
 void init_log(const char *log_file) {
   //log_fp = stdout;
   if (log_file != NULL) {
-    FILE *fp = fopen(log_file, "w");
-    if(fp == NULL)
+    log_fp = fopen(log_file, "w");
+    if(log_fp == NULL)
       printf("Can not open '%s'", log_file);
-    log_fp = fp;
+    //log_fp = fp;
   }
   Log("Log is written to %s", log_file ? log_file : "stdout");
   //printf("Log is written to %s\n", log_file ? log_file : "stdout");
