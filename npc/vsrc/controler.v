@@ -7,7 +7,7 @@ module controler(
     output reg adder_a_src,
     output reg MemRead,
     output reg MemWrite,
-    output reg wmask
+    output reg [7:0] wmask
 );
 
     wire [6:0] opcode;
