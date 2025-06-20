@@ -120,8 +120,15 @@ uint32_t gpr_29,uint32_t gpr_30,uint32_t gpr_31,uint32_t pc){
 }
 
 extern "C" void ebreak() {
-  printf("HIT GOOD TRAP\n");
-  cpu_state = NPC_END;
+  if(cpu.gpr[10]==0) {
+    printf("HIT GOOD TRAP\n");
+    cpu_state = NPC_END;
+  }
+  else {
+    printf("HIT BAD TRAP\n");
+    cpu_state = NPC_ABORT;
+  }
+  
   
 }
 
