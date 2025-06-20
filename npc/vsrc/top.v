@@ -12,7 +12,7 @@ input int gpr_30,input int gpr_31,input int pc);
 
 module top(
   input clk,
-  input rst_n,
+  input rst_n
   //output [31:0]pc,
   //input [31:0] inst
   //output [31:0] datamem_addr,
