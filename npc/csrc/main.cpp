@@ -57,7 +57,7 @@ extern "C" void pmem_write(int waddr, int wdata, char wmask) {
 
 uint32_t pmem_read_new(uint32_t pc) {
   uint32_t tmp = pc / 4 ;
-  printf("pc=%x,inst=%08x\n",pc,mem[tmp]);
+  //printf("pc=%x,inst=%08x\n",pc,mem[tmp]);
   return mem[tmp];
 
 }
