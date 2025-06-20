@@ -62,7 +62,7 @@ uint64_t get_time();
     extern FILE* log_fp; \
       fprintf(log_fp, __VA_ARGS__); \
       fflush(log_fp); \
-  } while (0) \
+  } while (0) 
 
 #define _Log(...) \
   do { \
