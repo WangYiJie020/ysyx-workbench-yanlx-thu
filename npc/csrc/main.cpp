@@ -43,7 +43,7 @@ void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 
 extern "C" int pmem_read(int raddr) {
   // 总是读取地址为`raddr & ~0x3u`的4字节返回
-  printf("raddr = %x\n",raddr);
+  printf("raddr = %x,data= %x\n",raddr,mem[raddr/4]);
   return mem[raddr / 4];
 }
 extern "C" void pmem_write(int waddr, int wdata, char wmask) {
