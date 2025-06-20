@@ -275,7 +275,7 @@ void cpu_exec(int num) {
       break;
     }
     if(cpu_state == NPC_ABORT) {
-      printf("abort! at pc=%x\n",top->pc);
+      printf("abort! at pc=%x\n",cpu.pc);
       break;
     }
     trace_and_difftest();

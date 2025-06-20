@@ -36,6 +36,7 @@ extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h0874e4f8_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h1b521792_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h757488f1_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h8bd5a248_0;
+extern const VlUnpacked<CData/*7:0*/, 1024> Vtop__ConstPool__TABLE_h02830898_0;
 void Vtop___024unit____Vdpiimwrap_reg_return_value_TOP____024unit(IData/*31:0*/ gpr_0, IData/*31:0*/ gpr_1, IData/*31:0*/ gpr_2, IData/*31:0*/ gpr_3, IData/*31:0*/ gpr_4, IData/*31:0*/ gpr_5, IData/*31:0*/ gpr_6, IData/*31:0*/ gpr_7, IData/*31:0*/ gpr_8, IData/*31:0*/ gpr_9, IData/*31:0*/ gpr_10, IData/*31:0*/ gpr_11, IData/*31:0*/ gpr_12, IData/*31:0*/ gpr_13, IData/*31:0*/ gpr_14, IData/*31:0*/ gpr_15, IData/*31:0*/ gpr_16, IData/*31:0*/ gpr_17, IData/*31:0*/ gpr_18, IData/*31:0*/ gpr_19, IData/*31:0*/ gpr_20, IData/*31:0*/ gpr_21, IData/*31:0*/ gpr_22, IData/*31:0*/ gpr_23, IData/*31:0*/ gpr_24, IData/*31:0*/ gpr_25, IData/*31:0*/ gpr_26, IData/*31:0*/ gpr_27, IData/*31:0*/ gpr_28, IData/*31:0*/ gpr_29, IData/*31:0*/ gpr_30, IData/*31:0*/ gpr_31, IData/*31:0*/ pc);
 void Vtop___024unit____Vdpiimwrap_pmem_write_TOP____024unit(IData/*31:0*/ waddr, IData/*31:0*/ wdata, CData/*7:0*/ wmask);
 
@@ -346,8 +347,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         [vlSelf->__Vtableidx1];
     vlSelf->top__DOT__mem_write = Vtop__ConstPool__TABLE_h8bd5a248_0
         [vlSelf->__Vtableidx1];
-    vlSelf->top__DOT____Vcellout__Controler__wmask 
-        = Vtop__ConstPool__TABLE_h8bd5a248_0[vlSelf->__Vtableidx1];
+    vlSelf->top__DOT__wmask = Vtop__ConstPool__TABLE_h02830898_0
+        [vlSelf->__Vtableidx1];
     Vtop___024unit____Vdpiimwrap_reg_return_value_TOP____024unit(
                                                                  vlSelf->top__DOT__reg_file
                                                                  [0U], 
@@ -479,7 +480,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                                                [
                                                                (0x1fU 
                                                                 & (vlSelf->top__DOT__inst 
-                                                                   >> 0x14U))], vlSelf->top__DOT____Vcellout__Controler__wmask);
+                                                                   >> 0x14U))], vlSelf->top__DOT__wmask);
     }
     Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__alu_result, vlSelf->__Vfunc_pmem_read__3__Vfuncout);
     vlSelf->top__DOT__Data_Mem__DOT__read_data__out__strong__out0 

@@ -27,7 +27,7 @@ class Vtop___024root final : public VerilatedModule {
     CData/*0:0*/ top__DOT__pc_srcs;
     CData/*0:0*/ top__DOT__mem_read;
     CData/*0:0*/ top__DOT__mem_write;
-    CData/*0:0*/ top__DOT____Vcellout__Controler__wmask;
+    CData/*7:0*/ top__DOT__wmask;
     CData/*0:0*/ __Vtrigrprev__TOP__clk;
     CData/*0:0*/ __VactContinue;
     SData/*9:0*/ __Vtableidx1;
