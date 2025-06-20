@@ -13,13 +13,15 @@ input int gpr_30,input int gpr_31,input int pc);
 module top(
   input clk,
   input rst_n,
-  output [31:0]pc,
-  input [31:0] inst
+  //output [31:0]pc,
+  //input [31:0] inst
   //output [31:0] datamem_addr,
   //input [31:0] datamem_data
 
 );
 
+  wire [31:0] pc;
+  wire [31:0] inst;
   wire [31:0] imm;
   wire [31:0] rs1,rs2,a_in,b_in,a_out;
   wire [1:0] b_in_src;
@@ -33,6 +35,10 @@ module top(
   wire [31:0] pc_new,npc;
   wire pc_srcs;
   wire [31:0] reg_file [31:0];
+  wire [31:0]datamem_readdata;
+  wire mem_read,mem_write;
+  wire [7:0] wmask;
+
   mux21 PC_Srcs(
     .d0(pc+4),
     .d1(pc_new),
@@ -47,14 +53,21 @@ module top(
     .dout(pc)
   );
 
+  inst_mem Inst_Mem(
+    .pc(pc),
+    .inst(inst)
+  );
+
   controler Controler(
     .inst(inst),
     .a_in_src(a_in_src),
     .b_in_src(b_in_src),
     .reg_write(reg_write),
     .adder_a_src(adder_a_src),
-    .pc_srcs(pc_srcs)
-
+    .pc_srcs(pc_srcs),
+    .MemRead(mem_read),
+    .MemWrite(mem_write),
+    .wmask(wmask)
   );
 
   regfile Rgefile (
@@ -118,10 +131,19 @@ module top(
 
   //assign datamem_addr = alu_result;
 
-  wire [31:0]datamem_data;
+  data_mem Data_Mem(
+    .MemRead(mem_read),
+    .MemWrite(mem_write),
+    .address(alu_result),
+    .write_data(rs2),
+    .wmask(wmask),
+    .read_data(datamem_readdata)
+  );
+
+  
   mux21 WB(
     .d0(alu_result),
-    .d1(datamem_data),
+    .d1(datamem_readdata),
     .sel(1'b0),
     .out(wdata)
   );
