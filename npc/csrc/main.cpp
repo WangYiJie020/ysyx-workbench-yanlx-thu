@@ -331,7 +331,7 @@ int main(int argc, char** argv) {
   }
   top->rst_n = 1;
 
-  sdb_set_batch_mode();
+  sdb_set_batch_mode();//批处理模式
   
   sdb_mainloop();
 
@@ -339,5 +339,10 @@ int main(int argc, char** argv) {
   delete top;
   tfp->close();
   delete contextp;
-  return 0;
+  if(cpu_state == NPC_END || cpu_state == NPC_QUIT) {
+    return 0;
+  }
+  else {
+    return 1;
+  }
 }
