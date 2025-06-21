@@ -330,6 +330,8 @@ int main(int argc, char** argv) {
     n--;
   }
   top->rst_n = 1;
+
+  sdb_set_batch_mode();
   
   sdb_mainloop();
 
