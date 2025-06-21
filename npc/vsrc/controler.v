@@ -58,7 +58,7 @@ module controler(
             end
             7'b0100011:begin
                 case(funct3)
-                    3'b000:begin //sb
+                    3'b010:begin //sw
                         a_in_src = 1'b1; //choose rs1
                         b_in_src = 2'b10; //choose imm
                         reg_write = 1'b0; //no need to write regfiles 

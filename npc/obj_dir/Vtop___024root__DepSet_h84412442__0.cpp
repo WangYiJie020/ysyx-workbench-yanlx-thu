@@ -384,7 +384,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         [vlSelf->__Vtableidx1];
     vlSelf->top__DOT__wmask = Vtop__ConstPool__TABLE_h9954bb7f_0
         [vlSelf->__Vtableidx1];
-    vlSelf->top__DOT__wb_src = Vtop__ConstPool__TABLE_hd0aca139_0
+    vlSelf->top__DOT__wb_src = Vtop__ConstPool__TABLE_h8bd5a248_0
         [vlSelf->__Vtableidx1];
     Vtop___024unit____Vdpiimwrap_reg_return_value_TOP____024unit(
                                                                  vlSelf->top__DOT__reg_file
