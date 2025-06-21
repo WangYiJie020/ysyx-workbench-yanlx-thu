@@ -27,7 +27,7 @@ extern WP *head;
 
 extern regfile cpu;
 extern int cpu_state;
-extern int mem[0xffffffff];
+extern uint32_t mem[0xffffffff];
 
 word_t expr(char *e, bool *success);
 WP* new_wp();
