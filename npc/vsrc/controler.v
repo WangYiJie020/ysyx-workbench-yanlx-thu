@@ -67,7 +67,7 @@ module controler(
                         MemRead = 1'b0; //not read mem
                         MemWrite = 1'b1; //write mem
                         wmask = 8'h0f; //4 byte can write
-                        wb_src=1'b1; //wb data is read mem data
+                        wb_src=1'b0; //wb data is default
                     end
                     default: begin 
                         a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 1'b0; adder_a_src = 1'b0;
