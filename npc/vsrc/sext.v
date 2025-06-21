@@ -32,6 +32,12 @@ module sext #(DATA_WIDTH = 32)(
                     default: data = 0;
                 endcase
             end
+            7'b0100011: begin
+                case(funct3)
+                    3'b000: data = {{20{inst[31]}},inst[31:25],inst[11:7]}; //sb
+                    default: data = 0;
+                endcase
+            end
             default: data = 0;
         endcase
     end

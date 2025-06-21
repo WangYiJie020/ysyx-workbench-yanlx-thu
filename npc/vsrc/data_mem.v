@@ -18,8 +18,6 @@ module data_mem(
         else read_data = 0;
 
     end
-    
-    //assign read_data = (!MemWrite && MemRead) ? pmem_read(address) : 'b0;
 
     always@(*)begin 
         if(MemWrite && !MemRead) begin
