@@ -6,6 +6,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+static int is_batch_mode = false;
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -212,7 +213,15 @@ void init_sdb() {
   init_wp_pool();
 }
 
+void sdb_set_batch_mode() {
+  is_batch_mode = true;
+}
+
 void sdb_mainloop() {
+  if (is_batch_mode) {
+    cmd_c(NULL);
+    return;
+  }
 
   for (char *str; (str = rl_gets()) != NULL; ) {
     char *str_end = str + strlen(str);
