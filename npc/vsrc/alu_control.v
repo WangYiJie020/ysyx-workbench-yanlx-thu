@@ -10,44 +10,57 @@ module alu_control(
     assign funct7 = inst[31:25];
 
     always@(*)begin
-        case(opcode)
-            7'b0010011: begin
-                case(funct3)
-                    3'b000: alu_op = 4'b0011; //addi +
-                    default: alu_op = 0;
-                endcase
-            end
+        case(opcode)          
             7'b0110111: begin //lui
                 alu_op = 4'b0000; //pass b
             end
             7'b0010111: begin //auipc
-                alu_op = 4'b0011; //+
+                alu_op = 4'b0100; //+
             end
             7'b1101111: begin //jal
-                alu_op = 4'b0011; //+
+                alu_op = 4'b0100; //+
             end
             7'b1100111: begin
                 case(funct3)
-                    3'b000: alu_op = 4'b0011; //+ //jalr
+                    3'b000: alu_op = 4'b0100; //+ //jalr
                     default: alu_op = 0;
-                endcase
-            end
-            7'b0100011: begin
-                case(funct3)
-                    3'b000: alu_op = 4'b0011; //+ //sb
-                    3'b001: alu_op = 4'b0011; //+ //sh
-                    3'b010: alu_op = 4'b0011; //+ //sw
-                    default: alu_op = 4'b0011;
                 endcase
             end
             7'b0000011: begin //+ //lb lh lw lbu lhu
                 case(funct3)
-                    3'b000: alu_op = 4'b0011; //+ //lb
-                    3'b001: alu_op = 4'b0011; //+ //lh
-                    3'b010: alu_op = 4'b0011; //+ //lw
-                    3'b100: alu_op = 4'b0011; //+ //lbu
-                    3'b101: alu_op = 4'b0011; //+ //lhu
-                    default: alu_op = 4'b0011;
+                    3'b000: alu_op = 4'b0100; //+ //lb
+                    3'b001: alu_op = 4'b0100; //+ //lh
+                    3'b010: alu_op = 4'b0100; //+ //lw
+                    3'b100: alu_op = 4'b0100; //+ //lbu
+                    3'b101: alu_op = 4'b0100; //+ //lhu
+                    default: alu_op = 4'b0100;
+                endcase
+            end
+            7'b0100011: begin
+                case(funct3)
+                    3'b000: alu_op = 4'b0100; //+ //sb
+                    3'b001: alu_op = 4'b0100; //+ //sh
+                    3'b010: alu_op = 4'b0100; //+ //sw
+                    default: alu_op = 4'b0100;
+                endcase
+            end
+            
+            7'b0010011: begin
+                case(funct3)
+                    3'b000: alu_op = 4'b0100; //addi +
+                    default: alu_op = 0;
+                endcase
+            end
+            7'b0110011: begin
+                case(funct3)
+                    3'b000: begin
+                        case(funct7)
+                            7'b0000000:alu_op = 4'b0100;//+ //add
+                            7'b0100000:alu_op = 4'b0101;//- //sub
+                            default:alu_op = 0;
+                        endcase
+                    end
+                    default:alu_op = 0;
                 endcase
             end
             default: alu_op = 0;
