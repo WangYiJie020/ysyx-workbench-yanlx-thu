@@ -54,12 +54,12 @@ extern "C" void pmem_write(int waddr, int wdata, char wmask) {
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   uint32_t addr_tmp = (uint32_t)waddr /4;
   switch(wmask) {
-    case 0x1:  mem[addr_tmp] = mem[addr_tmp] & 0xffffff00 + wdata & 0x000000ff;break;
-    case 0x3:  mem[addr_tmp] = mem[addr_tmp] & 0xffff0000 + wdata & 0x0000ffff;break;
-    case 0xf: mem[addr_tmp] = wdata;break;
+    case 0x1:  mem[addr_tmp] = (mem[addr_tmp] & 0xffffff00) + (wdata & 0x000000ff);break;
+    case 0x3:  mem[addr_tmp] = (mem[addr_tmp] & 0xffff0000) + (wdata & 0x0000ffff);break;
+    case 0xf:  mem[addr_tmp] = (mem[addr_tmp] & 0x00000000) + (wdata & 0xffffffff);;break;
     default: mem[addr_tmp] = mem[addr_tmp];
   }
-  log_write("                            wmask=%x,waddr = %08x,data= %08x\n",wmask,waddr,mem[addr_tmp]);
+  log_write("                               wmask=%x,waddr = %08x,data= %08x\n",wmask,waddr,mem[addr_tmp]);
 }
 
 FILE *log_fp = NULL;
