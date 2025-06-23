@@ -57,7 +57,7 @@ module sext #(DATA_WIDTH = 32)(
                         case(funct7)
                             7'b0000000: data = {27'd0,inst[24:20]}; //I //srli
                             7'b0100000: data = {27'd0,inst[24:20]}; //I //srai
-                            default:
+                            default: data = {27'd0,inst[24:20]};
                         endcase
                     end
                     default: data = {{20{inst[31]}},inst[31:20]};
