@@ -40,7 +40,7 @@ module sext #(DATA_WIDTH = 32)(
                     default: data = {{20{inst[31]}},inst[31:25],inst[11:7]};
                 endcase
             end
-            7'b0100011: begin //I
+            7'b0000011: begin //I
                 case(funct3)
                     3'b000: data = {{20{inst[31]}},inst[31:20]}; //I //lb
                     3'b001: data = {{20{inst[31]}},inst[31:20]}; //I //lh

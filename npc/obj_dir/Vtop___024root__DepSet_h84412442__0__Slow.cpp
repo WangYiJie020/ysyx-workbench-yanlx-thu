@@ -260,7 +260,17 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                              | (0x1fU 
                                                                 & (vlSelf->top__DOT__inst 
                                                                    >> 7U))))
-                                                          : 0U)))
+                                                          : 
+                                                         (((- (IData)(
+                                                                      (vlSelf->top__DOT__inst 
+                                                                       >> 0x1fU))) 
+                                                           << 0xcU) 
+                                                          | ((0xfe0U 
+                                                              & (vlSelf->top__DOT__inst 
+                                                                 >> 0x14U)) 
+                                                             | (0x1fU 
+                                                                & (vlSelf->top__DOT__inst 
+                                                                   >> 7U)))))))
                                                        : 0U)
                                                       : 0U))))
                                             : ((0x10U 
