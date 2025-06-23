@@ -424,7 +424,89 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                                         : 0U)
                                                        : 0U)
                                                       : 0U)))
-                                                : 0U)));
+                                                : (
+                                                   (8U 
+                                                    & vlSelf->top__DOT__inst)
+                                                    ? 0U
+                                                    : 
+                                                   ((4U 
+                                                     & vlSelf->top__DOT__inst)
+                                                     ? 0U
+                                                     : 
+                                                    ((2U 
+                                                      & vlSelf->top__DOT__inst)
+                                                      ? 
+                                                     ((1U 
+                                                       & vlSelf->top__DOT__inst)
+                                                       ? 
+                                                      ((0x4000U 
+                                                        & vlSelf->top__DOT__inst)
+                                                        ? 
+                                                       ((0x2000U 
+                                                         & vlSelf->top__DOT__inst)
+                                                         ? 
+                                                        (((- (IData)(
+                                                                     (vlSelf->top__DOT__inst 
+                                                                      >> 0x1fU))) 
+                                                          << 0xcU) 
+                                                         | (vlSelf->top__DOT__inst 
+                                                            >> 0x14U))
+                                                         : 
+                                                        ((0x1000U 
+                                                          & vlSelf->top__DOT__inst)
+                                                          ? 
+                                                         (((- (IData)(
+                                                                      (vlSelf->top__DOT__inst 
+                                                                       >> 0x1fU))) 
+                                                           << 0xcU) 
+                                                          | (vlSelf->top__DOT__inst 
+                                                             >> 0x14U))
+                                                          : 
+                                                         (((- (IData)(
+                                                                      (vlSelf->top__DOT__inst 
+                                                                       >> 0x1fU))) 
+                                                           << 0xcU) 
+                                                          | (vlSelf->top__DOT__inst 
+                                                             >> 0x14U))))
+                                                        : 
+                                                       ((0x2000U 
+                                                         & vlSelf->top__DOT__inst)
+                                                         ? 
+                                                        ((0x1000U 
+                                                          & vlSelf->top__DOT__inst)
+                                                          ? 
+                                                         (((- (IData)(
+                                                                      (vlSelf->top__DOT__inst 
+                                                                       >> 0x1fU))) 
+                                                           << 0xcU) 
+                                                          | (vlSelf->top__DOT__inst 
+                                                             >> 0x14U))
+                                                          : 
+                                                         (((- (IData)(
+                                                                      (vlSelf->top__DOT__inst 
+                                                                       >> 0x1fU))) 
+                                                           << 0xcU) 
+                                                          | (vlSelf->top__DOT__inst 
+                                                             >> 0x14U)))
+                                                         : 
+                                                        ((0x1000U 
+                                                          & vlSelf->top__DOT__inst)
+                                                          ? 
+                                                         (((- (IData)(
+                                                                      (vlSelf->top__DOT__inst 
+                                                                       >> 0x1fU))) 
+                                                           << 0xcU) 
+                                                          | (vlSelf->top__DOT__inst 
+                                                             >> 0x14U))
+                                                          : 
+                                                         (((- (IData)(
+                                                                      (vlSelf->top__DOT__inst 
+                                                                       >> 0x1fU))) 
+                                                           << 0xcU) 
+                                                          | (vlSelf->top__DOT__inst 
+                                                             >> 0x14U)))))
+                                                       : 0U)
+                                                      : 0U))))));
     vlSelf->top__DOT__rs1 = vlSelf->top__DOT__Rgefile__DOT__rf
         [(0x1fU & (vlSelf->top__DOT__inst >> 0xfU))];
     vlSelf->__Vtableidx1 = ((0x380U & (vlSelf->top__DOT__inst 
