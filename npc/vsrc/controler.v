@@ -8,7 +8,8 @@ module controler(
     output reg MemRead,
     output reg MemWrite,
     output reg [7:0] wmask,
-    output reg wb_src
+    output reg wb_src,
+    output reg [2:0] rmask
 );
 
     wire [6:0] opcode;
@@ -25,34 +26,36 @@ module controler(
                     3'b000: begin 
                         a_in_src = 1'b0; b_in_src = 2'b01; reg_write = 1; pc_srcs = 1'b0; 
                         adder_a_src = 1'b0; MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0;
+                        rmask = 0;
                     end //addi +
                     default: begin 
                         a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 1'b0; adder_a_src = 1'b0;
-                        MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0;
+                        MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
                     end
                 endcase
             end
             7'b0110111: begin //lui
                 a_in_src = 1'b0; b_in_src = 2'b01; reg_write = 1; pc_srcs = 1'b0;adder_a_src = 1'b0;
-                MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0;
-            end
+                MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
+            end 
             7'b0010111: begin //auipc
                 a_in_src = 1'b1; b_in_src = 2'b01; reg_write = 1; pc_srcs = 1'b0;adder_a_src = 1'b0;
-                MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0;
+                MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
             end
             7'b1101111: begin //jal
                 a_in_src = 1'b1; b_in_src = 2'b10; reg_write = 1; pc_srcs = 1'b1;adder_a_src = 1'b0;
-                MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0;
+                MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
             end
             7'b1100111: begin
                 case(funct3)
                     3'b000: begin //jalr
                         a_in_src = 1'b1; b_in_src = 2'b10; reg_write = 1; pc_srcs = 1'b1; 
                         adder_a_src = 1'b1; MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0;
+                        rmask = 0;
                     end //jalr
                     default: begin 
                         a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 1'b0; adder_a_src = 1'b0;
-                        MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0;
+                        MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
                     end
                 endcase
             end
@@ -68,16 +71,17 @@ module controler(
                         MemWrite = 1'b1; //write mem
                         wmask = 8'h0f; //4 byte can write
                         wb_src=1'b0; //wb data is default
+                        rmask = 0; 
                     end
                     default: begin 
                         a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 1'b0; adder_a_src = 1'b0;
-                        MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0;
+                        MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
                     end
                 endcase
             end
             default: begin 
                 a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 1'b0; adder_a_src = 1'b0;
-                MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0;
+                MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
             end
         endcase
     end

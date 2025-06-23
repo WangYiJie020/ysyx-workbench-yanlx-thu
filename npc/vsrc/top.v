@@ -39,6 +39,8 @@ module top(
   wire mem_read,mem_write;
   wire [7:0] wmask;
   wire wb_src;
+  wire [31:0] mem_data;
+  wire [2:0] rmask;
 
   mux21 PC_Srcs(
     .d0(pc+4),
@@ -69,7 +71,8 @@ module top(
     .MemRead(mem_read),
     .MemWrite(mem_write),
     .wmask(wmask),
-    .wb_src(wb_src)
+    .wb_src(wb_src),
+    .rmask(rmask)
   );
 
   regfile Rgefile (
@@ -142,10 +145,15 @@ module top(
     .read_data(datamem_readdata)
   );
 
-  
+  sext_mem SEXT_Mem(
+    .read_data(datamem_readdata),
+    .rmask(rmask),
+    .mem_data(mem_data)
+  );
+
   mux21 WB(
     .d0(alu_result),
-    .d1(datamem_readdata),
+    .d1(mem_data),
     .sel(wb_src),
     .out(wdata)
   );
