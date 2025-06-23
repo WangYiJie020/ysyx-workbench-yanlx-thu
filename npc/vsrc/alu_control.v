@@ -37,7 +37,17 @@ module alu_control(
                     3'b000: alu_op = 4'b0011; //+ //sb
                     3'b001: alu_op = 4'b0011; //+ //sh
                     3'b010: alu_op = 4'b0011; //+ //sw
-                    default: alu_op = 0;
+                    default: alu_op = 4'b0011;
+                endcase
+            end
+            7'b0000011: begin
+                case(funct3)
+                    3'b000: alu_op = 4'b0011; //+ //lb
+                    3'b001: alu_op = 4'b0011; //+ //lh
+                    3'b010: alu_op = 4'b0011; //+ //lw
+                    3'b100: alu_op = 4'b0011; //+ //lbu
+                    3'b101: alu_op = 4'b0011; //+ //lhu
+                    default: alu_op = 4'b0011;
                 endcase
             end
             default: alu_op = 0;

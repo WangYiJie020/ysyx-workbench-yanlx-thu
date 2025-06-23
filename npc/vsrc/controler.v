@@ -71,7 +71,27 @@ module controler(
                         MemWrite = 1'b1; //write mem
                         wmask = 8'h0f; //4 byte can write
                         wb_src=1'b0; //wb data is default
-                        rmask = 0; 
+                        rmask = 0; //pass
+                    end
+                    default: begin 
+                        a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 1'b0; adder_a_src = 1'b0;
+                        MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
+                    end
+                endcase
+            end
+            7'b0000011:begin
+                case(funct3)
+                    3'b010:begin //lw
+                        a_in_src = 1'b0; //choose rs1
+                        b_in_src = 2'b10; //choose imm
+                        reg_write = 1'b1; //write regfiles 
+                        pc_srcs = 1'b0; //pc=pc+4
+                        adder_a_src = 1'b0;//do not care 
+                        MemRead = 1'b1; //read mem
+                        MemWrite = 1'b0; //not write mem
+                        wmask = 8'h0f; //do not care 
+                        wb_src=1'b1; //wb data is mem_data
+                        rmask = 3'b000; //lw 32 pass
                     end
                     default: begin 
                         a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 1'b0; adder_a_src = 1'b0;

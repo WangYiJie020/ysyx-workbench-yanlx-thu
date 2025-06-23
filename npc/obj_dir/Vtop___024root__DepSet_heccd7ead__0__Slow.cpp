@@ -148,6 +148,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__mem_write = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__wmask = VL_RAND_RESET_I(8);
     vlSelf->top__DOT__wb_src = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__rmask = VL_RAND_RESET_I(3);
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
         vlSelf->top__DOT____Vcellout__Rgefile__reg_file[__Vi0] = VL_RAND_RESET_I(32);
     }

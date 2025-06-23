@@ -13,28 +13,30 @@ module sext #(DATA_WIDTH = 32)(
         case (opcode)
             7'b0010011: begin
                 case(funct3)
-                    3'b000: data = {{20{inst[31]}},inst[31:20]}; //addi
+                    3'b000: data = {{20{inst[31]}},inst[31:20]}; //I //addi
                     default: data = 0;
                 endcase
             end
-            7'b0110111: begin //lui
+            7'b0110111: begin //U //lui
                 data = {inst[31:12],12'd0};
             end
-            7'b0010111: begin //auipc
+            7'b0010111: begin //U //auipc
                 data = {inst[31:12],12'd0};
             end
-            7'b1101111: begin //jal
+            7'b1101111: begin //UJ //jal
                 data = {{12{inst[31]}},inst[19:12],inst[20],inst[30:21],1'b0};
             end
             7'b1100111: begin
                 case(funct3)
-                    3'b000: data = {{20{inst[31]}},inst[31:20]}; //jalr
+                    3'b000: data = {{20{inst[31]}},inst[31:20]}; //I //jalr
                     default: data = 0;
                 endcase
             end
             7'b0100011: begin
                 case(funct3)
-                    3'b000: data = {{20{inst[31]}},inst[31:25],inst[11:7]}; //sb
+                    3'b000: data = {{20{inst[31]}},inst[31:25],inst[11:7]}; //S //sb
+                    3'b001: data = {{20{inst[31]}},inst[31:25],inst[11:7]}; //S //sh
+                    3'b010: data = {{20{inst[31]}},inst[31:25],inst[11:7]}; //S //sw
                     default: data = 0;
                 endcase
             end
