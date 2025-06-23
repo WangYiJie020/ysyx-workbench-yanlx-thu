@@ -55,8 +55,8 @@ module sext #(DATA_WIDTH = 32)(
                     3'b001: data = {27'd0,inst[24:20]}; //I //slli
                     3'b101: begin
                         case(funct7)
-                            7'b0000000:data = {27'd0,inst[24:20]}; //I //srli
-                            7'b0100000:data = {27'd0,inst[24:20]}; //I //srai
+                            7'b0000000: data = {27'd0,inst[24:20]}; //I //srli
+                            7'b0100000: data = {27'd0,inst[24:20]}; //I //srai
                             default:
                         endcase
                     end
