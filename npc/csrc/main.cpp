@@ -59,7 +59,7 @@ extern "C" void pmem_write(int waddr, int wdata, char wmask) {
     case 0xf: mem[addr_tmp] = mem[addr_tmp] & 0x00000000 + wdata & 0xffffffff;break;
     default: mem[addr_tmp] = mem[addr_tmp];
   }
-  log_write("waddr = %08x,data= %08x\n",waddr,mem[addr_tmp]);
+  log_write("wmask=%x,waddr = %08x,data= %08x\n",wmask,waddr,mem[addr_tmp]);
 }
 
 FILE *log_fp = NULL;
