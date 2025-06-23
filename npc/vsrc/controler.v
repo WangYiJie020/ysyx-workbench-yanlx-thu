@@ -63,7 +63,7 @@ module controler(
                 case(funct3)
                     3'b010:begin //sw
                         a_in_src = 1'b0; //choose rs1
-                        b_in_src = 2'b10; //choose imm
+                        b_in_src = 2'b01; //choose imm
                         reg_write = 1'b0; //no need to write regfiles 
                         pc_srcs = 1'b0; //pc=pc+4
                         adder_a_src = 1'b0;//do not care 
@@ -83,7 +83,7 @@ module controler(
                 case(funct3)
                     3'b010:begin //lw
                         a_in_src = 1'b0; //choose rs1
-                        b_in_src = 2'b10; //choose imm
+                        b_in_src = 2'b01; //choose imm
                         reg_write = 1'b1; //write regfiles 
                         pc_srcs = 1'b0; //pc=pc+4
                         adder_a_src = 1'b0;//do not care 
