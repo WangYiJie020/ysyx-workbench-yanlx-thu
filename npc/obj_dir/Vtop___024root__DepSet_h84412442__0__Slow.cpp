@@ -29,7 +29,7 @@ void Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(IData/*31:0*/ raddr, 
 void Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();
 extern const VlUnpacked<CData/*3:0*/, 1024> Vtop__ConstPool__TABLE_h8d1136ab_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h7b4d463a_0;
-extern const VlUnpacked<CData/*1:0*/, 1024> Vtop__ConstPool__TABLE_hb0585f03_0;
+extern const VlUnpacked<CData/*1:0*/, 1024> Vtop__ConstPool__TABLE_h4228ab2e_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_ha1efb8d7_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h1b521792_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h757488f1_0;
@@ -405,7 +405,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                   & vlSelf->top__DOT__inst));
     vlSelf->top__DOT__a_in_src = Vtop__ConstPool__TABLE_h7b4d463a_0
         [vlSelf->__Vtableidx1];
-    vlSelf->top__DOT__b_in_src = Vtop__ConstPool__TABLE_hb0585f03_0
+    vlSelf->top__DOT__b_in_src = Vtop__ConstPool__TABLE_h4228ab2e_0
         [vlSelf->__Vtableidx1];
     vlSelf->top__DOT__reg_write = Vtop__ConstPool__TABLE_ha1efb8d7_0
         [vlSelf->__Vtableidx1];
