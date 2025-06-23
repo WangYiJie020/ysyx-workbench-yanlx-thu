@@ -32,8 +32,6 @@ class Vtop___024root final : public VerilatedModule {
     CData/*2:0*/ top__DOT__rmask;
     CData/*0:0*/ __Vtrigrprev__TOP__clk;
     CData/*0:0*/ __VactContinue;
-    SData/*9:0*/ __Vtableidx1;
-    SData/*9:0*/ __Vtableidx2;
     IData/*31:0*/ top__DOT__pc;
     IData/*31:0*/ top__DOT__inst;
     IData/*31:0*/ top__DOT__imm;
