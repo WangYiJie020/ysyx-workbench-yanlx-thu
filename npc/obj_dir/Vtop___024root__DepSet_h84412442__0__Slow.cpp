@@ -203,7 +203,10 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                         vlSelf->top__DOT__pc_srcs = 
                             ((1U == (7U & (vlSelf->top__DOT__inst 
                                            >> 0xcU)))
-                              ? 3U : 0U);
+                              ? 2U : ((1U == (7U & 
+                                              (vlSelf->top__DOT__inst 
+                                               >> 0xcU)))
+                                       ? 3U : 0U));
                         vlSelf->top__DOT__alu_op = 5U;
                         vlSelf->top__DOT__imm = ((0x4000U 
                                                   & vlSelf->top__DOT__inst)

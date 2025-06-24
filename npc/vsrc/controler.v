@@ -48,7 +48,7 @@ module controler(
             end
             7'b1100011: begin
                 case(funct3)
-                    3'b001:begin //beq
+                    3'b000:begin //beq
                         a_in_src = 1'b0; //choose rs1
                         b_in_src = 2'b00; //choose rs2
                         reg_write = 1'b0; //not write regfiles 
