@@ -3,7 +3,7 @@ module controler(
     output reg a_in_src,
     output reg [1:0] b_in_src,
     output reg reg_write,
-    output reg pc_srcs,
+    output reg [2:0] pc_srcs,
     output reg adder_a_src,
     output reg MemRead,
     output reg MemWrite,

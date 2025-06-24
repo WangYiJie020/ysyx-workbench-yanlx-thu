@@ -196,7 +196,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         [0U];
     if (VL_UNLIKELY((0x100073U == vlSelf->top__DOT__inst))) {
         Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();
-        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 165, "");
+        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 167, "");
     }
     if ((0x40U & vlSelf->top__DOT__inst)) {
         vlSelf->top__DOT__reg_write = (1U & (IData)(
@@ -282,7 +282,18 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                     vlSelf->top__DOT__imm = 0U;
                 }
             } else {
-                vlSelf->top__DOT__alu_op = 0U;
+                if ((2U & vlSelf->top__DOT__inst)) {
+                    if ((1U & vlSelf->top__DOT__inst)) {
+                        if ((1U == (7U & (vlSelf->top__DOT__inst 
+                                          >> 0xcU)))) {
+                            vlSelf->top__DOT__alu_op = 5U;
+                        }
+                    } else {
+                        vlSelf->top__DOT__alu_op = 0U;
+                    }
+                } else {
+                    vlSelf->top__DOT__alu_op = 0U;
+                }
                 vlSelf->top__DOT__b_in_src = 0U;
                 vlSelf->top__DOT__imm = 0U;
             }
@@ -803,28 +814,12 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                                  [(0x1fU 
                                                    & (vlSelf->top__DOT__inst 
                                                       >> 0x14U))]));
-    vlSelf->top__DOT__npc = ((1U & (IData)(((0x60U 
-                                             == (0x70U 
-                                                 & vlSelf->top__DOT__inst)) 
-                                            & ((8U 
-                                                & vlSelf->top__DOT__inst)
-                                                ? (IData)(
-                                                          (7U 
-                                                           == 
-                                                           (7U 
-                                                            & vlSelf->top__DOT__inst)))
-                                                : (IData)(
-                                                          (7U 
-                                                           == 
-                                                           (0x7007U 
-                                                            & vlSelf->top__DOT__inst)))))))
-                              ? (((IData)((0x67U == 
-                                           (0x707fU 
-                                            & vlSelf->top__DOT__inst)))
-                                   ? vlSelf->top__DOT__rs1
-                                   : vlSelf->top__DOT__pc) 
-                                 + vlSelf->top__DOT__imm)
-                              : ((IData)(4U) + vlSelf->top__DOT__pc));
+    vlSelf->top__DOT__pc_new = (((IData)((0x67U == 
+                                          (0x707fU 
+                                           & vlSelf->top__DOT__inst)))
+                                  ? vlSelf->top__DOT__rs1
+                                  : vlSelf->top__DOT__pc) 
+                                + vlSelf->top__DOT__imm);
     vlSelf->top__DOT__a_in = ((1U & ((0x40U & vlSelf->top__DOT__inst)
                                       ? (IData)(((0x20U 
                                                   == 
@@ -923,6 +918,23 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                                                 & (vlSelf->top__DOT__inst 
                                                                    >> 0x14U))], vlSelf->top__DOT__wmask);
     }
+    vlSelf->top__DOT__npc = ((1U & (IData)(((0x60U 
+                                             == (0x70U 
+                                                 & vlSelf->top__DOT__inst)) 
+                                            & ((8U 
+                                                & vlSelf->top__DOT__inst)
+                                                ? (IData)(
+                                                          (7U 
+                                                           == 
+                                                           (7U 
+                                                            & vlSelf->top__DOT__inst)))
+                                                : (IData)(
+                                                          (7U 
+                                                           == 
+                                                           (0x7007U 
+                                                            & vlSelf->top__DOT__inst)))))))
+                              ? vlSelf->top__DOT__pc_new
+                              : ((IData)(4U) + vlSelf->top__DOT__pc));
     if (((~ (IData)((0x2023U == (0x707fU & vlSelf->top__DOT__inst)))) 
          & (IData)((0x2003U == (0x707fU & vlSelf->top__DOT__inst))))) {
         Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__alu_result, vlSelf->__Vfunc_pmem_read__3__Vfuncout);
