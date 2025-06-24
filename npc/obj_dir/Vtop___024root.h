@@ -22,6 +22,7 @@ class Vtop___024root final : public VerilatedModule {
     CData/*1:0*/ top__DOT__b_in_src;
     CData/*0:0*/ top__DOT__reg_write;
     CData/*3:0*/ top__DOT__alu_op;
+    CData/*2:0*/ top__DOT__pc_srcs;
     CData/*7:0*/ top__DOT__wmask;
     CData/*0:0*/ __Vtrigrprev__TOP__clk;
     CData/*0:0*/ __VactContinue;
