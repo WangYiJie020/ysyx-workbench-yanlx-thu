@@ -334,7 +334,7 @@ int main(int argc, char** argv) {
   }
   top->rst_n = 1;
 
-  sdb_set_batch_mode();//批处理模式
+  //sdb_set_batch_mode();//批处理模式
   
   sdb_mainloop();
 
