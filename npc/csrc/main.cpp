@@ -239,13 +239,12 @@ static int parse_args(int argc, char *argv[]) {
 static void trace_and_difftest() {
   //log_write("%08x,%08x\n", top->pc,top->inst); 
 
-  //bool check = difftest_check();
-  //bool check = true;
-  //difftest_step();
-  //if(check==false) {
-  //  cpu_state = NPC_ABORT;
-  ///  return;
-  //}
+  bool check = difftest_check();
+  difftest_step();
+  if(check==false) {
+    cpu_state = NPC_ABORT;
+    return;
+  }
   
   WP * p = head;
   word_t expr(char *e, bool *success);
@@ -289,7 +288,7 @@ void cpu_exec(int num) {
       printf("abort! at pc=%x\n",cpu.pc);
       break;
     }
-    trace_and_difftest();
+    //trace_and_difftest();
     //top->inst = pmem_read_new(top->pc);
     top->clk = 0; top->eval();
     top->clk = 1; top->eval();
