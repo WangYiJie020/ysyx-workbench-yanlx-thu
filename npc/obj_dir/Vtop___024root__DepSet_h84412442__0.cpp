@@ -911,7 +911,24 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                                                [
                                                                (0x1fU 
                                                                 & (vlSelf->top__DOT__inst 
-                                                                   >> 0x14U))], vlSelf->top__DOT__wmask);
+                                                                   >> 0x14U))], 
+                                                               (0xffU 
+                                                                & ((1U 
+                                                                    == (IData)(vlSelf->top__DOT__wmask))
+                                                                    ? 
+                                                                   ((IData)(vlSelf->top__DOT__wmask) 
+                                                                    << 
+                                                                    (3U 
+                                                                     & vlSelf->top__DOT__alu_result))
+                                                                    : 
+                                                                   ((3U 
+                                                                     == (IData)(vlSelf->top__DOT__wmask))
+                                                                     ? 
+                                                                    ((IData)(vlSelf->top__DOT__wmask) 
+                                                                     << 
+                                                                     (3U 
+                                                                      & vlSelf->top__DOT__alu_result))
+                                                                     : (IData)(vlSelf->top__DOT__wmask)))));
     }
     if (((~ (IData)(vlSelf->top__DOT__mem_write)) & (IData)(vlSelf->top__DOT__mem_read))) {
         Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__alu_result, vlSelf->__Vfunc_pmem_read__3__Vfuncout);
