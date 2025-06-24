@@ -112,7 +112,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         = vlSelf->top__DOT__Rgefile__DOT__rf[0x1fU];
     if (VL_UNLIKELY((0x100073U == vlSelf->top__DOT__inst))) {
         Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();
-        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 167, "");
+        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 168, "");
     }
     if ((0x40U & vlSelf->top__DOT__inst)) {
         if ((0x20U & vlSelf->top__DOT__inst)) {
@@ -891,4 +891,91 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     } else {
         vlSelf->top__DOT__datamem_readdata = 0U;
     }
+    vlSelf->top__DOT__mem_data = ((4U & (IData)(vlSelf->top__DOT__rmask))
+                                   ? ((2U & (IData)(vlSelf->top__DOT__rmask))
+                                       ? vlSelf->top__DOT__datamem_readdata
+                                       : ((1U & (IData)(vlSelf->top__DOT__rmask))
+                                           ? vlSelf->top__DOT__datamem_readdata
+                                           : ((2U & vlSelf->top__DOT__alu_result)
+                                               ? ((1U 
+                                                   & vlSelf->top__DOT__alu_result)
+                                                   ? 
+                                                  (vlSelf->top__DOT__datamem_readdata 
+                                                   >> 0x18U)
+                                                   : 
+                                                  (0xffU 
+                                                   & (vlSelf->top__DOT__datamem_readdata 
+                                                      >> 0x10U)))
+                                               : ((1U 
+                                                   & vlSelf->top__DOT__alu_result)
+                                                   ? 
+                                                  (0xffU 
+                                                   & (vlSelf->top__DOT__datamem_readdata 
+                                                      >> 8U))
+                                                   : 
+                                                  (0xffU 
+                                                   & vlSelf->top__DOT__datamem_readdata)))))
+                                   : ((2U & (IData)(vlSelf->top__DOT__rmask))
+                                       ? ((1U & (IData)(vlSelf->top__DOT__rmask))
+                                           ? ((2U & vlSelf->top__DOT__alu_result)
+                                               ? ((1U 
+                                                   & vlSelf->top__DOT__alu_result)
+                                                   ? 
+                                                  (((- (IData)(
+                                                               (vlSelf->top__DOT__datamem_readdata 
+                                                                >> 0x1fU))) 
+                                                    << 8U) 
+                                                   | (vlSelf->top__DOT__datamem_readdata 
+                                                      >> 0x18U))
+                                                   : 
+                                                  (((- (IData)(
+                                                               (1U 
+                                                                & (vlSelf->top__DOT__datamem_readdata 
+                                                                   >> 0x17U)))) 
+                                                    << 8U) 
+                                                   | (0xffU 
+                                                      & (vlSelf->top__DOT__datamem_readdata 
+                                                         >> 0x10U))))
+                                               : ((1U 
+                                                   & vlSelf->top__DOT__alu_result)
+                                                   ? 
+                                                  (((- (IData)(
+                                                               (1U 
+                                                                & (vlSelf->top__DOT__datamem_readdata 
+                                                                   >> 0xfU)))) 
+                                                    << 8U) 
+                                                   | (0xffU 
+                                                      & (vlSelf->top__DOT__datamem_readdata 
+                                                         >> 8U)))
+                                                   : 
+                                                  (((- (IData)(
+                                                               (1U 
+                                                                & (vlSelf->top__DOT__datamem_readdata 
+                                                                   >> 7U)))) 
+                                                    << 8U) 
+                                                   | (0xffU 
+                                                      & vlSelf->top__DOT__datamem_readdata))))
+                                           : ((2U & vlSelf->top__DOT__alu_result)
+                                               ? (vlSelf->top__DOT__datamem_readdata 
+                                                  >> 0x10U)
+                                               : (0xffffU 
+                                                  & vlSelf->top__DOT__datamem_readdata)))
+                                       : ((1U & (IData)(vlSelf->top__DOT__rmask))
+                                           ? ((2U & vlSelf->top__DOT__alu_result)
+                                               ? ((
+                                                   (- (IData)(
+                                                              (vlSelf->top__DOT__datamem_readdata 
+                                                               >> 0x1fU))) 
+                                                   << 0x10U) 
+                                                  | (vlSelf->top__DOT__datamem_readdata 
+                                                     >> 0x10U))
+                                               : ((
+                                                   (- (IData)(
+                                                              (1U 
+                                                               & (vlSelf->top__DOT__datamem_readdata 
+                                                                  >> 0xfU)))) 
+                                                   << 0x10U) 
+                                                  | (0xffffU 
+                                                     & vlSelf->top__DOT__datamem_readdata)))
+                                           : vlSelf->top__DOT__datamem_readdata)));
 }
