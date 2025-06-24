@@ -205,14 +205,81 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                           >> 0xcU)))) {
                             vlSelf->top__DOT__alu_op = 5U;
                         }
+                        vlSelf->top__DOT__imm = ((0x4000U 
+                                                  & vlSelf->top__DOT__inst)
+                                                  ? 
+                                                 ((0x2000U 
+                                                   & vlSelf->top__DOT__inst)
+                                                   ? 
+                                                  (((- (IData)(
+                                                               (vlSelf->top__DOT__inst 
+                                                                >> 0x1fU))) 
+                                                    << 0xcU) 
+                                                   | (vlSelf->top__DOT__inst 
+                                                      >> 0x14U))
+                                                   : 
+                                                  ((0x1000U 
+                                                    & vlSelf->top__DOT__inst)
+                                                    ? 
+                                                   (((- (IData)(
+                                                                (vlSelf->top__DOT__inst 
+                                                                 >> 0x1fU))) 
+                                                     << 0xcU) 
+                                                    | (vlSelf->top__DOT__inst 
+                                                       >> 0x14U))
+                                                    : 
+                                                   (((- (IData)(
+                                                                (vlSelf->top__DOT__inst 
+                                                                 >> 0x1fU))) 
+                                                     << 0xcU) 
+                                                    | (vlSelf->top__DOT__inst 
+                                                       >> 0x14U))))
+                                                  : 
+                                                 ((0x2000U 
+                                                   & vlSelf->top__DOT__inst)
+                                                   ? 
+                                                  ((0x1000U 
+                                                    & vlSelf->top__DOT__inst)
+                                                    ? 
+                                                   (((- (IData)(
+                                                                (vlSelf->top__DOT__inst 
+                                                                 >> 0x1fU))) 
+                                                     << 0xcU) 
+                                                    | (vlSelf->top__DOT__inst 
+                                                       >> 0x14U))
+                                                    : 
+                                                   (((- (IData)(
+                                                                (vlSelf->top__DOT__inst 
+                                                                 >> 0x1fU))) 
+                                                     << 0xcU) 
+                                                    | (vlSelf->top__DOT__inst 
+                                                       >> 0x14U)))
+                                                   : 
+                                                  ((0x1000U 
+                                                    & vlSelf->top__DOT__inst)
+                                                    ? 
+                                                   (((- (IData)(
+                                                                (vlSelf->top__DOT__inst 
+                                                                 >> 0x1fU))) 
+                                                     << 0xcU) 
+                                                    | (vlSelf->top__DOT__inst 
+                                                       >> 0x14U))
+                                                    : 
+                                                   (((- (IData)(
+                                                                (vlSelf->top__DOT__inst 
+                                                                 >> 0x1fU))) 
+                                                     << 0xcU) 
+                                                    | (vlSelf->top__DOT__inst 
+                                                       >> 0x14U)))));
                     } else {
                         vlSelf->top__DOT__alu_op = 0U;
+                        vlSelf->top__DOT__imm = 0U;
                     }
                 } else {
                     vlSelf->top__DOT__alu_op = 0U;
+                    vlSelf->top__DOT__imm = 0U;
                 }
                 vlSelf->top__DOT__b_in_src = 0U;
-                vlSelf->top__DOT__imm = 0U;
             }
         } else {
             vlSelf->top__DOT__pc_srcs = 0U;

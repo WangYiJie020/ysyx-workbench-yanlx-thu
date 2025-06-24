@@ -29,6 +29,7 @@ module alu_control(
             7'b1100011: begin
                 case(funct3)
                     3'b001: alu_op = 4'b0101;//- //bne
+                    default: alu_op = 4'b0101;//- 
                 endcase
             end
             7'b0000011: begin //+ //lb lh lw lbu lhu
