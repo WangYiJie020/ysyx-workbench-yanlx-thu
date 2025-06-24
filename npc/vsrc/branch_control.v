@@ -4,7 +4,7 @@ module branch_control(
     input [2:0] pc_srcs,
     input zero,
     input [31:0] alu_result,
-    output [31:0] npc
+    output reg [31:0] npc
 );
     always@(*) begin
         case(pc_srcs)
