@@ -18,6 +18,22 @@ module branch_control(
                 if(zero==1'b0) npc = pc_new; //sub is not zero,unequal,jump
                 else npc = pc4;
             end
+            3'b100: begin //blt
+                if(alu_result==32'd1) npc = pc_new;
+                else npc = pc4;
+            end
+            3'b101: begin //bge
+                if(alu_result==32'd0) npc = pc_new;
+                else npc = pc4;
+            end
+            3'b110: begin //bltu
+                if(alu_result==32'd1) npc = pc_new;
+                else npc = pc4;
+            end
+            3'b111: begin //bgeu
+                if(alu_result==32'd0) npc = pc_new;
+                else npc = pc4;
+            end
             default: npc = pc4; //pc=pc+4
         endcase
 

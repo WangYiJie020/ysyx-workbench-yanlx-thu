@@ -30,6 +30,10 @@ module alu_control(
                 case(funct3)
                     3'b000: alu_op = 4'b0101;//- //beq
                     3'b001: alu_op = 4'b0101;//- //bne
+                    3'b100: alu_op = 4'b1010://s<s //blt
+                    3'b101: alu_op = 4'b1010://s<s //bge
+                    3'b110: alu_op = 4'b1001://u<u //bltu
+                    3'b111: alu_op = 4'b1001://u<u //bgeu
                     default: alu_op = 4'b0101;//- 
                 endcase
             end
