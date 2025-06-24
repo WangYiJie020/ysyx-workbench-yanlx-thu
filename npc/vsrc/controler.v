@@ -48,6 +48,18 @@ module controler(
             end
             7'b1100011: begin
                 case(funct3)
+                    3'b001:begin //beq
+                        a_in_src = 1'b0; //choose rs1
+                        b_in_src = 2'b00; //choose rs2
+                        reg_write = 1'b0; //not write regfiles 
+                        pc_srcs = 3'b010; //beq
+                        adder_a_src = 1'b0;//choose pc
+                        MemRead = 1'b0; //not read mem
+                        MemWrite = 1'b0; //not write mem
+                        wmask = 0; //do not care 
+                        wb_src=1'b0; //do not care 
+                        rmask = 3'b000; //do not care 
+                    end
                     3'b001:begin //bne
                         a_in_src = 1'b0; //choose rs1
                         b_in_src = 2'b00; //choose rs2
