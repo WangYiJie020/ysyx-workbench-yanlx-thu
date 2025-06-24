@@ -149,6 +149,7 @@ module top(
 
   sext_mem SEXT_Mem(
     .read_data(datamem_readdata),
+    .addr_low2(alu_result[1:0]),
     .rmask(rmask),
     .mem_data(mem_data)
   );
