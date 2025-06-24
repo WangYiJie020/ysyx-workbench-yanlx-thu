@@ -294,10 +294,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                 vlSelf->top__DOT__pc_srcs = 0U;
                 if ((2U & vlSelf->top__DOT__inst)) {
                     if ((1U & vlSelf->top__DOT__inst)) {
-                        if ((1U == (7U & (vlSelf->top__DOT__inst 
-                                          >> 0xcU)))) {
-                            vlSelf->top__DOT__alu_op = 5U;
-                        }
+                        vlSelf->top__DOT__alu_op = 5U;
                         vlSelf->top__DOT__imm = ((0x4000U 
                                                   & vlSelf->top__DOT__inst)
                                                   ? 

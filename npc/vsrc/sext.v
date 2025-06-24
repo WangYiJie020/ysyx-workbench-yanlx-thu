@@ -28,12 +28,13 @@ module sext #(DATA_WIDTH = 32)(
             end
             7'b1100011: begin //SB
                 case(funct3)
-                    3'b000: data = {{20{inst[31]}},inst[31:20]}; //I //lb
-                    3'b001: data = {{20{inst[31]}},inst[31:20]}; //I //lh
-                    3'b010: data = {{20{inst[31]}},inst[31:20]}; //I //lw
-                    3'b100: data = {{20{inst[31]}},inst[31:20]}; //I //lbu
-                    3'b101: data = {{20{inst[31]}},inst[31:20]}; //I //lhu
-                    default: data = {{20{inst[31]}},inst[31:20]};
+                    3'b000: data = {{20{inst[31]}},inst[7],inst[30:25],inst[11:8],1'b0}; //SB //beq
+                    3'b001: data = {{20{inst[31]}},inst[7],inst[30:25],inst[11:8],1'b0}; //SB //bne
+                    3'b100: data = {{20{inst[31]}},inst[7],inst[30:25],inst[11:8],1'b0}; //SB //blt
+                    3'b101: data = {{20{inst[31]}},inst[7],inst[30:25],inst[11:8],1'b0}; //SB //bge
+                    3'b110: data = {{20{inst[31]}},inst[7],inst[30:25],inst[11:8],1'b0}; //SB //bltu
+                    3'b111: data = {{20{inst[31]}},inst[7],inst[30:25],inst[11:8],1'b0}; //SB //bgeu
+                    default: data = {{20{inst[31]}},inst[7],inst[30:25],inst[11:8],1'b0};
                 endcase
             end
             7'b0000011: begin //I
