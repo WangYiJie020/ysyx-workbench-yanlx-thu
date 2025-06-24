@@ -8,8 +8,8 @@ module alu(
 
 assign zero = ~(| alu_result);
 
-wire [63:0] mux_tmp
-assign mux_tmp = a*b;
+//wire [63:0] mux_tmp;
+//assign mux_tmp = a*b;
 
 always@(*) begin
     case(op)
