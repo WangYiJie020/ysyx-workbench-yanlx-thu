@@ -288,12 +288,12 @@ void cpu_exec(int num) {
       printf("abort! at pc=%x\n",cpu.pc);
       break;
     }
-    //trace_and_difftest();
-    //top->inst = pmem_read_new(top->pc);
+    trace_and_difftest();
+
     top->clk = 0; top->eval();
     top->clk = 1; top->eval();
     
-    //printf("pc=%x\n",top->pc);
+
     tfp->dump(contextp->time()); //dump wave
     contextp->timeInc(1); //推动仿真时间
     
