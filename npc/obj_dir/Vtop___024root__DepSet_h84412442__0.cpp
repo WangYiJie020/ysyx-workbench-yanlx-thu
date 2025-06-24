@@ -294,7 +294,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                 if ((2U & vlSelf->top__DOT__inst)) {
                     if ((1U & vlSelf->top__DOT__inst)) {
                         vlSelf->top__DOT__pc_srcs = 
-                            ((1U == (7U & (vlSelf->top__DOT__inst 
+                            ((0U == (7U & (vlSelf->top__DOT__inst 
                                            >> 0xcU)))
                               ? 2U : ((1U == (7U & 
                                               (vlSelf->top__DOT__inst 
