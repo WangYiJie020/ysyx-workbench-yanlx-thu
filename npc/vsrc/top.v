@@ -33,7 +33,7 @@ module top(
   wire zero;
 
   wire [31:0] pc_new,npc;
-  wire pc_srcs;
+  wire [2:0] pc_srcs;
   wire [31:0] reg_file [31:0];
   wire [31:0]datamem_readdata;
   wire mem_read,mem_write;
@@ -41,13 +41,6 @@ module top(
   wire wb_src;
   wire [31:0] mem_data;
   wire [2:0] rmask;
-
-  mux21 PC_Srcs(
-    .d0(pc+4),
-    .d1(pc_new),
-    .sel(pc_srcs),
-    .out(npc)
-  );
 
   pc PC (
     .clk(clk),
@@ -103,6 +96,15 @@ module top(
     .a(a_out),
     .b(imm),
     .out(pc_new)
+  );
+
+  branch_control Branch_Control(
+    .pc4(pc+4),
+    .pc_new(pc_new),
+    .pc_srcs(pc_srcs),
+    .zero(zero),
+    .alu_result(alu_result),
+    .npc(npc)
   );
 
   mux21 ALU_A_Src(

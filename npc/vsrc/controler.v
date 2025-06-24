@@ -23,26 +23,26 @@ module controler(
         case(opcode)
             
             7'b0110111: begin //lui
-                a_in_src = 1'b0; b_in_src = 2'b01; reg_write = 1; pc_srcs = 1'b0;adder_a_src = 1'b0;
+                a_in_src = 1'b0; b_in_src = 2'b01; reg_write = 1; pc_srcs = 3'b000;adder_a_src = 1'b0;
                 MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
             end 
             7'b0010111: begin //auipc
-                a_in_src = 1'b1; b_in_src = 2'b01; reg_write = 1; pc_srcs = 1'b0;adder_a_src = 1'b0;
+                a_in_src = 1'b1; b_in_src = 2'b01; reg_write = 1; pc_srcs = 3'b000;adder_a_src = 1'b0;
                 MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
             end
             7'b1101111: begin //jal
-                a_in_src = 1'b1; b_in_src = 2'b10; reg_write = 1; pc_srcs = 1'b1;adder_a_src = 1'b0;
+                a_in_src = 1'b1; b_in_src = 2'b10; reg_write = 1; pc_srcs = 3'b001;adder_a_src = 1'b0;
                 MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
             end
             7'b1100111: begin
                 case(funct3)
                     3'b000: begin //jalr
-                        a_in_src = 1'b1; b_in_src = 2'b10; reg_write = 1; pc_srcs = 1'b1; 
+                        a_in_src = 1'b1; b_in_src = 2'b10; reg_write = 1; pc_srcs = 3'b001; 
                         adder_a_src = 1'b1; MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0;
                         rmask = 0;
                     end //jalr
                     default: begin 
-                        a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 1'b0; adder_a_src = 1'b0;
+                        a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 3'b000; adder_a_src = 1'b0;
                         MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
                     end
                 endcase
@@ -53,7 +53,7 @@ module controler(
                         a_in_src = 1'b0; //choose rs1
                         b_in_src = 2'b01; //choose imm
                         reg_write = 1'b1; //write regfiles 
-                        pc_srcs = 1'b0; //pc=pc+4
+                        pc_srcs = 3'b000; //pc=pc+4
                         adder_a_src = 1'b0;//do not care 
                         MemRead = 1'b1; //read mem
                         MemWrite = 1'b0; //not write mem
@@ -62,7 +62,7 @@ module controler(
                         rmask = 3'b000; //lw 32 pass
                     end
                     default: begin 
-                        a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 1'b0; adder_a_src = 1'b0;
+                        a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 3'b000; adder_a_src = 1'b0;
                         MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
                     end
                 endcase
@@ -73,7 +73,7 @@ module controler(
                         a_in_src = 1'b0; //choose rs1
                         b_in_src = 2'b01; //choose imm
                         reg_write = 1'b0; //no need to write regfiles 
-                        pc_srcs = 1'b0; //pc=pc+4
+                        pc_srcs = 3'b000; //pc=pc+4
                         adder_a_src = 1'b0;//do not care 
                         MemRead = 1'b0; //not read mem
                         MemWrite = 1'b1; //write mem
@@ -82,7 +82,7 @@ module controler(
                         rmask = 0; //pass
                     end
                     default: begin 
-                        a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 1'b0; adder_a_src = 1'b0;
+                        a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 3'b000; adder_a_src = 1'b0;
                         MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
                     end
                 endcase
@@ -91,7 +91,7 @@ module controler(
             7'b0010011: begin
                 case(funct3) 
                     3'b000: begin //addi +
-                        a_in_src = 1'b0; b_in_src = 2'b01; reg_write = 1; pc_srcs = 1'b0; 
+                        a_in_src = 1'b0; b_in_src = 2'b01; reg_write = 1; pc_srcs = 3'b000; 
                         adder_a_src = 1'b0; MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0;
                         rmask = 0;
                     end 
@@ -99,7 +99,7 @@ module controler(
                         a_in_src = 1'b0; //choose rs1
                         b_in_src = 2'b01; //choose imm
                         reg_write = 1; //write regfiles 
-                        pc_srcs = 1'b0; //pc=pc+4
+                        pc_srcs = 3'b000; //pc=pc+4
                         adder_a_src = 1'b0; //do not care 
                         MemRead = 1'b0; MemWrite = 1'b0; //not read mem //not write mem
                         wmask = 0; rmask = 0; //do not care 
@@ -107,7 +107,7 @@ module controler(
                         
                     end 
                     default: begin 
-                        a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 1'b0; adder_a_src = 1'b0;
+                        a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 3'b000; adder_a_src = 1'b0;
                         MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
                     end
                 endcase
@@ -120,7 +120,7 @@ module controler(
                                 a_in_src = 1'b0; //choose rs1
                                 b_in_src = 2'b00; //choose rs2
                                 reg_write = 1'b1; //write regfiles 
-                                pc_srcs = 1'b0; //pc=pc+4
+                                pc_srcs = 3'b000; //pc=pc+4
                                 adder_a_src = 1'b0;//do not care 
                                 MemRead = 1'b0; //not read mem
                                 MemWrite = 1'b0; //not write mem
@@ -129,19 +129,19 @@ module controler(
                                 rmask = 3'b000; //do not care 
                             end
                             default: begin 
-                                a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 1'b0; adder_a_src = 1'b0;
+                                a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 3'b000; adder_a_src = 1'b0;
                                 MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
                             end
                         endcase                     
                     end
                     default: begin 
-                        a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 1'b0; adder_a_src = 1'b0;
+                        a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 3'b000; adder_a_src = 1'b0;
                         MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
                     end
                 endcase
             end
             default: begin 
-                a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 1'b0; adder_a_src = 1'b0;
+                a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 3'b000; adder_a_src = 1'b0;
                 MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
             end
         endcase
