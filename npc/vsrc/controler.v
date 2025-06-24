@@ -56,9 +56,13 @@ module controler(
                         adder_a_src = 1'b0;//choose pc
                         MemRead = 1'b0; //not read mem
                         MemWrite = 1'b0; //not write mem
-                        wmask = 8'h0f; //do not care 
+                        wmask = 0; //do not care 
                         wb_src=1'b0; //do not care 
                         rmask = 3'b000; //do not care 
+                    end
+                    default: begin 
+                        a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 3'b000; adder_a_src = 1'b0;
+                        MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
                     end
                 endcase
             end

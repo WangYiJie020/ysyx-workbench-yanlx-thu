@@ -20,10 +20,16 @@ class Vtop___024root final : public VerilatedModule {
     VL_IN8(clk,0,0);
     VL_IN8(rst_n,0,0);
     CData/*1:0*/ top__DOT__b_in_src;
+    CData/*0:0*/ top__DOT__a_in_src;
+    CData/*0:0*/ top__DOT__adder_a_src;
     CData/*0:0*/ top__DOT__reg_write;
     CData/*3:0*/ top__DOT__alu_op;
     CData/*2:0*/ top__DOT__pc_srcs;
+    CData/*0:0*/ top__DOT__mem_read;
+    CData/*0:0*/ top__DOT__mem_write;
     CData/*7:0*/ top__DOT__wmask;
+    CData/*0:0*/ top__DOT__wb_src;
+    CData/*2:0*/ top__DOT__rmask;
     CData/*0:0*/ __Vtrigrprev__TOP__clk;
     CData/*0:0*/ __VactContinue;
     IData/*31:0*/ top__DOT__pc;
