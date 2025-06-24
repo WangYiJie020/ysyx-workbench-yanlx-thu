@@ -10,6 +10,16 @@ module data_mem(
     output reg [31:0] read_data
 
 );
+    reg [7:0] wmask_send;
+
+    always@(*) begin
+        case(wmask)
+            8'h01: wmask_send = wmask << (address[1:0]);
+            8'h03: wmask_send = wmask << (address[1:0]);
+            8'h0f: wmask_send = wmask;
+            default: wmask_send = wmask;
+        endcase
+    end
 
     always@(*) begin
         if(!MemWrite && MemRead) begin
@@ -21,7 +31,7 @@ module data_mem(
 
     always@(*)begin 
         if(MemWrite && !MemRead) begin
-            pmem_write(address,write_data,wmask);
+            pmem_write(address,write_data,wmask_send);
         end
     end
 

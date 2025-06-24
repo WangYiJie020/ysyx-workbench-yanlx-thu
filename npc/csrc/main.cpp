@@ -53,10 +53,13 @@ extern "C" void pmem_write(int waddr, int wdata, char wmask) {
   // `wmask`中每比特表示`wdata`中1个字节的掩码,
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   uint32_t addr_tmp = (uint32_t)waddr / 4;
-  uint32_t bias = (uint32_t)waddr % 4;
   switch(wmask) {
-    case 0x1:  mem[addr_tmp] = ((mem[addr_tmp]>>bias) & 0xffffff00) + (wdata & 0x000000ff);break;
-    case 0x3:  mem[addr_tmp] = ((mem[addr_tmp]>>bias) & 0xffff0000) + (wdata & 0x0000ffff);break;
+    case 0x1:  mem[addr_tmp] = (mem[addr_tmp] & 0xffffff00) + (wdata & 0x000000ff);break;
+    case 0x2:  mem[addr_tmp] = (mem[addr_tmp] & 0xffff00ff) + ((wdata & 0x000000ff)<<8);break; 
+    case 0x4:  mem[addr_tmp] = (mem[addr_tmp] & 0xff00ffff) + ((wdata & 0x000000ff)<<16);break;
+    case 0x8:  mem[addr_tmp] = (mem[addr_tmp] & 0x00ffffff) + ((wdata & 0x000000ff)<<24);break;
+    case 0x3:  mem[addr_tmp] = (mem[addr_tmp] & 0xffff0000) + (wdata & 0x0000ffff);break;
+    case 0xc:  mem[addr_tmp] = (mem[addr_tmp] & 0x0000ffff) + ((wdata & 0x0000ffff)<<16);break;
     case 0xf:  mem[addr_tmp] = (mem[addr_tmp] & 0x00000000) + (wdata & 0xffffffff);;break;
     default: mem[addr_tmp] = mem[addr_tmp];
   }
