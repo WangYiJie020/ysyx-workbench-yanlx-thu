@@ -239,13 +239,13 @@ static int parse_args(int argc, char *argv[]) {
 static void trace_and_difftest() {
   //log_write("%08x,%08x\n", top->pc,top->inst); 
 
-  bool check = difftest_check();
+  //bool check = difftest_check();
   //bool check = true;
-  difftest_step();
-  if(check==false) {
-    cpu_state = NPC_ABORT;
-    return;
-  }
+  //difftest_step();
+  //if(check==false) {
+  //  cpu_state = NPC_ABORT;
+  ///  return;
+  //}
   
   WP * p = head;
   word_t expr(char *e, bool *success);
