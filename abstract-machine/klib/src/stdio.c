@@ -15,9 +15,10 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 
-void putch(char ch);
+
 
 int printf(const char *fmt, ...) {
+	/*void putch(char ch);
 	char out[1024] = {'\0'};
 	va_list args;
 	int i;
@@ -30,8 +31,8 @@ int printf(const char *fmt, ...) {
 		buf++;
 	}
 	va_end(args);
-	return i;
-  //panic("Not implemented");
+	return i;*/
+  panic("Not implemented");
 }
 size_t strnlen(const char * s, size_t count)//size_t是unsigned long long的宏
 {
