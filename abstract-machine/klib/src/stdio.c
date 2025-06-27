@@ -19,7 +19,7 @@
 char buff[1024] = {'\0'};
 
 int printf(const char *fmt, ...) {
-
+/*
 	va_list args;
 	int i;
 
@@ -31,8 +31,8 @@ int printf(const char *fmt, ...) {
 		buf++;
 	}
 	va_end(args);
-	return i;
-  //panic("Not implemented");
+	return i;*/
+  panic("Not implemented");
 }
 size_t strnlen(const char * s, size_t count)//size_t是unsigned long long的宏
 {
