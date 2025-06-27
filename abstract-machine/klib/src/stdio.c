@@ -15,8 +15,8 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 
-void putch(char ch);
-char out[1024] = {'\0'};
+
+char buff[1024] = {'\0'};
 
 int printf(const char *fmt, ...) {
 
@@ -24,8 +24,8 @@ int printf(const char *fmt, ...) {
 	int i;
 
 	va_start(args, fmt);
-	i=vsprintf(out,fmt,args);
-	char *buf = out;
+	i=vsprintf(buff,fmt,args);
+	char *buf = buff;
 	while(*buf != '\0') {
 		putch(*buf);
 		buf++;
