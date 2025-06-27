@@ -19,20 +19,21 @@
 char buff[1024] = {'\0'};
 
 int printf(const char *fmt, ...) {
-/*
+
 	va_list args;
 	int i;
 
 	va_start(args, fmt);
 	i=vsprintf(buff,fmt,args);
-	char *buf = buff;
-	while(*buf != '\0') {
-		putch(*buf);
-		buf++;
-	}
+	//char *buf = buff;
+	//while(*buf != '\0') {
+	//	putch(*buf);
+	//	buf++;
+	//}
 	va_end(args);
-	return i;*/
-  panic("Not implemented");
+	putstr(buff);
+	return i;
+  //panic("Not implemented");
 }
 size_t strnlen(const char * s, size_t count)//size_t是unsigned long long的宏
 {
