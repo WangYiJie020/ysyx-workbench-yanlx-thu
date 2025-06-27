@@ -14,8 +14,24 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
+
+void putch(char ch);
+
 int printf(const char *fmt, ...) {
-  panic("Not implemented");
+	char out[1024] = {'\0'};
+	va_list args;
+	int i;
+
+	va_start(args, fmt);
+	i=vsprintf(out,fmt,args);
+	char *buf = out;
+	while(*buf != '\0') {
+		putch(*buf);
+		buf++;
+	}
+	va_end(args);
+	return i;
+  //panic("Not implemented");
 }
 size_t strnlen(const char * s, size_t count)//size_t是unsigned long long的宏
 {
