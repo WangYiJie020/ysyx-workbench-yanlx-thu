@@ -22,16 +22,16 @@ int printf(const char *fmt, ...) {
 
 	va_list args;
 	int i;
-	putch('p');
+
 	va_start(args, fmt);
 	i=vsprintf(buff,fmt,args);
-	//char *buf = buff;
-	//while(*buf != '\0') {
-	//	putch(*buf);
-	//	buf++;
-	//}
+	char *buf = buff;
+	while(*buf != '\0') {
+		putch(*buf);
+		buf++;
+	}
 	va_end(args);
-	putstr(buff);
+	
 	return i;
   //panic("Not implemented");
 }
