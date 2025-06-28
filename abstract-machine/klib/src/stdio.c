@@ -22,7 +22,7 @@ int printf(const char *fmt, ...) {
 
 	va_list args;
 	int i;
-	putstr("test\n");
+	putch('p');
 	va_start(args, fmt);
 	i=vsprintf(buff,fmt,args);
 	//char *buf = buff;
