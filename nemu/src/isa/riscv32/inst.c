@@ -153,8 +153,8 @@ static int decode_exec(Decode *s) {
             ///int64_t tmp = (int64_t)((sword_t)src1) * (int64_t)((sword_t)src2);
             R(rd) = BITS(tmp, 63, 32););
   INSTPAT("0000001 ????? ????? 011 ????? 01100 11", mulhu  , R, \
-            int64_t tmp = SEXT(BITS(src1, 31, 0), 32) * SEXT(BITS(src2, 31, 0), 32);
-            ///int64_t tmp = (int64_t)(src1) * (int64_t)(src2);
+            //int64_t tmp = SEXT(BITS(src1, 31, 0), 32) * SEXT(BITS(src2, 31, 0), 32);
+            uint64_t tmp = (uint64_t)(src1) * (uint64_t)(src2);
             R(rd) = BITS(tmp, 63, 32););
   INSTPAT("0000001 ????? ????? 100 ????? 01100 11", div    , R, R(rd) = (sword_t)src1 / (sword_t)src2;);
   INSTPAT("0000001 ????? ????? 101 ????? 01100 11", divu   , R, R(rd) = src1 / src2;);
