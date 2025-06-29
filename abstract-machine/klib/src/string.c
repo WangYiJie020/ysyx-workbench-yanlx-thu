@@ -67,7 +67,29 @@ void *memmove(void *dst, const void *src, size_t n) {
 }
 
 void *memcpy(void *out, const void *in, size_t n) {
-  panic("Not implemented");
+  if(NULL == out || NULL == in){
+		return NULL;
+	}
+	
+	if(out <= in || (char *)out >= (char *)in + n){
+		//没有内存重叠，从低地址开始复制
+		while(n--){
+			*(char *)out = *(char *)in;
+			out = (char *)out + 1;
+			in = (char *)in + 1;
+		}
+	}else{
+		//有内存重叠，从高地址开始复制
+		in = (char *)in + n - 1;
+		in = (char *)in + n - 1;
+		while(n--){
+			*(char *)out = *(char *)in;
+			out = (char *)out - 1;
+			in = (char *)in - 1;
+		}
+	}
+	return 0;
+  
 }
 
 int memcmp(const void *s1, const void *s2, size_t n) {
