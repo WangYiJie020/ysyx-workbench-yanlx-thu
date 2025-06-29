@@ -58,7 +58,7 @@ word_t map_read(paddr_t addr, int len, IOMap *map) {
   paddr_t offset = addr - map->low;
   invoke_callback(map->callback, offset, len, false); // prepare data to read
   word_t ret = host_read(map->space + offset, len);
-  IFDEF(CONFIG_DTRACE,log_write("read device is %s : address in = "FMT_PADDR",len = %d with "FMT_WORD"\n",map->name,addr,len,ret));
+  IFDEF(CONFIG_DTRACE,log_write("read device is %s : address in = "FMT_PADDR", len = %d with "FMT_WORD"\n",map->name,addr,len,ret));
   return ret;
 }
 
