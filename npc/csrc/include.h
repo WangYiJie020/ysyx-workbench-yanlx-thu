@@ -9,6 +9,11 @@
 
 #define CONFIG_MBASE 0x80000000
 #define CONFIG_MSIZE 0x8000000
+
+# define DEVICE_BASE 0xa0000000
+
+#define SERIAL_PORT     (DEVICE_BASE + 0x00003f8)
+#define RTC_ADDR        (DEVICE_BASE + 0x0000048)
 typedef struct {
   uint32_t gpr[32];
   uint32_t pc;
