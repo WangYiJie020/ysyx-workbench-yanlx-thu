@@ -51,7 +51,6 @@ extern "C" int pmem_read(int raddr) {
   
   time(&currentTimeABS);
   uint64_t time = (currentTimeABS - start_time)*1000000;
-  printf("starttime:%lu \n",start_time);
   if(raddr == RTC_ADDR){
     if(flag==0) {
       start_time = currentTimeABS;
