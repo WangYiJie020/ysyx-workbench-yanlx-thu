@@ -54,7 +54,8 @@ extern "C" int pmem_read(int raddr) {
   printf("starttime:%lu \n",start_time);
   if(raddr == RTC_ADDR){
     if(flag==0) {
-      time(&start_time);
+      start_time = currentTimeABS;
+      time = 0;
       flag=1;
     }
     log_write("raddr = %08x,the time = %08x\n",raddr,(uint32_t)time);
