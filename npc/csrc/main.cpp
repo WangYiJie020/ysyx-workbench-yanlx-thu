@@ -42,19 +42,23 @@ void (*ref_difftest_regcpy)(void *dut, bool direction) = NULL;
 void (*ref_difftest_exec)(uint64_t n) = NULL;
 void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 
+uint64_t start_time;
+time_t currentTime;
+
 extern "C" int pmem_read(int raddr) {
   // 总是读取地址为`raddr & ~0x3u`的4字节返回
-  time_t currentTime;
-  time(&currentTime);
+  
+  time(&currentTimeABS);
+  uint64_t time = (currentTimeABS - start_time)*1000000;
   if(raddr == RTC_ADDR){
-    log_write("raddr = %08x,the time = %08x\n",raddr,(uint32_t)currentTime);
-    return currentTime;
+    log_write("raddr = %08x,the time = %08x\n",raddr,(uint32_t)time);
+    return time;
   }
   if(raddr == RTC_ADDR + 4) {
-    log_write("raddr = %08x,the time = %08x\n",raddr,(uint32_t)(currentTime << 32));
-    return (currentTime << 32);
+    log_write("raddr = %08x,the time = %08x\n",raddr,(uint32_t)(time << 32));
+    return (time << 32);
   }
-  
+
   uint32_t tmp = (uint32_t)raddr /4; //int类型是有符号的，要转成无符号的
   log_write("raddr = %08x,data= %08x\n",raddr,mem[tmp]);
   return mem[tmp];
@@ -64,10 +68,17 @@ extern "C" void pmem_write(int waddr, int wdata, char wmask) {
   // `wmask`中每比特表示`wdata`中1个字节的掩码,
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   //log_write("                               wmask=%x,waddr = %08x,data= %08x\n",wmask,waddr,wdata);
+  time(&currentTime);
   if(waddr == SERIAL_PORT) {
     putchar(wdata);
     log_write("                               wmask=%x,waddr = %08x,data= %08x\n",wmask,waddr,wdata);
     return;
+  }
+  if(waddr == RTC_ADDR){
+    start_time = currentTime + wdata;
+  }
+  if(waddr == RTC_ADDR + 4){
+    start_time = currentTime + wdata << 32;
   }
   uint32_t addr_tmp = (uint32_t)waddr / 4;
   switch(wmask) {

@@ -11,6 +11,8 @@ static inline void outw(uintptr_t addr, uint16_t data) { *(volatile uint16_t *)a
 static inline void outl(uintptr_t addr, uint32_t data) { *(volatile uint32_t *)addr = data; }
 
 void __am_timer_init() {
+  outl(RTC_ADDR,0);
+  outl(RTC_ADDR+4,0);
 }
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
