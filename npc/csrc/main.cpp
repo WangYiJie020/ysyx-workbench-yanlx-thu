@@ -47,10 +47,11 @@ extern "C" int pmem_read(int raddr) {
   time_t currentTime;
   time(&currentTime);
   if(raddr == RTC_ADDR){
-    log_write("raddr = %08x,the time = %08x\n",raddr,currentTime);
+    log_write("raddr = %08x,the time = %08x\n",raddr,(uint32_t)currentTime);
     return currentTime;
   }
   if(raddr == RTC_ADDR + 4) {
+    log_write("raddr = %08x,the time = %08x\n",raddr,(uint32_t)(currentTime << 32));
     return (currentTime << 32);
   }
   uint32_t tmp = (uint32_t)raddr /4; //int类型是有符号的，要转成无符号的
