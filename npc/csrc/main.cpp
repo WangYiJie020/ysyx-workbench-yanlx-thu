@@ -44,6 +44,7 @@ void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 
 uint64_t start_time;
 time_t currentTimeABS;
+int flag;
 
 extern "C" int pmem_read(int raddr) {
   // 总是读取地址为`raddr & ~0x3u`的4字节返回
@@ -52,6 +53,10 @@ extern "C" int pmem_read(int raddr) {
   uint64_t time = (currentTimeABS - start_time)*1000000;
   printf("starttime:%llu \n",start_time);
   if(raddr == RTC_ADDR){
+    if(flag==0) {
+      time(&start_time);
+      flag=1;
+    }
     log_write("raddr = %08x,the time = %08x\n",raddr,(uint32_t)time);
     return time;
   }
@@ -75,14 +80,14 @@ extern "C" void pmem_write(int waddr, int wdata, char wmask) {
     log_write("                               wmask=%x,waddr = %08x,data= %08x\n",wmask,waddr,wdata);
     return;
   }
-  if(waddr == RTC_ADDR){
+  /*if(waddr == RTC_ADDR){
     start_time = currentTimeABS + wdata;
     return;
   }
   if(waddr == RTC_ADDR + 4){
     start_time = currentTimeABS + wdata << 32;
     return;
-  }
+  }*/
   uint32_t addr_tmp = (uint32_t)waddr / 4;
   switch(wmask) {
     case 0x1:  mem[addr_tmp] = (mem[addr_tmp] & 0xffffff00) + (wdata & 0x000000ff);break;
