@@ -1,10 +1,22 @@
 #include <am.h>
 
+# define DEVICE_BASE 0xa0000000
+#define RTC_ADDR        (DEVICE_BASE + 0x0000048)
+static inline uint8_t  inb(uintptr_t addr) { return *(volatile uint8_t  *)addr; }
+static inline uint16_t inw(uintptr_t addr) { return *(volatile uint16_t *)addr; }
+static inline uint32_t inl(uintptr_t addr) { return *(volatile uint32_t *)addr; }
+
+static inline void outb(uintptr_t addr, uint8_t  data) { *(volatile uint8_t  *)addr = data; }
+static inline void outw(uintptr_t addr, uint16_t data) { *(volatile uint16_t *)addr = data; }
+static inline void outl(uintptr_t addr, uint32_t data) { *(volatile uint32_t *)addr = data; }
+
 void __am_timer_init() {
 }
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
-  uptime->us = 0;
+  uptime->us = inl(RTC_ADDR+4);
+  uptime->us = uptime->us << 32;
+  uptime->us = uptime->us + inl(RTC_ADDR);
 }
 
 void __am_timer_rtc(AM_TIMER_RTC_T *rtc) {
