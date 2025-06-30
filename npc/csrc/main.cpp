@@ -43,11 +43,11 @@ void (*ref_difftest_exec)(uint64_t n) = NULL;
 void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 
 uint64_t start_time;
-
+time_t currentTimeABS;
 
 extern "C" int pmem_read(int raddr) {
   // 总是读取地址为`raddr & ~0x3u`的4字节返回
-  time_t currentTimeABS;
+  
   time(&currentTimeABS);
   uint64_t time = (currentTimeABS - start_time)*1000000;
   if(raddr == RTC_ADDR){
@@ -68,7 +68,7 @@ extern "C" void pmem_write(int waddr, int wdata, char wmask) {
   // `wmask`中每比特表示`wdata`中1个字节的掩码,
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   //log_write("                               wmask=%x,waddr = %08x,data= %08x\n",wmask,waddr,wdata);
-  time(&currentTime);
+  time(&currentTimeABS);
   if(waddr == SERIAL_PORT) {
     putchar(wdata);
     log_write("                               wmask=%x,waddr = %08x,data= %08x\n",wmask,waddr,wdata);
