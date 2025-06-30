@@ -20,6 +20,7 @@
 #include "utils.h"
 #include "include.h"
 #include "paddr.h"
+#include <time.h>
 
 
 int cpu_state;
@@ -43,7 +44,10 @@ void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 
 extern "C" int pmem_read(int raddr) {
   // 总是读取地址为`raddr & ~0x3u`的4字节返回
-  
+  if(raddr == RTC_ADDR){
+    time_t timep;
+    
+  }
   uint32_t tmp = (uint32_t)raddr /4; //int类型是有符号的，要转成无符号的
   log_write("raddr = %08x,data= %08x\n",raddr,mem[tmp]);
   return mem[tmp];
