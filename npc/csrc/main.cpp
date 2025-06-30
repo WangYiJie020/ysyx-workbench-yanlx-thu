@@ -246,7 +246,7 @@ static int parse_args(int argc, char *argv[]) {
 
 static void trace_and_difftest() {
   //log_write("%08x,%08x\n", top->pc,top->inst); 
-
+#ifdef CONFIG_DIFFTEST
   bool check = difftest_check();
   difftest_step();
   if(check==false) {
@@ -254,6 +254,7 @@ static void trace_and_difftest() {
     return;
   }
   
+#endif
   WP * p = head;
   word_t expr(char *e, bool *success);
   while(p!=NULL) {
@@ -315,8 +316,9 @@ int main(int argc, char** argv) {
   parse_args(argc, argv);
   long img_size = load_img();
 
-  
+#ifdef CONFIG_DIFFTEST
   init_difftest(diff_so_file, img_size, difftest_port);
+#endif
   init_sdb();
   cpu_state = NPC_RUNNING;
   
