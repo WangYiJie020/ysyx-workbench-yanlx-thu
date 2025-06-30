@@ -57,11 +57,11 @@ extern "C" int pmem_read(int raddr) {
       time = 0;
       flag=1;
     }
-    log_write("raddr = %08x,the time = %08x\n",raddr,(uint32_t)time);
+    //log_write("raddr = %08x,the time = %08x\n",raddr,(uint32_t)time);
     return time;
   }
   if(raddr == RTC_ADDR + 4) {
-    log_write("raddr = %08x,the time = %08x\n",raddr,(uint32_t)(time << 32));
+    //log_write("raddr = %08x,the time = %08x\n",raddr,(uint32_t)(time << 32));
     return (time << 32);
   }
 
@@ -77,7 +77,7 @@ extern "C" void pmem_write(int waddr, int wdata, char wmask) {
   time(&currentTimeABS);
   if(waddr == SERIAL_PORT) {
     putchar(wdata);
-    log_write("                               wmask=%x,waddr = %08x,data= %08x\n",wmask,waddr,wdata);
+    //log_write("                               wmask=%x,waddr = %08x,data= %08x\n",wmask,waddr,wdata);
     return;
   }
   /*if(waddr == RTC_ADDR){
