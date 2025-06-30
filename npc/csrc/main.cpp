@@ -75,10 +75,10 @@ extern "C" void pmem_write(int waddr, int wdata, char wmask) {
     return;
   }
   if(waddr == RTC_ADDR){
-    start_time = currentTime + wdata;
+    start_time = currentTimeABS + wdata;
   }
   if(waddr == RTC_ADDR + 4){
-    start_time = currentTime + wdata << 32;
+    start_time = currentTimeABS + wdata << 32;
   }
   uint32_t addr_tmp = (uint32_t)waddr / 4;
   switch(wmask) {
