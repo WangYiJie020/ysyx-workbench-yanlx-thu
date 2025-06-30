@@ -56,7 +56,7 @@ extern "C" void pmem_write(int waddr, int wdata, char wmask) {
   if(waddr == RTC_ADDR) {
     log_write("55\n");
     putchar(wdata);
-    log_write("                               wmask=%x,waddr = %08x,data= %08x\n",wmask,waddr,wdata);
+    //log_write("                               wmask=%x,waddr = %08x,data= %08x\n",wmask,waddr,wdata);
     return;
   }
   uint32_t addr_tmp = (uint32_t)waddr / 4;
