@@ -44,7 +44,7 @@ void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 
 time_t start_time;
 time_t currentTimeABS;
-int flag;
+int flag = 0;
 
 extern "C" int pmem_read(int raddr) {
   // 总是读取地址为`raddr & ~0x3u`的4字节返回
