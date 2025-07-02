@@ -35,14 +35,14 @@ void parse_elf(const char * elf_file){
     Elf32_Ehdr elf_header;
     if (fread(&elf_header, sizeof(Elf32_Ehdr), 1, fp) <= 0) {
         fclose(fp);
-        exit(EXIT_FAILURE);
+        assert(0);
     }
 
     // 检查文件是否为ELF文件
     if (memcmp(elf_header.e_ident, ELFMAG, SELFMAG) != 0) {
         fprintf(stderr, "Not an ELF file\n");
         fclose(fp);
-        exit(EXIT_FAILURE);
+        assert(0);
     }
 
     // 移动到Section header table,寻找字符表节
@@ -51,7 +51,7 @@ void parse_elf(const char * elf_file){
     while (1) {
         if (fread(&strtab_header, sizeof(Elf32_Shdr), 1, fp) <= 0) {
             fclose(fp);
-            exit(EXIT_FAILURE);
+            assert(0);
         }
         if (strtab_header.sh_type == SHT_STRTAB) {
             break;
@@ -63,7 +63,7 @@ void parse_elf(const char * elf_file){
     fseek(fp, strtab_header.sh_offset, SEEK_SET);
     if (fread(string_table, strtab_header.sh_size, 1, fp) <= 0) {
         fclose(fp);
-        exit(EXIT_FAILURE);
+        assert(0);
     }
 
     // 寻找符号表节
@@ -72,7 +72,7 @@ void parse_elf(const char * elf_file){
     while (1) {
         if (fread(&symtab_header, sizeof(Elf32_Shdr), 1, fp) <= 0) {
             fclose(fp);
-            exit(EXIT_FAILURE);
+            assert(0);
         }
         if (symtab_header.sh_type == SHT_SYMTAB) {
             break;
