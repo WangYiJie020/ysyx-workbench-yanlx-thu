@@ -26,7 +26,7 @@ void trace_call(paddr_t pc, paddr_t target);
 void trace_ret(paddr_t pc);
 
 enum {
-  TYPE_I, TYPE_U, TYPE_S, TYPE_UJ, TYPE_SB, TYPE_R, TYPE_ShiftI,
+  TYPE_I, TYPE_U, TYPE_S, TYPE_UJ, TYPE_SB, TYPE_R, TYPE_ShiftI, TYPE_C,
   TYPE_N, // none
 };
 
@@ -44,6 +44,17 @@ enum {
                             | (BITS(i, 11, 8) << 1) \
                             | (BITS(i, 7, 7) << 11); } while(0)
 #define immShiftI() do { *imm = SEXT(BITS(i, 24, 20), 5); } while(0)
+#define immC() do { *imm = BITS(i, 31, 20); } while(0)
+
+word_t * csr(word_t imm) {
+  switch(imm){
+    case 0x300: return &(cpu.csr_mstatus);break;
+    case 0x305: return &(cpu.csr_mtvec);break;
+    case 0x341: return &(cpu.csr_mepc);break;
+    case 0x342: return &(cpu.csr_mcause);break;
+    default: assert(0); return NULL;
+  }
+} 
 
 static void decode_operand(Decode *s, int *rd, word_t *src1, word_t *src2, word_t *imm, int type) {
   uint32_t i = s->isa.inst.val;
@@ -58,6 +69,7 @@ static void decode_operand(Decode *s, int *rd, word_t *src1, word_t *src2, word_
     case TYPE_UJ:                  immUJ(); break;
     case TYPE_SB:src1R(); src2R(); immSB(); break;
     case TYPE_ShiftI: src1R();     immShiftI(); break;
+    case TYPE_C: src1R();          immC(); break;
   }
 }
 
@@ -161,7 +173,9 @@ static int decode_exec(Decode *s) {
   INSTPAT("0000001 ????? ????? 110 ????? 01100 11", rem    , R, R(rd) = (sword_t)src1 % (sword_t)src2;);
   INSTPAT("0000001 ????? ????? 111 ????? 01100 11", remu   , R, R(rd) = src1 % src2;);
 
+  INSTPAT("0000000 00000 00000 000 00000 11100 11", ecall  , N, s->dnpc = 0x80000000); 
   INSTPAT("0000000 00001 00000 000 00000 11100 11", ebreak , N, NEMUTRAP(s->pc, R(10))); // R(10) is $a0
+  INSTPAT("0000001 ????? ????? 001 ????? 11100 11", carrw  , C, R(rd) = *(csr(imm)); *(csr(imm)) = src1);
   INSTPAT("??????? ????? ????? ??? ????? ????? ??", inv    , N, INV(s->pc));
   INSTPAT_END();
 
