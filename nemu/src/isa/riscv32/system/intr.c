@@ -20,10 +20,10 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
    * Then return the address of the interrupt/exception vector.
    */
 
-  cpu.csr_mstatus &= ~(1<<7);
-  cpu.csr_mstatus |= ((cpu.csr_mstatus&(1<<3))<<4);
-  cpu.csr_mstatus &= ~(1<<3);
-  cpu.csr_mstatus |= ((1<<11)+(1<<12));
+  cpu.csr_mstatus &= ~(1<<7); //MPIE set 0
+  cpu.csr_mstatus |= ((cpu.csr_mstatus&(1<<3))<<4); //MPIE = MIE
+  cpu.csr_mstatus &= ~(1<<3); //MIE set 0
+  cpu.csr_mstatus |= ((1<<11)+(1<<12)); //MPP=11
 
   cpu.csr_mepc = epc;
   cpu.csr_mcause = NO;
