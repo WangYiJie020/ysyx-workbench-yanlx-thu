@@ -136,7 +136,7 @@ static int cmd_p(char *args) {
 	uint32_t result;
 	//printf("%s\n",arg);
 	result=expr(arg,ptr_success);
-	printf("result=%u\n",result);
+	printf("result=%x\n",result);
         return 0;
 }
 
