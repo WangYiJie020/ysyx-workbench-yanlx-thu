@@ -29,6 +29,10 @@ void isa_reg_display() {
 	for(;i>0;i--) {
 		printf("%s\t%x\n",regs[32-i],cpu.gpr[32-i]);
 	}
+  printf("mstatus\t%x\n",cpu.csr_mstatus);
+  printf("mcause\t%x\n",cpu.csr_mcause);
+  printf("mepc\t%x\n",cpu.csr_mepc);
+  printf("mtvec\t%x\n",cpu.csr_mtvec);
 
 }
 
