@@ -56,7 +56,7 @@ int strcmp(const char *s1, const char *s2) {
 int strncmp(const char *s1, const char *s2, size_t n) {
   if (!n)   //n=0时，无字符要比，直接return 0
 		return 0;
-	while (--n && *s1 && *s1 == *s2) //当字符相等且不为’\0‘时比较下个字符，知道n=0比完
+	while (--n && *s1 && *s1 == *s2) //当字符相等且不为’\0‘时比较下个字符，直到n=0比完
 	{
 		s1++;
 		s2++;
