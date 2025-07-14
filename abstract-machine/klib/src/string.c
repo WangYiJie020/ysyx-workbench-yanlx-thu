@@ -50,7 +50,7 @@ int strcmp(const char *s1, const char *s2) {
       ret = 1 ;
   return( ret );
 
-  panic("Not implemented");
+  //panic("Not implemented");
 }
 
 int strncmp(const char *s1, const char *s2, size_t n) {
