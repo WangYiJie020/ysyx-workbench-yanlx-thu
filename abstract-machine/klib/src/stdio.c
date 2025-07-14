@@ -35,14 +35,14 @@ int printf(const char *fmt, ...) {
 	return i;
   //panic("Not implemented");
 }
-size_t strnlen(const char * s, size_t count)//size_t是unsigned long long的宏
+/*size_t strnlen(const char * s, size_t count)//size_t是unsigned long long的宏
 {
 	const char *sc;
 
 	for (sc = s; count-- && *sc != '\0'; ++sc)
-		/* nothing */;
+		;
 	return sc - s;
-}
+}*/
 
 uint32_t __attribute__((weak)) __div64_32(uint64_t *n, uint32_t base)
 {
@@ -296,7 +296,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
                 
 	        /*如果字符串中字符个数大于精度，len为精度；
 	        否则len为字符个数,即精度表示了字符串输出字符的个数*/
-			len = strnlen(s, precision);
+			len = strlen(s);
 	
 	         //处理'-',即printf("%-s","hello");
 			if (!(flags & LEFT))
