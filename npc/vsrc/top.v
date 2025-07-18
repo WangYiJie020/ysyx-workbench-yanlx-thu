@@ -41,7 +41,7 @@ module top(
   wire wb_src;
   wire [31:0] mem_data;
   wire [2:0] rmask;
-  wire [31:0] a5,csr_wdata,csr_rdata;
+  wire [31:0] a5,csr_wdata,csr_rdata,add_out;
   wire csr_write;
   wire adder_out_src;
   wire csr_wdata_src;

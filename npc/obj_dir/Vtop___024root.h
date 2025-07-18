@@ -30,6 +30,9 @@ class Vtop___024root final : public VerilatedModule {
     CData/*7:0*/ top__DOT__wmask;
     CData/*0:0*/ top__DOT__wb_src;
     CData/*2:0*/ top__DOT__rmask;
+    CData/*0:0*/ top__DOT__csr_write;
+    CData/*0:0*/ top__DOT__adder_out_src;
+    CData/*0:0*/ top__DOT__csr_wdata_src;
     CData/*0:0*/ __Vtrigrprev__TOP__clk;
     CData/*0:0*/ __VactContinue;
     SData/*9:0*/ __Vtableidx1;
@@ -44,6 +47,12 @@ class Vtop___024root final : public VerilatedModule {
     IData/*31:0*/ top__DOT__npc;
     IData/*31:0*/ top__DOT__datamem_readdata;
     IData/*31:0*/ top__DOT__mem_data;
+    IData/*31:0*/ top__DOT__csr_wdata;
+    IData/*31:0*/ top__DOT__csr_rdata;
+    IData/*31:0*/ top__DOT__CSR__DOT__csr_mepc;
+    IData/*31:0*/ top__DOT__CSR__DOT__csr_mstatus;
+    IData/*31:0*/ top__DOT__CSR__DOT__csr_mcause;
+    IData/*31:0*/ top__DOT__CSR__DOT__csr_mtvec;
     IData/*31:0*/ __Vfunc_pmem_read__2__Vfuncout;
     IData/*31:0*/ __Vfunc_pmem_read__3__Vfuncout;
     IData/*31:0*/ __VstlIterCount;
