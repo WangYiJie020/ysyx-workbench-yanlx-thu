@@ -102,7 +102,8 @@ module top(
     .wdata(csr_wdata),
     .NO(a5),
     .pc(pc),
-    .rdata(csr_rdata)
+    .rdata(csr_rdata),
+    .csr_reg(csr_reg) //for difftest
   );
 
   mux21 Csr_Wdata(

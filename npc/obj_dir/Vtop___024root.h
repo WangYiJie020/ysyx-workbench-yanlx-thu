@@ -58,8 +58,10 @@ class Vtop___024root final : public VerilatedModule {
     IData/*31:0*/ __VstlIterCount;
     IData/*31:0*/ __VactIterCount;
     VlUnpacked<IData/*31:0*/, 32> top__DOT__reg_file;
+    VlUnpacked<IData/*31:0*/, 4> top__DOT__csr_reg;
     VlUnpacked<IData/*31:0*/, 32> top__DOT____Vcellout__Rgefile__reg_file;
     VlUnpacked<IData/*31:0*/, 32> top__DOT__Rgefile__DOT__rf;
+    VlUnpacked<IData/*31:0*/, 4> top__DOT__CSR__DOT__csr_reg;
     VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
     VlTriggerVec<1> __VstlTriggered;
     VlTriggerVec<1> __VactTriggered;
