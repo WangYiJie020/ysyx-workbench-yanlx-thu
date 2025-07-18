@@ -360,9 +360,9 @@ int main(int argc, char** argv) {
   
   contextp->commandArgs(argc, argv);
   
-  contextp->traceEverOn(true); //打开追踪功能
-  top->trace(tfp, 0); //
-  tfp->open("wave.vcd"); //设置输出的文件wave.vcd
+  //contextp->traceEverOn(true); //打开追踪功能
+  //top->trace(tfp, 0); //
+  //tfp->open("wave.vcd"); //设置输出的文件wave.vcd
 
 
   int n = 10;
