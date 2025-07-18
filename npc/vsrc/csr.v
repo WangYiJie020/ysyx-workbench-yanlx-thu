@@ -40,21 +40,21 @@ module csr(
                             csr_mstatus[7] <= 1'b0;//MPIE set 0
                         end
                     end
-                    3'b001,3'b010: begin //csrrw, csrrs
+                    3'b001, 3'b010: begin //csrrw, csrrs
                         if(wen)begin
                             case (inst[31:20])
                                 12'h300:csr_mstatus <= wdata;
                                 12'h305:csr_mtvec <= wdata;
                                 12'h341:csr_mepc <= wdata;
                                 12'h342:csr_mcause <= wdata;
-                                default: 
+                                default:csr_mstatus <= csr_mstatus;
                             endcase
                         end
                     end
-                    default: 
+                    default:csr_mstatus <= csr_mstatus;
                 endcase
             end
-            default: 
+            default:csr_mstatus <= csr_mstatus;
         endcase
     end
 
