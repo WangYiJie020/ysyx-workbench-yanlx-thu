@@ -108,7 +108,7 @@ module top(
 
   mux21 Csr_Wdata(
     .d0(rs1),
-    .d1(csr_rdata & rs1),
+    .d1(csr_rdata | rs1),
     .sel(csr_wdata_src),
     .out(csr_wdata)
   );
