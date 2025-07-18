@@ -352,7 +352,7 @@ int main(int argc, char** argv) {
   parse_args(argc, argv);
   long img_size = load_img();
 
-#ifdef CONFIG_DIFFTEST
+#ifdef DIFFTEST_ON
   init_difftest(diff_so_file, img_size, difftest_port);
 #endif
   init_sdb();
