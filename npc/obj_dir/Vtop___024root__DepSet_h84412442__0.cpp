@@ -169,12 +169,16 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__Rgefile__DOT__rf[__Vdlyvdim0__top__DOT__Rgefile__DOT__rf__v0] 
             = __Vdlyvval__top__DOT__Rgefile__DOT__rf__v0;
     }
-    vlSelf->top__DOT__CSR__DOT__csr_reg[1U] = vlSelf->top__DOT__CSR__DOT__csr_mstatus;
-    vlSelf->top__DOT__CSR__DOT__csr_reg[3U] = vlSelf->top__DOT__CSR__DOT__csr_mtvec;
-    vlSelf->top__DOT__CSR__DOT__csr_reg[0U] = vlSelf->top__DOT__CSR__DOT__csr_mepc;
+    vlSelf->top__DOT____Vcellout__CSR__csr_reg[1U] 
+        = vlSelf->top__DOT__CSR__DOT__csr_mstatus;
+    vlSelf->top__DOT____Vcellout__CSR__csr_reg[3U] 
+        = vlSelf->top__DOT__CSR__DOT__csr_mtvec;
+    vlSelf->top__DOT____Vcellout__CSR__csr_reg[0U] 
+        = vlSelf->top__DOT__CSR__DOT__csr_mepc;
     vlSelf->top__DOT__pc = ((IData)(vlSelf->rst_n) ? vlSelf->top__DOT__npc
                              : 0x80000000U);
-    vlSelf->top__DOT__CSR__DOT__csr_reg[2U] = vlSelf->top__DOT__CSR__DOT__csr_mcause;
+    vlSelf->top__DOT____Vcellout__CSR__csr_reg[2U] 
+        = vlSelf->top__DOT__CSR__DOT__csr_mcause;
     vlSelf->top__DOT____Vcellout__Rgefile__reg_file[0U] 
         = vlSelf->top__DOT__Rgefile__DOT__rf[0U];
     vlSelf->top__DOT____Vcellout__Rgefile__reg_file[1U] 
@@ -239,6 +243,14 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         = vlSelf->top__DOT__Rgefile__DOT__rf[0x1eU];
     vlSelf->top__DOT____Vcellout__Rgefile__reg_file[0x1fU] 
         = vlSelf->top__DOT__Rgefile__DOT__rf[0x1fU];
+    vlSelf->top__DOT__csr_reg[3U] = vlSelf->top__DOT____Vcellout__CSR__csr_reg
+        [3U];
+    vlSelf->top__DOT__csr_reg[2U] = vlSelf->top__DOT____Vcellout__CSR__csr_reg
+        [2U];
+    vlSelf->top__DOT__csr_reg[1U] = vlSelf->top__DOT____Vcellout__CSR__csr_reg
+        [1U];
+    vlSelf->top__DOT__csr_reg[0U] = vlSelf->top__DOT____Vcellout__CSR__csr_reg
+        [0U];
     vlSelf->top__DOT__reg_file[0x1fU] = vlSelf->top__DOT____Vcellout__Rgefile__reg_file
         [0x1fU];
     vlSelf->top__DOT__reg_file[0x1eU] = vlSelf->top__DOT____Vcellout__Rgefile__reg_file
@@ -380,7 +392,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                                                  [3U]);
     if (VL_UNLIKELY((0x100073U == vlSelf->top__DOT__inst))) {
         Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();
-        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 202, "");
+        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 203, "");
     }
     vlSelf->top__DOT__csr_rdata = ((0x73U == (0x7fU 
                                               & vlSelf->top__DOT__inst))

@@ -47,10 +47,14 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___stl_sequent__TOP__0\n"); );
     // Body
-    vlSelf->top__DOT__CSR__DOT__csr_reg[0U] = vlSelf->top__DOT__CSR__DOT__csr_mepc;
-    vlSelf->top__DOT__CSR__DOT__csr_reg[1U] = vlSelf->top__DOT__CSR__DOT__csr_mstatus;
-    vlSelf->top__DOT__CSR__DOT__csr_reg[2U] = vlSelf->top__DOT__CSR__DOT__csr_mcause;
-    vlSelf->top__DOT__CSR__DOT__csr_reg[3U] = vlSelf->top__DOT__CSR__DOT__csr_mtvec;
+    vlSelf->top__DOT____Vcellout__CSR__csr_reg[0U] 
+        = vlSelf->top__DOT__CSR__DOT__csr_mepc;
+    vlSelf->top__DOT____Vcellout__CSR__csr_reg[1U] 
+        = vlSelf->top__DOT__CSR__DOT__csr_mstatus;
+    vlSelf->top__DOT____Vcellout__CSR__csr_reg[2U] 
+        = vlSelf->top__DOT__CSR__DOT__csr_mcause;
+    vlSelf->top__DOT____Vcellout__CSR__csr_reg[3U] 
+        = vlSelf->top__DOT__CSR__DOT__csr_mtvec;
     Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__pc, vlSelf->__Vfunc_pmem_read__2__Vfuncout);
     vlSelf->top__DOT__inst = vlSelf->__Vfunc_pmem_read__2__Vfuncout;
     vlSelf->top__DOT____Vcellout__Rgefile__reg_file[0U] 
@@ -117,9 +121,17 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         = vlSelf->top__DOT__Rgefile__DOT__rf[0x1eU];
     vlSelf->top__DOT____Vcellout__Rgefile__reg_file[0x1fU] 
         = vlSelf->top__DOT__Rgefile__DOT__rf[0x1fU];
+    vlSelf->top__DOT__csr_reg[3U] = vlSelf->top__DOT____Vcellout__CSR__csr_reg
+        [3U];
+    vlSelf->top__DOT__csr_reg[2U] = vlSelf->top__DOT____Vcellout__CSR__csr_reg
+        [2U];
+    vlSelf->top__DOT__csr_reg[1U] = vlSelf->top__DOT____Vcellout__CSR__csr_reg
+        [1U];
+    vlSelf->top__DOT__csr_reg[0U] = vlSelf->top__DOT____Vcellout__CSR__csr_reg
+        [0U];
     if (VL_UNLIKELY((0x100073U == vlSelf->top__DOT__inst))) {
         Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();
-        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 202, "");
+        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 203, "");
     }
     if ((0x40U & vlSelf->top__DOT__inst)) {
         if ((0x20U & vlSelf->top__DOT__inst)) {
