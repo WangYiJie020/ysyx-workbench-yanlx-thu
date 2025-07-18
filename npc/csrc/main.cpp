@@ -32,7 +32,7 @@ Vtop* top = new Vtop{contextp};
 VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
 
 
-#define  DIFFTEST_ON
+//#define  DIFFTEST_ON
 
 
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
@@ -66,7 +66,7 @@ extern "C" int pmem_read(int raddr) {
   }
 
   uint32_t tmp = (uint32_t)raddr /4; //int类型是有符号的，要转成无符号的
-  log_write("raddr = %08x,data= %08x\n",raddr,mem[tmp]);
+  //log_write("raddr = %08x,data= %08x\n",raddr,mem[tmp]);
   return mem[tmp];
 }
 extern "C" void pmem_write(int waddr, int wdata, char wmask) {
@@ -99,7 +99,7 @@ extern "C" void pmem_write(int waddr, int wdata, char wmask) {
     case 0xf:  mem[addr_tmp] = (mem[addr_tmp] & 0x00000000) + (wdata & 0xffffffff);;break;
     default: mem[addr_tmp] = mem[addr_tmp];
   }
-  log_write("                               wmask=%x,waddr = %08x,data= %08x\n",wmask,waddr,mem[addr_tmp]);
+  //log_write("                               wmask=%x,waddr = %08x,data= %08x\n",wmask,waddr,mem[addr_tmp]);
 }
 
 FILE *log_fp = NULL;
