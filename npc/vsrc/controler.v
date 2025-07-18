@@ -9,7 +9,10 @@ module controler(
     output reg MemWrite,
     output reg [7:0] wmask,
     output reg wb_src,
-    output reg [2:0] rmask
+    output reg [2:0] rmask,
+    output reg csr_write,
+    output reg adder_out_src,
+    output reg csr_wdata_src
 );
 
     wire [6:0] opcode;
@@ -23,26 +26,30 @@ module controler(
         case(opcode)           
             7'b0110111: begin //lui
                 a_in_src = 1'b0; b_in_src = 2'b01; reg_write = 1; pc_srcs = 3'b000;adder_a_src = 1'b0;
-                MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
+                MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0; csr_write = 1'b0;
+                adder_out_src = 1'b0; csr_wdata_src = 1'b0;
             end 
             7'b0010111: begin //auipc
                 a_in_src = 1'b1; b_in_src = 2'b01; reg_write = 1; pc_srcs = 3'b000;adder_a_src = 1'b0;
-                MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
+                MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0; csr_write = 1'b0;
+                adder_out_src = 1'b0; csr_wdata_src = 1'b0;
             end
             7'b1101111: begin //jal
                 a_in_src = 1'b1; b_in_src = 2'b10; reg_write = 1; pc_srcs = 3'b001;adder_a_src = 1'b0;
-                MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
+                MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0; csr_write = 1'b0;
+                adder_out_src = 1'b0; csr_wdata_src = 1'b0;
             end
             7'b1100111: begin
                 case(funct3)
                     3'b000: begin //jalr
                         a_in_src = 1'b1; b_in_src = 2'b10; reg_write = 1; pc_srcs = 3'b001; 
                         adder_a_src = 1'b1; MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0;
-                        rmask = 0;
+                        rmask = 0; csr_write = 1'b0; adder_out_src = 1'b0; csr_wdata_src = 1'b0;
                     end //jalr
                     default: begin 
                         a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 3'b000; adder_a_src = 1'b0;
-                        MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
+                        MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0; csr_write = 1'b0;
+                        adder_out_src = 1'b0; csr_wdata_src = 1'b0;
                     end
                 endcase
             end
@@ -56,6 +63,9 @@ module controler(
                 wmask = 0; //do not care 
                 wb_src=1'b0; //do not care 
                 rmask = 3'b000; //do not care 
+                csr_write = 1'b0;
+                adder_out_src = 1'b0; 
+                csr_wdata_src = 1'b0;
                 case(funct3)
                     3'b000: pc_srcs = 3'b010; //beq
                     3'b001: pc_srcs = 3'b011; //bne 
@@ -76,6 +86,9 @@ module controler(
                 MemWrite = 1'b0; //not write mem
                 wmask = 8'h0f; //do not care 
                 wb_src=1'b1; //wb data is mem_data
+                csr_write = 1'b0;
+                adder_out_src = 1'b0; 
+                csr_wdata_src = 1'b0;
                 case(funct3)
                     3'b000: rmask = 3'b011; //lb
                     3'b001: rmask = 3'b001; //lh
@@ -95,6 +108,9 @@ module controler(
                 MemWrite = 1'b1; //write mem
                 wb_src=1'b0; //wb data is default
                 rmask = 0; //do not care 
+                csr_write = 1'b0;
+                adder_out_src = 1'b0; 
+                csr_wdata_src = 1'b0;
                 case(funct3)
                     3'b000: wmask = 8'h01; //sb //1 byte can write
                     3'b001: wmask = 8'h03; //sh //2 byte can write
@@ -112,7 +128,9 @@ module controler(
                 MemRead = 1'b0; MemWrite = 1'b0; //not read mem //not write mem
                 wmask = 0; rmask = 0; //do not care 
                 wb_src=1'b0; //wb data is alu_result
-                
+                csr_write = 1'b0;
+                adder_out_src = 1'b0; 
+                csr_wdata_src = 1'b0;
             end
             7'b0110011:begin //add sub sll slt sltu xor srl sra or and
                 a_in_src = 1'b0; //choose rs1
@@ -125,11 +143,68 @@ module controler(
                 wmask = 8'h0f; //do not care 
                 wb_src=1'b0; //wb data is alu_result
                 rmask = 3'b000; //do not care 
-                
+                csr_write = 1'b0;
+                adder_out_src = 1'b0; 
+                csr_wdata_src = 1'b0;
+            end
+            7'b01110011:begin
+                case(funct3)
+                    3'b000: begin //ecall mret
+                        a_in_src = 1'b0; //do not care 
+                        b_in_src = 2'b11; //do not care 
+                        reg_write = 1'b0; //no need to write regfiles 
+                        pc_srcs = 3'b001; //pc=pc_new
+                        adder_a_src = 1'b0;//do not care 
+                        MemRead = 1'b0; //not read mem
+                        MemWrite = 1'b0; //not write mem
+                        wmask = 8'h0f; //do not care 
+                        wb_src=1'b0; //do not care 
+                        rmask = 3'b000; //do not care 
+                        csr_write = 1'b0; //do not care 
+                        adder_out_src = 1'b1; //choose csr_rdata
+                        csr_wdata_src = 1'b0; //do not care 
+                    end
+                    3'b001: begin //csrrw
+                        a_in_src = 1'b0; //choose rs1
+                        b_in_src = 2'b11; //choose csr_rdata
+                        reg_write = 1'b1; //write regfiles 
+                        pc_srcs = 3'b000; //pc=pc+4
+                        adder_a_src = 1'b0;//do not care 
+                        MemRead = 1'b0; //not read mem
+                        MemWrite = 1'b0; //not write mem
+                        wmask = 8'h0f; //do not care 
+                        wb_src=1'b0; //wb data is alu_result
+                        rmask = 3'b000; //do not care 
+                        csr_write = 1'b1; //write csr
+                        adder_out_src = 1'b0; //do not care
+                        csr_wdata_src = 1'b0; //choose rs1
+                    end
+                    3'b010: begin //csrrs
+                        a_in_src = 1'b0; //choose rs1
+                        b_in_src = 2'b11; //choose csr_rdata
+                        reg_write = 1'b1; //write regfiles 
+                        pc_srcs = 3'b000; //pc=pc+4
+                        adder_a_src = 1'b0;//do not care 
+                        MemRead = 1'b0; //not read mem
+                        MemWrite = 1'b0; //not write mem
+                        wmask = 8'h0f; //do not care 
+                        wb_src=1'b0; //wb data is alu_result
+                        rmask = 3'b000; //do not care 
+                        csr_write = 1'b1; //write csr
+                        adder_out_src = 1'b0; //do not care
+                        csr_wdata_src = 1'b1; //choose csr_wdata | rs1
+                    end
+                    default: begin 
+                        a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 3'b000; adder_a_src = 1'b0;
+                        MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0; csr_write = 1'b0;
+                        adder_out_src = 1'b0; csr_wdata_src = 1'b0;
+                    end
+                endcase
             end
             default: begin 
                 a_in_src = 1'b0; b_in_src = 2'b00; reg_write = 0; pc_srcs = 3'b000; adder_a_src = 1'b0;
-                MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0;
+                MemRead = 1'b0; MemWrite = 1'b0; wmask = 0; wb_src=1'b0; rmask = 0; csr_write = 1'b0;
+                adder_out_src = 1'b0; csr_wdata_src = 1'b0;
             end
         endcase
     end

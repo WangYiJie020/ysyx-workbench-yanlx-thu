@@ -100,6 +100,9 @@ module alu_control(
                     default:alu_op = 0;
                 endcase
             end
+            7'b1110011: begin
+                alu_op = 4'b0000;//pass b
+            end
             default: alu_op = 0;
         endcase
     end

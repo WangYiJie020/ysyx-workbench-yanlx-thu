@@ -41,6 +41,10 @@ module top(
   wire wb_src;
   wire [31:0] mem_data;
   wire [2:0] rmask;
+  wire [31:0] a5,csr_wdata,csr_rdata;
+  wire csr_write;
+  wire adder_out_src;
+  wire csr_wdata_src;
 
   pc PC (
     .clk(clk),
@@ -65,7 +69,10 @@ module top(
     .MemWrite(mem_write),
     .wmask(wmask),
     .wb_src(wb_src),
-    .rmask(rmask)
+    .rmask(rmask),
+    .csr_write(csr_write),
+    .adder_out_src(adder_out_src),
+    .csr_wdata_src(csr_wdata_src)
   );
 
   regfile Rgefile (
@@ -77,12 +84,30 @@ module top(
     .rdata1(rs1),
     .raddr2(inst[24:20]), //rs2
     .rdata2(rs2),
+    .value1(a5),
     .reg_file(reg_file)  //for difftest
   );
 
   sext SEXT (
     .inst(inst),
     .data(imm)
+  );
+
+  csr CSR(
+    .clk(clk),
+    .wen(csr_write),
+    .inst(inst),
+    .wdata(csr_wdata),
+    .NO(a5),
+    .pc(pc),
+    .rdata(csr_rdata)
+  );
+
+  mux21 Csr_Wdata(
+    .d0(rs1),
+    .d1(csr_rdata | rs1),
+    .sel(csr_wdata_src),
+    .out(csr_wdata)
   );
 
   mux21 Adder_A_Src(
@@ -95,6 +120,13 @@ module top(
   adder Adder(
     .a(a_out),
     .b(imm),
+    .out(add_out)
+  );
+
+  mux21 Adder_Out(
+    .d0(add_out),
+    .d1(csr_rdata),
+    .sel(adder_out_src),
     .out(pc_new)
   );
 
@@ -118,7 +150,7 @@ module top(
     .d0(rs2),
     .d1(imm),
     .d2(32'd4),
-    .d3(32'd0), // empty
+    .d3(csr_rdata),
     .sel(b_in_src),
     .out(b_in)
   );

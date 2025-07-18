@@ -7,12 +7,14 @@ module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
   output [DATA_WIDTH-1:0] rdata1,
   input [ADDR_WIDTH-1:0] raddr2,
   output [DATA_WIDTH-1:0] rdata2,
+  output [DATA_WIDTH-1:0] value1,
   output reg [31:0] reg_file [31:0]
 );
   reg [DATA_WIDTH-1:0] rf [2**ADDR_WIDTH-1:0];
   
   assign rdata1 = rf[raddr1];
   assign rdata2 = rf[raddr2];
+  assign value1 = rf[15]; //value1 = a5;
 
     genvar gv_i;
     generate
