@@ -66,7 +66,7 @@ module csr(
                     end
                     3'b001,3'b010: begin //csrrw, csrrs
                         case (inst[31:20])
-                            12'h300:rdata = csr_mstatus
+                            12'h300:rdata = csr_mstatus;
                             12'h305:rdata = csr_mtvec;
                             12'h341:rdata = csr_mepc;
                             12'h342:rdata = csr_mcause;
