@@ -754,10 +754,10 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                     : vlSelf->top__DOT__rs1);
     vlSelf->top__DOT__pc_new = ((IData)(vlSelf->top__DOT__adder_out_src)
                                  ? vlSelf->top__DOT__csr_rdata
-                                 : (1U & (((IData)(vlSelf->top__DOT__adder_a_src)
-                                            ? vlSelf->top__DOT__rs1
-                                            : vlSelf->top__DOT__pc) 
-                                          + vlSelf->top__DOT__imm)));
+                                 : (((IData)(vlSelf->top__DOT__adder_a_src)
+                                      ? vlSelf->top__DOT__rs1
+                                      : vlSelf->top__DOT__pc) 
+                                    + vlSelf->top__DOT__imm));
     vlSelf->top__DOT__a_in = ((IData)(vlSelf->top__DOT__a_in_src)
                                ? vlSelf->top__DOT__pc
                                : vlSelf->top__DOT__rs1);

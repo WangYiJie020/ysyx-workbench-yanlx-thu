@@ -47,11 +47,14 @@ module csr(
                                 12'h305:csr_mtvec <= wdata;
                                 12'h341:csr_mepc <= wdata;
                                 12'h342:csr_mcause <= wdata;
+                                default: 
                             endcase
                         end
                     end
+                    default: 
                 endcase
             end
+            default: 
         endcase
     end
 
