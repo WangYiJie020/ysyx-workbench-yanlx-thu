@@ -7,7 +7,8 @@ input int gpr_14,input int gpr_15,input int gpr_16,input int gpr_17,
 input int gpr_18,input int gpr_19,input int gpr_20,input int gpr_21,
 input int gpr_22,input int gpr_23,input int gpr_24,input int gpr_25,
 input int gpr_26,input int gpr_27,input int gpr_28,input int gpr_29,
-input int gpr_30,input int gpr_31,input int pc);
+input int gpr_30,input int gpr_31,input int pc,input int csr_reg_0,
+input int csr_reg_1,input int csr_reg_2,input int csr_reg_3);
 
 
 module top(
@@ -45,6 +46,7 @@ module top(
   wire csr_write;
   wire adder_out_src;
   wire csr_wdata_src;
+  wire [31:0] csr_reg [3:0];
 
   pc PC (
     .clk(clk),
@@ -206,7 +208,7 @@ module top(
       reg_file[7],reg_file[8],reg_file[9],reg_file[10],reg_file[11],reg_file[12],reg_file[13],reg_file[14],
       reg_file[15],reg_file[16],reg_file[17],reg_file[18],reg_file[19],reg_file[20],reg_file[21],reg_file[22],
       reg_file[23],reg_file[24],reg_file[25],reg_file[26],reg_file[27],reg_file[28],reg_file[29],reg_file[30],
-      reg_file[31],pc);
+      reg_file[31],pc,csr_reg[0],csr_reg[1],csr_reg[2],csr_reg[3]);
   end
 
 endmodule

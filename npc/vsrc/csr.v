@@ -5,7 +5,8 @@ module csr(
     input [31:0] wdata,
     input [31:0] NO,
     input [31:0] pc,
-    output reg [31:0] rdata
+    output reg [31:0] rdata,
+    output [31:0] csr_reg [3:0]
 );
 
     reg [31:0] csr_mepc;
@@ -18,6 +19,11 @@ module csr(
 
     assign opcode = inst[6:0];
     assign funct3 = inst[14:12];
+
+    assign csr_reg[0] = csr_mepc;
+    assign csr_reg[1] = csr_mstatus;
+    assign csr_reg[2] = csr_mcause;
+    assign csr_reg[3] = csr_mtvec;
 
     initial begin
         csr_mstatus = 32'h1800;

@@ -60,7 +60,29 @@ bool checkregs(regfile *ref, regfile *dut) {
       check = false;
     }
   }
+
+  if(ref->csr_mepc != dut->csr_mepc){
+    printf("difftest error: ");
+    printf("csr_mepc is diff: ref = 0x%x, dut = 0x%x\n",ref->csr_mepc,dut->csr_mepc);
+    check = false;
+  }
+  if(ref->csr_mstatus != dut->csr_mstatus){
+    printf("difftest error: ");
+    printf("csr_mstatus is diff: ref = 0x%x, dut = 0x%x\n",ref->csr_mstatus,dut->csr_mstatus);
+    check = false;
+  }
+  if(ref->csr_mcause != dut->csr_mcause){
+    printf("difftest error: ");
+    printf("csr_mcause is diff: ref = 0x%x, dut = 0x%x\n",ref->csr_mcause,dut->csr_mcause);
+    check = false;
+  }
+  if(ref->csr_mtvec != dut->csr_mtvec){
+    printf("difftest error: ");
+    printf("csr_mtvec is diff: ref = 0x%x, dut = 0x%x\n",ref->csr_mtvec,dut->csr_mtvec);
+    check = false;
+  }
   return check;
+
 }
 
 void print_regs(){

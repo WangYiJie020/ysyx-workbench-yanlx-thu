@@ -17,6 +17,10 @@
 typedef struct {
   uint32_t gpr[32];
   uint32_t pc;
+  uint32_t csr_mepc;
+  uint32_t csr_mstatus;
+  uint32_t csr_mcause;
+  uint32_t csr_mtvec;
 } regfile;
 
 typedef struct watchpoint {
