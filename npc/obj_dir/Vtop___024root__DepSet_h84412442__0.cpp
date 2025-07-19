@@ -93,8 +93,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                     = ((0xfffffff7U & __Vdly__top__DOT__CSR__DOT__csr_mstatus) 
                        | (8U & (vlSelf->top__DOT__CSR__DOT__csr_mstatus 
                                 >> 4U)));
-                __Vdly__top__DOT__CSR__DOT__csr_mstatus 
-                    = (0xffffff7fU & __Vdly__top__DOT__CSR__DOT__csr_mstatus);
             }
         } else if (((1U == (7U & (vlSelf->top__DOT__inst 
                                   >> 0xcU))) | (2U 

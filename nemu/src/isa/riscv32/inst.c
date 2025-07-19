@@ -179,10 +179,9 @@ static int decode_exec(Decode *s) {
               Log("mepc="FMT_PADDR", mcause="FMT_PADDR,cpu.csr_mepc,cpu.csr_mcause)\
             );); 
   INSTPAT("0000000 00001 00000 000 00000 11100 11", ebreak , N, NEMUTRAP(s->pc, R(10))); // R(10) is $a0
-  INSTPAT("0011000 00010 00000 000 00000 11100 11", mret   , N, s->dnpc = cpu.csr_mepc;\
-            cpu.csr_mstatus &= ~(1<<3); \
-            cpu.csr_mstatus |= ((cpu.csr_mstatus&(1<<7))>>4);\
-            cpu.csr_mstatus |= 1<<7);
+  INSTPAT("0011000 00010 00000 000 00000 11100 11", mret   , N, s->dnpc = cpu.csr_mepc;);
+            //cpu.csr_mstatus &= ~(1<<3);             cpu.csr_mstatus |= ((cpu.csr_mstatus&(1<<7))>>4);            cpu.csr_mstatus |= 1<<7);
+  
   INSTPAT("??????? ????? ????? 001 ????? 11100 11", csrrw  , C, R(rd) = *(csr(imm)); *(csr(imm)) = src1;);
   INSTPAT("??????? ????? ????? 010 ????? 11100 11", csrrs  , C, R(rd) = *(csr(imm)); *(csr(imm)) = src1 | *(csr(imm)););
   INSTPAT("??????? ????? ????? ??? ????? ????? ??", inv    , N, INV(s->pc));
