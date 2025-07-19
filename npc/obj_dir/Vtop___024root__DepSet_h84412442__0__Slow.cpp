@@ -25,7 +25,7 @@ VL_ATTR_COLD void Vtop___024root___eval_triggers__stl(Vtop___024root* vlSelf) {
 #endif
 }
 
-void Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(IData/*31:0*/ raddr, IData/*31:0*/ &pmem_read__Vfuncrtn);
+void Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(IData/*31:0*/ raddr, CData/*7:0*/ rmask, IData/*31:0*/ &pmem_read__Vfuncrtn);
 void Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h7b4d463a_0;
 extern const VlUnpacked<CData/*1:0*/, 1024> Vtop__ConstPool__TABLE_h2128083f_0;
@@ -55,7 +55,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         = vlSelf->top__DOT__CSR__DOT__csr_mcause;
     vlSelf->top__DOT____Vcellout__CSR__csr_reg[3U] 
         = vlSelf->top__DOT__CSR__DOT__csr_mtvec;
-    Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__pc, vlSelf->__Vfunc_pmem_read__2__Vfuncout);
+    Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__pc, 0U, vlSelf->__Vfunc_pmem_read__2__Vfuncout);
     vlSelf->top__DOT__inst = vlSelf->__Vfunc_pmem_read__2__Vfuncout;
     vlSelf->top__DOT____Vcellout__Rgefile__reg_file[0U] 
         = vlSelf->top__DOT__Rgefile__DOT__rf[0U];
@@ -131,7 +131,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         [0U];
     if (VL_UNLIKELY((0x100073U == vlSelf->top__DOT__inst))) {
         Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();
-        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 203, "");
+        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 204, "");
     }
     if ((0x40U & vlSelf->top__DOT__inst)) {
         if ((0x20U & vlSelf->top__DOT__inst)) {
@@ -987,7 +987,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                                      : (IData)(vlSelf->top__DOT__wmask)))));
     }
     if (((~ (IData)(vlSelf->top__DOT__mem_write)) & (IData)(vlSelf->top__DOT__mem_read))) {
-        Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__alu_result, vlSelf->__Vfunc_pmem_read__3__Vfuncout);
+        Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__alu_result, (IData)(vlSelf->top__DOT__rmask), vlSelf->__Vfunc_pmem_read__3__Vfuncout);
         vlSelf->top__DOT__datamem_readdata = vlSelf->__Vfunc_pmem_read__3__Vfuncout;
     } else {
         vlSelf->top__DOT__datamem_readdata = 0U;
