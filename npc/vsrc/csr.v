@@ -35,7 +35,7 @@ module csr(
                 case (funct3)
                     3'b000:begin 
                         if(inst==32'h00000073) begin //ecall
-                            csr_mepc <= 0;
+                            csr_mepc <= pc;
                             csr_mcause <= NO;
                             csr_mstatus[7] <= csr_mstatus[3];//MPIE = MIE
                             csr_mstatus[3] <= 1'b0;//MIE set 0
