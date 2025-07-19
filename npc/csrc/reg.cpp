@@ -44,6 +44,12 @@ word_t isa_reg_str2val(const char *s, bool *success) {
     }	
 	}
 
+  if(strcmp("pc", reg1) == 0) {
+    flag=1;
+    //printf("%s\t%x\n","pc",cpu.pc);
+    value=cpu.pc; 
+  }
+
   if(!flag) {
     *success=0;
     assert(0);
