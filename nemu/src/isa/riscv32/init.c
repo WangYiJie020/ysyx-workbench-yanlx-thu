@@ -34,6 +34,9 @@ static void restart() {
   cpu.gpr[0] = 0;
 
   cpu.csr_mstatus = 0x1800;
+  cpu.csr_mcause = 0;
+  cpu.csr_mepc = 0;
+  cpu.csr_mtvec = 0;
 }
 
 void init_isa() {
