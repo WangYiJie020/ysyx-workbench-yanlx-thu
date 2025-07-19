@@ -1033,10 +1033,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                                 (vlSelf->top__DOT__a_in 
                                                  - vlSelf->top__DOT__b_in)
                                                  : 
-                                                ((IData)(1U) 
-                                                 + 
-                                                 (vlSelf->top__DOT__a_in 
-                                                  + vlSelf->top__DOT__b_in))))
+                                                (vlSelf->top__DOT__a_in 
+                                                 + vlSelf->top__DOT__b_in)))
                                          : ((2U & (IData)(vlSelf->top__DOT__alu_op))
                                              ? ((1U 
                                                  & (IData)(vlSelf->top__DOT__alu_op))

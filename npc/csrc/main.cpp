@@ -281,7 +281,7 @@ static int parse_args(int argc, char *argv[]) {
 
 static void trace_and_difftest() {
   //log_write("%08x,%08x\n", top->pc,top->inst); 
-#ifdef CONFIG_DIFFTEST
+#ifdef DIFFTEST_ON
   bool check = difftest_check();
   difftest_step();
   if(check==false) {
