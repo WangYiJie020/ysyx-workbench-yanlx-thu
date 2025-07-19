@@ -43,7 +43,7 @@ module csr(
                         end
                         else if(inst==32'h30200073) begin //mret
                             csr_mstatus[3] <= csr_mstatus[7]; //MIE = MPIE
-                            csr_mstatus[7] <= 1'b0;//MPIE set 0
+                            //csr_mstatus[7] <= 1'b0;//MPIE set 0
                         end
                     end
                     3'b001, 3'b010: begin //csrrw, csrrs
