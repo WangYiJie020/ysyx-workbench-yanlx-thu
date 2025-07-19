@@ -33,11 +33,12 @@ static void restart() {
   /* The zero register is always 0. */
   cpu.gpr[0] = 0;
 
-  cpu.csr_mstatus = 0x1801;
+  cpu.csr_mstatus = 0x1800;
 }
 
 void init_isa() {
   /* Load built-in image. */
+  cpu.csr_mstatus = 0x1800;
   memcpy(guest_to_host(RESET_VECTOR), img, sizeof(img));
 
   /* Initialize this virtual computer system. */
