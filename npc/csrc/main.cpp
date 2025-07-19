@@ -217,7 +217,7 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
 bool difftest_check() {
   regfile ref;
   ref_difftest_regcpy(&ref, DIFFTEST_TO_DUT);
-  printf("%x,%x,%x\n",ref.pc,ref.csr_mcause,ref.csr_mepc);
+  //printf("%x,%x,%x\n",ref.pc,ref.csr_mcause,ref.csr_mepc);
   return checkregs(&ref, &cpu);
 }
 
