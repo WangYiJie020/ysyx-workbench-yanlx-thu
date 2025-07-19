@@ -73,26 +73,50 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
             = (0x1fU & (vlSelf->top__DOT__inst >> 7U));
     }
     if ((0x73U == (0x7fU & vlSelf->top__DOT__inst))) {
+        if ((0U != (7U & (vlSelf->top__DOT__inst >> 0xcU)))) {
+            if (((1U == (7U & (vlSelf->top__DOT__inst 
+                               >> 0xcU))) | (2U == 
+                                             (7U & 
+                                              (vlSelf->top__DOT__inst 
+                                               >> 0xcU))))) {
+                if (vlSelf->top__DOT__csr_write) {
+                    if ((0x300U == (vlSelf->top__DOT__inst 
+                                    >> 0x14U))) {
+                        __Vdly__top__DOT__CSR__DOT__csr_mstatus 
+                            = vlSelf->top__DOT__csr_wdata;
+                    } else if ((0x305U != (vlSelf->top__DOT__inst 
+                                           >> 0x14U))) {
+                        if ((0x341U != (vlSelf->top__DOT__inst 
+                                        >> 0x14U))) {
+                            if ((0x342U != (vlSelf->top__DOT__inst 
+                                            >> 0x14U))) {
+                                __Vdly__top__DOT__CSR__DOT__csr_mstatus 
+                                    = vlSelf->top__DOT__CSR__DOT__csr_mstatus;
+                            }
+                        }
+                    }
+                    if ((0x300U != (vlSelf->top__DOT__inst 
+                                    >> 0x14U))) {
+                        if ((0x305U == (vlSelf->top__DOT__inst 
+                                        >> 0x14U))) {
+                            vlSelf->top__DOT__CSR__DOT__csr_mtvec 
+                                = vlSelf->top__DOT__csr_wdata;
+                        }
+                    }
+                }
+            } else {
+                __Vdly__top__DOT__CSR__DOT__csr_mstatus 
+                    = vlSelf->top__DOT__CSR__DOT__csr_mstatus;
+            }
+        }
+        vlSelf->top__DOT__CSR__DOT__csr_mstatus = __Vdly__top__DOT__CSR__DOT__csr_mstatus;
         if ((0U == (7U & (vlSelf->top__DOT__inst >> 0xcU)))) {
             if ((0x73U == vlSelf->top__DOT__inst)) {
-                __Vdly__top__DOT__CSR__DOT__csr_mstatus 
-                    = ((0xffffff7fU & __Vdly__top__DOT__CSR__DOT__csr_mstatus) 
-                       | (0x80U & (vlSelf->top__DOT__CSR__DOT__csr_mstatus 
-                                   << 4U)));
-                __Vdly__top__DOT__CSR__DOT__csr_mstatus 
-                    = (0xfffffff7U & __Vdly__top__DOT__CSR__DOT__csr_mstatus);
-                __Vdly__top__DOT__CSR__DOT__csr_mstatus 
-                    = (0x1800U | __Vdly__top__DOT__CSR__DOT__csr_mstatus);
                 vlSelf->top__DOT__CSR__DOT__csr_mepc 
                     = vlSelf->top__DOT__pc;
                 vlSelf->top__DOT__CSR__DOT__csr_mcause 
                     = vlSelf->top__DOT__Rgefile__DOT__rf
                     [0xfU];
-            } else if ((0x30200073U == vlSelf->top__DOT__inst)) {
-                __Vdly__top__DOT__CSR__DOT__csr_mstatus 
-                    = ((0xfffffff7U & __Vdly__top__DOT__CSR__DOT__csr_mstatus) 
-                       | (8U & (vlSelf->top__DOT__CSR__DOT__csr_mstatus 
-                                >> 4U)));
             }
         } else if (((1U == (7U & (vlSelf->top__DOT__inst 
                                   >> 0xcU))) | (2U 
@@ -101,21 +125,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                                  & (vlSelf->top__DOT__inst 
                                                     >> 0xcU))))) {
             if (vlSelf->top__DOT__csr_write) {
-                if ((0x300U == (vlSelf->top__DOT__inst 
-                                >> 0x14U))) {
-                    __Vdly__top__DOT__CSR__DOT__csr_mstatus 
-                        = vlSelf->top__DOT__csr_wdata;
-                } else if ((0x305U != (vlSelf->top__DOT__inst 
-                                       >> 0x14U))) {
-                    if ((0x341U != (vlSelf->top__DOT__inst 
-                                    >> 0x14U))) {
-                        if ((0x342U != (vlSelf->top__DOT__inst 
-                                        >> 0x14U))) {
-                            __Vdly__top__DOT__CSR__DOT__csr_mstatus 
-                                = vlSelf->top__DOT__CSR__DOT__csr_mstatus;
-                        }
-                    }
-                }
                 if ((0x300U != (vlSelf->top__DOT__inst 
                                 >> 0x14U))) {
                     if ((0x305U != (vlSelf->top__DOT__inst 
@@ -132,28 +141,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                 vlSelf->top__DOT__CSR__DOT__csr_mcause 
                                     = vlSelf->top__DOT__csr_wdata;
                             }
-                        }
-                    }
-                }
-            }
-        } else {
-            __Vdly__top__DOT__CSR__DOT__csr_mstatus 
-                = vlSelf->top__DOT__CSR__DOT__csr_mstatus;
-        }
-        vlSelf->top__DOT__CSR__DOT__csr_mstatus = __Vdly__top__DOT__CSR__DOT__csr_mstatus;
-        if ((0U != (7U & (vlSelf->top__DOT__inst >> 0xcU)))) {
-            if (((1U == (7U & (vlSelf->top__DOT__inst 
-                               >> 0xcU))) | (2U == 
-                                             (7U & 
-                                              (vlSelf->top__DOT__inst 
-                                               >> 0xcU))))) {
-                if (vlSelf->top__DOT__csr_write) {
-                    if ((0x300U != (vlSelf->top__DOT__inst 
-                                    >> 0x14U))) {
-                        if ((0x305U == (vlSelf->top__DOT__inst 
-                                        >> 0x14U))) {
-                            vlSelf->top__DOT__CSR__DOT__csr_mtvec 
-                                = vlSelf->top__DOT__csr_wdata;
                         }
                     }
                 }
