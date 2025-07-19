@@ -67,7 +67,7 @@ extern "C" int pmem_read(int raddr, char rmask) {
   uint32_t tmp = (uint32_t)raddr /4; //int类型是有符号的，要转成无符号的
   uint32_t align = (uint32_t)raddr % 4;
   if(align != 0 && rmask == 0){
-    printf("不对齐\n");
+    //printf("不对齐\n");
     switch(align) {
       case 1:return_data = ((mem[tmp+1] & 0x000000ff) << 24) + ((mem[tmp] & 0xffffff00) >> 8);
       case 2:return_data = ((mem[tmp+1] & 0x0000ffff) << 16) + ((mem[tmp] & 0xffff0000) >> 16);
