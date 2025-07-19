@@ -203,7 +203,7 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
       "This will help you a lot for debugging, but also significantly reduce the performance. "
       "If it is not necessary, you can turn it off in menuconfig.", ref_so_file);
 
-  ref_difftest_init();
+  
   ref_difftest_memcpy(PMEM_LEFT, mem+0x20000000, img_size, DIFFTEST_TO_REF);
   cpu.pc = 0x80000000;
   cpu.csr_mstatus = 0x1800;
@@ -211,6 +211,7 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
   cpu.csr_mepc = 0;
   cpu.csr_mtvec = 0;
   ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
+  ref_difftest_init();
 }
 
 bool difftest_check() {
