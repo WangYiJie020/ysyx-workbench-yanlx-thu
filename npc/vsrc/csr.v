@@ -25,9 +25,9 @@ module csr(
     assign csr_reg[2] = csr_mcause;
     assign csr_reg[3] = csr_mtvec;
 
-    initial begin
-        csr_mstatus = 32'h1800;
-    end
+    //initial begin
+     //   csr_mstatus = 32'h1800;
+    //end
 
     always@(posedge clk) begin
         case (opcode)
