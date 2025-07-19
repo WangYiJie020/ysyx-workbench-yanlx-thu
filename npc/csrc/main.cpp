@@ -63,13 +63,22 @@ extern "C" int pmem_read(int raddr, char rmask) {
     //log_write("raddr = %08x,the time = %08x\n",raddr,(uint32_t)(time << 32));
     return (time << 32);
   }
-
+  uint32_t return_data;
   uint32_t tmp = (uint32_t)raddr /4; //int类型是有符号的，要转成无符号的
-  if((uint32_t)raddr % 4 != 0 && rmask == 0){
+  uint32_t align = (uint32_t)raddr % 4;
+  if(align != 0 && rmask == 0){
     printf("不对齐\n");
+    switch(align) {
+      case 1:return_data = ((mem[tmp+1] & 0x000000ff) << 24) + ((mem[tmp] & 0xffffff00) >> 8);
+      case 2:return_data = ((mem[tmp+1] & 0x0000ffff) << 16) + ((mem[tmp] & 0xffff0000) >> 16);
+      case 3:return_data = ((mem[tmp+1] & 0x00ffffff) << 8 ) + ((mem[tmp] & 0xff000000) >> 24);
+    }
   }
-  log_write("raddr = %08x,data= %08x\n",raddr,mem[tmp]);
-  return mem[tmp];
+  else {
+    return_data = mem[tmp];
+  }
+  log_write("raddr = %08x,data= %08x\n",raddr,return_data);
+  return return_data;
 }
 extern "C" void pmem_write(int waddr, int wdata, char wmask) {
   // 总是往地址为`waddr & ~0x3u`的4字节按写掩码`wmask`写入`wdata`
