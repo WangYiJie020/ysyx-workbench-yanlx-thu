@@ -23,10 +23,10 @@ void diff_set_regs(CPU_state* dut){
     cpu.gpr[i]= dut->gpr[i];
   }
   cpu.pc = dut->pc;
-  //cpu.csr_mepc = dut->csr_mepc;
-  //cpu.csr_mstatus = dut->csr_mstatus;
-  //cpu.csr_mcause = dut->csr_mcause;
-  //cpu.csr_mtvec = dut->csr_mtvec;
+  cpu.csr_mepc = dut->csr_mepc;
+  cpu.csr_mstatus = dut->csr_mstatus;
+  cpu.csr_mcause = dut->csr_mcause;
+  cpu.csr_mtvec = dut->csr_mtvec;
 
 }
 
