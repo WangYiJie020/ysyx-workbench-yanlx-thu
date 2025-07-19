@@ -65,6 +65,9 @@ extern "C" int pmem_read(int raddr) {
   }
 
   uint32_t tmp = (uint32_t)raddr /4; //int类型是有符号的，要转成无符号的
+  if((uint32_t)raddr % 4 != 0){
+    printf("不对齐\n");
+  }
   log_write("raddr = %08x,data= %08x\n",raddr,mem[tmp]);
   return mem[tmp];
 }
