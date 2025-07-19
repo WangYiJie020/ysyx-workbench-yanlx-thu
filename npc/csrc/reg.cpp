@@ -39,7 +39,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
   for(;i>0;i--) {
     if(strcmp(regs[32-i], reg1) == 0){
       flag=1;
-      printf("%s\t%x\n",regs[32-i],cpu.gpr[32-i]);
+      //printf("%s\t%x\n",regs[32-i],cpu.gpr[32-i]);
       value=cpu.gpr[32-i];      
     }	
 	}
