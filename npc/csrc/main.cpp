@@ -207,6 +207,9 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
   ref_difftest_memcpy(PMEM_LEFT, mem+0x20000000, img_size, DIFFTEST_TO_REF);
   cpu.pc = 0x80000000;
   cpu.csr_mstatus = 0x1800;
+  cpu.csr_mcause = 0;
+  cpu.csr_mepc = 0;
+  cpu.csr_mtvec = 0;
   ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
 }
 
