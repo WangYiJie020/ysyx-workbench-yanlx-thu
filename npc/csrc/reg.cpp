@@ -19,6 +19,11 @@ void isa_reg_display() {
 	for(;i>0;i--) {
 		printf("%s\t%x\n",regs[32-i],cpu.gpr[32-i]);
 	}
+  printf("pc\t%x\n",cpu.pc);
+  printf("mstatus\t%x\n",cpu.csr_mstatus);
+  printf("mcause\t%x\n",cpu.csr_mcause);
+  printf("mepc\t%x\n",cpu.csr_mepc);
+  printf("mtvec\t%x\n",cpu.csr_mtvec);
 
 }
 
@@ -90,4 +95,5 @@ void print_regs(){
   for (int i = 0; i < ARRLEN(regs); i++) {
     printf("dut reg %3s = 0x%x\n",regs[i],cpu.gpr[i]);
   }
+
 }
