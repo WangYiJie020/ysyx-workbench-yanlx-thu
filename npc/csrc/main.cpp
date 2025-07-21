@@ -244,15 +244,8 @@ bool difftest_check() {
 void diff_cpdutreg2ref() {
   ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
 }
-void difftest_step() {
-  if(is_skip_ref) {
-    diff_cpdutreg2ref();
-    is_skip_ref = false;
-  }
-  else {
-    ref_difftest_exec(1);
-  }
-  
+void difftest_step() { 
+  ref_difftest_exec(1);
 }
 
 
