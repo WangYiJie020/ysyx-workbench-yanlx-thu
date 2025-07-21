@@ -25,7 +25,7 @@
 
 int cpu_state;
 uint32_t mem[0xffffffff];
-
+bool is_skip_ref = false;
 
 VerilatedContext* contextp = new VerilatedContext;
 Vtop* top = new Vtop{contextp};
@@ -234,14 +234,16 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
   ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
   
 }
-bool is_skip_ref = false;
+
 bool difftest_check() {
   regfile ref;
   ref_difftest_regcpy(&ref, DIFFTEST_TO_DUT);
   //printf("%x,%x,%x\n",ref.pc,ref.csr_mcause,ref.csr_mepc);
   return checkregs(&ref, &cpu);
 }
-
+void diff_cpdutreg2ref() {
+  ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
+}
 void difftest_step() {
   if(is_skip_ref) {
     diff_cpdutreg2ref();
@@ -253,9 +255,7 @@ void difftest_step() {
   
 }
 
-void diff_cpdutreg2ref() {
-  ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
-}
+
 
 static char *log_file = NULL;
 static char *diff_so_file = NULL;
