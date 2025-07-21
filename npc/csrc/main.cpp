@@ -51,9 +51,8 @@ extern "C" int pmem_read(int raddr, char rmask) {
   time(&currentTimeABS);
   uint64_t time = (currentTimeABS - start_time)*1000000;
   if(raddr == RTC_ADDR){
-    is_skip_ref = true;
+    is_skip_ref = false;
     if(flag==0) {
-      is_skip_ref = true;
       start_time = currentTimeABS;
       time = 0;
       flag=1;
@@ -64,7 +63,7 @@ extern "C" int pmem_read(int raddr, char rmask) {
   }
   if(raddr == RTC_ADDR + 4) {
     //log_write("raddr = %08x,the time = %08x\n",raddr,(uint32_t)(time << 32));
-    is_skip_ref = true;
+    is_skip_ref = false;
     return (time << 32);
   }
   uint32_t return_data;
@@ -310,20 +309,20 @@ static int parse_args(int argc, char *argv[]) {
 static void trace_and_difftest() {
   //log_write("%08x,%08x\n", top->pc,top->inst); 
 #ifdef DIFFTEST_ON
-  //if(is_skip_ref) {
-  //  printf("skip\n");
-  //  diff_cpdutreg2ref();
-  //  is_skip_ref = false;
-  //}
-  //else {
+  if(is_skip_ref) {
+    printf("skip\n");
+    diff_cpdutreg2ref();
+    is_skip_ref = false;
+  }
+  else {
     difftest_step();
     bool check = difftest_check();
     
     if(check==false) {
       cpu_state = NPC_ABORT;
-    return;
+      return;
+    }
   }
-  //}
   
 #endif
   WP * p = head;
