@@ -31,7 +31,7 @@ VerilatedContext* contextp = new VerilatedContext;
 Vtop* top = new Vtop{contextp};
 VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
 
-//#define  DIFFTEST_ON
+#define  DIFFTEST_ON
 
 
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
@@ -56,11 +56,13 @@ extern "C" int pmem_read(int raddr, char rmask) {
       time = 0;
       flag=1;
     }
+    is_skip_ref = true;
     //log_write("raddr = %08x,the time = %08x\n",raddr,(uint32_t)time);
     return time;
   }
   if(raddr == RTC_ADDR + 4) {
     //log_write("raddr = %08x,the time = %08x\n",raddr,(uint32_t)(time << 32));
+    is_skip_ref = true;
     return (time << 32);
   }
   uint32_t return_data;
@@ -232,7 +234,7 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
   ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
   
 }
-
+bool is_skip_ref = false;
 bool difftest_check() {
   regfile ref;
   ref_difftest_regcpy(&ref, DIFFTEST_TO_DUT);
@@ -241,7 +243,14 @@ bool difftest_check() {
 }
 
 void difftest_step() {
-  ref_difftest_exec(1);
+  if(is_skip_ref) {
+    diff_cpdutreg2ref();
+    is_skip_ref = false;
+  }
+  else {
+    ref_difftest_exec(1);
+  }
+  
 }
 
 void diff_cpdutreg2ref() {
