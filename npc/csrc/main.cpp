@@ -76,10 +76,10 @@ extern "C" int pmem_read(int raddr, char rmask) {
   }
   else if((align == 1 || align == 3) && (rmask == 1 || rmask == 2)) {
     printf("不对齐\n");
-    switch(align) {
-      case 1:
-      case 3:
-    }
+    //switch(align) {
+    //  case 1:
+    //  case 3:
+    //}
   }
   else {
     return_data = mem[tmp];
