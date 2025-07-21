@@ -320,8 +320,9 @@ static void trace_and_difftest() {
     is_skip_ref = false;
   }
   else {
-    bool check = difftest_check();
     difftest_step();
+    bool check = difftest_check();
+    
     if(check==false) {
       cpu_state = NPC_ABORT;
     return;
@@ -372,7 +373,6 @@ void cpu_exec(int num) {
       break;
     }
     
-
     top->clk = 0; top->eval();
     top->clk = 1; top->eval();
     trace_and_difftest();
