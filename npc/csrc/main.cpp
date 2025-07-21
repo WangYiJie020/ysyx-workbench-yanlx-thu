@@ -53,6 +53,7 @@ extern "C" int pmem_read(int raddr, char rmask) {
   if(raddr == RTC_ADDR){
     is_skip_ref = true;
     if(flag==0) {
+      is_skip_ref = true;
       start_time = currentTimeABS;
       time = 0;
       flag=1;
