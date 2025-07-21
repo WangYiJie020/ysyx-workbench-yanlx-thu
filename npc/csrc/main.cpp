@@ -310,12 +310,12 @@ static int parse_args(int argc, char *argv[]) {
 static void trace_and_difftest() {
   //log_write("%08x,%08x\n", top->pc,top->inst); 
 #ifdef DIFFTEST_ON
-  if(is_skip_ref) {
-    printf("skip\n");
-    diff_cpdutreg2ref();
-    is_skip_ref = false;
-  }
-  else {
+  //if(is_skip_ref) {
+  //  printf("skip\n");
+  //  diff_cpdutreg2ref();
+  //  is_skip_ref = false;
+  //}
+  //else {
     difftest_step();
     bool check = difftest_check();
     
@@ -323,7 +323,7 @@ static void trace_and_difftest() {
       cpu_state = NPC_ABORT;
     return;
   }
-  }
+  //}
   
 #endif
   WP * p = head;
