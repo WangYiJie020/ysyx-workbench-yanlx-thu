@@ -322,11 +322,10 @@ static void trace_and_difftest() {
   else {
     bool check = difftest_check();
     difftest_step();
-  }
-  
-  if(check==false) {
-    cpu_state = NPC_ABORT;
+    if(check==false) {
+      cpu_state = NPC_ABORT;
     return;
+  }
   }
   
 #endif
