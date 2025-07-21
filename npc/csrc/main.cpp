@@ -315,8 +315,15 @@ static int parse_args(int argc, char *argv[]) {
 static void trace_and_difftest() {
   //log_write("%08x,%08x\n", top->pc,top->inst); 
 #ifdef DIFFTEST_ON
-  bool check = difftest_check();
-  difftest_step();
+  if(is_skip_ref) {
+    diff_cpdutreg2ref();
+    is_skip_ref = false;
+  }
+  else {
+    bool check = difftest_check();
+    difftest_step();
+  }
+  
   if(check==false) {
     cpu_state = NPC_ABORT;
     return;
