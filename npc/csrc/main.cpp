@@ -64,6 +64,11 @@ extern "C" int pmem_read(int raddr, char rmask) {
   if(raddr == RTC_ADDR + 4) {
     //log_write("raddr = %08x,the time = %08x\n",raddr,(uint32_t)(time << 32));
     is_skip_ref = true;
+    if(flag==0) {
+      start_time = currentTimeABS;
+      time = 0;
+      flag=1;
+    }
     return (time << 32);
   }
   uint32_t return_data;
