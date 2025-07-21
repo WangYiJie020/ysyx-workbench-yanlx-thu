@@ -74,13 +74,13 @@ extern "C" int pmem_read(int raddr, char rmask) {
       case 3:return_data = ((mem[tmp+1] & 0x00ffffff) << 8 ) + ((mem[tmp] & 0xff000000) >> 24);
     }
   }
-  else if((align == 1 || align == 3) && (rmask == 1 || rmask == 2)) {
-    printf("不对齐\n");
+  //else if((align == 1 || align == 3) && (rmask == 1 || rmask == 2)) {
+    //printf("不对齐\n");
     //switch(align) {
     //  case 1:
     //  case 3:
     //}
-  }
+  //}
   else {
     return_data = mem[tmp];
   }
