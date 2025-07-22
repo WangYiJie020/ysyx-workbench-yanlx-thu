@@ -333,7 +333,7 @@ static void trace_and_difftest() {
   if(is_skip_ref) {
     printf("skip\n");
     skip_r = is_skip_ref;
-    //diff_cpdutreg2ref();
+    diff_cpdutreg2ref();
   }
   else {
     difftest_step();
