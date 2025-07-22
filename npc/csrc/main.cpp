@@ -334,12 +334,13 @@ static void trace_and_difftest() {
     //diff_cpdutreg2ref();
   }
   else {
-    difftest_step();
-    bool check = difftest_check();
     if(skip_r) {
       diff_cpdutreg2ref();
       //difftest_step();
     }
+    difftest_step();
+    bool check = difftest_check();
+    
     if(check==false) {
       cpu_state = NPC_ABORT;
       return;
