@@ -878,32 +878,23 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                   ? 1U
                                                   : 0U)
                                                  : 
-                                                ((0x1fU 
-                                                  >= vlSelf->top__DOT__b_in)
-                                                  ? 
-                                                 VL_SHIFTRS_III(32,32,32, vlSelf->top__DOT__a_in, vlSelf->top__DOT__b_in)
-                                                  : 
-                                                 (- 
-                                                  (vlSelf->top__DOT__a_in 
-                                                   >> 0x1fU))))))
+                                                VL_SHIFTRS_III(32,32,5, vlSelf->top__DOT__a_in, 
+                                                               (0x1fU 
+                                                                & vlSelf->top__DOT__b_in)))))
                                      : ((4U & (IData)(vlSelf->top__DOT__alu_op))
                                          ? ((2U & (IData)(vlSelf->top__DOT__alu_op))
                                              ? ((1U 
                                                  & (IData)(vlSelf->top__DOT__alu_op))
                                                  ? 
-                                                ((0x1fU 
-                                                  >= vlSelf->top__DOT__b_in)
-                                                  ? 
-                                                 (vlSelf->top__DOT__a_in 
-                                                  >> vlSelf->top__DOT__b_in)
-                                                  : 0U)
+                                                (vlSelf->top__DOT__a_in 
+                                                 >> 
+                                                 (0x1fU 
+                                                  & vlSelf->top__DOT__b_in))
                                                  : 
-                                                ((0x1fU 
-                                                  >= vlSelf->top__DOT__b_in)
-                                                  ? 
-                                                 (vlSelf->top__DOT__a_in 
-                                                  << vlSelf->top__DOT__b_in)
-                                                  : 0U))
+                                                (vlSelf->top__DOT__a_in 
+                                                 << 
+                                                 (0x1fU 
+                                                  & vlSelf->top__DOT__b_in)))
                                              : ((1U 
                                                  & (IData)(vlSelf->top__DOT__alu_op))
                                                  ? 
