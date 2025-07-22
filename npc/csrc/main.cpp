@@ -32,8 +32,8 @@ Vtop* top = new Vtop{contextp};
 VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
 
 #define  DIFFTEST_ON
-#define  WAVE_ON
-#define  TRACE_ON
+//#define  WAVE_ON
+//#define  TRACE_ON
 
 
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
@@ -335,7 +335,6 @@ static void trace_and_difftest() {
       return;
     }
   }*/
-  bool diff_skip_r;
   if(!is_skip_ref){
     difftest_step();
   }
@@ -349,9 +348,6 @@ static void trace_and_difftest() {
       return;
     }
   }
-  // 2. nemu step and update nemu regs/mem:
-  
-  diff_skip_r = is_skip_ref;
   
 #endif
   WP * p = head;
