@@ -336,6 +336,9 @@ static void trace_and_difftest() {
     }
   }*/
   bool diff_skip_r;
+  if(!is_skip_ref){
+    difftest_step();
+  }
   // 1. check last cycle reg status:
   if(diff_skip_r){ //skip write or read device ins.
     diff_cpdutreg2ref();
@@ -347,9 +350,7 @@ static void trace_and_difftest() {
     }
   }
   // 2. nemu step and update nemu regs/mem:
-  if(!is_skip_ref){
-    difftest_step();
-  }
+  
   diff_skip_r = is_skip_ref;
   
 #endif
@@ -395,10 +396,10 @@ void cpu_exec(int num) {
       printf("abort! at pc=%x\n",cpu.pc);
       break;
     }
-    trace_and_difftest();
+    
     top->clk = 0; top->eval();
     top->clk = 1; top->eval();
-    
+    trace_and_difftest();
 
     tfp->dump(contextp->time()); //dump wave
     contextp->timeInc(1); //推动仿真时间
