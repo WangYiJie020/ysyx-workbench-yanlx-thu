@@ -377,12 +377,12 @@ static void trace_and_difftest() {
   return ;
 
 }
-
+uint64_t counter=0;
 void cpu_exec(uint64_t num) {
   uint64_t i;
   for(i = 0; i < num; i++) {
     if(cpu_state == NPC_END){ //finish
-      printf("finish\n");
+      printf("finish,counter=%ld\n",counter);
       break;
     }
     if(cpu_state == NPC_STOP) { //stop
@@ -396,6 +396,7 @@ void cpu_exec(uint64_t num) {
     
     top->clk = 0; top->eval();
     top->clk = 1; top->eval();
+    counter++;
     trace_and_difftest();
 
     tfp->dump(contextp->time()); //dump wave
