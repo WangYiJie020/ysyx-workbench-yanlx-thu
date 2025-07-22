@@ -326,8 +326,7 @@ bool skip_r=false;
 static void trace_and_difftest() {
   //log_write("%08x,%08x\n", top->pc,top->inst); 
 #ifdef DIFFTEST_ON
-  
-  
+
   if(is_skip_ref) {
     printf("skip\n");
     //skip_r = is_skip_ref;
@@ -336,10 +335,13 @@ static void trace_and_difftest() {
   else {
     if(skip_r) {
       diff_cpdutreg2ref();
-      printf("aa");
+      printf("aa\n");
       //difftest_step();
     }
-    difftest_step();
+    else{
+      difftest_step();
+    }
+    
     
     bool check = difftest_check();
     
