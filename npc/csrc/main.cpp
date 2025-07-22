@@ -346,7 +346,7 @@ static void trace_and_difftest() {
     difftest_step();
   }
   // 1. check last cycle reg status:
-  if(diff_skip_r){ //skip write or read device ins.
+  if(is_skip_ref){ //skip write or read device ins.
     diff_cpdutreg2ref();
   }
   else{
