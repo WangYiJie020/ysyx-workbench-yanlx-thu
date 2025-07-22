@@ -336,7 +336,7 @@ static void trace_and_difftest() {
   else {
     if(skip_r) {
       diff_cpdutreg2ref();
-      
+      printf("aa");
       //difftest_step();
     }
     difftest_step();
