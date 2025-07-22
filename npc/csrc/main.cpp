@@ -330,13 +330,13 @@ static void trace_and_difftest() {
   
   if(is_skip_ref) {
     printf("skip\n");
-    skip_r = is_skip_ref;
+    //skip_r = is_skip_ref;
     //diff_cpdutreg2ref();
   }
   else {
     if(skip_r) {
       diff_cpdutreg2ref();
-      skip_r = is_skip_ref;
+      
       //difftest_step();
     }
     difftest_step();
@@ -348,6 +348,7 @@ static void trace_and_difftest() {
       return;
     }
   }
+  skip_r = is_skip_ref;
   
 #endif
   WP * p = head;
