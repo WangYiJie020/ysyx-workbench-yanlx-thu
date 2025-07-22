@@ -336,9 +336,11 @@ static void trace_and_difftest() {
   else {
     if(skip_r) {
       diff_cpdutreg2ref();
+      skip_r = is_skip_ref;
       //difftest_step();
     }
     difftest_step();
+    
     bool check = difftest_check();
     
     if(check==false) {
