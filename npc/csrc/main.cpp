@@ -32,6 +32,7 @@ Vtop* top = new Vtop{contextp};
 VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
 
 #define  DIFFTEST_ON
+#define  WAVE_ON
 
 
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
@@ -398,10 +399,11 @@ int main(int argc, char** argv) {
   
   contextp->commandArgs(argc, argv);
   
-  //contextp->traceEverOn(true); //打开追踪功能
-  //top->trace(tfp, 0); //
-  //tfp->open("wave.vcd"); //设置输出的文件wave.vcd
-
+#ifdef WAVE_ON
+  contextp->traceEverOn(true); //打开追踪功能
+  top->trace(tfp, 0); //
+  tfp->open("wave.vcd"); //设置输出的文件wave.vcd
+#endif
 
   int n = 10;
   top->rst_n = 0;
@@ -420,7 +422,9 @@ int main(int argc, char** argv) {
 
 
   delete top;
-  //tfp->close();
+#ifdef WAVE_ON
+  tfp->close();
+#ifdef WAVE_ON
   delete contextp;
   if(cpu_state == NPC_END || cpu_state == NPC_QUIT) {
     return 0;
