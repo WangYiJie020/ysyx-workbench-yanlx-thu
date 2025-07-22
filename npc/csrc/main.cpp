@@ -31,7 +31,7 @@ VerilatedContext* contextp = new VerilatedContext;
 Vtop* top = new Vtop{contextp};
 VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
 
-#define  DIFFTEST_ON
+//#define  DIFFTEST_ON
 //#define  WAVE_ON
 //#define  TRACE_ON
 
@@ -378,8 +378,8 @@ static void trace_and_difftest() {
 
 }
 
-void cpu_exec(int num) {
-  int i;
+void cpu_exec(uint64_t num) {
+  uint64_t i;
   for(i = 0; i < num; i++) {
     if(cpu_state == NPC_END){ //finish
       printf("finish\n");
@@ -436,7 +436,7 @@ int main(int argc, char** argv) {
   }
   top->rst_n = 1;
 
-  //sdb_set_batch_mode();//批处理模式
+  sdb_set_batch_mode();//批处理模式
   
   sdb_mainloop();
 

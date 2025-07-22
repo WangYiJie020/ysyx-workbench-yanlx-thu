@@ -149,7 +149,7 @@ static int cmd_d(char *args) {
 
 
 static int cmd_c(char *args) {
-  cpu_exec(2000000000);
+  cpu_exec(-1);
   return 0;
 }
 
