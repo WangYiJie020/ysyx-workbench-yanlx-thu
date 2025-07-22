@@ -326,7 +326,7 @@ static int parse_args(int argc, char *argv[]) {
 static void trace_and_difftest() {
   //log_write("%08x,%08x\n", top->pc,top->inst); 
 #ifdef DIFFTEST_ON
-  bool skip_r
+  bool skip_r;
   if(skip_r) {
     diff_cpdutreg2ref();
   }
