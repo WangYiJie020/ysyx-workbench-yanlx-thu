@@ -33,6 +33,7 @@ VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
 
 #define  DIFFTEST_ON
 #define  WAVE_ON
+#define  TRACE_ON
 
 
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
@@ -93,7 +94,9 @@ extern "C" int pmem_read(int raddr, char rmask) {
   else {
     return_data = mem[tmp];
   }
-  //log_write("raddr = %08x,data= %08x\n",raddr,return_data);
+#ifdef TRACE_ON
+  log_write("raddr = %08x,data= %08x\n",raddr,return_data);
+#endif
   return return_data;
 }
 extern "C" void pmem_write(int waddr, int wdata, char wmask) {
@@ -126,7 +129,9 @@ extern "C" void pmem_write(int waddr, int wdata, char wmask) {
     case 0xf:  mem[addr_tmp] = (mem[addr_tmp] & 0x00000000) + (wdata & 0xffffffff);;break;
     default: mem[addr_tmp] = mem[addr_tmp];
   }
-  //log_write("                               wmask=%x,waddr = %08x,data= %08x\n",wmask,waddr,mem[addr_tmp]);
+#ifdef TRACE_ON
+  log_write("                               wmask=%x,waddr = %08x,data= %08x\n",wmask,waddr,mem[addr_tmp]);
+#endif
 }
 
 FILE *log_fp = NULL;
