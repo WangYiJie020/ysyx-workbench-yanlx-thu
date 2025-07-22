@@ -424,7 +424,7 @@ int main(int argc, char** argv) {
   delete top;
 #ifdef WAVE_ON
   tfp->close();
-#ifdef WAVE_ON
+#endif
   delete contextp;
   if(cpu_state == NPC_END || cpu_state == NPC_QUIT) {
     return 0;
