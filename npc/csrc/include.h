@@ -43,7 +43,7 @@ WP* new_wp();
 void free_wp(int num);
 void print_wp();
 
-void cpu_exec(int num);
+void cpu_exec(uint64_t num);
 int is_exit_status_bad();
 static bool make_token(char *e);
 word_t expr(char *e, bool *success);
