@@ -326,11 +326,10 @@ static int parse_args(int argc, char *argv[]) {
 static void trace_and_difftest() {
   //log_write("%08x,%08x\n", top->pc,top->inst); 
 #ifdef DIFFTEST_ON
-/*
+
   if(is_skip_ref) {
     printf("skip\n");
     diff_cpdutreg2ref();
-    is_skip_ref = false;
   }
   else {
     difftest_step();
@@ -340,24 +339,7 @@ static void trace_and_difftest() {
       cpu_state = NPC_ABORT;
       return;
     }
-  }*/
-  bool diff_skip_r;
-  if(!is_skip_ref){
-    difftest_step();
   }
-  // 1. check last cycle reg status:
-  if(is_skip_ref){ //skip write or read device ins.
-    diff_cpdutreg2ref();
-  }
-  else{
-    if(!difftest_check()){
-      cpu_state = NPC_ABORT;
-      return;
-    }
-  }
-  // 2. nemu step and update nemu regs/mem:
-  
-  diff_skip_r = is_skip_ref;
   
 #endif
   WP * p = head;
