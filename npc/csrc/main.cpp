@@ -329,7 +329,7 @@ static void trace_and_difftest() {
   bool skip_r=false;
   if(skip_r) {
     diff_cpdutreg2ref();
-    difftest_step();
+    //difftest_step();
   }
   if(is_skip_ref) {
     printf("skip\n");
@@ -339,7 +339,10 @@ static void trace_and_difftest() {
   else {
     difftest_step();
     bool check = difftest_check();
-    
+    if(skip_r) {
+    diff_cpdutreg2ref();
+    //difftest_step();
+  }
     if(check==false) {
       cpu_state = NPC_ABORT;
       return;
