@@ -32,8 +32,8 @@ Vtop* top = new Vtop{contextp};
 VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
 
 #define  DIFFTEST_ON
-#define  WAVE_ON
-#define  TRACE_ON
+//#define  WAVE_ON
+//#define  TRACE_ON
 
 
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
@@ -328,21 +328,19 @@ static void trace_and_difftest() {
 #ifdef DIFFTEST_ON
 
   if(is_skip_ref) {
-    printf("skip\n");
+    //printf("skip\n");
     //skip_r = is_skip_ref;
     //diff_cpdutreg2ref();
   }
   else {
     if(skip_r) {
       diff_cpdutreg2ref();
-      printf("aa\n");
+      //printf("aa\n");
       //difftest_step();
     }
     else{
       difftest_step();
     }
-    
-    
     bool check = difftest_check();
     
     if(check==false) {
