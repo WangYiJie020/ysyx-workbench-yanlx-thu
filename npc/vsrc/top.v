@@ -14,7 +14,7 @@ input int csr_reg_1,input int csr_reg_2,input int csr_reg_3);
 module top(
   input clk,
   input rst_n
-  output [31:0]pc,
+  //output [31:0]pc,
   //input [31:0] inst
   //output [31:0] datamem_addr,
   //input [31:0] datamem_data
