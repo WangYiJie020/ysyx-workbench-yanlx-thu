@@ -49,11 +49,11 @@ class Vtop___024root final : public VerilatedModule {
     IData/*31:0*/ top__DOT__mem_data;
     IData/*31:0*/ top__DOT__csr_wdata;
     IData/*31:0*/ top__DOT__csr_rdata;
+    IData/*31:0*/ top__DOT__add_out;
     IData/*31:0*/ top__DOT__CSR__DOT__csr_mepc;
     IData/*31:0*/ top__DOT__CSR__DOT__csr_mstatus;
     IData/*31:0*/ top__DOT__CSR__DOT__csr_mcause;
     IData/*31:0*/ top__DOT__CSR__DOT__csr_mtvec;
-    IData/*31:0*/ __Vfunc_pmem_read__2__Vfuncout;
     IData/*31:0*/ __Vfunc_pmem_read__3__Vfuncout;
     IData/*31:0*/ __VstlIterCount;
     IData/*31:0*/ __VactIterCount;

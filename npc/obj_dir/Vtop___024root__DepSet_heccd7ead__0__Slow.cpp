@@ -166,6 +166,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__rmask = VL_RAND_RESET_I(3);
     vlSelf->top__DOT__csr_wdata = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__csr_rdata = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT__add_out = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__csr_write = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__adder_out_src = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__csr_wdata_src = VL_RAND_RESET_I(1);
@@ -185,7 +186,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__CSR__DOT__csr_mstatus = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__CSR__DOT__csr_mcause = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__CSR__DOT__csr_mtvec = VL_RAND_RESET_I(32);
-    vlSelf->__Vfunc_pmem_read__2__Vfuncout = 0;
     vlSelf->__Vfunc_pmem_read__3__Vfuncout = 0;
     vlSelf->__Vtableidx1 = 0;
     vlSelf->__Vtrigrprev__TOP__clk = VL_RAND_RESET_I(1);
