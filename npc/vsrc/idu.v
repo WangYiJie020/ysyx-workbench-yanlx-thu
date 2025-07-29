@@ -62,8 +62,8 @@ module idu(
         .reg_write(reg_write_o),
         .adder_a_src(adder_a_src_o),
         .pc_srcs(pc_srcs_o),
-        .MemRead(mem_read_o),
-        .MemWrite(mem_write_o),
+        .MemRead(MemRead_o),
+        .MemWrite(MemWrite_o),
         .wmask(wmask_o),
         .wb_src(wb_src_o),
         .rmask(rmask_o),
@@ -97,15 +97,15 @@ module idu(
     assign idu_ready_o = idu_ready_i;
 
     always@(posedge clk) begin
-        if(ifu_valid_i && ifu_ready_i) begin
+        if(idu_valid_i && idu_ready_i) begin
             pc <= pc_i;
             inst <= inst_i;
         end
     end
 
     always@(posedge clk) begin
-        if(!rst_n) ifu_valid_o <= 1'b0;
-        else if(ifu_ready_o) ifu_valid_o <= ifu_valid_i;
+        if(!rst_n) idu_valid_o <= 1'b0;
+        else if(idu_ready_o) idu_valid_o <= idu_valid_i;
     end
 
 
