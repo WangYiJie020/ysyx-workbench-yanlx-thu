@@ -142,6 +142,7 @@ module top(
   wire [`CPU_WIDTH-1:0] wdata;
   wire [`REG_ADDR-1:0] waddr;
   wire reg_write;
+  reg [`CPU_WIDTH-1:0] reg_file [31:0];
   
   regfile Rgefile (
     .clk(clk),
