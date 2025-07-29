@@ -1,0 +1,81 @@
+`include "header.v"
+module wbu(
+    input clk,
+    input rst_n,
+    //lsu to wbu
+    input [`CPU_WIDTH-1:0] alu_result_i,
+    input [`CPU_WIDTH-1:0] rs1_i,
+    input [`CPU_WIDTH-1:0] csr_rdata_l_rs1_i,
+    input [`CPU_WIDTH-1:0] datamem_readdata_i,
+    input [`PC_WIDTH-1:0] npc_i,
+    input [2:0] rmask_i,
+    input wb_src_i,
+    input csr_write_i,
+    input csr_wdata_src_i,
+    input reg_write_i,
+    input [`REG_ADDR-1:0] waddr_i,
+
+    input wbu_valid_i,
+    output wbu_ready_o,
+
+    //wbu to ifu
+    output npc_o,
+
+    output reg wbu_valid_o,
+    input wbu_ready_i,
+
+    //write back
+    output [`CPU_WIDTH-1:0] csr_wdata_o,
+    output [`CPU_WIDTH-1:0] wdata_o,
+    output csr_write_o,
+    output reg_write_o,
+    output reg [`REG_ADDR-1:0] waddr_o
+);
+
+    wire [`CPU_WIDTH-1:0] mem_data;
+
+    sext_mem SEXT_Mem(
+        .read_data(datamem_readdata),
+        .addr_low2(alu_result[1:0]),
+        .rmask(rmask),
+        .mem_data(mem_data)
+    );
+
+    mux21 WB(
+        .d0(alu_result),
+        .d1(mem_data),
+        .sel(wb_src),
+        .out(wdata_o)
+    );
+
+    mux21 Csr_Wdata(
+        .d0(rs1),
+        .d1(csr_rdata_l_rs1),
+        .sel(csr_wdata_src),
+        .out(csr_wdata_o)
+    );
+
+    assign wbu_ready_o = wbu_ready_i;
+
+    always@(posedge clk) begin
+        if(wbu_valid_i && wbu_ready_i) begin
+            alu_result <= alu_result_i;
+            rs1 <= rs1_i;
+            csr_rdata_l_rs1 <= csr_rdata_l_rs1_i;
+            datamem_readdata <= datamem_readdata_i;
+            npc_o <= npc_i;
+            rmask <= rmask_i;
+            wb_src <= wb_src_i;
+            csr_wdata_src <= csr_wdata_src_i;
+            csr_write_o <= csr_write_i;
+            reg_write_o <= reg_write_i;
+            waddr_o <= waddr_i;
+            
+        end
+    end
+
+    always@(posedge clk) begin
+        if(!rst_n) wbu_valid_o <= 1'b0;
+        else if(wbu_ready_o) wbu_valid_o <= wbu_valid_i;
+    end
+endmodule

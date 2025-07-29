@@ -1,3 +1,5 @@
+`include "header.v"
+
 import "DPI-C" function void ebreak();
 import "DPI-C" function void reg_return_value(input int gpr_0,input int gpr_1,
 input int gpr_2,input int gpr_3,input int gpr_4,input int gpr_5,
@@ -21,182 +23,294 @@ module top(
 
 );
 
-  wire [31:0] pc;
-  wire [31:0] inst;
-  wire [31:0] imm;
-  wire [31:0] rs1,rs2,a_in,b_in,a_out;
-  wire [1:0] b_in_src;
-  wire a_in_src,adder_a_src;
-  wire reg_write;
-  wire [3:0] alu_op;
-  wire [31:0] alu_result;
-  wire [31:0] wdata;
-  wire zero;
-
-  wire [31:0] pc_new,npc;
-  wire [2:0] pc_srcs;
-  wire [31:0] reg_file [31:0];
-  wire [31:0]datamem_readdata;
-  wire mem_read,mem_write;
-  wire [7:0] wmask;
-  wire wb_src;
-  wire [31:0] mem_data;
-  wire [2:0] rmask;
-  wire [31:0] a5,csr_wdata,csr_rdata,add_out;
-  wire csr_write;
-  wire adder_out_src;
-  wire csr_wdata_src;
-  wire [31:0] csr_reg [3:0];
-
-  dff PC (
+  wire [`PC_WIDTH-1:0] pc_to_mem;
+  wire [`INST_WIDTH-1:0] inst_from_mem;
+  //wbu to ifu
+  wire [`PC_WIDTH-1:0] npc_wbu_to_ifu;
+  wire valid_wbu_to_ifu;
+  wire ready_wbu_to_ifu;
+  //ifu to idu
+  wire [`PC_WIDTH-1:0] pc_ifu_to_idu;
+  wire [`INST_WIDTH-1:0] inst_ifu_to_idu;
+  wire valid_ifu_to_idu;
+  wire ready_ifu_to_idu;
+  
+  ifu IFU(
     .clk(clk),
     .rst_n(rst_n),
-    .din(npc),
-    .dout(pc)
+    .pc_to_mem(pc_to_mem),
+    .inst_from_mem(inst_from_mem),
+
+    .npc_i(npc_wbu_to_ifu),
+
+    .ifu_valid_i(valid_wbu_to_ifu),
+    .ifu_ready_o(ready_wbu_to_ifu),
+
+    .pc_o(pc_ifu_to_idu),
+    .inst_o(inst_ifu_to_idu),
+
+    .ifu_valid_o(valid_ifu_to_idu),
+    .ifu_ready_i(ready_ifu_to_idu)
   );
 
   inst_mem Inst_Mem(
+    .pc(pc_to_mem),
+    .inst(inst_from_mem)
+  );
+
+  wire [`REG_ADDR-1:0] raddr1;
+  wire [`REG_ADDR-1:0] raddr2;
+  wire [`CPU_WIDTH-1:0] rdata1;
+  wire [`CPU_WIDTH-1:0] rdata2;
+  wire [`CPU_WIDTH-1:0] a5;
+  wire [`PC_WIDTH-1:0] pc_idu_to_exu;
+  wire [`CPU_WIDTH-1:0] rs1_idu_to_exu;
+  wire [`CPU_WIDTH-1:0] rs2_idu_to_exu;
+  wire [`CPU_WIDTH-1:0] imm_idu_to_exu;
+  wire [`CPU_WIDTH-1:0] csr_rdata_idu_to_exu;
+  wire a_in_src_idu_to_exu;
+  wire [1:0] b_in_src_idu_to_exu;
+  wire [2:0] pc_srcs_idu_to_exu;
+  wire adder_a_src_idu_to_exu;
+  wire adder_out_src_idu_to_exu;
+  wire [3:0] alu_op_idu_to_exu;
+  //idu to exu to lsu or wbu
+  wire MemRead_idu_to_exu;
+  wire MemWrite_idu_to_exu;
+  wire [7:0] wmask_idu_to_exu;
+  wire [2:0] rmask_idu_to_exu;
+  wire wb_src_idu_to_exu;
+  wire csr_write_idu_to_exu;
+  wire csr_wdata_src_idu_to_exu;
+  wire reg_write_idu_to_exu;
+  wire [`REG_ADDR-1:0] waddr_idu_to_exu;
+  wire valid_idu_to_exu;
+  wire ready_idu_to_exu;
+  //write csr
+  wire csr_write;
+  wire [`CPU_WIDTH-1:0] csr_wdata;
+  wire [`CPU_WIDTH-1:0] csr_reg [3:0]; //difftest
+
+  idu IDU(
     .clk(clk),
-    .pc(pc),
-    .inst(inst)
+    .rst_n(rst_n),
+    //regfiles
+    .raddr1(raddr1),
+    .raddr2(raddr2),
+    .rdata1(rdata1),
+    .rdata2(rdata2),
+    .a5(a5),
+    //ifu to idu
+    .pc_i(pc_ifu_to_idu),
+    .inst_i(inst_ifu_to_idu),
+
+    .idu_valid_i(valid_ifu_to_idu),
+    .idu_ready_o(ready_ifu_to_idu),
+
+    //idu to exu
+    .pc_o(pc_idu_to_exu),
+    .rs1_o(rs1_idu_to_exu),
+    .rs2_o(rs2_idu_to_exu),
+    .imm_o(imm_idu_to_exu),
+    .csr_rdata_o(csr_rdata_idu_to_exu),
+    .a_in_src_o(a_in_src_idu_to_exu),
+    .b_in_src_o(b_in_src_idu_to_exu),
+    .pc_srcs_o(pc_srcs_idu_to_exu),
+    .adder_a_src_o(adder_a_src_idu_to_exu),
+    .adder_out_src_o(adder_out_src_idu_to_exu),
+    .alu_op(alu_op_idu_to_exu),
+    //idu to exu to lsu or wbu
+    .MemRead_o(MemRead_idu_to_exu),
+    .MemWrite_o(MemWrite_idu_to_exu),
+    .wmask_o(wmask_idu_to_exu),
+    .rmask_o(rmask_idu_to_exu),
+    .wb_src_o(wb_src_idu_to_exu),
+    .csr_write_o(csr_write_idu_to_exu),
+    .csr_wdata_src_o(csr_wdata_src_idu_to_exu),
+    .reg_write_o(reg_write_idu_to_exu),
+    .waddr_o(waddr_idu_to_exu),
+
+    .idu_valid_o(valid_idu_to_exu),
+    .idu_ready_i(ready_idu_to_exu),
+
+    //write csr
+    .csr_write_i(csr_write),
+    .csr_wdata_i(csr_wdata),
+    .csr_reg(csr_reg) //difftest
   );
 
-  controler Controler(
-    .inst(inst),
-    .a_in_src(a_in_src),
-    .b_in_src(b_in_src),
-    .reg_write(reg_write),
-    .adder_a_src(adder_a_src),
-    .pc_srcs(pc_srcs),
-    .MemRead(mem_read),
-    .MemWrite(mem_write),
-    .wmask(wmask),
-    .wb_src(wb_src),
-    .rmask(rmask),
-    .csr_write(csr_write),
-    .adder_out_src(adder_out_src),
-    .csr_wdata_src(csr_wdata_src)
-  );
-
+  wire [`CPU_WIDTH-1:0] wdata;
+  wire [`REG_ADDR-1:0] waddr;
+  wire reg_write;
+  
   regfile Rgefile (
     .clk(clk),
     .wdata(wdata),
-    .waddr(inst[11:7]), //rd
+    .waddr(waddr), //rd
     .wen(reg_write),
-    .raddr1(inst[19:15]), //rs1
-    .rdata1(rs1),
-    .raddr2(inst[24:20]), //rs2
-    .rdata2(rs2),
+    .raddr1(raddr1), //rs1
+    .rdata1(rdata1),
+    .raddr2(raddr2), //rs2
+    .rdata2(rdata2),
     .value1(a5),
     .reg_file(reg_file)  //for difftest
   );
 
-  sext SEXT (
-    .inst(inst),
-    .data(imm)
-  );
+  wire [`CPU_WIDTH-1:0] alu_result_exu_to_lsu;
+  wire [`CPU_WIDTH-1:0] rs1_exu_to_lsu;
+  wire [`CPU_WIDTH-1:0] rs2_exu_to_lsu;
+  wire [`CPU_WIDTH-1:0] csr_rdata_l_rs1_exu_to_lsu;
+  wire [`PC_WIDTH-1:0] npc_exu_to_lsu;
+  wire MemRead_exu_to_lsu;
+  wire MemWrite_exu_to_lsu;
+  wire [7:0] wmask_exu_to_lsu;
+  wire [2:0] rmask_exu_to_lsu;
+  wire wb_src_exu_to_lsu;
+  wire csr_write_exu_to_lsu;
+  wire csr_wdta_src_exu_to_lsu;
+  wire reg_write_exu_to_lsu;
+  wire [`REG_ADDR-1:0] waddr_exu_to_lsu;
 
-  csr CSR(
+  wire valid_exu_to_lsu;
+  wire ready_exu_to_lsu;
+
+  exu EXU(
     .clk(clk),
-    .wen(csr_write),
-    .inst(inst),
-    .wdata(csr_wdata),
-    .NO(a5),
-    .pc(pc),
-    .rdata(csr_rdata),
-    .csr_reg(csr_reg) //for difftest
+    .rst_n(rst_n),
+    //idu to exu
+    .pc_i(pc_idu_to_exu),
+    .rs1_i(rs1_idu_to_exu),
+    .rs2_i(rs2_idu_to_exu),
+    .imm_i(imm_idu_to_exu),
+    .csr_rdata_i(csr_rdata_idu_to_exu),
+    .a_in_src_i(a_in_src_idu_to_exu),
+    .b_in_src_i(b_in_src_idu_to_exu),
+    .pc_srcs_i(pc_srcs_idu_to_exu),
+    .adder_a_src_i(adder_a_src_idu_to_exu),
+    .adder_out_src_i(adder_out_src_idu_to_exu),
+    .alu_op_i(alu_op_idu_to_exu),
+    //idu to exu to lsu or wbu
+    .MemRead_i(MemRead_idu_to_exu),
+    .MemWrite_i(MemWrite_idu_to_exu),
+    .wmask_i(wmask_idu_to_exu),
+    .rmask_i(rmask_idu_to_exu),
+    .wb_src_i(wb_src_idu_to_exu),
+    .csr_write_i(csr_write_idu_to_exu),
+    .csr_wdata_src_i(csr_wdata_src_idu_to_exu),
+    .reg_write_i(reg_write_idu_to_exu),
+    .waddr_i(waddr_idu_to_exu),
+
+    .exu_valid_i(valid_idu_to_exu),
+    .exu_ready_o(ready_idu_to_exu),
+
+    //exu to lsu
+    .alu_result_o(alu_result_exu_to_lsu),
+    .rs1_o(rs1_exu_to_lsu),
+    .rs2_o(rs2_exu_to_lsu),
+    .csr_rdata_l_rs1_o(csr_rdata_l_rs1_exu_to_lsu),
+    .npc_o(npc_exu_to_lsu),
+    .MemRead_o(MemRead_exu_to_lsu),
+    .MemWrite_o(MemWrite_exu_to_lsu),
+    .wmask_o(wmask_exu_to_lsu),
+    .rmask_o(rmask_exu_to_lsu),
+    .wb_src_o(wb_src_exu_to_lsu),
+    .csr_write_o(csr_write_exu_to_lsu),
+    .csr_wdata_src_o(csr_wdta_src_exu_to_lsu),
+    .reg_write_o(reg_write_exu_to_lsu),
+    .waddr_o(waddr_exu_to_lsu),
+
+    .exu_valid_o(valid_exu_to_lsu),
+    .exu_ready_i(ready_exu_to_lsu),   
   );
 
-  mux21 Csr_Wdata(
-    .d0(rs1),
-    .d1(csr_rdata | rs1),
-    .sel(csr_wdata_src),
-    .out(csr_wdata)
+  wire [`CPU_WIDTH-1:0] alu_result_lsu_to_wbu;
+  wire [`CPU_WIDTH-1:0] rs1_lsu_to_wbu;
+  wire [`CPU_WIDTH-1:0] csr_rdata_l_rs1_lsu_to_wbu;
+  wire [`CPU_WIDTH-1:0] datamem_readdata_lsu_to_wbu;
+  wire [`PC_WIDTH-1:0] npc_lsu_to_wbu;
+  wire [2:0] rmask_lsu_to_wbu;
+  wire wb_src_lsu_to_wbu;
+  wire csr_write_lsu_to_wbu;
+  wire csr_wdata_src_lsu_to_wbu;
+  wire reg_write_lsu_to_wbu;
+  wire [`REG_ADDR-1:0] waddr_lsu_to_wbu;
+
+  wire valid_lsu_to_wbu;
+  wire ready_lsu_to_wbu;
+
+  lsu LSU(
+    .clk(clk),
+    .rst_n(rst_n),
+    //exu to lsu
+    .alu_result_i(alu_result_exu_to_lsu),
+    .rs1_i(rs1_exu_to_lsu),
+    .rs2_i(rs2_exu_to_lsu),
+    .csr_rdata_l_rs1_i(csr_rdata_l_rs1_exu_to_lsu),
+    .npc_i(npc_exu_to_lsu),
+    .MemRead_i(MemRead_exu_to_lsu),
+    .MemWrite_i(MemWrite_exu_to_lsu),
+    .wmask_i(wmask_exu_to_lsu),
+    .rmask_i(rmask_exu_to_lsu),
+    .wb_src_i(wb_src_exu_to_lsu),
+    .csr_write_i(csr_write_exu_to_lsu),
+    .csr_wdata_src_i(csr_wdta_src_exu_to_lsu),
+    .reg_write_i(reg_write_exu_to_lsu),
+    .waddr_i(waddr_exu_to_lsu),
+
+    .lsu_valid_i(valid_exu_to_lsu),
+    .lsu_ready_o(ready_exu_to_lsu),
+    
+    //lsu to wbu
+    .alu_result_o(alu_result_lsu_to_wbu),
+    .rs1_o(rs1_lsu_to_wbu),
+    .csr_rdata_l_rs1_o(csr_rdata_l_rs1_lsu_to_wbu),
+    .datamem_readdata_o(datamem_readdata_lsu_to_wbu),
+    .npc_o(npc_lsu_to_wbu),
+    .rmask_o(rmask_lsu_to_wbu),
+    .wb_src_o(wb_src_lsu_to_wbu),
+    .csr_write_o(csr_write_lsu_to_wbu),
+    .csr_wdata_src_o(csr_wdata_src_lsu_to_wbu),
+    .reg_write_o(reg_write_lsu_to_wbu),
+    .waddr_o(waddr_lsu_to_wbu),
+
+    .lsu_valid_o(valid_lsu_to_wbu),
+    .lsu_ready_i(ready_lsu_to_wbu),
+
   );
 
-  mux21 Adder_A_Src(
-    .d0(pc),
-    .d1(rs1),
-    .sel(adder_a_src),
-    .out(a_out)
+  wbu WBU(
+    .clk(clk),
+    .rst_n(rst_n),
+    //lsu to wbu
+    .alu_result_i(alu_result_lsu_to_wbu),
+    .rs1_i(rs1_lsu_to_wbu),
+    .csr_rdata_l_rs1_i(csr_rdata_l_rs1_lsu_to_wbu),
+    .datamem_readdata_i(datamem_readdata_lsu_to_wbu),
+    .npc_i(npc_lsu_to_wbu),
+    .rmask_i(rmask_lsu_to_wbu),
+    .wb_src_i(wb_src_lsu_to_wbu),
+    .csr_write_i(csr_write_lsu_to_wbu),
+    .csr_wdata_src_i(csr_wdata_src_lsu_to_wbu),
+    .reg_write_i(reg_write_lsu_to_wbu),
+    .waddr_i(waddr_lsu_to_wbu),
+
+    .wbu_valid_i(valid_lsu_to_wbu),
+    .wbu_ready_o(ready_lsu_to_wbu),
+
+    //wbu to ifu
+    .npc_o(npc_wbu_to_ifu),
+
+    .wbu_valid_o(valid_wbu_to_ifu),
+    .wbu_ready_i(ready_wbu_to_ifu),
+
+    //write back
+    .csr_wdata_o(csr_wdata),
+    .csr_write_o(csr_write),
+    .wdata_o(wdata),
+    .reg_write_o(reg_write),
+    .waddr_o(waddr)
   );
 
-  adder Adder(
-    .a(a_out),
-    .b(imm),
-    .out(add_out)
-  );
-
-  mux21 Adder_Out(
-    .d0(add_out),
-    .d1(csr_rdata),
-    .sel(adder_out_src),
-    .out(pc_new)
-  );
-
-  branch_control Branch_Control(
-    .pc4(pc+4),
-    .pc_new(pc_new),
-    .pc_srcs(pc_srcs),
-    .zero(zero),
-    .alu_result(alu_result),
-    .npc(npc)
-  );
-
-  mux21 ALU_A_Src(
-    .d0(rs1),
-    .d1(pc),
-    .sel(a_in_src),
-    .out(a_in)
-  );
-
-  mux41 ALU_B_Src(
-    .d0(rs2),
-    .d1(imm),
-    .d2(32'd4),
-    .d3(csr_rdata),
-    .sel(b_in_src),
-    .out(b_in)
-  );
-
-  alu ALU(
-    .a(a_in),
-    .b(b_in),
-    .op(alu_op),
-    .alu_result(alu_result),
-    .zero(zero)
-  );
-
-  alu_control ALU_Control(
-    .inst(inst),
-    .alu_op(alu_op)
-  );
-
-  //assign datamem_addr = alu_result;
-
-  data_mem Data_Mem(
-    .MemRead(mem_read),
-    .MemWrite(mem_write),
-    .address(alu_result),
-    .write_data(rs2),
-    .wmask(wmask),
-    .rmask(rmask),
-    .read_data(datamem_readdata)
-  );
-
-  sext_mem SEXT_Mem(
-    .read_data(datamem_readdata),
-    .addr_low2(alu_result[1:0]),
-    .rmask(rmask),
-    .mem_data(mem_data)
-  );
-
-  mux21 WB(
-    .d0(alu_result),
-    .d1(mem_data),
-    .sel(wb_src),
-    .out(wdata)
-  );
 
   always@(*) begin
     
