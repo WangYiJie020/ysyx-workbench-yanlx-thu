@@ -35,7 +35,7 @@ module wbu(
     wire [`CPU_WIDTH-1:0] mem_data;
     reg [`CPU_WIDTH-1:0] datamem_readdata;
     reg [`CPU_WIDTH-1:0] alu_result,rs1,csr_rdata_l_rs1;
-    reg [`CPU_WIDTH-1:0] rmask;
+    reg [2:0] rmask;
     reg wb_src;
     reg csr_wdata_src;
 
