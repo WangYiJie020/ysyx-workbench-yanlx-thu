@@ -139,7 +139,7 @@ module exu(
 
             MemRead_o <= MemRead_i;
             MemWrite_o <= MemWrite_i;
-            wmask_o <= MemWrite_i;
+            wmask_o <= wmask_i;
             rmask_o <= rmask_i;
             wb_src_o <= wb_src_i;
             csr_write_o <= csr_write_i;
