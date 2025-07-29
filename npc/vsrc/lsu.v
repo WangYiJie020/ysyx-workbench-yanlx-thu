@@ -24,9 +24,9 @@ module lsu(
     //lsu to wbu
     output [`CPU_WIDTH-1:0] alu_result_o,
     output [`CPU_WIDTH-1:0] rs1_o,
-    output [`CPU_WIDTH-1:0] csr_rdata_l_rs1_o,
+    output reg [`CPU_WIDTH-1:0] csr_rdata_l_rs1_o,
     output [`CPU_WIDTH-1:0] datamem_readdata_o,
-    output [`PC_WIDTH-1:0] npc_o,
+    output reg [`PC_WIDTH-1:0] npc_o,
     output [2:0] rmask_o,
     output reg wb_src_o,
     output reg csr_write_o,
