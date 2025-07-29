@@ -58,7 +58,8 @@ module exu(
     reg adder_out_src;
     reg [3:0] alu_op;
 
-    wire [`CPU_WIDTH-1:0] a_in,b_in,a_out,add_out,pc_new;
+    wire [`CPU_WIDTH-1:0] a_in,b_in,a_out,add_out,pc_new,alu_result;
+    wire [`PC_WIDTH-1:0] npc;
     wire zero;
 
     assign alu_result_o = alu_result;
