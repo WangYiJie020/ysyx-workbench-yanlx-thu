@@ -19,7 +19,7 @@ module wbu(
     output wbu_ready_o,
 
     //wbu to ifu
-    output npc_o,
+    output [`PC_WIDTH-1:0] npc_o,
 
     output reg wbu_valid_o,
     input wbu_ready_i,
