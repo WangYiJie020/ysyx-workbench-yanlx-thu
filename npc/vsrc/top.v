@@ -220,7 +220,7 @@ module top(
     .waddr_o(waddr_exu_to_lsu),
 
     .exu_valid_o(valid_exu_to_lsu),
-    .exu_ready_i(ready_exu_to_lsu),   
+    .exu_ready_i(ready_exu_to_lsu)  
   );
 
   wire [`CPU_WIDTH-1:0] alu_result_lsu_to_wbu;
@@ -274,7 +274,7 @@ module top(
     .waddr_o(waddr_lsu_to_wbu),
 
     .lsu_valid_o(valid_lsu_to_wbu),
-    .lsu_ready_i(ready_lsu_to_wbu),
+    .lsu_ready_i(ready_lsu_to_wbu)
 
   );
 
