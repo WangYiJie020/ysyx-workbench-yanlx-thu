@@ -45,7 +45,7 @@ module exu(
     output reg [`REG_ADDR-1:0] waddr_o,
 
     output reg exu_valid_o,
-    input exu_ready_i,
+    input exu_ready_i
     
 );
 
