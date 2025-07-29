@@ -35,7 +35,7 @@ module lsu(
     output reg [`REG_ADDR-1:0] waddr_o,
 
     output reg lsu_valid_o,
-    input lsu_ready_i,
+    input lsu_ready_i
 
 );
     reg [`CPU_WIDTH-1:0] alu_result;

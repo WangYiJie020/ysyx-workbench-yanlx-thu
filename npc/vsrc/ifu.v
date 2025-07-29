@@ -21,9 +21,7 @@ module ifu(
     wire [`PC_WIDTH-1:0] pc;
     reg [`PC_WIDTH-1:0] npc;
 
-    dff #(WIDTH = `PC_WIDTH, 
-        RESET_VAL = `PC_INIT
-    ) PC (
+    dff #(`PC_WIDTH,`PC_INIT) PC (
         .clk(clk),
         .rst_n(rst_n),
         .din(npc),
