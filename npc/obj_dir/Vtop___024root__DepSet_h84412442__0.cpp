@@ -35,7 +35,6 @@ void Vtop___024root___eval_triggers__act(Vtop___024root* vlSelf) {
 void Vtop___024unit____Vdpiimwrap_pmem_write_TOP____024unit(IData/*31:0*/ waddr, IData/*31:0*/ wdata, CData/*7:0*/ wmask);
 void Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(IData/*31:0*/ raddr, CData/*7:0*/ rmask, IData/*31:0*/ &pmem_read__Vfuncrtn);
 extern const VlUnpacked<CData/*1:0*/, 64> Vtop__ConstPool__TABLE_h1dd48d1a_0;
-extern const VlUnpacked<CData/*1:0*/, 64> Vtop__ConstPool__TABLE_h8d974b01_0;
 
 VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
@@ -302,11 +301,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
                 = vlSelf->top__DOT__EXU__DOT__alu_result;
         } else if ((3U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))) {
             vlSelf->top__DOT__valid_lsu_to_wbu = 1U;
-            vlSelf->top__DOT__LSU__DOT__MemRead = 0U;
-            vlSelf->top__DOT__LSU__DOT__MemWrite = 0U;
-        } else if ((2U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))) {
-            vlSelf->top__DOT__LSU__DOT__MemRead = 0U;
-            vlSelf->top__DOT__LSU__DOT__MemWrite = 0U;
             vlSelf->top__DOT__valid_lsu_to_wbu = 1U;
         } else {
             vlSelf->top__DOT__LSU__DOT__MemRead = 0U;
@@ -452,14 +446,14 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
                                         ((1U & (IData)(vlSelf->top__DOT__EXU__DOT__b_in_src))
                                           ? vlSelf->top__DOT__EXU__DOT__imm
                                           : vlSelf->top__DOT__EXU__DOT__rs2));
-    vlSelf->__Vtableidx5 = (((IData)(vlSelf->top__DOT__ready_exu_to_lsu) 
-                             << 5U) | (((IData)(vlSelf->top__DOT__valid_exu_to_lsu) 
-                                        << 4U) | (((IData)(vlSelf->top__DOT__ready_lsu_to_wbu) 
+    vlSelf->__Vtableidx5 = (((IData)(vlSelf->top__DOT__ready_lsu_to_wbu) 
+                             << 5U) | (((IData)(vlSelf->top__DOT__valid_lsu_to_wbu) 
+                                        << 4U) | (((IData)(vlSelf->top__DOT__ready_exu_to_lsu) 
                                                    << 3U) 
-                                                  | (((IData)(vlSelf->top__DOT__valid_lsu_to_wbu) 
+                                                  | (((IData)(vlSelf->top__DOT__valid_exu_to_lsu) 
                                                       << 2U) 
                                                      | (IData)(vlSelf->top__DOT__LSU__DOT__current_state)))));
-    vlSelf->top__DOT__LSU__DOT__next_state = Vtop__ConstPool__TABLE_h8d974b01_0
+    vlSelf->top__DOT__LSU__DOT__next_state = Vtop__ConstPool__TABLE_h1dd48d1a_0
         [vlSelf->__Vtableidx5];
     vlSelf->top__DOT__EXU__DOT__alu_result = ((8U & (IData)(vlSelf->top__DOT__EXU__DOT__alu_op))
                                                ? ((4U 

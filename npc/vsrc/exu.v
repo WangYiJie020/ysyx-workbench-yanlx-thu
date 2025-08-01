@@ -26,7 +26,7 @@ module exu(
     input [`REG_ADDR-1:0] waddr_i,
 
     input exu_valid_i,
-    output reg exu_ready_o,
+    output exu_ready_o,
 
     //exu to lsu
     output [`CPU_WIDTH-1:0] alu_result_o,
@@ -120,7 +120,7 @@ module exu(
         .alu_result(alu_result),
         .zero(zero)
     );
-/*
+
     assign exu_ready_o = exu_ready_i;
 
     always@(posedge clk) begin
@@ -153,7 +153,8 @@ module exu(
         if(!rst_n) exu_valid_o <= 1'b0;
         else if(exu_ready_o) exu_valid_o <= exu_valid_i;
     end
-*/
+
+/*
 localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
 
     reg [1:0] current_state,next_state;
@@ -225,4 +226,5 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
             
         end
     end
+*/
 endmodule
