@@ -148,8 +148,6 @@ module lsu(
                 npc_o <= npc_i;
                 csr_rdata_l_rs1_o <= csr_rdata_l_rs1_i;
                 waddr_o <= waddr_i;
-            end else if (pc == `PC_INIT)begin
-                lsu_valid_o <= 1;
             end else if (current_state == S_SEND)begin
                 lsu_valid_o <= 1;
             end else begin

@@ -155,8 +155,6 @@ module idu(
                 idu_valid_o <= 1;
                 pc <= pc_i;
                 inst <= inst_i;
-            end else if (pc == `PC_INIT)begin
-                idu_valid_o <= 1;
             end else if (current_state == S_SEND)begin
                 idu_valid_o <= 1;
             end else begin
