@@ -68,6 +68,7 @@ module ifu(
             current_state <= S_IDLE;
             ifu_valid_o <= 0;
             ifu_ready_o <= 0;
+            npc <= `PC_INIT;
         end else begin
             current_state <= next_state;
             if(current_state == S_IDLE) ifu_ready_o <= 1;
