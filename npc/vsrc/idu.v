@@ -12,7 +12,7 @@ module idu(
     input [`PC_WIDTH-1:0] pc_i,
     input [`INST_WIDTH-1:0] inst_i,
     input idu_valid_i,
-    output idu_ready_o,
+    output reg idu_ready_o,
     //idu to exu
     output [`PC_WIDTH-1:0] pc_o,
     output [`CPU_WIDTH-1:0] rs1_o,
