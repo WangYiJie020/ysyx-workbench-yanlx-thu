@@ -32,8 +32,8 @@ Vtop* top = new Vtop{contextp};
 VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
 
 //#define  DIFFTEST_ON
-//#define  WAVE_ON
-//#define  TRACE_ON
+#define  WAVE_ON
+#define  TRACE_ON
 
 
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };

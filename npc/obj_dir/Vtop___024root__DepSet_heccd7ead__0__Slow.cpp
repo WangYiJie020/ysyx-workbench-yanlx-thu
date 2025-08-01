@@ -21,11 +21,12 @@ VL_ATTR_COLD void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_initial\n"); );
     // Body
     Vtop___024root___eval_initial__TOP(vlSelf);
+    vlSelf->__Vm_traceActivity[3U] = 1U;
+    vlSelf->__Vm_traceActivity[2U] = 1U;
     vlSelf->__Vm_traceActivity[1U] = 1U;
     vlSelf->__Vm_traceActivity[0U] = 1U;
-    vlSelf->__Vtrigrprev__TOP__top__DOT__ready_exu_to_lsu 
-        = vlSelf->top__DOT__ready_exu_to_lsu;
     vlSelf->__Vtrigrprev__TOP__clk = vlSelf->clk;
+    vlSelf->__Vtrigrprev__TOP__rst_n = vlSelf->rst_n;
 }
 
 VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
@@ -87,27 +88,8 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__stl(Vtop___024root* vlSelf) {
     if (vlSelf->__VstlTriggered.at(0U)) {
         VL_DBG_MSGF("         'stl' region trigger index 0 is active: Internal 'stl' trigger - first iteration\n");
     }
-    if (vlSelf->__VstlTriggered.at(1U)) {
-        VL_DBG_MSGF("         'stl' region trigger index 1 is active: @([hybrid] top.ready_exu_to_lsu)\n");
-    }
 }
 #endif  // VL_DEBUG
-
-VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__1(Vtop___024root* vlSelf) {
-    if (false && vlSelf) {}  // Prevent unused
-    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___stl_sequent__TOP__1\n"); );
-    // Body
-    vlSelf->top__DOT__ready_lsu_to_wbu = vlSelf->top__DOT__ready_exu_to_lsu;
-}
-
-VL_ATTR_COLD void Vtop___024root___stl_comb__TOP__0(Vtop___024root* vlSelf) {
-    if (false && vlSelf) {}  // Prevent unused
-    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___stl_comb__TOP__0\n"); );
-    // Body
-    vlSelf->top__DOT__ready_exu_to_lsu = vlSelf->top__DOT__ready_lsu_to_wbu;
-}
 
 VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf);
 
@@ -118,14 +100,10 @@ VL_ATTR_COLD void Vtop___024root___eval_stl(Vtop___024root* vlSelf) {
     // Body
     if (vlSelf->__VstlTriggered.at(0U)) {
         Vtop___024root___stl_sequent__TOP__0(vlSelf);
+        vlSelf->__Vm_traceActivity[3U] = 1U;
+        vlSelf->__Vm_traceActivity[2U] = 1U;
         vlSelf->__Vm_traceActivity[1U] = 1U;
         vlSelf->__Vm_traceActivity[0U] = 1U;
-    }
-    if (vlSelf->__VstlTriggered.at(1U)) {
-        Vtop___024root___stl_sequent__TOP__1(vlSelf);
-    }
-    if ((vlSelf->__VstlTriggered.at(0U) | vlSelf->__VstlTriggered.at(1U))) {
-        Vtop___024root___stl_comb__TOP__0(vlSelf);
     }
 }
 
@@ -139,7 +117,7 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__act(Vtop___024root* vlSelf) {
         VL_DBG_MSGF("         No triggers active\n");
     }
     if (vlSelf->__VactTriggered.at(0U)) {
-        VL_DBG_MSGF("         'act' region trigger index 0 is active: @([hybrid] top.ready_exu_to_lsu)\n");
+        VL_DBG_MSGF("         'act' region trigger index 0 is active: @(posedge clk or negedge rst_n)\n");
     }
     if (vlSelf->__VactTriggered.at(1U)) {
         VL_DBG_MSGF("         'act' region trigger index 1 is active: @(posedge clk)\n");
@@ -157,7 +135,7 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__nba(Vtop___024root* vlSelf) {
         VL_DBG_MSGF("         No triggers active\n");
     }
     if (vlSelf->__VnbaTriggered.at(0U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 0 is active: @([hybrid] top.ready_exu_to_lsu)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(posedge clk or negedge rst_n)\n");
     }
     if (vlSelf->__VnbaTriggered.at(1U)) {
         VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(posedge clk)\n");
@@ -175,6 +153,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__inst_from_mem = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__npc_wbu_to_ifu = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__valid_wbu_to_ifu = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__ready_wbu_to_ifu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__valid_ifu_to_idu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__imm_idu_to_exu = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__a_in_src_idu_to_exu = VL_RAND_RESET_I(1);
@@ -218,7 +197,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__reg_write_exu_to_lsu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__waddr_exu_to_lsu = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__valid_exu_to_lsu = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__ready_exu_to_lsu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__csr_rdata_l_rs1_lsu_to_wbu = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__datamem_readdata_lsu_to_wbu = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__npc_lsu_to_wbu = VL_RAND_RESET_I(32);
@@ -228,7 +206,8 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__reg_write_lsu_to_wbu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__waddr_lsu_to_wbu = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__valid_lsu_to_wbu = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__ready_lsu_to_wbu = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__IFU__DOT__current_state = VL_RAND_RESET_I(2);
+    vlSelf->top__DOT__IFU__DOT__next_state = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__IFU__DOT__pc = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__IFU__DOT__npc = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__IDU__DOT__pc = VL_RAND_RESET_I(32);
@@ -278,11 +257,13 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->__Vfunc_pmem_read__2__Vfuncout = 0;
     vlSelf->__Vfunc_pmem_read__3__Vfuncout = 0;
     vlSelf->__Vtableidx1 = 0;
-    vlSelf->__Vtrigrprev__TOP__top__DOT__ready_exu_to_lsu = VL_RAND_RESET_I(1);
-    vlSelf->__VstlDidInit = 0;
+    vlSelf->__Vtableidx2 = 0;
+    vlSelf->__Vdly__top__DOT__ready_wbu_to_ifu = VL_RAND_RESET_I(1);
+    vlSelf->__Vdly__top__DOT__npc_lsu_to_wbu = VL_RAND_RESET_I(32);
+    vlSelf->__Vdly__top__DOT__valid_lsu_to_wbu = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigrprev__TOP__clk = VL_RAND_RESET_I(1);
-    vlSelf->__VactDidInit = 0;
-    for (int __Vi0 = 0; __Vi0 < 2; ++__Vi0) {
+    vlSelf->__Vtrigrprev__TOP__rst_n = VL_RAND_RESET_I(1);
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = 0;
     }
 }
