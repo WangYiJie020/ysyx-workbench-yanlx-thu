@@ -93,7 +93,7 @@ module idu(
         .inst(inst),
         .alu_op(alu_op)
     );
-
+/*
     assign idu_ready_o = idu_ready_i;
 
     always@(posedge clk) begin
@@ -106,6 +106,53 @@ module idu(
     always@(posedge clk) begin
         if(!rst_n) idu_valid_o <= 1'b0;
         else if(idu_ready_o) idu_valid_o <= idu_valid_i;
+    end
+*/
+    localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
+
+    always @(*) begin
+        case(current_state)
+            S_IDLE: begin
+                if (idu_valid_i == 1 && idu_ready_o == 1) begin
+                    next_state = S_RECEIVE;
+                end else begin
+                    next_state = current_state;
+                end
+            end
+            
+            S_RECEIVE: begin
+                if (idu_valid_o == 1 && idu_ready_i == 1) begin
+                    next_state = S_SEND;  
+                end else begin
+                    next_state = current_state;
+                end
+            end
+            
+            S_SEND: begin
+                next_state = S_IDLE;                 
+            end
+            
+          
+            default: next_state = current_state;
+        endcase
+    end
+
+    always @(posedge clk or negedge rst_n) begin        
+        if (!rst_n) begin
+            current_state <= S_IDLE;
+            idu_valid_o <= 0;
+            idu_ready_o <= 0;
+            npc <= `PC_INIT;
+        end else begin
+            current_state <= next_state;
+            if(current_state == S_IDLE) idu_ready_o <= 1;
+            if(current_state == S_RECEIVE) begin 
+                idu_valid_o <= 1;
+                pc <= pc_i;
+                inst <= inst_i;
+            end 
+            
+        end
     end
 
 

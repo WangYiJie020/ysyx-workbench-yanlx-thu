@@ -307,13 +307,13 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBus(c+212,"inst_o", false,-1, 31,0);
     tracep->declBit(c+219,"ifu_valid_o", false,-1);
     tracep->declBit(c+218,"ifu_ready_i", false,-1);
-    tracep->declBus(c+225,"S_IDLE", false,-1, 1,0);
-    tracep->declBus(c+226,"S_RECEIVE", false,-1, 1,0);
-    tracep->declBus(c+227,"S_SEND", false,-1, 1,0);
     tracep->declBus(c+220,"current_state", false,-1, 1,0);
     tracep->declBus(c+221,"next_state", false,-1, 1,0);
     tracep->declBus(c+211,"pc", false,-1, 31,0);
     tracep->declBus(c+222,"npc", false,-1, 31,0);
+    tracep->declBus(c+225,"S_IDLE", false,-1, 1,0);
+    tracep->declBus(c+226,"S_RECEIVE", false,-1, 1,0);
+    tracep->declBus(c+227,"S_SEND", false,-1, 1,0);
     tracep->pushNamePrefix("PC ");
     tracep->declBus(c+223,"WIDTH", false,-1, 31,0);
     tracep->declBus(c+228,"RESET_VAL", false,-1, 31,0);
