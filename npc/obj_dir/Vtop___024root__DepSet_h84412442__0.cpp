@@ -203,8 +203,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
          & (IData)(vlSelf->top__DOT__ready_wbu_to_ifu))) {
         vlSelf->top__DOT__EXU__DOT__alu_op = vlSelf->top__DOT__alu_op_idu_to_exu;
         vlSelf->top__DOT__EXU__DOT__imm = vlSelf->top__DOT__imm_idu_to_exu;
-        vlSelf->top__DOT__EXU__DOT__adder_a_src = vlSelf->top__DOT__adder_a_src_idu_to_exu;
         vlSelf->top__DOT__EXU__DOT__adder_out_src = vlSelf->top__DOT__adder_out_src_idu_to_exu;
+        vlSelf->top__DOT__EXU__DOT__adder_a_src = vlSelf->top__DOT__adder_a_src_idu_to_exu;
         vlSelf->top__DOT__EXU__DOT__a_in_src = vlSelf->top__DOT__a_in_src_idu_to_exu;
         vlSelf->top__DOT__EXU__DOT__b_in_src = vlSelf->top__DOT__b_in_src_idu_to_exu;
     }
@@ -537,7 +537,10 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
                                          : vlSelf->top__DOT__EXU__DOT__rs1);
     vlSelf->top__DOT__EXU__DOT__pc_new = ((IData)(vlSelf->top__DOT__EXU__DOT__adder_out_src)
                                            ? vlSelf->top__DOT__EXU__DOT__csr_rdata
-                                           : vlSelf->top__DOT__EXU__DOT__add_out);
+                                           : (((IData)(vlSelf->top__DOT__EXU__DOT__adder_a_src)
+                                                ? vlSelf->top__DOT__EXU__DOT__rs1
+                                                : vlSelf->top__DOT__EXU__DOT__pc) 
+                                              + vlSelf->top__DOT__EXU__DOT__imm));
     vlSelf->top__DOT__EXU__DOT__b_in = ((2U & (IData)(vlSelf->top__DOT__EXU__DOT__b_in_src))
                                          ? ((1U & (IData)(vlSelf->top__DOT__EXU__DOT__b_in_src))
                                              ? vlSelf->top__DOT__EXU__DOT__csr_rdata

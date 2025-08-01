@@ -645,9 +645,6 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__csr_wdata = ((IData)(vlSelf->top__DOT__WBU__DOT__csr_wdata_src)
                                     ? vlSelf->top__DOT__WBU__DOT__csr_rdata_l_rs1
                                     : vlSelf->top__DOT__WBU__DOT__rs1);
-    vlSelf->top__DOT__EXU__DOT__pc_new = ((IData)(vlSelf->top__DOT__EXU__DOT__adder_out_src)
-                                           ? vlSelf->top__DOT__EXU__DOT__csr_rdata
-                                           : vlSelf->top__DOT__EXU__DOT__add_out);
     Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__IFU__DOT__pc, 0U, vlSelf->__Vfunc_pmem_read__2__Vfuncout);
     vlSelf->top__DOT__inst_from_mem = vlSelf->__Vfunc_pmem_read__2__Vfuncout;
     if (((~ (IData)(vlSelf->top__DOT__LSU__DOT__MemWrite)) 
@@ -658,6 +655,12 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     } else {
         vlSelf->top__DOT__datamem_readdata_lsu_to_wbu = 0U;
     }
+    vlSelf->top__DOT__EXU__DOT__pc_new = ((IData)(vlSelf->top__DOT__EXU__DOT__adder_out_src)
+                                           ? vlSelf->top__DOT__EXU__DOT__csr_rdata
+                                           : (((IData)(vlSelf->top__DOT__EXU__DOT__adder_a_src)
+                                                ? vlSelf->top__DOT__EXU__DOT__rs1
+                                                : vlSelf->top__DOT__EXU__DOT__pc) 
+                                              + vlSelf->top__DOT__EXU__DOT__imm));
     vlSelf->__Vtableidx1 = (((IData)(vlSelf->top__DOT__ready_wbu_to_ifu) 
                              << 5U) | (((IData)(vlSelf->top__DOT__valid_ifu_to_idu) 
                                         << 4U) | (((IData)(vlSelf->top__DOT__ready_wbu_to_ifu) 
