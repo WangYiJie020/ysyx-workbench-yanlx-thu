@@ -16,7 +16,7 @@ module wbu(
     input [`REG_ADDR-1:0] waddr_i,
 
     input wbu_valid_i,
-    output wbu_ready_o,
+    output reg wbu_ready_o,
 
     //wbu to ifu
     output reg [`PC_WIDTH-1:0] npc_o,
@@ -59,7 +59,7 @@ module wbu(
         .sel(csr_wdata_src),
         .out(csr_wdata_o)
     );
-
+/*
     assign wbu_ready_o = wbu_ready_i;
 
     always@(posedge clk) begin
@@ -82,5 +82,59 @@ module wbu(
     always@(posedge clk) begin
         if(!rst_n) wbu_valid_o <= 1'b0;
         else if(wbu_ready_o) wbu_valid_o <= wbu_valid_i;
+    end
+
+*/
+    localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
+
+    reg [1:0] current_state,next_state;
+
+    always @(*) begin
+        case(current_state)
+            S_IDLE: begin
+                if (wbu_valid_i == 1 && wbu_ready_o == 1) begin
+                    next_state = S_RECEIVE;
+                end else begin
+                    next_state = current_state;
+                end
+            end
+            
+            S_RECEIVE: begin
+                if (wbu_valid_o == 1 && wbu_ready_i == 1) begin
+                    next_state = S_SEND;  
+                end else begin
+                    next_state = current_state;
+                end
+            end
+            
+            S_SEND: begin
+                next_state = S_IDLE;                 
+            end
+            
+          
+            default: next_state = current_state;
+        endcase
+    end
+
+    always @(posedge clk or negedge rst_n) begin        
+        if (!rst_n) begin
+            current_state <= S_IDLE;
+            wbu_valid_o <= 0;
+            wbu_ready_o <= 0;
+        end else begin
+            current_state <= next_state;
+            if(current_state == S_IDLE) wbu_ready_o <= 1;
+            else if(current_state == S_RECEIVE) wbu_ready_o <= 0;
+            if(current_state == S_RECEIVE) begin 
+                wbu_valid_o <= 1;
+                pc <= pc_i;
+                inst <= inst_i;
+            end else if (current_state == S_SEND)begin
+                wbu_valid_o <= 1;
+            end else begin
+                wbu_valid_o <= 0;
+            end
+            
+        end
     end
 endmodule
