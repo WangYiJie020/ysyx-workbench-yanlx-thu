@@ -661,7 +661,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                 ? vlSelf->top__DOT__EXU__DOT__rs1
                                                 : vlSelf->top__DOT__EXU__DOT__pc) 
                                               + vlSelf->top__DOT__EXU__DOT__imm));
-    vlSelf->__Vtableidx1 = (((IData)(vlSelf->top__DOT__ready_ifu_to_idu) 
+    vlSelf->__Vtableidx1 = (((IData)(vlSelf->top__DOT__ready_wbu_to_ifu) 
                              << 5U) | (((IData)(vlSelf->top__DOT__valid_ifu_to_idu) 
                                         << 4U) | (((IData)(vlSelf->top__DOT__ready_wbu_to_ifu) 
                                                    << 3U) 
@@ -670,15 +670,6 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                      | (IData)(vlSelf->top__DOT__IFU__DOT__current_state)))));
     vlSelf->top__DOT__IFU__DOT__next_state = Vtop__ConstPool__TABLE_h1dd48d1a_0
         [vlSelf->__Vtableidx1];
-    vlSelf->__Vtableidx2 = (((IData)(vlSelf->top__DOT__ready_wbu_to_ifu) 
-                             << 5U) | (((IData)(vlSelf->top__DOT__valid_idu_to_exu) 
-                                        << 4U) | (((IData)(vlSelf->top__DOT__ready_ifu_to_idu) 
-                                                   << 3U) 
-                                                  | (((IData)(vlSelf->top__DOT__valid_ifu_to_idu) 
-                                                      << 2U) 
-                                                     | (IData)(vlSelf->top__DOT__IDU__DOT__current_state)))));
-    vlSelf->top__DOT__IDU__DOT__next_state = Vtop__ConstPool__TABLE_h1dd48d1a_0
-        [vlSelf->__Vtableidx2];
     vlSelf->top__DOT__EXU__DOT__a_in = ((IData)(vlSelf->top__DOT__EXU__DOT__a_in_src)
                                          ? vlSelf->top__DOT__EXU__DOT__pc
                                          : vlSelf->top__DOT__EXU__DOT__rs1);
@@ -689,35 +680,35 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                         ((1U & (IData)(vlSelf->top__DOT__EXU__DOT__b_in_src))
                                           ? vlSelf->top__DOT__EXU__DOT__imm
                                           : vlSelf->top__DOT__EXU__DOT__rs2));
-    vlSelf->__Vtableidx3 = ((0x380U & (vlSelf->top__DOT__IDU__DOT__inst 
+    vlSelf->__Vtableidx2 = ((0x380U & (vlSelf->top__DOT__IDU__DOT__inst 
                                        >> 5U)) | (0x7fU 
                                                   & vlSelf->top__DOT__IDU__DOT__inst));
     vlSelf->top__DOT__a_in_src_idu_to_exu = Vtop__ConstPool__TABLE_h7b4d463a_0
-        [vlSelf->__Vtableidx3];
+        [vlSelf->__Vtableidx2];
     vlSelf->top__DOT__b_in_src_idu_to_exu = Vtop__ConstPool__TABLE_h2128083f_0
-        [vlSelf->__Vtableidx3];
+        [vlSelf->__Vtableidx2];
     vlSelf->top__DOT__reg_write_idu_to_exu = Vtop__ConstPool__TABLE_h413ee4ec_0
-        [vlSelf->__Vtableidx3];
+        [vlSelf->__Vtableidx2];
     vlSelf->top__DOT__pc_srcs_idu_to_exu = Vtop__ConstPool__TABLE_hd435c651_0
-        [vlSelf->__Vtableidx3];
+        [vlSelf->__Vtableidx2];
     vlSelf->top__DOT__adder_a_src_idu_to_exu = Vtop__ConstPool__TABLE_h757488f1_0
-        [vlSelf->__Vtableidx3];
+        [vlSelf->__Vtableidx2];
     vlSelf->top__DOT__MemRead_idu_to_exu = Vtop__ConstPool__TABLE_he56f561c_0
-        [vlSelf->__Vtableidx3];
+        [vlSelf->__Vtableidx2];
     vlSelf->top__DOT__MemWrite_idu_to_exu = Vtop__ConstPool__TABLE_h22430f06_0
-        [vlSelf->__Vtableidx3];
+        [vlSelf->__Vtableidx2];
     vlSelf->top__DOT__wmask_idu_to_exu = Vtop__ConstPool__TABLE_hd0c4a6d6_0
-        [vlSelf->__Vtableidx3];
+        [vlSelf->__Vtableidx2];
     vlSelf->top__DOT__wb_src_idu_to_exu = Vtop__ConstPool__TABLE_he56f561c_0
-        [vlSelf->__Vtableidx3];
+        [vlSelf->__Vtableidx2];
     vlSelf->top__DOT__rmask_idu_to_exu = Vtop__ConstPool__TABLE_hfcb85a5e_0
-        [vlSelf->__Vtableidx3];
+        [vlSelf->__Vtableidx2];
     vlSelf->top__DOT__csr_write_idu_to_exu = Vtop__ConstPool__TABLE_h329e03ac_0
-        [vlSelf->__Vtableidx3];
+        [vlSelf->__Vtableidx2];
     vlSelf->top__DOT__adder_out_src_idu_to_exu = Vtop__ConstPool__TABLE_h2b8e0fee_0
-        [vlSelf->__Vtableidx3];
+        [vlSelf->__Vtableidx2];
     vlSelf->top__DOT__csr_wdata_src_idu_to_exu = Vtop__ConstPool__TABLE_h0253fb65_0
-        [vlSelf->__Vtableidx3];
+        [vlSelf->__Vtableidx2];
     vlSelf->top__DOT__IDU__DOT____Vcellout__CSR__csr_reg[0U] 
         = vlSelf->top__DOT__IDU__DOT__CSR__DOT__csr_mepc;
     vlSelf->top__DOT__IDU__DOT____Vcellout__CSR__csr_reg[1U] 

@@ -21,7 +21,6 @@ VL_ATTR_COLD void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_initial\n"); );
     // Body
     Vtop___024root___eval_initial__TOP(vlSelf);
-    vlSelf->__Vm_traceActivity[3U] = 1U;
     vlSelf->__Vm_traceActivity[2U] = 1U;
     vlSelf->__Vm_traceActivity[1U] = 1U;
     vlSelf->__Vm_traceActivity[0U] = 1U;
@@ -100,7 +99,6 @@ VL_ATTR_COLD void Vtop___024root___eval_stl(Vtop___024root* vlSelf) {
     // Body
     if (vlSelf->__VstlTriggered.at(0U)) {
         Vtop___024root___stl_sequent__TOP__0(vlSelf);
-        vlSelf->__Vm_traceActivity[3U] = 1U;
         vlSelf->__Vm_traceActivity[2U] = 1U;
         vlSelf->__Vm_traceActivity[1U] = 1U;
         vlSelf->__Vm_traceActivity[0U] = 1U;
@@ -155,7 +153,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__valid_wbu_to_ifu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__ready_wbu_to_ifu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__valid_ifu_to_idu = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__ready_ifu_to_idu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__imm_idu_to_exu = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__a_in_src_idu_to_exu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__b_in_src_idu_to_exu = VL_RAND_RESET_I(2);
@@ -216,8 +213,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
         vlSelf->top__DOT__IDU__DOT____Vcellout__CSR__csr_reg[__Vi0] = VL_RAND_RESET_I(32);
     }
-    vlSelf->top__DOT__IDU__DOT__current_state = VL_RAND_RESET_I(2);
-    vlSelf->top__DOT__IDU__DOT__next_state = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__IDU__DOT__CSR__DOT__csr_mepc = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__IDU__DOT__CSR__DOT__csr_mstatus = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__IDU__DOT__CSR__DOT__csr_mcause = VL_RAND_RESET_I(32);
@@ -260,12 +255,13 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->__Vfunc_pmem_read__3__Vfuncout = 0;
     vlSelf->__Vtableidx1 = 0;
     vlSelf->__Vtableidx2 = 0;
-    vlSelf->__Vtableidx3 = 0;
+    vlSelf->__Vdly__top__DOT__ready_wbu_to_ifu = VL_RAND_RESET_I(1);
     vlSelf->__Vdly__top__DOT__IFU__DOT__npc = VL_RAND_RESET_I(32);
-    vlSelf->__Vdly__top__DOT__npc_wbu_to_ifu = VL_RAND_RESET_I(32);
+    vlSelf->__Vdly__top__DOT__npc_lsu_to_wbu = VL_RAND_RESET_I(32);
+    vlSelf->__Vdly__top__DOT__valid_lsu_to_wbu = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigrprev__TOP__clk = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigrprev__TOP__rst_n = VL_RAND_RESET_I(1);
-    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = 0;
     }
 }
