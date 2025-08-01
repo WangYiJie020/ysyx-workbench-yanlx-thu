@@ -108,7 +108,7 @@ module lsu(
                 if (lsu_valid_o == 1 && lsu_ready_i == 1) begin
                     next_state = S_SEND;  
                 end else begin
-                    next_state = S_WAIT_SEND;
+                    next_state = current_state;
                 end
             end
 
