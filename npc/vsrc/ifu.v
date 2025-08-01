@@ -8,7 +8,7 @@ module ifu(
     //wbu to ifu
     input [`PC_WIDTH-1:0] npc_i,
     input ifu_valid_i,
-    output ifu_ready_o,
+    output reg ifu_ready_o,
     //ifu to idu
     output [`PC_WIDTH-1:0] pc_o,
     output reg [`INST_WIDTH-1:0] inst_o,
