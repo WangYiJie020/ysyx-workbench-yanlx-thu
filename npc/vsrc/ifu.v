@@ -17,6 +17,9 @@ module ifu(
     
 
 );
+    localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
+
+    reg [1:0] current_state,next_state;
 
     wire [`PC_WIDTH-1:0] pc;
     reg [`PC_WIDTH-1:0] npc;
@@ -30,23 +33,51 @@ module ifu(
 
     assign pc_to_mem = pc;
     assign pc_o = pc;
-    
 
-    assign ifu_ready_o = ifu_ready_i;
     assign inst_o = inst_from_mem;
 
+    always @(*) begin
+        case(current_state)
+            S_IDLE: begin
+                if (ifu_valid_i == 1 && ifu_ready_o == 1) begin
+                    next_state = S_RECEIVE;
+                end else begin
+                    next_state = current_state;
+                end
+            end
+            
+            S_RECEIVE: begin
+                if (ifu_valid_o == 1 && ifu_ready_i == 1) begin
+                    next_state = S_SEND;  
+                end else begin
+                    next_state = current_state;
+                end
+            end
+            
+            S_SEND: begin
+                next_state = S_IDLE;                 
+            end
+            
+          
+            default: next_state = current_state;
+        endcase
+    end
 
-    always@(posedge clk) begin
-        if(ifu_valid_i && ifu_ready_i) begin
-            npc <= npc_i;
+    always @(posedge clk or negedge rst_n) begin        
+        if (!rst_n) begin
+            current_state <= S_IDLE;
+            ifu_valid_o <= 0;
+            ifu_ready_o <= 0;
+        end else begin
+            current_state <= next_state;
+            if(current_state == S_IDLE) ifu_ready_o <= 1;
+            if(current_state == S_RECEIVE) begin 
+                ifu_valid_o <= 1;
+                npc <= npc_i;
+            end
+            
         end
     end
-
-    always@(posedge clk) begin
-        if(!rst_n) ifu_valid_o <= 1'b0;
-        else if(ifu_ready_o) ifu_valid_o <= ifu_valid_i;
-    end
-
 
 
 endmodule
