@@ -157,6 +157,7 @@ module lsu(
                 csr_rdata_l_rs1_o <= csr_rdata_l_rs1_i;
                 waddr_o <= waddr_i;
             end else if (current_state == S_WAIT_SEND)begin
+                lsu_valid_o <= 1;
                 MemRead <= 0;
                 MemWrite <= 0;
             end else if (current_state == S_SEND)begin
