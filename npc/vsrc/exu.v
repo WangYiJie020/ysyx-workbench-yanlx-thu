@@ -26,7 +26,7 @@ module exu(
     input [`REG_ADDR-1:0] waddr_i,
 
     input exu_valid_i,
-    output exu_ready_o,
+    output reg exu_ready_o,
 
     //exu to lsu
     output [`CPU_WIDTH-1:0] alu_result_o,
@@ -120,7 +120,7 @@ module exu(
         .alu_result(alu_result),
         .zero(zero)
     );
-
+/*
     assign exu_ready_o = exu_ready_i;
 
     always@(posedge clk) begin
@@ -153,5 +153,76 @@ module exu(
         if(!rst_n) exu_valid_o <= 1'b0;
         else if(exu_ready_o) exu_valid_o <= exu_valid_i;
     end
+*/
+localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
 
+    reg [1:0] current_state,next_state;
+
+    always @(*) begin
+        case(current_state)
+            S_IDLE: begin
+                if (exu_valid_i == 1 && exu_ready_o == 1) begin
+                    next_state = S_RECEIVE;
+                end else begin
+                    next_state = current_state;
+                end
+            end
+            
+            S_RECEIVE: begin
+                if (exu_valid_o == 1 && exu_ready_i == 1) begin
+                    next_state = S_SEND;  
+                end else begin
+                    next_state = current_state;
+                end
+            end
+            
+            S_SEND: begin
+                next_state = S_IDLE;                 
+            end
+            
+          
+            default: next_state = current_state;
+        endcase
+    end
+
+    always @(posedge clk or negedge rst_n) begin        
+        if (!rst_n) begin
+            current_state <= S_IDLE;
+            exu_valid_o <= 0;
+            exu_ready_o <= 0;
+        end else begin
+            current_state <= next_state;
+            if(current_state == S_IDLE) exu_ready_o <= 1;
+            else if(current_state == S_RECEIVE) exu_ready_o <= 0;
+            if(current_state == S_RECEIVE) begin 
+                exu_valid_o <= 1;
+                pc <= pc_i;
+                rs1 <= rs1_i;
+                rs2 <=rs2_i;
+                imm <= imm_i;
+                csr_rdata <= csr_rdata_i;
+                a_in_src <= a_in_src_i;
+                b_in_src <= b_in_src_i;
+                pc_srcs <= pc_srcs_i;
+                adder_a_src <= adder_a_src_i;
+                adder_out_src <= adder_out_src_i;
+                alu_op <= alu_op_i;
+
+                MemRead_o <= MemRead_i;
+                MemWrite_o <= MemWrite_i;
+                wmask_o <= wmask_i;
+                rmask_o <= rmask_i;
+                wb_src_o <= wb_src_i;
+                csr_write_o <= csr_write_i;
+                csr_wdata_src_o <= csr_wdata_src_i;
+                reg_write_o <= reg_write_i;
+                waddr_o <= waddr_i;
+            end else if (current_state == S_SEND)begin
+                exu_valid_o <= 1;
+            end else begin
+                exu_valid_o <= 0;
+            end
+            
+        end
+    end
 endmodule
