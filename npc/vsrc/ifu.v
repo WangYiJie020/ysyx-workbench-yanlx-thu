@@ -75,6 +75,8 @@ module ifu(
             if(current_state == S_RECEIVE) begin 
                 ifu_valid_o <= 1;
                 npc <= npc_i;
+            end else if (pc == `PC_INIT)begin
+                ifu_valid_o <= 1;
             end
             
         end
