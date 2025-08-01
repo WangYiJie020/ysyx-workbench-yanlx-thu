@@ -160,7 +160,7 @@ module lsu(
             //    lsu_valid_o <= 1;
                 //MemRead <= 0;
                 //MemWrite <= 0;
-            //end else if (current_state == S_SEND)begin
+            end else if (current_state == S_SEND)begin
                 //MemRead <= 0;
                 //MemWrite <= 0;
                 lsu_valid_o <= 1;
