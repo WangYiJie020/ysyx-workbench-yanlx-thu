@@ -19,7 +19,7 @@ module lsu(
     input [`REG_ADDR-1:0] waddr_i,
 
     input lsu_valid_i,
-    output lsu_ready_o,
+    output reg lsu_ready_o,
     
     //lsu to wbu
     output [`CPU_WIDTH-1:0] alu_result_o,
