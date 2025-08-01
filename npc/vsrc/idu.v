@@ -118,7 +118,7 @@ module idu(
     always @(*) begin
         case(current_state)
             S_IDLE: begin
-                if (ifu_valid_i == 1 && ifu_ready_o == 1) begin
+                if (idu_valid_i == 1 && idu_ready_o == 1) begin
                     next_state = S_RECEIVE;
                 end else begin
                     next_state = current_state;
@@ -126,7 +126,7 @@ module idu(
             end
             
             S_RECEIVE: begin
-                if (ifu_valid_o == 1 && ifu_ready_i == 1) begin
+                if (idu_valid_o == 1 && idu_ready_i == 1) begin
                     next_state = S_SEND;  
                 end else begin
                     next_state = current_state;
@@ -145,22 +145,22 @@ module idu(
     always @(posedge clk or negedge rst_n) begin        
         if (!rst_n) begin
             current_state <= S_IDLE;
-            ifu_valid_o <= 0;
-            ifu_ready_o <= 0;
+            idu_valid_o <= 0;
+            idu_ready_o <= 0;
         end else begin
             current_state <= next_state;
-            if(current_state == S_IDLE) ifu_ready_o <= 1;
-            else if(current_state == S_RECEIVE) ifu_ready_o <= 0;
+            if(current_state == S_IDLE) idu_ready_o <= 1;
+            else if(current_state == S_RECEIVE) idu_ready_o <= 0;
             if(current_state == S_RECEIVE) begin 
-                ifu_valid_o <= 1;
+                idu_valid_o <= 1;
                 pc <= pc_i;
                 inst <= inst_i;
             end else if (pc == `PC_INIT)begin
-                ifu_valid_o <= 1;
+                idu_valid_o <= 1;
             end else if (current_state == S_SEND)begin
-                ifu_valid_o <= 1;
+                idu_valid_o <= 1;
             end else begin
-                ifu_valid_o <= 0;
+                idu_valid_o <= 0;
             end
             
         end
