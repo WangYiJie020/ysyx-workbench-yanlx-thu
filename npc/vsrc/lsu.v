@@ -90,7 +90,7 @@ module lsu(
     end
 */
 
-    localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
+    localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10,S_WAIT_SEND = 2'b11;
 
     reg [1:0] current_state,next_state;
 
