@@ -144,7 +144,6 @@ module idu(
             current_state <= S_IDLE;
             idu_valid_o <= 0;
             idu_ready_o <= 0;
-            npc <= `PC_INIT;
         end else begin
             current_state <= next_state;
             if(current_state == S_IDLE) idu_ready_o <= 1;
