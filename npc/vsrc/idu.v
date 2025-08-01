@@ -94,6 +94,8 @@ module idu(
         .alu_op(alu_op)
     );
 
+/*
+
     assign idu_ready_o = idu_ready_i;
 
     always@(posedge clk) begin
@@ -107,8 +109,8 @@ module idu(
         if(!rst_n) idu_valid_o <= 1'b0;
         else if(idu_ready_o) idu_valid_o <= idu_valid_i;
     end
+*/
 
-/*
     localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
 
     reg [1:0] current_state,next_state;
@@ -116,7 +118,7 @@ module idu(
     always @(*) begin
         case(current_state)
             S_IDLE: begin
-                if (idu_valid_i == 1 && idu_ready_o == 1) begin
+                if (ifu_valid_i == 1 && ifu_ready_o == 1) begin
                     next_state = S_RECEIVE;
                 end else begin
                     next_state = current_state;
@@ -124,7 +126,7 @@ module idu(
             end
             
             S_RECEIVE: begin
-                if (idu_valid_o == 1 && idu_ready_i == 1) begin
+                if (ifu_valid_o == 1 && ifu_ready_i == 1) begin
                     next_state = S_SEND;  
                 end else begin
                     next_state = current_state;
@@ -143,20 +145,27 @@ module idu(
     always @(posedge clk or negedge rst_n) begin        
         if (!rst_n) begin
             current_state <= S_IDLE;
-            idu_valid_o <= 0;
-            idu_ready_o <= 0;
+            ifu_valid_o <= 0;
+            ifu_ready_o <= 0;
         end else begin
             current_state <= next_state;
-            if(current_state == S_IDLE) idu_ready_o <= 1;
+            if(current_state == S_IDLE) ifu_ready_o <= 1;
+            else if(current_state == S_RECEIVE) ifu_ready_o <= 0;
             if(current_state == S_RECEIVE) begin 
-                idu_valid_o <= 1;
+                ifu_valid_o <= 1;
                 pc <= pc_i;
                 inst <= inst_i;
-            end 
+            end else if (pc == `PC_INIT)begin
+                ifu_valid_o <= 1;
+            end else if (current_state == S_SEND)begin
+                ifu_valid_o <= 1;
+            end else begin
+                ifu_valid_o <= 0;
+            end
             
         end
     end
 
-*/
+
 
 endmodule
