@@ -19,7 +19,7 @@ module ifu(
 );
     
 
-    reg [1:0] current_state,next_state;
+    
 
     wire [`PC_WIDTH-1:0] pc;
     reg [`PC_WIDTH-1:0] npc;
@@ -37,6 +37,8 @@ module ifu(
     assign inst_o = inst_from_mem;
 
     localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
+
+    reg [1:0] current_state,next_state;
 
     always @(*) begin
         case(current_state)

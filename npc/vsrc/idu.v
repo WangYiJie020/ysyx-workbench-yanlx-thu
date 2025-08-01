@@ -110,6 +110,8 @@ module idu(
 */
     localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
 
+    reg [1:0] current_state,next_state;
+
     always @(*) begin
         case(current_state)
             S_IDLE: begin
