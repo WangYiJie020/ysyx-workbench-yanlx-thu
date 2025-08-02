@@ -150,14 +150,14 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
             vlSelf->top__DOT__waddr_lsu_to_wbu = vlSelf->top__DOT__waddr_exu_to_lsu;
             vlSelf->top__DOT__LSU__DOT__alu_result 
                 = vlSelf->top__DOT__EXU__DOT__alu_result;
-        } else if ((3U != (IData)(vlSelf->top__DOT__LSU__DOT__current_state))) {
-            if ((2U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))) {
-                vlSelf->top__DOT__valid_lsu_to_wbu = 1U;
-            } else {
-                vlSelf->top__DOT__LSU__DOT__MemRead = 0U;
-                vlSelf->top__DOT__LSU__DOT__MemWrite = 0U;
-                vlSelf->top__DOT__valid_lsu_to_wbu = 0U;
-            }
+        } else if ((3U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))) {
+            vlSelf->top__DOT__valid_lsu_to_wbu = 1U;
+        } else if ((2U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))) {
+            vlSelf->top__DOT__valid_lsu_to_wbu = 1U;
+        } else {
+            vlSelf->top__DOT__LSU__DOT__MemRead = 0U;
+            vlSelf->top__DOT__LSU__DOT__MemWrite = 0U;
+            vlSelf->top__DOT__valid_lsu_to_wbu = 0U;
         }
         vlSelf->top__DOT__IFU__DOT__current_state = vlSelf->top__DOT__IFU__DOT__next_state;
     } else {
