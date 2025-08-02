@@ -91,7 +91,7 @@ module ifu(
             end else if (pc == `PC_INIT)begin
                 ifu_valid_o <= 1;
             end else if (current_state == S_WAIT_SEND)begin
-                ifu_valid_o <= 0;
+                ifu_valid_o <= 1;
             end else if (current_state == S_SEND)begin
                 ifu_valid_o <= 0;
             end else begin
