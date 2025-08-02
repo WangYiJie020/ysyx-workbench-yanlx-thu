@@ -36,7 +36,7 @@ module ifu(
 
     assign inst_o = inst_from_mem;
 
-    localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
+    localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10,S_WAIT_SEND = 2'b11;
 
     reg [1:0] current_state,next_state;
 
@@ -51,6 +51,14 @@ module ifu(
             end
             
             S_RECEIVE: begin
+                if (ifu_valid_o == 1 && ifu_ready_i == 1) begin
+                    next_state = S_SEND;  
+                end else begin
+                    next_state = S_WAIT_SEND;
+                end
+            end
+
+            S_WAIT_SEND: begin
                 if (ifu_valid_o == 1 && ifu_ready_i == 1) begin
                     next_state = S_SEND;  
                 end else begin
@@ -78,10 +86,12 @@ module ifu(
             if(current_state == S_IDLE) ifu_ready_o <= 1;
             else if(current_state == S_RECEIVE) ifu_ready_o <= 0;
             if(current_state == S_RECEIVE) begin 
-                ifu_valid_o <= 1;
+                ifu_valid_o <= 0;
                 npc <= npc_i;
             end else if (pc == `PC_INIT)begin
                 ifu_valid_o <= 1;
+            end else if (current_state == S_WAIT_SEND)begin
+                ifu_valid_o <= 0;
             end else if (current_state == S_SEND)begin
                 ifu_valid_o <= 0;
             end else begin
