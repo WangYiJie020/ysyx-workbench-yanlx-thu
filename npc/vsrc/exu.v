@@ -26,7 +26,7 @@ module exu(
     input [`REG_ADDR-1:0] waddr_i,
 
     input exu_valid_i,
-    output exu_ready_o,
+    output reg exu_ready_o,
 
     //exu to lsu
     output [`CPU_WIDTH-1:0] alu_result_o,
