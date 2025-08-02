@@ -138,7 +138,7 @@ module lsu(
             current_state <= S_IDLE;
             lsu_valid_o <= 0;
             lsu_ready_o <= 0;
-            flag = 0;
+            flag <= 0;
         end else begin
             current_state <= next_state;
             if(current_state == S_IDLE) lsu_ready_o <= 1;
