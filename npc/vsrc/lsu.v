@@ -137,7 +137,7 @@ module lsu(
         end else begin
             current_state <= next_state;
             if(current_state == S_IDLE) lsu_ready_o <= 1;
-            else if(current_state == S_RECEIVE) lsu_ready_o <= 0;
+            //else if(current_state == S_RECEIVE) lsu_ready_o <= 0;
             if(current_state == S_RECEIVE) begin 
                 lsu_valid_o <= 1;
 
