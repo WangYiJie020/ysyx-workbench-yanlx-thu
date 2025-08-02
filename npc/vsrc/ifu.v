@@ -54,7 +54,7 @@ module ifu(
                 if (ifu_valid_o == 1 && ifu_ready_i == 1) begin
                     next_state = S_SEND;  
                 end else begin
-                    next_state = S_WAIT_SEND;
+                    next_state = current_state;
                 end
             end
 
@@ -90,8 +90,8 @@ module ifu(
                 npc <= npc_i;
             end else if (pc == `PC_INIT)begin
                 ifu_valid_o <= 1;
-            end else if (current_state == S_WAIT_SEND)begin
-                ifu_valid_o <= 1;
+            //end else if (current_state == S_WAIT_SEND)begin
+            //    ifu_valid_o <= 1;
             end else if (current_state == S_SEND)begin
                 ifu_valid_o <= 0;
             end else begin
