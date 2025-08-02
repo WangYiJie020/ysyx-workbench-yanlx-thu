@@ -176,10 +176,12 @@ module lsu(
                 //MemRead <= 0;
                 //MemWrite <= 0;
                 lsu_valid_o <= 1;
+                flag <= 0;
             end else begin
                 MemRead <= 0;
                 MemWrite <= 0;
                 lsu_valid_o <= 0;
+                flag <= 0;
             end
             
         end
