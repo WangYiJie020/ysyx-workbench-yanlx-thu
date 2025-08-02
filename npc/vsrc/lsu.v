@@ -162,7 +162,7 @@ module lsu(
             end else if (current_state == S_SEND)begin
                 //MemRead <= 0;
                 //MemWrite <= 0;
-                lsu_valid_o <= 1;
+                lsu_valid_o <= 0;
             end else begin
                 MemRead <= 0;
                 MemWrite <= 0;
