@@ -51,10 +51,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
             vlSelf->__Vdly__top__DOT__IFU__DOT__npc 
                 = vlSelf->top__DOT__npc_wbu_to_ifu;
         } else {
-            vlSelf->top__DOT__valid_ifu_to_idu = ((0x80000000U 
-                                                   == vlSelf->top__DOT__IFU__DOT__pc) 
-                                                  | (2U 
-                                                     == (IData)(vlSelf->top__DOT__IFU__DOT__current_state)));
+            vlSelf->top__DOT__valid_ifu_to_idu = (0x80000000U 
+                                                  == vlSelf->top__DOT__IFU__DOT__pc);
         }
         if ((0U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))) {
             vlSelf->__Vdly__top__DOT__ready_exu_to_lsu = 1U;
