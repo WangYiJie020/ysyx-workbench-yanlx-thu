@@ -1172,19 +1172,15 @@ VL_INLINE_OPT void Vtop___024root___nba_comb__TOP__0(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___nba_comb__TOP__0\n"); );
     // Body
-    vlSelf->top__DOT__LSU__DOT__next_state = ((0U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))
-                                               ? (((IData)(vlSelf->top__DOT__valid_exu_to_lsu) 
-                                                   & (IData)(vlSelf->top__DOT__ready_exu_to_lsu))
-                                                   ? 1U
-                                                   : (IData)(vlSelf->top__DOT__LSU__DOT__current_state))
-                                               : ((1U 
-                                                   == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))
-                                                   ? 2U
-                                                   : 
-                                                  ((2U 
-                                                    == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))
-                                                    ? 0U
-                                                    : (IData)(vlSelf->top__DOT__LSU__DOT__current_state))));
+    vlSelf->__Vtableidx4 = (((IData)(vlSelf->top__DOT__ready_wbu_to_ifu) 
+                             << 5U) | (((IData)(vlSelf->top__DOT__valid_lsu_to_wbu) 
+                                        << 4U) | (((IData)(vlSelf->top__DOT__ready_exu_to_lsu) 
+                                                   << 3U) 
+                                                  | (((IData)(vlSelf->top__DOT__valid_exu_to_lsu) 
+                                                      << 2U) 
+                                                     | (IData)(vlSelf->top__DOT__LSU__DOT__current_state)))));
+    vlSelf->top__DOT__LSU__DOT__next_state = Vtop__ConstPool__TABLE_h1dd48d1a_0
+        [vlSelf->__Vtableidx4];
     vlSelf->__Vtableidx1 = (((IData)(vlSelf->top__DOT__ready_ifu_to_idu) 
                              << 5U) | (((IData)(vlSelf->top__DOT__valid_ifu_to_idu) 
                                         << 4U) | (((IData)(vlSelf->top__DOT__ready_wbu_to_ifu) 

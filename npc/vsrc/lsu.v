@@ -48,6 +48,7 @@ module lsu(
     reg [2:0] rmask;
 
     reg [`CPU_WIDTH-1:0] datamem_readdata;
+    reg flag;
 
     assign rmask_o = rmask;
     assign rs1_o = rs1;
@@ -137,18 +138,27 @@ module lsu(
             current_state <= S_IDLE;
             lsu_valid_o <= 0;
             lsu_ready_o <= 0;
+            flag = 0;
         end else begin
             current_state <= next_state;
             if(current_state == S_IDLE) lsu_ready_o <= 1;
             else if(current_state == S_RECEIVE) lsu_ready_o <= 0;
             if(current_state == S_RECEIVE) begin 
                 lsu_valid_o <= 1;
+                if(flag == 0) begin
+                    MemRead <= MemRead_i;
+                    MemWrite <= MemWrite_i;
+                    flag <= 1;
+                end
+                else begin
+                    MemRead <= 0;
+                    MemWrite <= 0;
+                end
 
                 alu_result <= alu_result_i;
                 rs1 <= rs1_i;
                 rs2 <= rs2_i;            
-                MemRead <= MemRead_i;
-                MemWrite <= MemWrite_i;
+                
                 wmask <= wmask_i;
                 rmask <= rmask_i;
                 alu_result <= alu_result_i;
