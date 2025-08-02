@@ -266,6 +266,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->__Vtableidx1 = 0;
     vlSelf->__Vtableidx2 = 0;
     vlSelf->__Vtableidx3 = 0;
+    vlSelf->__Vtableidx4 = 0;
     vlSelf->__Vdly__top__DOT__IFU__DOT__npc = VL_RAND_RESET_I(32);
     vlSelf->__Vdly__top__DOT__ready_exu_to_lsu = VL_RAND_RESET_I(1);
     vlSelf->__Vdly__top__DOT__IDU__DOT__CSR__DOT__csr_mstatus = VL_RAND_RESET_I(32);

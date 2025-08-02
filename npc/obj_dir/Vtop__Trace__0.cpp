@@ -371,13 +371,7 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
                               + vlSelf->top__DOT__EXU__DOT__imm)),32);
     bufp->chgIData(oldp+225,(vlSelf->top__DOT__IFU__DOT__npc),32);
     bufp->chgCData(oldp+226,(vlSelf->top__DOT__IFU__DOT__next_state),2);
-    bufp->chgCData(oldp+227,(((0U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))
-                               ? (((IData)(vlSelf->top__DOT__valid_exu_to_lsu) 
-                                   & (IData)(vlSelf->top__DOT__ready_exu_to_lsu))
-                                   ? 1U : (IData)(vlSelf->top__DOT__LSU__DOT__current_state))
-                               : ((1U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))
-                                   ? 2U : ((2U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))
-                                            ? 0U : (IData)(vlSelf->top__DOT__LSU__DOT__current_state))))),2);
+    bufp->chgCData(oldp+227,(vlSelf->top__DOT__LSU__DOT__next_state),2);
 }
 
 void Vtop___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {
