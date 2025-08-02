@@ -125,7 +125,7 @@ module wbu(
         end else begin
             current_state <= next_state;
             if(current_state == S_IDLE) wbu_ready_o <= 1;
-            //else if(current_state == S_RECEIVE) wbu_ready_o <= 0;
+            else if(current_state == S_RECEIVE) wbu_ready_o <= 0;
             if(current_state == S_RECEIVE) begin 
                 wbu_valid_o <= 1;
                 alu_result <= alu_result_i;

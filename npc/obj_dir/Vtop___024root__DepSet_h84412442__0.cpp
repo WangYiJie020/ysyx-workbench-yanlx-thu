@@ -61,8 +61,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__IFU__DOT__current_state = vlSelf->top__DOT__IFU__DOT__next_state;
         if ((0U == (IData)(vlSelf->top__DOT__WBU__DOT__current_state))) {
             vlSelf->top__DOT__ready_lsu_to_wbu = 1U;
-        } else if ((1U == (IData)(vlSelf->top__DOT__WBU__DOT__current_state))) {
-            vlSelf->top__DOT__ready_lsu_to_wbu = 0U;
         }
         if ((1U == (IData)(vlSelf->top__DOT__WBU__DOT__current_state))) {
             vlSelf->top__DOT__valid_wbu_to_ifu = 1U;
@@ -206,8 +204,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__WBU__DOT__current_state = vlSelf->top__DOT__WBU__DOT__next_state;
         if ((0U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))) {
             vlSelf->top__DOT__ready_exu_to_lsu = 1U;
-        } else if ((1U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))) {
-            vlSelf->top__DOT__ready_exu_to_lsu = 0U;
         }
         if ((1U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))) {
             vlSelf->top__DOT__valid_lsu_to_wbu = 1U;
@@ -345,8 +341,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__LSU__DOT__current_state = vlSelf->top__DOT__LSU__DOT__next_state;
         if ((0U == (IData)(vlSelf->top__DOT__EXU__DOT__current_state))) {
             vlSelf->top__DOT__ready_idu_to_exu = 1U;
-        } else if ((1U == (IData)(vlSelf->top__DOT__EXU__DOT__current_state))) {
-            vlSelf->top__DOT__ready_idu_to_exu = 0U;
         }
         if ((1U == (IData)(vlSelf->top__DOT__EXU__DOT__current_state))) {
             vlSelf->top__DOT__valid_exu_to_lsu = 1U;
