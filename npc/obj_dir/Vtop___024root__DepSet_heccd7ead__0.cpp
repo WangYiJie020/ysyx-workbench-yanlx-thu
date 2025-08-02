@@ -81,7 +81,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
         vlSelf->__Vdly__top__DOT__csr_write = vlSelf->top__DOT__csr_write_lsu_to_wbu;
         vlSelf->__Vdly__top__DOT__npc_wbu_to_ifu = vlSelf->top__DOT__npc_lsu_to_wbu;
         vlSelf->top__DOT__WBU__DOT__datamem_readdata 
-            = vlSelf->top__DOT__datamem_readdata_lsu_to_wbu;
+            = vlSelf->top__DOT__LSU__DOT__datamem_readdata;
         vlSelf->top__DOT__WBU__DOT__csr_wdata_src = vlSelf->top__DOT__csr_wdata_src_lsu_to_wbu;
         vlSelf->top__DOT__WBU__DOT__csr_rdata_l_rs1 
             = vlSelf->top__DOT__csr_rdata_l_rs1_lsu_to_wbu;

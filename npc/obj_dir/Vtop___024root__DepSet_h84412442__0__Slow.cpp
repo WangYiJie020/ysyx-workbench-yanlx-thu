@@ -650,10 +650,10 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     if (((~ (IData)(vlSelf->top__DOT__LSU__DOT__MemWrite)) 
          & (IData)(vlSelf->top__DOT__LSU__DOT__MemRead))) {
         Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__LSU__DOT__alu_result, (IData)(vlSelf->top__DOT__LSU__DOT__rmask), vlSelf->__Vfunc_pmem_read__3__Vfuncout);
-        vlSelf->top__DOT__datamem_readdata_lsu_to_wbu 
+        vlSelf->top__DOT__LSU__DOT__datamem_readdata 
             = vlSelf->__Vfunc_pmem_read__3__Vfuncout;
     } else {
-        vlSelf->top__DOT__datamem_readdata_lsu_to_wbu = 0U;
+        vlSelf->top__DOT__LSU__DOT__datamem_readdata = 0U;
     }
     vlSelf->top__DOT__EXU__DOT__pc_new = ((IData)(vlSelf->top__DOT__EXU__DOT__adder_out_src)
                                            ? vlSelf->top__DOT__EXU__DOT__csr_rdata

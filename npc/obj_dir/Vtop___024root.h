@@ -97,7 +97,6 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__imm_idu_to_exu;
         IData/*31:0*/ top__DOT__csr_wdata;
         IData/*31:0*/ top__DOT__csr_rdata_l_rs1_lsu_to_wbu;
-        IData/*31:0*/ top__DOT__datamem_readdata_lsu_to_wbu;
         IData/*31:0*/ top__DOT__npc_lsu_to_wbu;
         IData/*31:0*/ top__DOT__IFU__DOT__pc;
         IData/*31:0*/ top__DOT__IFU__DOT__npc;
@@ -120,6 +119,7 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__LSU__DOT__rs1;
         IData/*31:0*/ top__DOT__LSU__DOT__rs2;
         IData/*31:0*/ top__DOT__LSU__DOT__csr_rdata_l_rs1;
+        IData/*31:0*/ top__DOT__LSU__DOT__datamem_readdata;
         IData/*31:0*/ top__DOT__WBU__DOT__mem_data;
         IData/*31:0*/ top__DOT__WBU__DOT__datamem_readdata;
         IData/*31:0*/ top__DOT__WBU__DOT__alu_result;

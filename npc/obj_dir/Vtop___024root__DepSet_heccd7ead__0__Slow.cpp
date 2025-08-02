@@ -202,7 +202,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__valid_exu_to_lsu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__ready_exu_to_lsu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__csr_rdata_l_rs1_lsu_to_wbu = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__datamem_readdata_lsu_to_wbu = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__npc_lsu_to_wbu = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__wb_src_lsu_to_wbu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__csr_write_lsu_to_wbu = VL_RAND_RESET_I(1);
@@ -251,6 +250,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__LSU__DOT__MemWrite = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__LSU__DOT__wmask = VL_RAND_RESET_I(8);
     vlSelf->top__DOT__LSU__DOT__rmask = VL_RAND_RESET_I(3);
+    vlSelf->top__DOT__LSU__DOT__datamem_readdata = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__LSU__DOT__current_state = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__LSU__DOT__next_state = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__WBU__DOT__mem_data = VL_RAND_RESET_I(32);
