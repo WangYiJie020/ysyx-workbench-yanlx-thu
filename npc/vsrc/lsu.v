@@ -47,9 +47,12 @@ module lsu(
     reg [7:0] wmask;
     reg [2:0] rmask;
 
+    reg [`CPU_WIDTH-1:0] datamem_readdata;
+
     assign rmask_o = rmask;
     assign rs1_o = rs1;
     assign alu_result_o = alu_result;
+    assign datamem_readdata_o = datamem_readdata;
 
     data_mem Data_Mem(
         .MemRead(MemRead),
@@ -58,7 +61,7 @@ module lsu(
         .write_data(rs2),
         .wmask(wmask),
         .rmask(rmask),
-        .read_data(datamem_readdata_o)
+        .read_data(datamem_readdata)
     );
 /*
     assign lsu_ready_o = lsu_ready_i;
