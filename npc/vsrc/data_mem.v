@@ -13,9 +13,6 @@ module data_mem(
 );
     reg [7:0] wmask_send;
 
-    wire [7:0] rmask_send;
-    assign rmask_send = {5'd0,rmask};
-
     always@(*) begin
         case(wmask)
             8'h01: wmask_send = wmask << (address[1:0]);
