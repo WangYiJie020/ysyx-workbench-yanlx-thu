@@ -167,8 +167,8 @@ module lsu(
                 alu_result <= alu_result_i;
                 rs1 <= rs1_i;
                 rs2 <= rs2_i;  
-                MemRead <= MemRead_i;
-                MemWrite <= MemWrite_i;          
+                MemRead <= 0;
+                MemWrite <= 0;          
                 
                 wmask <= wmask_i;
                 rmask <= rmask_i;
@@ -185,8 +185,8 @@ module lsu(
                 //MemRead <= 0;
                 //MemWrite <= 0;
             end else if (current_state == S_SEND)begin
-                //MemRead <= 0;
-                //MemWrite <= 0;
+                MemRead <= MemRead_i;
+                MemWrite <= MemWrite_i; 
                 lsu_valid_o <= 0;
                 //flag <= 0;
             end 
