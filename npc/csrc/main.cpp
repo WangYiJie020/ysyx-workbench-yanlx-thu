@@ -82,14 +82,14 @@ extern "C" int pmem_read(int raddr, char rmask) {
   uint32_t return_data;
   uint32_t tmp = (uint32_t)raddr /4; //int类型是有符号的，要转成无符号的
   uint32_t align = (uint32_t)raddr % 4;
-  if(align != 0 && rmask == 0){
+  //if(align != 0 && rmask == 0){
     //printf("不对齐\n");
-    switch(align) {
-      case 1:return_data = ((mem[tmp+1] & 0x000000ff) << 24) + ((mem[tmp] & 0xffffff00) >> 8);
-      case 2:return_data = ((mem[tmp+1] & 0x0000ffff) << 16) + ((mem[tmp] & 0xffff0000) >> 16);
-      case 3:return_data = ((mem[tmp+1] & 0x00ffffff) << 8 ) + ((mem[tmp] & 0xff000000) >> 24);
-    }
-  }
+  //  switch(align) {
+  //    case 1:return_data = ((mem[tmp+1] & 0x000000ff) << 24) + ((mem[tmp] & 0xffffff00) >> 8);
+  //    case 2:return_data = ((mem[tmp+1] & 0x0000ffff) << 16) + ((mem[tmp] & 0xffff0000) >> 16);
+  //    case 3:return_data = ((mem[tmp+1] & 0x00ffffff) << 8 ) + ((mem[tmp] & 0xff000000) >> 24);
+  //  }
+  //}
   //else if((align == 1 || align == 3) && (rmask == 1 || rmask == 2)) {
     //printf("不对齐\n");
     //switch(align) {
@@ -97,9 +97,9 @@ extern "C" int pmem_read(int raddr, char rmask) {
     //  case 3:
     //}
   //}
-  else {
+  //else {
     return_data = mem[tmp];
-  }
+  //}
 #ifdef TRACE_ON
   log_write("raddr = %08x,data= %08x\n",raddr,return_data);
 #endif
