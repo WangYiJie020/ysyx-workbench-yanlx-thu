@@ -151,7 +151,8 @@ module idu(
             current_state <= next_state;
             if(current_state == S_IDLE) idu_ready_o <= 1;
             else if(current_state == S_RECEIVE) idu_ready_o <= 0;
-            if(current_state == S_RECEIVE) begin 
+            if(current_state == S_IDLE) idu_valid_o <= 1;
+            else if(current_state == S_RECEIVE) begin 
                 idu_valid_o <= 1;
                 pc <= pc_i;
                 inst <= inst_i;
