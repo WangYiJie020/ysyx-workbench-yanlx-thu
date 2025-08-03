@@ -333,10 +333,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__3(Vtop___024root* vlSelf) 
                 = (vlSelf->top__DOT__EXU__DOT__csr_rdata 
                    | vlSelf->top__DOT__EXU__DOT__rs1);
             vlSelf->top__DOT__waddr_lsu_to_wbu = vlSelf->top__DOT__waddr_exu_to_lsu;
-            vlSelf->top__DOT__LSU__DOT__MemRead = vlSelf->top__DOT__MemRead_exu_to_lsu;
             vlSelf->top__DOT__LSU__DOT__alu_result 
                 = vlSelf->top__DOT__EXU__DOT__alu_result;
-            vlSelf->top__DOT__LSU__DOT__MemWrite = vlSelf->top__DOT__MemWrite_exu_to_lsu;
         } else if ((2U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))) {
             vlSelf->top__DOT__ready_exu_to_lsu = 1U;
             vlSelf->top__DOT__LSU__DOT__flag = 0U;

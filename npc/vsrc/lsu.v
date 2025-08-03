@@ -110,19 +110,19 @@ module lsu(
             
             S_RECEIVE: begin
                 if (lsu_valid_o == 1 && lsu_ready_i == 1) begin
+                    next_state = S_WAIT_SEND;  
+                end else begin
+                    next_state = S_WAIT_SEND;
+                end
+            end
+
+            S_WAIT_SEND: begin
+                if (lsu_valid_o == 1 && lsu_ready_i == 1) begin
                     next_state = S_SEND;  
                 end else begin
                     next_state = current_state;
                 end
             end
-
-            //S_WAIT_SEND: begin
-            //    if (lsu_valid_o == 1 && lsu_ready_i == 1) begin
-            //        next_state = S_SEND;  
-            //    end else begin
-            //        next_state = current_state;
-            //    end
-            //end
             
             S_SEND: begin
                 next_state = S_IDLE;                 
@@ -143,12 +143,13 @@ module lsu(
             current_state <= next_state;
             if(current_state == S_IDLE) lsu_ready_o <= 1;
             else if(current_state == S_RECEIVE) lsu_ready_o <= 0;
+            else if(current_state == S_WAIT_SEND) lsu_ready_o <= 0;
             else if(current_state == S_SEND) lsu_ready_o <= 1;
 
             if(current_state == S_IDLE) lsu_valid_o <= 0;
             else if(current_state == S_RECEIVE) begin 
-                lsu_valid_o <= 1;
-                
+                lsu_valid_o <= 0;
+                /*
                 if(flag == 0) begin
                     MemRead <= MemRead_i;
                     MemWrite <= MemWrite_i;
@@ -158,12 +159,12 @@ module lsu(
                     MemRead <= 0;
                     MemWrite <= 0;
                 end
-
+*/
                 alu_result <= alu_result_i;
                 rs1 <= rs1_i;
                 rs2 <= rs2_i;  
-                //MemRead <= MemRead_i;
-                //MemWrite <= MemWrite_i;          
+                MemRead <= MemRead_i;
+                MemWrite <= MemWrite_i;          
                 
                 wmask <= wmask_i;
                 rmask <= rmask_i;
@@ -175,19 +176,19 @@ module lsu(
                 npc_o <= npc_i;
                 csr_rdata_l_rs1_o <= csr_rdata_l_rs1_i;
                 waddr_o <= waddr_i;
-            //end else if (current_state == S_WAIT_SEND)begin
-            //    lsu_valid_o <= 1;
+            end else if (current_state == S_WAIT_SEND)begin
+                lsu_valid_o <= 1;
                 //MemWrite <= 0;
             end else if (current_state == S_SEND)begin
                 //MemRead <= 0;
                 //MemWrite <= 0;
-                lsu_valid_o <= 1;
-                flag <= 0;
+                lsu_valid_o <= 0;
+                //flag <= 0;
             end else begin
                 MemRead <= 0;
                 MemWrite <= 0;
                 lsu_valid_o <= 0;
-                flag <= 0;
+                //flag <= 0;
             end
             
         end
