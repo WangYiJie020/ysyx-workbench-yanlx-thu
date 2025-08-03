@@ -26,8 +26,6 @@ VL_ATTR_COLD void Vtop___024root___eval_triggers__stl(Vtop___024root* vlSelf) {
 }
 
 void Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();
-void Vtop___024unit____Vdpiimwrap_pmem_write_TOP____024unit(IData/*31:0*/ waddr, IData/*31:0*/ wdata, CData/*7:0*/ wmask);
-void Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(IData/*31:0*/ raddr, CData/*7:0*/ rmask, IData/*31:0*/ &pmem_read__Vfuncrtn);
 extern const VlUnpacked<CData/*1:0*/, 64> Vtop__ConstPool__TABLE_hbf80e028_0;
 extern const VlUnpacked<CData/*1:0*/, 64> Vtop__ConstPool__TABLE_h1dd48d1a_0;
 extern const VlUnpacked<CData/*1:0*/, 64> Vtop__ConstPool__TABLE_hb056201f_0;
@@ -518,27 +516,6 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__imm_idu_to_exu = 0U;
         vlSelf->top__DOT__alu_op_idu_to_exu = 0U;
     }
-    if (((IData)(vlSelf->top__DOT__LSU__DOT__MemWrite) 
-         & (~ (IData)(vlSelf->top__DOT__LSU__DOT__MemRead)))) {
-        Vtop___024unit____Vdpiimwrap_pmem_write_TOP____024unit(vlSelf->top__DOT__LSU__DOT__alu_result, vlSelf->top__DOT__LSU__DOT__rs2, 
-                                                               (0xffU 
-                                                                & ((1U 
-                                                                    == (IData)(vlSelf->top__DOT__LSU__DOT__wmask))
-                                                                    ? 
-                                                                   ((IData)(vlSelf->top__DOT__LSU__DOT__wmask) 
-                                                                    << 
-                                                                    (3U 
-                                                                     & vlSelf->top__DOT__LSU__DOT__alu_result))
-                                                                    : 
-                                                                   ((3U 
-                                                                     == (IData)(vlSelf->top__DOT__LSU__DOT__wmask))
-                                                                     ? 
-                                                                    ((IData)(vlSelf->top__DOT__LSU__DOT__wmask) 
-                                                                     << 
-                                                                     (3U 
-                                                                      & vlSelf->top__DOT__LSU__DOT__alu_result))
-                                                                     : (IData)(vlSelf->top__DOT__LSU__DOT__wmask)))));
-    }
     vlSelf->top__DOT__WBU__DOT__mem_data = ((4U & (IData)(vlSelf->top__DOT__WBU__DOT__rmask))
                                              ? ((2U 
                                                  & (IData)(vlSelf->top__DOT__WBU__DOT__rmask))
@@ -651,14 +628,6 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__csr_wdata = ((IData)(vlSelf->top__DOT__WBU__DOT__csr_wdata_src)
                                     ? vlSelf->top__DOT__WBU__DOT__csr_rdata_l_rs1
                                     : vlSelf->top__DOT__WBU__DOT__rs1);
-    if (((~ (IData)(vlSelf->top__DOT__LSU__DOT__MemWrite)) 
-         & (IData)(vlSelf->top__DOT__LSU__DOT__MemRead))) {
-        Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__LSU__DOT__alu_result, (IData)(vlSelf->top__DOT__LSU__DOT__rmask), vlSelf->__Vfunc_pmem_read__3__Vfuncout);
-        vlSelf->top__DOT__LSU__DOT__datamem_readdata 
-            = vlSelf->__Vfunc_pmem_read__3__Vfuncout;
-    } else {
-        vlSelf->top__DOT__LSU__DOT__datamem_readdata = 0U;
-    }
     vlSelf->top__DOT__EXU__DOT__pc_new = ((IData)(vlSelf->top__DOT__EXU__DOT__adder_out_src)
                                            ? vlSelf->top__DOT__EXU__DOT__csr_rdata
                                            : (((IData)(vlSelf->top__DOT__EXU__DOT__adder_a_src)
