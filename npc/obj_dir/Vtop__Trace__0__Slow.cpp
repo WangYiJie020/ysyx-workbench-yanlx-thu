@@ -322,7 +322,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBus(c+236,"S_IDLE", false,-1, 1,0);
     tracep->declBus(c+237,"S_RECEIVE", false,-1, 1,0);
     tracep->declBus(c+238,"S_SEND", false,-1, 1,0);
-    tracep->declBus(c+241,"S_WAIT_SEND", false,-1, 1,0);
+    tracep->declBus(c+241,"S_WAIT_RECEIVE", false,-1, 1,0);
     tracep->declBus(c+55,"current_state", false,-1, 1,0);
     tracep->declBus(c+227,"next_state", false,-1, 1,0);
     tracep->pushNamePrefix("PC ");

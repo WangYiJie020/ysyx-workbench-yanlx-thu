@@ -294,6 +294,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
         [0U];
 }
 
+extern const VlUnpacked<CData/*1:0*/, 64> Vtop__ConstPool__TABLE_hbf80e028_0;
 extern const VlUnpacked<CData/*1:0*/, 64> Vtop__ConstPool__TABLE_h1dd48d1a_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h7b4d463a_0;
 extern const VlUnpacked<CData/*1:0*/, 1024> Vtop__ConstPool__TABLE_h2128083f_0;
@@ -345,7 +346,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__3(Vtop___024root* vlSelf) 
                                                   | (((IData)(vlSelf->top__DOT__valid_wbu_to_ifu) 
                                                       << 2U) 
                                                      | (IData)(vlSelf->top__DOT__IFU__DOT__current_state)))));
-    vlSelf->top__DOT__IFU__DOT__next_state = Vtop__ConstPool__TABLE_h1dd48d1a_0
+    vlSelf->top__DOT__IFU__DOT__next_state = Vtop__ConstPool__TABLE_hbf80e028_0
         [vlSelf->__Vtableidx1];
     vlSelf->__Vtableidx4 = (((IData)(vlSelf->top__DOT__ready_exu_to_lsu) 
                              << 5U) | (((IData)(vlSelf->top__DOT__valid_exu_to_lsu) 

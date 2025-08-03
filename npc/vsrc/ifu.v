@@ -85,19 +85,18 @@ module ifu(
             npc <= `PC_INIT;
         end else begin
             current_state <= next_state;
-            if(current_state == S_IDLE) ifu_ready_o <= 1;
-            else if(current_state == S_RECEIVE) ifu_ready_o <= 0;
-            else if(current_state == S_SEND) ifu_ready_o <= 1;
+            if(current_state == S_IDLE) ifu_ready_o <= 0;
+            else if(current_state == S_RECEIVE) ifu_ready_o <= 1;
+            else if(current_state == S_SEND) ifu_ready_o <= 0;
+            else if(current_state == S_WAIT_RECEIVE) ifu_ready_o <= 1;
 
-            if (pc == `PC_INIT)begin
-                ifu_valid_o <= 1;
-            end
-            else if(current_state == S_IDLE) ifu_valid_o <= 0;
+            
+            if(current_state == S_IDLE) ifu_valid_o <= 1;
             else if(current_state == S_RECEIVE) begin 
-                ifu_valid_o <= 1;
+                ifu_valid_o <= 0;
                 npc <= npc_i;
-            //end else if (current_state == S_WAIT_SEND)begin
-            //    ifu_valid_o <= 1;
+            end else if (current_state == S_WAIT_RECEIVE)begin
+                ifu_valid_o <= 0;
             end else if (current_state == S_SEND)begin
                 ifu_valid_o <= 1;
             end else begin
