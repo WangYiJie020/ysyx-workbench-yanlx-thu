@@ -334,6 +334,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBus(c+231,"dout", false,-1, 31,0);
     tracep->popNamePrefix(2);
     tracep->pushNamePrefix("Inst_Mem ");
+    tracep->declBit(c+229,"clk", false,-1);
     tracep->declBus(c+231,"pc", false,-1, 31,0);
     tracep->declBus(c+232,"inst", false,-1, 31,0);
     tracep->popNamePrefix(1);
