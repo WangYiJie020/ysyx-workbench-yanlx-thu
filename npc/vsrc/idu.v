@@ -94,23 +94,6 @@ module idu(
         .alu_op(alu_op)
     );
 
-/*
-
-    assign idu_ready_o = idu_ready_i;
-
-    always@(posedge clk) begin
-        if(idu_valid_i && idu_ready_i) begin
-            pc <= pc_i;
-            inst <= inst_i;
-        end
-    end
-
-    always@(posedge clk) begin
-        if(!rst_n) idu_valid_o <= 1'b0;
-        else if(idu_ready_o) idu_valid_o <= idu_valid_i;
-    end
-*/
-
     localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
 
     reg [1:0] current_state,next_state;

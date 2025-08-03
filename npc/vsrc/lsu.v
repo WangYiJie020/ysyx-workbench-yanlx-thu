@@ -65,35 +65,7 @@ module lsu(
         .rmask(rmask),
         .read_data(datamem_readdata)
     );
-/*
-    assign lsu_ready_o = lsu_ready_i;
 
-    always@(posedge clk) begin
-        if(lsu_valid_i && lsu_ready_i) begin
-            alu_result <= alu_result_i;
-            rs1 <= rs1_i;
-            rs2 <= rs2_i;            
-            MemRead <= MemRead_i;
-            MemWrite <= MemWrite_i;
-            wmask <= wmask_i;
-            rmask <= rmask_i;
-            alu_result <= alu_result_i;
-
-            wb_src_o <= wb_src_i;
-            csr_write_o <= csr_write_i;
-            csr_wdata_src_o <= csr_wdata_src_i;
-            reg_write_o <= reg_write_i;
-            npc_o <= npc_i;
-            csr_rdata_l_rs1_o <= csr_rdata_l_rs1_i;
-            waddr_o <= waddr_i;
-        end
-    end
-
-    always@(posedge clk) begin
-        if(!rst_n) lsu_valid_o <= 1'b0;
-        else if(lsu_ready_o) lsu_valid_o <= lsu_valid_i;
-    end
-*/
 
     localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10,S_WAIT_SEND = 2'b11;
 

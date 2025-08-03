@@ -59,32 +59,6 @@ module wbu(
         .sel(csr_wdata_src),
         .out(csr_wdata_o)
     );
-/*
-    assign wbu_ready_o = wbu_ready_i;
-
-    always@(posedge clk) begin
-        if(wbu_valid_i && wbu_ready_i) begin
-            alu_result <= alu_result_i;
-            rs1 <= rs1_i;
-            csr_rdata_l_rs1 <= csr_rdata_l_rs1_i;
-            datamem_readdata <= datamem_readdata_i;
-            npc_o <= npc_i;
-            rmask <= rmask_i;
-            wb_src <= wb_src_i;
-            csr_wdata_src <= csr_wdata_src_i;
-            csr_write_o <= csr_write_i;
-            reg_write_o <= reg_write_i;
-            waddr_o <= waddr_i;
-            
-        end
-    end
-
-    always@(posedge clk) begin
-        if(!rst_n) wbu_valid_o <= 1'b0;
-        else if(wbu_ready_o) wbu_valid_o <= wbu_valid_i;
-    end
-*/
-
 
     localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
 
