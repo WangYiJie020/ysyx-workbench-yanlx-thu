@@ -148,7 +148,7 @@ module lsu(
             if(current_state == S_IDLE) lsu_valid_o <= 0;
             else if(current_state == S_RECEIVE) begin 
                 lsu_valid_o <= 1;
-                /*
+                
                 if(flag == 0) begin
                     MemRead <= MemRead_i;
                     MemWrite <= MemWrite_i;
@@ -157,7 +157,7 @@ module lsu(
                 else begin
                     MemRead <= 0;
                     MemWrite <= 0;
-                end*/
+                end
 
                 alu_result <= alu_result_i;
                 rs1 <= rs1_i;
@@ -182,12 +182,12 @@ module lsu(
                 //MemRead <= 0;
                 //MemWrite <= 0;
                 lsu_valid_o <= 1;
-                //flag <= 0;
+                flag <= 0;
             end else begin
                 MemRead <= 0;
                 MemWrite <= 0;
                 lsu_valid_o <= 0;
-                //flag <= 0;
+                flag <= 0;
             end
             
         end
