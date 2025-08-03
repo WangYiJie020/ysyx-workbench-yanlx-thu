@@ -81,10 +81,11 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__LSU__DOT__flag;
         CData/*1:0*/ top__DOT__LSU__DOT__current_state;
         CData/*1:0*/ top__DOT__LSU__DOT__next_state;
+        CData/*2:0*/ top__DOT__LSU__DOT__Data_Mem__DOT__rmask;
         CData/*2:0*/ top__DOT__WBU__DOT__rmask;
-        CData/*0:0*/ top__DOT__WBU__DOT__wb_src;
     };
     struct {
+        CData/*0:0*/ top__DOT__WBU__DOT__wb_src;
         CData/*0:0*/ top__DOT__WBU__DOT__csr_wdata_src;
         CData/*1:0*/ top__DOT__WBU__DOT__current_state;
         CData/*1:0*/ top__DOT__WBU__DOT__next_state;

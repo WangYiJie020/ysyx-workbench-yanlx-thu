@@ -33,7 +33,7 @@ void Vtop___024root___eval_triggers__act(Vtop___024root* vlSelf) {
 }
 
 void Vtop___024unit____Vdpiimwrap_pmem_write_TOP____024unit(IData/*31:0*/ waddr, IData/*31:0*/ wdata, CData/*7:0*/ wmask);
-void Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(IData/*31:0*/ raddr, CData/*7:0*/ rmask, IData/*31:0*/ &pmem_read__Vfuncrtn);
+void Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(IData/*31:0*/ raddr, IData/*31:0*/ &pmem_read__Vfuncrtn);
 
 VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
@@ -69,7 +69,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     vlSelf->__Vdlyvset__top__DOT__Rgefile__DOT__rf__v0 = 0U;
     if (((~ (IData)(vlSelf->top__DOT__LSU__DOT__MemWrite)) 
          & (IData)(vlSelf->top__DOT__LSU__DOT__MemRead))) {
-        Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__LSU__DOT__alu_result, (IData)(vlSelf->top__DOT__LSU__DOT__rmask), __Vfunc_pmem_read__3__Vfuncout);
+        Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__LSU__DOT__alu_result, __Vfunc_pmem_read__3__Vfuncout);
         vlSelf->top__DOT__LSU__DOT__datamem_readdata 
             = __Vfunc_pmem_read__3__Vfuncout;
     } else {
@@ -131,7 +131,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
     IData/*31:0*/ __Vfunc_pmem_read__2__Vfuncout;
     __Vfunc_pmem_read__2__Vfuncout = 0;
     // Body
-    Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__IFU__DOT__pc, 0U, __Vfunc_pmem_read__2__Vfuncout);
+    Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__IFU__DOT__pc, __Vfunc_pmem_read__2__Vfuncout);
     vlSelf->top__DOT__inst_from_mem = __Vfunc_pmem_read__2__Vfuncout;
     if (VL_UNLIKELY((0x100073U == vlSelf->top__DOT__inst_from_mem))) {
         Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();

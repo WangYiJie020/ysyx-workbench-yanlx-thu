@@ -19,7 +19,7 @@ extern "C" {
     // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/top.v:3:30
     extern void ebreak();
     // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/data_mem.v:1:29
-    extern int pmem_read(int raddr, char rmask);
+    extern int pmem_read(int raddr);
     // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/data_mem.v:2:30
     extern void pmem_write(int waddr, int wdata, char wmask);
     // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/top.v:4:30
