@@ -196,8 +196,9 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
             current_state <= next_state;
             if(current_state == S_IDLE) exu_ready_o <= 1;
             else if(current_state == S_RECEIVE) exu_ready_o <= 0;
-            if(current_state == S_RECEIVE) begin 
-                exu_valid_o <= 1;
+            if(current_state == S_IDLE) exu_valid_o <= 1;
+            else if(current_state == S_RECEIVE) begin 
+                exu_valid_o <= 0;
                 pc <= pc_i;
                 rs1 <= rs1_i;
                 rs2 <=rs2_i;
@@ -220,7 +221,7 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
                 reg_write_o <= reg_write_i;
                 waddr_o <= waddr_i;
             end else if (current_state == S_SEND)begin
-                exu_valid_o <= 1;
+                exu_valid_o <= 0;
             end else begin
                 exu_valid_o <= 0;
             end
