@@ -75,9 +75,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
     vlSelf->__Vdly__top__DOT__csr_write = vlSelf->top__DOT__csr_write;
     vlSelf->__Vdly__top__DOT__IDU__DOT__pc = vlSelf->top__DOT__IDU__DOT__pc;
     vlSelf->__Vdly__top__DOT__IDU__DOT__inst = vlSelf->top__DOT__IDU__DOT__inst;
-    if ((1U & (~ (IData)(vlSelf->rst_n)))) {
-        vlSelf->top__DOT__LSU__DOT__flag = 0U;
-    }
     if (vlSelf->rst_n) {
         if ((0U == (IData)(vlSelf->top__DOT__IDU__DOT__current_state))) {
             vlSelf->top__DOT__ready_ifu_to_idu = 1U;
