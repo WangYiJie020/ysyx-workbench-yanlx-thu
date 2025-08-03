@@ -18,9 +18,6 @@ module ifu(
 
 );
     
-
-    
-
     wire [`PC_WIDTH-1:0] pc;
     reg [`PC_WIDTH-1:0] npc;
 
@@ -85,7 +82,7 @@ module ifu(
             npc <= `PC_INIT;
         end else begin
             current_state <= next_state;
-            
+
             if(current_state == S_IDLE) ifu_ready_o <= 0;
             else if(current_state == S_RECEIVE) ifu_ready_o <= 1;
             else if(current_state == S_SEND) ifu_ready_o <= 0;
