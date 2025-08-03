@@ -146,7 +146,11 @@ module lsu(
             else if(current_state == S_WAIT_SEND) lsu_ready_o <= 0;
             else if(current_state == S_SEND) lsu_ready_o <= 1;
 
-            if(current_state == S_IDLE) lsu_valid_o <= 0;
+            if(current_state == S_IDLE) begin 
+                lsu_valid_o <= 0;
+                MemRead <= 0;
+                MemWrite <= 0;
+            end
             else if(current_state == S_RECEIVE) begin 
                 lsu_valid_o <= 0;
                 /*
@@ -181,8 +185,8 @@ module lsu(
                 //MemRead <= 0;
                 //MemWrite <= 0;
             end else if (current_state == S_SEND)begin
-                MemRead <= 0;
-                MemWrite <= 0;
+                //MemRead <= 0;
+                //MemWrite <= 0;
                 lsu_valid_o <= 0;
                 //flag <= 0;
             end 
