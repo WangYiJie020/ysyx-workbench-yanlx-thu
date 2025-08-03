@@ -93,7 +93,7 @@ module ifu(
             
             if(current_state == S_IDLE) ifu_valid_o <= 1;
             else if(current_state == S_RECEIVE) begin 
-                ifu_valid_o <= 0;
+                ifu_valid_o <= 1;
                 npc <= npc_i;
             end else if (current_state == S_WAIT_RECEIVE)begin
                 ifu_valid_o <= 0;

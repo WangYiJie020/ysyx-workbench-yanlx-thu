@@ -135,7 +135,8 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__WBU__DOT__csr_rdata_l_rs1;
         IData/*31:0*/ __Vfunc_pmem_read__2__Vfuncout;
         IData/*31:0*/ __Vfunc_pmem_read__3__Vfuncout;
-        IData/*31:0*/ __Vdly__top__DOT__IFU__DOT__npc;
+        IData/*31:0*/ __Vdly__top__DOT__IDU__DOT__pc;
+        IData/*31:0*/ __Vdly__top__DOT__IDU__DOT__inst;
         IData/*31:0*/ __Vdly__top__DOT__IDU__DOT__CSR__DOT__csr_mstatus;
         IData/*31:0*/ __Vdlyvval__top__DOT__Rgefile__DOT__rf__v0;
         IData/*31:0*/ __VstlIterCount;
@@ -146,7 +147,7 @@ class Vtop___024root final : public VerilatedModule {
         VlUnpacked<IData/*31:0*/, 32> top__DOT____Vcellout__Rgefile__reg_file;
         VlUnpacked<IData/*31:0*/, 4> top__DOT__IDU__DOT____Vcellout__CSR__csr_reg;
         VlUnpacked<IData/*31:0*/, 32> top__DOT__Rgefile__DOT__rf;
-        VlUnpacked<CData/*0:0*/, 4> __Vm_traceActivity;
+        VlUnpacked<CData/*0:0*/, 5> __Vm_traceActivity;
     };
     VlTriggerVec<1> __VstlTriggered;
     VlTriggerVec<2> __VactTriggered;
