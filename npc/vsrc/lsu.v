@@ -162,8 +162,8 @@ module lsu(
                 alu_result <= alu_result_i;
                 rs1 <= rs1_i;
                 rs2 <= rs2_i;  
-                MemRead <= MemRead_i;
-                MemWrite <= MemWrite_i;          
+                //MemRead <= MemRead_i;
+                //MemWrite <= MemWrite_i;          
                 
                 wmask <= wmask_i;
                 rmask <= rmask_i;
