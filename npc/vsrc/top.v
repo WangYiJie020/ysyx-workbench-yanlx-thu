@@ -54,7 +54,7 @@ module top(
   );
 
   inst_mem Inst_Mem(
-    .clk(clk)
+    .clk(clk),
     .pc(pc_to_mem),
     .inst(inst_from_mem)
   );
