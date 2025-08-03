@@ -120,7 +120,7 @@ module exu(
         .alu_result(alu_result),
         .zero(zero)
     );
-
+/*
     assign exu_ready_o = exu_ready_i;
 
     always@(posedge clk) begin
@@ -153,8 +153,8 @@ module exu(
         if(!rst_n) exu_valid_o <= 1'b0;
         else if(exu_ready_o) exu_valid_o <= exu_valid_i;
     end
+*/
 
-/*
 
 localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
 
@@ -227,5 +227,5 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
             
         end
     end
-*/
+
 endmodule
