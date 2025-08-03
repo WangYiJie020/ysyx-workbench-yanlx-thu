@@ -39,16 +39,19 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___nba_sequent__TOP__2\n"); );
+    // Init
+    IData/*31:0*/ __Vfunc_pmem_read__2__Vfuncout;
+    __Vfunc_pmem_read__2__Vfuncout = 0;
     // Body
-    vlSelf->top__DOT__IFU__DOT__pc = ((IData)(vlSelf->rst_n)
-                                       ? vlSelf->top__DOT__IFU__DOT__npc
-                                       : 0x80000000U);
-    Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__IFU__DOT__pc, 0U, vlSelf->__Vfunc_pmem_read__2__Vfuncout);
-    vlSelf->top__DOT__inst_from_mem = vlSelf->__Vfunc_pmem_read__2__Vfuncout;
+    Vtop___024unit____Vdpiimwrap_pmem_read_TOP____024unit(vlSelf->top__DOT__IFU__DOT__pc, 0U, __Vfunc_pmem_read__2__Vfuncout);
+    vlSelf->top__DOT__inst_from_mem = __Vfunc_pmem_read__2__Vfuncout;
     if (VL_UNLIKELY((0x100073U == vlSelf->top__DOT__inst_from_mem))) {
         Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();
         VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 321, "");
     }
+    vlSelf->top__DOT__IFU__DOT__pc = ((IData)(vlSelf->rst_n)
+                                       ? vlSelf->top__DOT__IFU__DOT__npc
+                                       : 0x80000000U);
 }
 
 extern const VlUnpacked<CData/*1:0*/, 64> Vtop__ConstPool__TABLE_hbf80e028_0;

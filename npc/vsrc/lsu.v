@@ -56,6 +56,7 @@ module lsu(
     assign datamem_readdata_o = datamem_readdata;
 
     data_mem Data_Mem(
+        .clk(clk),
         .MemRead(MemRead),
         .MemWrite(MemWrite),
         .address(alu_result),
