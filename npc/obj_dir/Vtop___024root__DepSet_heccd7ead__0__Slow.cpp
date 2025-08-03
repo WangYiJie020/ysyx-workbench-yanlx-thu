@@ -268,6 +268,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__WBU__DOT__csr_wdata_src = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__WBU__DOT__current_state = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__WBU__DOT__next_state = VL_RAND_RESET_I(2);
+    vlSelf->__Vfunc_pmem_read__2__Vfuncout = 0;
     vlSelf->__Vfunc_pmem_read__3__Vfuncout = 0;
     vlSelf->__Vtableidx1 = 0;
     vlSelf->__Vtableidx2 = 0;

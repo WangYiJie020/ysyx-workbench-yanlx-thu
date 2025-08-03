@@ -133,6 +133,7 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__WBU__DOT__alu_result;
         IData/*31:0*/ top__DOT__WBU__DOT__rs1;
         IData/*31:0*/ top__DOT__WBU__DOT__csr_rdata_l_rs1;
+        IData/*31:0*/ __Vfunc_pmem_read__2__Vfuncout;
         IData/*31:0*/ __Vfunc_pmem_read__3__Vfuncout;
         IData/*31:0*/ __Vdly__top__DOT__IDU__DOT__pc;
         IData/*31:0*/ __Vdly__top__DOT__IDU__DOT__inst;
