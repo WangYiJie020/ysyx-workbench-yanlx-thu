@@ -178,8 +178,8 @@ module lsu(
                 waddr_o <= waddr_i;
             end else if (current_state == S_WAIT_SEND)begin
                 lsu_valid_o <= 1;
-                //MemRead <= 0;
-                //MemWrite <= 0;
+                MemRead <= 0;
+                MemWrite <= 0;
             end else if (current_state == S_SEND)begin
                 //MemRead <= 0;
                 //MemWrite <= 0;
