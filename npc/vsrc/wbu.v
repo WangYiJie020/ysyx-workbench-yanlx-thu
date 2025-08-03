@@ -126,9 +126,10 @@ module wbu(
             current_state <= next_state;
             if(current_state == S_IDLE) wbu_ready_o <= 1;
             else if(current_state == S_RECEIVE) wbu_ready_o <= 0;
+            else if(current_state == S_SEND) wbu_ready_o <= 1;
             if(current_state == S_IDLE) wbu_valid_o <= 1;
             else if(current_state == S_RECEIVE) begin 
-                wbu_valid_o <= 1;
+                wbu_valid_o <= 0;
                 alu_result <= alu_result_i;
                 rs1 <= rs1_i;
                 csr_rdata_l_rs1 <= csr_rdata_l_rs1_i;
@@ -141,7 +142,7 @@ module wbu(
                 reg_write_o <= reg_write_i;
                 waddr_o <= waddr_i;
             end else if (current_state == S_SEND)begin
-                wbu_valid_o <= 1;
+                wbu_valid_o <= 0;
             end else begin
                 wbu_valid_o <= 0;
             end
