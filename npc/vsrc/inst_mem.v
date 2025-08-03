@@ -4,7 +4,7 @@ module inst_mem(
     output reg [31:0] inst
 );
     always@(posedge clk) begin
-        inst <= pmem_read(pc,0);
+        inst <= pmem_read(pc);
     end
     //assign inst = pmem_read(pc,0);
 

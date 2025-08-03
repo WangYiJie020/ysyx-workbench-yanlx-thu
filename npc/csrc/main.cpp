@@ -47,7 +47,7 @@ time_t start_time;
 time_t currentTimeABS;
 int flag = 0;
 
-extern "C" int pmem_read(int raddr, char rmask) {
+extern "C" int pmem_read(int raddr) {
   // 总是读取地址为`raddr & ~0x3u`的4字节返回
   
   time(&currentTimeABS);
@@ -81,7 +81,7 @@ extern "C" int pmem_read(int raddr, char rmask) {
   }
   uint32_t return_data;
   uint32_t tmp = (uint32_t)raddr /4; //int类型是有符号的，要转成无符号的
-  uint32_t align = (uint32_t)raddr % 4;
+  //uint32_t align = (uint32_t)raddr % 4;
   //if(align != 0 && rmask == 0){
   //  printf("不对齐\n");
   //  switch(align) {
@@ -91,7 +91,7 @@ extern "C" int pmem_read(int raddr, char rmask) {
   //  }
   //}
   //else {
-    return_data = mem[tmp];
+  return_data = mem[tmp];
   //}
 #ifdef TRACE_ON
   log_write("raddr = %08x,data= %08x\n",raddr,return_data);

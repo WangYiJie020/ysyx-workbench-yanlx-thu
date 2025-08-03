@@ -62,7 +62,6 @@ module lsu(
         .address(alu_result),
         .write_data(rs2),
         .wmask(wmask),
-        .rmask(rmask),
         .read_data(datamem_readdata)
     );
 
