@@ -36,7 +36,7 @@ module ifu(
     assign araddr_o = pc;
     //assign pc_o = pc;
 
-    //assign inst_o = (rvalid_i == 1 && rready_o == 1) ? rdata_i : 0;
+    assign inst_o = rdata_i;
 
     localparam S_IDLE = 3'b00,S_RECEIVE = 3'b01,S_SEND = 3'b10,S_WAIT_RECEIVE = 3'b11;
     localparam S_WAIT_SEND = 3'b100;
@@ -104,12 +104,12 @@ module ifu(
                 arvalid_o <= 1;
                 rready_o <= 1;
                 pc_o <= pc;
-                inst_o <= rdata_i;
+                //inst_o <= rdata_i;
             end else if (current_state == S_SEND)begin
                 ifu_valid_o <= 1;
                 arvalid_o <= 0;
                 rready_o <= 0;
-                inst_o <= rdata_i;
+                //inst_o <= rdata_i;
                 pc_o <= pc;
             end else if (current_state == S_WAIT_RECEIVE)begin
                 ifu_valid_o <= 0;
