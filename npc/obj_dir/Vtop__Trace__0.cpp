@@ -24,10 +24,10 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
     uint32_t* const oldp VL_ATTR_UNUSED = bufp->oldp(vlSymsp->__Vm_baseCode + 1);
     // Body
     if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[1U])) {
-        bufp->chgIData(oldp+0,(vlSelf->top__DOT__inst_ifu_to_idu),32);
-        bufp->chgBit(oldp+1,(vlSelf->top__DOT__ready_ifu_to_idu));
-        bufp->chgBit(oldp+2,(vlSelf->top__DOT__ifu_arready));
-        bufp->chgIData(oldp+3,(vlSelf->top__DOT__ifu_rdata),32);
+        bufp->chgIData(oldp+0,(vlSelf->top__DOT__ifu_rdata),32);
+        bufp->chgIData(oldp+1,(vlSelf->top__DOT__inst_ifu_to_idu),32);
+        bufp->chgBit(oldp+2,(vlSelf->top__DOT__ready_ifu_to_idu));
+        bufp->chgBit(oldp+3,(vlSelf->top__DOT__ifu_arready));
         bufp->chgBit(oldp+4,(vlSelf->top__DOT__ifu_rresp));
         bufp->chgBit(oldp+5,(vlSelf->top__DOT__ifu_rvalid));
         bufp->chgBit(oldp+6,(vlSelf->top__DOT__useless1));
