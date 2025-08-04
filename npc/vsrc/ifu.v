@@ -3,13 +3,13 @@ module ifu(
     input clk,
     input rst_n,
     //to mem
-    output [`CPU_WIDTH-1:0] araddr_o,
-    output arvalid_o,
+    output reg [`CPU_WIDTH-1:0] araddr_o,
+    output reg arvalid_o,
     input arready_i,
     input [`CPU_WIDTH-1:0] rdata_i,
     input rresp_i,
     input rvalid_i,
-    output rready_o,
+    output reg rready_o,
     //wbu to ifu
     input [`PC_WIDTH-1:0] npc_i,
     input ifu_valid_i,

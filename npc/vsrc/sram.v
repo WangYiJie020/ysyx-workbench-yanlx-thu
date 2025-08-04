@@ -107,7 +107,7 @@ module sram(
             end
 
             if(wready_o == 1 && wvalid_i == 1) begin
-                pmem_write(awaddr,wdata_i,wvalid_i);
+                pmem_write(awaddr,wdata_i,wstrb_i);
             end
         end
     end
