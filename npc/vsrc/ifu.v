@@ -72,7 +72,7 @@ module ifu(
                 if (rvalid_i == 1 && rready_o == 1) begin
                     next_state = S_WAIT_RECEIVE;  
                 end else begin
-                    next_state = current_state;
+                    next_state = S_WAIT_RECEIVE;
                 end
                                
             end
