@@ -156,7 +156,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__valid_wbu_to_ifu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__ready_wbu_to_ifu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__pc_ifu_to_idu = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__inst_ifu_to_idu = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__valid_ifu_to_idu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__ready_ifu_to_idu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__ifu_arvalid = VL_RAND_RESET_I(1);
