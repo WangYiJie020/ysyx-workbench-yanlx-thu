@@ -88,6 +88,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
             vlSelf->top__DOT__valid_ifu_to_idu = 1U;
             __Vdly__top__DOT__ifu_arvalid = 1U;
             __Vdly__top__DOT__ifu_rready = 1U;
+            vlSelf->top__DOT__pc_ifu_to_idu = vlSelf->top__DOT__IFU__DOT__pc;
         } else if ((1U == (IData)(vlSelf->top__DOT__IFU__DOT__current_state))) {
             vlSelf->top__DOT__ready_wbu_to_ifu = 1U;
             vlSelf->top__DOT__valid_ifu_to_idu = 1U;
