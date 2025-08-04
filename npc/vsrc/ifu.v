@@ -38,9 +38,10 @@ module ifu(
 
     //assign inst_o = (rvalid_i == 1 && rready_o == 1) ? rdata_i : 0;
 
-    localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10,S_WAIT_RECEIVE = 2'b11;
+    localparam S_IDLE = 3'b00,S_RECEIVE = 3'b01,S_SEND = 3'b10,S_WAIT_RECEIVE = 3'b11;
+    localparam S_WAIT_SEND = 3'b100;
 
-    reg [1:0] current_state,next_state;
+    reg [2:0] current_state,next_state;
 
     always @(*) begin
         case(current_state)
@@ -51,13 +52,9 @@ module ifu(
                     next_state = current_state;
                 end
             end
-            
-            S_RECEIVE: begin
-                if (ifu_valid_o == 1 && ifu_ready_i == 1) begin
-                    next_state = S_SEND;  
-                end else begin
-                    next_state = current_state;
-                end
+
+            S_SEND: begin
+                next_state = S_WAIT_RECEIVE;                                 
             end
 
             S_WAIT_RECEIVE: begin
@@ -68,16 +65,18 @@ module ifu(
                 end
             end
             
-            S_SEND: begin
-                if (rvalid_i == 1 && rready_o == 1) begin
-                    next_state = S_WAIT_RECEIVE;  
-                end else begin
-                    next_state = S_WAIT_RECEIVE;
-                end
-                               
+            S_RECEIVE: begin
+                next_state = S_WAIT_SEND;  
             end
-            
-          
+
+            S_WAIT_SEND: begin
+                if (ifu_valid_o == 1 && ifu_ready_i == 1) begin
+                    next_state = S_SEND;  
+                end else begin
+                    next_state = current_state;
+                end
+            end             
+        
             default: next_state = current_state;
         endcase
     end
@@ -94,36 +93,41 @@ module ifu(
             current_state <= next_state;
 
             if(current_state == S_IDLE) ifu_ready_o <= 0;
-            else if(current_state == S_RECEIVE) ifu_ready_o <= 1;
             else if(current_state == S_SEND) ifu_ready_o <= 0;
             else if(current_state == S_WAIT_RECEIVE) ifu_ready_o <= 1;
-
+            else if(current_state == S_RECEIVE) ifu_ready_o <= 1;
+            else if(current_state == S_WAIT_SEND) ifu_ready_o <= 0;      
             
             if(current_state == S_IDLE) begin 
                 ifu_valid_o <= 1;
                 arvalid_o <= 1;
                 rready_o <= 1;
                 pc_o <= pc;
-            end
-            else if(current_state == S_RECEIVE) begin 
+                inst_o <= rdata_i;
+            end else if (current_state == S_SEND)begin
                 ifu_valid_o <= 1;
-                npc <= npc_i;
-                arvalid_o <= 1;
+                arvalid_o <= 0;
+                rready_o <= 1;
+                inst_o <= rdata_i;
+                pc_o <= pc;
             end else if (current_state == S_WAIT_RECEIVE)begin
+                ifu_valid_o <= 0;
                 arvalid_o <= 0;
                 rready_o <= 0;
-                if(rvalid_i == 1 && rready_o == 1) begin 
-                    inst_o <= rdata_i;
-                    pc_o <= pc;
-                    ifu_valid_o <= 1;
-                end
-                else ifu_valid_o <= 0;
-            end else if (current_state == S_SEND)begin
-                rready_o <= 1;
-                
-            end else begin
+
+            end else if(current_state == S_RECEIVE) begin 
                 ifu_valid_o <= 0;
-            end
+                npc <= npc_i;
+                arvalid_o <= 1;
+                rready_o <= 1;
+            end else if(current_state == S_WAIT_SEND) begin               
+                if(rvalid_i == 1 && rready_o == 1) ifu_valid_o <= 1;
+                else ifu_valid_o <= 0;
+
+                arvalid_o <= 1; 
+                rready_o <= 1;
+
+            end 
 
             
             
