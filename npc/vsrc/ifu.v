@@ -3,8 +3,13 @@ module ifu(
     input clk,
     input rst_n,
     //to mem
-    output [`PC_WIDTH-1:0] pc_to_mem,
-    input [`INST_WIDTH-1:0] inst_from_mem,
+    output [`REG_ADDR-1:0] araddr_o,
+    output arvalid_o,
+    input arready_i,
+    input [`CPU_WIDTH-1:0] rdata_i,
+    input rresp_i,
+    input rvalid_i,
+    output rready_o,
     //wbu to ifu
     input [`PC_WIDTH-1:0] npc_i,
     input ifu_valid_i,
@@ -28,10 +33,10 @@ module ifu(
         .dout(pc)
     );
 
-    assign pc_to_mem = pc;
+    assign araddr_o = pc;
     assign pc_o = pc;
 
-    assign inst_o = inst_from_mem;
+    //assign inst_o = (rvalid_i == 1 && rready_o == 1) ? rdata_i : 0;
 
     localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10,S_WAIT_RECEIVE = 2'b11;
 
@@ -80,6 +85,8 @@ module ifu(
             ifu_valid_o <= 0;
             ifu_ready_o <= 0;
             npc <= `PC_INIT;
+            arvalid_o <= 0;
+            rready_o <= 0;
         end else begin
             current_state <= next_state;
 
@@ -89,17 +96,26 @@ module ifu(
             else if(current_state == S_WAIT_RECEIVE) ifu_ready_o <= 1;
 
             
-            if(current_state == S_IDLE) ifu_valid_o <= 1;
+            if(current_state == S_IDLE) begin 
+                ifu_valid_o <= 1;
+                arvalid_o <= 1;
+                rready_o <= 1;
+            end
             else if(current_state == S_RECEIVE) begin 
                 ifu_valid_o <= 1;
                 npc <= npc_i;
             end else if (current_state == S_WAIT_RECEIVE)begin
                 ifu_valid_o <= 0;
+                arvalid_o <= 1;
+                rready_o <= 0;
             end else if (current_state == S_SEND)begin
                 ifu_valid_o <= 1;
+                rready_o <= 1;
             end else begin
                 ifu_valid_o <= 0;
             end
+
+            if(rvalid_i == 1 && rready_o == 1) inst_o <= rdata_i;
             
         end
     end
