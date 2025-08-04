@@ -113,11 +113,12 @@ module ifu(
                 arvalid_o <= 0;
                 rready_o <= 0;
             end else if (current_state == S_SEND)begin
-                ifu_valid_o <= 1;
+                
                 rready_o <= 1;
                 if(rvalid_i == 1 && rready_o == 1) begin 
                     inst_o <= rdata_i;
                     pc_o <= pc;
+                    ifu_valid_o <= 1;
                 end
             end else begin
                 ifu_valid_o <= 0;
