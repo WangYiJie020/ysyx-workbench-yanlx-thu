@@ -103,6 +103,7 @@ module ifu(
                 ifu_valid_o <= 1;
                 arvalid_o <= 1;
                 rready_o <= 1;
+                pc_o <= pc;
             end
             else if(current_state == S_RECEIVE) begin 
                 ifu_valid_o <= 1;
