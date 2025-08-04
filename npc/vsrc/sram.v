@@ -5,24 +5,24 @@ module sram(
 
     input [`CPU_WIDTH-1:0] araddr_i,
     input arvalid_i,
-    output arready_o,
+    output reg arready_o,
 
-    output [`CPU_WIDTH-1:0] rdata_o,
-    output rresp_o,
-    output rvalid_o,
+    output reg [`CPU_WIDTH-1:0] rdata_o,
+    output reg rresp_o,
+    output reg rvalid_o,
     input rready_i,
 
     input [`CPU_WIDTH-1:0] awaddr_i,
     input awvalid_i,
-    output awready_o,
+    output reg awready_o,
 
     input [`CPU_WIDTH-1:0] wdata_i,
     input [7:0] wstrb_i,
     input wvalid_i,
-    output wready_o,
+    output reg wready_o,
 
-    output bresp_o,
-    output bvalid_o,
+    output reg bresp_o,
+    output reg bvalid_o,
     input bready_i
 );
 
