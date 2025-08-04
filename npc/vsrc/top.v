@@ -22,6 +22,9 @@ module top(
   //input [31:0] datamem_data
 
 );
+
+  wire [`PC_WIDTH-1:0] pc_to_mem;
+  wire [`INST_WIDTH-1:0] inst_from_mem;
   //wbu to ifu
   wire [`PC_WIDTH-1:0] npc_wbu_to_ifu;
   wire valid_wbu_to_ifu;
@@ -63,6 +66,9 @@ module top(
     .ifu_valid_o(valid_ifu_to_idu),
     .ifu_ready_i(ready_ifu_to_idu)
   );
+
+  assign pc_to_mem = ifu_araddr;
+  assign inst_from_mem = ifu_rdata;
 
   wire useless1,useless2,useless3,useless4;
 
