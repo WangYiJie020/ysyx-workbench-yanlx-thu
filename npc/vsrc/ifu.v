@@ -34,7 +34,7 @@ module ifu(
     );
 
     assign araddr_o = pc;
-    assign pc_o = pc;
+    //assign pc_o = pc;
 
     //assign inst_o = (rvalid_i == 1 && rready_o == 1) ? rdata_i : 0;
 
@@ -119,7 +119,10 @@ module ifu(
                 ifu_valid_o <= 0;
             end
 
-            if(rvalid_i == 1 && rready_o == 1) inst_o <= rdata_i;
+            if(rvalid_i == 1 && rready_o == 1) begin 
+                inst_o <= rdata_i;
+                pc_o <= pc;
+            end
             
         end
     end
