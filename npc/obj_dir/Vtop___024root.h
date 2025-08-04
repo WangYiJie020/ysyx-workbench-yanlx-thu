@@ -71,8 +71,8 @@ class Vtop___024root final : public VerilatedModule {
         CData/*4:0*/ top__DOT__waddr_lsu_to_wbu;
         CData/*0:0*/ top__DOT__valid_lsu_to_wbu;
         CData/*0:0*/ top__DOT__ready_lsu_to_wbu;
-        CData/*1:0*/ top__DOT__IFU__DOT__current_state;
-        CData/*1:0*/ top__DOT__IFU__DOT__next_state;
+        CData/*2:0*/ top__DOT__IFU__DOT__current_state;
+        CData/*2:0*/ top__DOT__IFU__DOT__next_state;
         CData/*0:0*/ top__DOT__Inst_Mem__DOT__ar_state;
         CData/*0:0*/ top__DOT__Inst_Mem__DOT__r_state;
         CData/*0:0*/ top__DOT__Inst_Mem__DOT__aw_state;
@@ -103,7 +103,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__WBU__DOT__csr_wdata_src;
         CData/*1:0*/ top__DOT__WBU__DOT__current_state;
         CData/*1:0*/ top__DOT__WBU__DOT__next_state;
-        CData/*5:0*/ __Vtableidx1;
+        CData/*6:0*/ __Vtableidx1;
         CData/*5:0*/ __Vtableidx2;
         CData/*5:0*/ __Vtableidx4;
         CData/*5:0*/ __Vtableidx5;

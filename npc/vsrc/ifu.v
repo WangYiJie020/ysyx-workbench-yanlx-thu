@@ -107,7 +107,7 @@ module ifu(
             end else if (current_state == S_SEND)begin
                 ifu_valid_o <= 1;
                 arvalid_o <= 0;
-                rready_o <= 1;
+                rready_o <= 0;
                 inst_o <= rdata_i;
                 pc_o <= pc;
             end else if (current_state == S_WAIT_RECEIVE)begin
