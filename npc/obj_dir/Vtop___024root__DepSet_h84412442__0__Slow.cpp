@@ -26,9 +26,9 @@ VL_ATTR_COLD void Vtop___024root___eval_triggers__stl(Vtop___024root* vlSelf) {
 }
 
 void Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();
+extern const VlUnpacked<CData/*1:0*/, 64> Vtop__ConstPool__TABLE_hbf80e028_0;
 extern const VlUnpacked<CData/*1:0*/, 64> Vtop__ConstPool__TABLE_h1dd48d1a_0;
 extern const VlUnpacked<CData/*1:0*/, 64> Vtop__ConstPool__TABLE_hb056201f_0;
-extern const VlUnpacked<CData/*1:0*/, 256> Vtop__ConstPool__TABLE_hcf48a4d7_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h7b4d463a_0;
 extern const VlUnpacked<CData/*1:0*/, 1024> Vtop__ConstPool__TABLE_h2128083f_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h413ee4ec_0;
@@ -634,6 +634,15 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                 ? vlSelf->top__DOT__EXU__DOT__rs1
                                                 : vlSelf->top__DOT__EXU__DOT__pc) 
                                               + vlSelf->top__DOT__EXU__DOT__imm));
+    vlSelf->__Vtableidx1 = (((IData)(vlSelf->top__DOT__ready_ifu_to_idu) 
+                             << 5U) | (((IData)(vlSelf->top__DOT__valid_ifu_to_idu) 
+                                        << 4U) | (((IData)(vlSelf->top__DOT__ready_wbu_to_ifu) 
+                                                   << 3U) 
+                                                  | (((IData)(vlSelf->top__DOT__valid_wbu_to_ifu) 
+                                                      << 2U) 
+                                                     | (IData)(vlSelf->top__DOT__IFU__DOT__current_state)))));
+    vlSelf->top__DOT__IFU__DOT__next_state = Vtop__ConstPool__TABLE_hbf80e028_0
+        [vlSelf->__Vtableidx1];
     vlSelf->__Vtableidx2 = (((IData)(vlSelf->top__DOT__ready_idu_to_exu) 
                              << 5U) | (((IData)(vlSelf->top__DOT__valid_idu_to_exu) 
                                         << 4U) | (((IData)(vlSelf->top__DOT__ready_ifu_to_idu) 
@@ -680,19 +689,6 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                         ((1U & (IData)(vlSelf->top__DOT__EXU__DOT__b_in_src))
                                           ? vlSelf->top__DOT__EXU__DOT__imm
                                           : vlSelf->top__DOT__EXU__DOT__rs2));
-    vlSelf->__Vtableidx1 = (((IData)(vlSelf->top__DOT__ready_ifu_to_idu) 
-                             << 7U) | (((IData)(vlSelf->top__DOT__valid_ifu_to_idu) 
-                                        << 6U) | (((IData)(vlSelf->top__DOT__ifu_rready) 
-                                                   << 5U) 
-                                                  | (((IData)(vlSelf->top__DOT__ifu_rvalid) 
-                                                      << 4U) 
-                                                     | (((IData)(vlSelf->top__DOT__ready_wbu_to_ifu) 
-                                                         << 3U) 
-                                                        | (((IData)(vlSelf->top__DOT__valid_wbu_to_ifu) 
-                                                            << 2U) 
-                                                           | (IData)(vlSelf->top__DOT__IFU__DOT__current_state)))))));
-    vlSelf->top__DOT__IFU__DOT__next_state = Vtop__ConstPool__TABLE_hcf48a4d7_0
-        [vlSelf->__Vtableidx1];
     vlSelf->__Vtableidx3 = ((0x380U & (vlSelf->top__DOT__IDU__DOT__inst 
                                        >> 5U)) | (0x7fU 
                                                   & vlSelf->top__DOT__IDU__DOT__inst));

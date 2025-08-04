@@ -103,7 +103,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__WBU__DOT__csr_wdata_src;
         CData/*1:0*/ top__DOT__WBU__DOT__current_state;
         CData/*1:0*/ top__DOT__WBU__DOT__next_state;
-        CData/*7:0*/ __Vtableidx1;
+        CData/*5:0*/ __Vtableidx1;
         CData/*5:0*/ __Vtableidx2;
         CData/*5:0*/ __Vtableidx4;
         CData/*5:0*/ __Vtableidx5;

@@ -49,8 +49,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     // Body
     vlSelf->__Vdly__top__DOT__csr_write = vlSelf->top__DOT__csr_write;
     vlSelf->__Vdly__top__DOT__IFU__DOT__npc = vlSelf->top__DOT__IFU__DOT__npc;
-    __Vdly__top__DOT__ifu_arvalid = vlSelf->top__DOT__ifu_arvalid;
     __Vdly__top__DOT__ifu_rready = vlSelf->top__DOT__ifu_rready;
+    __Vdly__top__DOT__ifu_arvalid = vlSelf->top__DOT__ifu_arvalid;
     vlSelf->__Vdly__top__DOT__IDU__DOT__pc = vlSelf->top__DOT__IDU__DOT__pc;
     vlSelf->__Vdly__top__DOT__IDU__DOT__inst = vlSelf->top__DOT__IDU__DOT__inst;
     vlSelf->top__DOT__useless2 = 0U;
