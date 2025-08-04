@@ -99,7 +99,8 @@ module ifu(
             else if(current_state == S_WAIT_SEND) ifu_ready_o <= 0;      
             
             if(current_state == S_IDLE) begin 
-                ifu_valid_o <= 1;
+                if(rvalid_i == 1 && rready_o == 1) ifu_valid_o <= 1;
+                else ifu_valid_o <= 0;
                 arvalid_o <= 1;
                 rready_o <= 1;
                 pc_o <= pc;
