@@ -50,7 +50,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     // Body
     if (VL_UNLIKELY((0x100073U == vlSelf->top__DOT__inst_from_mem))) {
         Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();
-        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 321, "");
+        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 358, "");
     }
     if ((0x40U & vlSelf->top__DOT__IDU__DOT__inst)) {
         if ((0x20U & vlSelf->top__DOT__IDU__DOT__inst)) {
@@ -1011,7 +1011,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                                  vlSelf->top__DOT__reg_file
                                                                  [0x1eU], 
                                                                  vlSelf->top__DOT__reg_file
-                                                                 [0x1fU], vlSelf->top__DOT__IFU__DOT__pc, 
+                                                                 [0x1fU], vlSelf->top__DOT__pc_to_mem, 
                                                                  vlSelf->top__DOT__csr_reg
                                                                  [0U], 
                                                                  vlSelf->top__DOT__csr_reg

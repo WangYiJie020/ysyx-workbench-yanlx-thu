@@ -22,9 +22,6 @@ module top(
   //input [31:0] datamem_data
 
 );
-
-  wire [`PC_WIDTH-1:0] pc_to_mem;
-  wire [`INST_WIDTH-1:0] inst_from_mem;
   //wbu to ifu
   wire [`PC_WIDTH-1:0] npc_wbu_to_ifu;
   wire valid_wbu_to_ifu;
