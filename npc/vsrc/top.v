@@ -67,6 +67,8 @@ module top(
     .ifu_ready_i(ready_ifu_to_idu)
   );
 
+  wire useless1,useless2,useless3,useless4;
+
   sram Inst_Mem(
     .clk(clk),
     .rst_n(rst_n),
@@ -79,6 +81,19 @@ module top(
     .rresp_o(ifu_rresp),
     .rvalid_o(ifu_rvalid),
     .rready_i(ifu_rready),
+
+    .awaddr_i(0),
+    .awvalid_i(0),
+    .awready_o(useless1),
+
+    .wdata_i(0),
+    .wstrb_i(0),
+    .wvalid_i(0),
+    .wready_o(useless2),
+
+    .bresp_o(useless3),
+    .bvalid_o(useless4),
+    .bready_i(0)
   );
 
   wire [`REG_ADDR-1:0] raddr1;
