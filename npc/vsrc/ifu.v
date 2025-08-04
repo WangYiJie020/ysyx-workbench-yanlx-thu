@@ -3,7 +3,7 @@ module ifu(
     input clk,
     input rst_n,
     //to mem
-    output [`REG_ADDR-1:0] araddr_o,
+    output [`CPU_WIDTH-1:0] araddr_o,
     output arvalid_o,
     input arready_i,
     input [`CPU_WIDTH-1:0] rdata_i,

@@ -34,12 +34,26 @@ module top(
   wire [`INST_WIDTH-1:0] inst_ifu_to_idu;
   wire valid_ifu_to_idu;
   wire ready_ifu_to_idu;
-  
+
+  wire [`CPU_WIDTH-1:0] ifu_araddr;
+  wire ifu_arvalid;
+  wire ifu_arready;
+  wire [`CPU_WIDTH-1:0] ifu_rdata;
+  wire ifu_rresp;
+  wire ifu_rvalid;
+  wire ifu_rready;
+
   ifu IFU(
     .clk(clk),
     .rst_n(rst_n),
-    .pc_to_mem(pc_to_mem),
-    .inst_from_mem(inst_from_mem),
+
+    .araddr_o(ifu_araddr),
+    .arvalid_o(ifu_arvalid),
+    .arready_i(ifu_arready),
+    .rdata_i(ifu_rdata),
+    .rresp_i(ifu_rresp),
+    .rvalid_i(ifu_rvalid),
+    .rready_o(ifu_rready),
 
     .npc_i(npc_wbu_to_ifu),
 
@@ -53,10 +67,18 @@ module top(
     .ifu_ready_i(ready_ifu_to_idu)
   );
 
-  inst_mem Inst_Mem(
+  sram Inst_Mem(
     .clk(clk),
-    .pc(pc_to_mem),
-    .inst(inst_from_mem)
+    .rst_n(rst_n),
+
+    .araddr_i(ifu_araddr),
+    .arvalid_i(ifu_arvalid),
+    .arready_o(ifu_arready),
+
+    .rdata_o(ifu_rdata),
+    .rresp_o(ifu_rresp),
+    .rvalid_o(ifu_rvalid),
+    .rready_i(ifu_rready),
   );
 
   wire [`REG_ADDR-1:0] raddr1;
