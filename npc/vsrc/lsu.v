@@ -171,7 +171,7 @@ module lsu(
                 waddr_o <= waddr_i;
 
                 araddr_o <= alu_result;
-                awaddr_o <= alu_result
+                awaddr_o <= alu_result;
             end else if (current_state == S_WAIT_SEND)begin
                 if(MemRead_i) begin
                     if(rvalid_i == 1 && rready_o == 1) lsu_valid_o <= 1;
