@@ -517,6 +517,14 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__imm_idu_to_exu = 0U;
         vlSelf->top__DOT__alu_op_idu_to_exu = 0U;
     }
+    if (((IData)(vlSelf->top__DOT__Inst_Mem__DOT__flag_waddr) 
+         & (IData)(vlSelf->top__DOT__Inst_Mem__DOT__flag_wdata))) {
+        Vtop___024unit____Vdpiimwrap_pmem_write_TOP____024unit(vlSelf->top__DOT__Inst_Mem__DOT__awaddr, vlSelf->top__DOT__Inst_Mem__DOT__wdata, (IData)(vlSelf->top__DOT__Inst_Mem__DOT__wstrb));
+    }
+    if (((IData)(vlSelf->top__DOT__Data_Mem__DOT__flag_waddr) 
+         & (IData)(vlSelf->top__DOT__Data_Mem__DOT__flag_wdata))) {
+        Vtop___024unit____Vdpiimwrap_pmem_write_TOP____024unit(vlSelf->top__DOT__Data_Mem__DOT__awaddr, vlSelf->top__DOT__Data_Mem__DOT__wdata, (IData)(vlSelf->top__DOT__Data_Mem__DOT__wstrb));
+    }
     vlSelf->top__DOT__WBU__DOT__mem_data = ((4U & (IData)(vlSelf->top__DOT__WBU__DOT__rmask))
                                              ? ((2U 
                                                  & (IData)(vlSelf->top__DOT__WBU__DOT__rmask))
@@ -629,13 +637,6 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__csr_wdata = ((IData)(vlSelf->top__DOT__WBU__DOT__csr_wdata_src)
                                     ? vlSelf->top__DOT__WBU__DOT__csr_rdata_l_rs1
                                     : vlSelf->top__DOT__WBU__DOT__rs1);
-    if (((IData)(vlSelf->top__DOT__Data_Mem__DOT__flag_waddr) 
-         & (IData)(vlSelf->top__DOT__Data_Mem__DOT__flag_wdata))) {
-        if (((IData)(vlSelf->top__DOT__lsu_wready) 
-             & (IData)(vlSelf->top__DOT__lsu_wvalid))) {
-            Vtop___024unit____Vdpiimwrap_pmem_write_TOP____024unit(vlSelf->top__DOT__Data_Mem__DOT__awaddr, vlSelf->top__DOT__Data_Mem__DOT__wdata, (IData)(vlSelf->top__DOT__Data_Mem__DOT__wstrb));
-        }
-    }
     vlSelf->top__DOT__EXU__DOT__pc_new = ((IData)(vlSelf->top__DOT__EXU__DOT__adder_out_src)
                                            ? vlSelf->top__DOT__EXU__DOT__csr_rdata
                                            : (((IData)(vlSelf->top__DOT__EXU__DOT__adder_a_src)
