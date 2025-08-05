@@ -94,7 +94,7 @@ extern "C" int pmem_read(int raddr) {
   return_data = mem[tmp];
   //}
 #ifdef TRACE_ON
-  if(raddr >= 0X80000000 && raddr <= 0X80000118)
+  if(raddr >= 0X80000000 && raddr <= 0X80000118);
   else
   log_write("raddr = %08x,data= %08x\n",raddr,return_data);
 #endif
