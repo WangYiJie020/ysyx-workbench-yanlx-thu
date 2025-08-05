@@ -509,9 +509,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
             vlSelf->__Vdly__top__DOT__lsu_rready = 0U;
             vlSelf->top__DOT__lsu_awvalid = 0U;
             vlSelf->top__DOT__lsu_wvalid = 0U;
-            vlSelf->__Vdly__top__DOT__lsu_arvalid = vlSelf->top__DOT__MemRead_exu_to_lsu;
-            vlSelf->top__DOT__lsu_awvalid = vlSelf->top__DOT__MemWrite_exu_to_lsu;
-            vlSelf->top__DOT__lsu_wvalid = vlSelf->top__DOT__MemWrite_exu_to_lsu;
         }
     } else {
         vlSelf->top__DOT__WBU__DOT__current_state = 0U;

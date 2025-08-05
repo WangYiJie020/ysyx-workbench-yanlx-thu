@@ -75,6 +75,7 @@ module lsu(
     assign alu_result_o = alu_result;
     assign datamem_readdata_o = datamem_readdata;
     assign araddr_o = alu_result;
+    assign awaddr_o = alu_result;
 
     reg [7:0] wmask_send;
 
