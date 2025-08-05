@@ -74,8 +74,8 @@ module lsu(
     assign rs1_o = rs1;
     assign alu_result_o = alu_result;
     //assign datamem_readdata_o = rdata_i;
-    assign araddr_o = alu_result;
-    assign awaddr_o = alu_result;
+    //assign araddr_o = alu_result;
+    //assign awaddr_o = alu_result;
 
     reg [7:0] wmask_send;
 
@@ -169,6 +169,9 @@ module lsu(
                 npc_o <= npc_i;
                 csr_rdata_l_rs1_o <= csr_rdata_l_rs1_i;
                 waddr_o <= waddr_i;
+
+                araddr_o <= alu_result;
+                awaddr_o <= alu_result
             end else if (current_state == S_WAIT_SEND)begin
                 if(MemRead_i) begin
                     if(rvalid_i == 1 && rready_o == 1) lsu_valid_o <= 1;
