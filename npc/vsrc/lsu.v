@@ -68,7 +68,7 @@ module lsu(
     reg [2:0] rmask;
 
     
-    reg flag;
+    reg flag,wvalid_tmp;
 
     assign rmask_o = rmask;
     assign rs1_o = rs1;
@@ -162,7 +162,7 @@ module lsu(
                 rmask <= rmask_i;
 
                 awvalid_o <= MemWrite_i;
-                wvalid_o <= MemWrite_i;
+                wvalid_tmp <= MemWrite_i;
                 
                 wb_src_o <= wb_src_i;
                 csr_write_o <= csr_write_i;
@@ -186,7 +186,7 @@ module lsu(
                 else lsu_valid_o <= 1;
                 //datamem_readdata_o <= rdata_i;
 
-                
+                wvalid_o <= wvalid_tmp;
 
                 //if(bresp_i == 0)  wvalid_o <= 0;
                 //if(bresp_i == 0) awvalid_o <= 0;
