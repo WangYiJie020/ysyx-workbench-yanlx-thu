@@ -158,8 +158,7 @@ module lsu(
                 
                 arvalid_o <= MemRead_i;
                 rready_o <= MemRead_i;        
-                awvalid_o <= MemWrite_i;
-                wvalid_o <= MemWrite_i;
+                
                 bready_o <= 1;
                 rmask <= rmask_i;
                 
@@ -181,6 +180,8 @@ module lsu(
                 end
                 else lsu_valid_o <= 1;
                 datamem_readdata_o <= rdata_i;
+                awvalid_o <= MemWrite_i;
+                wvalid_o <= MemWrite_i;
                 
             end else if (current_state == S_SEND)begin
                 lsu_valid_o <= 0;
