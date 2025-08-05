@@ -78,13 +78,14 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__lsu_rready;
         CData/*0:0*/ top__DOT__lsu_awvalid;
         CData/*0:0*/ top__DOT__lsu_awready;
+        CData/*7:0*/ top__DOT__lsu_wstrb;
         CData/*0:0*/ top__DOT__lsu_wvalid;
         CData/*0:0*/ top__DOT__lsu_wready;
         CData/*0:0*/ top__DOT__lsu_bresp;
         CData/*0:0*/ top__DOT__lsu_bvalid;
-        CData/*0:0*/ top__DOT__lsu_bready;
     };
     struct {
+        CData/*0:0*/ top__DOT__lsu_bready;
         CData/*2:0*/ top__DOT__IFU__DOT__current_state;
         CData/*2:0*/ top__DOT__IFU__DOT__next_state;
         CData/*0:0*/ top__DOT__Inst_Mem__DOT__ar_state;
@@ -92,6 +93,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__Inst_Mem__DOT__aw_state;
         CData/*0:0*/ top__DOT__Inst_Mem__DOT__w_state;
         CData/*0:0*/ top__DOT__Inst_Mem__DOT__b_state;
+        CData/*7:0*/ top__DOT__Inst_Mem__DOT__wstrb;
         CData/*0:0*/ top__DOT__Inst_Mem__DOT__wvalid;
         CData/*1:0*/ top__DOT__IDU__DOT__current_state;
         CData/*1:0*/ top__DOT__IDU__DOT__next_state;
@@ -113,6 +115,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__Data_Mem__DOT__aw_state;
         CData/*0:0*/ top__DOT__Data_Mem__DOT__w_state;
         CData/*0:0*/ top__DOT__Data_Mem__DOT__b_state;
+        CData/*7:0*/ top__DOT__Data_Mem__DOT__wstrb;
         CData/*0:0*/ top__DOT__Data_Mem__DOT__wvalid;
         CData/*2:0*/ top__DOT__WBU__DOT__rmask;
         CData/*0:0*/ top__DOT__WBU__DOT__wb_src;
@@ -146,11 +149,11 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__IFU__DOT__pc;
         IData/*31:0*/ top__DOT__IFU__DOT__npc;
         IData/*31:0*/ top__DOT__Inst_Mem__DOT__araddr;
+    };
+    struct {
         IData/*31:0*/ top__DOT__Inst_Mem__DOT__awaddr;
         IData/*31:0*/ top__DOT__Inst_Mem__DOT__wdata;
         IData/*31:0*/ top__DOT__IDU__DOT__pc;
-    };
-    struct {
         IData/*31:0*/ top__DOT__IDU__DOT__inst;
         IData/*31:0*/ top__DOT__IDU__DOT__CSR__DOT__csr_mepc;
         IData/*31:0*/ top__DOT__IDU__DOT__CSR__DOT__csr_mstatus;
