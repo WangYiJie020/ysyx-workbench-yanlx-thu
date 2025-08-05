@@ -68,7 +68,7 @@ module lsu(
     reg [2:0] rmask;
 
     
-    reg [1:0]flag;
+    reg flag;
 
     assign rmask_o = rmask;
     assign rs1_o = rs1;
@@ -147,7 +147,6 @@ module lsu(
                 arvalid_o <= 0;
                 rready_o <= 0;
                 bready_o <= 0;
-                flag <= 0;
                 //datamem_readdata_o <= 0;
             end else if(current_state == S_RECEIVE) begin 
                 lsu_valid_o <= 0;
@@ -169,7 +168,7 @@ module lsu(
                 npc_o <= npc_i;
                 csr_rdata_l_rs1_o <= csr_rdata_l_rs1_i;
                 waddr_o <= waddr_i;
-                flag <= 0;
+
                 //araddr_o <= alu_result;
                 //awaddr_o <= alu_result;
             end else if (current_state == S_WAIT_SEND)begin
@@ -183,15 +182,10 @@ module lsu(
                 end
                 else lsu_valid_o <= 1;
                 //datamem_readdata_o <= rdata_i;
-                if(flag <= 1) begin
-                    awvalid_o <= MemWrite_i;
-                    wvalid_o <= MemWrite_i;
-                    flag <= flag + 1;
-                end
-                else begin
-                    awvalid_o <= 0;
-                    wvalid_o <= 0;
-                end
+
+                awvalid_o <= MemWrite_i;
+                wvalid_o <= MemWrite_i;
+
                 //if(wvalid_o == 1 && wready_i == 1)  wvalid_o <= 0;
                 //if(awvalid_o == 1 && awready_i == 1) awvalid_o <= 0;
             end else if (current_state == S_SEND)begin
