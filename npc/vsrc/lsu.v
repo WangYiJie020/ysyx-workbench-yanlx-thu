@@ -170,8 +170,8 @@ module lsu(
                 csr_rdata_l_rs1_o <= csr_rdata_l_rs1_i;
                 waddr_o <= waddr_i;
 
-                araddr_o <= alu_result;
-                awaddr_o <= alu_result;
+                //araddr_o <= alu_result;
+                //awaddr_o <= alu_result;
             end else if (current_state == S_WAIT_SEND)begin
                 if(MemRead_i) begin
                     if(rvalid_i == 1 && rready_o == 1) lsu_valid_o <= 1;
@@ -183,8 +183,8 @@ module lsu(
                 end
                 else lsu_valid_o <= 1;
                 datamem_readdata_o <= rdata_i;
-                //awvalid_o <= MemWrite_i;
-                //wvalid_o <= MemWrite_i;
+                awvalid_o <= MemWrite_i;
+                wvalid_o <= MemWrite_i;
                 
             end else if (current_state == S_SEND)begin
                 lsu_valid_o <= 0;
