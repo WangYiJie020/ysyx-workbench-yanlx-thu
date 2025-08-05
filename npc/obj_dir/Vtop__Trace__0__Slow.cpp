@@ -732,7 +732,14 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullBit(oldp+76,(vlSelf->top__DOT__lsu_rready));
     bufp->fullBit(oldp+77,(vlSelf->top__DOT__lsu_awvalid));
     bufp->fullIData(oldp+78,(vlSelf->top__DOT__lsu_wdata),32);
-    bufp->fullCData(oldp+79,(vlSelf->top__DOT__lsu_wstrb),8);
+    bufp->fullCData(oldp+79,((0xffU & ((1U == (IData)(vlSelf->top__DOT__wmask_exu_to_lsu))
+                                        ? ((IData)(vlSelf->top__DOT__wmask_exu_to_lsu) 
+                                           << (3U & vlSelf->top__DOT__LSU__DOT__alu_result))
+                                        : ((3U == (IData)(vlSelf->top__DOT__wmask_exu_to_lsu))
+                                            ? ((IData)(vlSelf->top__DOT__wmask_exu_to_lsu) 
+                                               << (3U 
+                                                   & vlSelf->top__DOT__LSU__DOT__alu_result))
+                                            : (IData)(vlSelf->top__DOT__wmask_exu_to_lsu))))),8);
     bufp->fullBit(oldp+80,(vlSelf->top__DOT__lsu_wvalid));
     bufp->fullBit(oldp+81,(vlSelf->top__DOT__lsu_bresp));
     bufp->fullBit(oldp+82,(vlSelf->top__DOT__lsu_bvalid));
