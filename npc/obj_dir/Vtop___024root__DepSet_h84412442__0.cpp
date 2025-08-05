@@ -525,10 +525,11 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
                                                       | (((IData)(vlSelf->top__DOT__lsu_bready) 
                                                           & (IData)(vlSelf->top__DOT__lsu_bvalid)) 
                                                          & (~ (IData)(vlSelf->top__DOT__lsu_bresp))))));
-            if ((0U == (IData)(vlSelf->top__DOT__LSU__DOT__flag))) {
+            if ((1U >= (IData)(vlSelf->top__DOT__LSU__DOT__flag))) {
+                vlSelf->__Vdly__top__DOT__LSU__DOT__flag 
+                    = (3U & ((IData)(1U) + (IData)(vlSelf->top__DOT__LSU__DOT__flag)));
                 vlSelf->top__DOT__lsu_awvalid = vlSelf->top__DOT__MemWrite_exu_to_lsu;
                 vlSelf->top__DOT__lsu_wvalid = vlSelf->top__DOT__MemWrite_exu_to_lsu;
-                vlSelf->__Vdly__top__DOT__LSU__DOT__flag = 1U;
             } else {
                 vlSelf->top__DOT__lsu_awvalid = 0U;
                 vlSelf->top__DOT__lsu_wvalid = 0U;
