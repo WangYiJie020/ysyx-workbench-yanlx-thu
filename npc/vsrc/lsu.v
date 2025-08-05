@@ -76,6 +76,7 @@ module lsu(
     //assign datamem_readdata_o = rdata_i;
     assign araddr_o = alu_result;
     assign awaddr_o = alu_result;
+    assign datamem_readdata_o = rdata_i;
 
     reg [7:0] wmask_send;
 
@@ -148,7 +149,7 @@ module lsu(
                 arvalid_o <= 0;
                 rready_o <= 0;
                 bready_o <= 0;
-                datamem_readdata_o <= 0;
+                //datamem_readdata_o <= 0;
             end else if(current_state == S_RECEIVE) begin 
                 lsu_valid_o <= 0;
                 
@@ -182,7 +183,7 @@ module lsu(
                     else lsu_valid_o <= 0;
                 end
                 else lsu_valid_o <= 1;
-                datamem_readdata_o <= rdata_i;
+                //datamem_readdata_o <= rdata_i;
                 awvalid_o <= MemWrite_i;
                 wvalid_o <= MemWrite_i;
                 
@@ -192,7 +193,7 @@ module lsu(
                 rready_o <= 0;
                 awvalid_o <= 0;
                 wvalid_o <= 0;
-                datamem_readdata_o <= rdata_i;
+                //datamem_readdata_o <= rdata_i;
                 //arvalid_o <= MemRead_i;
                 //rready_o <= MemRead_i;        
                 //awvalid_o <= MemWrite_i;
