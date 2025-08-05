@@ -94,6 +94,7 @@ module sram(
             wready_o <= 0;
             w_state <= 0; //未握手
             wdata <= 0;
+            bresp_o <= 1;
         end
         else begin
             if(w_state == 0 && wvalid_i == 1) begin
@@ -108,7 +109,9 @@ module sram(
 
             if(wready_o == 1 && wvalid_i == 1) begin
                 pmem_write(awaddr,wdata_i,wstrb_i);
+                bresp_o <= 0;
             end
+            else bresp_o <= 1;
         end
     end
 
@@ -119,7 +122,7 @@ module sram(
         end
         else begin
             
-            bresp_o <= 1;
+            //bresp_o <= 0;
             bvalid_o <= 1;
         end
     end

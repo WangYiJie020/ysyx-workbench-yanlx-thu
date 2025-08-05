@@ -146,6 +146,7 @@ module lsu(
                 wvalid_o <= 0;
                 arvalid_o <= 0;
                 rready_o <= 0;
+                bready_o <= 0;
             end else if(current_state == S_RECEIVE) begin 
                 lsu_valid_o <= 0;
                 
@@ -157,6 +158,7 @@ module lsu(
                 rready_o <= MemRead_i;        
                 awvalid_o <= MemWrite_i;
                 wvalid_o <= MemWrite_i;
+                bready_o <= 1;
                 rmask <= rmask_i;
                 
                 wb_src_o <= wb_src_i;
@@ -171,8 +173,9 @@ module lsu(
                     if(rvalid_i == 1 && rready_o == 1) lsu_valid_o <= 1;
                     else lsu_valid_o <= 0;
                 end
-                else begin
-                    lsu_valid_o <= 1;
+                else if(MemWrite_i)begin
+                    if(bready_o == 1 && bvalid_i == 1 && bresp_i == 0) lsu_valid_o <= 1;
+                    else lsu_valid_o <= 0;
                 end
                 
                 
@@ -183,7 +186,7 @@ module lsu(
                 awvalid_o <= 0;
                 wvalid_o <= 0;
                 arvalid_o <= MemRead_i;
-                rready_o <= MemRead_i;        
+                //rready_o <= MemRead_i;        
                 awvalid_o <= MemWrite_i;
                 wvalid_o <= MemWrite_i;
 
