@@ -188,8 +188,8 @@ module lsu(
 
                 
 
-                if(bready_o == 1 && bvalid_i == 1)  wvalid_o <= 0;
-                if(bready_o == 1 && bvalid_i == 1) awvalid_o <= 0;
+                if(bresp_i == 0)  wvalid_o <= 0;
+                if(bresp_i == 0) awvalid_o <= 0;
             end else if (current_state == S_SEND)begin
                 lsu_valid_o <= 0;
                 arvalid_o <= 0;
