@@ -108,7 +108,8 @@ module sram(
             end
 
             if(wready_o == 1 && wvalid_i == 1) begin
-                pmem_write(awaddr,wdata_i,wstrb_i);
+                wdata <= wdata_i;
+                pmem_write(awaddr,wdata,wstrb_i);
                 bresp_o <= 0;
             end
             else bresp_o <= 1;
