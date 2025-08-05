@@ -37,14 +37,34 @@ module lsu(
     output reg lsu_valid_o,
     input lsu_ready_i
 
+    //to mem
+    output [`CPU_WIDTH-1:0] araddr_o,
+    output arvalid_o,
+    input arready_i,
+
+    input [`CPU_WIDTH-1:0] rdata_i,
+    input rresp_i,
+    input rvalid_i,
+    output rready_o,
+
+    output [`CPU_WIDTH-1:0] awaddr_o,
+    output awvalid_o,
+    input awready_i,
+
+    output [`CPU_WIDTH-1:0] wdata_o,
+    output [7:0] wstrb_o,
+    output wvalid_o,
+    input wready_i,
+
+    input bresp_i,
+    input bvalid_i,
+    output bready_o
+
 );
     reg [`CPU_WIDTH-1:0] alu_result;
     reg [`CPU_WIDTH-1:0] rs1;
     reg [`CPU_WIDTH-1:0] rs2;
     reg [`CPU_WIDTH-1:0] csr_rdata_l_rs1;
-    reg MemRead;
-    reg MemWrite;
-    reg [7:0] wmask;
     reg [2:0] rmask;
 
     reg [`CPU_WIDTH-1:0] datamem_readdata;
@@ -54,16 +74,18 @@ module lsu(
     assign rs1_o = rs1;
     assign alu_result_o = alu_result;
     assign datamem_readdata_o = datamem_readdata;
+    assign araddr_o = alu_result;
 
-    data_mem Data_Mem(
-        .clk(clk),
-        .MemRead(MemRead),
-        .MemWrite(MemWrite),
-        .address(alu_result),
-        .write_data(rs2),
-        .wmask(wmask),
-        .read_data(datamem_readdata)
-    );
+    reg [7:0] wmask_send;
+
+    always@(*) begin
+        case(wmask_i)
+            8'h01: wstrb_o = wmask_i << (alu_result[1:0]);
+            8'h03: wstrb_o = wmask_i << (alu_result[1:0]);
+            8'h0f: wstrb_o = wmask_i;
+            default: wstrb_o = wmask_i;
+        endcase
+    end
 
 
     localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10,S_WAIT_SEND = 2'b11;
@@ -120,31 +142,23 @@ module lsu(
 
             if(current_state == S_IDLE) begin 
                 lsu_valid_o <= 0;
-                MemRead <= 0;
-                MemWrite <= 0;
-            end
-            else if(current_state == S_RECEIVE) begin 
+                awvalid_o <= 0;
+                wvalid_o <= 0;
+                arvalid_o <= 0;
+                rready_o <= 0;
+            end else if(current_state == S_RECEIVE) begin 
                 lsu_valid_o <= 0;
-                /*
-                if(flag == 0) begin
-                    MemRead <= MemRead_i;
-                    MemWrite <= MemWrite_i;
-                    flag <= 1;
-                end
-                else begin
-                    MemRead <= 0;
-                    MemWrite <= 0;
-                end
-*/
+                
                 alu_result <= alu_result_i;
                 rs1 <= rs1_i;
-                rs2 <= rs2_i;  
-                MemRead <= 0;
-                MemWrite <= 0;          
+                wdata_o <= rs2_i;  
                 
-                wmask <= wmask_i;
+                arvalid_o <= MemRead_i;
+                rready_o <= MemRead_i;        
+                awvalid_o <= MemWrite_i;
+                wvalid_o <= MemWrite_i;
                 rmask <= rmask_i;
-                alu_result <= alu_result_i;
+                
                 wb_src_o <= wb_src_i;
                 csr_write_o <= csr_write_i;
                 csr_wdata_src_o <= csr_wdata_src_i;
@@ -153,14 +167,16 @@ module lsu(
                 csr_rdata_l_rs1_o <= csr_rdata_l_rs1_i;
                 waddr_o <= waddr_i;
             end else if (current_state == S_WAIT_SEND)begin
-                lsu_valid_o <= 1;
-                //MemRead <= 0;
-                //MemWrite <= 0;
+                if(rvalid_i == 1 && rready_o == 1) lsu_valid_o <= 1;
+                else lsu_valid_o <= 0;
+                
             end else if (current_state == S_SEND)begin
-                MemRead <= MemRead_i;
-                MemWrite <= MemWrite_i; 
                 lsu_valid_o <= 0;
-                //flag <= 0;
+                arvalid_o <= 0;
+                rready_o <= 0;
+                awvalid_o <= 0;
+                wvalid_o <= 0;
+
             end 
             
         end

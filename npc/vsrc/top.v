@@ -280,6 +280,24 @@ module top(
   wire valid_lsu_to_wbu;
   wire ready_lsu_to_wbu;
 
+  wire [`CPU_WIDTH-1:0] lsu_araddr;
+  wire lsu_arvalid;
+  wire lsu_arready;
+  wire [`CPU_WIDTH-1:0] lsu_rdata;
+  wire lsu_rresp;
+  wire lsu_rvalid;
+  wire lsu_rready;
+  wire [`CPU_WIDTH-1:0] lsu_awaddr;
+  wire lsu_awvalid;
+  wire lsu_awready;
+  wire [`CPU_WIDTH-1:0] lsu_wdata;
+  wire [7:0] lsu_wstrb;
+  wire lsu_wvalid;
+  wire lsu_wready;
+  wire lsu_bresp;
+  wire lsu_bvalid;
+  wire lsu_bready;
+
   lsu LSU(
     .clk(clk),
     .rst_n(rst_n),
@@ -316,8 +334,57 @@ module top(
     .waddr_o(waddr_lsu_to_wbu),
 
     .lsu_valid_o(valid_lsu_to_wbu),
-    .lsu_ready_i(ready_lsu_to_wbu)
+    .lsu_ready_i(ready_lsu_to_wbu),
 
+    //to mem
+    .araddr_o(lsu_araddr),
+    .arvalid_o(lsu_arvalid),
+    .arready_i(lsu_arready),
+
+    .rdata_i(lsu_rdata),
+    .rresp_i(lsu_rresp),
+    .rvalid_i(lsu_rvalid),
+    .rready_o(lsu_rready),
+
+    .awaddr_o(lsu_awaddr),
+    .awvalid_o(lsu_awvalid),
+    .awready_i(lsu_awready),
+
+    .wdata_o(lsu_wdata),
+    .wstrb_o(lsu_wstrb),
+    .wvalid_o(lsu_wvalid),
+    .wready_i(lsu_wready),
+    
+    .bresp_i(lsu_bresp),
+    .bvalid_i(lsu_bvalid),
+    .bready_o(lsu_bready)
+  );
+
+  sram Data_Mem(
+    .clk(clk),
+    .rst_n(rst_n),
+
+    .araddr_i(lsu_araddr),
+    .arvalid_i(lsu_arvalid),
+    .arready_o(lsu_arready),
+
+    .rdata_o(lsu_rdata),
+    .rresp_o(lsu_rresp),
+    .rvalid_o(lsu_rvalid),
+    .rready_i(lsu_rready),
+
+    .awaddr_i(lsu_awaddr),
+    .awvalid_i(lsu_awvalid),
+    .awready_o(lsu_awready),
+
+    .wdata_i(lsu_wdata),
+    .wstrb_i(lsu_wstrb),
+    .wvalid_i(lsu_wvalid),
+    .wready_o(lsu_wready),
+
+    .bresp_o(lsu_bresp),
+    .bvalid_o(lsu_bvalid),
+    .bready_i(lsu_bready)
   );
 
   wbu WBU(
