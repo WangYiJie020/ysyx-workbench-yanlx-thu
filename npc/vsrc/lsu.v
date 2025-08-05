@@ -169,7 +169,7 @@ module lsu(
                 npc_o <= npc_i;
                 csr_rdata_l_rs1_o <= csr_rdata_l_rs1_i;
                 waddr_o <= waddr_i;
-
+                flag <= 0;
                 //araddr_o <= alu_result;
                 //awaddr_o <= alu_result;
             end else if (current_state == S_WAIT_SEND)begin
