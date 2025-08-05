@@ -314,11 +314,11 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__WBU__DOT__current_state = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__WBU__DOT__next_state = VL_RAND_RESET_I(2);
     vlSelf->__Vtableidx1 = 0;
+    vlSelf->__Vtableidx2 = 0;
     vlSelf->__Vtableidx3 = 0;
     vlSelf->__Vtableidx4 = 0;
     vlSelf->__Vtableidx5 = 0;
     vlSelf->__Vtableidx6 = 0;
-    vlSelf->__Vtableidx7 = 0;
     vlSelf->__Vdly__top__DOT__IFU__DOT__npc = VL_RAND_RESET_I(32);
     vlSelf->__Vdly__top__DOT__IDU__DOT__pc = VL_RAND_RESET_I(32);
     vlSelf->__Vdly__top__DOT__IDU__DOT__inst = VL_RAND_RESET_I(32);
