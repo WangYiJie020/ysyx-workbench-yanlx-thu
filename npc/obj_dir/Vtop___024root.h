@@ -143,15 +143,14 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__csr_rdata_l_rs1_lsu_to_wbu;
         IData/*31:0*/ top__DOT__npc_lsu_to_wbu;
         IData/*31:0*/ top__DOT__lsu_rdata;
-        IData/*31:0*/ top__DOT__lsu_awaddr;
         IData/*31:0*/ top__DOT__lsu_wdata;
         IData/*31:0*/ top__DOT__IFU__DOT__pc;
         IData/*31:0*/ top__DOT__IFU__DOT__npc;
         IData/*31:0*/ top__DOT__Inst_Mem__DOT__araddr;
         IData/*31:0*/ top__DOT__Inst_Mem__DOT__awaddr;
+        IData/*31:0*/ top__DOT__Inst_Mem__DOT__wdata;
     };
     struct {
-        IData/*31:0*/ top__DOT__Inst_Mem__DOT__wdata;
         IData/*31:0*/ top__DOT__IDU__DOT__pc;
         IData/*31:0*/ top__DOT__IDU__DOT__inst;
         IData/*31:0*/ top__DOT__IDU__DOT__CSR__DOT__csr_mepc;

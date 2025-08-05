@@ -227,7 +227,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__lsu_rresp = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__lsu_rvalid = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__lsu_rready = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__lsu_awaddr = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__lsu_awvalid = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__lsu_awready = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__lsu_wdata = VL_RAND_RESET_I(32);

@@ -132,7 +132,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         if (((IData)(vlSelf->top__DOT__lsu_awready) 
              & (IData)(vlSelf->top__DOT__lsu_awvalid))) {
             vlSelf->top__DOT__Data_Mem__DOT__awaddr 
-                = vlSelf->top__DOT__lsu_awaddr;
+                = vlSelf->top__DOT__LSU__DOT__alu_result;
         }
         vlSelf->top__DOT__IDU__DOT__current_state = vlSelf->top__DOT__IDU__DOT__next_state;
         if ((0U == (IData)(vlSelf->top__DOT__IFU__DOT__current_state))) {

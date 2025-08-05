@@ -67,13 +67,13 @@ module lsu(
     reg [`CPU_WIDTH-1:0] csr_rdata_l_rs1;
     reg [2:0] rmask;
 
-    reg [`CPU_WIDTH-1:0] datamem_readdata;
+    
     reg flag;
 
     assign rmask_o = rmask;
     assign rs1_o = rs1;
     assign alu_result_o = alu_result;
-    assign datamem_readdata_o = datamem_readdata;
+    assign datamem_readdata_o = rdata_i;
     assign araddr_o = alu_result;
     assign awaddr_o = alu_result;
 
