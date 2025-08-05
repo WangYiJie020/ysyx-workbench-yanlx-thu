@@ -29,7 +29,7 @@ module sram(
     reg ar_state;
     reg r_state;
     reg aw_state;
-    reg w_state;
+    reg [1:0] w_state;
     reg b_state;
     reg [`CPU_WIDTH-1:0] araddr;
     reg [`CPU_WIDTH-1:0] awaddr;
