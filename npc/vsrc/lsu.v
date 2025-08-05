@@ -177,6 +177,7 @@ module lsu(
                     if(bready_o == 1 && bvalid_i == 1 && bresp_i == 0) lsu_valid_o <= 1;
                     else lsu_valid_o <= 0;
                 end
+                else lsu_valid_o <= 1;
                 
                 
             end else if (current_state == S_SEND)begin

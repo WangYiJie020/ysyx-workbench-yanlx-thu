@@ -320,7 +320,9 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->__Vdly__top__DOT__IDU__DOT__inst = VL_RAND_RESET_I(32);
     vlSelf->__Vdly__top__DOT__lsu_arvalid = VL_RAND_RESET_I(1);
     vlSelf->__Vdly__top__DOT__lsu_rready = VL_RAND_RESET_I(1);
+    vlSelf->__Vdly__top__DOT__lsu_bready = VL_RAND_RESET_I(1);
     vlSelf->__Vdly__top__DOT__LSU__DOT__alu_result = VL_RAND_RESET_I(32);
+    vlSelf->__Vdly__top__DOT__lsu_bresp = VL_RAND_RESET_I(1);
     vlSelf->__Vdly__top__DOT__csr_write = VL_RAND_RESET_I(1);
     vlSelf->__Vdly__top__DOT__IDU__DOT__CSR__DOT__csr_mstatus = VL_RAND_RESET_I(32);
     vlSelf->__Vdlyvdim0__top__DOT__Rgefile__DOT__rf__v0 = 0;
