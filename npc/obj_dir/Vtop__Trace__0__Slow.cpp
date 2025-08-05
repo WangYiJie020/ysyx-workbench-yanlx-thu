@@ -483,7 +483,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBus(c+288,"rs2", false,-1, 31,0);
     tracep->declBus(c+289,"csr_rdata_l_rs1", false,-1, 31,0);
     tracep->declBus(c+64,"rmask", false,-1, 2,0);
-    tracep->declBit(c+106,"flag", false,-1);
+    tracep->declBus(c+106,"flag", false,-1, 1,0);
     tracep->declBus(c+273,"S_IDLE", false,-1, 1,0);
     tracep->declBus(c+274,"S_RECEIVE", false,-1, 1,0);
     tracep->declBus(c+275,"S_SEND", false,-1, 1,0);
@@ -770,7 +770,7 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullCData(oldp+103,(vlSelf->top__DOT__IDU__DOT__next_state),2);
     bufp->fullIData(oldp+104,(vlSelf->top__DOT__IFU__DOT__npc),32);
     bufp->fullCData(oldp+105,(vlSelf->top__DOT__IFU__DOT__next_state),3);
-    bufp->fullBit(oldp+106,(vlSelf->top__DOT__LSU__DOT__flag));
+    bufp->fullCData(oldp+106,(vlSelf->top__DOT__LSU__DOT__flag),2);
     bufp->fullCData(oldp+107,(vlSelf->top__DOT__LSU__DOT__current_state),2);
     bufp->fullCData(oldp+108,(vlSelf->top__DOT__LSU__DOT__next_state),2);
     bufp->fullIData(oldp+109,(vlSelf->top__DOT__WBU__DOT__mem_data),32);
