@@ -143,7 +143,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBit(c+19,"ar_state", false,-1);
     tracep->declBit(c+84,"r_state", false,-1);
     tracep->declBit(c+20,"aw_state", false,-1);
-    tracep->declBit(c+21,"w_state", false,-1);
+    tracep->declBus(c+21,"w_state", false,-1, 1,0);
     tracep->declBit(c+22,"b_state", false,-1);
     tracep->declBus(c+85,"araddr", false,-1, 31,0);
     tracep->declBus(c+23,"awaddr", false,-1, 31,0);
@@ -421,7 +421,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBit(c+28,"ar_state", false,-1);
     tracep->declBit(c+29,"r_state", false,-1);
     tracep->declBit(c+30,"aw_state", false,-1);
-    tracep->declBit(c+31,"w_state", false,-1);
+    tracep->declBus(c+31,"w_state", false,-1, 1,0);
     tracep->declBit(c+32,"b_state", false,-1);
     tracep->declBus(c+33,"araddr", false,-1, 31,0);
     tracep->declBus(c+34,"awaddr", false,-1, 31,0);
@@ -638,7 +638,7 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullBit(oldp+18,(vlSelf->top__DOT__lsu_wready));
     bufp->fullBit(oldp+19,(vlSelf->top__DOT__Data_Mem__DOT__ar_state));
     bufp->fullBit(oldp+20,(vlSelf->top__DOT__Data_Mem__DOT__aw_state));
-    bufp->fullBit(oldp+21,(vlSelf->top__DOT__Data_Mem__DOT__w_state));
+    bufp->fullCData(oldp+21,(vlSelf->top__DOT__Data_Mem__DOT__w_state),2);
     bufp->fullBit(oldp+22,(vlSelf->top__DOT__Data_Mem__DOT__b_state));
     bufp->fullIData(oldp+23,(vlSelf->top__DOT__Data_Mem__DOT__awaddr),32);
     bufp->fullIData(oldp+24,(vlSelf->top__DOT__Data_Mem__DOT__wdata),32);
@@ -648,7 +648,7 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullBit(oldp+28,(vlSelf->top__DOT__Inst_Mem__DOT__ar_state));
     bufp->fullBit(oldp+29,(vlSelf->top__DOT__Inst_Mem__DOT__r_state));
     bufp->fullBit(oldp+30,(vlSelf->top__DOT__Inst_Mem__DOT__aw_state));
-    bufp->fullBit(oldp+31,(vlSelf->top__DOT__Inst_Mem__DOT__w_state));
+    bufp->fullCData(oldp+31,(vlSelf->top__DOT__Inst_Mem__DOT__w_state),2);
     bufp->fullBit(oldp+32,(vlSelf->top__DOT__Inst_Mem__DOT__b_state));
     bufp->fullIData(oldp+33,(vlSelf->top__DOT__Inst_Mem__DOT__araddr),32);
     bufp->fullIData(oldp+34,(vlSelf->top__DOT__Inst_Mem__DOT__awaddr),32);

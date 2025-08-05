@@ -44,7 +44,7 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
         bufp->chgBit(oldp+17,(vlSelf->top__DOT__lsu_wready));
         bufp->chgBit(oldp+18,(vlSelf->top__DOT__Data_Mem__DOT__ar_state));
         bufp->chgBit(oldp+19,(vlSelf->top__DOT__Data_Mem__DOT__aw_state));
-        bufp->chgBit(oldp+20,(vlSelf->top__DOT__Data_Mem__DOT__w_state));
+        bufp->chgCData(oldp+20,(vlSelf->top__DOT__Data_Mem__DOT__w_state),2);
         bufp->chgBit(oldp+21,(vlSelf->top__DOT__Data_Mem__DOT__b_state));
         bufp->chgIData(oldp+22,(vlSelf->top__DOT__Data_Mem__DOT__awaddr),32);
         bufp->chgIData(oldp+23,(vlSelf->top__DOT__Data_Mem__DOT__wdata),32);
@@ -54,7 +54,7 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
         bufp->chgBit(oldp+27,(vlSelf->top__DOT__Inst_Mem__DOT__ar_state));
         bufp->chgBit(oldp+28,(vlSelf->top__DOT__Inst_Mem__DOT__r_state));
         bufp->chgBit(oldp+29,(vlSelf->top__DOT__Inst_Mem__DOT__aw_state));
-        bufp->chgBit(oldp+30,(vlSelf->top__DOT__Inst_Mem__DOT__w_state));
+        bufp->chgCData(oldp+30,(vlSelf->top__DOT__Inst_Mem__DOT__w_state),2);
         bufp->chgBit(oldp+31,(vlSelf->top__DOT__Inst_Mem__DOT__b_state));
         bufp->chgIData(oldp+32,(vlSelf->top__DOT__Inst_Mem__DOT__araddr),32);
         bufp->chgIData(oldp+33,(vlSelf->top__DOT__Inst_Mem__DOT__awaddr),32);
