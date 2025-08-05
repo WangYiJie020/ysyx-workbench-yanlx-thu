@@ -34,6 +34,7 @@ module sram(
     reg [`CPU_WIDTH-1:0] araddr;
     reg [`CPU_WIDTH-1:0] awaddr;
     reg [`CPU_WIDTH-1:0] wdata;
+    reg [7:0] wstrb;
     reg wvalid;
     always@(posedge clk, negedge rst_n) begin
         if(rst_n == 0) begin
@@ -94,6 +95,7 @@ module sram(
             wready_o <= 0;
             w_state <= 0; //未握手
             wdata <= 0;
+            wstrb <= 0;
             bresp_o <= 1;
         end
         else begin
@@ -109,6 +111,7 @@ module sram(
 
             if(wready_o == 1 && wvalid_i == 1) begin
                 wdata <= wdata_i;
+                wstrb <= wstrb_i;
                 pmem_write(awaddr,wdata,wstrb_i);
                 bresp_o <= 0;
             end
