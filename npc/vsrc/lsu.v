@@ -160,6 +160,9 @@ module lsu(
                 
                 bready_o <= 1;
                 rmask <= rmask_i;
+
+                awvalid_o <= MemWrite_i;
+                wvalid_o <= MemWrite_i;
                 
                 wb_src_o <= wb_src_i;
                 csr_write_o <= csr_write_i;
@@ -183,8 +186,7 @@ module lsu(
                 else lsu_valid_o <= 1;
                 //datamem_readdata_o <= rdata_i;
 
-                awvalid_o <= MemWrite_i;
-                wvalid_o <= MemWrite_i;
+                
 
                 //if(wvalid_o == 1 && wready_i == 1)  wvalid_o <= 0;
                 //if(awvalid_o == 1 && awready_i == 1) awvalid_o <= 0;

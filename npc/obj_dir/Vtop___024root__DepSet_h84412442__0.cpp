@@ -50,7 +50,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     CData/*0:0*/ __Vdly__top__DOT__Data_Mem__DOT__w_state;
     __Vdly__top__DOT__Data_Mem__DOT__w_state = 0;
     // Body
-    vlSelf->__Vdly__top__DOT__LSU__DOT__flag = vlSelf->top__DOT__LSU__DOT__flag;
     vlSelf->__Vdly__top__DOT__lsu_bready = vlSelf->top__DOT__lsu_bready;
     vlSelf->__Vdly__top__DOT__lsu_rready = vlSelf->top__DOT__lsu_rready;
     vlSelf->__Vdly__top__DOT__Data_Mem__DOT__araddr 
@@ -110,6 +109,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     vlSelf->top__DOT__Inst_Mem__DOT__aw_state = 0U;
     if ((1U & (~ (IData)(vlSelf->rst_n)))) {
         vlSelf->top__DOT__Data_Mem__DOT__b_state = 0U;
+        vlSelf->top__DOT__LSU__DOT__flag = 0U;
         vlSelf->top__DOT__Inst_Mem__DOT__b_state = 0U;
         vlSelf->top__DOT__Inst_Mem__DOT__wstrb = 0U;
         vlSelf->top__DOT__Inst_Mem__DOT__wdata = 0U;
@@ -423,7 +423,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
             vlSelf->top__DOT__lsu_arvalid = 0U;
             vlSelf->__Vdly__top__DOT__lsu_rready = 0U;
             vlSelf->__Vdly__top__DOT__lsu_bready = 0U;
-            vlSelf->__Vdly__top__DOT__LSU__DOT__flag = 0U;
         } else if ((1U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))) {
             vlSelf->top__DOT__ready_exu_to_lsu = 0U;
             vlSelf->top__DOT__valid_lsu_to_wbu = 0U;
@@ -512,7 +511,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
                 = (vlSelf->top__DOT__EXU__DOT__csr_rdata 
                    | vlSelf->top__DOT__EXU__DOT__rs1);
             vlSelf->top__DOT__waddr_lsu_to_wbu = vlSelf->top__DOT__waddr_exu_to_lsu;
-            vlSelf->__Vdly__top__DOT__LSU__DOT__flag = 0U;
         } else if ((3U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))) {
             vlSelf->top__DOT__ready_exu_to_lsu = 0U;
             vlSelf->top__DOT__valid_lsu_to_wbu = (1U 
@@ -525,15 +523,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
                                                       | (((IData)(vlSelf->top__DOT__lsu_bready) 
                                                           & (IData)(vlSelf->top__DOT__lsu_bvalid)) 
                                                          & (~ (IData)(vlSelf->top__DOT__lsu_bresp))))));
-            if ((1U >= (IData)(vlSelf->top__DOT__LSU__DOT__flag))) {
-                vlSelf->__Vdly__top__DOT__LSU__DOT__flag 
-                    = (3U & ((IData)(1U) + (IData)(vlSelf->top__DOT__LSU__DOT__flag)));
-                vlSelf->top__DOT__lsu_awvalid = vlSelf->top__DOT__MemWrite_exu_to_lsu;
-                vlSelf->top__DOT__lsu_wvalid = vlSelf->top__DOT__MemWrite_exu_to_lsu;
-            } else {
-                vlSelf->top__DOT__lsu_awvalid = 0U;
-                vlSelf->top__DOT__lsu_wvalid = 0U;
-            }
+            vlSelf->top__DOT__lsu_awvalid = vlSelf->top__DOT__MemWrite_exu_to_lsu;
+            vlSelf->top__DOT__lsu_wvalid = vlSelf->top__DOT__MemWrite_exu_to_lsu;
         } else if ((2U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))) {
             vlSelf->top__DOT__ready_exu_to_lsu = 1U;
             vlSelf->top__DOT__valid_lsu_to_wbu = 0U;
@@ -546,12 +537,10 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__WBU__DOT__current_state = 0U;
         vlSelf->top__DOT__valid_lsu_to_wbu = 0U;
         vlSelf->top__DOT__ready_exu_to_lsu = 0U;
-        vlSelf->__Vdly__top__DOT__LSU__DOT__flag = 0U;
     }
     vlSelf->top__DOT__lsu_bresp = vlSelf->__Vdly__top__DOT__lsu_bresp;
     vlSelf->top__DOT__lsu_rready = vlSelf->__Vdly__top__DOT__lsu_rready;
     vlSelf->top__DOT__lsu_bready = vlSelf->__Vdly__top__DOT__lsu_bready;
-    vlSelf->top__DOT__LSU__DOT__flag = vlSelf->__Vdly__top__DOT__LSU__DOT__flag;
     vlSelf->__Vtableidx6 = (((IData)(vlSelf->top__DOT__ready_wbu_to_ifu) 
                              << 5U) | (((IData)(vlSelf->top__DOT__valid_wbu_to_ifu) 
                                         << 4U) | (((IData)(vlSelf->top__DOT__ready_lsu_to_wbu) 
