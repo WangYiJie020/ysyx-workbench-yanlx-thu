@@ -138,7 +138,7 @@ module sram(
         end
     end
 
-    always@(posedge clk) begin
+    always@(*) begin
         if(flag_waddr == 1 && flag_wdata == 1) begin
             if(wready_o == 1 && wvalid_i == 1)
             pmem_write(awaddr,wdata,wstrb);
