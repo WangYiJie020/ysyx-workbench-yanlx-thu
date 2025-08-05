@@ -186,10 +186,10 @@ module lsu(
                 rready_o <= 0;
                 awvalid_o <= 0;
                 wvalid_o <= 0;
-                arvalid_o <= MemRead_i;
+                //arvalid_o <= MemRead_i;
                 //rready_o <= MemRead_i;        
-                awvalid_o <= MemWrite_i;
-                wvalid_o <= MemWrite_i;
+                //awvalid_o <= MemWrite_i;
+                //wvalid_o <= MemWrite_i;
 
             end 
             
