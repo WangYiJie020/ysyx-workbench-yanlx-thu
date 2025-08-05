@@ -105,12 +105,6 @@ module sram(
                 wready_o <= 1;
                 w_state <= 1;
             end else if(w_state == 1) begin
-                w_state <= w_state + 1;
-                wready_o <= 0;
-            end else if(w_state == 2) begin
-                w_state <= w_state + 1;
-                wready_o <= 0;
-            end else if(w_state == 3) begin
                 w_state <= 0;
                 wready_o <= 0;
             end
