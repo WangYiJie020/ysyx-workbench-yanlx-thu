@@ -75,6 +75,7 @@ module sram(
             awready_o <= 0;
             aw_state <= 0; //未握手
             awaddr <= 0;
+            flag_waddr <= 0;
         end
         else begin
             if(aw_state == 0 && awvalid_i == 1) begin
@@ -99,6 +100,7 @@ module sram(
             wdata <= 0;
             wstrb <= 0;
             bresp_o <= 1;
+            flag_wdata <= 0;
         end
         else begin
             if(w_state == 0 && wvalid_i == 1) begin
