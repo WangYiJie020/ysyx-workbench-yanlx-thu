@@ -147,6 +147,7 @@ module lsu(
                 arvalid_o <= 0;
                 rready_o <= 0;
                 bready_o <= 0;
+                flag <= 0;
                 //datamem_readdata_o <= 0;
             end else if(current_state == S_RECEIVE) begin 
                 lsu_valid_o <= 0;
@@ -182,11 +183,17 @@ module lsu(
                 end
                 else lsu_valid_o <= 1;
                 //datamem_readdata_o <= rdata_i;
-                
-                awvalid_o <= MemWrite_i;
-                wvalid_o <= MemWrite_i;
-                if(wready_i == 1)  wvalid_o <= 0;
-                if(awready_i == 1) awvalid_o <= 0;
+                if(flag == 0) begin
+                    awvalid_o <= MemWrite_i;
+                    wvalid_o <= MemWrite_i;
+                    flag <= 1;
+                end
+                else begin
+                    awvalid_o <= 0;
+                    wvalid_o <= 0;
+                end
+                //if(wvalid_o == 1 && wready_i == 1)  wvalid_o <= 0;
+                //if(awvalid_o == 1 && awready_i == 1) awvalid_o <= 0;
             end else if (current_state == S_SEND)begin
                 lsu_valid_o <= 0;
                 arvalid_o <= 0;
