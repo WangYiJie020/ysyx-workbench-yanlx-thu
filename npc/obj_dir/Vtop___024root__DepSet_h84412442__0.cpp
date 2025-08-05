@@ -525,8 +525,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
                                                       | (((IData)(vlSelf->top__DOT__lsu_bready) 
                                                           & (IData)(vlSelf->top__DOT__lsu_bvalid)) 
                                                          & (~ (IData)(vlSelf->top__DOT__lsu_bresp))))));
-            if (((IData)(vlSelf->top__DOT__lsu_bready) 
-                 & (IData)(vlSelf->top__DOT__lsu_bvalid))) {
+            if ((1U & (~ (IData)(vlSelf->top__DOT__lsu_bresp)))) {
                 vlSelf->top__DOT__lsu_wvalid = 0U;
                 vlSelf->top__DOT__lsu_awvalid = 0U;
             }
