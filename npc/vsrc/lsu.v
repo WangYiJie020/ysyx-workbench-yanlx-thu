@@ -184,13 +184,13 @@ module lsu(
                 else lsu_valid_o <= 1;
                 //datamem_readdata_o <= rdata_i;
                 if(flag == 0) begin
-                    awvalid_o <= MemWrite_i;
-                    wvalid_o <= MemWrite_i;
+                    awvalid_o <= 0;
+                    wvalid_o <= 0;
                     flag <= 1;
                 end
                 else begin
-                    awvalid_o <= 0;
-                    wvalid_o <= 0;
+                    awvalid_o <= MemWrite_i;
+                    wvalid_o <= MemWrite_i;
                 end
                 //if(wvalid_o == 1 && wready_i == 1)  wvalid_o <= 0;
                 //if(awvalid_o == 1 && awready_i == 1) awvalid_o <= 0;
