@@ -249,13 +249,15 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__4(Vtop___024root* vlSelf) 
     __Vfunc_pmem_read__4__Vfuncout = 0;
     // Body
     vlSelf->top__DOT__IFU__DOT__npc = vlSelf->__Vdly__top__DOT__IFU__DOT__npc;
+    vlSelf->top__DOT__Inst_Mem__DOT__flag_waddr = vlSelf->rst_n;
     if ((1U & (~ (IData)(vlSelf->rst_n)))) {
+        vlSelf->top__DOT__Inst_Mem__DOT__flag_wdata = 0U;
         vlSelf->top__DOT__Inst_Mem__DOT__awaddr = 0U;
         vlSelf->top__DOT__Inst_Mem__DOT__wdata = 0U;
         vlSelf->top__DOT__Inst_Mem__DOT__wstrb = 0U;
     }
     if (vlSelf->rst_n) {
-        vlSelf->top__DOT__Inst_Mem__DOT__flag_waddr = 1U;
+        vlSelf->top__DOT__Data_Mem__DOT__flag_waddr = 1U;
         if ((0U == (IData)(vlSelf->top__DOT__WBU__DOT__current_state))) {
             vlSelf->top__DOT__ready_lsu_to_wbu = 1U;
             vlSelf->top__DOT__valid_wbu_to_ifu = 0U;
@@ -284,6 +286,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__4(Vtop___024root* vlSelf) 
             vlSelf->top__DOT__valid_wbu_to_ifu = 0U;
         }
     } else {
+        vlSelf->top__DOT__Data_Mem__DOT__flag_waddr = 0U;
         vlSelf->top__DOT__valid_wbu_to_ifu = 0U;
         vlSelf->top__DOT__ready_lsu_to_wbu = 0U;
     }
@@ -406,7 +409,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__4(Vtop___024root* vlSelf) 
     vlSelf->top__DOT__IFU__DOT__next_state = Vtop__ConstPool__TABLE_h4a96c7c5_0
         [vlSelf->__Vtableidx1];
     if (vlSelf->rst_n) {
-        vlSelf->top__DOT__Data_Mem__DOT__flag_waddr = 1U;
         if (((IData)(vlSelf->top__DOT__lsu_awready) 
              & (IData)(vlSelf->top__DOT__lsu_awvalid))) {
             vlSelf->top__DOT__Data_Mem__DOT__awaddr 
@@ -574,6 +576,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__4(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__Data_Mem__DOT__wdata = 0U;
         vlSelf->top__DOT__Data_Mem__DOT__wstrb = 0U;
         vlSelf->__Vdly__top__DOT__lsu_bresp = 1U;
+        vlSelf->top__DOT__Data_Mem__DOT__flag_wdata = 0U;
         vlSelf->top__DOT__WBU__DOT__current_state = 0U;
         vlSelf->top__DOT__lsu_awready = 0U;
         vlSelf->top__DOT__Data_Mem__DOT__aw_state = 0U;

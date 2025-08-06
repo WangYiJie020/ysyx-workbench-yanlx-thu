@@ -29,7 +29,7 @@ module sram(
     reg ar_state;
     reg r_state;
     reg aw_state;
-    reg [1:0] w_state;
+    reg w_state;
     reg b_state;
     reg [`CPU_WIDTH-1:0] araddr;
     reg [`CPU_WIDTH-1:0] awaddr;
@@ -64,7 +64,7 @@ module sram(
             rvalid_o <= 0;
         end
         else begin
-            rdata_o <= pmem_read(araddr);
+            rdata_o <= # 5 pmem_read(araddr);
             rresp_o <= 1;
             rvalid_o <= 1;
         end
