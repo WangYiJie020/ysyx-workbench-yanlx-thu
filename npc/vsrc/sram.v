@@ -64,7 +64,7 @@ module sram(
             rvalid_o <= 0;
         end
         else begin
-            rdata_o <= # 5 pmem_read(araddr);
+            rdata_o <= #5 pmem_read(araddr);
             rresp_o <= 1;
             rvalid_o <= 1;
         end
