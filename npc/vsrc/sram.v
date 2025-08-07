@@ -65,7 +65,7 @@ module sram(
             rdata_counter <= 0;
         end
         else begin
-            if(rdata_counter == 5) begin
+            if(rdata_counter == 4) begin
                 rdata_counter <= 0;
                 rdata_o <= pmem_read(araddr);
                 rresp_o <= 1;
