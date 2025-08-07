@@ -122,7 +122,7 @@ module ifu(
                 arvalid_o <= 1;
                 rready_o <= 1;
             end else if(current_state == S_WAIT_SEND) begin               
-                if(rvalid_i == 1 && rready_o == 1) ifu_valid_o <= 1;
+                if(rresp_i) ifu_valid_o <= 1;
                 else ifu_valid_o <= 0;
 
                 arvalid_o <= 1; 
