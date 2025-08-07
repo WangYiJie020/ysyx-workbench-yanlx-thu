@@ -176,7 +176,7 @@ module lsu(
                 //awaddr_o <= alu_result;
             end else if (current_state == S_WAIT_SEND)begin
                 if(MemRead_i) begin
-                    if(rvalid_i == 1 && rready_o == 1) lsu_valid_o <= 1;
+                    if(rresp_i) lsu_valid_o <= 1;
                     else lsu_valid_o <= 0;
                 end
                 else if(MemWrite_i)begin

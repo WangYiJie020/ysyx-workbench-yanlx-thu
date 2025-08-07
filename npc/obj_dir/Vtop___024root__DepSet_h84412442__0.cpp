@@ -65,8 +65,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     __Vfunc_pmem_read__2__Vfuncout = 0;
     CData/*0:0*/ __Vdly__top__DOT__ifu_arvalid;
     __Vdly__top__DOT__ifu_arvalid = 0;
-    CData/*0:0*/ __Vdly__top__DOT__ifu_rready;
-    __Vdly__top__DOT__ifu_rready = 0;
     CData/*4:0*/ __Vdly__top__DOT__Inst_Mem__DOT__rdata_counter;
     __Vdly__top__DOT__Inst_Mem__DOT__rdata_counter = 0;
     // Body
@@ -83,7 +81,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     vlSelf->__Vdly__top__DOT__lsu_bresp = vlSelf->top__DOT__lsu_bresp;
     vlSelf->__Vdly__top__DOT__csr_write = vlSelf->top__DOT__csr_write;
     vlSelf->__Vdly__top__DOT__IFU__DOT__npc = vlSelf->top__DOT__IFU__DOT__npc;
-    __Vdly__top__DOT__ifu_rready = vlSelf->top__DOT__ifu_rready;
     __Vdly__top__DOT__ifu_arvalid = vlSelf->top__DOT__ifu_arvalid;
     vlSelf->__Vdly__top__DOT__IDU__DOT__pc = vlSelf->top__DOT__IDU__DOT__pc;
     vlSelf->__Vdly__top__DOT__IDU__DOT__inst = vlSelf->top__DOT__IDU__DOT__inst;
@@ -137,33 +134,31 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                                   & (IData)(vlSelf->top__DOT__ifu_rready));
             __Vdly__top__DOT__ifu_arvalid = 1U;
             vlSelf->top__DOT__pc_ifu_to_idu = vlSelf->top__DOT__IFU__DOT__pc;
-            __Vdly__top__DOT__ifu_rready = 1U;
+            vlSelf->top__DOT__ifu_rready = 1U;
         } else if ((2U == (IData)(vlSelf->top__DOT__IFU__DOT__current_state))) {
             vlSelf->top__DOT__ready_wbu_to_ifu = 0U;
             vlSelf->top__DOT__valid_ifu_to_idu = 1U;
             __Vdly__top__DOT__ifu_arvalid = 0U;
-            __Vdly__top__DOT__ifu_rready = 0U;
+            vlSelf->top__DOT__ifu_rready = 0U;
             vlSelf->top__DOT__pc_ifu_to_idu = vlSelf->top__DOT__IFU__DOT__pc;
         } else if ((3U == (IData)(vlSelf->top__DOT__IFU__DOT__current_state))) {
             vlSelf->top__DOT__ready_wbu_to_ifu = 1U;
             vlSelf->top__DOT__valid_ifu_to_idu = 0U;
             __Vdly__top__DOT__ifu_arvalid = 0U;
-            __Vdly__top__DOT__ifu_rready = 0U;
+            vlSelf->top__DOT__ifu_rready = 0U;
         } else if ((1U == (IData)(vlSelf->top__DOT__IFU__DOT__current_state))) {
             vlSelf->top__DOT__ready_wbu_to_ifu = 1U;
             vlSelf->top__DOT__valid_ifu_to_idu = 0U;
             vlSelf->__Vdly__top__DOT__IFU__DOT__npc 
                 = vlSelf->top__DOT__npc_wbu_to_ifu;
             __Vdly__top__DOT__ifu_arvalid = 1U;
-            __Vdly__top__DOT__ifu_rready = 1U;
+            vlSelf->top__DOT__ifu_rready = 1U;
         } else if ((4U == (IData)(vlSelf->top__DOT__IFU__DOT__current_state))) {
             vlSelf->top__DOT__ready_wbu_to_ifu = 0U;
-            vlSelf->top__DOT__valid_ifu_to_idu = ((IData)(vlSelf->top__DOT__ifu_rvalid) 
-                                                  & (IData)(vlSelf->top__DOT__ifu_rready));
+            vlSelf->top__DOT__valid_ifu_to_idu = vlSelf->top__DOT__ifu_rresp;
             __Vdly__top__DOT__ifu_arvalid = 1U;
-            __Vdly__top__DOT__ifu_rready = 1U;
+            vlSelf->top__DOT__ifu_rready = 1U;
         }
-        vlSelf->top__DOT__ifu_rready = __Vdly__top__DOT__ifu_rready;
         vlSelf->top__DOT__IFU__DOT__current_state = vlSelf->top__DOT__IFU__DOT__next_state;
     } else {
         vlSelf->top__DOT__useless4 = 0U;
@@ -175,12 +170,11 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__lsu_arready = 0U;
         vlSelf->top__DOT__Data_Mem__DOT__ar_state = 0U;
         vlSelf->top__DOT__IDU__DOT__current_state = 0U;
-        __Vdly__top__DOT__ifu_rready = 0U;
+        vlSelf->top__DOT__ifu_rready = 0U;
         vlSelf->top__DOT__valid_ifu_to_idu = 0U;
         vlSelf->top__DOT__ready_wbu_to_ifu = 0U;
         vlSelf->__Vdly__top__DOT__IFU__DOT__npc = 0x80000000U;
         __Vdly__top__DOT__ifu_arvalid = 0U;
-        vlSelf->top__DOT__ifu_rready = __Vdly__top__DOT__ifu_rready;
         vlSelf->top__DOT__IFU__DOT__current_state = 0U;
     }
     if (vlSelf->rst_n) {
