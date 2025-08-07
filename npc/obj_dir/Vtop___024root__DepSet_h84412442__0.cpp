@@ -73,7 +73,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     __Vdly__top__DOT__Inst_Mem__DOT__rdata_counter 
         = vlSelf->top__DOT__Inst_Mem__DOT__rdata_counter;
     vlSelf->__Vdly__top__DOT__lsu_bready = vlSelf->top__DOT__lsu_bready;
-    vlSelf->__Vdly__top__DOT__lsu_rready = vlSelf->top__DOT__lsu_rready;
     vlSelf->__Vdly__top__DOT__Data_Mem__DOT__w_state 
         = vlSelf->top__DOT__Data_Mem__DOT__w_state;
     vlSelf->__Vdly__top__DOT__Data_Mem__DOT__araddr 
@@ -466,7 +465,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__4(Vtop___024root* vlSelf) 
             vlSelf->top__DOT__lsu_awvalid = 0U;
             vlSelf->top__DOT__lsu_wvalid = 0U;
             vlSelf->top__DOT__lsu_arvalid = 0U;
-            vlSelf->__Vdly__top__DOT__lsu_rready = 1U;
+            vlSelf->top__DOT__lsu_rready = 1U;
             vlSelf->__Vdly__top__DOT__lsu_bready = 0U;
         } else if ((1U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))) {
             vlSelf->top__DOT__ready_exu_to_lsu = 0U;
@@ -476,7 +475,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__4(Vtop___024root* vlSelf) 
             vlSelf->top__DOT__LSU__DOT__rs1 = vlSelf->top__DOT__EXU__DOT__rs1;
             vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__EXU__DOT__rs2;
             vlSelf->top__DOT__lsu_arvalid = vlSelf->top__DOT__MemRead_exu_to_lsu;
-            vlSelf->__Vdly__top__DOT__lsu_rready = vlSelf->top__DOT__MemRead_exu_to_lsu;
+            vlSelf->top__DOT__lsu_rready = vlSelf->top__DOT__MemRead_exu_to_lsu;
             vlSelf->__Vdly__top__DOT__lsu_bready = 1U;
             vlSelf->top__DOT__LSU__DOT__rmask = vlSelf->top__DOT__rmask_exu_to_lsu;
             vlSelf->top__DOT__lsu_awvalid = vlSelf->top__DOT__MemWrite_exu_to_lsu;
@@ -562,9 +561,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__4(Vtop___024root* vlSelf) 
             vlSelf->top__DOT__ready_exu_to_lsu = 0U;
             vlSelf->top__DOT__valid_lsu_to_wbu = (1U 
                                                   & ((IData)(vlSelf->top__DOT__MemRead_exu_to_lsu)
-                                                      ? 
-                                                     ((IData)(vlSelf->top__DOT__lsu_rvalid) 
-                                                      & (IData)(vlSelf->top__DOT__lsu_rready))
+                                                      ? (IData)(vlSelf->top__DOT__lsu_rresp)
                                                       : 
                                                      ((~ (IData)(vlSelf->top__DOT__MemWrite_exu_to_lsu)) 
                                                       | (((IData)(vlSelf->top__DOT__lsu_bready) 
@@ -578,7 +575,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__4(Vtop___024root* vlSelf) 
             vlSelf->top__DOT__ready_exu_to_lsu = 1U;
             vlSelf->top__DOT__valid_lsu_to_wbu = 0U;
             vlSelf->top__DOT__lsu_arvalid = 0U;
-            vlSelf->__Vdly__top__DOT__lsu_rready = 0U;
+            vlSelf->top__DOT__lsu_rready = 0U;
             vlSelf->top__DOT__lsu_awvalid = 0U;
             vlSelf->top__DOT__lsu_wvalid = 0U;
         }
@@ -598,7 +595,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__4(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__ready_exu_to_lsu = 0U;
     }
     vlSelf->top__DOT__lsu_bresp = vlSelf->__Vdly__top__DOT__lsu_bresp;
-    vlSelf->top__DOT__lsu_rready = vlSelf->__Vdly__top__DOT__lsu_rready;
     vlSelf->top__DOT__lsu_bready = vlSelf->__Vdly__top__DOT__lsu_bready;
     vlSelf->__Vtableidx6 = (((IData)(vlSelf->top__DOT__ready_wbu_to_ifu) 
                              << 5U) | (((IData)(vlSelf->top__DOT__valid_wbu_to_ifu) 

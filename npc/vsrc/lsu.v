@@ -145,7 +145,7 @@ module lsu(
                 awvalid_o <= 0;
                 wvalid_o <= 0;
                 arvalid_o <= 0;
-                rready_o <= 1;
+                rready_o <= 0;
                 bready_o <= 0;
                 //datamem_readdata_o <= 0;
             end else if(current_state == S_RECEIVE) begin 
