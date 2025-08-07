@@ -90,12 +90,13 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__Inst_Mem__DOT__ar_state;
         CData/*0:0*/ top__DOT__Inst_Mem__DOT__r_state;
         CData/*0:0*/ top__DOT__Inst_Mem__DOT__aw_state;
-        CData/*1:0*/ top__DOT__Inst_Mem__DOT__w_state;
+        CData/*0:0*/ top__DOT__Inst_Mem__DOT__w_state;
         CData/*0:0*/ top__DOT__Inst_Mem__DOT__b_state;
         CData/*7:0*/ top__DOT__Inst_Mem__DOT__wstrb;
         CData/*0:0*/ top__DOT__Inst_Mem__DOT__wvalid;
         CData/*0:0*/ top__DOT__Inst_Mem__DOT__flag_waddr;
         CData/*0:0*/ top__DOT__Inst_Mem__DOT__flag_wdata;
+        CData/*4:0*/ top__DOT__Inst_Mem__DOT__rdata_counter;
         CData/*1:0*/ top__DOT__IDU__DOT__current_state;
         CData/*1:0*/ top__DOT__IDU__DOT__next_state;
         CData/*0:0*/ top__DOT__EXU__DOT__a_in_src;
@@ -114,12 +115,13 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__Data_Mem__DOT__ar_state;
         CData/*0:0*/ top__DOT__Data_Mem__DOT__r_state;
         CData/*0:0*/ top__DOT__Data_Mem__DOT__aw_state;
-        CData/*1:0*/ top__DOT__Data_Mem__DOT__w_state;
+        CData/*0:0*/ top__DOT__Data_Mem__DOT__w_state;
         CData/*0:0*/ top__DOT__Data_Mem__DOT__b_state;
         CData/*7:0*/ top__DOT__Data_Mem__DOT__wstrb;
         CData/*0:0*/ top__DOT__Data_Mem__DOT__wvalid;
         CData/*0:0*/ top__DOT__Data_Mem__DOT__flag_waddr;
         CData/*0:0*/ top__DOT__Data_Mem__DOT__flag_wdata;
+        CData/*4:0*/ top__DOT__Data_Mem__DOT__rdata_counter;
         CData/*2:0*/ top__DOT__WBU__DOT__rmask;
         CData/*0:0*/ top__DOT__WBU__DOT__wb_src;
         CData/*0:0*/ top__DOT__WBU__DOT__csr_wdata_src;
@@ -132,7 +134,8 @@ class Vtop___024root final : public VerilatedModule {
         CData/*5:0*/ __Vtableidx6;
         CData/*0:0*/ __Vdly__top__DOT__lsu_rready;
         CData/*0:0*/ __Vdly__top__DOT__lsu_bready;
-        CData/*1:0*/ __Vdly__top__DOT__Data_Mem__DOT__w_state;
+        CData/*4:0*/ __Vdly__top__DOT__Data_Mem__DOT__rdata_counter;
+        CData/*0:0*/ __Vdly__top__DOT__Data_Mem__DOT__w_state;
         CData/*0:0*/ __Vdly__top__DOT__lsu_bresp;
         CData/*0:0*/ __Vdly__top__DOT__csr_write;
         CData/*4:0*/ __Vdlyvdim0__top__DOT__Rgefile__DOT__rf__v0;
@@ -146,11 +149,11 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__pc_ifu_to_idu;
         IData/*31:0*/ top__DOT__ifu_rdata;
         IData/*31:0*/ top__DOT__imm_idu_to_exu;
+    };
+    struct {
         IData/*31:0*/ top__DOT__csr_wdata;
         IData/*31:0*/ top__DOT__csr_rdata_l_rs1_lsu_to_wbu;
         IData/*31:0*/ top__DOT__npc_lsu_to_wbu;
-    };
-    struct {
         IData/*31:0*/ top__DOT__lsu_rdata;
         IData/*31:0*/ top__DOT__lsu_wdata;
         IData/*31:0*/ top__DOT__IFU__DOT__pc;
