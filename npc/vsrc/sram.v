@@ -72,7 +72,7 @@ module sram(
                 rvalid_o <= 1;
             end
             else begin
-                rdata_counter = rdata_counter + 1;
+                rdata_counter <= rdata_counter + 1;
                 rresp_o <= 0;
                 rvalid_o <= 0;
             end
