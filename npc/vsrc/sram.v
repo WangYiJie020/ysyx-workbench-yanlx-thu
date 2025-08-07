@@ -57,16 +57,26 @@ module sram(
                 araddr <= araddr_i;
         end
     end
-
+    reg [4:0] rdata_counter;
     always@(posedge clk, negedge rst_n) begin
         if(rst_n == 0) begin
             r_state <= 0;
             rvalid_o <= 0;
+            rdata_counter <= 0;
         end
         else begin
-            rdata_o <= #5 pmem_read(araddr);
-            rresp_o <= 1;
-            rvalid_o <= 1;
+            if(rdata_counter == 5) begin
+                rdata_counter = 0;
+                rdata_o <= pmem_read(araddr);
+                rresp_o <= 1;
+                rvalid_o <= 1;
+            end
+            else begin
+                rdata_counter = rdata_counter + 1;
+                rresp_o <= 0;
+                rvalid_o <= 0;
+            end
+            
         end
     end
 
@@ -143,5 +153,7 @@ module sram(
             //flag_wdata <= 0;
         end
     end
+
+
 
 endmodule
