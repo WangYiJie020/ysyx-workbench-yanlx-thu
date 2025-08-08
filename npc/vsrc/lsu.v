@@ -192,6 +192,9 @@ module lsu(
                     wvalid_o <= 0;
                     awvalid_o <= 0;
                 end
+                if(rresp_i) begin
+                    arvalid_o <= 0;
+                end 
             end else if (current_state == S_SEND)begin
                 lsu_valid_o <= 0;
                 arvalid_o <= 0;
