@@ -114,9 +114,10 @@ module sram(
                 awready_o <= 0;
             end
 
-            if(awready_o == 1 && awvalid_i == 1)
+            if(awready_o == 1 && awvalid_i == 1) begin
                 awaddr <= awaddr_i;
                 flag_waddr <= 1; 
+            end 
         end
     end
 
