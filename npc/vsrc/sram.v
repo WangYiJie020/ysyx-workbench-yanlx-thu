@@ -1,4 +1,6 @@
 `include "header.v"
+
+`define DELAY 5 
 module sram(
     input clk,
     input rst_n,
@@ -72,7 +74,7 @@ module sram(
         else begin
             if(flag_raddr == 1) flag_rdata <= 1;
             else if(flag_rdata == 1) begin
-                if(rdata_counter == 4) begin
+                if(rdata_counter == `DELAY - 1) begin
                     rdata_counter <= 0;
                     rdata_o <= pmem_read(araddr);
                     rresp_o <= 1;
