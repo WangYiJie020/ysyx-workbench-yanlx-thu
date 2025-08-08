@@ -53,8 +53,11 @@ module sram(
                 arready_o <= 0;
             end
 
-            if(arready_o == 1 && arvalid_i == 1)
+            if(arready_o == 1 && arvalid_i == 1) begin
                 araddr <= araddr_i;
+                flag_raddr <= 1;//get read addr
+            else 
+                flag_raddr <= 0;
         end
     end
     reg [4:0] rdata_counter;
@@ -63,18 +66,24 @@ module sram(
             r_state <= 0;
             rvalid_o <= 0;
             rdata_counter <= 0;
+            flag_rdata <= 0;
         end
         else begin
-            if(rdata_counter == 4) begin
-                rdata_counter <= 0;
-                rdata_o <= pmem_read(araddr);
-                rresp_o <= 1;
-                rvalid_o <= 1;
-            end
-            else begin
-                rdata_counter <= rdata_counter + 1;
-                rresp_o <= 0;
-                rvalid_o <= 0;
+            if(flag_raddr == 1) flag_rdata <= 1;
+            else if(flag_rdata == 1) begin
+                if(rdata_counter == 4) begin
+                    rdata_counter <= 0;
+                    rdata_o <= pmem_read(araddr);
+                    rresp_o <= 1;
+                    rvalid_o <= 1;
+                    flag_rdata <= 0;
+                    
+                end
+                else begin
+                    rdata_counter <= rdata_counter + 1;
+                    rresp_o <= 0;
+                    rvalid_o <= 0;
+                end
             end
             
         end
