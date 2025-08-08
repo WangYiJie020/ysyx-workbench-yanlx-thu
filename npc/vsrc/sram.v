@@ -63,7 +63,7 @@ module sram(
                 flag_raddr <= 0;
         end
     end
-    reg [4:0] rdata_counter;
+    reg [6:0] rdata_counter;
     always@(posedge clk, negedge rst_n) begin
         if(rst_n == 0) begin
             r_state <= 0;
