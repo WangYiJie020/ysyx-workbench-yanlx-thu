@@ -1,6 +1,6 @@
 `include "header.v"
 
-`define DELAY 10
+`define DELAY 20
 module sram(
     input clk,
     input rst_n,
