@@ -67,7 +67,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     __Vdly__top__DOT__ifu_arvalid = 0;
     CData/*0:0*/ __Vdly__top__DOT__Inst_Mem__DOT__flag_rdata;
     __Vdly__top__DOT__Inst_Mem__DOT__flag_rdata = 0;
-    CData/*4:0*/ __Vdly__top__DOT__Inst_Mem__DOT__rdata_counter;
+    CData/*6:0*/ __Vdly__top__DOT__Inst_Mem__DOT__rdata_counter;
     __Vdly__top__DOT__Inst_Mem__DOT__rdata_counter = 0;
     // Body
     vlSelf->__Vdly__top__DOT__Data_Mem__DOT__rdata_counter 
@@ -179,7 +179,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                 __Vdly__top__DOT__Inst_Mem__DOT__flag_rdata = 0U;
             } else {
                 __Vdly__top__DOT__Inst_Mem__DOT__rdata_counter 
-                    = (0x1fU & ((IData)(1U) + (IData)(vlSelf->top__DOT__Inst_Mem__DOT__rdata_counter)));
+                    = (0x7fU & ((IData)(1U) + (IData)(vlSelf->top__DOT__Inst_Mem__DOT__rdata_counter)));
                 vlSelf->top__DOT__ifu_rresp = 0U;
                 vlSelf->top__DOT__ifu_rvalid = 0U;
             }
@@ -629,7 +629,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__4(Vtop___024root* vlSelf) 
                 vlSelf->__Vdly__top__DOT__Data_Mem__DOT__flag_rdata = 0U;
             } else {
                 vlSelf->__Vdly__top__DOT__Data_Mem__DOT__rdata_counter 
-                    = (0x1fU & ((IData)(1U) + (IData)(vlSelf->top__DOT__Data_Mem__DOT__rdata_counter)));
+                    = (0x7fU & ((IData)(1U) + (IData)(vlSelf->top__DOT__Data_Mem__DOT__rdata_counter)));
                 vlSelf->top__DOT__lsu_rresp = 0U;
                 vlSelf->top__DOT__lsu_rvalid = 0U;
             }

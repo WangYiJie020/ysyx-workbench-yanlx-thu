@@ -154,7 +154,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBit(c+87,"flag_wdata", false,-1);
     tracep->declBit(c+88,"flag_rdata", false,-1);
     tracep->declBit(c+89,"flag_raddr", false,-1);
-    tracep->declBus(c+90,"rdata_counter", false,-1, 4,0);
+    tracep->declBus(c+90,"rdata_counter", false,-1, 6,0);
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("EXU ");
     tracep->declBit(c+276,"clk", false,-1);
@@ -437,7 +437,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBit(c+116,"flag_wdata", false,-1);
     tracep->declBit(c+25,"flag_rdata", false,-1);
     tracep->declBit(c+26,"flag_raddr", false,-1);
-    tracep->declBus(c+27,"rdata_counter", false,-1, 4,0);
+    tracep->declBus(c+27,"rdata_counter", false,-1, 6,0);
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("LSU ");
     tracep->declBit(c+276,"clk", false,-1);
@@ -654,7 +654,7 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullIData(oldp+24,(vlSelf->top__DOT__Inst_Mem__DOT__araddr),32);
     bufp->fullBit(oldp+25,(vlSelf->top__DOT__Inst_Mem__DOT__flag_rdata));
     bufp->fullBit(oldp+26,(vlSelf->top__DOT__Inst_Mem__DOT__flag_raddr));
-    bufp->fullCData(oldp+27,(vlSelf->top__DOT__Inst_Mem__DOT__rdata_counter),5);
+    bufp->fullCData(oldp+27,(vlSelf->top__DOT__Inst_Mem__DOT__rdata_counter),7);
     bufp->fullBit(oldp+28,(vlSelf->top__DOT__LSU__DOT__flag));
     bufp->fullIData(oldp+29,(vlSelf->top__DOT__npc_wbu_to_ifu),32);
     bufp->fullBit(oldp+30,(vlSelf->top__DOT__valid_wbu_to_ifu));
@@ -760,7 +760,7 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullBit(oldp+87,(vlSelf->top__DOT__Data_Mem__DOT__flag_wdata));
     bufp->fullBit(oldp+88,(vlSelf->top__DOT__Data_Mem__DOT__flag_rdata));
     bufp->fullBit(oldp+89,(vlSelf->top__DOT__Data_Mem__DOT__flag_raddr));
-    bufp->fullCData(oldp+90,(vlSelf->top__DOT__Data_Mem__DOT__rdata_counter),5);
+    bufp->fullCData(oldp+90,(vlSelf->top__DOT__Data_Mem__DOT__rdata_counter),7);
     bufp->fullIData(oldp+91,(vlSelf->top__DOT__EXU__DOT__pc),32);
     bufp->fullIData(oldp+92,(vlSelf->top__DOT__EXU__DOT__imm),32);
     bufp->fullIData(oldp+93,(vlSelf->top__DOT__EXU__DOT__csr_rdata),32);
