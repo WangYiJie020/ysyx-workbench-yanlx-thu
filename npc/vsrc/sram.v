@@ -154,7 +154,7 @@ module sram(
                 flag_wdata <= 0;
                 //bresp_o <= 1;
             end
-            else //bresp_o <= 1;
+            //else bresp_o <= 1;
         end
     end
 
