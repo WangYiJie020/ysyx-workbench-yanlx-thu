@@ -1,6 +1,7 @@
 `include "header.v"
 
 `define R_DELAY 5
+`define W_DELAY 5
 module sram(
     input clk,
     input rst_n,
@@ -118,6 +119,9 @@ module sram(
                 awaddr <= awaddr_i;
                 flag_waddr <= 1; 
             end 
+            else if(bresp_o == 0) begin
+                flag_waddr <= 0;
+            end
         end
     end
 
@@ -145,30 +149,30 @@ module sram(
                 wstrb <= wstrb_i;
                 flag_wdata <= 1;
                 //pmem_write(awaddr,wdata,wstrb);
-                bresp_o <= 0;
+                //bresp_o <= 0;
+            end else if(bresp_o == 0) begin
+                flag_wdata <= 0;
+                //bresp_o <= 1;
             end
-            else bresp_o <= 1;
+            else //bresp_o <= 1;
         end
     end
 
     always@(posedge clk, negedge rst_n) begin
         if(rst_n == 0) begin
-            b_state <= 0;
+            bresp_o <= 1;
             bvalid_o <= 0;
         end
-        else begin
-            
-            //bresp_o <= 0;
-            bvalid_o <= 1;
-        end
-    end
-
-    always@(awaddr,wdata) begin
-        if(flag_waddr == 1 && flag_wdata == 1) begin
+        else if(flag_waddr == 1 && flag_wdata == 1) begin
             //if(wready_o == 1 && wvalid_i == 1)
             pmem_write(awaddr,wdata,wstrb);
+            bresp_o <= 0;
+            bvalid_o <= 1;
             //flag_waddr <= 0;
             //flag_wdata <= 0;
+        end else begin
+            bresp_o <= 1;
+            bvalid_o <= 0;
         end
     end
 
