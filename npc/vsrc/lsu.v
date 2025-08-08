@@ -133,6 +133,7 @@ module lsu(
             lsu_valid_o <= 0;
             lsu_ready_o <= 0;
             flag <= 0;
+            arvalid_o <= 1;
         end else begin
             current_state <= next_state;
             if(current_state == S_IDLE) lsu_ready_o <= 1;
@@ -147,6 +148,9 @@ module lsu(
                 arvalid_o <= 0;
                 rready_o <= 0;
                 bready_o <= 0;
+                if(rresp_i) begin
+                    arvalid_o <= 0;
+                end 
                 //datamem_readdata_o <= 0;
             end else if(current_state == S_RECEIVE) begin 
                 lsu_valid_o <= 0;
