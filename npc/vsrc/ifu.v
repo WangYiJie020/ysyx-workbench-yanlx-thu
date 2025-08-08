@@ -105,6 +105,9 @@ module ifu(
                 rready_o <= 1;
                 pc_o <= pc;
                 //inst_o <= rdata_i;
+                if(arvalid_o==1 && arready_i==1) begin
+                    arvalid_o <= 0;
+                end
             end else if (current_state == S_SEND)begin
                 ifu_valid_o <= 1;
                 arvalid_o <= 0;
