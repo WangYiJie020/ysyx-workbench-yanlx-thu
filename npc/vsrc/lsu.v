@@ -148,7 +148,7 @@ module lsu(
                 arvalid_o <= 0;
                 rready_o <= 0;
                 bready_o <= 0;
-                if(rresp_i) begin
+                if(arvalid_o==1 && arready_i==1) begin
                     arvalid_o <= 0;
                 end 
                 //datamem_readdata_o <= 0;
@@ -196,7 +196,7 @@ module lsu(
                     wvalid_o <= 0;
                     awvalid_o <= 0;
                 end
-                if(rresp_i) begin
+                if(arvalid_o==1 && arready_i==1) begin
                     arvalid_o <= 0;
                 end 
             end else if (current_state == S_SEND)begin
