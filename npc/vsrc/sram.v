@@ -36,7 +36,7 @@ module sram(
     reg [`CPU_WIDTH-1:0] wdata;
     reg [7:0] wstrb;
     reg wvalid;
-    reg flag_waddr,flag_wdata;
+    reg flag_waddr,flag_wdata,flag_rdata,flag_raddr;
     always@(posedge clk, negedge rst_n) begin
         if(rst_n == 0) begin
             arready_o <= 0;
@@ -56,6 +56,7 @@ module sram(
             if(arready_o == 1 && arvalid_i == 1) begin
                 araddr <= araddr_i;
                 flag_raddr <= 1;//get read addr
+            end
             else 
                 flag_raddr <= 0;
         end
