@@ -86,6 +86,11 @@ module sram(
                     rvalid_o <= 0;
                 end
             end
+            else begin
+                rvalid_o <= 0;
+                rdata_counter <= 0;
+                rresp_o <= 0;
+            end
             
         end
     end
