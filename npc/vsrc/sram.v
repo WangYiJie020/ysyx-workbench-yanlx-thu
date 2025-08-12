@@ -144,16 +144,19 @@ module sram(
                 wready_o <= 0;
             end
 
-            if(wready_o == 1 && wvalid_i == 1) begin
+            if(bresp_o == 0) 
+                flag_wdata <= 0;
+            else if(wready_o == 1 && wvalid_i == 1) begin
                 wdata <= wdata_i;
                 wstrb <= wstrb_i;
                 flag_wdata <= 1;
                 //pmem_write(awaddr,wdata,wstrb);
                 //bresp_o <= 0;
-            end else if(bresp_o == 0) begin
-                flag_wdata <= 0;
+            end 
+            //else if(bresp_o == 0) begin
+                //flag_wdata <= 0;
                 //bresp_o <= 1;
-            end
+            //end
             //else bresp_o <= 1;
         end
     end
