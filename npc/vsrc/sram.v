@@ -1,7 +1,7 @@
 `include "header.v"
 
 `define R_DELAY 5
-`define W_DELAY 20
+`define W_DELAY 5
 module sram(
     input clk,
     input rst_n,
@@ -40,7 +40,7 @@ module sram(
     reg [7:0] wstrb;
     reg wvalid;
     reg flag_waddr,flag_wdata,flag_rdata,flag_raddr,flag_write;
-    reg [6:0] rdata_counter,wdata_counter;
+    reg [4:0] rdata_counter,wdata_counter;
     always@(posedge clk, negedge rst_n) begin
         if(rst_n == 0) begin
             arready_o <= 0;
@@ -186,6 +186,15 @@ module sram(
         end else begin
             bresp_o <= 1;
             bvalid_o <= 0;
+        end
+    end
+    reg [4:0] LFSR;
+    reg lfsr_in;
+    assign lfsr_in = LFSR[4] ^ LFSR[3] ^ LFSR[2] ^ LFSR[1] ^ LFSR[0];
+    always@(posedge clk, negedge rst_n) begin
+        if(rst_n == 0) LFSR <= 5'b00001
+        else begin
+            LFSR = {lfsr_in,LFSR[4:1]};
         end
     end
 
