@@ -145,7 +145,7 @@ module lsu(
                 lsu_valid_o <= 0;
                 awvalid_o <= 0;
                 wvalid_o <= 0;
-                arvalid_o <= 0;
+                //arvalid_o <= 0;
                 rready_o <= 0;
                 bready_o <= 0;
                 if(arvalid_o==1 && arready_i==1) begin
