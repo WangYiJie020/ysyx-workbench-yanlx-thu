@@ -192,7 +192,7 @@ module sram(
     reg lfsr_in;
     assign lfsr_in = LFSR[4] ^ LFSR[3] ^ LFSR[2] ^ LFSR[1] ^ LFSR[0];
     always@(posedge clk, negedge rst_n) begin
-        if(rst_n == 0) LFSR <= 5'b00001
+        if(rst_n == 0) LFSR <= 5'b00001;
         else begin
             LFSR = {lfsr_in,LFSR[4:1]};
         end
