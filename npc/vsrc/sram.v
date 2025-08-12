@@ -40,7 +40,10 @@ module sram(
     reg [7:0] wstrb;
     reg wvalid;
     reg flag_waddr,flag_wdata,flag_rdata,flag_raddr,flag_write;
-    reg [4:0] rdata_counter,wdata_counter;
+    reg [4:0] rdata_counter,wdata_counter,w_delay,r_delay;
+    reg [4:0] LFSR;
+    reg lfsr_in;
+
     always@(posedge clk, negedge rst_n) begin
         if(rst_n == 0) begin
             arready_o <= 0;
@@ -72,17 +75,18 @@ module sram(
             rvalid_o <= 0;
             rdata_counter <= 0;
             flag_rdata <= 0;
+            r_delay <= LFSR;
         end
         else begin
             if(flag_raddr == 1) flag_rdata <= 1;
             else if(flag_rdata == 1) begin
-                if(rdata_counter == `R_DELAY - 1) begin
+                if(rdata_counter == r_delay) begin
                     rdata_counter <= 0;
                     rdata_o <= pmem_read(araddr);
                     rresp_o <= 1;
                     rvalid_o <= 1;
                     flag_rdata <= 0;
-                    
+                    r_delay <= LFSR;
                 end
                 else begin
                     rdata_counter <= rdata_counter + 1;
@@ -166,18 +170,20 @@ module sram(
         if(rst_n == 0) begin
             bresp_o <= 1;
             bvalid_o <= 0;
+            w_delay <= LFSR;
         end
         else if(flag_waddr == 1 && flag_wdata == 1) begin
             flag_write <= 1;
             //if(wready_o == 1 && wvalid_i == 1)
         end
         else if(flag_write == 1) begin
-            if(wdata_counter == `W_DELAY - 1) begin
+            if(wdata_counter == w_delay) begin
                 wdata_counter <= 0;
                 pmem_write(awaddr,wdata,wstrb);
                 bresp_o <= 0;
                 bvalid_o <= 1;
                 flag_write <= 0;
+                w_delay <= LFSR;
             end else begin
                 wdata_counter <= wdata_counter + 1;
                 bresp_o <= 1;
@@ -188,8 +194,7 @@ module sram(
             bvalid_o <= 0;
         end
     end
-    reg [4:0] LFSR;
-    reg lfsr_in;
+    
     assign lfsr_in = LFSR[4] ^ LFSR[3] ^ LFSR[2] ^ LFSR[1] ^ LFSR[0];
     always@(posedge clk, negedge rst_n) begin
         if(rst_n == 0) LFSR <= 5'b00001;

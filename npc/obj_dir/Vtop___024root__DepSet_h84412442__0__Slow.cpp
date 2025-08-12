@@ -516,6 +516,10 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__imm_idu_to_exu = 0U;
         vlSelf->top__DOT__alu_op_idu_to_exu = 0U;
     }
+    vlSelf->top__DOT__Inst_Mem__DOT__lfsr_in = (1U 
+                                                & VL_REDXOR_8(vlSelf->top__DOT__Inst_Mem__DOT__LFSR));
+    vlSelf->top__DOT__Data_Mem__DOT__lfsr_in = (1U 
+                                                & VL_REDXOR_8(vlSelf->top__DOT__Data_Mem__DOT__LFSR));
     vlSelf->top__DOT__WBU__DOT__mem_data = ((4U & (IData)(vlSelf->top__DOT__WBU__DOT__rmask))
                                              ? ((2U 
                                                  & (IData)(vlSelf->top__DOT__WBU__DOT__rmask))
