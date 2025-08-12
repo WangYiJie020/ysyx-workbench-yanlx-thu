@@ -109,6 +109,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                 __Vdly__top__DOT__Inst_Mem__DOT__wdata_counter = 0U;
                 vlSelf->top__DOT__useless3 = 0U;
                 vlSelf->top__DOT__useless4 = 1U;
+                __Vdly__top__DOT__Inst_Mem__DOT__flag_write = 0U;
             } else {
                 __Vdly__top__DOT__Inst_Mem__DOT__wdata_counter 
                     = (0x7fU & ((IData)(1U) + (IData)(vlSelf->top__DOT__Inst_Mem__DOT__wdata_counter)));
@@ -613,6 +614,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
                 vlSelf->__Vdly__top__DOT__Data_Mem__DOT__wdata_counter = 0U;
                 vlSelf->__Vdly__top__DOT__lsu_bresp = 0U;
                 vlSelf->top__DOT__lsu_bvalid = 1U;
+                vlSelf->__Vdly__top__DOT__Data_Mem__DOT__flag_write = 0U;
             } else {
                 vlSelf->__Vdly__top__DOT__Data_Mem__DOT__wdata_counter 
                     = (0x7fU & ((IData)(1U) + (IData)(vlSelf->top__DOT__Data_Mem__DOT__wdata_counter)));
