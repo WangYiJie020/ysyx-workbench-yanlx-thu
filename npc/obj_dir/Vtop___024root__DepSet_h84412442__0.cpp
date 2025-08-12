@@ -619,20 +619,22 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
         } else if ((1U & (~ (IData)(vlSelf->top__DOT__lsu_bresp)))) {
             vlSelf->top__DOT__Data_Mem__DOT__flag_waddr = 0U;
         }
-        if (((IData)(vlSelf->top__DOT__lsu_wready) 
-             & (IData)(vlSelf->top__DOT__lsu_wvalid))) {
-            vlSelf->top__DOT__Data_Mem__DOT__wdata 
-                = vlSelf->top__DOT__lsu_wdata;
-            vlSelf->top__DOT__Data_Mem__DOT__wstrb 
-                = (0xffU & ((1U == (IData)(vlSelf->top__DOT__wmask_exu_to_lsu))
-                             ? ((IData)(vlSelf->top__DOT__wmask_exu_to_lsu) 
-                                << (3U & vlSelf->top__DOT__LSU__DOT__alu_result))
-                             : ((3U == (IData)(vlSelf->top__DOT__wmask_exu_to_lsu))
+        if (vlSelf->top__DOT__lsu_bresp) {
+            if (((IData)(vlSelf->top__DOT__lsu_wready) 
+                 & (IData)(vlSelf->top__DOT__lsu_wvalid))) {
+                vlSelf->top__DOT__Data_Mem__DOT__wdata 
+                    = vlSelf->top__DOT__lsu_wdata;
+                vlSelf->top__DOT__Data_Mem__DOT__wstrb 
+                    = (0xffU & ((1U == (IData)(vlSelf->top__DOT__wmask_exu_to_lsu))
                                  ? ((IData)(vlSelf->top__DOT__wmask_exu_to_lsu) 
                                     << (3U & vlSelf->top__DOT__LSU__DOT__alu_result))
-                                 : (IData)(vlSelf->top__DOT__wmask_exu_to_lsu))));
-            vlSelf->top__DOT__Data_Mem__DOT__flag_wdata = 1U;
-        } else if ((1U & (~ (IData)(vlSelf->top__DOT__lsu_bresp)))) {
+                                 : ((3U == (IData)(vlSelf->top__DOT__wmask_exu_to_lsu))
+                                     ? ((IData)(vlSelf->top__DOT__wmask_exu_to_lsu) 
+                                        << (3U & vlSelf->top__DOT__LSU__DOT__alu_result))
+                                     : (IData)(vlSelf->top__DOT__wmask_exu_to_lsu))));
+                vlSelf->top__DOT__Data_Mem__DOT__flag_wdata = 1U;
+            }
+        } else {
             vlSelf->top__DOT__Data_Mem__DOT__flag_wdata = 0U;
         }
         if (((~ (IData)(vlSelf->top__DOT__Data_Mem__DOT__ar_state)) 

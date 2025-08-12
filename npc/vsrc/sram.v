@@ -152,7 +152,7 @@ module sram(
                 flag_wdata <= 1;
                 //pmem_write(awaddr,wdata,wstrb);
                 //bresp_o <= 0;
-            end 
+            end else flag_wdata <= 0;
             //else if(bresp_o == 0) begin
                 //flag_wdata <= 0;
                 //bresp_o <= 1;
