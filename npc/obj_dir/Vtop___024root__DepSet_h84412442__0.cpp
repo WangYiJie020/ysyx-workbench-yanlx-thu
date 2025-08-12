@@ -104,7 +104,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
              & (IData)(vlSelf->top__DOT__Inst_Mem__DOT__flag_wdata))) {
             __Vdly__top__DOT__Inst_Mem__DOT__flag_write = 1U;
         } else if (vlSelf->top__DOT__Inst_Mem__DOT__flag_write) {
-            if ((4U == (IData)(vlSelf->top__DOT__Inst_Mem__DOT__wdata_counter))) {
+            if ((9U == (IData)(vlSelf->top__DOT__Inst_Mem__DOT__wdata_counter))) {
                 Vtop___024unit____Vdpiimwrap_pmem_write_TOP____024unit(vlSelf->top__DOT__Inst_Mem__DOT__awaddr, vlSelf->top__DOT__Inst_Mem__DOT__wdata, (IData)(vlSelf->top__DOT__Inst_Mem__DOT__wstrb));
                 __Vdly__top__DOT__Inst_Mem__DOT__wdata_counter = 0U;
                 vlSelf->top__DOT__useless3 = 0U;
@@ -609,7 +609,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
              & (IData)(vlSelf->top__DOT__Data_Mem__DOT__flag_wdata))) {
             vlSelf->__Vdly__top__DOT__Data_Mem__DOT__flag_write = 1U;
         } else if (vlSelf->top__DOT__Data_Mem__DOT__flag_write) {
-            if ((4U == (IData)(vlSelf->top__DOT__Data_Mem__DOT__wdata_counter))) {
+            if ((9U == (IData)(vlSelf->top__DOT__Data_Mem__DOT__wdata_counter))) {
                 Vtop___024unit____Vdpiimwrap_pmem_write_TOP____024unit(vlSelf->top__DOT__Data_Mem__DOT__awaddr, vlSelf->top__DOT__Data_Mem__DOT__wdata, (IData)(vlSelf->top__DOT__Data_Mem__DOT__wstrb));
                 vlSelf->__Vdly__top__DOT__Data_Mem__DOT__wdata_counter = 0U;
                 vlSelf->__Vdly__top__DOT__lsu_bresp = 0U;
