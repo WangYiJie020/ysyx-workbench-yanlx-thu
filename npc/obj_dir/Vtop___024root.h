@@ -140,18 +140,17 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ __Vdly__top__DOT__lsu_bready;
         CData/*0:0*/ __Vdly__top__DOT__Data_Mem__DOT__flag_rdata;
         CData/*6:0*/ __Vdly__top__DOT__Data_Mem__DOT__rdata_counter;
-        CData/*0:0*/ __Vdly__top__DOT__Data_Mem__DOT__w_state;
         CData/*0:0*/ __Vdly__top__DOT__lsu_bresp;
+        CData/*0:0*/ __Vdly__top__DOT__lsu_bvalid;
         CData/*0:0*/ __Vdly__top__DOT__csr_write;
         CData/*4:0*/ __Vdlyvdim0__top__DOT__Rgefile__DOT__rf__v0;
         CData/*0:0*/ __Vdlyvset__top__DOT__Rgefile__DOT__rf__v0;
         CData/*0:0*/ __Vtrigrprev__TOP__clk;
         CData/*0:0*/ __Vtrigrprev__TOP__rst_n;
-        CData/*0:0*/ __VactDidInit;
         CData/*0:0*/ __VactContinue;
+        SData/*9:0*/ __Vtableidx3;
     };
     struct {
-        SData/*9:0*/ __Vtableidx3;
         IData/*31:0*/ top__DOT__npc_wbu_to_ifu;
         IData/*31:0*/ top__DOT__pc_ifu_to_idu;
         IData/*31:0*/ top__DOT__ifu_rdata;
@@ -200,10 +199,6 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ __Vdly__top__DOT__IDU__DOT__CSR__DOT__csr_mstatus;
         IData/*31:0*/ __Vdlyvval__top__DOT__Rgefile__DOT__rf__v0;
         IData/*31:0*/ __VstlIterCount;
-        IData/*31:0*/ __Vtrigrprev__TOP__top__DOT__Inst_Mem__DOT__awaddr;
-        IData/*31:0*/ __Vtrigrprev__TOP__top__DOT__Inst_Mem__DOT__wdata;
-        IData/*31:0*/ __Vtrigrprev__TOP__top__DOT__Data_Mem__DOT__awaddr;
-        IData/*31:0*/ __Vtrigrprev__TOP__top__DOT__Data_Mem__DOT__wdata;
         IData/*31:0*/ __VactIterCount;
         VlUnpacked<IData/*31:0*/, 4> top__DOT__csr_reg;
         VlUnpacked<IData/*31:0*/, 4> top__DOT____Vcellout__IDU__csr_reg;
@@ -214,8 +209,8 @@ class Vtop___024root final : public VerilatedModule {
         VlUnpacked<CData/*0:0*/, 5> __Vm_traceActivity;
     };
     VlTriggerVec<1> __VstlTriggered;
-    VlTriggerVec<4> __VactTriggered;
-    VlTriggerVec<4> __VnbaTriggered;
+    VlTriggerVec<2> __VactTriggered;
+    VlTriggerVec<2> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     Vtop__Syms* const vlSymsp;
