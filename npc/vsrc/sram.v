@@ -121,7 +121,7 @@ module sram(
             end 
             else if(bresp_o == 0) begin
                 flag_waddr <= 0;
-            end
+            end else flag_waddr <= 0;
         end
     end
 
