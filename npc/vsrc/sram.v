@@ -177,7 +177,7 @@ module sram(
                 pmem_write(awaddr,wdata,wstrb);
                 bresp_o <= 0;
                 bvalid_o <= 1;
-                flag_write == 0;
+                flag_write <= 0;
             end else begin
                 wdata_counter <= wdata_counter + 1;
                 bresp_o <= 1;
