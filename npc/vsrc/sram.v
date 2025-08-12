@@ -39,7 +39,8 @@ module sram(
     reg [`CPU_WIDTH-1:0] wdata;
     reg [7:0] wstrb;
     reg wvalid;
-    reg flag_waddr,flag_wdata,flag_rdata,flag_raddr;
+    reg flag_waddr,flag_wdata,flag_rdata,flag_raddr,flag_write;
+    reg [6:0] rdata_counter,wdata_counter;
     always@(posedge clk, negedge rst_n) begin
         if(rst_n == 0) begin
             arready_o <= 0;
@@ -64,7 +65,7 @@ module sram(
                 flag_raddr <= 0;
         end
     end
-    reg [6:0] rdata_counter;
+    
     always@(posedge clk, negedge rst_n) begin
         if(rst_n == 0) begin
             r_state <= 0;
@@ -167,12 +168,20 @@ module sram(
             bvalid_o <= 0;
         end
         else if(flag_waddr == 1 && flag_wdata == 1) begin
+            flag_write <= 1;
             //if(wready_o == 1 && wvalid_i == 1)
-            pmem_write(awaddr,wdata,wstrb);
-            bresp_o <= 0;
-            bvalid_o <= 1;
-            //flag_waddr <= 0;
-            //flag_wdata <= 0;
+        end
+        else if(flag_write == 1) begin
+            if(wdata_counter == `W_DELAY - 1) begin
+                wdata_counter <= 0;
+                pmem_write(awaddr,wdata,wstrb);
+                bresp_o <= 0;
+                bvalid_o <= 1;
+            end else begin
+                wdata_counter <= wdata_counter + 1;
+                bresp_o <= 1;
+                bvalid_o <= 0;
+            end
         end else begin
             bresp_o <= 1;
             bvalid_o <= 0;
