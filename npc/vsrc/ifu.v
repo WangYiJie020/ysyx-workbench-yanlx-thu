@@ -160,7 +160,7 @@ module ifu(
 `else 
     assign arvalid_o = arvalid;
 
-`endif delay
+`endif 
 
     
 
