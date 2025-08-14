@@ -41,7 +41,7 @@ module ifu(
         .dout(pc)
     );
 
-    assign araddr_o = pc;
+    assign araddr = pc;
     //assign pc_o = pc;
 
     assign inst_o = rdata_i;
@@ -159,8 +159,9 @@ module ifu(
     end
 `else 
     assign arvalid_o = arvalid;
+    assign araddr_o = araddr;
 
-`endif 
+`endif
 
     
 
