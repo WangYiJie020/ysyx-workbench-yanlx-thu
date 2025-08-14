@@ -130,13 +130,13 @@ module ifu(
             end else if(current_state == S_RECEIVE) begin 
                 ifu_valid_o <= 0;
                 npc <= npc_i;
-                arvalid <= 1;
+                arvalid <= 0;
                 rready_o <= 1;
             end else if(current_state == S_WAIT_SEND) begin               
                 if(rresp_i) ifu_valid_o <= 1;
                 else ifu_valid_o <= 0;
-
-                //arvalid_o <= 1; 
+                
+                arvalid_o <= 1; 
                 rready_o <= 1;
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
@@ -150,6 +150,9 @@ module ifu(
     end
 
 `ifdef DELAY
+    reg [4:0] LFSR;
+    reg lfsr_in;
+
     assign lfsr_in = LFSR[4] ^ LFSR[3] ^ LFSR[2] ^ LFSR[1] ^ LFSR[0];
     always@(posedge clk, negedge rst_n) begin
         if(rst_n == 0) LFSR <= 5'b00001;
@@ -157,6 +160,42 @@ module ifu(
             LFSR <= {lfsr_in,LFSR[4:1]};
         end
     end
+
+    reg arvalid_buffer [31:0];
+    reg [`CPU_WIDTH-1:0] araddr_buffer [31:0];
+
+    
+
+    always@(posedge clk, negedge rst_n) begin
+        if(rst_n == 0) begin
+            genvar gv_i;
+            generate
+            for(gv_i=0;gv_i<32;gv_i++) begin
+                araddr_buffer[gv_i] <= 32'd0;
+                arvalid_buffer[gv_i] <= 1'b1;
+            end
+            endgenerate
+        end
+        else begin
+            genvar gv_i;
+            generate
+            for(gv_i=1;gv_i<32;gv_i++) begin
+                araddr_buffer[gv_i] <= araddr_buffer[gv_i-1];
+                arvalid_buffer[gv_i] <= arvalid_buffer[gv_i-1];
+            end
+            endgenerate
+            araddr_buffer[0] <= araddr;
+            arvalid_buffer[0] <= arvalid;
+        end
+    end
+
+    always@(*)begin
+        
+    end
+
+
+
+
 `else 
     assign arvalid_o = arvalid;
     assign araddr_o = araddr;
