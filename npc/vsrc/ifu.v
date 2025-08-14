@@ -136,7 +136,7 @@ module ifu(
                 if(rresp_i) ifu_valid_o <= 1;
                 else ifu_valid_o <= 0;
                 
-                arvalid_o <= 1; 
+                arvalid <= 1; 
                 rready_o <= 1;
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
