@@ -70,6 +70,9 @@ module lsu(
     
     reg flag,wvalid_tmp;
 
+    reg [4:0] LFSR;
+    reg lfsr_in;
+
     assign rmask_o = rmask;
     assign rs1_o = rs1;
     assign alu_result_o = alu_result;
@@ -195,7 +198,7 @@ module lsu(
                 if(awvalid_o==1 && awready_i==1) awvalid_o <= 0;
                 if(wvalid_o==1 && wready_i==1) wvalid_o <= 0;
                 if(arvalid_o==1 && arready_i==1) arvalid_o <= 0;
-                
+
             end else if (current_state == S_SEND)begin
                 lsu_valid_o <= 0;
                 arvalid_o <= 0;
@@ -210,6 +213,14 @@ module lsu(
 
             end 
             
+        end
+    end
+
+    assign lfsr_in = LFSR[4] ^ LFSR[3] ^ LFSR[2] ^ LFSR[1] ^ LFSR[0];
+    always@(posedge clk, negedge rst_n) begin
+        if(rst_n == 0) LFSR <= 5'b00001;
+        else begin
+            LFSR <= {lfsr_in,LFSR[4:1]};
         end
     end
 
