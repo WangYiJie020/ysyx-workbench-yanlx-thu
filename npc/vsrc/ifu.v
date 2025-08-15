@@ -168,7 +168,7 @@ module ifu(
         if(rst_n == 0) begin
             for(integer i=0; i<32; i=i+1) begin
                 araddr_buffer[i] <= 32'd0;
-                arvalid_buffer[i] <= 1'b1;
+                arvalid_buffer[i] <= 1'b0;
             end
         end
         else begin

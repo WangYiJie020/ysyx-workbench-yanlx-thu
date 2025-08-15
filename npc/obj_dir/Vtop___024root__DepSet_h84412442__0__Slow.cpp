@@ -528,30 +528,30 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                 if ((2U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
                     if ((1U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
                         vlSelf->top__DOT__ifu_arvalid 
-                            = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                            [0x1fU];
+                            = (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                     >> 0x1fU));
                         vlSelf->top__DOT__ifu_araddr 
                             = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                             [0x1fU];
                     } else {
                         vlSelf->top__DOT__ifu_arvalid 
-                            = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                            [0x1eU];
+                            = (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                     >> 0x1eU));
                         vlSelf->top__DOT__ifu_araddr 
                             = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                             [0x1eU];
                     }
                 } else if ((1U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
                     vlSelf->top__DOT__ifu_arvalid = 
-                        vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                        [0x1dU];
+                        (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                               >> 0x1dU));
                     vlSelf->top__DOT__ifu_araddr = 
                         vlSelf->top__DOT__IFU__DOT__araddr_buffer
                         [0x1dU];
                 } else {
                     vlSelf->top__DOT__ifu_arvalid = 
-                        vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                        [0x1cU];
+                        (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                               >> 0x1cU));
                     vlSelf->top__DOT__ifu_araddr = 
                         vlSelf->top__DOT__IFU__DOT__araddr_buffer
                         [0x1cU];
@@ -559,27 +559,29 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
             } else if ((2U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
                 if ((1U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
                     vlSelf->top__DOT__ifu_arvalid = 
-                        vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                        [0x1bU];
+                        (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                               >> 0x1bU));
                     vlSelf->top__DOT__ifu_araddr = 
                         vlSelf->top__DOT__IFU__DOT__araddr_buffer
                         [0x1bU];
                 } else {
                     vlSelf->top__DOT__ifu_arvalid = 
-                        vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                        [0x1aU];
+                        (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                               >> 0x1aU));
                     vlSelf->top__DOT__ifu_araddr = 
                         vlSelf->top__DOT__IFU__DOT__araddr_buffer
                         [0x1aU];
                 }
             } else if ((1U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
-                vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                    [0x19U];
+                vlSelf->top__DOT__ifu_arvalid = (1U 
+                                                 & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                    >> 0x19U));
                 vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                     [0x19U];
             } else {
-                vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                    [0x18U];
+                vlSelf->top__DOT__ifu_arvalid = (1U 
+                                                 & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                    >> 0x18U));
                 vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                     [0x18U];
             }
@@ -587,50 +589,54 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
             if ((2U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
                 if ((1U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
                     vlSelf->top__DOT__ifu_arvalid = 
-                        vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                        [0x17U];
+                        (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                               >> 0x17U));
                     vlSelf->top__DOT__ifu_araddr = 
                         vlSelf->top__DOT__IFU__DOT__araddr_buffer
                         [0x17U];
                 } else {
                     vlSelf->top__DOT__ifu_arvalid = 
-                        vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                        [0x16U];
+                        (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                               >> 0x16U));
                     vlSelf->top__DOT__ifu_araddr = 
                         vlSelf->top__DOT__IFU__DOT__araddr_buffer
                         [0x16U];
                 }
             } else if ((1U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
-                vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                    [0x15U];
+                vlSelf->top__DOT__ifu_arvalid = (1U 
+                                                 & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                    >> 0x15U));
                 vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                     [0x15U];
             } else {
-                vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                    [0x14U];
+                vlSelf->top__DOT__ifu_arvalid = (1U 
+                                                 & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                    >> 0x14U));
                 vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                     [0x14U];
             }
         } else if ((2U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
             if ((1U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
-                vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                    [0x13U];
+                vlSelf->top__DOT__ifu_arvalid = (1U 
+                                                 & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                    >> 0x13U));
                 vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                     [0x13U];
             } else {
-                vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                    [0x12U];
+                vlSelf->top__DOT__ifu_arvalid = (1U 
+                                                 & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                    >> 0x12U));
                 vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                     [0x12U];
             }
         } else if ((1U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
-            vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                [0x11U];
+            vlSelf->top__DOT__ifu_arvalid = (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                   >> 0x11U));
             vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                 [0x11U];
         } else {
-            vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                [0x10U];
+            vlSelf->top__DOT__ifu_arvalid = (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                   >> 0x10U));
             vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                 [0x10U];
         }
@@ -639,97 +645,102 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
             if ((2U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
                 if ((1U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
                     vlSelf->top__DOT__ifu_arvalid = 
-                        vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                        [0xfU];
+                        (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                               >> 0xfU));
                     vlSelf->top__DOT__ifu_araddr = 
                         vlSelf->top__DOT__IFU__DOT__araddr_buffer
                         [0xfU];
                 } else {
                     vlSelf->top__DOT__ifu_arvalid = 
-                        vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                        [0xeU];
+                        (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                               >> 0xeU));
                     vlSelf->top__DOT__ifu_araddr = 
                         vlSelf->top__DOT__IFU__DOT__araddr_buffer
                         [0xeU];
                 }
             } else if ((1U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
-                vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                    [0xdU];
+                vlSelf->top__DOT__ifu_arvalid = (1U 
+                                                 & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                    >> 0xdU));
                 vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                     [0xdU];
             } else {
-                vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                    [0xcU];
+                vlSelf->top__DOT__ifu_arvalid = (1U 
+                                                 & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                    >> 0xcU));
                 vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                     [0xcU];
             }
         } else if ((2U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
             if ((1U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
-                vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                    [0xbU];
+                vlSelf->top__DOT__ifu_arvalid = (1U 
+                                                 & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                    >> 0xbU));
                 vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                     [0xbU];
             } else {
-                vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                    [0xaU];
+                vlSelf->top__DOT__ifu_arvalid = (1U 
+                                                 & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                    >> 0xaU));
                 vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                     [0xaU];
             }
         } else if ((1U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
-            vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                [9U];
+            vlSelf->top__DOT__ifu_arvalid = (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                   >> 9U));
             vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                 [9U];
         } else {
-            vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                [8U];
+            vlSelf->top__DOT__ifu_arvalid = (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                   >> 8U));
             vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                 [8U];
         }
     } else if ((4U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
         if ((2U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
             if ((1U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
-                vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                    [7U];
+                vlSelf->top__DOT__ifu_arvalid = (1U 
+                                                 & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                    >> 7U));
                 vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                     [7U];
             } else {
-                vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                    [6U];
+                vlSelf->top__DOT__ifu_arvalid = (1U 
+                                                 & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                    >> 6U));
                 vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                     [6U];
             }
         } else if ((1U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
-            vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                [5U];
+            vlSelf->top__DOT__ifu_arvalid = (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                   >> 5U));
             vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                 [5U];
         } else {
-            vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                [4U];
+            vlSelf->top__DOT__ifu_arvalid = (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                   >> 4U));
             vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                 [4U];
         }
     } else if ((2U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
         if ((1U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
-            vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                [3U];
+            vlSelf->top__DOT__ifu_arvalid = (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                   >> 3U));
             vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                 [3U];
         } else {
-            vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-                [2U];
+            vlSelf->top__DOT__ifu_arvalid = (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                                   >> 2U));
             vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
                 [2U];
         }
     } else if ((1U & (IData)(vlSelf->top__DOT__IFU__DOT__arvalid_delay))) {
-        vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-            [1U];
+        vlSelf->top__DOT__ifu_arvalid = (1U & (vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                                               >> 1U));
         vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
             [1U];
     } else {
-        vlSelf->top__DOT__ifu_arvalid = vlSelf->top__DOT__IFU__DOT__arvalid_buffer
-            [0U];
+        vlSelf->top__DOT__ifu_arvalid = (1U & vlSelf->top__DOT__IFU__DOT__arvalid_buffer);
         vlSelf->top__DOT__ifu_araddr = vlSelf->top__DOT__IFU__DOT__araddr_buffer
             [0U];
     }
