@@ -170,7 +170,7 @@ module ifu(
     always@(posedge clk, negedge rst_n) begin
         if(rst_n == 0) begin
             generate
-            for(gv_i=0;gv_i<32;gv_i++) begin
+            for(gv_i=0;gv_i<32;gv_i++) begin:a
                 araddr_buffer[gv_i] <= 32'd0;
                 arvalid_buffer[gv_i] <= 1'b1;
             end
@@ -179,7 +179,7 @@ module ifu(
         else begin
             
             generate
-            for(gv_i=1;gv_i<32;gv_i++) begin
+            for(gv_i=1;gv_i<32;gv_i++) begin:b
                 araddr_buffer[gv_i] <= araddr_buffer[gv_i-1];
                 arvalid_buffer[gv_i] <= arvalid_buffer[gv_i-1];
             end
