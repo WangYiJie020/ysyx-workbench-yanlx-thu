@@ -28,8 +28,14 @@ module ifu(
     wire [`PC_WIDTH-1:0] pc;
     reg [`PC_WIDTH-1:0] npc;
 
+    reg [4:0] LFSR, arvalid_delay;
+    reg lfsr_in;
+
     reg arvalid;
     reg [`CPU_WIDTH-1:0] araddr;
+
+    reg arvalid_buffer [31:0];
+    reg [`CPU_WIDTH-1:0] araddr_buffer [31:0];
 
     dff #(`PC_WIDTH,`PC_INIT) PC (
         .clk(clk),
@@ -148,8 +154,6 @@ module ifu(
     end
 
 `ifdef DELAY
-    reg [4:0] LFSR;
-    reg lfsr_in;
 
     assign lfsr_in = LFSR[4] ^ LFSR[3] ^ LFSR[2] ^ LFSR[1] ^ LFSR[0];
     always@(posedge clk, negedge rst_n) begin
@@ -158,9 +162,6 @@ module ifu(
             LFSR <= {lfsr_in,LFSR[4:1]};
         end
     end
-
-    reg arvalid_buffer [31:0];
-    reg [`CPU_WIDTH-1:0] araddr_buffer [31:0];
 
 
     always @(posedge clk, negedge rst_n) begin
