@@ -45,74 +45,78 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     __Vfunc_pmem_read__2__Vfuncout = 0;
     CData/*0:0*/ __Vdly__top__DOT__IFU__DOT__arvalid;
     __Vdly__top__DOT__IFU__DOT__arvalid = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v0;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v0 = 0;
+    CData/*4:0*/ __Vdly__top__DOT__IFU__DOT__LFSR;
+    __Vdly__top__DOT__IFU__DOT__LFSR = 0;
     CData/*0:0*/ __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v0;
     __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v0 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v1;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v1 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v2;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v2 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v3;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v3 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v4;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v4 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v5;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v5 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v6;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v6 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v7;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v7 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v8;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v8 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v9;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v9 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v10;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v10 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v11;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v11 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v12;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v12 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v13;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v13 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v14;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v14 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v15;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v15 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v16;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v16 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v17;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v17 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v18;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v18 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v19;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v19 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v20;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v20 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v21;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v21 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v22;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v22 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v23;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v23 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v24;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v24 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v25;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v25 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v26;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v26 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v27;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v27 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v28;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v28 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v29;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v29 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v30;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v30 = 0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v31;
-    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v31 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v32;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v32 = 0;
     CData/*0:0*/ __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v32;
     __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v32 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v33;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v33 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v34;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v34 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v35;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v35 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v36;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v36 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v37;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v37 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v38;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v38 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v39;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v39 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v40;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v40 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v41;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v41 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v42;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v42 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v43;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v43 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v44;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v44 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v45;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v45 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v46;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v46 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v47;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v47 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v48;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v48 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v49;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v49 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v50;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v50 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v51;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v51 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v52;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v52 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v53;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v53 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v54;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v54 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v55;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v55 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v56;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v56 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v57;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v57 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v58;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v58 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v59;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v59 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v60;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v60 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v61;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v61 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v62;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v62 = 0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v63;
+    __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v63 = 0;
+    CData/*0:0*/ __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v64;
+    __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v64 = 0;
     CData/*0:0*/ __Vdly__top__DOT__Inst_Mem__DOT__flag_rdata;
     __Vdly__top__DOT__Inst_Mem__DOT__flag_rdata = 0;
     CData/*4:0*/ __Vdly__top__DOT__Inst_Mem__DOT__rdata_counter;
@@ -126,6 +130,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     // Body
     vlSelf->__Vdly__top__DOT__Data_Mem__DOT__w_state 
         = vlSelf->top__DOT__Data_Mem__DOT__w_state;
+    __Vdly__top__DOT__IFU__DOT__LFSR = vlSelf->top__DOT__IFU__DOT__LFSR;
     vlSelf->__Vdly__top__DOT__Data_Mem__DOT__LFSR = vlSelf->top__DOT__Data_Mem__DOT__LFSR;
     __Vdly__top__DOT__Inst_Mem__DOT__LFSR = vlSelf->top__DOT__Inst_Mem__DOT__LFSR;
     __Vdly__top__DOT__Inst_Mem__DOT__wdata_counter 
@@ -140,6 +145,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         = vlSelf->top__DOT__Data_Mem__DOT__flag_rdata;
     __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v0 = 0U;
     __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v32 = 0U;
+    __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v64 = 0U;
     vlSelf->__Vdly__top__DOT__Data_Mem__DOT__wdata_counter 
         = vlSelf->top__DOT__Data_Mem__DOT__wdata_counter;
     vlSelf->__Vdly__top__DOT__Data_Mem__DOT__flag_write 
@@ -166,13 +172,122 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__useless3 = 1U;
     }
     if (vlSelf->rst_n) {
-        vlSelf->top__DOT__IFU__DOT__unnamedblk2__DOT__j = 0x20U;
+        if ((2U == (IData)(vlSelf->top__DOT__IFU__DOT__current_state))) {
+            vlSelf->top__DOT__IFU__DOT__unnamedblk2__DOT__i = 0x20U;
+            vlSelf->top__DOT__IFU__DOT__arvalid_buffer = 0U;
+            __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v0 = 1U;
+            vlSelf->top__DOT__IFU__DOT__arvalid_delay 
+                = vlSelf->top__DOT__IFU__DOT__LFSR;
+        } else {
+            vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                = ((vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
+                    << 1U) | (IData)(vlSelf->top__DOT__IFU__DOT__arvalid));
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v32 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0U];
+            __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v32 = 1U;
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v33 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [1U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v34 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [2U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v35 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [3U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v36 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [4U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v37 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [5U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v38 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [6U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v39 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [7U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v40 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [8U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v41 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [9U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v42 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0xaU];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v43 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0xbU];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v44 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0xcU];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v45 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0xdU];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v46 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0xeU];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v47 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0xfU];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v48 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0x10U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v49 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0x11U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v50 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0x12U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v51 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0x13U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v52 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0x14U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v53 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0x15U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v54 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0x16U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v55 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0x17U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v56 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0x18U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v57 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0x19U];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v58 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0x1aU];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v59 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0x1bU];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v60 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0x1cU];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v61 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0x1dU];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v62 
+                = vlSelf->top__DOT__IFU__DOT__araddr_buffer
+                [0x1eU];
+            __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v63 
+                = vlSelf->top__DOT__IFU__DOT__pc;
+        }
+        if ((2U != (IData)(vlSelf->top__DOT__IFU__DOT__current_state))) {
+            vlSelf->top__DOT__IFU__DOT__unnamedblk3__DOT__j = 0x20U;
+        }
         vlSelf->top__DOT__LSU__DOT__LFSR = (((IData)(vlSelf->top__DOT__LSU__DOT__lfsr_in) 
                                              << 4U) 
                                             | (0xfU 
                                                & ((IData)(vlSelf->top__DOT__LSU__DOT__LFSR) 
                                                   >> 1U)));
-        vlSelf->top__DOT__IFU__DOT__LFSR = (((IData)(vlSelf->top__DOT__IFU__DOT__lfsr_in) 
+        __Vdly__top__DOT__IFU__DOT__LFSR = (((IData)(vlSelf->top__DOT__IFU__DOT__lfsr_in) 
                                              << 4U) 
                                             | (0xfU 
                                                & ((IData)(vlSelf->top__DOT__IFU__DOT__LFSR) 
@@ -186,116 +301,17 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                                  | (0xfU 
                                                     & ((IData)(vlSelf->top__DOT__Inst_Mem__DOT__LFSR) 
                                                        >> 1U)));
-        vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
-            = ((vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
-                << 1U) | (IData)(vlSelf->top__DOT__IFU__DOT__arvalid));
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v0 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0U];
-        __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v0 = 1U;
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v1 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [1U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v2 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [2U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v3 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [3U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v4 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [4U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v5 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [5U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v6 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [6U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v7 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [7U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v8 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [8U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v9 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [9U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v10 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0xaU];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v11 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0xbU];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v12 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0xcU];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v13 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0xdU];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v14 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0xeU];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v15 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0xfU];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v16 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0x10U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v17 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0x11U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v18 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0x12U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v19 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0x13U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v20 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0x14U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v21 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0x15U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v22 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0x16U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v23 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0x17U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v24 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0x18U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v25 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0x19U];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v26 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0x1aU];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v27 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0x1bU];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v28 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0x1cU];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v29 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0x1dU];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v30 
-            = vlSelf->top__DOT__IFU__DOT__araddr_buffer
-            [0x1eU];
-        __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v31 
-            = vlSelf->top__DOT__IFU__DOT__pc;
         if (vlSelf->top__DOT__Inst_Mem__DOT__w_state) {
             vlSelf->top__DOT__Inst_Mem__DOT__w_state = 0U;
             vlSelf->top__DOT__useless2 = 0U;
         }
     } else {
         vlSelf->top__DOT__LSU__DOT__LFSR = 1U;
-        vlSelf->top__DOT__IFU__DOT__LFSR = 1U;
+        __Vdly__top__DOT__IFU__DOT__LFSR = 1U;
         vlSelf->__Vdly__top__DOT__Data_Mem__DOT__LFSR = 1U;
         __Vdly__top__DOT__Inst_Mem__DOT__LFSR = 1U;
         vlSelf->top__DOT__IFU__DOT__arvalid_buffer = 0U;
-        __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v32 = 1U;
+        __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v64 = 1U;
         vlSelf->top__DOT__useless2 = 0U;
         vlSelf->top__DOT__Inst_Mem__DOT__w_state = 0U;
     }
@@ -334,72 +350,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__Inst_Mem__DOT__wstrb = 0U;
     }
     if (__Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v0) {
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[1U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v0;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[2U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v1;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[3U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v2;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[4U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v3;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[5U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v4;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[6U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v5;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[7U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v6;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[8U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v7;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[9U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v8;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0xaU] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v9;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0xbU] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v10;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0xcU] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v11;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0xdU] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v12;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0xeU] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v13;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0xfU] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v14;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x10U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v15;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x11U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v16;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x12U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v17;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x13U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v18;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x14U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v19;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x15U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v20;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x16U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v21;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x17U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v22;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x18U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v23;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x19U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v24;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1aU] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v25;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1bU] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v26;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1cU] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v27;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1dU] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v28;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1eU] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v29;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1fU] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v30;
-        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0U] 
-            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v31;
-    }
-    if (__Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v32) {
         vlSelf->top__DOT__IFU__DOT__araddr_buffer[0U] = 0U;
         vlSelf->top__DOT__IFU__DOT__araddr_buffer[1U] = 0U;
         vlSelf->top__DOT__IFU__DOT__araddr_buffer[2U] = 0U;
@@ -433,6 +383,107 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1eU] = 0U;
         vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1fU] = 0U;
     }
+    if (__Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v32) {
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[1U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v32;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[2U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v33;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[3U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v34;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[4U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v35;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[5U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v36;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[6U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v37;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[7U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v38;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[8U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v39;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[9U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v40;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0xaU] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v41;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0xbU] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v42;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0xcU] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v43;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0xdU] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v44;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0xeU] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v45;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0xfU] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v46;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x10U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v47;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x11U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v48;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x12U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v49;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x13U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v50;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x14U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v51;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x15U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v52;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x16U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v53;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x17U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v54;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x18U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v55;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x19U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v56;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1aU] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v57;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1bU] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v58;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1cU] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v59;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1dU] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v60;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1eU] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v61;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1fU] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v62;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0U] 
+            = __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v63;
+    }
+    if (__Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v64) {
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[1U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[2U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[3U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[4U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[5U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[6U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[7U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[8U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[9U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0xaU] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0xbU] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0xcU] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0xdU] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0xeU] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0xfU] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x10U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x11U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x12U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x13U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x14U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x15U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x16U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x17U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x18U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x19U] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1aU] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1bU] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1cU] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1dU] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1eU] = 0U;
+        vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1fU] = 0U;
+    }
+    vlSelf->top__DOT__IFU__DOT__LFSR = __Vdly__top__DOT__IFU__DOT__LFSR;
     vlSelf->top__DOT__Inst_Mem__DOT__flag_write = __Vdly__top__DOT__Inst_Mem__DOT__flag_write;
     vlSelf->top__DOT__Inst_Mem__DOT__wdata_counter 
         = __Vdly__top__DOT__Inst_Mem__DOT__wdata_counter;
@@ -474,7 +525,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
             vlSelf->top__DOT__valid_ifu_to_idu = 1U;
             vlSelf->top__DOT__ifu_rready = 0U;
             vlSelf->top__DOT__pc_ifu_to_idu = vlSelf->top__DOT__IFU__DOT__pc;
-            vlSelf->top__DOT__IFU__DOT__arvalid_delay = 3U;
         } else if ((3U == (IData)(vlSelf->top__DOT__IFU__DOT__current_state))) {
             vlSelf->top__DOT__ready_wbu_to_ifu = 1U;
             __Vdly__top__DOT__IFU__DOT__arvalid = 0U;
