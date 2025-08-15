@@ -173,7 +173,7 @@ module ifu(
         end
         else begin
             if(current_state == S_WAIT_RECEIVE) begin
-                arvalid_delay <= 18;
+                arvalid_delay <= 10;
                 for(integer i=0; i<32; i=i+1) begin
                     araddr_buffer[i] <= 32'd0;
                     arvalid_buffer[i] <= 1'b0;
