@@ -172,7 +172,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__useless3 = 1U;
     }
     if (vlSelf->rst_n) {
-        if ((2U == (IData)(vlSelf->top__DOT__IFU__DOT__current_state))) {
+        if ((3U == (IData)(vlSelf->top__DOT__IFU__DOT__current_state))) {
             vlSelf->top__DOT__IFU__DOT__unnamedblk2__DOT__i = 0x20U;
             vlSelf->top__DOT__IFU__DOT__arvalid_buffer = 0U;
             __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v0 = 1U;
@@ -279,7 +279,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
             __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v63 
                 = vlSelf->top__DOT__IFU__DOT__pc;
         }
-        if ((2U != (IData)(vlSelf->top__DOT__IFU__DOT__current_state))) {
+        if ((3U != (IData)(vlSelf->top__DOT__IFU__DOT__current_state))) {
             vlSelf->top__DOT__IFU__DOT__unnamedblk3__DOT__j = 0x20U;
         }
         vlSelf->top__DOT__LSU__DOT__LFSR = (((IData)(vlSelf->top__DOT__LSU__DOT__lfsr_in) 
