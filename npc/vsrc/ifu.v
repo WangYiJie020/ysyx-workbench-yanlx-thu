@@ -165,26 +165,19 @@ module ifu(
     reg arvalid_buffer [31:0];
     reg [`CPU_WIDTH-1:0] araddr_buffer [31:0];
 
-    
-    
-    always@(posedge clk, negedge rst_n) begin
+
+    always @(posedge clk, negedge rst_n) begin
         if(rst_n == 0) begin
-            genvar gv_i;
-            generate
-            for(gv_i=0;gv_i<32;gv_i=gv_i+1) begin:a
-                araddr_buffer[gv_i] <= 32'd0;
-                arvalid_buffer[gv_i] <= 1'b1;
+            for(integer i=0; i<32; i=i+1) begin
+                araddr_buffer[i] <= 32'd0;
+                arvalid_buffer[i] <= 1'b1;
             end
-            endgenerate
         end
         else begin
-            genvar gv_j;
-            generate
-            for(gv_j=1;gv_j<32;gv_j=gv_j+1) begin:b
-                araddr_buffer[gv_j] <= araddr_buffer[gv_j-1];
-                arvalid_buffer[gv_j] <= arvalid_buffer[gv_j-1];
+            for(integer j=1; j<32; j=j+1) begin
+                araddr_buffer[j] <= araddr_buffer[j-1];
+                arvalid_buffer[j] <= arvalid_buffer[j-1];
             end
-            endgenerate
             araddr_buffer[0] <= araddr;
             arvalid_buffer[0] <= arvalid;
         end
