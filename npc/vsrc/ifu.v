@@ -171,7 +171,7 @@ module ifu(
         if(rst_n == 0) begin
             genvar gv_i;
             generate
-            for(gv_i=0;gv_i<32;gv_i++) begin:a
+            for(gv_i=0;gv_i<32;gv_i=gv_i+1) begin:a
                 araddr_buffer[gv_i] <= 32'd0;
                 arvalid_buffer[gv_i] <= 1'b1;
             end
@@ -180,7 +180,7 @@ module ifu(
         else begin
             genvar gv_j;
             generate
-            for(gv_j=1;gv_j<32;gv_j++) begin:b
+            for(gv_j=1;gv_j<32;gv_j=gv_j+1) begin:b
                 araddr_buffer[gv_j] <= araddr_buffer[gv_j-1];
                 arvalid_buffer[gv_j] <= arvalid_buffer[gv_j-1];
             end
