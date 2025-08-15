@@ -173,7 +173,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
             vlSelf->top__DOT__IFU__DOT__unnamedblk2__DOT__i = 0x20U;
             vlSelf->top__DOT__IFU__DOT__arvalid_buffer = 0U;
             __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v0 = 1U;
-            vlSelf->top__DOT__IFU__DOT__arvalid_delay = 0xaU;
+            vlSelf->top__DOT__IFU__DOT__arvalid_delay = 4U;
         } else {
             vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
                 = ((vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
