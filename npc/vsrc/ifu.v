@@ -125,7 +125,7 @@ module ifu(
                 rready_o <= 0;
                 //inst_o <= rdata_i;
                 pc_o <= pc;
-                arvalid_delay <= 3;
+
             end else if (current_state == S_WAIT_RECEIVE)begin
                 ifu_valid_o <= 0;
                 arvalid <= 0;
@@ -172,12 +172,21 @@ module ifu(
             end
         end
         else begin
-            for(integer j=1; j<32; j=j+1) begin
-                araddr_buffer[j] <= araddr_buffer[j-1];
-                arvalid_buffer[j] <= arvalid_buffer[j-1];
+            if(current_state == S_SEND) begin
+                arvalid_delay <= LFSR;
+                for(integer i=0; i<32; i=i+1) begin
+                    araddr_buffer[i] <= 32'd0;
+                    arvalid_buffer[i] <= 1'b0;
+                end
             end
-            araddr_buffer[0] <= araddr;
-            arvalid_buffer[0] <= arvalid;
+            else begin
+                for(integer j=1; j<32; j=j+1) begin
+                    araddr_buffer[j] <= araddr_buffer[j-1];
+                    arvalid_buffer[j] <= arvalid_buffer[j-1];
+                end
+                araddr_buffer[0] <= araddr;
+                arvalid_buffer[0] <= arvalid;
+            end
         end
     end
 
