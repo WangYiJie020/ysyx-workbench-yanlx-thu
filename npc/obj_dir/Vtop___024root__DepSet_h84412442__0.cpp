@@ -297,7 +297,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         __Vdly__top__DOT__IFU__DOT__LFSR = 1U;
         vlSelf->__Vdly__top__DOT__Data_Mem__DOT__LFSR = 1U;
         __Vdly__top__DOT__Inst_Mem__DOT__LFSR = 1U;
-        vlSelf->top__DOT__IFU__DOT__arvalid_buffer = 0xffffffffU;
+        vlSelf->top__DOT__IFU__DOT__arvalid_buffer = 0U;
         __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v32 = 1U;
         vlSelf->top__DOT__useless2 = 0U;
         vlSelf->top__DOT__Inst_Mem__DOT__w_state = 0U;

@@ -125,7 +125,7 @@ module ifu(
                 rready_o <= 0;
                 //inst_o <= rdata_i;
                 pc_o <= pc;
-                arvalid_delay <= LFSR;
+                arvalid_delay <= 3;
             end else if (current_state == S_WAIT_RECEIVE)begin
                 ifu_valid_o <= 0;
                 arvalid <= 0;
