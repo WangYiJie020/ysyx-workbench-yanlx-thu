@@ -1,6 +1,6 @@
 `include "header.v"
 
-//`define DELAY
+`define DELAY
 module ifu(
     input clk,
     input rst_n,
