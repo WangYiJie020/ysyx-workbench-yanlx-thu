@@ -34,7 +34,7 @@ module ifu(
     reg arvalid;
     reg [`CPU_WIDTH-1:0] araddr;
 
-    reg arvalid_buffer [31:0];
+    reg [31:0] arvalid_buffer ;
     reg [`CPU_WIDTH-1:0] araddr_buffer [31:0];
 
     dff #(`PC_WIDTH,`PC_INIT) PC (
