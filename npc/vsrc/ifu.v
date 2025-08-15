@@ -1,12 +1,12 @@
 `include "header.v"
 
-//`define DELAY
+`define DELAY
 module ifu(
     input clk,
     input rst_n,
     //to mem
-    output [`CPU_WIDTH-1:0] araddr_o,
-    output arvalid_o,
+    output reg [`CPU_WIDTH-1:0] araddr_o,
+    output reg arvalid_o,
     input arready_i,
     input [`CPU_WIDTH-1:0] rdata_i,
     input rresp_i,
@@ -122,6 +122,7 @@ module ifu(
                 rready_o <= 0;
                 //inst_o <= rdata_i;
                 pc_o <= pc;
+                arvalid_delay <= LFSR;
             end else if (current_state == S_WAIT_RECEIVE)begin
                 ifu_valid_o <= 0;
                 arvalid <= 0;
@@ -190,11 +191,42 @@ module ifu(
     end
 
     always@(*)begin
-        
+        case(arvalid_delay)
+            5'd0:  begin arvalid_o = arvalid_buffer[0]; araddr_o = araddr_buffer[0]; end
+            5'd1:  begin arvalid_o = arvalid_buffer[1]; araddr_o = araddr_buffer[1]; end
+            5'd2:  begin arvalid_o = arvalid_buffer[2]; araddr_o = araddr_buffer[2]; end
+            5'd3:  begin arvalid_o = arvalid_buffer[3]; araddr_o = araddr_buffer[3]; end
+            5'd4:  begin arvalid_o = arvalid_buffer[4]; araddr_o = araddr_buffer[4]; end
+            5'd5:  begin arvalid_o = arvalid_buffer[5]; araddr_o = araddr_buffer[5]; end
+            5'd6:  begin arvalid_o = arvalid_buffer[6]; araddr_o = araddr_buffer[6]; end
+            5'd7:  begin arvalid_o = arvalid_buffer[7]; araddr_o = araddr_buffer[7]; end
+            5'd8:  begin arvalid_o = arvalid_buffer[8]; araddr_o = araddr_buffer[8]; end
+            5'd9:  begin arvalid_o = arvalid_buffer[9]; araddr_o = araddr_buffer[9]; end
+            5'd10: begin arvalid_o = arvalid_buffer[10]; araddr_o = araddr_buffer[10]; end
+            5'd11: begin arvalid_o = arvalid_buffer[11]; araddr_o = araddr_buffer[11]; end
+            5'd12: begin arvalid_o = arvalid_buffer[12]; araddr_o = araddr_buffer[12]; end
+            5'd13: begin arvalid_o = arvalid_buffer[13]; araddr_o = araddr_buffer[13]; end
+            5'd14: begin arvalid_o = arvalid_buffer[14]; araddr_o = araddr_buffer[14]; end
+            5'd15: begin arvalid_o = arvalid_buffer[15]; araddr_o = araddr_buffer[15]; end
+            5'd16: begin arvalid_o = arvalid_buffer[16]; araddr_o = araddr_buffer[16]; end
+            5'd17: begin arvalid_o = arvalid_buffer[17]; araddr_o = araddr_buffer[17]; end
+            5'd18: begin arvalid_o = arvalid_buffer[18]; araddr_o = araddr_buffer[18]; end
+            5'd19: begin arvalid_o = arvalid_buffer[19]; araddr_o = araddr_buffer[19]; end
+            5'd20: begin arvalid_o = arvalid_buffer[20]; araddr_o = araddr_buffer[20]; end
+            5'd21: begin arvalid_o = arvalid_buffer[21]; araddr_o = araddr_buffer[21]; end
+            5'd22: begin arvalid_o = arvalid_buffer[22]; araddr_o = araddr_buffer[22]; end
+            5'd23: begin arvalid_o = arvalid_buffer[23]; araddr_o = araddr_buffer[23]; end
+            5'd24: begin arvalid_o = arvalid_buffer[24]; araddr_o = araddr_buffer[24]; end
+            5'd25: begin arvalid_o = arvalid_buffer[25]; araddr_o = araddr_buffer[25]; end
+            5'd26: begin arvalid_o = arvalid_buffer[26]; araddr_o = araddr_buffer[26]; end
+            5'd27: begin arvalid_o = arvalid_buffer[27]; araddr_o = araddr_buffer[27]; end
+            5'd28: begin arvalid_o = arvalid_buffer[28]; araddr_o = araddr_buffer[28]; end
+            5'd29: begin arvalid_o = arvalid_buffer[29]; araddr_o = araddr_buffer[29]; end
+            5'd30: begin arvalid_o = arvalid_buffer[30]; araddr_o = araddr_buffer[30]; end
+            5'd31: begin arvalid_o = arvalid_buffer[31]; araddr_o = araddr_buffer[31]; end
+            default: begin arvalid_o = arvalid_buffer[0]; araddr_o = araddr_buffer[0]; end
+        endcase
     end
-
-
-
 
 `else 
     assign arvalid_o = arvalid;
