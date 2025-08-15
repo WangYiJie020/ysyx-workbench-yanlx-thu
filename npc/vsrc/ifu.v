@@ -166,10 +166,9 @@ module ifu(
     reg [`CPU_WIDTH-1:0] araddr_buffer [31:0];
 
     
-
+    genvar gv_i;
     always@(posedge clk, negedge rst_n) begin
         if(rst_n == 0) begin
-            genvar gv_i;
             generate
             for(gv_i=0;gv_i<32;gv_i++) begin
                 araddr_buffer[gv_i] <= 32'd0;
@@ -178,7 +177,7 @@ module ifu(
             endgenerate
         end
         else begin
-            genvar gv_i;
+            
             generate
             for(gv_i=1;gv_i<32;gv_i++) begin
                 araddr_buffer[gv_i] <= araddr_buffer[gv_i-1];
