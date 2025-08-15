@@ -45,8 +45,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     __Vfunc_pmem_read__2__Vfuncout = 0;
     CData/*0:0*/ __Vdly__top__DOT__IFU__DOT__arvalid;
     __Vdly__top__DOT__IFU__DOT__arvalid = 0;
-    CData/*4:0*/ __Vdly__top__DOT__IFU__DOT__LFSR;
-    __Vdly__top__DOT__IFU__DOT__LFSR = 0;
     CData/*0:0*/ __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v0;
     __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v0 = 0;
     IData/*31:0*/ __Vdlyvval__top__DOT__IFU__DOT__araddr_buffer__v32;
@@ -130,7 +128,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     // Body
     vlSelf->__Vdly__top__DOT__Data_Mem__DOT__w_state 
         = vlSelf->top__DOT__Data_Mem__DOT__w_state;
-    __Vdly__top__DOT__IFU__DOT__LFSR = vlSelf->top__DOT__IFU__DOT__LFSR;
     vlSelf->__Vdly__top__DOT__Data_Mem__DOT__LFSR = vlSelf->top__DOT__Data_Mem__DOT__LFSR;
     __Vdly__top__DOT__Inst_Mem__DOT__LFSR = vlSelf->top__DOT__Inst_Mem__DOT__LFSR;
     __Vdly__top__DOT__Inst_Mem__DOT__wdata_counter 
@@ -176,8 +173,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
             vlSelf->top__DOT__IFU__DOT__unnamedblk2__DOT__i = 0x20U;
             vlSelf->top__DOT__IFU__DOT__arvalid_buffer = 0U;
             __Vdlyvset__top__DOT__IFU__DOT__araddr_buffer__v0 = 1U;
-            vlSelf->top__DOT__IFU__DOT__arvalid_delay 
-                = vlSelf->top__DOT__IFU__DOT__LFSR;
+            vlSelf->top__DOT__IFU__DOT__arvalid_delay = 3U;
         } else {
             vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
                 = ((vlSelf->top__DOT__IFU__DOT__arvalid_buffer 
@@ -287,7 +283,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                                             | (0xfU 
                                                & ((IData)(vlSelf->top__DOT__LSU__DOT__LFSR) 
                                                   >> 1U)));
-        __Vdly__top__DOT__IFU__DOT__LFSR = (((IData)(vlSelf->top__DOT__IFU__DOT__lfsr_in) 
+        vlSelf->top__DOT__IFU__DOT__LFSR = (((IData)(vlSelf->top__DOT__IFU__DOT__lfsr_in) 
                                              << 4U) 
                                             | (0xfU 
                                                & ((IData)(vlSelf->top__DOT__IFU__DOT__LFSR) 
@@ -307,7 +303,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         }
     } else {
         vlSelf->top__DOT__LSU__DOT__LFSR = 1U;
-        __Vdly__top__DOT__IFU__DOT__LFSR = 1U;
+        vlSelf->top__DOT__IFU__DOT__LFSR = 1U;
         vlSelf->__Vdly__top__DOT__Data_Mem__DOT__LFSR = 1U;
         __Vdly__top__DOT__Inst_Mem__DOT__LFSR = 1U;
         vlSelf->top__DOT__IFU__DOT__arvalid_buffer = 0U;
@@ -483,7 +479,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1eU] = 0U;
         vlSelf->top__DOT__IFU__DOT__araddr_buffer[0x1fU] = 0U;
     }
-    vlSelf->top__DOT__IFU__DOT__LFSR = __Vdly__top__DOT__IFU__DOT__LFSR;
     vlSelf->top__DOT__Inst_Mem__DOT__flag_write = __Vdly__top__DOT__Inst_Mem__DOT__flag_write;
     vlSelf->top__DOT__Inst_Mem__DOT__wdata_counter 
         = __Vdly__top__DOT__Inst_Mem__DOT__wdata_counter;
