@@ -273,7 +273,7 @@ module lsu(
             end
 
             if(current_state == S_IDLE) begin
-                awvalid_delay <= LFSR;
+                awvalid_delay <= 3;
                 for(integer i=0; i<32; i=i+1) begin
                     awaddr_buffer[i] <= 32'd0;
                     awvalid_buffer[i] <= 1'b0;
