@@ -176,7 +176,7 @@ module sram(
             flag_write <= 1;
             //if(wready_o == 1 && wvalid_i == 1)
         end
-        else if(flag_write == 1) begin
+        if(flag_write == 1) begin
             if(wdata_counter == w_delay) begin
                 wdata_counter <= 0;
                 pmem_write(awaddr,wdata,wstrb);
