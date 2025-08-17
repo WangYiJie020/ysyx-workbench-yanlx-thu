@@ -177,7 +177,7 @@ module sram(
             if(flag_waddr == 1 ) write_box[0] <= 1;
             if(flag_wdata == 1) write_box[1] <= 1;
 
-            if(write_box == 2'11) begin
+            if(write_box == 2'b11) begin
                 if(wdata_counter == w_delay) begin
                     wdata_counter <= 0;
                     pmem_write(awaddr,wdata,wstrb);
