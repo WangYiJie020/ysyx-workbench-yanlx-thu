@@ -297,7 +297,7 @@ module lsu(
             if(current_state == S_IDLE) begin
                 wvalid_delay <= LFSR;
                 for(integer i=0; i<32; i=i+1) begin
-                    waddr_buffer[i] <= 32'd0;
+                    wdata_buffer[i] <= 32'd0;
                     wvalid_buffer[i] <= 1'b0;
                     wstrb_buffer[i] <= 8'd0;
                 end
