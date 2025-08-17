@@ -86,7 +86,7 @@ class Vtop___024root final : public VerilatedModule {
     };
     struct {
         CData/*4:0*/ top__DOT__IFU__DOT__LFSR;
-        CData/*1:0*/ top__DOT__IFU__DOT__arvalid_delay;
+        CData/*4:0*/ top__DOT__IFU__DOT__arvalid_delay;
         CData/*0:0*/ top__DOT__IFU__DOT__lfsr_in;
         CData/*0:0*/ top__DOT__IFU__DOT__arvalid;
         CData/*2:0*/ top__DOT__IFU__DOT__current_state;

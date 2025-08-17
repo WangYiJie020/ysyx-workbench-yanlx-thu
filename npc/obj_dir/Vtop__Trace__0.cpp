@@ -42,7 +42,7 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
         bufp->chgBit(oldp+15,(vlSelf->top__DOT__valid_idu_to_exu));
         bufp->chgCData(oldp+16,(vlSelf->top__DOT__IDU__DOT__current_state),2);
         bufp->chgCData(oldp+17,(vlSelf->top__DOT__IFU__DOT__LFSR),5);
-        bufp->chgCData(oldp+18,(vlSelf->top__DOT__IFU__DOT__arvalid_delay),2);
+        bufp->chgCData(oldp+18,(vlSelf->top__DOT__IFU__DOT__arvalid_delay),5);
         bufp->chgBit(oldp+19,((1U & VL_REDXOR_8(vlSelf->top__DOT__IFU__DOT__LFSR))));
         bufp->chgBit(oldp+20,(vlSelf->top__DOT__IFU__DOT__arvalid));
         bufp->chgIData(oldp+21,(vlSelf->top__DOT__IFU__DOT__arvalid_buffer),32);

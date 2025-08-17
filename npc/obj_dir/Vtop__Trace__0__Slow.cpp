@@ -395,7 +395,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBus(c+334,"pc", false,-1, 31,0);
     tracep->declBus(c+168,"npc", false,-1, 31,0);
     tracep->declBus(c+18,"LFSR", false,-1, 4,0);
-    tracep->declBus(c+19,"arvalid_delay", false,-1, 1,0);
+    tracep->declBus(c+19,"arvalid_delay", false,-1, 4,0);
     tracep->declBit(c+20,"lfsr_in", false,-1);
     tracep->declBit(c+21,"arvalid", false,-1);
     tracep->declBus(c+334,"araddr", false,-1, 31,0);
@@ -678,7 +678,7 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullBit(oldp+16,(vlSelf->top__DOT__valid_idu_to_exu));
     bufp->fullCData(oldp+17,(vlSelf->top__DOT__IDU__DOT__current_state),2);
     bufp->fullCData(oldp+18,(vlSelf->top__DOT__IFU__DOT__LFSR),5);
-    bufp->fullCData(oldp+19,(vlSelf->top__DOT__IFU__DOT__arvalid_delay),2);
+    bufp->fullCData(oldp+19,(vlSelf->top__DOT__IFU__DOT__arvalid_delay),5);
     bufp->fullBit(oldp+20,((1U & VL_REDXOR_8(vlSelf->top__DOT__IFU__DOT__LFSR))));
     bufp->fullBit(oldp+21,(vlSelf->top__DOT__IFU__DOT__arvalid));
     bufp->fullIData(oldp+22,(vlSelf->top__DOT__IFU__DOT__arvalid_buffer),32);
