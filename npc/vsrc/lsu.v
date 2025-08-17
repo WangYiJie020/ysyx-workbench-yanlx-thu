@@ -1,6 +1,6 @@
 `include "header.v"
 
-//`define DELAY
+//`define LSU_DELAY
 module lsu(
     input clk,
     input rst_n,
@@ -223,7 +223,7 @@ module lsu(
     end
 
 
-`ifdef DELAY
+`ifdef IFU_DELAY
 
     assign lfsr_in = LFSR[4] ^ LFSR[3] ^ LFSR[2] ^ LFSR[1] ^ LFSR[0];
     always@(posedge clk, negedge rst_n) begin
