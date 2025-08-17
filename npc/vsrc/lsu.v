@@ -78,8 +78,8 @@ module lsu(
     reg arvalid;
     reg [`CPU_WIDTH-1:0] araddr;
     reg rready;
-    reg [`CPU_WIDTH-1:0] awaddr,
-    reg awvalid,
+    reg [`CPU_WIDTH-1:0] awaddr;
+    reg awvalid;
 
     reg [31:0] arvalid_buffer ;
     reg [`CPU_WIDTH-1:0] araddr_buffer [31:0];
