@@ -84,6 +84,8 @@ module lsu(
     reg [31:0] arvalid_buffer ;
     reg [`CPU_WIDTH-1:0] araddr_buffer [31:0];
     reg [31:0] rready_buffer ;
+    reg [31:0] awvalid_buffer ;
+    reg [`CPU_WIDTH-1:0] awaddr_buffer [31:0];
 
     assign rmask_o = rmask;
     assign rs1_o = rs1;
