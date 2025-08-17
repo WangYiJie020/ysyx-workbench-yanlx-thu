@@ -90,7 +90,7 @@ module lsu(
     reg [31:0] awvalid_buffer ;
     reg [`CPU_WIDTH-1:0] awaddr_buffer [31:0];
     reg [31:0] wvalid_buffer ;
-    reg [`CPU_WIDTH-1:0] waddr_buffer [31:0];
+    reg [`CPU_WIDTH-1:0] wdata_buffer [31:0];
     reg [7:0] wstrb_buffer [31:0];
 
     assign rmask_o = rmask;
@@ -308,7 +308,7 @@ module lsu(
                     wvalid_buffer[j] <= wvalid_buffer[j-1];
                     wstrb_buffer[j] <= wstrb_buffer[j-1];
                 end
-                waddr_buffer[0] <= waddr;
+                wdata_buffer[0] <= wdata;
                 wvalid_buffer[0] <= wvalid;
                 wstrb_buffer[0] <= wstrb;
             end
@@ -431,39 +431,39 @@ module lsu(
 
     always@(*)begin
         case(wvalid_delay)
-            5'd0:  begin wvalid_o = wvalid_buffer[0]; waddr_o = waddr_buffer[0]; wstrb_o = wstrb_buffer[0]; end
-            5'd1:  begin wvalid_o = wvalid_buffer[1]; waddr_o = waddr_buffer[1]; wstrb_o = wstrb_buffer[1];end
-            5'd2:  begin wvalid_o = wvalid_buffer[2]; waddr_o = waddr_buffer[2]; wstrb_o = wstrb_buffer[2];end
-            5'd3:  begin wvalid_o = wvalid_buffer[3]; waddr_o = waddr_buffer[3]; wstrb_o = wstrb_buffer[3];end
-            5'd4:  begin wvalid_o = wvalid_buffer[4]; waddr_o = waddr_buffer[4]; wstrb_o = wstrb_buffer[4];end
-            5'd5:  begin wvalid_o = wvalid_buffer[5]; waddr_o = waddr_buffer[5]; wstrb_o = wstrb_buffer[5];end
-            5'd6:  begin wvalid_o = wvalid_buffer[6]; waddr_o = waddr_buffer[6]; wstrb_o = wstrb_buffer[6];end
-            5'd7:  begin wvalid_o = wvalid_buffer[7]; waddr_o = waddr_buffer[7]; wstrb_o = wstrb_buffer[7];end
-            5'd8:  begin wvalid_o = wvalid_buffer[8]; waddr_o = waddr_buffer[8]; wstrb_o = wstrb_buffer[8];end
-            5'd9:  begin wvalid_o = wvalid_buffer[9]; waddr_o = waddr_buffer[9]; wstrb_o = wstrb_buffer[9];end
-            5'd10: begin wvalid_o = wvalid_buffer[10]; waddr_o = waddr_buffer[10]; wstrb_o = wstrb_buffer[10];end
-            5'd11: begin wvalid_o = wvalid_buffer[11]; waddr_o = waddr_buffer[11]; wstrb_o = wstrb_buffer[11];end
-            5'd12: begin wvalid_o = wvalid_buffer[12]; waddr_o = waddr_buffer[12]; wstrb_o = wstrb_buffer[12];end
-            5'd13: begin wvalid_o = wvalid_buffer[13]; waddr_o = waddr_buffer[13]; wstrb_o = wstrb_buffer[13];end
-            5'd14: begin wvalid_o = wvalid_buffer[14]; waddr_o = waddr_buffer[14]; wstrb_o = wstrb_buffer[14];end
-            5'd15: begin wvalid_o = wvalid_buffer[15]; waddr_o = waddr_buffer[15]; wstrb_o = wstrb_buffer[15];end
-            5'd16: begin wvalid_o = wvalid_buffer[16]; waddr_o = waddr_buffer[16]; wstrb_o = wstrb_buffer[16];end
-            5'd17: begin wvalid_o = wvalid_buffer[17]; waddr_o = waddr_buffer[17]; wstrb_o = wstrb_buffer[17];end
-            5'd18: begin wvalid_o = wvalid_buffer[18]; waddr_o = waddr_buffer[18]; wstrb_o = wstrb_buffer[18];end
-            5'd19: begin wvalid_o = wvalid_buffer[19]; waddr_o = waddr_buffer[19]; wstrb_o = wstrb_buffer[19];end
-            5'd20: begin wvalid_o = wvalid_buffer[20]; waddr_o = waddr_buffer[20]; wstrb_o = wstrb_buffer[20];end
-            5'd21: begin wvalid_o = wvalid_buffer[21]; waddr_o = waddr_buffer[21]; wstrb_o = wstrb_buffer[21];end
-            5'd22: begin wvalid_o = wvalid_buffer[22]; waddr_o = waddr_buffer[22]; wstrb_o = wstrb_buffer[22];end
-            5'd23: begin wvalid_o = wvalid_buffer[23]; waddr_o = waddr_buffer[23]; wstrb_o = wstrb_buffer[23];end
-            5'd24: begin wvalid_o = wvalid_buffer[24]; waddr_o = waddr_buffer[24]; wstrb_o = wstrb_buffer[24];end
-            5'd25: begin wvalid_o = wvalid_buffer[25]; waddr_o = waddr_buffer[25]; wstrb_o = wstrb_buffer[25];end
-            5'd26: begin wvalid_o = wvalid_buffer[26]; waddr_o = waddr_buffer[26]; wstrb_o = wstrb_buffer[26];end
-            5'd27: begin wvalid_o = wvalid_buffer[27]; waddr_o = waddr_buffer[27]; wstrb_o = wstrb_buffer[27];end
-            5'd28: begin wvalid_o = wvalid_buffer[28]; waddr_o = waddr_buffer[28]; wstrb_o = wstrb_buffer[28];end
-            5'd29: begin wvalid_o = wvalid_buffer[29]; waddr_o = waddr_buffer[29]; wstrb_o = wstrb_buffer[29];end
-            5'd30: begin wvalid_o = wvalid_buffer[30]; waddr_o = waddr_buffer[30]; wstrb_o = wstrb_buffer[30];end
-            5'd31: begin wvalid_o = wvalid_buffer[31]; waddr_o = waddr_buffer[31]; wstrb_o = wstrb_buffer[31];end
-            default: begin wvalid_o = wvalid_buffer[0]; waddr_o = waddr_buffer[0]; wstrb_o = wstrb_buffer[0];end
+            5'd0:  begin wvalid_o = wvalid_buffer[0]; wdata_o = wdata_buffer[0]; wstrb_o = wstrb_buffer[0]; end
+            5'd1:  begin wvalid_o = wvalid_buffer[1]; wdata_o = wdata_buffer[1]; wstrb_o = wstrb_buffer[1];end
+            5'd2:  begin wvalid_o = wvalid_buffer[2]; wdata_o = wdata_buffer[2]; wstrb_o = wstrb_buffer[2];end
+            5'd3:  begin wvalid_o = wvalid_buffer[3]; wdata_o = wdata_buffer[3]; wstrb_o = wstrb_buffer[3];end
+            5'd4:  begin wvalid_o = wvalid_buffer[4]; wdata_o = wdata_buffer[4]; wstrb_o = wstrb_buffer[4];end
+            5'd5:  begin wvalid_o = wvalid_buffer[5]; wdata_o = wdata_buffer[5]; wstrb_o = wstrb_buffer[5];end
+            5'd6:  begin wvalid_o = wvalid_buffer[6]; wdata_o = wdata_buffer[6]; wstrb_o = wstrb_buffer[6];end
+            5'd7:  begin wvalid_o = wvalid_buffer[7]; wdata_o = wdata_buffer[7]; wstrb_o = wstrb_buffer[7];end
+            5'd8:  begin wvalid_o = wvalid_buffer[8]; wdata_o = wdata_buffer[8]; wstrb_o = wstrb_buffer[8];end
+            5'd9:  begin wvalid_o = wvalid_buffer[9]; wdata_o = wdata_buffer[9]; wstrb_o = wstrb_buffer[9];end
+            5'd10: begin wvalid_o = wvalid_buffer[10]; wdata_o = wdata_buffer[10]; wstrb_o = wstrb_buffer[10];end
+            5'd11: begin wvalid_o = wvalid_buffer[11]; wdata_o = wdata_buffer[11]; wstrb_o = wstrb_buffer[11];end
+            5'd12: begin wvalid_o = wvalid_buffer[12]; wdata_o = wdata_buffer[12]; wstrb_o = wstrb_buffer[12];end
+            5'd13: begin wvalid_o = wvalid_buffer[13]; wdata_o = wdata_buffer[13]; wstrb_o = wstrb_buffer[13];end
+            5'd14: begin wvalid_o = wvalid_buffer[14]; wdata_o = wdata_buffer[14]; wstrb_o = wstrb_buffer[14];end
+            5'd15: begin wvalid_o = wvalid_buffer[15]; wdata_o = wdata_buffer[15]; wstrb_o = wstrb_buffer[15];end
+            5'd16: begin wvalid_o = wvalid_buffer[16]; wdata_o = wdata_buffer[16]; wstrb_o = wstrb_buffer[16];end
+            5'd17: begin wvalid_o = wvalid_buffer[17]; wdata_o = wdata_buffer[17]; wstrb_o = wstrb_buffer[17];end
+            5'd18: begin wvalid_o = wvalid_buffer[18]; wdata_o = wdata_buffer[18]; wstrb_o = wstrb_buffer[18];end
+            5'd19: begin wvalid_o = wvalid_buffer[19]; wdata_o = wdata_buffer[19]; wstrb_o = wstrb_buffer[19];end
+            5'd20: begin wvalid_o = wvalid_buffer[20]; wdata_o = wdata_buffer[20]; wstrb_o = wstrb_buffer[20];end
+            5'd21: begin wvalid_o = wvalid_buffer[21]; wdata_o = wdata_buffer[21]; wstrb_o = wstrb_buffer[21];end
+            5'd22: begin wvalid_o = wvalid_buffer[22]; wdata_o = wdata_buffer[22]; wstrb_o = wstrb_buffer[22];end
+            5'd23: begin wvalid_o = wvalid_buffer[23]; wdata_o = wdata_buffer[23]; wstrb_o = wstrb_buffer[23];end
+            5'd24: begin wvalid_o = wvalid_buffer[24]; wdata_o = wdata_buffer[24]; wstrb_o = wstrb_buffer[24];end
+            5'd25: begin wvalid_o = wvalid_buffer[25]; wdata_o = wdata_buffer[25]; wstrb_o = wstrb_buffer[25];end
+            5'd26: begin wvalid_o = wvalid_buffer[26]; wdata_o = wdata_buffer[26]; wstrb_o = wstrb_buffer[26];end
+            5'd27: begin wvalid_o = wvalid_buffer[27]; wdata_o = wdata_buffer[27]; wstrb_o = wstrb_buffer[27];end
+            5'd28: begin wvalid_o = wvalid_buffer[28]; wdata_o = wdata_buffer[28]; wstrb_o = wstrb_buffer[28];end
+            5'd29: begin wvalid_o = wvalid_buffer[29]; wdata_o = wdata_buffer[29]; wstrb_o = wstrb_buffer[29];end
+            5'd30: begin wvalid_o = wvalid_buffer[30]; wdata_o = wdata_buffer[30]; wstrb_o = wstrb_buffer[30];end
+            5'd31: begin wvalid_o = wvalid_buffer[31]; wdata_o = wdata_buffer[31]; wstrb_o = wstrb_buffer[31];end
+            default: begin wvalid_o = wvalid_buffer[0]; wdata_o = wdata_buffer[0]; wstrb_o = wstrb_buffer[0];end
         endcase
     end
 
