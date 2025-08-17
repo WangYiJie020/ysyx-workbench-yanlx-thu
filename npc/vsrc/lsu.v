@@ -72,7 +72,7 @@ module lsu(
     
     reg flag,wvalid_tmp;
 
-    reg [4:0] LFSR, arvalid_delay, rready_delay, awvalid_delay, wvalid_delay;
+    reg [4:0] LFSR, arvalid_delay, rready_delay, awvalid_delay, wvalid_delay, bready_delay;
     reg lfsr_in;
 
     reg arvalid;
@@ -83,6 +83,7 @@ module lsu(
     reg [`CPU_WIDTH-1:0] wdata;
     reg [7:0] wstrb;
     reg wvalid;
+    reg bready;
 
     reg [31:0] arvalid_buffer ;
     reg [`CPU_WIDTH-1:0] araddr_buffer [31:0];
@@ -92,6 +93,7 @@ module lsu(
     reg [31:0] wvalid_buffer ;
     reg [`CPU_WIDTH-1:0] wdata_buffer [31:0];
     reg [7:0] wstrb_buffer [31:0];
+    reg [31:0] bready_buffer;
 
     assign rmask_o = rmask;
     assign rs1_o = rs1;
@@ -170,7 +172,7 @@ module lsu(
                 wvalid <= 0;
                 //arvalid <= 0;
                 rready <= 0;
-                bready_o <= 0;
+                bready <= 0;
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                 end 
@@ -185,7 +187,7 @@ module lsu(
                 arvalid <= MemRead_i;
                 rready <= MemRead_i;        
                 
-                bready_o <= 1;
+                bready <= 1;
                 rmask <= rmask_i;
 
                 awvalid <= MemWrite_i;
@@ -207,7 +209,7 @@ module lsu(
                     else lsu_valid_o <= 0;
                 end
                 else if(MemWrite_i)begin
-                    if(bready_o == 1 && bvalid_i == 1 && bresp_i == 0) lsu_valid_o <= 1;
+                    if(bready == 1 && bvalid_i == 1 && bresp_i == 0) lsu_valid_o <= 1;
                     else lsu_valid_o <= 0;
                 end
                 else lsu_valid_o <= 1;
@@ -311,6 +313,19 @@ module lsu(
                 wdata_buffer[0] <= wdata;
                 wvalid_buffer[0] <= wvalid;
                 wstrb_buffer[0] <= wstrb;
+            end
+
+            if(current_state == S_IDLE) begin
+                bready_delay <= LFSR;
+                for(integer i=0; i<32; i=i+1) begin
+                    bready_buffer[i] <= 1'b0;
+                end
+            end
+            else begin
+                for(integer j=1; j<32; j=j+1) begin
+                    bready_buffer[j] <= bready_buffer[j-1];
+                end
+                bready_buffer[0] <= bready;
             end
         end
     end
@@ -467,6 +482,44 @@ module lsu(
         endcase
     end
 
+    always@(*)begin
+        case(bready_delay)
+            5'd0:  begin bready_o = bready_buffer[0]; end
+            5'd1:  begin bready_o = bready_buffer[1]; end
+            5'd2:  begin bready_o = bready_buffer[2]; end
+            5'd3:  begin bready_o = bready_buffer[3]; end
+            5'd4:  begin bready_o = bready_buffer[4]; end
+            5'd5:  begin bready_o = bready_buffer[5]; end
+            5'd6:  begin bready_o = bready_buffer[6]; end
+            5'd7:  begin bready_o = bready_buffer[7]; end
+            5'd8:  begin bready_o = bready_buffer[8]; end
+            5'd9:  begin bready_o = bready_buffer[9]; end
+            5'd10: begin bready_o = bready_buffer[10]; end
+            5'd11: begin bready_o = bready_buffer[11]; end
+            5'd12: begin bready_o = bready_buffer[12]; end
+            5'd13: begin bready_o = bready_buffer[13]; end
+            5'd14: begin bready_o = bready_buffer[14]; end
+            5'd15: begin bready_o = bready_buffer[15]; end
+            5'd16: begin bready_o = bready_buffer[16]; end
+            5'd17: begin bready_o = bready_buffer[17]; end
+            5'd18: begin bready_o = bready_buffer[18]; end
+            5'd19: begin bready_o = bready_buffer[19]; end
+            5'd20: begin bready_o = bready_buffer[20]; end
+            5'd21: begin bready_o = bready_buffer[21]; end
+            5'd22: begin bready_o = bready_buffer[22]; end
+            5'd23: begin bready_o = bready_buffer[23]; end
+            5'd24: begin bready_o = bready_buffer[24]; end
+            5'd25: begin bready_o = bready_buffer[25]; end
+            5'd26: begin bready_o = bready_buffer[26]; end
+            5'd27: begin bready_o = bready_buffer[27]; end
+            5'd28: begin bready_o = bready_buffer[28]; end
+            5'd29: begin bready_o = bready_buffer[29]; end
+            5'd30: begin bready_o = bready_buffer[30]; end
+            5'd31: begin bready_o = bready_buffer[31]; end
+            default: begin bready_o = bready_buffer[0]; end
+        endcase
+    end
+
 `else 
     assign arvalid_o = arvalid;
     assign araddr_o = araddr;
@@ -476,6 +529,7 @@ module lsu(
     assign wvalid_o = wvalid;
     assign wdata_o = wdata;
     assign wstrb_o = wstrb;
+    assign bready_o = bready;
 
 `endif
 
