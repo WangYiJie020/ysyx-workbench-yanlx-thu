@@ -221,7 +221,7 @@ module lsu(
                 arvalid <= 0;
                 rready <= 0;
                 awvalid <= 0;
-                wvalid_o <= 0;
+                wvalid <= 0;
 
             end 
             
