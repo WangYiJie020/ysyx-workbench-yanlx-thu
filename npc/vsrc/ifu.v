@@ -1,6 +1,6 @@
 `include "header.v"
 
-`define DELAY
+//`define DELAY
 module ifu(
     input clk,
     input rst_n,
@@ -28,14 +28,16 @@ module ifu(
     wire [`PC_WIDTH-1:0] pc;
     reg [`PC_WIDTH-1:0] npc;
 
-    reg [4:0] LFSR, arvalid_delay;
+    reg [4:0] LFSR, arvalid_delay, rready_delay;
     reg lfsr_in;
 
     reg arvalid;
     reg [`CPU_WIDTH-1:0] araddr;
+    reg rready;
 
     reg [31:0] arvalid_buffer ;
     reg [`CPU_WIDTH-1:0] araddr_buffer [31:0];
+    reg [31:0] rready_buffer ;
 
     dff #(`PC_WIDTH,`PC_INIT) PC (
         .clk(clk),
@@ -99,7 +101,7 @@ module ifu(
             ifu_ready_o <= 0;
             npc <= `PC_INIT;
             arvalid <= 1;
-            rready_o <= 0;
+            rready <= 0;
         end else begin
             current_state <= next_state;
 
@@ -110,10 +112,10 @@ module ifu(
             else if(current_state == S_WAIT_SEND) ifu_ready_o <= 0;      
             
             if(current_state == S_IDLE) begin 
-                if(rvalid_i == 1 && rready_o == 1) ifu_valid_o <= 1;
+                if(rvalid_i == 1 && rready == 1) ifu_valid_o <= 1;
                 else ifu_valid_o <= 0;
                 //arvalid_o <= 1;
-                rready_o <= 1;
+                rready <= 1;
                 pc_o <= pc;
                 //inst_o <= rdata_i;
                 if(arvalid==1 && arready_i==1) begin
@@ -122,26 +124,26 @@ module ifu(
             end else if (current_state == S_SEND)begin
                 ifu_valid_o <= 1;
                 arvalid <= 0;
-                rready_o <= 0;
+                rready <= 0;
                 //inst_o <= rdata_i;
                 pc_o <= pc;
 
             end else if (current_state == S_WAIT_RECEIVE)begin
                 ifu_valid_o <= 0;
                 arvalid <= 0;
-                rready_o <= 0;
+                rready <= 0;
 
             end else if(current_state == S_RECEIVE) begin 
                 ifu_valid_o <= 0;
                 npc <= npc_i;
                 arvalid <= 1;
-                rready_o <= 1;
+                rready <= 1;
             end else if(current_state == S_WAIT_SEND) begin               
                 if(rresp_i) ifu_valid_o <= 1;
                 else ifu_valid_o <= 0;
                 
                 //arvalid <= 1; 
-                rready_o <= 1;
+                rready <= 1;
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                 end 
@@ -169,6 +171,7 @@ module ifu(
             for(integer i=0; i<32; i=i+1) begin
                 araddr_buffer[i] <= 32'd0;
                 arvalid_buffer[i] <= 1'b0;
+                rready_buffer[i] <= 1'b1;
             end
         end
         else begin
@@ -187,6 +190,19 @@ module ifu(
                 end
                 araddr_buffer[0] <= araddr;
                 arvalid_buffer[0] <= arvalid;
+            end
+
+            if(current_state == S_WAIT_RECEIVE) begin
+                rready_delay <= LFSR;
+                for(integer i=0; i<32; i=i+1) begin
+                    rready_buffer[i] <= 1'b1;
+                end
+            end
+            else begin
+                for(integer j=1; j<32; j=j+1) begin
+                    rready_buffer[j] <= rready_buffer[j-1];
+                end
+                rready_buffer[0] <= rready;
             end
         end
     end
@@ -232,6 +248,7 @@ module ifu(
 `else 
     assign arvalid_o = arvalid;
     assign araddr_o = araddr;
+    assign rready_o = rready;
 
 `endif
 
