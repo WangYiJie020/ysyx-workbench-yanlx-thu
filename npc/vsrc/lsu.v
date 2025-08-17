@@ -72,12 +72,14 @@ module lsu(
     
     reg flag,wvalid_tmp;
 
-    reg [4:0] LFSR, arvalid_delay, rready_delay;
+    reg [4:0] LFSR, arvalid_delay, rready_delay, awvalid_delay;
     reg lfsr_in;
 
     reg arvalid;
     reg [`CPU_WIDTH-1:0] araddr;
     reg rready;
+    reg [`CPU_WIDTH-1:0] awaddr,
+    reg awvalid,
 
     reg [31:0] arvalid_buffer ;
     reg [`CPU_WIDTH-1:0] araddr_buffer [31:0];
@@ -87,8 +89,8 @@ module lsu(
     assign rs1_o = rs1;
     assign alu_result_o = alu_result;
     //assign datamem_readdata_o = rdata_i;
-    assign araddr_o = alu_result;
-    assign awaddr_o = alu_result;
+    assign araddr = alu_result;
+    assign awaddr = alu_result;
     assign datamem_readdata_o = rdata_i;
 
     always@(*) begin
@@ -156,7 +158,7 @@ module lsu(
 
             if(current_state == S_IDLE) begin 
                 lsu_valid_o <= 0;
-                awvalid_o <= 0;
+                awvalid <= 0;
                 wvalid_o <= 0;
                 //arvalid <= 0;
                 rready <= 0;
@@ -178,7 +180,7 @@ module lsu(
                 bready_o <= 1;
                 rmask <= rmask_i;
 
-                awvalid_o <= MemWrite_i;
+                awvalid <= MemWrite_i;
                 wvalid_o <= MemWrite_i;
                 
                 wb_src_o <= wb_src_i;
@@ -202,7 +204,7 @@ module lsu(
                 end
                 else lsu_valid_o <= 1;
 
-                if(awvalid_o==1 && awready_i==1) awvalid_o <= 0;
+                if(awvalid==1 && awready_i==1) awvalid <= 0;
                 if(wvalid_o==1 && wready_i==1) wvalid_o <= 0;
                 if(arvalid==1 && arready_i==1) arvalid <= 0;
 
@@ -210,7 +212,7 @@ module lsu(
                 lsu_valid_o <= 0;
                 arvalid <= 0;
                 rready <= 0;
-                awvalid_o <= 0;
+                awvalid <= 0;
                 wvalid_o <= 0;
 
             end 
@@ -240,7 +242,6 @@ module lsu(
         end
         else begin
             if(current_state == S_IDLE) begin
-                //arvalid_delay <= {3'd0,LFSR[1:0]};
                 arvalid_delay <= LFSR;
                 for(integer i=0; i<32; i=i+1) begin
                     araddr_buffer[i] <= 32'd0;
@@ -267,6 +268,22 @@ module lsu(
                     rready_buffer[j] <= rready_buffer[j-1];
                 end
                 rready_buffer[0] <= rready;
+            end
+
+            if(current_state == S_IDLE) begin
+                awvalid_delay <= LFSR;
+                for(integer i=0; i<32; i=i+1) begin
+                    awaddr_buffer[i] <= 32'd0;
+                    awvalid_buffer[i] <= 1'b0;
+                end
+            end
+            else begin
+                for(integer j=1; j<32; j=j+1) begin
+                    awaddr_buffer[j] <= awaddr_buffer[j-1];
+                    awvalid_buffer[j] <= awvalid_buffer[j-1];
+                end
+                awaddr_buffer[0] <= awaddr;
+                awvalid_buffer[0] <= awvalid;
             end
         end
     end
@@ -347,10 +364,50 @@ module lsu(
         endcase
     end
 
+    always@(*)begin
+        case(awvalid_delay)
+            5'd0:  begin awvalid_o = awvalid_buffer[0]; awaddr_o = awaddr_buffer[0]; end
+            5'd1:  begin awvalid_o = awvalid_buffer[1]; awaddr_o = awaddr_buffer[1]; end
+            5'd2:  begin awvalid_o = awvalid_buffer[2]; awaddr_o = awaddr_buffer[2]; end
+            5'd3:  begin awvalid_o = awvalid_buffer[3]; awaddr_o = awaddr_buffer[3]; end
+            5'd4:  begin awvalid_o = awvalid_buffer[4]; awaddr_o = awaddr_buffer[4]; end
+            5'd5:  begin awvalid_o = awvalid_buffer[5]; awaddr_o = awaddr_buffer[5]; end
+            5'd6:  begin awvalid_o = awvalid_buffer[6]; awaddr_o = awaddr_buffer[6]; end
+            5'd7:  begin awvalid_o = awvalid_buffer[7]; awaddr_o = awaddr_buffer[7]; end
+            5'd8:  begin awvalid_o = awvalid_buffer[8]; awaddr_o = awaddr_buffer[8]; end
+            5'd9:  begin awvalid_o = awvalid_buffer[9]; awaddr_o = awaddr_buffer[9]; end
+            5'd10: begin awvalid_o = awvalid_buffer[10]; awaddr_o = awaddr_buffer[10]; end
+            5'd11: begin awvalid_o = awvalid_buffer[11]; awaddr_o = awaddr_buffer[11]; end
+            5'd12: begin awvalid_o = awvalid_buffer[12]; awaddr_o = awaddr_buffer[12]; end
+            5'd13: begin awvalid_o = awvalid_buffer[13]; awaddr_o = awaddr_buffer[13]; end
+            5'd14: begin awvalid_o = awvalid_buffer[14]; awaddr_o = awaddr_buffer[14]; end
+            5'd15: begin awvalid_o = awvalid_buffer[15]; awaddr_o = awaddr_buffer[15]; end
+            5'd16: begin awvalid_o = awvalid_buffer[16]; awaddr_o = awaddr_buffer[16]; end
+            5'd17: begin awvalid_o = awvalid_buffer[17]; awaddr_o = awaddr_buffer[17]; end
+            5'd18: begin awvalid_o = awvalid_buffer[18]; awaddr_o = awaddr_buffer[18]; end
+            5'd19: begin awvalid_o = awvalid_buffer[19]; awaddr_o = awaddr_buffer[19]; end
+            5'd20: begin awvalid_o = awvalid_buffer[20]; awaddr_o = awaddr_buffer[20]; end
+            5'd21: begin awvalid_o = awvalid_buffer[21]; awaddr_o = awaddr_buffer[21]; end
+            5'd22: begin awvalid_o = awvalid_buffer[22]; awaddr_o = awaddr_buffer[22]; end
+            5'd23: begin awvalid_o = awvalid_buffer[23]; awaddr_o = awaddr_buffer[23]; end
+            5'd24: begin awvalid_o = awvalid_buffer[24]; awaddr_o = awaddr_buffer[24]; end
+            5'd25: begin awvalid_o = awvalid_buffer[25]; awaddr_o = awaddr_buffer[25]; end
+            5'd26: begin awvalid_o = awvalid_buffer[26]; awaddr_o = awaddr_buffer[26]; end
+            5'd27: begin awvalid_o = awvalid_buffer[27]; awaddr_o = awaddr_buffer[27]; end
+            5'd28: begin awvalid_o = awvalid_buffer[28]; awaddr_o = awaddr_buffer[28]; end
+            5'd29: begin awvalid_o = awvalid_buffer[29]; awaddr_o = awaddr_buffer[29]; end
+            5'd30: begin awvalid_o = awvalid_buffer[30]; awaddr_o = awaddr_buffer[30]; end
+            5'd31: begin awvalid_o = awvalid_buffer[31]; awaddr_o = awaddr_buffer[31]; end
+            default: begin awvalid_o = awvalid_buffer[0]; awaddr_o = awaddr_buffer[0]; end
+        endcase
+    end
+
 `else 
     assign arvalid_o = arvalid;
     assign araddr_o = araddr;
     assign rready_o = rready;
+    assign awaddr_o = awaddr;
+    assign awvalid_o = awvalid;
 
 `endif
 
