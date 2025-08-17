@@ -43,6 +43,7 @@ module sram(
     reg [4:0] rdata_counter,wdata_counter,w_delay,r_delay;
     reg [4:0] LFSR;
     reg lfsr_in;
+    reg [1:0] write_box;
 
     always@(posedge clk, negedge rst_n) begin
         if(rst_n == 0) begin
@@ -176,7 +177,7 @@ module sram(
             flag_write <= 1;
             //if(wready_o == 1 && wvalid_i == 1)
         end
-        else if(flag_write == 1) begin
+        if(flag_write == 1) begin
             if(wdata_counter == w_delay) begin
                 wdata_counter <= 0;
                 pmem_write(awaddr,wdata,wstrb);
