@@ -108,6 +108,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*4:0*/ top__DOT__Inst_Mem__DOT__r_delay;
         CData/*4:0*/ top__DOT__Inst_Mem__DOT__LFSR;
         CData/*0:0*/ top__DOT__Inst_Mem__DOT__lfsr_in;
+        CData/*1:0*/ top__DOT__Inst_Mem__DOT__write_box;
         CData/*1:0*/ top__DOT__IDU__DOT__current_state;
         CData/*1:0*/ top__DOT__IDU__DOT__next_state;
         CData/*0:0*/ top__DOT__EXU__DOT__a_in_src;
@@ -148,9 +149,10 @@ class Vtop___024root final : public VerilatedModule {
         CData/*4:0*/ top__DOT__Data_Mem__DOT__w_delay;
         CData/*4:0*/ top__DOT__Data_Mem__DOT__r_delay;
         CData/*4:0*/ top__DOT__Data_Mem__DOT__LFSR;
-        CData/*0:0*/ top__DOT__Data_Mem__DOT__lfsr_in;
     };
     struct {
+        CData/*0:0*/ top__DOT__Data_Mem__DOT__lfsr_in;
+        CData/*1:0*/ top__DOT__Data_Mem__DOT__write_box;
         CData/*2:0*/ top__DOT__WBU__DOT__rmask;
         CData/*0:0*/ top__DOT__WBU__DOT__wb_src;
         CData/*0:0*/ top__DOT__WBU__DOT__csr_wdata_src;
@@ -172,6 +174,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ __Vdly__top__DOT__Data_Mem__DOT__w_state;
         CData/*0:0*/ __Vdly__top__DOT__lsu_bresp;
         CData/*0:0*/ __Vdly__top__DOT__Data_Mem__DOT__flag_write;
+        CData/*4:0*/ __Vdly__top__DOT__Data_Mem__DOT__w_delay;
         CData/*4:0*/ __Vdly__top__DOT__Data_Mem__DOT__wdata_counter;
         CData/*4:0*/ __Vdly__top__DOT__Data_Mem__DOT__LFSR;
         CData/*0:0*/ __Vdly__top__DOT__csr_write;
@@ -212,11 +215,11 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__EXU__DOT__pc;
         IData/*31:0*/ top__DOT__EXU__DOT__rs1;
         IData/*31:0*/ top__DOT__EXU__DOT__rs2;
+    };
+    struct {
         IData/*31:0*/ top__DOT__EXU__DOT__imm;
         IData/*31:0*/ top__DOT__EXU__DOT__csr_rdata;
         IData/*31:0*/ top__DOT__EXU__DOT__a_in;
-    };
-    struct {
         IData/*31:0*/ top__DOT__EXU__DOT__b_in;
         IData/*31:0*/ top__DOT__EXU__DOT__pc_new;
         IData/*31:0*/ top__DOT__EXU__DOT__alu_result;

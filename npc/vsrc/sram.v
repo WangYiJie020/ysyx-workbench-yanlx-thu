@@ -173,26 +173,27 @@ module sram(
             bvalid_o <= 0;
             w_delay <= LFSR;
         end
-        else if(flag_waddr == 1 && flag_wdata == 1) begin
-            flag_write <= 1;
-            //if(wready_o == 1 && wvalid_i == 1)
-        end
-        if(flag_write == 1) begin
-            if(wdata_counter == w_delay) begin
-                wdata_counter <= 0;
-                pmem_write(awaddr,wdata,wstrb);
-                bresp_o <= 0;
-                bvalid_o <= 1;
-                flag_write <= 0;
-                w_delay <= LFSR;
+        else begin 
+            if(flag_waddr == 1 ) write_box[0] <= 1;
+            if(flag_wdata == 1) write_box[1] <= 1;
+
+            if(write_box == 2'11) begin
+                if(wdata_counter == w_delay) begin
+                    wdata_counter <= 0;
+                    pmem_write(awaddr,wdata,wstrb);
+                    bresp_o <= 0;
+                    bvalid_o <= 1;
+                    write_box <= 0;
+                    w_delay <= LFSR;
+                end else begin
+                    wdata_counter <= wdata_counter + 1;
+                    bresp_o <= 1;
+                    bvalid_o <= 0;
+                end
             end else begin
-                wdata_counter <= wdata_counter + 1;
                 bresp_o <= 1;
                 bvalid_o <= 0;
             end
-        end else begin
-            bresp_o <= 1;
-            bvalid_o <= 0;
         end
     end
     
