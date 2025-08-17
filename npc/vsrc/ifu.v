@@ -1,6 +1,6 @@
 `include "header.v"
 
-//`define DELAY
+`define DELAY
 module ifu(
     input clk,
     input rst_n,
@@ -195,7 +195,7 @@ module ifu(
             if(current_state == S_WAIT_RECEIVE) begin
                 rready_delay <= LFSR;
                 for(integer i=0; i<32; i=i+1) begin
-                    rready_buffer[i] <= 1'b1;
+                    rready_buffer[i] <= 1'b0;
                 end
             end
             else begin
@@ -242,6 +242,44 @@ module ifu(
             5'd30: begin arvalid_o = arvalid_buffer[30]; araddr_o = araddr_buffer[30]; end
             5'd31: begin arvalid_o = arvalid_buffer[31]; araddr_o = araddr_buffer[31]; end
             default: begin arvalid_o = arvalid_buffer[0]; araddr_o = araddr_buffer[0]; end
+        endcase
+    end
+
+    always@(*)begin
+        case(rready_delay)
+            5'd0:  begin rready_o = rready_buffer[0]; end
+            5'd1:  begin rready_o = rready_buffer[1]; end
+            5'd2:  begin rready_o = rready_buffer[2]; end
+            5'd3:  begin rready_o = rready_buffer[3]; end
+            5'd4:  begin rready_o = rready_buffer[4]; end
+            5'd5:  begin rready_o = rready_buffer[5]; end
+            5'd6:  begin rready_o = rready_buffer[6]; end
+            5'd7:  begin rready_o = rready_buffer[7]; end
+            5'd8:  begin rready_o = rready_buffer[8]; end
+            5'd9:  begin rready_o = rready_buffer[9]; end
+            5'd10: begin rready_o = rready_buffer[10]; end
+            5'd11: begin rready_o = rready_buffer[11]; end
+            5'd12: begin rready_o = rready_buffer[12]; end
+            5'd13: begin rready_o = rready_buffer[13]; end
+            5'd14: begin rready_o = rready_buffer[14]; end
+            5'd15: begin rready_o = rready_buffer[15]; end
+            5'd16: begin rready_o = rready_buffer[16]; end
+            5'd17: begin rready_o = rready_buffer[17]; end
+            5'd18: begin rready_o = rready_buffer[18]; end
+            5'd19: begin rready_o = rready_buffer[19]; end
+            5'd20: begin rready_o = rready_buffer[20]; end
+            5'd21: begin rready_o = rready_buffer[21]; end
+            5'd22: begin rready_o = rready_buffer[22]; end
+            5'd23: begin rready_o = rready_buffer[23]; end
+            5'd24: begin rready_o = rready_buffer[24]; end
+            5'd25: begin rready_o = rready_buffer[25]; end
+            5'd26: begin rready_o = rready_buffer[26]; end
+            5'd27: begin rready_o = rready_buffer[27]; end
+            5'd28: begin rready_o = rready_buffer[28]; end
+            5'd29: begin rready_o = rready_buffer[29]; end
+            5'd30: begin rready_o = rready_buffer[30]; end
+            5'd31: begin rready_o = rready_buffer[31]; end
+            default: begin rready_o = rready_buffer[0]; end
         endcase
     end
 

@@ -25,11 +25,9 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__ready_wbu_to_ifu;
         CData/*0:0*/ top__DOT__valid_ifu_to_idu;
         CData/*0:0*/ top__DOT__ready_ifu_to_idu;
-        CData/*0:0*/ top__DOT__ifu_arvalid;
         CData/*0:0*/ top__DOT__ifu_arready;
         CData/*0:0*/ top__DOT__ifu_rresp;
         CData/*0:0*/ top__DOT__ifu_rvalid;
-        CData/*0:0*/ top__DOT__ifu_rready;
         CData/*0:0*/ top__DOT__useless1;
         CData/*0:0*/ top__DOT__useless2;
         CData/*0:0*/ top__DOT__useless3;
@@ -83,12 +81,14 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__lsu_bresp;
         CData/*0:0*/ top__DOT__lsu_bvalid;
         CData/*0:0*/ top__DOT__lsu_bready;
-    };
-    struct {
         CData/*4:0*/ top__DOT__IFU__DOT__LFSR;
         CData/*4:0*/ top__DOT__IFU__DOT__arvalid_delay;
+    };
+    struct {
+        CData/*4:0*/ top__DOT__IFU__DOT__rready_delay;
         CData/*0:0*/ top__DOT__IFU__DOT__lfsr_in;
         CData/*0:0*/ top__DOT__IFU__DOT__arvalid;
+        CData/*0:0*/ top__DOT__IFU__DOT__rready;
         CData/*2:0*/ top__DOT__IFU__DOT__current_state;
         CData/*2:0*/ top__DOT__IFU__DOT__next_state;
         CData/*0:0*/ top__DOT__Inst_Mem__DOT__ar_state;
@@ -177,7 +177,6 @@ class Vtop___024root final : public VerilatedModule {
         SData/*9:0*/ __Vtableidx3;
         IData/*31:0*/ top__DOT__npc_wbu_to_ifu;
         IData/*31:0*/ top__DOT__pc_ifu_to_idu;
-        IData/*31:0*/ top__DOT__ifu_araddr;
         IData/*31:0*/ top__DOT__ifu_rdata;
         IData/*31:0*/ top__DOT__imm_idu_to_exu;
         IData/*31:0*/ top__DOT__csr_wdata;
@@ -188,9 +187,7 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__IFU__DOT__pc;
         IData/*31:0*/ top__DOT__IFU__DOT__npc;
         IData/*31:0*/ top__DOT__IFU__DOT__arvalid_buffer;
-        IData/*31:0*/ top__DOT__IFU__DOT__unnamedblk1__DOT__i;
-        IData/*31:0*/ top__DOT__IFU__DOT__unnamedblk2__DOT__i;
-        IData/*31:0*/ top__DOT__IFU__DOT__unnamedblk3__DOT__j;
+        IData/*31:0*/ top__DOT__IFU__DOT__rready_buffer;
         IData/*31:0*/ top__DOT__Inst_Mem__DOT__araddr;
         IData/*31:0*/ top__DOT__Inst_Mem__DOT__awaddr;
         IData/*31:0*/ top__DOT__Inst_Mem__DOT__wdata;
@@ -215,11 +212,11 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__LSU__DOT__csr_rdata_l_rs1;
         IData/*31:0*/ top__DOT__Data_Mem__DOT__araddr;
         IData/*31:0*/ top__DOT__Data_Mem__DOT__awaddr;
-    };
-    struct {
         IData/*31:0*/ top__DOT__Data_Mem__DOT__wdata;
         IData/*31:0*/ top__DOT__WBU__DOT__mem_data;
         IData/*31:0*/ top__DOT__WBU__DOT__datamem_readdata;
+    };
+    struct {
         IData/*31:0*/ top__DOT__WBU__DOT__alu_result;
         IData/*31:0*/ top__DOT__WBU__DOT__rs1;
         IData/*31:0*/ top__DOT__WBU__DOT__csr_rdata_l_rs1;
