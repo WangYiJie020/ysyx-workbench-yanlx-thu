@@ -126,7 +126,7 @@ module sram(
             end 
             else if(bresp_o == 0) begin
                 flag_waddr <= 0;
-            end //else flag_waddr <= 0;
+            end else flag_waddr <= 0;
         end
     end
 
@@ -157,7 +157,7 @@ module sram(
                 flag_wdata <= 1;
                 //pmem_write(awaddr,wdata,wstrb);
                 //bresp_o <= 0;
-            end //else flag_wdata <= 0;
+            end else flag_wdata <= 0;
             //else if(bresp_o == 0) begin
                 //flag_wdata <= 0;
                 //bresp_o <= 1;
@@ -176,7 +176,7 @@ module sram(
             flag_write <= 1;
             //if(wready_o == 1 && wvalid_i == 1)
         end
-        if(flag_write == 1) begin
+        else if(flag_write == 1) begin
             if(wdata_counter == w_delay) begin
                 wdata_counter <= 0;
                 pmem_write(awaddr,wdata,wstrb);
