@@ -1,6 +1,6 @@
 `include "header.v"
 
-//`define LSU_DELAY
+`define LSU_DELAY
 module lsu(
     input clk,
     input rst_n,
