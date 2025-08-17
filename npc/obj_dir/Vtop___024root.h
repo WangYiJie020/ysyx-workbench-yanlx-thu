@@ -160,6 +160,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ __Vdly__top__DOT__lsu_awvalid;
         CData/*0:0*/ __Vdly__top__DOT__lsu_wvalid;
         CData/*0:0*/ __Vdly__top__DOT__lsu_bready;
+        CData/*0:0*/ __Vdly__top__DOT__Data_Mem__DOT__ar_state;
         CData/*0:0*/ __Vdly__top__DOT__Data_Mem__DOT__flag_rdata;
         CData/*4:0*/ __Vdly__top__DOT__Data_Mem__DOT__rdata_counter;
         CData/*0:0*/ __Vdly__top__DOT__Data_Mem__DOT__w_state;
@@ -214,9 +215,9 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__LSU__DOT__csr_rdata_l_rs1;
         IData/*31:0*/ top__DOT__Data_Mem__DOT__araddr;
         IData/*31:0*/ top__DOT__Data_Mem__DOT__awaddr;
-        IData/*31:0*/ top__DOT__Data_Mem__DOT__wdata;
     };
     struct {
+        IData/*31:0*/ top__DOT__Data_Mem__DOT__wdata;
         IData/*31:0*/ top__DOT__WBU__DOT__mem_data;
         IData/*31:0*/ top__DOT__WBU__DOT__datamem_readdata;
         IData/*31:0*/ top__DOT__WBU__DOT__alu_result;
