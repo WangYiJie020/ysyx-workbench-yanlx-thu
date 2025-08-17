@@ -72,7 +72,7 @@ module lsu(
     
     reg flag,wvalid_tmp;
 
-    reg [4:0] LFSR, arvalid_delay, rready_delay, awvalid_delay;
+    reg [4:0] LFSR, arvalid_delay, rready_delay, awvalid_delay, wvalid_delay;
     reg lfsr_in;
 
     reg arvalid;
@@ -80,12 +80,18 @@ module lsu(
     reg rready;
     reg [`CPU_WIDTH-1:0] awaddr;
     reg awvalid;
+    reg [`CPU_WIDTH-1:0] wdata;
+    reg [7:0] wstrb;
+    reg wvalid;
 
     reg [31:0] arvalid_buffer ;
     reg [`CPU_WIDTH-1:0] araddr_buffer [31:0];
     reg [31:0] rready_buffer ;
     reg [31:0] awvalid_buffer ;
     reg [`CPU_WIDTH-1:0] awaddr_buffer [31:0];
+    reg [31:0] wvalid_buffer ;
+    reg [`CPU_WIDTH-1:0] waddr_buffer [31:0];
+    reg [7:0] wstrb_buffer [31:0];
 
     assign rmask_o = rmask;
     assign rs1_o = rs1;
@@ -97,10 +103,10 @@ module lsu(
 
     always@(*) begin
         case(wmask_i)
-            8'h01: wstrb_o = wmask_i << (alu_result[1:0]);
-            8'h03: wstrb_o = wmask_i << (alu_result[1:0]);
-            8'h0f: wstrb_o = wmask_i;
-            default: wstrb_o = wmask_i;
+            8'h01: wstrb = wmask_i << (alu_result[1:0]);
+            8'h03: wstrb = wmask_i << (alu_result[1:0]);
+            8'h0f: wstrb = wmask_i;
+            default: wstrb = wmask_i;
         endcase
     end
 
@@ -161,7 +167,7 @@ module lsu(
             if(current_state == S_IDLE) begin 
                 lsu_valid_o <= 0;
                 awvalid <= 0;
-                wvalid_o <= 0;
+                wvalid <= 0;
                 //arvalid <= 0;
                 rready <= 0;
                 bready_o <= 0;
@@ -174,7 +180,7 @@ module lsu(
                 
                 alu_result <= alu_result_i;
                 rs1 <= rs1_i;
-                wdata_o <= rs2_i;  
+                wdata <= rs2_i;  
                 
                 arvalid <= MemRead_i;
                 rready <= MemRead_i;        
@@ -183,7 +189,7 @@ module lsu(
                 rmask <= rmask_i;
 
                 awvalid <= MemWrite_i;
-                wvalid_o <= MemWrite_i;
+                wvalid <= MemWrite_i;
                 
                 wb_src_o <= wb_src_i;
                 csr_write_o <= csr_write_i;
@@ -207,7 +213,7 @@ module lsu(
                 else lsu_valid_o <= 1;
 
                 if(awvalid==1 && awready_i==1) awvalid <= 0;
-                if(wvalid_o==1 && wready_i==1) wvalid_o <= 0;
+                if(wvalid==1 && wready_i==1) wvalid <= 0;
                 if(arvalid==1 && arready_i==1) arvalid <= 0;
 
             end else if (current_state == S_SEND)begin
@@ -286,6 +292,25 @@ module lsu(
                 end
                 awaddr_buffer[0] <= awaddr;
                 awvalid_buffer[0] <= awvalid;
+            end
+
+            if(current_state == S_IDLE) begin
+                wvalid_delay <= LFSR;
+                for(integer i=0; i<32; i=i+1) begin
+                    waddr_buffer[i] <= 32'd0;
+                    wvalid_buffer[i] <= 1'b0;
+                    wstrb_buffer[i] <= 8'd0;
+                end
+            end
+            else begin
+                for(integer j=1; j<32; j=j+1) begin
+                    waddr_buffer[j] <= waddr_buffer[j-1];
+                    wvalid_buffer[j] <= wvalid_buffer[j-1];
+                    wstrb_buffer[j] <= wstrb_buffer[j-1];
+                end
+                waddr_buffer[0] <= waddr;
+                wvalid_buffer[0] <= wvalid;
+                wstrb_buffer[0] <= wstrb;
             end
         end
     end
@@ -404,12 +429,53 @@ module lsu(
         endcase
     end
 
+    always@(*)begin
+        case(wvalid_delay)
+            5'd0:  begin wvalid_o = wvalid_buffer[0]; waddr_o = waddr_buffer[0]; wstrb_o = wstrb_buffer[0]; end
+            5'd1:  begin wvalid_o = wvalid_buffer[1]; waddr_o = waddr_buffer[1]; wstrb_o = wstrb_buffer[1];end
+            5'd2:  begin wvalid_o = wvalid_buffer[2]; waddr_o = waddr_buffer[2]; wstrb_o = wstrb_buffer[2];end
+            5'd3:  begin wvalid_o = wvalid_buffer[3]; waddr_o = waddr_buffer[3]; wstrb_o = wstrb_buffer[3];end
+            5'd4:  begin wvalid_o = wvalid_buffer[4]; waddr_o = waddr_buffer[4]; wstrb_o = wstrb_buffer[4];end
+            5'd5:  begin wvalid_o = wvalid_buffer[5]; waddr_o = waddr_buffer[5]; wstrb_o = wstrb_buffer[5];end
+            5'd6:  begin wvalid_o = wvalid_buffer[6]; waddr_o = waddr_buffer[6]; wstrb_o = wstrb_buffer[6];end
+            5'd7:  begin wvalid_o = wvalid_buffer[7]; waddr_o = waddr_buffer[7]; wstrb_o = wstrb_buffer[7];end
+            5'd8:  begin wvalid_o = wvalid_buffer[8]; waddr_o = waddr_buffer[8]; wstrb_o = wstrb_buffer[8];end
+            5'd9:  begin wvalid_o = wvalid_buffer[9]; waddr_o = waddr_buffer[9]; wstrb_o = wstrb_buffer[9];end
+            5'd10: begin wvalid_o = wvalid_buffer[10]; waddr_o = waddr_buffer[10]; wstrb_o = wstrb_buffer[10];end
+            5'd11: begin wvalid_o = wvalid_buffer[11]; waddr_o = waddr_buffer[11]; wstrb_o = wstrb_buffer[11];end
+            5'd12: begin wvalid_o = wvalid_buffer[12]; waddr_o = waddr_buffer[12]; wstrb_o = wstrb_buffer[12];end
+            5'd13: begin wvalid_o = wvalid_buffer[13]; waddr_o = waddr_buffer[13]; wstrb_o = wstrb_buffer[13];end
+            5'd14: begin wvalid_o = wvalid_buffer[14]; waddr_o = waddr_buffer[14]; wstrb_o = wstrb_buffer[14];end
+            5'd15: begin wvalid_o = wvalid_buffer[15]; waddr_o = waddr_buffer[15]; wstrb_o = wstrb_buffer[15];end
+            5'd16: begin wvalid_o = wvalid_buffer[16]; waddr_o = waddr_buffer[16]; wstrb_o = wstrb_buffer[16];end
+            5'd17: begin wvalid_o = wvalid_buffer[17]; waddr_o = waddr_buffer[17]; wstrb_o = wstrb_buffer[17];end
+            5'd18: begin wvalid_o = wvalid_buffer[18]; waddr_o = waddr_buffer[18]; wstrb_o = wstrb_buffer[18];end
+            5'd19: begin wvalid_o = wvalid_buffer[19]; waddr_o = waddr_buffer[19]; wstrb_o = wstrb_buffer[19];end
+            5'd20: begin wvalid_o = wvalid_buffer[20]; waddr_o = waddr_buffer[20]; wstrb_o = wstrb_buffer[20];end
+            5'd21: begin wvalid_o = wvalid_buffer[21]; waddr_o = waddr_buffer[21]; wstrb_o = wstrb_buffer[21];end
+            5'd22: begin wvalid_o = wvalid_buffer[22]; waddr_o = waddr_buffer[22]; wstrb_o = wstrb_buffer[22];end
+            5'd23: begin wvalid_o = wvalid_buffer[23]; waddr_o = waddr_buffer[23]; wstrb_o = wstrb_buffer[23];end
+            5'd24: begin wvalid_o = wvalid_buffer[24]; waddr_o = waddr_buffer[24]; wstrb_o = wstrb_buffer[24];end
+            5'd25: begin wvalid_o = wvalid_buffer[25]; waddr_o = waddr_buffer[25]; wstrb_o = wstrb_buffer[25];end
+            5'd26: begin wvalid_o = wvalid_buffer[26]; waddr_o = waddr_buffer[26]; wstrb_o = wstrb_buffer[26];end
+            5'd27: begin wvalid_o = wvalid_buffer[27]; waddr_o = waddr_buffer[27]; wstrb_o = wstrb_buffer[27];end
+            5'd28: begin wvalid_o = wvalid_buffer[28]; waddr_o = waddr_buffer[28]; wstrb_o = wstrb_buffer[28];end
+            5'd29: begin wvalid_o = wvalid_buffer[29]; waddr_o = waddr_buffer[29]; wstrb_o = wstrb_buffer[29];end
+            5'd30: begin wvalid_o = wvalid_buffer[30]; waddr_o = waddr_buffer[30]; wstrb_o = wstrb_buffer[30];end
+            5'd31: begin wvalid_o = wvalid_buffer[31]; waddr_o = waddr_buffer[31]; wstrb_o = wstrb_buffer[31];end
+            default: begin wvalid_o = wvalid_buffer[0]; waddr_o = waddr_buffer[0]; wstrb_o = wstrb_buffer[0];end
+        endcase
+    end
+
 `else 
     assign arvalid_o = arvalid;
     assign araddr_o = araddr;
     assign rready_o = rready;
     assign awaddr_o = awaddr;
     assign awvalid_o = awvalid;
+    assign wvalid_o = wvalid;
+    assign wdata_o = wdata;
+    assign wstrb_o = wstrb;
 
 `endif
 
