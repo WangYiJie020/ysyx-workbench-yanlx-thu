@@ -172,6 +172,7 @@ module sram(
             bresp_o <= 1;
             bvalid_o <= 0;
             w_delay <= LFSR;
+            wdata_counter <= 0;
         end
         else begin 
             if(flag_waddr == 1 ) write_box[0] <= 1;
