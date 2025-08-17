@@ -451,7 +451,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
             __Vdlyvset__top__DOT__LSU__DOT__awaddr_buffer__v0 = 1U;
             __Vdlyvset__top__DOT__LSU__DOT__araddr_buffer__v0 = 1U;
             vlSelf->top__DOT__LSU__DOT__rready_buffer = 0U;
-            vlSelf->top__DOT__LSU__DOT__awvalid_delay = 3U;
+            vlSelf->top__DOT__LSU__DOT__awvalid_delay = 5U;
             vlSelf->top__DOT__LSU__DOT__rready_delay 
                 = vlSelf->top__DOT__LSU__DOT__LFSR;
             vlSelf->top__DOT__LSU__DOT__arvalid_delay 
