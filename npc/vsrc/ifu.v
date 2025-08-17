@@ -28,8 +28,7 @@ module ifu(
     wire [`PC_WIDTH-1:0] pc;
     reg [`PC_WIDTH-1:0] npc;
 
-    reg [4:0] LFSR;
-    reg [1:0] arvalid_delay;
+    reg [4:0] LFSR, arvalid_delay;
     reg lfsr_in;
 
     reg arvalid;
@@ -174,7 +173,7 @@ module ifu(
         end
         else begin
             if(current_state == S_WAIT_RECEIVE) begin
-                arvalid_delay <= LFSR[1:0];
+                arvalid_delay <= {4'd0,LFSR[1:0]};
                 for(integer i=0; i<32; i=i+1) begin
                     araddr_buffer[i] <= 32'd0;
                     arvalid_buffer[i] <= 1'b0;
