@@ -304,7 +304,7 @@ module lsu(
             end
             else begin
                 for(integer j=1; j<32; j=j+1) begin
-                    waddr_buffer[j] <= waddr_buffer[j-1];
+                    wdata_buffer[j] <= wdata_buffer[j-1];
                     wvalid_buffer[j] <= wvalid_buffer[j-1];
                     wstrb_buffer[j] <= wstrb_buffer[j-1];
                 end
