@@ -223,7 +223,7 @@ module lsu(
     end
 
 
-`ifdef IFU_DELAY
+`ifdef LSU_DELAY
 
     assign lfsr_in = LFSR[4] ^ LFSR[3] ^ LFSR[2] ^ LFSR[1] ^ LFSR[0];
     always@(posedge clk, negedge rst_n) begin
