@@ -174,7 +174,7 @@ module ifu(
         else begin
             if(current_state == S_WAIT_RECEIVE) begin
                 //arvalid_delay <= {3'd0,LFSR[1:0]};
-                arvalid_delay <= 4;
+                arvalid_delay <= 5;
                 for(integer i=0; i<32; i=i+1) begin
                     araddr_buffer[i] <= 32'd0;
                     arvalid_buffer[i] <= 1'b0;
