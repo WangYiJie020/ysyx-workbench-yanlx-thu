@@ -116,8 +116,8 @@ module sram(
                 awready_o <= 1;
                 aw_state <= 1;
             end
-            else if(aw_state == 1 && awvalid_i == 0) begin
-                aw_state <= 0;
+            else if(aw_state == 1) begin
+                if(awvalid_i == 0) aw_state <= 0;
                 awready_o <= 0;
             end
 
