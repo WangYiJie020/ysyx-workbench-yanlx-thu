@@ -206,7 +206,7 @@ module lsu(
                 end
                 else lsu_valid_o <= 1;
 
-                if(awvalid==1 && awready_i==1) awvalid <= 0;
+                if(awvalid==1 ) awvalid <= 0;
                 if(wvalid_o==1 && wready_i==1) wvalid_o <= 0;
                 if(arvalid==1 && arready_i==1) arvalid <= 0;
 
