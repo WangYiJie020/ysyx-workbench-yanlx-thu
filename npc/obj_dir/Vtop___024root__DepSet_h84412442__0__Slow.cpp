@@ -1822,6 +1822,183 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
             [0U];
     }
+    vlSelf->top__DOT__lsu_bready = (1U & ((0x10U & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                           ? ((8U & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                               ? ((4U 
+                                                   & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                   ? 
+                                                  ((2U 
+                                                    & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                    ? 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                     ? 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0x1fU)
+                                                     : 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0x1eU))
+                                                    : 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                     ? 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0x1dU)
+                                                     : 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0x1cU)))
+                                                   : 
+                                                  ((2U 
+                                                    & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                    ? 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                     ? 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0x1bU)
+                                                     : 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0x1aU))
+                                                    : 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                     ? 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0x19U)
+                                                     : 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0x18U))))
+                                               : ((4U 
+                                                   & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                   ? 
+                                                  ((2U 
+                                                    & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                    ? 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                     ? 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0x17U)
+                                                     : 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0x16U))
+                                                    : 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                     ? 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0x15U)
+                                                     : 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0x14U)))
+                                                   : 
+                                                  ((2U 
+                                                    & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                    ? 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                     ? 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0x13U)
+                                                     : 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0x12U))
+                                                    : 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                     ? 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0x11U)
+                                                     : 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0x10U)))))
+                                           : ((8U & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                               ? ((4U 
+                                                   & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                   ? 
+                                                  ((2U 
+                                                    & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                    ? 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                     ? 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0xfU)
+                                                     : 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0xeU))
+                                                    : 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                     ? 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0xdU)
+                                                     : 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0xcU)))
+                                                   : 
+                                                  ((2U 
+                                                    & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                    ? 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                     ? 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0xbU)
+                                                     : 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 0xaU))
+                                                    : 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                     ? 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 9U)
+                                                     : 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 8U))))
+                                               : ((4U 
+                                                   & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                   ? 
+                                                  ((2U 
+                                                    & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                    ? 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                     ? 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 7U)
+                                                     : 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 6U))
+                                                    : 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                     ? 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 5U)
+                                                     : 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 4U)))
+                                                   : 
+                                                  ((2U 
+                                                    & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                    ? 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                     ? 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 3U)
+                                                     : 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 2U))
+                                                    : 
+                                                   ((1U 
+                                                     & (IData)(vlSelf->top__DOT__LSU__DOT__bready_delay))
+                                                     ? 
+                                                    (vlSelf->top__DOT__LSU__DOT__bready_buffer 
+                                                     >> 1U)
+                                                     : vlSelf->top__DOT__LSU__DOT__bready_buffer))))));
     vlSelf->top__DOT__WBU__DOT__mem_data = ((4U & (IData)(vlSelf->top__DOT__WBU__DOT__rmask))
                                              ? ((2U 
                                                  & (IData)(vlSelf->top__DOT__WBU__DOT__rmask))
