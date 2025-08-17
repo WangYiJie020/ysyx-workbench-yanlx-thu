@@ -55,7 +55,7 @@ module sram(
                 arready_o <= 1;
                 ar_state <= 1;
             end
-            else if(ar_state <= 1) begin
+            else if(ar_state == 1 && arvalid_i == 0) begin
                 ar_state <= 0;
                 arready_o <= 0;
             end
