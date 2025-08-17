@@ -28,7 +28,7 @@ module ifu(
     wire [`PC_WIDTH-1:0] pc;
     reg [`PC_WIDTH-1:0] npc;
 
-    reg [4:0] LFSR,;
+    reg [4:0] LFSR;
     reg [1:0] arvalid_delay;
     reg lfsr_in;
 
