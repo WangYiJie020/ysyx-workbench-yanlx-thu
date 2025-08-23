@@ -72,8 +72,6 @@ module axi_arbiter(
     output reg bready_o
 );
 
-    localparam AR_IDLE = 3'b00,AR_RECEIVE = 3'b01,AR_SEND = 3'b10,AR_WAIT_SEND = 3'b11;
-    localparam AR_IDLE = 3'b00,AR_RECEIVE = 3'b01,AR_SEND = 3'b10,AR_WAIT_SEND = 3'b11;
 
     reg ar_switch,r_switch,aw_switch,w_switch,b_switch;
 
