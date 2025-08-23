@@ -72,31 +72,123 @@ module top(
 
   wire useless1,useless2,useless3,useless4;
 
-  sram Inst_Mem(
+  wire [`CPU_WIDTH-1:0] sram_araddr;
+  wire sram_arvalid;
+  wire sram_arready;
+  wire [`CPU_WIDTH-1:0] sram_rdata;
+  wire sram_rresp;
+  wire sram_rvalid;
+  wire sram_rready;
+  wire [`CPU_WIDTH-1:0] sram_awaddr;
+  wire sram_awvalid;
+  wire sram_awready;
+  wire [`CPU_WIDTH-1:0] sram_wdata;
+  wire [7:0] sram_wstrb;
+  wire sram_wvalid;
+  wire sram_wready;
+  wire sram_bresp;
+  wire sram_bvalid;
+  wire sram_bready;
+
+  axi_arbiter AXI_Arbiter(
     .clk(clk),
     .rst_n(rst_n),
 
-    .araddr_i(ifu_araddr),
-    .arvalid_i(ifu_arvalid),
-    .arready_o(ifu_arready),
+    //a
+    .araddr_i_a(ifu_araddr),
+    .arvalid_i_a(ifu_arvalid),
+    .arready_o_a(ifu_arready),
 
-    .rdata_o(ifu_rdata),
-    .rresp_o(ifu_rresp),
-    .rvalid_o(ifu_rvalid),
-    .rready_i(ifu_rready),
+    .rdata_o_a(ifu_rdata),
+    .rresp_o_a(ifu_rresp),
+    .rvalid_o_a(ifu_rvalid),
+    .rready_i_a(ifu_rready),
 
-    .awaddr_i(0),
-    .awvalid_i(0),
-    .awready_o(useless1),
+    .awaddr_i_a(0),
+    .awvalid_i_a(0),
+    .awready_o_a(useless1),
 
-    .wdata_i(0),
-    .wstrb_i(0),
-    .wvalid_i(0),
-    .wready_o(useless2),
+    .wdata_i_a(0),
+    .wstrb_i_a(0),
+    .wvalid_i_a(0),
+    .wready_o_a(useless2),
 
-    .bresp_o(useless3),
-    .bvalid_o(useless4),
-    .bready_i(0)
+    .bresp_o_a(useless3),
+    .bvalid_o_a(useless4),
+    .bready_i_a(0),
+
+    //b
+    .araddr_i_b(lsu_araddr),
+    .arvalid_i_b(lsu_arvalid),
+    .arready_o_b(lsu_arready),
+
+    .rdata_o_b(lsu_rdata),
+    .rresp_o_b(lsu_rresp),
+    .rvalid_o_b(lsu_rvalid),
+    .rready_i_b(lsu_rready),
+
+    .awaddr_i_b(lsu_awaddr),
+    .awvalid_i_b(lsu_awvalid),
+    .awready_o_b(lsu_awready),
+
+    .wdata_i_b(lsu_wdata),
+    .wstrb_i_b(lsu_wstrb),
+    .wvalid_i_b(lsu_wvalid),
+    .wready_o_b(lsu_wready),
+
+    .bresp_o_b(lsu_bresp),
+    .bvalid_o_b(lsu_bvalid),
+    .bready_i_b(lsu_bready),
+
+    //to mem
+    .araddr_o(sram_araddr),
+    .arvalid_o(sram_arvalid),
+    .arready_i(sram_arready),
+
+    .rdata_i(sram_rdata),
+    .rresp_i(sram_rresp),
+    .rvalid_i(sram_rvalid),
+    .rready_o(sram_rready),
+
+    .awaddr_o(sram_awaddr),
+    .awvalid_o(sram_awvalid),
+    .awready_i(sram_awready),
+
+    .wdata_o(sram_wdata),
+    .wstrb_o(sram_wstrb),
+    .wvalid_o(sram_wvalid),
+    .wready_i(sram_wready),
+
+    .bresp_i(sram_bresp),
+    .bvalid_i(sram_bvalid),
+    .bready_o(sram_bready)
+  );
+
+  sram Mem(
+    .clk(clk),
+    .rst_n(rst_n),
+
+    .araddr_i(sram_araddr),
+    .arvalid_i(sram_arvalid),
+    .arready_o(sram_arready),
+
+    .rdata_o(sram_rdata),
+    .rresp_o(sram_rresp),
+    .rvalid_o(sram_rvalid),
+    .rready_i(sram_rready),
+
+    .awaddr_i(sram_awaddr),
+    .awvalid_i(sram_awvalid),
+    .awready_o(sram_awready),
+
+    .wdata_i(sram_wdata),
+    .wstrb_i(sram_wstrb),
+    .wvalid_i(sram_wvalid),
+    .wready_o(sram_wready),
+
+    .bresp_o(sram_bresp),
+    .bvalid_o(sram_bvalid),
+    .bready_i(sram_bready)
   );
 
   wire [`REG_ADDR-1:0] raddr1;
@@ -360,32 +452,6 @@ module top(
     .bready_o(lsu_bready)
   );
 
-  sram Data_Mem(
-    .clk(clk),
-    .rst_n(rst_n),
-
-    .araddr_i(lsu_araddr),
-    .arvalid_i(lsu_arvalid),
-    .arready_o(lsu_arready),
-
-    .rdata_o(lsu_rdata),
-    .rresp_o(lsu_rresp),
-    .rvalid_o(lsu_rvalid),
-    .rready_i(lsu_rready),
-
-    .awaddr_i(lsu_awaddr),
-    .awvalid_i(lsu_awvalid),
-    .awready_o(lsu_awready),
-
-    .wdata_i(lsu_wdata),
-    .wstrb_i(lsu_wstrb),
-    .wvalid_i(lsu_wvalid),
-    .wready_o(lsu_wready),
-
-    .bresp_o(lsu_bresp),
-    .bvalid_o(lsu_bvalid),
-    .bready_i(lsu_bready)
-  );
 
   wbu WBU(
     .clk(clk),
