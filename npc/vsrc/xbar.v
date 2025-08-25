@@ -88,7 +88,7 @@ module xbar(
                 w_switch <= 1;
                 b_switch <= 1;
             end
-            else if(axi_awaddr_i == 32'h0xa0003f8) begin 
+            else if(axi_awaddr_i == 32'ha0003f8) begin 
                 aw_switch <= 0; 
                 w_switch <= 0;
                 b_switch <= 0;
