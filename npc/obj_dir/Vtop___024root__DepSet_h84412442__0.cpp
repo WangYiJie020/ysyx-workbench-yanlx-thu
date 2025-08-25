@@ -1173,7 +1173,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         if ((3U == (IData)(vlSelf->top__DOT__UART__DOT__write_box))) {
             if (VL_UNLIKELY(((IData)(vlSelf->top__DOT__UART__DOT__wdata_counter) 
                              == (IData)(vlSelf->top__DOT__UART__DOT__w_delay)))) {
-                VL_WRITEF("%c\n",8,(0xffU & vlSelf->top__DOT__UART__DOT__wdata));
+                VL_WRITEF("%3#",8,(0xffU & vlSelf->top__DOT__UART__DOT__wdata));
                 __Vdly__top__DOT__UART__DOT__wdata_counter = 0U;
                 __Vdly__top__DOT__uart_bresp = 0U;
                 vlSelf->top__DOT__uart_bvalid = 1U;
