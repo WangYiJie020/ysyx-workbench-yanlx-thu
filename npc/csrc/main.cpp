@@ -107,11 +107,11 @@ extern "C" void pmem_write(int waddr, int wdata, char wmask) {
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   //log_write("                               wmask=%x,waddr = %08x,data= %08x\n",wmask,waddr,wdata);
   time(&currentTimeABS);
-  if(waddr == SERIAL_PORT) {
-    putchar(wdata);
+  //if(waddr == SERIAL_PORT) {
+  //  putchar(wdata);
     //log_write("                               wmask=%x,waddr = %08x,data= %08x\n",wmask,waddr,wdata);
-    return;
-  }
+  //  return;
+  //}
   /*if(waddr == RTC_ADDR){
     start_time = currentTimeABS + wdata;
     return;
