@@ -515,6 +515,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__IFU__DOT__lfsr_in = (1U & VL_REDXOR_8(vlSelf->top__DOT__IFU__DOT__LFSR));
     vlSelf->top__DOT__Mem__DOT__lfsr_in = (1U & VL_REDXOR_8(vlSelf->top__DOT__Mem__DOT__LFSR));
     vlSelf->top__DOT__UART__DOT__lfsr_in = (1U & VL_REDXOR_8(vlSelf->top__DOT__UART__DOT__LFSR));
+    vlSelf->top__DOT__CLINT__DOT__lfsr_in = (1U & VL_REDXOR_8(vlSelf->top__DOT__CLINT__DOT__LFSR));
     vlSelf->top__DOT__LSU__DOT__lfsr_in = (1U & VL_REDXOR_8(vlSelf->top__DOT__LSU__DOT__LFSR));
     vlSelf->top__DOT__WBU__DOT__mem_data = ((4U & (IData)(vlSelf->top__DOT__WBU__DOT__rmask))
                                              ? ((2U 
@@ -2342,7 +2343,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                      : vlSelf->top__DOT__EXU__DOT__b_in))));
     vlSelf->top__DOT__axi_arready = ((IData)(vlSelf->top__DOT__Xbar__DOT__ar_switch)
                                       ? (IData)(vlSelf->top__DOT__sram_arready)
-                                      : (IData)(vlSelf->top__DOT__uart_arready));
+                                      : (IData)(vlSelf->top__DOT__clint_arready));
     if ((1U & (~ (IData)(vlSelf->top__DOT__AXI_Arbiter__DOT__ar_switch)))) {
         vlSelf->top__DOT__ifu_arready = vlSelf->top__DOT__axi_arready;
     }
@@ -2356,19 +2357,19 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     }
     vlSelf->top__DOT__axi_rresp = ((IData)(vlSelf->top__DOT__Xbar__DOT__r_switch)
                                     ? (IData)(vlSelf->top__DOT__sram_rresp)
-                                    : (IData)(vlSelf->top__DOT__uart_rresp));
+                                    : (IData)(vlSelf->top__DOT__clint_rresp));
     if (vlSelf->top__DOT__AXI_Arbiter__DOT__r_switch) {
         vlSelf->top__DOT__lsu_rresp = vlSelf->top__DOT__axi_rresp;
     }
     vlSelf->top__DOT__axi_rvalid = ((IData)(vlSelf->top__DOT__Xbar__DOT__r_switch)
                                      ? (IData)(vlSelf->top__DOT__sram_rvalid)
-                                     : (IData)(vlSelf->top__DOT__uart_rvalid));
+                                     : (IData)(vlSelf->top__DOT__clint_rvalid));
     if (vlSelf->top__DOT__AXI_Arbiter__DOT__r_switch) {
         vlSelf->top__DOT__lsu_rvalid = vlSelf->top__DOT__axi_rvalid;
     }
     vlSelf->top__DOT__axi_rdata = ((IData)(vlSelf->top__DOT__Xbar__DOT__r_switch)
                                     ? vlSelf->top__DOT__sram_rdata
-                                    : vlSelf->top__DOT__uart_rdata);
+                                    : vlSelf->top__DOT__clint_rdata);
     if (vlSelf->top__DOT__AXI_Arbiter__DOT__r_switch) {
         vlSelf->top__DOT__lsu_rdata = vlSelf->top__DOT__axi_rdata;
         vlSelf->top__DOT__axi_rready = vlSelf->top__DOT__lsu_rready;
@@ -2506,7 +2507,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         [0U];
     if (VL_UNLIKELY((0x100073U == vlSelf->top__DOT__ifu_rdata))) {
         Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();
-        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 631, "");
+        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 699, "");
     }
     if (vlSelf->top__DOT__Xbar__DOT__r_switch) {
         vlSelf->top__DOT__sram_rready = vlSelf->top__DOT__axi_rready;
@@ -2540,11 +2541,11 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__uart_bready = vlSelf->top__DOT__axi_bready;
     }
     if ((1U & (~ (IData)(vlSelf->top__DOT__Xbar__DOT__ar_switch)))) {
-        vlSelf->top__DOT__uart_arvalid = vlSelf->top__DOT__axi_arvalid;
-        vlSelf->top__DOT__uart_araddr = vlSelf->top__DOT__axi_araddr;
+        vlSelf->top__DOT__clint_arvalid = vlSelf->top__DOT__axi_arvalid;
+        vlSelf->top__DOT__clint_araddr = vlSelf->top__DOT__axi_araddr;
     }
     if ((1U & (~ (IData)(vlSelf->top__DOT__Xbar__DOT__r_switch)))) {
-        vlSelf->top__DOT__uart_rready = vlSelf->top__DOT__axi_rready;
+        vlSelf->top__DOT__clint_rready = vlSelf->top__DOT__axi_rready;
     }
     vlSelf->top__DOT__csr_reg[3U] = vlSelf->top__DOT____Vcellout__IDU__csr_reg
         [3U];
