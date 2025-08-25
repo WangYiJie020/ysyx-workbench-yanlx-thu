@@ -180,7 +180,7 @@ module uart(
                 if(wdata_counter == w_delay) begin
                     wdata_counter <= 0;
                     //pmem_write(awaddr,wdata,wstrb);
-                    $display("%c",wdata);
+                    $display("%c",wdata[7:0]);
                     bresp_o <= 0;
                     bvalid_o <= 1;
                     write_box <= 0;
