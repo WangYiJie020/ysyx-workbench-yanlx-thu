@@ -72,6 +72,42 @@ module top(
 
   wire useless1,useless2,useless3,useless4;
 
+  wire [`CPU_WIDTH-1:0] axi_araddr;
+  wire axi_arvalid;
+  wire axi_arready;
+  wire [`CPU_WIDTH-1:0] axi_rdata;
+  wire axi_rresp;
+  wire axi_rvalid;
+  wire axi_rready;
+  wire [`CPU_WIDTH-1:0] axi_awaddr;
+  wire axi_awvalid;
+  wire axi_awready;
+  wire [`CPU_WIDTH-1:0] axi_wdata;
+  wire [7:0] axi_wstrb;
+  wire axi_wvalid;
+  wire axi_wready;
+  wire axi_bresp;
+  wire axi_bvalid;
+  wire axi_bready;
+
+  wire [`CPU_WIDTH-1:0] uart_araddr;
+  wire uart_arvalid;
+  wire uart_arready;
+  wire [`CPU_WIDTH-1:0] uart_rdata;
+  wire uart_rresp;
+  wire uart_rvalid;
+  wire uart_rready;
+  wire [`CPU_WIDTH-1:0] uart_awaddr;
+  wire uart_awvalid;
+  wire uart_awready;
+  wire [`CPU_WIDTH-1:0] uart_wdata;
+  wire [7:0] uart_wstrb;
+  wire uart_wvalid;
+  wire uart_wready;
+  wire uart_bresp;
+  wire uart_bvalid;
+  wire uart_bready;
+
   wire [`CPU_WIDTH-1:0] sram_araddr;
   wire sram_arvalid;
   wire sram_arready;
@@ -140,28 +176,102 @@ module top(
     .bvalid_o_b(lsu_bvalid),
     .bready_i_b(lsu_bready),
 
+    //to xbar
+    .araddr_o(axi_araddr),
+    .arvalid_o(axi_arvalid),
+    .arready_i(axi_arready),
+
+    .rdata_i(axi_rdata),
+    .rresp_i(axi_rresp),
+    .rvalid_i(axi_rvalid),
+    .rready_o(axi_rready),
+
+    .awaddr_o(axi_awaddr),
+    .awvalid_o(axi_awvalid),
+    .awready_i(axi_awready),
+
+    .wdata_o(axi_wdata),
+    .wstrb_o(axi_wstrb),
+    .wvalid_o(axi_wvalid),
+    .wready_i(axi_wready),
+
+    .bresp_i(axi_bresp),
+    .bvalid_i(axi_bvalid),
+    .bready_o(axi_bready)
+  );
+
+  xbar Xbar(
+    .clk(clk),
+    .rst_n(rst_n),
+
+    //in
+    .axi_araddr_i(axi_araddr),
+    .axi_arvalid_i(axi_arvalid),
+    .axi_arready_o(axi_arready),
+
+    .axi_rdata_o(axi_rdata),
+    .axi_rresp_o(axi_rresp),
+    .axi_rvalid_o(axi_rvalid),
+    .axi_rready_i(axi_rready),
+
+    .axi_awaddr_i(axi_awaddr),
+    .axi_awvalid_i(axi_awvalid),
+    .axi_awready_o(axi_awready),
+
+    .axi_wdata_i(axi_wdata),
+    .axi_wstrb_i(axi_wstrb),
+    .axi_wvalid_i(axi_wvalid),
+    .axi_wready_o(axi_wready),
+
+    .axi_bresp_o(axi_bresp),
+    .axi_bvalid_o(axi_bvalid),
+    .axi_bready_i(axi_bready),
+
     //to mem
-    .araddr_o(sram_araddr),
-    .arvalid_o(sram_arvalid),
-    .arready_i(sram_arready),
+    .sram_araddr_o(sram_araddr),
+    .sram_arvalid_o(sram_arvalid),
+    .sram_arready_i(sram_arready),
 
-    .rdata_i(sram_rdata),
-    .rresp_i(sram_rresp),
-    .rvalid_i(sram_rvalid),
-    .rready_o(sram_rready),
+    .sram_rdata_i(sram_rdata),
+    .sram_rresp_i(sram_rresp),
+    .sram_rvalid_i(sram_rvalid),
+    .sram_rready_o(sram_rready),
 
-    .awaddr_o(sram_awaddr),
-    .awvalid_o(sram_awvalid),
-    .awready_i(sram_awready),
+    .sram_awaddr_o(sram_awaddr),
+    .sram_awvalid_o(sram_awvalid),
+    .sram_awready_i(sram_awready),
 
-    .wdata_o(sram_wdata),
-    .wstrb_o(sram_wstrb),
-    .wvalid_o(sram_wvalid),
-    .wready_i(sram_wready),
+    .sram_wdata_o(sram_wdata),
+    .sram_wstrb_o(sram_wstrb),
+    .sram_wvalid_o(sram_wvalid),
+    .sram_wready_i(sram_wready),
 
-    .bresp_i(sram_bresp),
-    .bvalid_i(sram_bvalid),
-    .bready_o(sram_bready)
+    .sram_bresp_i(sram_bresp),
+    .sram_bvalid_i(sram_bvalid),
+    .sram_bready_o(sram_bready),
+
+    //to uart
+    .uart_araddr_o(uart_araddr),
+    .uart_arvalid_o(uart_arvalid),
+    .uart_arready_i(uart_arready),
+
+    .uart_rdata_i(uart_rdata),
+    .uart_rresp_i(uart_rresp),
+    .uart_rvalid_i(uart_rvalid),
+    .uart_rready_o(uart_rready),
+
+    .uart_awaddr_o(uart_awaddr),
+    .uart_awvalid_o(uart_awvalid),
+    .uart_awready_i(uart_awready),
+
+    .uart_wdata_o(uart_wdata),
+    .uart_wstrb_o(uart_wstrb),
+    .uart_wvalid_o(uart_wvalid),
+    .uart_wready_i(uart_wready),
+
+    .uart_bresp_i(uart_bresp),
+    .uart_bvalid_i(uart_bvalid),
+    .uart_bready_o(uart_bready)
   );
 
   sram Mem(
@@ -189,6 +299,33 @@ module top(
     .bresp_o(sram_bresp),
     .bvalid_o(sram_bvalid),
     .bready_i(sram_bready)
+  );
+
+  uart UART(
+    .clk(clk),
+    .rst_n(rst_n),
+
+    .araddr_i(uart_araddr),
+    .arvalid_i(uart_arvalid),
+    .arready_o(uart_arready),
+
+    .rdata_o(uart_rdata),
+    .rresp_o(uart_rresp),
+    .rvalid_o(uart_rvalid),
+    .rready_i(uart_rready),
+
+    .awaddr_i(uart_awaddr),
+    .awvalid_i(uart_awvalid),
+    .awready_o(uart_awready),
+
+    .wdata_i(uart_wdata),
+    .wstrb_i(uart_wstrb),
+    .wvalid_i(uart_wvalid),
+    .wready_o(uart_wready),
+
+    .bresp_o(uart_bresp),
+    .bvalid_o(uart_bvalid),
+    .bready_i(uart_bready)
   );
 
   wire [`REG_ADDR-1:0] raddr1;
