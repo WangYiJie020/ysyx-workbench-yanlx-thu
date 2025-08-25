@@ -49,7 +49,7 @@ int flag = 0;
 
 extern "C" int pmem_read(int raddr) {
   // 总是读取地址为`raddr & ~0x3u`的4字节返回
-  
+  /*
   time(&currentTimeABS);
   uint64_t time = (currentTimeABS - start_time)*1000000;
   if(raddr == RTC_ADDR){
@@ -79,6 +79,7 @@ extern "C" int pmem_read(int raddr) {
   else{
     is_skip_ref = false;
   }
+  */
   uint32_t return_data;
   uint32_t tmp = (uint32_t)raddr /4; //int类型是有符号的，要转成无符号的
   //uint32_t align = (uint32_t)raddr % 4;
