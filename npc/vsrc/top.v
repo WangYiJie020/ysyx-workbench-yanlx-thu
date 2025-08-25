@@ -126,6 +126,24 @@ module top(
   wire sram_bvalid;
   wire sram_bready;
 
+  wire [`CPU_WIDTH-1:0] clint_araddr;
+  wire clint_arvalid;
+  wire clint_arready;
+  wire [`CPU_WIDTH-1:0] clint_rdata;
+  wire clint_rresp;
+  wire clint_rvalid;
+  wire clint_rready;
+  wire [`CPU_WIDTH-1:0] clint_awaddr;
+  wire clint_awvalid;
+  wire clint_awready;
+  wire [`CPU_WIDTH-1:0] clint_wdata;
+  wire [7:0] clint_wstrb;
+  wire clint_wvalid;
+  wire clint_wready;
+  wire clint_bresp;
+  wire clint_bvalid;
+  wire clint_bready;
+
   axi_arbiter AXI_Arbiter(
     .clk(clk),
     .rst_n(rst_n),
@@ -271,7 +289,30 @@ module top(
 
     .uart_bresp_i(uart_bresp),
     .uart_bvalid_i(uart_bvalid),
-    .uart_bready_o(uart_bready)
+    .uart_bready_o(uart_bready),
+
+    //to clint
+    .clint_araddr_o(clint_araddr),
+    .clint_arvalid_o(clint_arvalid),
+    .clint_arready_i(clint_arready),
+
+    .clint_rdata_i(clint_rdata),
+    .clint_rresp_i(clint_rresp),
+    .clint_rvalid_i(clint_rvalid),
+    .clint_rready_o(clint_rready),
+
+    .clint_awaddr_o(clint_awaddr),
+    .clint_awvalid_o(clint_awvalid),
+    .clint_awready_i(clint_awready),
+
+    .clint_wdata_o(clint_wdata),
+    .clint_wstrb_o(clint_wstrb),
+    .clint_wvalid_o(clint_wvalid),
+    .clint_wready_i(clint_wready),
+
+    .clint_bresp_i(clint_bresp),
+    .clint_bvalid_i(clint_bvalid),
+    .clint_bready_o(clint_bready)
   );
 
   sram Mem(
@@ -326,6 +367,33 @@ module top(
     .bresp_o(uart_bresp),
     .bvalid_o(uart_bvalid),
     .bready_i(uart_bready)
+  );
+
+  clint CLINT(
+    .clk(clk),
+    .rst_n(rst_n),
+
+    .araddr_i(clint_araddr),
+    .arvalid_i(clint_arvalid),
+    .arready_o(clint_arready),
+
+    .rdata_o(clint_rdata),
+    .rresp_o(clint_rresp),
+    .rvalid_o(clint_rvalid),
+    .rready_i(clint_rready),
+
+    .awaddr_i(clint_awaddr),
+    .awvalid_i(clint_awvalid),
+    .awready_o(clint_awready),
+
+    .wdata_i(clint_wdata),
+    .wstrb_i(clint_wstrb),
+    .wvalid_i(clint_wvalid),
+    .wready_o(clint_wready),
+
+    .bresp_o(clint_bresp),
+    .bvalid_o(clint_bvalid),
+    .bready_i(clint_bready)
   );
 
   wire [`REG_ADDR-1:0] raddr1;

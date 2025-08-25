@@ -69,7 +69,30 @@ module xbar(
 
     input uart_bresp_i,
     input uart_bvalid_i,
-    output reg uart_bready_o
+    output reg uart_bready_o,
+
+    //to clint 
+    output reg [`CPU_WIDTH-1:0] clint_araddr_o,
+    output reg clint_arvalid_o,
+    input clint_arready_i,
+
+    input [`CPU_WIDTH-1:0] clint_rdata_i,
+    input clint_rresp_i,
+    input clint_rvalid_i,
+    output reg clint_rready_o,
+
+    output [`CPU_WIDTH-1:0] clint_awaddr_o,
+    output clint_awvalid_o,
+    input clint_awready_i,
+
+    output reg [`CPU_WIDTH-1:0] clint_wdata_o,
+    output reg [7:0] clint_wstrb_o,
+    output reg clint_wvalid_o,
+    input clint_wready_i,
+
+    input clint_bresp_i,
+    input clint_bvalid_i,
+    output reg clint_bready_o
 );
 
     reg ar_switch,r_switch,aw_switch,w_switch,b_switch;
@@ -93,6 +116,15 @@ module xbar(
                 w_switch <= 0;
                 b_switch <= 0;
             end
+
+            if(axi_araddr_i == 32'ha0000048 || axi_araddr_i == 32'ha000004c) begin
+                ar_switch <= 0;
+                r_switch <= 0;
+            end
+            else begin
+                ar_switch <= 1;
+                r_switch <= 1;
+            end
             
         end
     end
@@ -105,9 +137,9 @@ module xbar(
                 axi_arready_o = sram_arready_i;
             end
             default: begin
-                uart_araddr_o = axi_araddr_i;
-                uart_arvalid_o = axi_arvalid_i;
-                axi_arready_o = uart_arready_i;
+                clint_araddr_o = axi_araddr_i;
+                clint_arvalid_o = axi_arvalid_i;
+                axi_arready_o = clint_arready_i;
             end
         endcase
     end
@@ -121,10 +153,10 @@ module xbar(
                 sram_rready_o = axi_rready_i;
             end
             default: begin
-                axi_rdata_o = uart_rdata_i;
-                axi_rresp_o = uart_rresp_i;
-                axi_rvalid_o = uart_rvalid_i;
-                uart_rready_o = axi_rready_i;
+                axi_rdata_o = clint_rdata_i;
+                axi_rresp_o = clint_rresp_i;
+                axi_rvalid_o = clint_rvalid_i;
+                clint_rready_o = axi_rready_i;
             end
         endcase
     end
