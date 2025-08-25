@@ -1068,7 +1068,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
             vlSelf->top__DOT__Xbar__DOT__aw_switch = 1U;
             vlSelf->top__DOT__Xbar__DOT__b_switch = 1U;
             vlSelf->top__DOT__Xbar__DOT__w_switch = 1U;
-        } else if ((0xa0003f8U == vlSelf->top__DOT__axi_awaddr)) {
+        } else if ((0xa00003f8U == vlSelf->top__DOT__axi_awaddr)) {
             vlSelf->top__DOT__Xbar__DOT__aw_switch = 0U;
             vlSelf->top__DOT__Xbar__DOT__b_switch = 0U;
             vlSelf->top__DOT__Xbar__DOT__w_switch = 0U;
