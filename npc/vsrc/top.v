@@ -48,10 +48,16 @@ module top(
     .rst_n(rst_n),
 
     .araddr_o(ifu_araddr),
+    .arid_o(),
+    .arlen_o(),
+    .arsize_o(),
+    .arburst_o(),
     .arvalid_o(ifu_arvalid),
     .arready_i(ifu_arready),
     .rdata_i(ifu_rdata),
     .rresp_i(ifu_rresp),
+    .rlast_i(0),
+    .rid_i(0),
     .rvalid_i(ifu_rvalid),
     .rready_o(ifu_rready),
 
@@ -150,70 +156,106 @@ module top(
 
     //a
     .araddr_i_a(ifu_araddr),
+    .arid_i_a(0),
+    .arlen_i_a(0),
+    .arsize_i_a(0),
+    .arburst_i_a(0),
     .arvalid_i_a(ifu_arvalid),
     .arready_o_a(ifu_arready),
 
     .rdata_o_a(ifu_rdata),
     .rresp_o_a(ifu_rresp),
+    .rlast_o_a(),
+    .rid_o_a(),
     .rvalid_o_a(ifu_rvalid),
     .rready_i_a(ifu_rready),
 
     .awaddr_i_a(0),
+    .awid_i_a(0),
+    .awlen_i_a(0),
+    .awsize_i_a(0),
+    .awburst_i_a(0),
     .awvalid_i_a(0),
-    .awready_o_a(useless1),
+    .awready_o_a(),
 
     .wdata_i_a(0),
     .wstrb_i_a(0),
+    .wlast_i_a(0),
     .wvalid_i_a(0),
-    .wready_o_a(useless2),
+    .wready_o_a(),
 
-    .bresp_o_a(useless3),
-    .bvalid_o_a(useless4),
+    .bresp_o_a(),
+    .bid_o_a(),
+    .bvalid_o_a(),
     .bready_i_a(0),
 
     //b
     .araddr_i_b(lsu_araddr),
+    .arid_i_b(0),
+    .arlen_i_b(0),
+    .arsize_i_b(0),
+    .arburst_i_b(0),
     .arvalid_i_b(lsu_arvalid),
     .arready_o_b(lsu_arready),
 
     .rdata_o_b(lsu_rdata),
     .rresp_o_b(lsu_rresp),
+    .rlast_o_b(),
+    .rid_o_b(),
     .rvalid_o_b(lsu_rvalid),
     .rready_i_b(lsu_rready),
 
     .awaddr_i_b(lsu_awaddr),
+    .awid_i_b(0),
+    .awlen_i_b(0),
+    .awsize_i_b(0),
+    .awburst_i_b(0),
     .awvalid_i_b(lsu_awvalid),
     .awready_o_b(lsu_awready),
 
     .wdata_i_b(lsu_wdata),
     .wstrb_i_b(lsu_wstrb),
+    .wlast_i_b(0),
     .wvalid_i_b(lsu_wvalid),
     .wready_o_b(lsu_wready),
 
     .bresp_o_b(lsu_bresp),
+    .bid_o_b(),
     .bvalid_o_b(lsu_bvalid),
     .bready_i_b(lsu_bready),
 
     //to xbar
     .araddr_o(axi_araddr),
+    .arid_o(),
+    .arlen_o(),
+    .arsize_o(),
+    .arburst_o(),
     .arvalid_o(axi_arvalid),
     .arready_i(axi_arready),
 
     .rdata_i(axi_rdata),
     .rresp_i(axi_rresp),
+    .rlast_i(0),
+    .rid_i(0),
     .rvalid_i(axi_rvalid),
     .rready_o(axi_rready),
 
     .awaddr_o(axi_awaddr),
+    .awid_o(),
+    .awlen_o(),
+    .awsize_o(),
+    .awburst_o(),
     .awvalid_o(axi_awvalid),
     .awready_i(axi_awready),
 
     .wdata_o(axi_wdata),
     .wstrb_o(axi_wstrb),
+    .wlast_o(),
     .wvalid_o(axi_wvalid),
     .wready_i(axi_wready),
 
     .bresp_i(axi_bresp),
+    .bid_i(0)
     .bvalid_i(axi_bvalid),
     .bready_o(axi_bready)
   );
@@ -224,93 +266,141 @@ module top(
 
     //in
     .axi_araddr_i(axi_araddr),
+    .axi_arid_i(0),
+    .axi_arlen_i(0),
+    .axi_arsize_i(0),
+    .axi_arburst_i(0),
     .axi_arvalid_i(axi_arvalid),
     .axi_arready_o(axi_arready),
 
     .axi_rdata_o(axi_rdata),
     .axi_rresp_o(axi_rresp),
+    .axi_rlast_o(),
+    .axi_rid_o(),
     .axi_rvalid_o(axi_rvalid),
     .axi_rready_i(axi_rready),
 
     .axi_awaddr_i(axi_awaddr),
+    .axi_awid_i(0),
+    .axi_awlen_i(0),
+    .axi_awsize_i(0),
+    .axi_awburst_i(0),
     .axi_awvalid_i(axi_awvalid),
     .axi_awready_o(axi_awready),
-
+    
     .axi_wdata_i(axi_wdata),
     .axi_wstrb_i(axi_wstrb),
+    .axi_wlast_i(0),
     .axi_wvalid_i(axi_wvalid),
     .axi_wready_o(axi_wready),
 
     .axi_bresp_o(axi_bresp),
+    .axi_bid_o(),
     .axi_bvalid_o(axi_bvalid),
     .axi_bready_i(axi_bready),
 
     //to mem
     .sram_araddr_o(sram_araddr),
+    .sram_arid_o(),
+    .sram_arlen_o(),
+    .sram_arsize_o(),
+    .sram_arburst_o(),
     .sram_arvalid_o(sram_arvalid),
     .sram_arready_i(sram_arready),
 
     .sram_rdata_i(sram_rdata),
     .sram_rresp_i(sram_rresp),
+    .sram_rlast_i(0),
+    .sram_rid_i(0),
     .sram_rvalid_i(sram_rvalid),
     .sram_rready_o(sram_rready),
 
     .sram_awaddr_o(sram_awaddr),
+    .sram_awid_o(),
+    .sram_awlen_o(),
+    .sram_awsize_o(),
+    .sram_awburst_o(),
     .sram_awvalid_o(sram_awvalid),
     .sram_awready_i(sram_awready),
 
     .sram_wdata_o(sram_wdata),
     .sram_wstrb_o(sram_wstrb),
+    .sram_wlast_o(),
     .sram_wvalid_o(sram_wvalid),
     .sram_wready_i(sram_wready),
 
     .sram_bresp_i(sram_bresp),
+    .sram_bid_i(0),
     .sram_bvalid_i(sram_bvalid),
     .sram_bready_o(sram_bready),
 
     //to uart
     .uart_araddr_o(uart_araddr),
+    .uart_arid_o(),
+    .uart_arlen_o(),
+    .uart_arsize_o(),
+    .uart_arburst_o(),
     .uart_arvalid_o(uart_arvalid),
     .uart_arready_i(uart_arready),
 
     .uart_rdata_i(uart_rdata),
     .uart_rresp_i(uart_rresp),
+    .uart_rlast_i(0),
+    .uart_rid_i(0),
     .uart_rvalid_i(uart_rvalid),
     .uart_rready_o(uart_rready),
 
     .uart_awaddr_o(uart_awaddr),
+    .uart_awid_o(),
+    .uart_awlen_o(),
+    .uart_awsize_o(),
+    .uart_awburst_o(),
     .uart_awvalid_o(uart_awvalid),
     .uart_awready_i(uart_awready),
 
     .uart_wdata_o(uart_wdata),
     .uart_wstrb_o(uart_wstrb),
+    .uart_wlast_o(),
     .uart_wvalid_o(uart_wvalid),
     .uart_wready_i(uart_wready),
 
     .uart_bresp_i(uart_bresp),
+    .uart_bid_i(0),
     .uart_bvalid_i(uart_bvalid),
     .uart_bready_o(uart_bready),
 
     //to clint
     .clint_araddr_o(clint_araddr),
+    .clint_arid_o(),
+    .clint_arlen_o(),
+    .clint_arsize_o(),
+    .clint_arburst_o(),
     .clint_arvalid_o(clint_arvalid),
     .clint_arready_i(clint_arready),
 
     .clint_rdata_i(clint_rdata),
     .clint_rresp_i(clint_rresp),
+    .clint_rlast_i(0),
+    .clint_rid_i(0),
     .clint_rvalid_i(clint_rvalid),
     .clint_rready_o(clint_rready),
 
     .clint_awaddr_o(clint_awaddr),
+    .clint_awid_o(),
+    .clint_awlen_o(),
+    .clint_awsize_o(),
+    .clint_awburst_o(),
     .clint_awvalid_o(clint_awvalid),
     .clint_awready_i(clint_awready),
 
     .clint_wdata_o(clint_wdata),
     .clint_wstrb_o(clint_wstrb),
+    .clint_wlast_o(),
     .clint_wvalid_o(clint_wvalid),
     .clint_wready_i(clint_wready),
 
     .clint_bresp_i(clint_bresp),
+    .clint_bid_i(0),
     .clint_bvalid_i(clint_bvalid),
     .clint_bready_o(clint_bready)
   );
@@ -320,24 +410,36 @@ module top(
     .rst_n(rst_n),
 
     .araddr_i(sram_araddr),
+    .arid_i(),
+    .arlen_i(),
+    .arsize_i(),
+    .arburst_i(),
     .arvalid_i(sram_arvalid),
     .arready_o(sram_arready),
 
     .rdata_o(sram_rdata),
     .rresp_o(sram_rresp),
+    .rlast_o(),
+    .rid_o(),
     .rvalid_o(sram_rvalid),
     .rready_i(sram_rready),
 
     .awaddr_i(sram_awaddr),
+    .awid_i(0),
+    .awlen_i(0),
+    .awsize_i(0),
+    .awburst_i(0),
     .awvalid_i(sram_awvalid),
     .awready_o(sram_awready),
 
     .wdata_i(sram_wdata),
     .wstrb_i(sram_wstrb),
+    .wlast_i(0),
     .wvalid_i(sram_wvalid),
     .wready_o(sram_wready),
 
     .bresp_o(sram_bresp),
+    .bid_o(),
     .bvalid_o(sram_bvalid),
     .bready_i(sram_bready)
   );
@@ -347,24 +449,36 @@ module top(
     .rst_n(rst_n),
 
     .araddr_i(uart_araddr),
+    .arid_i(0),
+    .arlen_i(0),
+    .arsize_i(0),
+    .arburst_i(0),
     .arvalid_i(uart_arvalid),
     .arready_o(uart_arready),
 
     .rdata_o(uart_rdata),
     .rresp_o(uart_rresp),
+    .rlast_o(),
+    .rid_o(),
     .rvalid_o(uart_rvalid),
     .rready_i(uart_rready),
 
     .awaddr_i(uart_awaddr),
+    .awid_i(0),
+    .awlen_i(0),
+    .awsize_i(0),
+    .awburst_i(0),
     .awvalid_i(uart_awvalid),
     .awready_o(uart_awready),
 
     .wdata_i(uart_wdata),
     .wstrb_i(uart_wstrb),
+    .wlast_i(0),
     .wvalid_i(uart_wvalid),
     .wready_o(uart_wready),
 
     .bresp_o(uart_bresp),
+    .bid_o(),
     .bvalid_o(uart_bvalid),
     .bready_i(uart_bready)
   );
@@ -374,24 +488,36 @@ module top(
     .rst_n(rst_n),
 
     .araddr_i(clint_araddr),
+    .arid_i(0),
+    .arlen_i(0),
+    .arsize_i(0),
+    .arburst_i(0),
     .arvalid_i(clint_arvalid),
     .arready_o(clint_arready),
 
     .rdata_o(clint_rdata),
     .rresp_o(clint_rresp),
+    .rlast_o(),
+    .rid_o(),
     .rvalid_o(clint_rvalid),
     .rready_i(clint_rready),
 
     .awaddr_i(clint_awaddr),
+    .awid_i(0),
+    .awlen_i(0),
+    .awsize_i(0),
+    .awburst_i(0),
     .awvalid_i(clint_awvalid),
     .awready_o(clint_awready),
 
     .wdata_i(clint_wdata),
     .wstrb_i(clint_wstrb),
+    .wlast_i(0),
     .wvalid_i(clint_wvalid),
     .wready_o(clint_wready),
 
     .bresp_o(clint_bresp),
+    .bid_o(),
     .bvalid_o(clint_bvalid),
     .bready_i(clint_bready)
   );
