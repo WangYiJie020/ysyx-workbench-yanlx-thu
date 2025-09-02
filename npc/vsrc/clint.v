@@ -213,11 +213,11 @@ module clint(
                     w_delay <= LFSR;
                 end else begin
                     wdata_counter <= wdata_counter + 1;
-                    bresp_o <= 2'b10
+                    bresp_o <= 2'b10;
                     bvalid_o <= 0;
                 end
             end else begin
-                bresp_o <= 2'b10
+                bresp_o <= 2'b10;
                 bvalid_o <= 0;
             end
         end

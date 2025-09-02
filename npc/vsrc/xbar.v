@@ -57,13 +57,13 @@ module xbar(
     output [3:0] sram_awid_o,
     output [7:0] sram_awlen_o,
     output [2:0] sram_awsize_o,
-    output [1:0] sram_awburst_o
+    output [1:0] sram_awburst_o,
     output sram_awvalid_o,
     input sram_awready_i,
 
     output reg [`CPU_WIDTH-1:0] sram_wdata_o,
     output reg [7:0] sram_wstrb_o,
-    output sram_wlast_o,
+    output reg sram_wlast_o,
     output reg sram_wvalid_o,
     input sram_wready_i,
 
