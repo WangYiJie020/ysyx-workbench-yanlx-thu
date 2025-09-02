@@ -2570,14 +2570,12 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__sram_bready = vlSelf->top__DOT__axi_bready;
     }
     if ((1U & (~ (IData)(vlSelf->top__DOT__Xbar__DOT__w_switch)))) {
-        vlSelf->top__DOT____Vcellout__Xbar__uart_wstrb_o 
-            = vlSelf->top__DOT__axi_wstrb;
+        vlSelf->top__DOT__uart_wstrb = vlSelf->top__DOT__axi_wstrb;
         vlSelf->top__DOT__uart_wvalid = vlSelf->top__DOT__axi_wvalid;
         vlSelf->top__DOT__uart_wdata = vlSelf->top__DOT__axi_wdata;
     }
     if (vlSelf->top__DOT__Xbar__DOT__w_switch) {
-        vlSelf->top__DOT____Vcellout__Xbar__sram_wstrb_o 
-            = vlSelf->top__DOT__axi_wstrb;
+        vlSelf->top__DOT__sram_wstrb = vlSelf->top__DOT__axi_wstrb;
         vlSelf->top__DOT__sram_wvalid = vlSelf->top__DOT__axi_wvalid;
         vlSelf->top__DOT__sram_wdata = vlSelf->top__DOT__axi_wdata;
     }

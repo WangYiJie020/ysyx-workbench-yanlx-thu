@@ -208,6 +208,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__uart_awvalid = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__uart_awready = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__uart_wdata = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT__uart_wstrb = VL_RAND_RESET_I(4);
     vlSelf->top__DOT__uart_wvalid = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__uart_wready = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__uart_bresp = VL_RAND_RESET_I(2);
@@ -224,6 +225,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__sram_awvalid = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__sram_awready = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__sram_wdata = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT__sram_wstrb = VL_RAND_RESET_I(4);
     vlSelf->top__DOT__sram_wvalid = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__sram_wready = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__sram_bresp = VL_RAND_RESET_I(2);
@@ -240,6 +242,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__clint_awvalid = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__clint_awready = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__clint_wdata = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT__clint_wstrb = VL_RAND_RESET_I(4);
     vlSelf->top__DOT__clint_wvalid = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__clint_wready = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__clint_bresp = VL_RAND_RESET_I(2);
@@ -247,9 +250,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__clint_bready = VL_RAND_RESET_I(1);
     vlSelf->top__DOT____Vcellout__AXI_Arbiter__rresp_o_b = VL_RAND_RESET_I(1);
     vlSelf->top__DOT____Vcellout__AXI_Arbiter__rresp_o_a = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT____Vcellout__Xbar__clint_wstrb_o = VL_RAND_RESET_I(8);
-    vlSelf->top__DOT____Vcellout__Xbar__uart_wstrb_o = VL_RAND_RESET_I(8);
-    vlSelf->top__DOT____Vcellout__Xbar__sram_wstrb_o = VL_RAND_RESET_I(8);
     vlSelf->top__DOT__imm_idu_to_exu = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__a_in_src_idu_to_exu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__b_in_src_idu_to_exu = VL_RAND_RESET_I(2);

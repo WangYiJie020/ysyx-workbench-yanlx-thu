@@ -27,7 +27,7 @@ module axi_arbiter(
     output reg awready_o_a,
 
     input [`CPU_WIDTH-1:0] wdata_i_a,
-    input [7:0] wstrb_i_a,
+    input [3:0] wstrb_i_a,
     input wlast_i_a,
     input wvalid_i_a,
     output reg wready_o_a,
@@ -62,7 +62,7 @@ module axi_arbiter(
     output reg awready_o_b,
 
     input [`CPU_WIDTH-1:0] wdata_i_b,
-    input [7:0] wstrb_i_b,
+    input [3:0] wstrb_i_b,
     input wlast_i_b,
     input wvalid_i_b,
     output reg wready_o_b,
