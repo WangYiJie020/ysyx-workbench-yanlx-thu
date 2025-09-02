@@ -45,7 +45,7 @@ module clint(
     reg [`CPU_WIDTH-1:0] araddr;
     reg [`CPU_WIDTH-1:0] awaddr;
     reg [`CPU_WIDTH-1:0] wdata;
-    reg [7:0] wstrb;
+    reg [3:0] wstrb;
     reg wvalid;
     reg flag_waddr,flag_wdata,flag_rdata,flag_raddr,flag_write;
     reg [4:0] rdata_counter,wdata_counter,w_delay,r_delay;

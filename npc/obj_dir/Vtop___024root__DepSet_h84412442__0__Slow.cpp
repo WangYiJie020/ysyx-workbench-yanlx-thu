@@ -694,12 +694,12 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__AXI_Arbiter__DOT__rlast_o_a = 0U;
         vlSelf->top__DOT__AXI_Arbiter__DOT__rid_o_a = 0U;
     }
-    vlSelf->top__DOT____Vcellout__Xbar__axi_rresp_o 
-        = ((IData)(vlSelf->top__DOT__Xbar__DOT__r_switch)
-            ? (1U & (IData)(vlSelf->top__DOT____Vcellout__Mem__rresp_o))
-            : (1U & (IData)(vlSelf->top__DOT____Vcellout__CLINT__rresp_o)));
+    vlSelf->top__DOT__axi_rresp = ((IData)(vlSelf->top__DOT__Xbar__DOT__r_switch)
+                                    ? (IData)(vlSelf->top__DOT__sram_rresp)
+                                    : (IData)(vlSelf->top__DOT__clint_rresp));
     if ((1U & (~ (IData)(vlSelf->top__DOT__AXI_Arbiter__DOT__r_switch)))) {
-        vlSelf->top__DOT__ifu_rresp = (1U & (IData)(vlSelf->top__DOT____Vcellout__Xbar__axi_rresp_o));
+        vlSelf->top__DOT____Vcellout__AXI_Arbiter__rresp_o_a 
+            = (1U & (IData)(vlSelf->top__DOT__axi_rresp));
     }
     vlSelf->top__DOT__axi_rvalid = ((IData)(vlSelf->top__DOT__Xbar__DOT__r_switch)
                                      ? (IData)(vlSelf->top__DOT__sram_rvalid)
@@ -716,13 +716,12 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     if ((1U & (~ (IData)(vlSelf->top__DOT__AXI_Arbiter__DOT__b_switch)))) {
         vlSelf->top__DOT__AXI_Arbiter__DOT__bid_o_a = 0U;
     }
-    vlSelf->top__DOT____Vcellout__Xbar__axi_bresp_o 
-        = ((IData)(vlSelf->top__DOT__Xbar__DOT__b_switch)
-            ? (1U & (IData)(vlSelf->top__DOT____Vcellout__Mem__bresp_o))
-            : (1U & (IData)(vlSelf->top__DOT____Vcellout__UART__bresp_o)));
+    vlSelf->top__DOT__axi_bresp = ((IData)(vlSelf->top__DOT__Xbar__DOT__b_switch)
+                                    ? (IData)(vlSelf->top__DOT__sram_bresp)
+                                    : (IData)(vlSelf->top__DOT__uart_bresp));
     if ((1U & (~ (IData)(vlSelf->top__DOT__AXI_Arbiter__DOT__b_switch)))) {
         vlSelf->top__DOT__AXI_Arbiter__DOT__bresp_o_a 
-            = (1U & (IData)(vlSelf->top__DOT____Vcellout__Xbar__axi_bresp_o));
+            = vlSelf->top__DOT__axi_bresp;
     }
     vlSelf->top__DOT__axi_bvalid = ((IData)(vlSelf->top__DOT__Xbar__DOT__b_switch)
                                      ? (IData)(vlSelf->top__DOT__sram_bvalid)
@@ -733,8 +732,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     }
     if (vlSelf->top__DOT__AXI_Arbiter__DOT__b_switch) {
         vlSelf->top__DOT__AXI_Arbiter__DOT__bid_o_b = 0U;
-        vlSelf->top__DOT____Vcellout__AXI_Arbiter__bresp_o_b 
-            = (1U & (IData)(vlSelf->top__DOT____Vcellout__Xbar__axi_bresp_o));
+        vlSelf->top__DOT__lsu_bresp = vlSelf->top__DOT__axi_bresp;
         vlSelf->top__DOT__lsu_bvalid = vlSelf->top__DOT__axi_bvalid;
     }
     if ((0x10U & (IData)(vlSelf->top__DOT__LSU__DOT__awvalid_delay))) {
@@ -2247,7 +2245,8 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     if (vlSelf->top__DOT__AXI_Arbiter__DOT__r_switch) {
         vlSelf->top__DOT__AXI_Arbiter__DOT__rlast_o_b = 0U;
         vlSelf->top__DOT__AXI_Arbiter__DOT__rid_o_b = 0U;
-        vlSelf->top__DOT__lsu_rresp = (1U & (IData)(vlSelf->top__DOT____Vcellout__Xbar__axi_rresp_o));
+        vlSelf->top__DOT____Vcellout__AXI_Arbiter__rresp_o_b 
+            = (1U & (IData)(vlSelf->top__DOT__axi_rresp));
         vlSelf->top__DOT__lsu_rvalid = vlSelf->top__DOT__axi_rvalid;
         vlSelf->top__DOT__lsu_rdata = vlSelf->top__DOT__axi_rdata;
         vlSelf->top__DOT__axi_rready = vlSelf->top__DOT__lsu_rready;
@@ -2585,7 +2584,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     }
     if (VL_UNLIKELY((0x100073U == vlSelf->top__DOT__ifu_rdata))) {
         Vtop___024unit____Vdpiimwrap_ebreak_TOP____024unit();
-        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 825, "");
+        VL_FINISH_MT("/home/yanlx/ysyx-workbench/npc/vsrc/top.v", 837, "");
     }
     if (vlSelf->top__DOT__Xbar__DOT__r_switch) {
         vlSelf->top__DOT__sram_rready = vlSelf->top__DOT__axi_rready;

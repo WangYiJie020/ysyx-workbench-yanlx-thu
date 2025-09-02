@@ -89,7 +89,7 @@ module top(
   wire axi_awvalid;
   wire axi_awready;
   wire [`CPU_WIDTH-1:0] axi_wdata;
-  wire [7:0] axi_wstrb;
+  wire [3:0] axi_wstrb;
   wire axi_wvalid;
   wire axi_wready;
   wire [1:0] axi_bresp;
@@ -107,7 +107,7 @@ module top(
   wire uart_awvalid;
   wire uart_awready;
   wire [`CPU_WIDTH-1:0] uart_wdata;
-  wire [7:0] uart_wstrb;
+  wire [3:0] uart_wstrb;
   wire uart_wvalid;
   wire uart_wready;
   wire [1:0] uart_bresp;
@@ -125,7 +125,7 @@ module top(
   wire sram_awvalid;
   wire sram_awready;
   wire [`CPU_WIDTH-1:0] sram_wdata;
-  wire [7:0] sram_wstrb;
+  wire [3:0] sram_wstrb;
   wire sram_wvalid;
   wire sram_wready;
   wire [1:0] sram_bresp;
@@ -143,7 +143,7 @@ module top(
   wire clint_awvalid;
   wire clint_awready;
   wire [`CPU_WIDTH-1:0] clint_wdata;
-  wire [7:0] clint_wstrb;
+  wire [3:0] clint_wstrb;
   wire clint_wvalid;
   wire clint_wready;
   wire [1:0] clint_bresp;
@@ -714,7 +714,7 @@ module top(
   wire lsu_awvalid;
   wire lsu_awready;
   wire [`CPU_WIDTH-1:0] lsu_wdata;
-  wire [7:0] lsu_wstrb;
+  wire [3:0] lsu_wstrb;
   wire lsu_wvalid;
   wire lsu_wready;
   wire [1:0] lsu_bresp;

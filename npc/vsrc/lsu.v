@@ -93,7 +93,7 @@ module lsu(
     reg [`CPU_WIDTH-1:0] awaddr;
     reg awvalid;
     reg [`CPU_WIDTH-1:0] wdata;
-    reg [7:0] wstrb;
+    reg [3:0] wstrb;
     reg wvalid;
     reg bready;
 

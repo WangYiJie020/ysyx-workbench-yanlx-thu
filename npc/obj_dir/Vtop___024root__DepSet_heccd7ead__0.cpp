@@ -230,12 +230,13 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
             vlSelf->top__DOT__valid_lsu_to_wbu = (1U 
                                                   & ((IData)(vlSelf->top__DOT__MemRead_exu_to_lsu)
                                                       ? 
-                                                     (~ (IData)(vlSelf->top__DOT__lsu_rresp))
+                                                     (~ (IData)(vlSelf->top__DOT____Vcellout__AXI_Arbiter__rresp_o_b))
                                                       : 
                                                      ((~ (IData)(vlSelf->top__DOT__MemWrite_exu_to_lsu)) 
                                                       | (((IData)(vlSelf->top__DOT__LSU__DOT__bready) 
                                                           & (IData)(vlSelf->top__DOT__lsu_bvalid)) 
-                                                         & (~ (IData)(vlSelf->top__DOT____Vcellout__AXI_Arbiter__bresp_o_b))))));
+                                                         & (0U 
+                                                            == (IData)(vlSelf->top__DOT__lsu_bresp))))));
         } else if ((2U == (IData)(vlSelf->top__DOT__LSU__DOT__current_state))) {
             vlSelf->top__DOT__ready_exu_to_lsu = 1U;
             vlSelf->__Vdly__top__DOT__LSU__DOT__arvalid = 0U;
@@ -332,7 +333,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
     }
     if (vlSelf->top__DOT__AXI_Arbiter__DOT__r_switch) {
         vlSelf->top__DOT__lsu_rdata = vlSelf->top__DOT__axi_rdata;
-        vlSelf->top__DOT__lsu_rresp = (1U & (IData)(vlSelf->top__DOT____Vcellout__Xbar__axi_rresp_o));
+        vlSelf->top__DOT____Vcellout__AXI_Arbiter__rresp_o_b 
+            = (1U & (IData)(vlSelf->top__DOT__axi_rresp));
     }
     vlSelf->top__DOT__WBU__DOT__mem_data = ((4U & (IData)(vlSelf->top__DOT__WBU__DOT__rmask))
                                              ? ((2U 
@@ -467,8 +469,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
     vlSelf->top__DOT__LSU__DOT__bready = vlSelf->__Vdly__top__DOT__LSU__DOT__bready;
     if (vlSelf->top__DOT__AXI_Arbiter__DOT__b_switch) {
         vlSelf->top__DOT__lsu_bvalid = vlSelf->top__DOT__axi_bvalid;
-        vlSelf->top__DOT____Vcellout__AXI_Arbiter__bresp_o_b 
-            = (1U & (IData)(vlSelf->top__DOT____Vcellout__Xbar__axi_bresp_o));
+        vlSelf->top__DOT__lsu_bresp = vlSelf->top__DOT__axi_bresp;
     }
     vlSelf->__Vtableidx6 = (((IData)(vlSelf->top__DOT__ready_wbu_to_ifu) 
                              << 5U) | (((IData)(vlSelf->top__DOT__valid_wbu_to_ifu) 
