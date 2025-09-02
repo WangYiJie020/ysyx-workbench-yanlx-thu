@@ -195,7 +195,7 @@ module sram(
             if(write_box == 2'b11) begin
                 if(wdata_counter == w_delay) begin
                     wdata_counter <= 0;
-                    pmem_write(awaddr,wdata,wstrb);
+                    pmem_write(awaddr,wdata,{4'd0,wstrb});
                     bresp_o <= 0;
                     bvalid_o <= 1;
                     write_box <= 0;
