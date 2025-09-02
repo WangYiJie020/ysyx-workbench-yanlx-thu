@@ -628,7 +628,7 @@ module top(
   wire [`PC_WIDTH-1:0] npc_exu_to_lsu;
   wire MemRead_exu_to_lsu;
   wire MemWrite_exu_to_lsu;
-  wire [7:0] wmask_exu_to_lsu;
+  wire [3:0] wmask_exu_to_lsu;
   wire [2:0] rmask_exu_to_lsu;
   wire wb_src_exu_to_lsu;
   wire csr_write_exu_to_lsu;

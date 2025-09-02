@@ -258,7 +258,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__alu_op_idu_to_exu = VL_RAND_RESET_I(4);
     vlSelf->top__DOT__MemRead_idu_to_exu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__MemWrite_idu_to_exu = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__wmask_idu_to_exu = VL_RAND_RESET_I(8);
     vlSelf->top__DOT__rmask_idu_to_exu = VL_RAND_RESET_I(3);
     vlSelf->top__DOT__wb_src_idu_to_exu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__csr_write_idu_to_exu = VL_RAND_RESET_I(1);
@@ -284,7 +283,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     }
     vlSelf->top__DOT__MemRead_exu_to_lsu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__MemWrite_exu_to_lsu = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__wmask_exu_to_lsu = VL_RAND_RESET_I(8);
     vlSelf->top__DOT__rmask_exu_to_lsu = VL_RAND_RESET_I(3);
     vlSelf->top__DOT__wb_src_exu_to_lsu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__csr_write_exu_to_lsu = VL_RAND_RESET_I(1);
@@ -293,6 +291,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__waddr_exu_to_lsu = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__valid_exu_to_lsu = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__ready_exu_to_lsu = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT____Vcellout__EXU__wmask_o = VL_RAND_RESET_I(4);
     vlSelf->top__DOT__csr_rdata_l_rs1_lsu_to_wbu = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__npc_lsu_to_wbu = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__wb_src_lsu_to_wbu = VL_RAND_RESET_I(1);
@@ -474,6 +473,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__CLINT__DOT__time_counter = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__IDU__DOT__pc = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__IDU__DOT__inst = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT__IDU__DOT__wmask_tmp = VL_RAND_RESET_I(8);
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
         vlSelf->top__DOT__IDU__DOT____Vcellout__CSR__csr_reg[__Vi0] = VL_RAND_RESET_I(32);
     }

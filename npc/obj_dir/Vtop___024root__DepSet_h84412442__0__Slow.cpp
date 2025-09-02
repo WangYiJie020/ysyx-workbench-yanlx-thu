@@ -2238,7 +2238,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         [vlSelf->__Vtableidx3];
     vlSelf->top__DOT__MemWrite_idu_to_exu = Vtop__ConstPool__TABLE_h22430f06_0
         [vlSelf->__Vtableidx3];
-    vlSelf->top__DOT__wmask_idu_to_exu = Vtop__ConstPool__TABLE_hd0c4a6d6_0
+    vlSelf->top__DOT__IDU__DOT__wmask_tmp = Vtop__ConstPool__TABLE_hd0c4a6d6_0
         [vlSelf->__Vtableidx3];
     vlSelf->top__DOT__wb_src_idu_to_exu = Vtop__ConstPool__TABLE_he56f561c_0
         [vlSelf->__Vtableidx3];
