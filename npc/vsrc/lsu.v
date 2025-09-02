@@ -104,7 +104,7 @@ module lsu(
     reg [`CPU_WIDTH-1:0] awaddr_buffer [31:0];
     reg [31:0] wvalid_buffer ;
     reg [`CPU_WIDTH-1:0] wdata_buffer [31:0];
-    reg [7:0] wstrb_buffer [31:0];
+    reg [3:0] wstrb_buffer [31:0];
     reg [31:0] bready_buffer;
 
     assign rmask_o = rmask;
