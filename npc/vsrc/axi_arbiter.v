@@ -12,7 +12,7 @@ module axi_arbiter(
     output reg arready_o_a,
 
     output reg [`CPU_WIDTH-1:0] rdata_o_a,
-    output reg rresp_o_a,
+    output reg [1:0] rresp_o_a,
     output reg rlast_o_a,
     output reg [3:0] rid_o_a,
     output reg rvalid_o_a,
@@ -47,7 +47,7 @@ module axi_arbiter(
     output reg arready_o_b,
 
     output reg [`CPU_WIDTH-1:0] rdata_o_b,
-    output reg rresp_o_b,
+    output reg [1:0] rresp_o_b,
     output reg rlast_o_b,
     output reg [3:0] rid_o_b,
     output reg rvalid_o_b,
