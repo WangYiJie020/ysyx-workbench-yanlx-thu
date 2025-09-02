@@ -127,7 +127,7 @@ module xbar(
     output [3:0] clint_awid_o,
     output [7:0] clint_awlen_o,
     output [2:0] clint_awsize_o,
-    output [1:0] clint_awburst_o
+    output [1:0] clint_awburst_o,
     output clint_awvalid_o,
     input clint_awready_i,
 
