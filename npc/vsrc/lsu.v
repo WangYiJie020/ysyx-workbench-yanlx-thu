@@ -59,7 +59,7 @@ module lsu(
     output [3:0] awid_o,
     output [7:0] awlen_o,
     output [2:0] awsize_o,
-    output [1:0] awburst_o
+    output [1:0] awburst_o,
     output awvalid_o,
     input awready_i,
 
