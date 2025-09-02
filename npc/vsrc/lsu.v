@@ -126,9 +126,9 @@ module lsu(
 
     always@(*) begin
         case(wmask_i)
-            8'h01: wstrb = wmask_i << (alu_result[1:0]);
-            8'h03: wstrb = wmask_i << (alu_result[1:0]);
-            8'h0f: wstrb = wmask_i;
+            4'h1: wstrb = wmask_i << (alu_result[1:0]);
+            4'h3: wstrb = wmask_i << (alu_result[1:0]);
+            4'hf: wstrb = wmask_i;
             default: wstrb = wmask_i;
         endcase
     end
