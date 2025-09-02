@@ -28,7 +28,7 @@ module idu(
     //idu to exu to lsu or wbu
     output MemRead_o,
     output MemWrite_o,
-    output [7:0] wmask_o,
+    output [3:0] wmask_o,
     output [2:0] rmask_o,
     output wb_src_o,
     output csr_write_o,
@@ -55,6 +55,9 @@ module idu(
     assign raddr1 = inst[19:15];
     assign raddr2 = inst[24:20];
 
+    wire [7:0] wmask_tmp;
+    assign wmask_o = wmask_tmp[3:0];
+
     controler Controler(
         .inst(inst),
         .a_in_src(a_in_src_o),
@@ -64,7 +67,7 @@ module idu(
         .pc_srcs(pc_srcs_o),
         .MemRead(MemRead_o),
         .MemWrite(MemWrite_o),
-        .wmask(wmask_o),
+        .wmask(wmask_tmp),
         .wb_src(wb_src_o),
         .rmask(rmask_o),
         .csr_write(csr_write_o),

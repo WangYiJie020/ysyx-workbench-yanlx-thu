@@ -12,7 +12,7 @@ module lsu(
     input [`PC_WIDTH-1:0] npc_i,
     input MemRead_i,
     input MemWrite_i,
-    input [7:0] wmask_i,
+    input [3:0] wmask_i,
     input [2:0] rmask_i,
     input wb_src_i,
     input csr_write_i,

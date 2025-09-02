@@ -3583,8 +3583,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
                  & (IData)(vlSelf->top__DOT__ifu_arready))) {
                 __Vdly__top__DOT__IFU__DOT__arvalid = 0U;
             }
-            vlSelf->top__DOT__valid_ifu_to_idu = (1U 
-                                                  & (~ (IData)(vlSelf->top__DOT__ifu_rresp)));
+            vlSelf->top__DOT__valid_ifu_to_idu = (0U 
+                                                  == (IData)(vlSelf->top__DOT__ifu_rresp));
             vlSelf->top__DOT__IFU__DOT__rready = 1U;
         }
     } else {

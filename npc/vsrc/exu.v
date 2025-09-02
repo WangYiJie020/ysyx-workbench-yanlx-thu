@@ -17,7 +17,7 @@ module exu(
     //idu to exu to lsu or wbu
     input MemRead_i,
     input MemWrite_i,
-    input [7:0] wmask_i,
+    input [3:0] wmask_i,
     input [2:0] rmask_i,
     input wb_src_i,
     input csr_write_i,
@@ -36,7 +36,7 @@ module exu(
     output [`PC_WIDTH-1:0] npc_o,
     output reg MemRead_o,
     output reg MemWrite_o,
-    output reg [7:0] wmask_o,
+    output reg [3:0] wmask_o,
     output reg [2:0] rmask_o,
     output reg wb_src_o,
     output reg csr_write_o,
