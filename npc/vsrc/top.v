@@ -255,7 +255,7 @@ module top(
     .wready_i(axi_wready),
 
     .bresp_i(axi_bresp),
-    .bid_i(0)
+    .bid_i(0),
     .bvalid_i(axi_bvalid),
     .bready_o(axi_bready)
   );
