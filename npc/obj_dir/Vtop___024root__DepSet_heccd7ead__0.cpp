@@ -301,8 +301,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
             vlSelf->top__DOT__EXU__DOT__alu_op = vlSelf->top__DOT__alu_op_idu_to_exu;
             vlSelf->top__DOT__MemRead_exu_to_lsu = vlSelf->top__DOT__MemRead_idu_to_exu;
             vlSelf->top__DOT__MemWrite_exu_to_lsu = vlSelf->top__DOT__MemWrite_idu_to_exu;
-            vlSelf->top__DOT____Vcellout__EXU__wmask_o 
-                = (0xfU & (IData)(vlSelf->top__DOT__IDU__DOT__wmask_tmp));
+            vlSelf->top__DOT__wmask_exu_to_lsu = (0xfU 
+                                                  & (IData)(vlSelf->top__DOT__IDU__DOT__wmask_tmp));
             vlSelf->top__DOT__rmask_exu_to_lsu = vlSelf->top__DOT__rmask_idu_to_exu;
             vlSelf->top__DOT__wb_src_exu_to_lsu = vlSelf->top__DOT__wb_src_idu_to_exu;
             vlSelf->top__DOT__csr_write_exu_to_lsu 

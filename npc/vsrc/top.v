@@ -541,7 +541,7 @@ module top(
   //idu to exu to lsu or wbu
   wire MemRead_idu_to_exu;
   wire MemWrite_idu_to_exu;
-  wire [7:0] wmask_idu_to_exu;
+  wire [3:0] wmask_idu_to_exu;
   wire [2:0] rmask_idu_to_exu;
   wire wb_src_idu_to_exu;
   wire csr_write_idu_to_exu;
