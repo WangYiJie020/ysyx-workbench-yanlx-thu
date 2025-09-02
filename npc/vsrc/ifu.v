@@ -13,7 +13,7 @@ module ifu(
     output reg arvalid_o,
     input arready_i,
     input [`CPU_WIDTH-1:0] rdata_i,
-    input rresp_i,
+    input [1:0] rresp_i,
     input rlast_i,
     input [3:0] rid_i,
     input rvalid_i,
