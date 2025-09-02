@@ -777,7 +777,7 @@ module top(
 
     .awaddr_o(lsu_awaddr),
     .awid_o(),
-    .awlen_o()
+    .awlen_o(),
     .awsize_o(),
     .awburst_o(),
     .awvalid_o(lsu_awvalid),
