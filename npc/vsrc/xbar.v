@@ -92,7 +92,7 @@ module xbar(
     output [3:0] uart_awid_o,
     output [7:0] uart_awlen_o,
     output [2:0] uart_awsize_o,
-    output [1:0] uart_awburst_o
+    output [1:0] uart_awburst_o,
     output uart_awvalid_o,
     input uart_awready_i,
 
