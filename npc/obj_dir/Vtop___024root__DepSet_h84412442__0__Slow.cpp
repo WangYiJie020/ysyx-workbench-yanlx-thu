@@ -963,8 +963,8 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                 if ((2U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
                     if ((1U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
                         vlSelf->top__DOT__lsu_wstrb 
-                            = (0xfU & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                               [0x1fU]);
+                            = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                            [0x1fU];
                         vlSelf->top__DOT__lsu_wvalid 
                             = (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                      >> 0x1fU));
@@ -973,8 +973,8 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                             [0x1fU];
                     } else {
                         vlSelf->top__DOT__lsu_wstrb 
-                            = (0xfU & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                               [0x1eU]);
+                            = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                            [0x1eU];
                         vlSelf->top__DOT__lsu_wvalid 
                             = (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                      >> 0x1eU));
@@ -983,18 +983,16 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                             [0x1eU];
                     }
                 } else if ((1U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
-                    vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                                   & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                                   [0x1dU]);
+                    vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                        [0x1dU];
                     vlSelf->top__DOT__lsu_wvalid = 
                         (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                >> 0x1dU));
                     vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
                         [0x1dU];
                 } else {
-                    vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                                   & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                                   [0x1cU]);
+                    vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                        [0x1cU];
                     vlSelf->top__DOT__lsu_wvalid = 
                         (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                >> 0x1cU));
@@ -1003,18 +1001,16 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                 }
             } else if ((2U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
                 if ((1U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
-                    vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                                   & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                                   [0x1bU]);
+                    vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                        [0x1bU];
                     vlSelf->top__DOT__lsu_wvalid = 
                         (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                >> 0x1bU));
                     vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
                         [0x1bU];
                 } else {
-                    vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                                   & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                                   [0x1aU]);
+                    vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                        [0x1aU];
                     vlSelf->top__DOT__lsu_wvalid = 
                         (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                >> 0x1aU));
@@ -1022,18 +1018,16 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                         [0x1aU];
                 }
             } else if ((1U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
-                vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                               & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                               [0x19U]);
+                vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                    [0x19U];
                 vlSelf->top__DOT__lsu_wvalid = (1U 
                                                 & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                    >> 0x19U));
                 vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
                     [0x19U];
             } else {
-                vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                               & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                               [0x18U]);
+                vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                    [0x18U];
                 vlSelf->top__DOT__lsu_wvalid = (1U 
                                                 & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                    >> 0x18U));
@@ -1043,18 +1037,16 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         } else if ((4U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
             if ((2U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
                 if ((1U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
-                    vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                                   & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                                   [0x17U]);
+                    vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                        [0x17U];
                     vlSelf->top__DOT__lsu_wvalid = 
                         (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                >> 0x17U));
                     vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
                         [0x17U];
                 } else {
-                    vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                                   & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                                   [0x16U]);
+                    vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                        [0x16U];
                     vlSelf->top__DOT__lsu_wvalid = 
                         (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                >> 0x16U));
@@ -1062,18 +1054,16 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                         [0x16U];
                 }
             } else if ((1U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
-                vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                               & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                               [0x15U]);
+                vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                    [0x15U];
                 vlSelf->top__DOT__lsu_wvalid = (1U 
                                                 & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                    >> 0x15U));
                 vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
                     [0x15U];
             } else {
-                vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                               & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                               [0x14U]);
+                vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                    [0x14U];
                 vlSelf->top__DOT__lsu_wvalid = (1U 
                                                 & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                    >> 0x14U));
@@ -1082,18 +1072,16 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
             }
         } else if ((2U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
             if ((1U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
-                vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                               & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                               [0x13U]);
+                vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                    [0x13U];
                 vlSelf->top__DOT__lsu_wvalid = (1U 
                                                 & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                    >> 0x13U));
                 vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
                     [0x13U];
             } else {
-                vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                               & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                               [0x12U]);
+                vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                    [0x12U];
                 vlSelf->top__DOT__lsu_wvalid = (1U 
                                                 & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                    >> 0x12U));
@@ -1101,15 +1089,15 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                     [0x12U];
             }
         } else if ((1U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
-            vlSelf->top__DOT__lsu_wstrb = (0xfU & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                           [0x11U]);
+            vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                [0x11U];
             vlSelf->top__DOT__lsu_wvalid = (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                   >> 0x11U));
             vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
                 [0x11U];
         } else {
-            vlSelf->top__DOT__lsu_wstrb = (0xfU & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                           [0x10U]);
+            vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                [0x10U];
             vlSelf->top__DOT__lsu_wvalid = (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                   >> 0x10U));
             vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
@@ -1119,18 +1107,16 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         if ((4U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
             if ((2U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
                 if ((1U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
-                    vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                                   & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                                   [0xfU]);
+                    vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                        [0xfU];
                     vlSelf->top__DOT__lsu_wvalid = 
                         (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                >> 0xfU));
                     vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
                         [0xfU];
                 } else {
-                    vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                                   & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                                   [0xeU]);
+                    vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                        [0xeU];
                     vlSelf->top__DOT__lsu_wvalid = 
                         (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                >> 0xeU));
@@ -1138,18 +1124,16 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                         [0xeU];
                 }
             } else if ((1U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
-                vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                               & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                               [0xdU]);
+                vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                    [0xdU];
                 vlSelf->top__DOT__lsu_wvalid = (1U 
                                                 & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                    >> 0xdU));
                 vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
                     [0xdU];
             } else {
-                vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                               & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                               [0xcU]);
+                vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                    [0xcU];
                 vlSelf->top__DOT__lsu_wvalid = (1U 
                                                 & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                    >> 0xcU));
@@ -1158,18 +1142,16 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
             }
         } else if ((2U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
             if ((1U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
-                vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                               & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                               [0xbU]);
+                vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                    [0xbU];
                 vlSelf->top__DOT__lsu_wvalid = (1U 
                                                 & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                    >> 0xbU));
                 vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
                     [0xbU];
             } else {
-                vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                               & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                               [0xaU]);
+                vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                    [0xaU];
                 vlSelf->top__DOT__lsu_wvalid = (1U 
                                                 & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                    >> 0xaU));
@@ -1177,15 +1159,15 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                     [0xaU];
             }
         } else if ((1U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
-            vlSelf->top__DOT__lsu_wstrb = (0xfU & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                           [9U]);
+            vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                [9U];
             vlSelf->top__DOT__lsu_wvalid = (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                   >> 9U));
             vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
                 [9U];
         } else {
-            vlSelf->top__DOT__lsu_wstrb = (0xfU & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                           [8U]);
+            vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                [8U];
             vlSelf->top__DOT__lsu_wvalid = (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                   >> 8U));
             vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
@@ -1194,18 +1176,16 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     } else if ((4U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
         if ((2U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
             if ((1U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
-                vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                               & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                               [7U]);
+                vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                    [7U];
                 vlSelf->top__DOT__lsu_wvalid = (1U 
                                                 & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                    >> 7U));
                 vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
                     [7U];
             } else {
-                vlSelf->top__DOT__lsu_wstrb = (0xfU 
-                                               & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                               [6U]);
+                vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                    [6U];
                 vlSelf->top__DOT__lsu_wvalid = (1U 
                                                 & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                    >> 6U));
@@ -1213,15 +1193,15 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                     [6U];
             }
         } else if ((1U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
-            vlSelf->top__DOT__lsu_wstrb = (0xfU & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                           [5U]);
+            vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                [5U];
             vlSelf->top__DOT__lsu_wvalid = (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                   >> 5U));
             vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
                 [5U];
         } else {
-            vlSelf->top__DOT__lsu_wstrb = (0xfU & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                           [4U]);
+            vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                [4U];
             vlSelf->top__DOT__lsu_wvalid = (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                   >> 4U));
             vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
@@ -1229,30 +1209,30 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         }
     } else if ((2U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
         if ((1U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
-            vlSelf->top__DOT__lsu_wstrb = (0xfU & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                           [3U]);
+            vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                [3U];
             vlSelf->top__DOT__lsu_wvalid = (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                   >> 3U));
             vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
                 [3U];
         } else {
-            vlSelf->top__DOT__lsu_wstrb = (0xfU & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                           [2U]);
+            vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+                [2U];
             vlSelf->top__DOT__lsu_wvalid = (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                                   >> 2U));
             vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
                 [2U];
         }
     } else if ((1U & (IData)(vlSelf->top__DOT__LSU__DOT__wvalid_delay))) {
-        vlSelf->top__DOT__lsu_wstrb = (0xfU & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                       [1U]);
+        vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+            [1U];
         vlSelf->top__DOT__lsu_wvalid = (1U & (vlSelf->top__DOT__LSU__DOT__wvalid_buffer 
                                               >> 1U));
         vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
             [1U];
     } else {
-        vlSelf->top__DOT__lsu_wstrb = (0xfU & vlSelf->top__DOT__LSU__DOT__wstrb_buffer
-                                       [0U]);
+        vlSelf->top__DOT__lsu_wstrb = vlSelf->top__DOT__LSU__DOT__wstrb_buffer
+            [0U];
         vlSelf->top__DOT__lsu_wvalid = (1U & vlSelf->top__DOT__LSU__DOT__wvalid_buffer);
         vlSelf->top__DOT__lsu_wdata = vlSelf->top__DOT__LSU__DOT__wdata_buffer
             [0U];

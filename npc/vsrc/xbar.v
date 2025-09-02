@@ -27,7 +27,7 @@ module xbar(
     output reg axi_awready_o,
 
     input [`CPU_WIDTH-1:0] axi_wdata_i,
-    input [7:0] axi_wstrb_i,
+    input [3:0] axi_wstrb_i,
     input axi_wlast_i,
     input axi_wvalid_i,
     output reg axi_wready_o,
@@ -62,7 +62,7 @@ module xbar(
     input sram_awready_i,
 
     output reg [`CPU_WIDTH-1:0] sram_wdata_o,
-    output reg [7:0] sram_wstrb_o,
+    output reg [3:0] sram_wstrb_o,
     output reg sram_wlast_o,
     output reg sram_wvalid_o,
     input sram_wready_i,
@@ -97,7 +97,7 @@ module xbar(
     input uart_awready_i,
 
     output reg [`CPU_WIDTH-1:0] uart_wdata_o,
-    output reg [7:0] uart_wstrb_o,
+    output reg [3:0] uart_wstrb_o,
     output uart_wlast_o,
     output reg uart_wvalid_o,
     input uart_wready_i,
@@ -132,7 +132,7 @@ module xbar(
     input clint_awready_i,
 
     output reg [`CPU_WIDTH-1:0] clint_wdata_o,
-    output reg [7:0] clint_wstrb_o,
+    output reg [3:0] clint_wstrb_o,
     output clint_wlast_o,
     output reg clint_wvalid_o,
     input clint_wready_i,

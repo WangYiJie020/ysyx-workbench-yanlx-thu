@@ -434,7 +434,7 @@ class Vtop___024root final : public VerilatedModule {
         VlUnpacked<IData/*31:0*/, 32> top__DOT__LSU__DOT__araddr_buffer;
         VlUnpacked<IData/*31:0*/, 32> top__DOT__LSU__DOT__awaddr_buffer;
         VlUnpacked<IData/*31:0*/, 32> top__DOT__LSU__DOT__wdata_buffer;
-        VlUnpacked<CData/*7:0*/, 32> top__DOT__LSU__DOT__wstrb_buffer;
+        VlUnpacked<CData/*3:0*/, 32> top__DOT__LSU__DOT__wstrb_buffer;
         VlUnpacked<CData/*0:0*/, 5> __Vm_traceActivity;
     };
     VlTriggerVec<1> __VstlTriggered;
