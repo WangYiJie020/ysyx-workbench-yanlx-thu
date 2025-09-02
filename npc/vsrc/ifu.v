@@ -6,10 +6,16 @@ module ifu(
     input rst_n,
     //to mem
     output reg [`CPU_WIDTH-1:0] araddr_o,
+    output reg [3:0] arid_o,
+    output reg [7:0] arlen_o,
+    output reg [2:0] arsize_o,
+    output reg [1:0] arburst_o,
     output reg arvalid_o,
     input arready_i,
     input [`CPU_WIDTH-1:0] rdata_i,
     input rresp_i,
+    input rlast_i,
+    input [3:0] rid_i,
     input rvalid_i,
     output reg rready_o,
     //wbu to ifu
@@ -47,7 +53,10 @@ module ifu(
     );
 
     assign araddr = pc;
-    //assign pc_o = pc;
+    assign arid_o = 0;
+    assign arlen_o = 0;
+    assign arsize_o = 3'b010; //4bytes
+    assign arburst_o = 0;
 
     assign inst_o = rdata_i;
 
@@ -139,7 +148,7 @@ module ifu(
                 arvalid <= 1;
                 rready <= 1;
             end else if(current_state == S_WAIT_SEND) begin               
-                if(rresp_i) ifu_valid_o <= 1;
+                if(rresp_i==0) ifu_valid_o <= 1;
                 else ifu_valid_o <= 0;
                 
                 //arvalid <= 1; 

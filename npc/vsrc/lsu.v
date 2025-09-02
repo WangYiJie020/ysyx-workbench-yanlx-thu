@@ -41,24 +41,36 @@ module lsu(
 
     //to mem
     output [`CPU_WIDTH-1:0] araddr_o,
+    output [3:0] arid_o,
+    output [7:0] arlen_o,
+    output [2:0] arsize_o,
+    output [1:0] arburst_o,
     output arvalid_o,
     input arready_i,
 
     input [`CPU_WIDTH-1:0] rdata_i,
-    input rresp_i,
+    input [1:0] rresp_i,
+    input rlast_i,
+    input [3:0] rid_i,
     input rvalid_i,
     output rready_o,
 
     output [`CPU_WIDTH-1:0] awaddr_o,
+    output [3:0] awid_o,
+    output [7:0] awlen_o,
+    output [2:0] awsize_o,
+    output [1:0] awburst_o
     output awvalid_o,
     input awready_i,
 
     output [`CPU_WIDTH-1:0] wdata_o,
-    output [7:0] wstrb_o,
+    output [3:0] wstrb_o,
+    output wlast_o,
     output wvalid_o,
     input wready_i,
 
-    input bresp_i,
+    input [1:0] bresp_i,
+    input [3:0] bid_i,
     input bvalid_i,
     output bready_o
 
@@ -102,6 +114,15 @@ module lsu(
     assign araddr = alu_result;
     assign awaddr = alu_result;
     assign datamem_readdata_o = rdata_i;
+    assign arid_o = 0;
+    assign arlen_o = 0;
+    assign arsize_o = 0;
+    assign arburst_o = 0;
+    assign awid_o = 0;
+    assign awlen_o = 0;
+    assign awsize_o = 0;
+    assign awburst_o = 0;
+    assign wlast_o = 1;
 
     always@(*) begin
         case(wmask_i)
@@ -205,7 +226,7 @@ module lsu(
                 //awaddr_o <= alu_result;
             end else if (current_state == S_WAIT_SEND)begin
                 if(MemRead_i) begin
-                    if(rresp_i) lsu_valid_o <= 1;
+                    if(rresp_i==0) lsu_valid_o <= 1;
                     else lsu_valid_o <= 0;
                 end
                 else if(MemWrite_i)begin

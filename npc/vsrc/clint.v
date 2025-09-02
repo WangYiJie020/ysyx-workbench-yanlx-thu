@@ -3,24 +3,36 @@ module clint(
     input rst_n,
 
     input [`CPU_WIDTH-1:0] araddr_i,
+    input [3:0] arid_i,
+    input [7:0] arlen_i,
+    input [2:0] arsize_i,
+    input [1:0] arburst_i,
     input arvalid_i,
     output reg arready_o,
 
     output reg [`CPU_WIDTH-1:0] rdata_o,
-    output reg rresp_o,
+    output reg [1:0] rresp_o,
+    output reg rlast_o,
+    output reg [3:0] rid_o,
     output reg rvalid_o,
     input rready_i,
 
     input [`CPU_WIDTH-1:0] awaddr_i,
+    input [3:0] awid_i,
+    input [7:0] awlen_i,
+    input [2:0] awsize_i,
+    input [1:0] awburst_i,
     input awvalid_i,
     output reg awready_o,
 
     input [`CPU_WIDTH-1:0] wdata_i,
-    input [7:0] wstrb_i,
+    input [3:0] wstrb_i,
+    input wlast_i,
     input wvalid_i,
     output reg wready_o,
 
-    output reg bresp_o,
+    output reg [1:0] bresp_o,
+    output reg [3:0] bid_o,
     output reg bvalid_o,
     input bready_i
 );
@@ -42,6 +54,9 @@ module clint(
     reg [1:0] write_box;
 
     reg [63:0] time_counter;
+
+    assign rid_o = 0;
+    assign bid_o = 0;
 
     always@(posedge clk, negedge rst_n) begin
         if(rst_n == 0) begin
@@ -89,23 +104,26 @@ module clint(
             else if(flag_rdata == 1) begin
                 if(rdata_counter == r_delay) begin
                     rdata_counter <= 0;
-                    rresp_o <= 1;
+                    rresp_o <= 2'b00;
                     rvalid_o <= 1;
                     flag_rdata <= 0;
                     r_delay <= LFSR;
+                    rlast_o <= 1;
                     if(araddr == 32'ha0000048) rdata_o <= time_counter[31:0];
                     else if(araddr == 32'ha000004c) rdata_o <= time_counter[63:32];
                 end
                 else begin
                     rdata_counter <= rdata_counter + 1;
-                    rresp_o <= 0;
+                    rresp_o <= 2'b10;
                     rvalid_o <= 0;
+                    rlast_o <= 0;
                 end
             end
             else begin
                 rvalid_o <= 0;
                 rdata_counter <= 0;
-                rresp_o <= 0;
+                rresp_o <= 2'b10;
+                rlast_o <= 0;
             end
             
         end
@@ -144,7 +162,6 @@ module clint(
             w_state <= 0; //未握手
             wdata <= 0;
             wstrb <= 0;
-            bresp_o <= 1;
             flag_wdata <= 0;
         end
         else begin
@@ -176,7 +193,7 @@ module clint(
 
     always@(posedge clk, negedge rst_n) begin
         if(rst_n == 0) begin
-            bresp_o <= 1;
+            bresp_o <= 2'b10;
             bvalid_o <= 0;
             w_delay <= LFSR;
             wdata_counter <= 0;
@@ -196,11 +213,11 @@ module clint(
                     w_delay <= LFSR;
                 end else begin
                     wdata_counter <= wdata_counter + 1;
-                    bresp_o <= 1;
+                    bresp_o <= 2'b10
                     bvalid_o <= 0;
                 end
             end else begin
-                bresp_o <= 1;
+                bresp_o <= 2'b10
                 bvalid_o <= 0;
             end
         end
