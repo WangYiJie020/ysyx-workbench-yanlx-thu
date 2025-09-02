@@ -27,6 +27,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__ready_ifu_to_idu;
         CData/*0:0*/ top__DOT__ifu_arvalid;
         CData/*0:0*/ top__DOT__ifu_arready;
+        CData/*1:0*/ top__DOT__ifu_rresp;
         CData/*0:0*/ top__DOT__ifu_rvalid;
         CData/*0:0*/ top__DOT__ifu_rready;
         CData/*0:0*/ top__DOT__useless1;
@@ -82,13 +83,11 @@ class Vtop___024root final : public VerilatedModule {
         CData/*3:0*/ top__DOT__clint_wstrb;
         CData/*0:0*/ top__DOT__clint_wvalid;
         CData/*0:0*/ top__DOT__clint_wready;
-        CData/*1:0*/ top__DOT__clint_bresp;
     };
     struct {
+        CData/*1:0*/ top__DOT__clint_bresp;
         CData/*0:0*/ top__DOT__clint_bvalid;
         CData/*0:0*/ top__DOT__clint_bready;
-        CData/*0:0*/ top__DOT____Vcellout__AXI_Arbiter__rresp_o_b;
-        CData/*0:0*/ top__DOT____Vcellout__AXI_Arbiter__rresp_o_a;
         CData/*0:0*/ top__DOT__a_in_src_idu_to_exu;
         CData/*1:0*/ top__DOT__b_in_src_idu_to_exu;
         CData/*2:0*/ top__DOT__pc_srcs_idu_to_exu;
@@ -128,6 +127,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__ready_lsu_to_wbu;
         CData/*0:0*/ top__DOT__lsu_arvalid;
         CData/*0:0*/ top__DOT__lsu_arready;
+        CData/*1:0*/ top__DOT__lsu_rresp;
         CData/*0:0*/ top__DOT__lsu_rvalid;
         CData/*0:0*/ top__DOT__lsu_rready;
         CData/*0:0*/ top__DOT__lsu_awvalid;

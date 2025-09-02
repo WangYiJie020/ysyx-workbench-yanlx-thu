@@ -230,7 +230,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
             vlSelf->top__DOT__valid_lsu_to_wbu = (1U 
                                                   & ((IData)(vlSelf->top__DOT__MemRead_exu_to_lsu)
                                                       ? 
-                                                     (~ (IData)(vlSelf->top__DOT____Vcellout__AXI_Arbiter__rresp_o_b))
+                                                     (0U 
+                                                      == (IData)(vlSelf->top__DOT__lsu_rresp))
                                                       : 
                                                      ((~ (IData)(vlSelf->top__DOT__MemWrite_exu_to_lsu)) 
                                                       | (((IData)(vlSelf->top__DOT__LSU__DOT__bready) 
@@ -333,8 +334,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__2(Vtop___024root* vlSelf) 
     }
     if (vlSelf->top__DOT__AXI_Arbiter__DOT__r_switch) {
         vlSelf->top__DOT__lsu_rdata = vlSelf->top__DOT__axi_rdata;
-        vlSelf->top__DOT____Vcellout__AXI_Arbiter__rresp_o_b 
-            = (1U & (IData)(vlSelf->top__DOT__axi_rresp));
+        vlSelf->top__DOT__lsu_rresp = vlSelf->top__DOT__axi_rresp;
     }
     vlSelf->top__DOT__WBU__DOT__mem_data = ((4U & (IData)(vlSelf->top__DOT__WBU__DOT__rmask))
                                              ? ((2U 

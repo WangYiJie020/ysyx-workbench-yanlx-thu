@@ -698,8 +698,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                     ? (IData)(vlSelf->top__DOT__sram_rresp)
                                     : (IData)(vlSelf->top__DOT__clint_rresp));
     if ((1U & (~ (IData)(vlSelf->top__DOT__AXI_Arbiter__DOT__r_switch)))) {
-        vlSelf->top__DOT____Vcellout__AXI_Arbiter__rresp_o_a 
-            = (1U & (IData)(vlSelf->top__DOT__axi_rresp));
+        vlSelf->top__DOT__ifu_rresp = vlSelf->top__DOT__axi_rresp;
     }
     vlSelf->top__DOT__axi_rvalid = ((IData)(vlSelf->top__DOT__Xbar__DOT__r_switch)
                                      ? (IData)(vlSelf->top__DOT__sram_rvalid)
@@ -2215,8 +2214,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     if (vlSelf->top__DOT__AXI_Arbiter__DOT__r_switch) {
         vlSelf->top__DOT__AXI_Arbiter__DOT__rlast_o_b = 0U;
         vlSelf->top__DOT__AXI_Arbiter__DOT__rid_o_b = 0U;
-        vlSelf->top__DOT____Vcellout__AXI_Arbiter__rresp_o_b 
-            = (1U & (IData)(vlSelf->top__DOT__axi_rresp));
+        vlSelf->top__DOT__lsu_rresp = vlSelf->top__DOT__axi_rresp;
         vlSelf->top__DOT__lsu_rvalid = vlSelf->top__DOT__axi_rvalid;
         vlSelf->top__DOT__lsu_rdata = vlSelf->top__DOT__axi_rdata;
         vlSelf->top__DOT__axi_rready = vlSelf->top__DOT__lsu_rready;

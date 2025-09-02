@@ -322,7 +322,7 @@ module lsu(
                 for(integer i=0; i<32; i=i+1) begin
                     wdata_buffer[i] <= 32'd0;
                     wvalid_buffer[i] <= 1'b0;
-                    wstrb_buffer[i] <= 8'd0;
+                    wstrb_buffer[i] <= 4'd0;
                 end
             end
             else begin
