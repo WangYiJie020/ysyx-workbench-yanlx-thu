@@ -52,7 +52,7 @@ extern "C" void mrom_read(int32_t addr, int32_t *data) {
   uint32_t tmp = (uint32_t)addr / 4;
   //printf("%x\n",tmp);
   *data = mem[tmp]; 
-  printf("%x\n",mem[tmp]);
+  //printf("%x\n",mem[tmp]);
   //*data = ;
 }
 
@@ -295,10 +295,10 @@ static long load_img() {
   Log("The image is %s, size = %ld", img_file, size);
 
   fseek(fp, 0, SEEK_SET);
-  int ret = fread(&(mem[0x4000000]), size, 1, fp);
+  int ret = fread(&(mem[0x8000000]), size, 1, fp);
   assert(ret == 1);
 
-  printf("%x\n",mem[0x4000000]);
+  printf("%x\n",mem[0x8000000]);
 
   fclose(fp);
   return size;
