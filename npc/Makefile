@@ -11,6 +11,7 @@ OBJ_DIR = $(BUILD_DIR)/obj_dir
 BIN = $(BUILD_DIR)/$(TOPNAME)
 
 NPC_HOME := $(shell pwd) 
+YSYX_DIR := $(shell cd .. && pwd)
 
 default: $(BIN)
 
@@ -51,9 +52,9 @@ all:
 
 sim: $(VSRCS) $(CSRCS) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-	@echo "NPC_HOME: $(NPC_HOME)"
-	@echo "UART path: $(abspath $(NPC_HOME)/../ysyxSoC/perip/uart16550/rtl)"
-	@echo "SPI path: $(abspath $(NPC_HOME)/../ysyxSoC/perip/spi/rtl)"
+	@echo "NPC_HOME: $(YSYX_DIR)"
+	@echo "UART path: $(abspath $(YSYX_DIR)/ysyxSoC/perip/uart16550/rtl)"
+	@echo "SPI path: $(abspath $(YSYX_DIR)/ysyxSoC/perip/spi/rtl)"
 	verilator $(VSRCS) $(CSRCS) --cc --trace --exe --build --top-module $(TOPNAME) \
 		+incdir+$(NPC_HOME)/../ysyxSoC/perip/uart16550/rtl \
 		+incdir+$(NPC_HOME)/../ysyxSoC/perip/spi/rtl \
