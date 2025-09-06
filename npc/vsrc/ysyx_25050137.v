@@ -68,7 +68,7 @@ module ysyx_25050137(
 
     wire clk,rst_n;
     assign clk = clock;
-    assign rst_n = !rst_n;
+    assign rst_n = !reset;
 
     wire [`PC_WIDTH-1:0] pc_to_mem;
     wire [`INST_WIDTH-1:0] inst_from_mem;
