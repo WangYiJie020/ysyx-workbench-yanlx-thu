@@ -1,4 +1,4 @@
-TOPNAME = top
+TOPNAME = ysyxSoCFull
 NXDC_FILES = constr/top.nxdc
 INC_PATH ?=
 
@@ -23,6 +23,8 @@ $(SRC_AUTO_BIND): $(NXDC_FILES)
 
 # project source
 VSRCS = $(shell find $(abspath ./vsrc) -name "*.v")
+VSRCS += $(shell find $(abspath ../ysyxSoC/perip) -name "*.v")
+VSRCS += $(shell find $(abspath ../ysyxSoC/build) -name "*.v")
 CSRCS = $(shell find $(abspath ./csrc) -name "*.c" -or -name "*.cc" -or -name "*.cpp")
 
 # rules for NVBoard
@@ -39,6 +41,9 @@ $(BIN): $(VSRCS) $(CSRCS) $(NVBOARD_ARCHIVE)
 	@rm -rf $(OBJ_DIR)
 	$(VERILATOR) $(VERILATOR_CFLAGS) \
 		--top-module $(TOPNAME) $^ \
+		-I$(NPC_HOME)/../ysyxSoC/perip/uart16550/rtl \
+		-I$(NPC_HOME)/../ysyxSoC/perip/spi/rtl \
+		--timescale "1ns/1ns" --no-timing \
 		$(addprefix -CFLAGS , $(CXXFLAGS)) $(addprefix -LDFLAGS , $(LDFLAGS)) \
 		--Mdir $(OBJ_DIR) --exe -o $(abspath $(BIN))
 

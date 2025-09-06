@@ -47,6 +47,9 @@ time_t start_time;
 time_t currentTimeABS;
 int flag = 0;
 
+extern "C" void flash_read(int32_t addr, int32_t *data) { assert(0); }
+extern "C" void mrom_read(int32_t addr, int32_t *data) { assert(0); }
+
 extern "C" int pmem_read(int raddr) {
   // 总是读取地址为`raddr & ~0x3u`的4字节返回
   /*

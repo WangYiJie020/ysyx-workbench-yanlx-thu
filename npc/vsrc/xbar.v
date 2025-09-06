@@ -72,41 +72,6 @@ module xbar(
     input sram_bvalid_i,
     output reg sram_bready_o,
 
-    //to uart
-    output reg [`CPU_WIDTH-1:0] uart_araddr_o,
-    output [3:0] uart_arid_o,
-    output [7:0] uart_arlen_o,
-    output [2:0] uart_arsize_o,
-    output [1:0] uart_arburst_o,
-    output reg uart_arvalid_o,
-    input uart_arready_i,
-
-    input [`CPU_WIDTH-1:0] uart_rdata_i,
-    input [1:0] uart_rresp_i,
-    input uart_rlast_i,
-    input [3:0] uart_rid_i,
-    input uart_rvalid_i,
-    output reg uart_rready_o,
-
-    output [`CPU_WIDTH-1:0] uart_awaddr_o,
-    output [3:0] uart_awid_o,
-    output [7:0] uart_awlen_o,
-    output [2:0] uart_awsize_o,
-    output [1:0] uart_awburst_o,
-    output uart_awvalid_o,
-    input uart_awready_i,
-
-    output reg [`CPU_WIDTH-1:0] uart_wdata_o,
-    output reg [3:0] uart_wstrb_o,
-    output uart_wlast_o,
-    output reg uart_wvalid_o,
-    input uart_wready_i,
-
-    input [1:0] uart_bresp_i,
-    input [3:0] uart_bid_i,
-    input uart_bvalid_i,
-    output reg uart_bready_o,
-
     //to clint 
     output reg [`CPU_WIDTH-1:0] clint_araddr_o,
     output [3:0] clint_arid_o,
@@ -154,18 +119,8 @@ module xbar(
             w_switch <= 1;
             b_switch <= 1;
         end else begin
-            if(axi_awaddr_i >= 32'h8000_0000 && axi_awaddr_i <= 32'h80ff_ffff) begin 
-                aw_switch <= 1; 
-                w_switch <= 1;
-                b_switch <= 1;
-            end
-            else if(axi_awaddr_i == 32'ha00003f8) begin 
-                aw_switch <= 0; 
-                w_switch <= 0;
-                b_switch <= 0;
-            end
-
-            if(axi_araddr_i == 32'ha0000048 || axi_araddr_i == 32'ha000004c) begin
+            
+            if(axi_araddr_i >= 32'h0200_0000 && axi_araddr_i <= 32'h0200_ffff) begin
                 ar_switch <= 0;
                 r_switch <= 0;
             end
@@ -221,68 +176,22 @@ module xbar(
         endcase
     end
 
-    always@(*) begin
-        case(aw_switch)
-            1: begin
-                sram_awaddr_o = axi_awaddr_i;
-                sram_awid_o = axi_awid_i;
-                sram_awlen_o = axi_awlen_i;
-                sram_awsize_o = axi_awsize_i;
-                sram_awburst_o = axi_awburst_i;
-                sram_awvalid_o = axi_awvalid_i;
-                axi_awready_o = sram_awready_i;
-            end
-            default: begin
-                uart_awaddr_o = axi_awaddr_i;
-                uart_awid_o = axi_awid_i;
-                uart_awlen_o = axi_awlen_i;
-                uart_awsize_o = axi_awsize_i;
-                uart_awburst_o = axi_awburst_i;
-                uart_awvalid_o = axi_awvalid_i;
-                axi_awready_o = uart_awready_i;
-            end
-        endcase
-    end
-
-    always@(*) begin
-        case(w_switch)
-            1: begin
-                sram_wdata_o = axi_wdata_i;
-                sram_wstrb_o = axi_wstrb_i;
-                sram_wlast_o = axi_wlast_i;
-                sram_wvalid_o = axi_wvalid_i;
-                axi_wready_o = sram_wready_i;
-            end
-            default: begin
-                uart_wdata_o = axi_wdata_i;
-                uart_wstrb_o = axi_wstrb_i;
-                uart_wlast_o = axi_wlast_i;
-                uart_wvalid_o = axi_wvalid_i;
-                axi_wready_o = uart_wready_i;
-            end
-        endcase
-    end
-    
-    always@(*) begin
-        case(b_switch)
-            1: begin
-                axi_bresp_o = sram_bresp_i;
-                axi_bid_o = sram_bid_i;
-                axi_bvalid_o = sram_bvalid_i;
-                sram_bready_o = axi_bready_i;
-            end
-            default: begin
-                axi_bresp_o = uart_bresp_i;
-                axi_bid_o = uart_bid_i;
-                axi_bvalid_o = uart_bvalid_i;
-                uart_bready_o = axi_bready_i;
-            end
-        endcase
-    end
-
-    
-
-
+    assign sram_awaddr_o = axi_awaddr_i;
+    assign sram_awid_o = axi_awid_i;
+    assign sram_awlen_o = axi_awlen_i;
+    assign sram_awsize_o = axi_awsize_i;
+    assign sram_awburst_o = axi_awburst_i;
+    assign sram_awvalid_o = axi_awvalid_i;
+    assign axi_awready_o = sram_awready_i;
+    assign sram_wdata_o = axi_wdata_i;
+    assign sram_wstrb_o = axi_wstrb_i;
+    assign sram_wlast_o = axi_wlast_i;
+    assign sram_wvalid_o = axi_wvalid_i;
+    assign axi_wready_o = sram_wready_i;
+    assign axi_bresp_o = sram_bresp_i;
+    assign axi_bid_o = sram_bid_i;
+    assign axi_bvalid_o = sram_bvalid_i;
+    assign sram_bready_o = axi_bready_i;
 
 
 endmodule
