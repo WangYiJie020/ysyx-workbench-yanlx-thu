@@ -28,7 +28,7 @@ uint32_t mem[0xffffffff];
 bool is_skip_ref = false;
 
 VerilatedContext* contextp = new VerilatedContext;
-Vtop* top = new Vtop{contextp};
+VysyxSoCFull* top = new VysyxSoCFull{contextp};
 VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
 
 //#define  DIFFTEST_ON
