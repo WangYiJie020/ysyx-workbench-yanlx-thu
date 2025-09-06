@@ -408,6 +408,7 @@ void cpu_exec(uint64_t num) {
 
 
 int main(int argc, char** argv) {
+  Verilated::commandArgs(argc, argv);
   init_log("npc-log.txt");
   parse_args(argc, argv);
   long img_size = load_img();
@@ -417,8 +418,6 @@ int main(int argc, char** argv) {
 #endif
   init_sdb();
   cpu_state = NPC_RUNNING;
-  
-  Verilated::commandArgs(argc, argv);
 
   contextp->commandArgs(argc, argv);
   

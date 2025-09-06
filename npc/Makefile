@@ -52,8 +52,6 @@ all:
 
 sim: $(VSRCS) $(CSRCS) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-	@echo "UART path: $(abspath $(YSYX_DIR)/ysyxSoC/perip/uart16550/rtl)"
-	@echo "SPI path: $(abspath $(YSYX_DIR)/ysyxSoC/perip/spi/rtl)"
 	verilator $(VSRCS) $(CSRCS) --cc --trace --exe --build --top-module $(TOPNAME) \
 		+incdir+$(YSYX_DIR)/ysyxSoC/perip/uart16550/rtl \
 		+incdir+$(YSYX_DIR)/ysyxSoC/perip/spi/rtl \
