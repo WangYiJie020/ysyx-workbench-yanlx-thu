@@ -295,7 +295,7 @@ static long load_img() {
   int ret = fread(&(mem[0x4000000]), size, 1, fp);
   assert(ret == 1);
 
-  //printf("%x\n",mem[0x20000001]);
+  printf("%x\n",mem[0x4000000]);
 
   fclose(fp);
   return size;
