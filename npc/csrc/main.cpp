@@ -394,8 +394,8 @@ void cpu_exec(uint64_t num) {
       break;
     }
     
-    top->clk = 0; top->eval();
-    top->clk = 1; top->eval();
+    top->clock = 0; top->eval();
+    top->clock = 1; top->eval();
     counter++;
     trace_and_difftest();
 
@@ -428,15 +428,15 @@ int main(int argc, char** argv) {
 #endif
 
   int n = 10;
-  top->rst_n = 0;
+  top->reset = 1;
   while (n > 0) {
-    top->clk = 0; top->eval();
-    top->clk = 1; top->eval();
+    top->clock = 0; top->eval();
+    top->clock = 1; top->eval();
     tfp->dump(contextp->time()); //dump wave
     contextp->timeInc(1); //推动仿真时间
     n--;
   }
-  top->rst_n = 1;
+  top->rst_n = 0;
 
   sdb_set_batch_mode();//批处理模式
   
