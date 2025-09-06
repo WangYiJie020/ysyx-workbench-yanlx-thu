@@ -3,6 +3,7 @@
 module ysyx_25050137(
     input           clock,
     input           reset,
+    input           io_interrupt,
     input           io_master_awready,
     output          io_master_awvalid,  
     output  [31:0]  io_master_awaddr,     
