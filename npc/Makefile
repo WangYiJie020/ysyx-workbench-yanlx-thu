@@ -55,7 +55,6 @@ sim: $(VSRCS) $(CSRCS)
 	verilator $(VSRCS) $(CSRCS) --cc --trace --exe --build --top-module $(TOPNAME) \
 		+incdir+$(YSYX_DIR)/ysyxSoC/perip/uart16550/rtl \
 		+incdir+$(YSYX_DIR)/ysyxSoC/perip/spi/rtl \
-		+incdir+$(NPC_HOME)/vsrc \
 		--timescale "1ns/1ns" --no-timing \
 		-CFLAGS "-mcmodel=medium" -LDFLAGS "-lreadline" 
 	./obj_dir/Vtop --diff=${DIFFTEST} $(IMG) 
