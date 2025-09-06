@@ -52,12 +52,11 @@ all:
 
 sim: $(VSRCS) $(CSRCS) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-	@echo "NPC_HOME: $(YSYX_DIR)"
 	@echo "UART path: $(abspath $(YSYX_DIR)/ysyxSoC/perip/uart16550/rtl)"
 	@echo "SPI path: $(abspath $(YSYX_DIR)/ysyxSoC/perip/spi/rtl)"
 	verilator $(VSRCS) $(CSRCS) --cc --trace --exe --build --top-module $(TOPNAME) \
-		+incdir+$(NPC_HOME)/../ysyxSoC/perip/uart16550/rtl \
-		+incdir+$(NPC_HOME)/../ysyxSoC/perip/spi/rtl \
+		+incdir+$(YSYX_DIR)/ysyxSoC/perip/uart16550/rtl \
+		+incdir+$(YSYX_DIR)/ysyxSoC/perip/spi/rtl \
 		--timescale "1ns/1ns" --no-timing \
 		-CFLAGS "-mcmodel=medium" -LDFLAGS "-lreadline" 
 	./obj_dir/Vtop --diff=${DIFFTEST} $(IMG) 
