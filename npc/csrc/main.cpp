@@ -32,7 +32,7 @@ VysyxSoCFull* top = new VysyxSoCFull{contextp};
 VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
 
 //#define  DIFFTEST_ON
-//#define  WAVE_ON
+#define  WAVE_ON
 #define  TRACE_ON
 
 
@@ -48,7 +48,10 @@ time_t currentTimeABS;
 int flag = 0;
 
 extern "C" void flash_read(int32_t addr, int32_t *data) { assert(0); }
-extern "C" void mrom_read(int32_t addr, int32_t *data) { assert(0); }
+extern "C" int mrom_read(int32_t addr, int32_t *data) { 
+  return 0x00100073; 
+}
+
 
 extern "C" int pmem_read(int raddr) {
   // 总是读取地址为`raddr & ~0x3u`的4字节返回
