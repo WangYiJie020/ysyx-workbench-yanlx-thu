@@ -49,7 +49,8 @@ int flag = 0;
 
 extern "C" void flash_read(int32_t addr, int32_t *data) { assert(0); }
 extern "C" void mrom_read(int32_t addr, int32_t *data) { 
-  *data = 0x00100073; 
+  uint32_t tmp = (uint32_t)addr / 4;
+  *data = mem[tmp]; 
 }
 
 
@@ -291,7 +292,7 @@ static long load_img() {
   Log("The image is %s, size = %ld", img_file, size);
 
   fseek(fp, 0, SEEK_SET);
-  int ret = fread(&(mem[0x20000000]), size, 1, fp);
+  int ret = fread(&(mem[0x10000000/4]), size, 1, fp);
   assert(ret == 1);
 
   //printf("%x\n",mem[0x20000001]);
