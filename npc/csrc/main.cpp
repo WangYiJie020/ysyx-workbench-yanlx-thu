@@ -436,7 +436,7 @@ int main(int argc, char** argv) {
     contextp->timeInc(1); //推动仿真时间
     n--;
   }
-  top->rst_n = 0;
+  top->reset = 0;
 
   sdb_set_batch_mode();//批处理模式
   
