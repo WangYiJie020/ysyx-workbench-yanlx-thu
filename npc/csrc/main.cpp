@@ -292,7 +292,7 @@ static long load_img() {
   Log("The image is %s, size = %ld", img_file, size);
 
   fseek(fp, 0, SEEK_SET);
-  int ret = fread(&(mem[0x10000000/4]), size, 1, fp);
+  int ret = fread(&(mem[0x4000000]), size, 1, fp);
   assert(ret == 1);
 
   //printf("%x\n",mem[0x20000001]);
