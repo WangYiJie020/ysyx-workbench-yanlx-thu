@@ -52,7 +52,7 @@ extern "C" void mrom_read(int32_t addr, int32_t *data) {
   uint32_t tmp = (uint32_t)addr / 4;
   //printf("%x\n",tmp);
   *data = mem[tmp]; 
-  //printf("%x\n",mem[tmp]);
+  printf("%x\n",mem[tmp]);
   //*data = ;
 }
 
