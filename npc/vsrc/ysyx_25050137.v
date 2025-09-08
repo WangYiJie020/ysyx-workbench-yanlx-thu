@@ -83,10 +83,16 @@ module ysyx_25050137(
     wire ready_ifu_to_idu;
 
     wire [`CPU_WIDTH-1:0] ifu_araddr;
+    wire [3:0] ifu_arid;
+    wire [7:0] ifu_arlen;
+    wire [2:0] ifu_arsize;
+    wire [1:0] ifu_arburst;
     wire ifu_arvalid;
     wire ifu_arready;
     wire [`CPU_WIDTH-1:0] ifu_rdata;
     wire [1:0] ifu_rresp;
+    wire ifu_rlast;
+    wire [3:0] ifu_rid;
     wire ifu_rvalid;
     wire ifu_rready;
 
@@ -95,16 +101,16 @@ module ysyx_25050137(
         .rst_n(rst_n),
 
         .araddr_o(ifu_araddr),
-        .arid_o(),
-        .arlen_o(),
-        .arsize_o(),
-        .arburst_o(),
+        .arid_o(ifu_arid),
+        .arlen_o(ifu_arlen),
+        .arsize_o(ifu_arsize),
+        .arburst_o(ifu_arburst),
         .arvalid_o(ifu_arvalid),
         .arready_i(ifu_arready),
         .rdata_i(ifu_rdata),
         .rresp_i(ifu_rresp),
-        .rlast_i(0),
-        .rid_i(0),
+        .rlast_i(ifu_rlast),
+        .rid_i(ifu_rid),
         .rvalid_i(ifu_rvalid),
         .rready_o(ifu_rready),
 
@@ -126,56 +132,62 @@ module ysyx_25050137(
     wire useless1,useless2,useless3,useless4;
 
     wire [`CPU_WIDTH-1:0] axi_araddr;
+    wire [3:0] axi_arid;
+    wire [7:0] axi_arlen;
+    wire [2:0] axi_arsize;
+    wire [1:0] axi_arburst;
     wire axi_arvalid;
     wire axi_arready;
     wire [`CPU_WIDTH-1:0] axi_rdata;
     wire [1:0] axi_rresp;
+    wire axi_rlast;
+    wire [3:0] axi_rid;
     wire axi_rvalid;
     wire axi_rready;
     wire [`CPU_WIDTH-1:0] axi_awaddr;
+    wire [3:0] axi_awid;
+    wire [7:0] axi_awlen;
+    wire [2:0] axi_awsize;
+    wire [1:0] axi_awburst;
     wire axi_awvalid;
     wire axi_awready;
     wire [`CPU_WIDTH-1:0] axi_wdata;
     wire [3:0] axi_wstrb;
+    wire axi_wlast;
     wire axi_wvalid;
     wire axi_wready;
     wire [1:0] axi_bresp;
+    wire [3:0] axi_bid;
     wire axi_bvalid;
     wire axi_bready;
 
-    wire [`CPU_WIDTH-1:0] sram_araddr;
-    wire sram_arvalid;
-    wire sram_arready;
-    wire [`CPU_WIDTH-1:0] sram_rdata;
-    wire [1:0] sram_rresp;
-    wire sram_rvalid;
-    wire sram_rready;
-    wire [`CPU_WIDTH-1:0] sram_awaddr;
-    wire sram_awvalid;
-    wire sram_awready;
-    wire [`CPU_WIDTH-1:0] sram_wdata;
-    wire [3:0] sram_wstrb;
-    wire sram_wvalid;
-    wire sram_wready;
-    wire [1:0] sram_bresp;
-    wire sram_bvalid;
-    wire sram_bready;
-
     wire [`CPU_WIDTH-1:0] clint_araddr;
+    wire [3:0] clint_arid;
+    wire [7:0] clint_arlen;
+    wire [2:0] clint_arsize;
+    wire [1:0] clint_arburst;
     wire clint_arvalid;
     wire clint_arready;
     wire [`CPU_WIDTH-1:0] clint_rdata;
     wire [1:0] clint_rresp;
+    wire clint_rlast;
+    wire [3:0] clint_rid;
     wire clint_rvalid;
     wire clint_rready;
     wire [`CPU_WIDTH-1:0] clint_awaddr;
+    wire [3:0] clint_awid;
+    wire [7:0] clint_awlen;
+    wire [2:0] clint_awsize;
+    wire [1:0] clint_awburst;
     wire clint_awvalid;
     wire clint_awready;
     wire [`CPU_WIDTH-1:0] clint_wdata;
     wire [3:0] clint_wstrb;
+    wire clint_wlast;
     wire clint_wvalid;
     wire clint_wready;
     wire [1:0] clint_bresp;
+    wire [3:0] clint_bid;
     wire clint_bvalid;
     wire clint_bready;
 
@@ -185,17 +197,17 @@ module ysyx_25050137(
 
         //a
         .araddr_i_a(ifu_araddr),
-        .arid_i_a(0),
-        .arlen_i_a(0),
-        .arsize_i_a(0),
-        .arburst_i_a(0),
+        .arid_i_a(ifu_arid),
+        .arlen_i_a(ifu_arlen),
+        .arsize_i_a(ifu_arsize),
+        .arburst_i_a(ifu_arburst),
         .arvalid_i_a(ifu_arvalid),
         .arready_o_a(ifu_arready),
 
         .rdata_o_a(ifu_rdata),
         .rresp_o_a(ifu_rresp),
-        .rlast_o_a(),
-        .rid_o_a(),
+        .rlast_o_a(ifu_rlast),
+        .rid_o_a(ifu_rid),
         .rvalid_o_a(ifu_rvalid),
         .rready_i_a(ifu_rready),
 
@@ -220,71 +232,71 @@ module ysyx_25050137(
 
         //b
         .araddr_i_b(lsu_araddr),
-        .arid_i_b(0),
-        .arlen_i_b(0),
-        .arsize_i_b(0),
-        .arburst_i_b(0),
+        .arid_i_b(lsu_arid),
+        .arlen_i_b(lsu_arlen),
+        .arsize_i_b(lsu_arsize),
+        .arburst_i_b(lsu_arburst),
         .arvalid_i_b(lsu_arvalid),
         .arready_o_b(lsu_arready),
 
         .rdata_o_b(lsu_rdata),
         .rresp_o_b(lsu_rresp),
-        .rlast_o_b(),
-        .rid_o_b(),
+        .rlast_o_b(lsu_rlast),
+        .rid_o_b(lsu_rid),
         .rvalid_o_b(lsu_rvalid),
         .rready_i_b(lsu_rready),
 
         .awaddr_i_b(lsu_awaddr),
-        .awid_i_b(0),
-        .awlen_i_b(0),
-        .awsize_i_b(0),
-        .awburst_i_b(0),
+        .awid_i_b(lsu_awid),
+        .awlen_i_b(lsu_awlen),
+        .awsize_i_b(lsu_awsize),
+        .awburst_i_b(lsu_awburst),
         .awvalid_i_b(lsu_awvalid),
         .awready_o_b(lsu_awready),
 
         .wdata_i_b(lsu_wdata),
         .wstrb_i_b(lsu_wstrb),
-        .wlast_i_b(0),
+        .wlast_i_b(lsu_wlast),
         .wvalid_i_b(lsu_wvalid),
         .wready_o_b(lsu_wready),
 
         .bresp_o_b(lsu_bresp),
-        .bid_o_b(),
+        .bid_o_b(lsu_bid),
         .bvalid_o_b(lsu_bvalid),
         .bready_i_b(lsu_bready),
 
         //to xbar
         .araddr_o(axi_araddr),
-        .arid_o(),
-        .arlen_o(),
-        .arsize_o(),
-        .arburst_o(),
+        .arid_o(axi_arid),
+        .arlen_o(axi_arlen),
+        .arsize_o(axi_arsize),
+        .arburst_o(axi_arburst),
         .arvalid_o(axi_arvalid),
         .arready_i(axi_arready),
 
         .rdata_i(axi_rdata),
         .rresp_i(axi_rresp),
-        .rlast_i(0),
-        .rid_i(0),
+        .rlast_i(axi_rlast),
+        .rid_i(axi_rid),
         .rvalid_i(axi_rvalid),
         .rready_o(axi_rready),
 
         .awaddr_o(axi_awaddr),
-        .awid_o(),
-        .awlen_o(),
-        .awsize_o(),
-        .awburst_o(),
+        .awid_o(axi_awid),
+        .awlen_o(axi_awlen),
+        .awsize_o(axi_awsize),
+        .awburst_o(axi_awburst),
         .awvalid_o(axi_awvalid),
         .awready_i(axi_awready),
 
         .wdata_o(axi_wdata),
         .wstrb_o(axi_wstrb),
-        .wlast_o(),
+        .wlast_o(axi_wlast),
         .wvalid_o(axi_wvalid),
         .wready_i(axi_wready),
 
         .bresp_i(axi_bresp),
-        .bid_i(0),
+        .bid_i(axi_bid),
         .bvalid_i(axi_bvalid),
         .bready_o(axi_bready)
     );
@@ -295,36 +307,36 @@ module ysyx_25050137(
 
         //in
         .axi_araddr_i(axi_araddr),
-        .axi_arid_i(0),
-        .axi_arlen_i(0),
-        .axi_arsize_i(0),
-        .axi_arburst_i(0),
+        .axi_arid_i(axi_arid),
+        .axi_arlen_i(axi_arlen),
+        .axi_arsize_i(axi_arsize),
+        .axi_arburst_i(axi_arburst),
         .axi_arvalid_i(axi_arvalid),
         .axi_arready_o(axi_arready),
 
         .axi_rdata_o(axi_rdata),
         .axi_rresp_o(axi_rresp),
-        .axi_rlast_o(),
-        .axi_rid_o(),
+        .axi_rlast_o(axi_rlast),
+        .axi_rid_o(axi_rid),
         .axi_rvalid_o(axi_rvalid),
         .axi_rready_i(axi_rready),
 
         .axi_awaddr_i(axi_awaddr),
-        .axi_awid_i(0),
-        .axi_awlen_i(0),
-        .axi_awsize_i(0),
-        .axi_awburst_i(0),
+        .axi_awid_i(axi_awid),
+        .axi_awlen_i(axi_awlen),
+        .axi_awsize_i(axi_awsize),
+        .axi_awburst_i(axi_awburst),
         .axi_awvalid_i(axi_awvalid),
         .axi_awready_o(axi_awready),
         
         .axi_wdata_i(axi_wdata),
         .axi_wstrb_i(axi_wstrb),
-        .axi_wlast_i(0),
+        .axi_wlast_i(axi_wlast),
         .axi_wvalid_i(axi_wvalid),
         .axi_wready_o(axi_wready),
 
         .axi_bresp_o(axi_bresp),
-        .axi_bid_o(),
+        .axi_bid_o(axi_bid),
         .axi_bvalid_o(axi_bvalid),
         .axi_bready_i(axi_bready),
 
@@ -365,36 +377,36 @@ module ysyx_25050137(
 
         //to clint
         .clint_araddr_o(clint_araddr),
-        .clint_arid_o(),
-        .clint_arlen_o(),
-        .clint_arsize_o(),
-        .clint_arburst_o(),
+        .clint_arid_o(clint_arid),
+        .clint_arlen_o(clint_arlen),
+        .clint_arsize_o(clint_arsize),
+        .clint_arburst_o(clint_arburst),
         .clint_arvalid_o(clint_arvalid),
         .clint_arready_i(clint_arready),
 
         .clint_rdata_i(clint_rdata),
         .clint_rresp_i(clint_rresp),
-        .clint_rlast_i(0),
-        .clint_rid_i(0),
+        .clint_rlast_i(clint_rlast),
+        .clint_rid_i(clint_rid),
         .clint_rvalid_i(clint_rvalid),
         .clint_rready_o(clint_rready),
 
         .clint_awaddr_o(clint_awaddr),
-        .clint_awid_o(),
-        .clint_awlen_o(),
-        .clint_awsize_o(),
-        .clint_awburst_o(),
+        .clint_awid_o(clint_awid),
+        .clint_awlen_o(clint_awlen),
+        .clint_awsize_o(clint_awsize),
+        .clint_awburst_o(clint_awburst),
         .clint_awvalid_o(clint_awvalid),
         .clint_awready_i(clint_awready),
 
         .clint_wdata_o(clint_wdata),
         .clint_wstrb_o(clint_wstrb),
-        .clint_wlast_o(),
+        .clint_wlast_o(clint_wlast),
         .clint_wvalid_o(clint_wvalid),
         .clint_wready_i(clint_wready),
 
         .clint_bresp_i(clint_bresp),
-        .clint_bid_i(0),
+        .clint_bid_i(clint_bid),
         .clint_bvalid_i(clint_bvalid),
         .clint_bready_o(clint_bready)
     );
@@ -405,36 +417,36 @@ module ysyx_25050137(
         .rst_n(rst_n),
 
         .araddr_i(clint_araddr),
-        .arid_i(0),
-        .arlen_i(0),
-        .arsize_i(0),
-        .arburst_i(0),
+        .arid_i(clint_arid),
+        .arlen_i(clint_arlen),
+        .arsize_i(clint_arsize),
+        .arburst_i(clint_arburst),
         .arvalid_i(clint_arvalid),
         .arready_o(clint_arready),
 
         .rdata_o(clint_rdata),
         .rresp_o(clint_rresp),
-        .rlast_o(),
-        .rid_o(),
+        .rlast_o(clint_rlast),
+        .rid_o(clint_rid),
         .rvalid_o(clint_rvalid),
         .rready_i(clint_rready),
 
         .awaddr_i(clint_awaddr),
-        .awid_i(0),
-        .awlen_i(0),
-        .awsize_i(0),
-        .awburst_i(0),
+        .awid_i(clint_awid),
+        .awlen_i(clint_awlen),
+        .awsize_i(clint_awsize),
+        .awburst_i(clint_awburst),
         .awvalid_i(clint_awvalid),
         .awready_o(clint_awready),
 
         .wdata_i(clint_wdata),
         .wstrb_i(clint_wstrb),
-        .wlast_i(0),
+        .wlast_i(clint_wlast),
         .wvalid_i(clint_wvalid),
         .wready_o(clint_wready),
 
         .bresp_o(clint_bresp),
-        .bid_o(),
+        .bid_o(clint_bid),
         .bvalid_o(clint_bvalid),
         .bready_i(clint_bready)
     );
@@ -678,36 +690,36 @@ module ysyx_25050137(
 
         //to mem
         .araddr_o(lsu_araddr),
-        .arid_o(),
-        .arlen_o(),
-        .arsize_o(),
-        .arburst_o(),
+        .arid_o(lsu_arid),
+        .arlen_o(lsu_arlen),
+        .arsize_o(lsu_arsize),
+        .arburst_o(lsu_arburst),
         .arvalid_o(lsu_arvalid),
         .arready_i(lsu_arready),
 
         .rdata_i(lsu_rdata),
         .rresp_i(lsu_rresp),
-        .rlast_i(),
-        .rid_i(),
+        .rlast_i(lsu_rlast),
+        .rid_i(lsu_rid),
         .rvalid_i(lsu_rvalid),
         .rready_o(lsu_rready),
 
         .awaddr_o(lsu_awaddr),
-        .awid_o(),
-        .awlen_o(),
-        .awsize_o(),
-        .awburst_o(),
+        .awid_o(lsu_awid),
+        .awlen_o(lsu_awlen),
+        .awsize_o(lsu_awsize),
+        .awburst_o(lsu_awburst),
         .awvalid_o(lsu_awvalid),
         .awready_i(lsu_awready),
 
         .wdata_o(lsu_wdata),
         .wstrb_o(lsu_wstrb),
-        .wlast_o(),
+        .wlast_o(lsu_wlast),
         .wvalid_o(lsu_wvalid),
         .wready_i(lsu_wready),
         
         .bresp_i(lsu_bresp),
-        .bid_i(0),
+        .bid_i(lsu_bid),
         .bvalid_i(lsu_bvalid),
         .bready_o(lsu_bready)
     );
@@ -747,11 +759,10 @@ module ysyx_25050137(
     );
 
 
-    always@(*) begin
-        
+    always@(*) begin       
         if(inst_from_mem == 32'h00100073) begin
-        ebreak();
-        $finish;
+            ebreak();
+            $finish;
         end
     end
     /*
