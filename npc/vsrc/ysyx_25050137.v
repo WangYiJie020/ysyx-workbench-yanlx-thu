@@ -131,6 +131,36 @@ module ysyx_25050137(
 
     wire useless1,useless2,useless3,useless4;
 
+    wire [`CPU_WIDTH-1:0] lsu_araddr;
+    wire [3:0] lsu_arid;
+    wire [7:0] lsu_arlen;
+    wire [2:0] lsu_arsize;
+    wire [1:0] lsu_arburst;
+    wire lsu_arvalid;
+    wire lsu_arready;
+    wire [`CPU_WIDTH-1:0] lsu_rdata;
+    wire [1:0] lsu_rresp;
+    wire lsu_rlast;
+    wire [3:0] lsu_rid;
+    wire lsu_rvalid;
+    wire lsu_rready;
+    wire [`CPU_WIDTH-1:0] lsu_awaddr;
+    wire [3:0] lsu_awid;
+    wire [7:0] lsu_awlen;
+    wire [2:0] lsu_awsize;
+    wire [1:0] lsu_awburst;
+    wire lsu_awvalid;
+    wire lsu_awready;
+    wire [`CPU_WIDTH-1:0] lsu_wdata;
+    wire [3:0] lsu_wstrb;
+    wire lsu_wlast;
+    wire lsu_wvalid;
+    wire lsu_wready;
+    wire [1:0] lsu_bresp;
+    wire [3:0] lsu_bid;
+    wire lsu_bvalid;
+    wire lsu_bready;
+
     wire [`CPU_WIDTH-1:0] axi_araddr;
     wire [3:0] axi_arid;
     wire [7:0] axi_arlen;
@@ -632,23 +662,7 @@ module ysyx_25050137(
     wire valid_lsu_to_wbu;
     wire ready_lsu_to_wbu;
 
-    wire [`CPU_WIDTH-1:0] lsu_araddr;
-    wire lsu_arvalid;
-    wire lsu_arready;
-    wire [`CPU_WIDTH-1:0] lsu_rdata;
-    wire [1:0] lsu_rresp;
-    wire lsu_rvalid;
-    wire lsu_rready;
-    wire [`CPU_WIDTH-1:0] lsu_awaddr;
-    wire lsu_awvalid;
-    wire lsu_awready;
-    wire [`CPU_WIDTH-1:0] lsu_wdata;
-    wire [3:0] lsu_wstrb;
-    wire lsu_wvalid;
-    wire lsu_wready;
-    wire [1:0] lsu_bresp;
-    wire lsu_bvalid;
-    wire lsu_bready;
+    
 
     lsu LSU(
         .clk(clk),
