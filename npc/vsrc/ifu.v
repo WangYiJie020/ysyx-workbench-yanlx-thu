@@ -148,7 +148,7 @@ module ifu(
                 arvalid <= 1;
                 rready <= 1;
             end else if(current_state == S_WAIT_SEND) begin               
-                if(rresp_i==0) ifu_valid_o <= 1;
+                if(rlast_i==1) ifu_valid_o <= 1;
                 else ifu_valid_o <= 0;
                 
                 //arvalid <= 1; 
