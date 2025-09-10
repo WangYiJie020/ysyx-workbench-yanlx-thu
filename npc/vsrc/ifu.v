@@ -38,7 +38,7 @@ module ifu(
     reg lfsr_in;
 
     reg arvalid;
-    reg [`CPU_WIDTH-1:0] araddr;
+    reg [`CPU_WIDTH-1:0] araddr,inst;
     reg rready;
 
     reg [31:0] arvalid_buffer ;
@@ -131,7 +131,7 @@ module ifu(
                 //arvalid_o <= 1;
                 rready <= 1;
                 pc_o <= pc;
-                //inst_o <= rdata_i;
+                inst <= rdata_i;
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                 end
@@ -139,7 +139,7 @@ module ifu(
                 ifu_valid_o <= 1;
                 arvalid <= 0;
                 rready <= 0;
-                //inst_o <= rdata_i;
+                inst_o <= inst;
                 pc_o <= pc;
 
             end else if (current_state == S_WAIT_RECEIVE)begin
@@ -152,7 +152,7 @@ module ifu(
                 npc <= npc_i;
                 arvalid <= 1;
                 rready <= 1;
-                inst_o <= rdata_i;
+                inst <= rdata_i;
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                 end
