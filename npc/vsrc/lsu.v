@@ -179,7 +179,7 @@ module lsu(
             lsu_valid_o <= 0;
             lsu_ready_o <= 0;
             flag <= 0;
-            arvalid <= 1;
+            arvalid <= 0;
         end else begin
             current_state <= next_state;
             if(current_state == S_IDLE) lsu_ready_o <= 1;
