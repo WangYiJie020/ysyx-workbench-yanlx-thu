@@ -60,10 +60,11 @@ module ifu(
 
     //assign inst_o = rdata_i;
 
-    localparam S_IDLE = 3'b00,S_RECEIVE = 3'b01,S_SEND = 3'b10,S_WAIT_RECEIVE = 3'b11;
+    localparam S_IDLE = 3'b000,S_RECEIVE = 3'b01,S_SEND = 3'b010,S_WAIT_RECEIVE = 3'b011;
     localparam S_WAIT_SEND = 3'b100;
 
     reg [2:0] current_state,next_state;
+    reg [1:0] receive_counter;
 
     always @(*) begin
         case(current_state)
@@ -88,7 +89,9 @@ module ifu(
             end
             
             S_RECEIVE: begin  
-                next_state = S_WAIT_SEND; 
+                if(receive_counter == 2)  
+                    next_state = S_WAIT_SEND;  //wait pc
+                else next_state = current_state; 
             end
 
             S_WAIT_SEND: begin
@@ -152,6 +155,8 @@ module ifu(
                 
 
             end else if(current_state == S_RECEIVE) begin 
+                if(receive_counter == 2) receive_counter <= 0;
+                else receive_counter <= receive_counter + 1;
                 ifu_valid_o <= 0;
                 npc <= npc_i;
                 arvalid <= 1;
@@ -159,7 +164,8 @@ module ifu(
                 
                 
                 
-            end else if(current_state == S_WAIT_SEND) begin               
+            end else if(current_state == S_WAIT_SEND) begin     
+                receive_counter <= 0;          
                 if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
                     ifu_valid_o <= 1;
                     inst_o <= rdata_i;
