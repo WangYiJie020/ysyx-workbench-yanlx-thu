@@ -125,7 +125,7 @@ module ifu(
                 araddr <= pc;
                 if(rvalid_i == 1 && rready == 1) begin 
                     ifu_valid_o <= 1;
-                    inst <= rdata_i;
+                    inst_o <= rdata_i;
                 end
                 else ifu_valid_o <= 0;
                 //arvalid <= 1;
@@ -140,7 +140,7 @@ module ifu(
                 ifu_valid_o <= 1;
                 arvalid <= 0;
                 rready <= 0;
-                inst_o <= inst;
+                //inst_o <= inst;
                 pc_o <= pc;
                 
                 
@@ -162,7 +162,7 @@ module ifu(
             end else if(current_state == S_WAIT_SEND) begin               
                 if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
                     ifu_valid_o <= 1;
-                    inst <= rdata_i;
+                    inst_o <= rdata_i;
                 end
                 else ifu_valid_o <= 0;
                 //ifu_valid_o <= 1;
