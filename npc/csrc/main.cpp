@@ -433,7 +433,7 @@ int main(int argc, char** argv) {
   tfp->open("wave.vcd"); //设置输出的文件wave.vcd
 #endif
 
-  int n = 10;
+  int n = 2;
   top->reset = 1;
   while (n > 0) {
     top->clock = 0; top->eval();
