@@ -2270,7 +2270,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+1385,"S_WAIT_SEND", false,-1, 2,0);
     tracep->declBus(c+56,"current_state", false,-1, 2,0);
     tracep->declBus(c+872,"next_state", false,-1, 2,0);
-    tracep->declBus(c+57,"receive_counter", false,-1, 1,0);
+    tracep->declBus(c+57,"receive_counter", false,-1, 2,0);
     tracep->pushNamePrefix("PC ");
     tracep->declBus(c+1343,"WIDTH", false,-1, 31,0);
     tracep->declBus(c+1386,"RESET_VAL", false,-1, 31,0);
@@ -3601,7 +3601,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_full_sub_0(VysyxSoCFull___024roo
     bufp->fullQData(oldp+53,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__CLINT__DOT__time_counter),64);
     bufp->fullCData(oldp+55,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__current_state),2);
     bufp->fullCData(oldp+56,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__current_state),3);
-    bufp->fullCData(oldp+57,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__receive_counter),2);
+    bufp->fullCData(oldp+57,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__receive_counter),3);
     bufp->fullBit(oldp+58,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__flag));
     bufp->fullBit(oldp+59,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Xbar__DOT__ar_switch));
     bufp->fullBit(oldp+60,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Xbar__DOT__r_switch));

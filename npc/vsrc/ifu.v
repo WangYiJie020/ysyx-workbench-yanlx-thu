@@ -155,7 +155,7 @@ module ifu(
                 
 
             end else if(current_state == S_RECEIVE) begin 
-                if(receive_counter == 3) begin
+                if(receive_counter == 4) begin
                     receive_counter <= 0;
                     ifu_valid_o <= 0;
                     arvalid <= 1;
