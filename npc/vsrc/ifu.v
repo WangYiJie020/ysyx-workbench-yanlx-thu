@@ -52,7 +52,7 @@ module ifu(
         .dout(pc)
     );
 
-    //assign araddr = pc;
+    assign araddr = (current_state == S_IDLE || current_state == S_IDLE ) ? pc :0;
     assign arid_o = 0;
     assign arlen_o = 0;
     assign arsize_o = 3'b010; //4bytes
@@ -124,7 +124,7 @@ module ifu(
                 if(rvalid_i == 1 && rready == 1) ifu_valid_o <= 1;
                 else ifu_valid_o <= 0;
                 //arvalid <= 1;
-                araddr <= pc;
+                //araddr <= pc;
                 rready <= 1;
                 //pc_o <= pc;
                 inst <= rdata_i;
@@ -137,13 +137,13 @@ module ifu(
                 rready <= 0;
                 inst_o <= inst;
                 pc_o <= pc;
-                araddr <= pc;
+                
 
             end else if (current_state == S_WAIT_RECEIVE)begin
                 ifu_valid_o <= 0;
                 arvalid <= 0;
                 rready <= 0;
-                araddr <= pc;
+                
 
             end else if(current_state == S_RECEIVE) begin 
                 ifu_valid_o <= 0;
@@ -151,7 +151,7 @@ module ifu(
                 arvalid <= 0;
                 rready <= 1;
                 inst <= rdata_i;
-                araddr <= pc;
+                
                 
             end else if(current_state == S_WAIT_SEND) begin               
                 if(rlast_i==1) ifu_valid_o <= 1;
@@ -159,7 +159,7 @@ module ifu(
                 ifu_valid_o <= 1;
                 arvalid <= 1; 
                 rready <= 1;
-                araddr <= pc;
+                //araddr <= pc;
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                 end
