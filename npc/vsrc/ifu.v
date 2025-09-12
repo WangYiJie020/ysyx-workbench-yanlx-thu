@@ -89,7 +89,7 @@ module ifu(
             end
             
             S_RECEIVE: begin  
-                if(receive_counter == 4)  
+                if(receive_counter == 2)  
                     next_state = S_WAIT_SEND;  //wait pc
                 else next_state = current_state; 
             end
@@ -155,7 +155,7 @@ module ifu(
                 
 
             end else if(current_state == S_RECEIVE) begin 
-                if(receive_counter == 4) begin
+                if(receive_counter == 2) begin
                     receive_counter <= 0;
                     arvalid <= 1;
                     rready <= 1;
