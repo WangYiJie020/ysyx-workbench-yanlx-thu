@@ -161,7 +161,7 @@ module ifu(
                     rready <= 1;
                     araddr <= pc;
                 end
-                else receive_counter = receive_counter + 1;
+                else receive_counter <= receive_counter + 1;
                 ifu_valid_o <= 0;                
                 npc <= npc_i;
                 
