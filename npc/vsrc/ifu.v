@@ -122,13 +122,18 @@ module ifu(
             else if(current_state == S_WAIT_SEND) ifu_ready_o <= 0;      
             
             if(current_state == S_IDLE) begin 
-                if(rvalid_i == 1 && rready == 1) ifu_valid_o <= 1;
+                if(rvalid_i == 1 && rready == 1) begin 
+                    ifu_valid_o <= 1;
+                    pc_o <= pc;
+                    inst_o <= rdata_i;
+                    araddr <= pc;
+                end
                 else ifu_valid_o <= 0;
                 //arvalid <= 1;
-                araddr <= pc;
+                
                 rready <= 1;
-                pc_o <= pc;
-                inst_o <= rdata_i;
+                
+                
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                 end
