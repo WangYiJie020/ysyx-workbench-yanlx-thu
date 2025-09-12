@@ -140,6 +140,9 @@ module ifu(
                     arvalid <= 0;
                 end
             end else if (current_state == S_SEND)begin
+                if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
+                    inst_o <= rdata_i;
+                end
                 ifu_valid_o <= 1;
                 arvalid <= 0;
                 rready <= 0;
