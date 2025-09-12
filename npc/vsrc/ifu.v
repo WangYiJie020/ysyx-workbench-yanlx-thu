@@ -123,7 +123,7 @@ module ifu(
             if(current_state == S_IDLE) begin 
                 if(rvalid_i == 1 && rready == 1) ifu_valid_o <= 1;
                 else ifu_valid_o <= 0;
-                arvalid_o <= 1;
+                arvalid <= 1;
                 rready <= 1;
                 pc_o <= pc;
                 inst <= rdata_i;
