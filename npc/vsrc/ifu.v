@@ -131,14 +131,13 @@ module ifu(
                     inst_o <= rdata_i;
                 end
                 else ifu_valid_o <= 0;
-                //arvalid <= 1;
-                
+                //arvalid <= 1;               
                 rready <= 1;
-                
                 
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                 end
+
             end else if (current_state == S_SEND)begin
                 if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
                     inst_o <= rdata_i;
@@ -147,15 +146,12 @@ module ifu(
                 arvalid <= 0;
                 rready <= 0;
                 //inst_o <= inst;
-                pc_o <= pc;
-                
-                
+                pc_o <= pc;       
 
             end else if (current_state == S_WAIT_RECEIVE)begin
                 ifu_valid_o <= 0;
                 arvalid <= 0;
-                rready <= 0;
-                
+                rready <= 0;       
 
             end else if(current_state == S_RECEIVE) begin 
                 if(receive_counter == 2) begin
@@ -167,12 +163,9 @@ module ifu(
                 else receive_counter <= receive_counter + 1;
                 ifu_valid_o <= 0;                
                 npc <= npc_i;
-                
-                
-                
+ 
             end else if(current_state == S_WAIT_SEND) begin     
-                receive_counter <= 0; 
-                        
+                receive_counter <= 0;                        
                 if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
                     ifu_valid_o <= 1;
                     inst_o <= rdata_i;
@@ -180,17 +173,11 @@ module ifu(
                 else ifu_valid_o <= 0;
                 //ifu_valid_o <= 1;
                 //arvalid <= 1; 
-                rready <= 1;
-                
+                rready <= 1;              
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                 end
-                 
-
-            end 
-
-            
-            
+            end            
         end
     end
 
