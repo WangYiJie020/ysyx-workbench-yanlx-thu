@@ -64,7 +64,7 @@ module ifu(
     localparam S_WAIT_SEND = 3'b100;
 
     reg [2:0] current_state,next_state;
-    reg [1:0] receive_counter;
+    reg [2:0] receive_counter;
 
     always @(*) begin
         case(current_state)
@@ -89,7 +89,7 @@ module ifu(
             end
             
             S_RECEIVE: begin  
-                if(receive_counter == 2)  
+                if(receive_counter == 4)  
                     next_state = S_WAIT_SEND;  //wait pc
                 else next_state = current_state; 
             end
@@ -155,7 +155,7 @@ module ifu(
                 
 
             end else if(current_state == S_RECEIVE) begin 
-                if(receive_counter == 4) begin
+                if(receive_counter == 3) begin
                     receive_counter <= 0;
                     ifu_valid_o <= 0;
                     arvalid <= 1;
