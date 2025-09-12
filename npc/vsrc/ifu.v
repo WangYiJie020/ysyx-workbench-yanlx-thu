@@ -155,12 +155,14 @@ module ifu(
                 
 
             end else if(current_state == S_RECEIVE) begin 
-                if(receive_counter == 2) receive_counter <= 0;
+                if(receive_counter == 2) begin
+                    receive_counter <= 0;
+                    ifu_valid_o <= 0;
+                    arvalid <= 1;
+                    rready <= 1;
+                end
                 else receive_counter <= receive_counter + 1;
-                ifu_valid_o <= 0;
                 npc <= npc_i;
-                arvalid <= 1;
-                rready <= 1;
                 
                 
                 
