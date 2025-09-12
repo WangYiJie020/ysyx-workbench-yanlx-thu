@@ -145,7 +145,7 @@ module ifu(
             end else if(current_state == S_RECEIVE) begin 
                 ifu_valid_o <= 0;
                 npc <= npc_i;
-                arvalid <= 1;
+                arvalid <= 0;
                 rready <= 1;
                 inst <= rdata_i;
                 if(arvalid==1 && arready_i==1) begin
@@ -155,7 +155,7 @@ module ifu(
                 if(rlast_i==1) ifu_valid_o <= 1;
                 else ifu_valid_o <= 0;
                 ifu_valid_o <= 1;
-                //arvalid <= 1; 
+                arvalid <= 1; 
                 rready <= 1;
                  
 
