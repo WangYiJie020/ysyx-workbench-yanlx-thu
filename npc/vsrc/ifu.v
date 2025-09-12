@@ -111,6 +111,7 @@ module ifu(
             npc <= `PC_INIT;
             arvalid <= 1;
             rready <= 0;
+            araddr <= pc;
         end else begin
             current_state <= next_state;
 
