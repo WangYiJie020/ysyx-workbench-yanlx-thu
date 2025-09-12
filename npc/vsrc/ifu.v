@@ -128,7 +128,7 @@ module ifu(
                 araddr <= pc;
                 rready <= 1;
                 //pc_o <= pc;
-                inst <= rdata_i;
+                inst_o <= rdata_i;
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                 end
@@ -166,7 +166,7 @@ module ifu(
                 end
                  
 
-            end else araddr <= pc;
+            end 
 
             
             
