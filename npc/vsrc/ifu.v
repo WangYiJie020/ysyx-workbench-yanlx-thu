@@ -88,7 +88,6 @@ module ifu(
             end
             
             S_RECEIVE: begin  
-                npc <= npc_i;
                 next_state = S_WAIT_SEND; 
             end
 
@@ -154,7 +153,7 @@ module ifu(
 
             end else if(current_state == S_RECEIVE) begin 
                 ifu_valid_o <= 0;
-                
+                npc <= npc_i;
                 arvalid <= 1;
                 rready <= 1;
                 

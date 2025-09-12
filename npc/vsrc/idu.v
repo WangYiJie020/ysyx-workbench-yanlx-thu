@@ -106,8 +106,6 @@ module idu(
             S_IDLE: begin
                 if (idu_valid_i == 1 && idu_ready_o == 1) begin
                     next_state = S_RECEIVE;
-                    pc <= pc_i;
-                    inst <= inst_i;
                 end else begin
                     next_state = current_state;
                 end
@@ -144,6 +142,10 @@ module idu(
 
             if(current_state == S_IDLE) begin
                 idu_valid_o <= 0;
+                if(idu_valid_i == 1 && idu_ready_o == 1) begin
+                    pc <= pc_i;
+                    inst <= inst_i;
+                end
             end
             else if(current_state == S_RECEIVE) begin 
                 idu_valid_o <= 1;
