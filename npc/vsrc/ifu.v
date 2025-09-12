@@ -87,13 +87,8 @@ module ifu(
                 end
             end
             
-            S_RECEIVE: begin
-                if(rlast_i==1) begin
-                    next_state = S_WAIT_SEND; 
-                end
-                else begin 
-                    next_state = current_state;
-                end
+            S_RECEIVE: begin  
+                next_state = S_WAIT_SEND; 
             end
 
             S_WAIT_SEND: begin
@@ -114,7 +109,7 @@ module ifu(
             ifu_valid_o <= 0;
             ifu_ready_o <= 0;
             npc <= `PC_INIT;
-            arvalid <= 1;
+            arvalid <= 0;
             rready <= 0;
         end else begin
             current_state <= next_state;
@@ -128,7 +123,7 @@ module ifu(
             if(current_state == S_IDLE) begin 
                 if(rvalid_i == 1 && rready == 1) ifu_valid_o <= 1;
                 else ifu_valid_o <= 0;
-                //arvalid_o <= 1;
+                arvalid_o <= 1;
                 rready <= 1;
                 pc_o <= pc;
                 inst <= rdata_i;
@@ -157,8 +152,8 @@ module ifu(
                     arvalid <= 0;
                 end
             end else if(current_state == S_WAIT_SEND) begin               
-                //if(rlast_i==1) ifu_valid_o <= 1;
-                //else ifu_valid_o <= 0;
+                if(rlast_i==1) ifu_valid_o <= 1;
+                else ifu_valid_o <= 0;
                 ifu_valid_o <= 1;
                 //arvalid <= 1; 
                 rready <= 1;
