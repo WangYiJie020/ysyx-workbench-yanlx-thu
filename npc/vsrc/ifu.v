@@ -109,7 +109,7 @@ module ifu(
             ifu_valid_o <= 0;
             ifu_ready_o <= 0;
             npc <= `PC_INIT;
-            arvalid <= 0;
+            arvalid <= 1;
             rready <= 0;
         end else begin
             current_state <= next_state;
@@ -123,7 +123,7 @@ module ifu(
             if(current_state == S_IDLE) begin 
                 if(rvalid_i == 1 && rready == 1) ifu_valid_o <= 1;
                 else ifu_valid_o <= 0;
-                arvalid <= 1;
+                //arvalid <= 1;
                 rready <= 1;
                 pc_o <= pc;
                 inst <= rdata_i;
