@@ -57,7 +57,7 @@ sim: $(VSRCS) $(CSRCS)
 		+incdir+$(YSYX_DIR)/ysyxSoC/perip/spi/rtl \
 		--timescale "1ns/1ns" --no-timing \
 		-CFLAGS "-mcmodel=medium" -LDFLAGS "-lreadline" 
-	./obj_dir/V$(TOPNAME) --diff=${DIFFTEST} char-test.bin
+	./obj_dir/V$(TOPNAME) --diff=${DIFFTEST} char-test2.bin
 # ./obj_dir/V$(TOPNAME) --diff=${DIFFTEST} $(IMG) 
 
 include ../Makefile
