@@ -28,7 +28,7 @@ static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
 
 #define CONFIG_SRAMBASE 0x0f000000
 
-static uint8_t sram[8192] PG_ALIGN = {};
+static uint8_t sram[0x01000000] PG_ALIGN = {};
 
 uint8_t* guest_to_host(paddr_t paddr) { return pmem + paddr - CONFIG_MBASE; }
 paddr_t host_to_guest(uint8_t *haddr) { return haddr - pmem + CONFIG_MBASE; }
