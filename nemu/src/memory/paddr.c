@@ -39,7 +39,7 @@ paddr_t host_to_guest_sram(uint8_t *haddr) { return haddr - sram + CONFIG_SRAMBA
 static word_t pmem_read(paddr_t addr, int len) {
   word_t ret = host_read(guest_to_host(addr), len);
   #ifdef CONFIG_MTRACE
-  log_write("[itrace] read addr:%x, len:%d\n",addr,len);
+  //log_write("[itrace] read addr:%x, len:%d\n",addr,len);
   #endif
   return ret;
 }
