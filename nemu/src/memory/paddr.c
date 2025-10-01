@@ -52,7 +52,7 @@ static void pmem_write(paddr_t addr, int len, word_t data) {
 static word_t sram_read(paddr_t addr, int len) {
   word_t ret = host_read(guest_to_host_sram(addr), len);
   #ifdef CONFIG_MTRACE
-  log_write("[mtrace] read addr:%x, len:%d\n",addr,len);
+  log_write("[mtrace] read addr:%x, len:%d, data=%08x\n",addr,len,ret);
   #endif
   return ret;
 }
