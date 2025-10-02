@@ -1,5 +1,16 @@
 `include "header.v"
 
+import "DPI-C" function void reg_return_value(input int gpr_0,input int gpr_1,
+input int gpr_2,input int gpr_3,input int gpr_4,input int gpr_5,
+input int gpr_6,input int gpr_7,input int gpr_8,input int gpr_9,
+input int gpr_10,input int gpr_11,input int gpr_12,input int gpr_13,
+input int gpr_14,input int gpr_15,input int gpr_16,input int gpr_17,
+input int gpr_18,input int gpr_19,input int gpr_20,input int gpr_21,
+input int gpr_22,input int gpr_23,input int gpr_24,input int gpr_25,
+input int gpr_26,input int gpr_27,input int gpr_28,input int gpr_29,
+input int gpr_30,input int gpr_31,input int pc,input int csr_reg_0,
+input int csr_reg_1,input int csr_reg_2,input int csr_reg_3);
+
 module ysyx_25050137(
     input           clock,
     input           reset,
@@ -779,7 +790,7 @@ module ysyx_25050137(
             $finish;
         end
     end
-    /*
+    
     always@(*) begin
         reg_return_value(reg_file[0],reg_file[1],reg_file[2],reg_file[3],reg_file[4],reg_file[5],reg_file[6],
         reg_file[7],reg_file[8],reg_file[9],reg_file[10],reg_file[11],reg_file[12],reg_file[13],reg_file[14],
@@ -787,5 +798,5 @@ module ysyx_25050137(
         reg_file[23],reg_file[24],reg_file[25],reg_file[26],reg_file[27],reg_file[28],reg_file[29],reg_file[30],
         reg_file[31],pc_to_mem,csr_reg[0],csr_reg[1],csr_reg[2],csr_reg[3]);
     end
-    */
+    
 endmodule
