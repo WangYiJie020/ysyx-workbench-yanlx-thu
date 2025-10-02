@@ -7,7 +7,7 @@
 #include "macro.h"
 #include "utils.h"
 
-#define CONFIG_MBASE 0x80000000
+#define CONFIG_MBASE 0x20000000
 #define CONFIG_MSIZE 0x8000000
 
 # define DEVICE_BASE 0xa0000000
