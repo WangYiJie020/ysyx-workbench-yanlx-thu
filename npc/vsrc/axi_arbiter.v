@@ -123,8 +123,8 @@ module axi_arbiter(
             if(arvalid_i_a == 1) begin ar_switch <= 0; r_switch <= 0;end
             else if(arvalid_i_b == 1) begin 
                 ar_switch <= 1; r_switch <= 1;
-                if(rlast_o_b == 1) begin ar_switch <= 0; r_switch <= 0;end
             end
+            else if(rlast_o_b == 1) begin ar_switch <= 0; r_switch <= 0;end
             
         end
     end
