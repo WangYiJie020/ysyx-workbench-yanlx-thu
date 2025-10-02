@@ -113,7 +113,7 @@ module lsu(
     //assign datamem_readdata_o = rdata_i;
     assign araddr = alu_result;
     assign awaddr = alu_result;
-    assign datamem_readdata_o = rdata_i;
+    //assign datamem_readdata_o = rdata_i;
     assign arid_o = 0;
     assign arlen_o = 0;
     assign arsize_o = 0;
@@ -226,7 +226,10 @@ module lsu(
                 //awaddr_o <= alu_result;
             end else if (current_state == S_WAIT_SEND)begin
                 if(MemRead_i) begin
-                    if(rlast_i==1) lsu_valid_o <= 1;
+                    if(rlast_i==1) begin 
+                        lsu_valid_o <= 1;
+                        datamem_readdata_o <= rdata_i;
+                    end
                     else lsu_valid_o <= 0;
                 end
                 else if(MemWrite_i)begin
