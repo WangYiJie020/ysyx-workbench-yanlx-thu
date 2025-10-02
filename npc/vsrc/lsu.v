@@ -226,7 +226,7 @@ module lsu(
                 //awaddr_o <= alu_result;
             end else if (current_state == S_WAIT_SEND)begin
                 if(MemRead_i) begin
-                    if(rlast_i==0) begin 
+                    if(rlast_i==1) begin 
                         lsu_valid_o <= 1;
                         datamem_readdata_o <= rdata_i;
                     end
