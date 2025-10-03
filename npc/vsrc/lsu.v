@@ -116,22 +116,33 @@ module lsu(
     //assign datamem_readdata_o = rdata_i;
     assign arid_o = 0;
     assign arlen_o = 0;
-    assign arsize_o = 0;
+    //assign arsize_o = 0;
     assign arburst_o = 0;
     assign awid_o = 0;
     assign awlen_o = 0;
-    assign awsize_o = 0;
+    //assign awsize_o = 0;
     assign awburst_o = 0;
     assign wlast_o = 1;
 
     always@(*) begin
         case(wmask_i)
-            //4'h1: wstrb = wmask_i << (alu_result[1:0]);
-            //4'h3: wstrb = wmask_i << (alu_result[1:0]);
-            4'hf: wstrb = wmask_i;
-            default: wstrb = wmask_i;
+            4'h1: awsize_o = 3'b000;
+            4'h3: awsize_o = 3'b001;
+            4'hf: awsize_o = 3'b010;
+            default: awsize_o = 3'b010;
         endcase
     end
+
+    always@(*) begin
+        case(rmask)
+            3'b100,3'b011: arsize_o = 3'b000; //lb,lbu
+            3'b010,3'b001: arsize_o = 3'b001; //lh,lhu
+            3'b000: arsize_o = 3'b010; //lw
+            default: arsize_o = 3'b010;
+        endcase
+    end
+
+    assign wstrb = wmask_i;
 
 
     localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10,S_WAIT_SEND = 2'b11;
