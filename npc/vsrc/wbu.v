@@ -41,7 +41,7 @@ module wbu(
     reg [2:0] rmask;
     reg wb_src;
     reg csr_wdata_src;
-    reg difftest_is_skep;
+    reg difftest_check;
 
     sext_mem SEXT_Mem(
         .read_data(datamem_readdata),
