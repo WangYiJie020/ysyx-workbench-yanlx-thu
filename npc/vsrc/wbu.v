@@ -105,7 +105,7 @@ module wbu(
 
             if(current_state == S_IDLE) wbu_valid_o <= 0;
             else if(current_state == S_RECEIVE) begin 
-                wbu_valid_o <= 0;
+                wbu_valid_o <= 1;
                 alu_result <= alu_result_i;
                 rs1 <= rs1_i;
                 csr_rdata_l_rs1 <= csr_rdata_l_rs1_i;
