@@ -42,6 +42,7 @@ module wbu(
     reg wb_src;
     reg csr_wdata_src;
     reg difftest_check;
+    reg difftest_check_flag;
 
     sext_mem SEXT_Mem(
         .read_data(datamem_readdata),
@@ -110,6 +111,7 @@ module wbu(
             if(current_state == S_IDLE) begin 
                 wbu_valid_o <= 0; 
                 difftest_check <= 0; 
+                difftest_check_flag <= 0;
             end
             else if(current_state == S_RECEIVE) begin 
                 wbu_valid_o <= 1;
@@ -124,14 +126,20 @@ module wbu(
                 csr_write_o <= csr_write_i;
                 reg_write_o <= reg_write_i;
                 waddr_o <= waddr_i;
-                if(difftest_check == 0) difftest_check <= 1; //此时检查寄存器
+                //隐藏bug 如果S_RECEIVE有3拍，difftest机制将出错
+                if(difftest_check == 0 && difftest_check_flag == 0) begin 
+                    difftest_check <= 1; //此时检查寄存器
+                    difftest_check_flag <= 1;
+                end
                 else difftest_check <= 0;
                 
             end else if (current_state == S_SEND)begin
                 difftest_check <= 0; 
+                difftest_check_flag <= 0;
                 wbu_valid_o <= 1;
             end else begin
                 difftest_check <= 0; 
+                difftest_check_flag <= 0;
                 wbu_valid_o <= 0;
             end
             
