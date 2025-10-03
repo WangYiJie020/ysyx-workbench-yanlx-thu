@@ -20,14 +20,14 @@ module sext_mem(
     always@(*) begin
         case(rmask)
             3'b000:mem_data = read_data; //lw
-            //3'b001:begin //lh
-            //    mem_data = addr_low2[1] ? ({{16{read_data[31]}},read_data[31:16]}) : ({{16{read_data[15]}},read_data[15:0]}) ;//lh
-            //end
-            //3'b010:begin //lhu
-            //    mem_data = addr_low2[1] ? ({16'd0,read_data[31:16]}) : ({16'd0,read_data[15:0]}) ;//lhu
-            //end
-            //3'b011:mem_data = addr_low2[1] ? (addr_low2[0] ? sbyte3 : sbyte2) : (addr_low2[0] ? sbyte1 : sbyte0);//lb
-            //3'b100:mem_data = addr_low2[1] ? (addr_low2[0] ? byte3 : byte2) : (addr_low2[0] ? byte1 : byte0);//lbu
+            3'b001:begin //lh
+                mem_data = addr_low2[1] ? ({{16{read_data[31]}},read_data[31:16]}) : ({{16{read_data[15]}},read_data[15:0]}) ;//lh
+            end
+            3'b010:begin //lhu
+                mem_data = addr_low2[1] ? ({16'd0,read_data[31:16]}) : ({16'd0,read_data[15:0]}) ;//lhu
+            end
+            3'b011:mem_data = addr_low2[1] ? (addr_low2[0] ? sbyte3 : sbyte2) : (addr_low2[0] ? sbyte1 : sbyte0);//lb
+            3'b100:mem_data = addr_low2[1] ? (addr_low2[0] ? byte3 : byte2) : (addr_low2[0] ? byte1 : byte0);//lbu
             default:mem_data = read_data;
 
         endcase
