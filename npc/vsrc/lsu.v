@@ -120,18 +120,18 @@ module lsu(
     assign arburst_o = 0;
     assign awid_o = 0;
     assign awlen_o = 0;
-    //assign awsize_o = 0;
+    assign awsize_o = 3'b010;
     assign awburst_o = 0;
     assign wlast_o = 1;
 
-    always@(*) begin
+    /*always@(*) begin
         case(wmask_i)
             4'h1: awsize_o = 3'b000;
             4'h3: awsize_o = 3'b001;
             4'hf: awsize_o = 3'b010;
             default: awsize_o = 3'b010;
         endcase
-    end
+    end*/
 
     /*always@(*) begin
         case(rmask_i)
