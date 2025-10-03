@@ -344,6 +344,11 @@ static void trace_and_difftest() {
       //diff_cpdutreg2ref();
     }
     else {
+      bool check = difftest_check();
+      if(check==false) {
+        cpu_state = NPC_ABORT;
+        return;
+      }
       if(skip_r) {
         diff_cpdutreg2ref();
         //printf("aa\n");
@@ -352,12 +357,7 @@ static void trace_and_difftest() {
       else{
         difftest_step();
       }
-      bool check = difftest_check();
       
-      if(check==false) {
-        cpu_state = NPC_ABORT;
-        return;
-      }
     }
     skip_r = is_skip_ref;
   }
