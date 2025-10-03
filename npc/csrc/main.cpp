@@ -26,6 +26,7 @@
 int cpu_state;
 uint32_t mem[0xffffffff];
 bool is_skip_ref = false;
+bool difftest_check_all = false;
 
 VerilatedContext* contextp = new VerilatedContext;
 VysyxSoCFull* top = new VysyxSoCFull{contextp};
@@ -48,7 +49,7 @@ time_t currentTimeABS;
 int flag = 0;
 
 extern "C" void difftest_next_step(char difftest_check) {
-  is_skip_ref = ~difftest_check;
+  difftest_check_all = difftest_check;
 }
 extern "C" void flash_read(int32_t addr, int32_t *data) { assert(0); }
 extern "C" void mrom_read(int32_t addr, int32_t *data) { 
@@ -336,29 +337,30 @@ bool skip_r=false;
 static void trace_and_difftest() {
   //log_write("%08x,%08x\n", top->pc,top->inst); 
 #ifdef DIFFTEST_ON
-
-  if(is_skip_ref) {
-    //printf("skip\n");
-    //skip_r = is_skip_ref;
-    //diff_cpdutreg2ref();
+  if(difftest_check_all == 1) {
+    if(is_skip_ref) {
+      //printf("skip\n");
+      //skip_r = is_skip_ref;
+      //diff_cpdutreg2ref();
+    }
+    else {
+      if(skip_r) {
+        diff_cpdutreg2ref();
+        //printf("aa\n");
+        //difftest_step();
+      }
+      else{
+        difftest_step();
+      }
+      bool check = difftest_check();
+      
+      if(check==false) {
+        cpu_state = NPC_ABORT;
+        return;
+      }
+    }
+    skip_r = is_skip_ref;
   }
-  else {
-    if(skip_r) {
-      diff_cpdutreg2ref();
-      //printf("aa\n");
-      //difftest_step();
-    }
-    else{
-      difftest_step();
-    }
-    bool check = difftest_check();
-    
-    if(check==false) {
-      cpu_state = NPC_ABORT;
-      return;
-    }
-  }
-  skip_r = is_skip_ref;
   
 #endif
   WP * p = head;
