@@ -1,6 +1,6 @@
 `include "header.v"
 
-import "DPI-C" function void difftest_next_step(input bool difftest_check);
+import "DPI-C" function void difftest_next_step(input byte difftest_check);
 
 module wbu(
     input clk,
@@ -138,7 +138,7 @@ module wbu(
     end
 
     always@(*) begin
-        difftest_next_step(difftest_check);
+        difftest_next_step({7'd0,difftest_check});
     end
 
 endmodule

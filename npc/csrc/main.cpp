@@ -47,7 +47,7 @@ time_t start_time;
 time_t currentTimeABS;
 int flag = 0;
 
-extern "C" void difftest_next_step(bool difftest_check) {
+extern "C" void difftest_next_step(char difftest_check) {
   is_skip_ref = ~difftest_check;
 }
 extern "C" void flash_read(int32_t addr, int32_t *data) { assert(0); }
