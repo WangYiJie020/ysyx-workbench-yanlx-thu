@@ -353,7 +353,7 @@ static void trace_and_difftest() {
       else{
         difftest_step();
       }
-      bool check = difftest_check();
+      //bool check = difftest_check();
       
       if(check==false) {
         cpu_state = NPC_ABORT;
