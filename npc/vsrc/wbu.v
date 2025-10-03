@@ -126,7 +126,6 @@ module wbu(
                 csr_write_o <= csr_write_i;
                 reg_write_o <= reg_write_i;
                 waddr_o <= waddr_i;
-                //隐藏bug 如果S_RECEIVE有3拍，difftest机制将出错
                 if(difftest_check == 0 && difftest_check_flag == 0) begin 
                     difftest_check <= 1; //此时检查寄存器
                     difftest_check_flag <= 1;
