@@ -344,6 +344,7 @@ static void trace_and_difftest() {
       //diff_cpdutreg2ref();
     }
     else {
+      bool check = difftest_check();
       if(skip_r) {
         diff_cpdutreg2ref();
         //printf("aa\n");
