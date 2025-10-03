@@ -142,7 +142,7 @@ module lsu(
         endcase
     end
 
-    assign wstrb = 0;
+    assign wstrb = wmask_i;
 
 
     localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10,S_WAIT_SEND = 2'b11;
