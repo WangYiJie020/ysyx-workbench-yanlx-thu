@@ -1,4 +1,7 @@
 `include "header.v"
+
+import "DPI-C" function void difftest_next_step(input bool difftest_check);
+
 module wbu(
     input clk,
     input rst_n,
@@ -38,6 +41,7 @@ module wbu(
     reg [2:0] rmask;
     reg wb_src;
     reg csr_wdata_src;
+    reg difftest_is_skep;
 
     sext_mem SEXT_Mem(
         .read_data(datamem_readdata),
@@ -103,7 +107,10 @@ module wbu(
             else if(current_state == S_RECEIVE) wbu_ready_o <= 0;
             else if(current_state == S_SEND) wbu_ready_o <= 1;
 
-            if(current_state == S_IDLE) wbu_valid_o <= 0;
+            if(current_state == S_IDLE) begin 
+                wbu_valid_o <= 0; 
+                difftest_check <= 0; 
+            end
             else if(current_state == S_RECEIVE) begin 
                 wbu_valid_o <= 1;
                 alu_result <= alu_result_i;
@@ -117,14 +124,21 @@ module wbu(
                 csr_write_o <= csr_write_i;
                 reg_write_o <= reg_write_i;
                 waddr_o <= waddr_i;
-
+                difftest_check <= 0; 
+                
             end else if (current_state == S_SEND)begin
+                difftest_check <= 1; //此时检查寄存器
                 wbu_valid_o <= 1;
             end else begin
+                difftest_check <= 0; 
                 wbu_valid_o <= 0;
             end
             
         end
+    end
+
+    always@(*) begin
+        difftest_next_step(difftest_check);
     end
 
 endmodule
