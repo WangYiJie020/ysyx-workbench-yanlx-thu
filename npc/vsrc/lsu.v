@@ -142,7 +142,15 @@ module lsu(
         endcase
     end
 
-    assign wstrb = wmask_i << alu_result_i[1:0];
+    always@(*) begin
+        case(wmask_i)
+            4'h1: wstrb = wmask_i << alu_result_i[1:0];
+            4'h3: wstrb = wmask_i << alu_result_i[1:0];
+            4'hf: wstrb = wmask_i;
+            default: wstrb = wmask_i;
+        endcase
+    end
+    //assign wstrb = wmask_i << alu_result_i[1:0];
 
 
     localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10,S_WAIT_SEND = 2'b11;
@@ -215,7 +223,8 @@ module lsu(
                 
                 alu_result <= alu_result_i;
                 rs1 <= rs1_i;
-                wdata <= rs2_i << (8*alu_result_i[1:0]);  
+                if(wmask_i == 4'hf) wdata <= rs2_i; 
+                else wdata <= rs2_i << (8*alu_result_i[1:0]);  
                 
                 arvalid <= MemRead_i;
                 rready <= MemRead_i;        
