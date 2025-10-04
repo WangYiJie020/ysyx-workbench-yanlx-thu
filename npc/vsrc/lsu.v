@@ -233,7 +233,7 @@ module lsu(
                 npc_o <= npc_i;
                 csr_rdata_l_rs1_o <= csr_rdata_l_rs1_i;
                 waddr_o <= waddr_i;
-                wlast_o <= 0;
+                wlast_o <= 1;
 
                 //araddr_o <= alu_result;
                 //awaddr_o <= alu_result;
@@ -254,7 +254,7 @@ module lsu(
                 if(awvalid==1 && awready_i==1) awvalid <= 0;
                 if(wvalid==1 && wready_i==1) wvalid <= 0;
                 if(arvalid==1 && arready_i==1) arvalid <= 0;
-                wlast_o <= 1;
+                wlast_o <= 0;
 
             end else if (current_state == S_SEND)begin
                 lsu_valid_o <= 0;
