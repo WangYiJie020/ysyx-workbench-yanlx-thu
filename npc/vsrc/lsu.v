@@ -215,7 +215,7 @@ module lsu(
                 
                 alu_result <= alu_result_i;
                 rs1 <= rs1_i;
-                wdata <= rs2_i << 8*alu_result_i[1:0];  
+                wdata <= rs2_i << (8*alu_result_i[1:0]);  
                 
                 arvalid <= MemRead_i;
                 rready <= MemRead_i;        
