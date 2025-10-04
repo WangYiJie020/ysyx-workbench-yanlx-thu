@@ -126,8 +126,8 @@ module lsu(
 
     always@(*) begin
         case(wmask_i)
-            4'h1: awsize_o = 3'b000;
-            4'h3: awsize_o = 3'b001;
+            //4'h1: awsize_o = 3'b000;
+            //4'h3: awsize_o = 3'b001;
             4'hf: awsize_o = 3'b010;
             default: awsize_o = 3'b010;
         endcase
@@ -135,14 +135,14 @@ module lsu(
 
     always@(*) begin
         case(rmask_i)
-            3'b100,3'b011: arsize_o = 3'b000; //lb,lbu
-            3'b010,3'b001: arsize_o = 3'b001; //lh,lhu
+            //3'b100,3'b011: arsize_o = 3'b000; //lb,lbu
+            //3'b010,3'b001: arsize_o = 3'b001; //lh,lhu
             3'b000: arsize_o = 3'b010; //lw
             default: arsize_o = 3'b010;
         endcase
     end
 
-    assign wstrb = wmask_i;
+    assign wstrb = 4'b1111;
 
 
     localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10,S_WAIT_SEND = 2'b11;
