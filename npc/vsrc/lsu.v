@@ -126,8 +126,8 @@ module lsu(
 
     always@(*) begin
         case(wmask_i)
-            4'h1: awsize_o = 3'b000;
-            4'h3: awsize_o = 3'b001;
+            //4'h1: awsize_o = 3'b000;
+            //4'h3: awsize_o = 3'b001;
             4'hf: awsize_o = 3'b010;
             default: awsize_o = 3'b010;
         endcase
