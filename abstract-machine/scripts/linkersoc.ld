@@ -45,7 +45,7 @@ SECTIONS {
   /* 栈区在SRAM末尾 */
   .stack : ALIGN(16) {
       _stack_bottom = .;
-      . = . + 1K;         /* 4KB栈区 */
+      . = . + 2K;         /* 4KB栈区 */
       _stack_top = .;
   } > REGION_BSS
   
