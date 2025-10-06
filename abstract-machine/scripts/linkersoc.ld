@@ -33,7 +33,7 @@ SECTIONS {
   {
     _data_vma_start = .;
     *(.data)
-  } > sram AT > mrom :data
+  } > sram AT> mrom :data
   edata = .;
   _data = .;
   _data_size = SIZEOF(.data);
