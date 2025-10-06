@@ -29,11 +29,11 @@ SECTIONS {
     *(.rodata)
     rodata_end = .;
   } > REGION_RODATA 
-  .data : AT (rodata_end)
+  .data : 
   {
     _data_vma_start = .;
     *(.data)
-  } > REGION_DATA :data
+  } > sram AT > mrom :data
   edata = .;
   _data = .;
   _data_size = SIZEOF(.data);
