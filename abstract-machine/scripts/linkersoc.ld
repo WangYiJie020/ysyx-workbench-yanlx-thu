@@ -2,9 +2,7 @@ ENTRY(_start)
 
 PHDRS {
   text PT_LOAD;
-  rodata PT_LOAD;
   data PT_LOAD;
-  bss PT_LOAD;
 }
 
 MEMORY {
@@ -30,7 +28,7 @@ SECTIONS {
   {
     *(.rodata)
     rodata_end = .;
-  } > REGION_RODATA :rodata
+  } > REGION_RODATA 
   .data : AT (rodata_end)
   {
     _data_vma_start = .;
@@ -43,7 +41,7 @@ SECTIONS {
   .bss :
   {
     *(.bss)
-  } > REGION_BSS :bss
+  } > REGION_BSS 
   
   
   /* 堆区在数据段和BSS段之后 */
