@@ -1,8 +1,3 @@
-/* 加载数据段从MROM到SRAM */
-    call load_data_section
-    
-    jal _trm_init
-
 /* 加载数据段 */
 load_data_section:
     /* 获取数据段的源地址(LMA)、目标地址(VMA)和长度 */
