@@ -23,17 +23,18 @@ SECTIONS {
     *(.srodata.mainargs)  /* 放在.rodata段中 */
   } >mrom 
 
-  .bootloader ALIGN(4) :SUBALIGN(4){
+  .bootloader ALIGN(4) :{
     *(.bootloader*)
   } >mrom 
   
-  .data ALIGN(4) : SUBALIGN(4) 
+  .data ALIGN(4) : 
   {
     _data_vma_start = .;
     *(.data)
     *(.sdata)
     _data_vma_end = .;
   } > sram AT> mrom 
+
   _data_lma_start = LOADADDR(.data);
 
   .bss :
