@@ -8,9 +8,9 @@ extern uint8_t _data_vma_end[];
 extern uint8_t _trm_init[];
 
 /* 简单的内存操作函数 */
-static void memcpy(void *dest, const void *src, uint32_t n) {
-    uint32_t *d = (uint32_t *)dest;
-    const uint32_t *s = (const uint32_t *)src;
+static void memcpy(void *dest, const void *src, size_t n) {
+    uint8_t *d = (uint8_t *)dest;
+    const uint8_t *s = (const uint8_t *)src;
     while (n--) {
         *d++ = *s++;
     }
