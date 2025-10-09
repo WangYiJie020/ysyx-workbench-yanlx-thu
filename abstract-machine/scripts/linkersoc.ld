@@ -19,9 +19,8 @@ SECTIONS {
   .bootloader :{
     *(.bootloader*)
   } >mrom 
-  .rodata :
+  .rodata : ALIGN(4)
   {
-    . = ALIGN(4);
     *(.rodata)
     rodata_end = .;
   } > mrom 
