@@ -9,16 +9,16 @@ MEMORY {
 SECTIONS {
   
   . = ORIGIN(mrom);
-  .bootloader :{
-    *(.bootloader*)
-  } >mrom 
+  
   .text : {
     *(entry)
     *(.text*)
     etext = .;
     _etext = .;
   } > mrom AT> mrom 
-  
+  .bootloader :{
+    *(.bootloader*)
+  } >mrom 
   .rodata :
   {
     *(.rodata)
