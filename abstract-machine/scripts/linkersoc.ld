@@ -25,7 +25,6 @@ SECTIONS {
 
   .bootloader ALIGN(4) :{
     *(.bootloader*)
-    _sidata = .;
   } >mrom 
   
   .data ALIGN(4) : 
