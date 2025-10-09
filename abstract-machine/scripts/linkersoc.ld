@@ -5,6 +5,10 @@ MEMORY {
   mrom : ORIGIN = 0x20000000, LENGTH = 4K
   sram : ORIGIN = 0x0f000000, LENGTH = 8K
 }
+REGION_ALIAS("REGION_TEXT", mrom);
+REGION_ALIAS("REGION_RODATA", mrom);
+REGION_ALIAS("REGION_DATA", sram);
+REGION_ALIAS("REGION_BSS", sram);
 
 SECTIONS {
   
@@ -25,17 +29,18 @@ SECTIONS {
 
   .bootloader ALIGN(4) :{
     *(.bootloader*)
+    _sidata = .;
   } >mrom 
   
-  .data ALIGN(4) : 
+  .data :
   {
     _data_vma_start = .;
     *(.data)           /* 主要数据段 */
-    
+    *(.data.*)         /* 数据子段 */
     *(.sdata)          /* 小数据段 */
-    
+    *(.sdata.*)        /* 小数据子段 */
     _data_vma_end = .;
-  } > sram AT> mrom 
+  } > REGION_DATA AT>mrom
 
   . = ALIGN(4);
 
