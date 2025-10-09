@@ -20,6 +20,10 @@ SECTIONS {
   .bootloader ALIGN(4) :SUBALIGN(4){
     *(.bootloader*)
   } >mrom 
+
+  .rodata ALIGN(4) :SUBALIGN(4) {
+    *(.rodata*)
+  } >mrom 
   
   .data ALIGN(4) : SUBALIGN(4) 
   {
