@@ -28,13 +28,13 @@ SECTIONS {
     _sidata = .;
   } >mrom 
   
-  .data : AT (_sidata)  
+  .data ALIGN(4) : 
   {
     _data_vma_start = .;
     *(.data)
     *(.sdata)
     _data_vma_end = .;
-  } > sram 
+  } > sram AT> mrom 
 
   _data_lma_start = LOADADDR(.data);
 
