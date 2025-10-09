@@ -25,17 +25,18 @@ SECTIONS {
 
   .bootloader ALIGN(4) :{
     *(.bootloader*)
+    _sidata = .;
   } >mrom 
   
-  .data ALIGN(4) : 
+  .data : AT (_sidata)  
   {
     _data_vma_start = .;
     *(.data)
     *(.sdata)
     _data_vma_end = .;
-  } > sram AT> mrom 
+  } > sram 
 
-  _data_lma_start = LOADADDR(.data.ans);
+  _data_lma_start = LOADADDR(.data);
 
   .bss :
   {
