@@ -20,11 +20,7 @@ SECTIONS {
     *(.bootloader*)
   } >mrom 
   . = ALIGN(0x100);
-  .rodata : 
-  {
-    *(.rodata)
-    rodata_end = .;
-  } > mrom 
+  
   
   .data : 
   {
