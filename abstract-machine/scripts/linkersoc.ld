@@ -17,14 +17,13 @@ SECTIONS {
     _etext = .;
   } > mrom AT> mrom 
 
-  .bootloader ALIGN(4) :SUBALIGN(4){
-    *(.bootloader*)
-  } >mrom 
-
-
-  .rodata ALIGN(4) :SUBALIGN(4) {
+  .rodata ALIGN(4) : SUBALIGN(4) {
     *(.rodata*)
     *(.srodata.mainargs)  /* 放在.data段中 */
+  } >mrom 
+
+  .bootloader ALIGN(4) :SUBALIGN(4){
+    *(.bootloader*)
   } >mrom 
   
   .data ALIGN(4) : SUBALIGN(4) 
