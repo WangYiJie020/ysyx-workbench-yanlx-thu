@@ -9,17 +9,22 @@ MEMORY {
 SECTIONS {
   
   . = ORIGIN(mrom);
+  .bootloader :{
+    *(.bootloader*)
+  } >mrom 
   .text : {
     *(entry)
     *(.text*)
     etext = .;
     _etext = .;
-  } > mrom AT> mrom  
+  } > mrom AT> mrom 
+  
   .rodata :
   {
     *(.rodata)
     rodata_end = .;
   } > mrom 
+  
   .data : 
   {
     _data_vma_start = .;
@@ -28,6 +33,9 @@ SECTIONS {
     _data_vma_end = .;
   } > sram AT> mrom 
   _data_lma_start = LOADADDR(.data);
+
+  
+
   .bss :
   {
     *(.bss)
