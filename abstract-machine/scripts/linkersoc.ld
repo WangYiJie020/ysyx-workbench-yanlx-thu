@@ -19,11 +19,6 @@ SECTIONS {
   .bootloader ALIGN(4) :{
     *(.bootloader*)
   } >mrom 
-  .rodata ALIGN(32) :
-  {
-    *(.rodata)
-    rodata_end = .;
-  } > mrom 
   
   .data ALIGN(4) : 
   {
@@ -33,8 +28,6 @@ SECTIONS {
     _data_vma_end = .;
   } > sram AT> mrom 
   _data_lma_start = LOADADDR(.data);
-
-  
 
   .bss :
   {
