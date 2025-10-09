@@ -25,7 +25,7 @@ SECTIONS {
     rodata_end = .;
   } > mrom 
   
-  .data : 
+  .data ALIGN(4) : 
   {
     _data_vma_start = .;
     *(.data)
