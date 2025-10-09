@@ -11,8 +11,7 @@ AM_SRCS := riscv/npc/start.S \
 
 
 CFLAGS    += -fdata-sections -ffunction-sections
-LDFLAGS   += -T $(AM_HOME)/scripts/linkersoc.ld \
-						 --defsym=_pmem_start=0x20000000 --defsym=_entry_offset=0x0
+LDFLAGS   += -T $(AM_HOME)/scripts/linkersoc.ld 
 LDFLAGS   += --gc-sections -e _start
 NPCFLAGS  += -h 
 

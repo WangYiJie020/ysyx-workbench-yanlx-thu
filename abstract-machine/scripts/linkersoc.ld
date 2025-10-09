@@ -30,10 +30,14 @@ SECTIONS {
   .data ALIGN(4) : 
   {
     _data_vma_start = .;
-    *(.data)
-    *(.sdata)
+    *(.data)           /* 主要数据段 */
+    
+    *(.sdata)          /* 小数据段 */
+    
     _data_vma_end = .;
   } > sram AT> mrom 
+
+  . = ALIGN(4);
 
   _data_lma_start = LOADADDR(.data);
 
