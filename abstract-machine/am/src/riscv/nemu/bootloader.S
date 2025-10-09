@@ -1,7 +1,4 @@
 /* 加载数据段从MROM到SRAM */
-    call load_data_section
-    
-    jal _trm_init
 
 /* 加载数据段 */
 load_data_section:
