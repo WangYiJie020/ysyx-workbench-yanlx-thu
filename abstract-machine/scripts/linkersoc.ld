@@ -10,13 +10,13 @@ SECTIONS {
   
   . = ORIGIN(mrom);
   
-  .text : {
+  .text ALIGN(4) : {
     *(entry)
     *(.text*)
     etext = .;
     _etext = .;
   } > mrom AT> mrom 
-  .bootloader :{
+  .bootloader ALIGN(4) :{
     *(.bootloader*)
   } >mrom 
   .rodata ALIGN(32) :
