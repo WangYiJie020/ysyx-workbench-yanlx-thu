@@ -16,7 +16,8 @@ SECTIONS {
     etext = .;
     _etext = .;
   } > mrom AT> mrom 
-  .bootloader ALIGN(4) :{
+
+  .bootloader ALIGN(16) :{
     *(.bootloader*)
   } >mrom 
   
