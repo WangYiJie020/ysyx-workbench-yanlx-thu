@@ -38,8 +38,6 @@ SECTIONS {
     _data_vma_end = .;
   } > sram AT>mrom
 
-  . = ALIGN(4);
-
   _data_lma_start = LOADADDR(.data);
 
   .bss :
@@ -56,7 +54,7 @@ SECTIONS {
   } > sram
   
   /* 栈区在SRAM末尾 */
-  .stack : ALIGN(16) {
+  .stack : ALIGN(4) {
       _stack_bottom = .;
       . = . + 4K;         /* 4KB栈区 */
       _stack_top = .;

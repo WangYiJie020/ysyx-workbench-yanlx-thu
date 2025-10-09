@@ -24,9 +24,14 @@ Area heap = RANGE(&_heap_start, PMEM_END);
 #define MAINARGS ""
 #endif
 static const char mainargs[] = MAINARGS;
-
+/* npc版
 void putch(char ch) {
   outb(SERIAL_PORT, ch);
+}*/
+#define UART_BASE 0x10000000L
+#define UART_TX   0
+void putch(char ch) {
+  *(volatile char *)(UART_BASE + UART_TX) = ch;
 }
 
 void halt(int code) {
