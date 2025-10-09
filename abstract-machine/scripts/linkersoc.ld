@@ -21,6 +21,7 @@ SECTIONS {
   } >mrom 
   .rodata :
   {
+    . = ALIGN(0x0);
     *(.rodata)
     rodata_end = .;
   } > mrom 
