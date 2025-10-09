@@ -14,7 +14,9 @@ void __attribute__((section(".bootloader"))) _bootloader_init() {
         uint8_t *d = (uint8_t *)_data_vma_start;
         uint8_t *s = (uint8_t *)_data_lma_start;
         while (data_size--) {
-            *d++ = *s++;
+            *d = *s;
+            d++;
+            s++;
         }
     }
     asm volatile ("jal %0" : : "i"(_trm_init));
