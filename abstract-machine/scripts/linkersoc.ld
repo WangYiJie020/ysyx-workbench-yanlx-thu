@@ -17,7 +17,7 @@ SECTIONS {
     _etext = .;
   } > mrom AT> mrom 
 
-  .rodata ALIGN(4) : SUBALIGN(4) {
+  .rodata ALIGN(4) : {
     *(.rodata*)
     *(.srodata.mainargs)  /* 放在.data段中 */
   } >mrom 
