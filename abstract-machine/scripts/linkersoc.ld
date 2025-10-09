@@ -21,7 +21,7 @@ SECTIONS {
     *(.bootloader*)
   } >mrom 
   
-  .data ALIGN(4) : 
+  .data ALIGN(4) : SUBALIGN(16) 
   {
     _data_vma_start = .;
     *(.data)
