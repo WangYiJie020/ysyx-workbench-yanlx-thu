@@ -21,5 +21,5 @@ void __attribute__((section(".bootloader"))) _bootloader_init() {
     if (data_size > 0) {
         memcpy(_data_vma_start, _data_lma_start, data_size);
     }
-    __asm__ volatile ("jal %0" : : "i"(_trm_init));
+    //__asm__ volatile ("jal %0" : : "i"(_trm_init));
 }
