@@ -35,7 +35,7 @@ SECTIONS {
     _data_vma_end = .;
   } > sram AT> mrom 
 
-  _data_lma_start = LOADADDR(.data);
+  _data_lma_start = LOADADDR(.data.ans);
 
   .bss :
   {
