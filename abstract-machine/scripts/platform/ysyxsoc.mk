@@ -12,7 +12,7 @@ AM_SRCS := riscv/npc/start.S \
 
 CFLAGS    += -fdata-sections -ffunction-sections
 LDFLAGS   += -T $(AM_HOME)/scripts/linkersoc.ld 
-LDFLAGS   += --gc-sections -e _start
+LDFLAGS   += --gc-sections -e _start --print-map
 NPCFLAGS  += -h 
 
 CFLAGS += -DMAINARGS=\"$(mainargs)\"
