@@ -13,8 +13,8 @@ load_data_section:
     /* 获取数据段的源地址(LMA)、目标地址(VMA)和长度 */
     la t0, _data_lma_start    /* 源地址：MROM中的数据 */
     la t1, _data_vma_start    /* 目标地址：SRAM中的数据段 */
-    la t2, _data_size      /* 数据段长度 */
-    
+    la t2, _data_vma_end      /* 数据段长度 */
+    sub t2, t2, t1
     /* 计算长度 */
     beqz t2, load_done       /* 如果长度为0，跳过 */
     

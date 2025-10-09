@@ -24,10 +24,9 @@ SECTIONS {
   {
     _data_vma_start = .;
     *(.data)
+    *(.sdata)
+    _data_vma_end = .;
   } > sram AT> mrom 
-  edata = .;
-  _data = .;
-  _data_size = SIZEOF(.data);
   _data_lma_start = LOADADDR(.data);
   .bss :
   {
