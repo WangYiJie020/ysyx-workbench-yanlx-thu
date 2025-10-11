@@ -30,11 +30,11 @@ void putch(char ch) {
 }*/
 #define UART_BASE 0x10000000L
 #define UART_TX   0
-#define UART_LSR  3
+#define UART_LSR  5
 #define UART_LSR_THRE   0x20    // 发送保持寄存器空
 #define UART_LSR_TEMT   0x40    // 发送器空
 void putch(char ch) {
-  while(!(*(volatile char *)(UART_BASE + UART_LSR) & UART_LSR_TEMT)){
+  while(!(*(volatile char *)(UART_BASE + UART_LSR) & UART_LSR_THRE)){
     
   }
   *(volatile char *)(UART_BASE + UART_TX) = ch;
