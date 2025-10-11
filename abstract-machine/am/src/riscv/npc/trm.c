@@ -33,9 +33,9 @@ void putch(char ch) {
 #define UART_LSR  3
 void putch(char ch) {
   while((*(volatile char *)(UART_BASE + UART_LSR) & 0x20)){
-    *(volatile char *)(UART_BASE + UART_TX) = ch;
+    ;
   }
-  
+  *(volatile char *)(UART_BASE + UART_TX) = ch;
 }
 
 void halt(int code) {
