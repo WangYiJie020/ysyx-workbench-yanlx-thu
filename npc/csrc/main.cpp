@@ -25,6 +25,7 @@
 
 int cpu_state;
 uint32_t mem[0xffffffff];
+uint32_t flash[0xfffffff];
 bool is_skip_ref = false;
 bool difftest_check_all = false;
 
@@ -311,7 +312,7 @@ static long load_img() {
   //printf("%x\n",mem[0x8000000]);
   int i;
   for (i=0;i<10;i++) {
-    mem[0x18000000+i] = 'A'+i;
+    flash[i] = 'A'+i;
   }
   //printf("%c\n",mem[0x18000003]);
 
