@@ -55,9 +55,9 @@ extern "C" void difftest_next_step(char difftest_check) {
 extern "C" void flash_read(int32_t addr, int32_t *data) { 
   uint32_t tmp = (uint32_t)addr / 4;
   //printf("%x\n",tmp);
-  *data = mem[tmp]; 
+  *data = flash[tmp]; 
   //printf("%x\n",mem[tmp]);
-  log_write("raddr = %08x,data= %08x\n",addr,mem[tmp]);
+  log_write("raddr = %08x,data= %08x\n",addr,*data);
 }
 extern "C" void mrom_read(int32_t addr, int32_t *data) { 
   uint32_t tmp = (uint32_t)addr / 4;
