@@ -309,6 +309,7 @@ static long load_img() {
   assert(ret == 1);
 
   //printf("%x\n",mem[0x8000000]);
+  int i;
   for (i=0;i<10;i++) {
     mem[0x18000000+i] = i;
   }
