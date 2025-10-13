@@ -309,11 +309,9 @@ static long load_img() {
   assert(ret == 1);
 
   //printf("%x\n",mem[0x8000000]);
-  int i;
-  for (i=0;i<10;i++) {
-    mem[0x18000000+i] = i;
-  }
-  printf("%x\n",mem[0x18000003]);
+  mem[0x18000000] = 0x03020100;
+  mem[0x18000001] = 0x07060504;
+  mem[0x18000002] = 0x0b0a0908;
 
   fclose(fp);
   return size;
