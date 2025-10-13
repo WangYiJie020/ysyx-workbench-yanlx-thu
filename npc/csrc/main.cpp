@@ -313,7 +313,7 @@ static long load_img() {
   for (i=0;i<10;i++) {
     mem[0x18000000+i] = 'A'+i;
   }
-  printf("%x\n",mem[0x18000003]);
+  printf("%c\n",mem[0x18000003]);
 
   fclose(fp);
   return size;
