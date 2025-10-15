@@ -2755,7 +2755,7 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__7(VysyxSoCFull___0
                                                   | (vlSelf->ysyxSoCFull__DOT__flash__DOT__rdata 
                                                      >> 0x18U))));
     if ((0x80U & (IData)(vlSelf->ysyxSoCFull__DOT___asic_spi_ss))) {
-        vlSelf->__Vdly__ysyxSoCFull__DOT__bitrev__DOT__bit_count = 0U;
+        vlSelf->__Vdly__ysyxSoCFull__DOT__bitrev__DOT__bit_count = 1U;
         vlSelf->ysyxSoCFull__DOT___bitrev_miso = 1U;
         vlSelf->__Vdly__ysyxSoCFull__DOT__bitrev__DOT__shift_in = 0U;
     } else if ((8U > (IData)(vlSelf->ysyxSoCFull__DOT__bitrev__DOT__bit_count))) {
