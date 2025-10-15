@@ -2755,17 +2755,17 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__7(VysyxSoCFull___0
                                                   | (vlSelf->ysyxSoCFull__DOT__flash__DOT__rdata 
                                                      >> 0x18U))));
     if ((0x80U & (IData)(vlSelf->ysyxSoCFull__DOT___asic_spi_ss))) {
-        vlSelf->__Vdly__ysyxSoCFull__DOT__bitrev__DOT__bit_count = 0x1fU;
+        vlSelf->__Vdly__ysyxSoCFull__DOT__bitrev__DOT__bit_count = 0U;
         vlSelf->ysyxSoCFull__DOT___bitrev_miso = 1U;
         vlSelf->__Vdly__ysyxSoCFull__DOT__bitrev__DOT__shift_in = 0U;
-    } else if ((7U > (IData)(vlSelf->ysyxSoCFull__DOT__bitrev__DOT__bit_count))) {
+    } else if ((8U > (IData)(vlSelf->ysyxSoCFull__DOT__bitrev__DOT__bit_count))) {
         vlSelf->__Vdly__ysyxSoCFull__DOT__bitrev__DOT__shift_in 
             = ((0xfeU & ((IData)(vlSelf->ysyxSoCFull__DOT__bitrev__DOT__shift_in) 
                          << 1U)) | (IData)(vlSelf->ysyxSoCFull__DOT___asic_spi_mosi));
         vlSelf->__Vdly__ysyxSoCFull__DOT__bitrev__DOT__bit_count 
             = (0x1fU & ((IData)(1U) + (IData)(vlSelf->ysyxSoCFull__DOT__bitrev__DOT__bit_count)));
         vlSelf->ysyxSoCFull__DOT___bitrev_miso = 1U;
-    } else if ((0xfU > (IData)(vlSelf->ysyxSoCFull__DOT__bitrev__DOT__bit_count))) {
+    } else if ((0x10U > (IData)(vlSelf->ysyxSoCFull__DOT__bitrev__DOT__bit_count))) {
         vlSelf->ysyxSoCFull__DOT___bitrev_miso = (1U 
                                                   & ((IData)(vlSelf->ysyxSoCFull__DOT__bitrev__DOT__shift_in) 
                                                      >> 
@@ -2774,7 +2774,7 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__7(VysyxSoCFull___0
         vlSelf->__Vdly__ysyxSoCFull__DOT__bitrev__DOT__bit_count 
             = (0x1fU & ((IData)(1U) + (IData)(vlSelf->ysyxSoCFull__DOT__bitrev__DOT__bit_count)));
     } else {
-        vlSelf->__Vdly__ysyxSoCFull__DOT__bitrev__DOT__bit_count = 0U;
+        vlSelf->__Vdly__ysyxSoCFull__DOT__bitrev__DOT__bit_count = 1U;
     }
     vlSelf->ysyxSoCFull__DOT__bitrev__DOT__bit_count 
         = vlSelf->__Vdly__ysyxSoCFull__DOT__bitrev__DOT__bit_count;
