@@ -316,16 +316,14 @@ static long load_img() {
   //}
   //printf("%c\n",mem[0x18000003]);
 
-  flash[0] = 0xffc10113;
-  flash[1] = 0x00812023;
-  flash[2] = 0x00410413;
-  flash[3] = 0x100007b7;
-  flash[4] = 0x04100713;
-  flash[5] = 0x00e78023;
-  flash[6] = 0x100007b7;
-  flash[7] = 0x00a00713;
-  flash[8] = 0x00e78023;
-  flash[9] = 0x0000006f;
+  flash[0] = 0x00410413;
+  flash[1] = 0x100007b7;
+  flash[2] = 0x04100713;
+  flash[3] = 0x00e78023;
+  flash[4] = 0x100007b7;
+  flash[5] = 0x00a00713;
+  flash[6] = 0x00e78023;
+  flash[7] = 0x0000006f;
 
   fclose(fp);
   return size;
