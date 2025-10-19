@@ -171,11 +171,12 @@ module ifu(
                     inst_o <= rdata_i;
                     rready <= 0;
                 end
+                else ifu_valid_o <= 0;
  
             end else if(current_state == S_WAIT_SEND) begin     
                 receive_counter <= 0;                        
                 
-                else ifu_valid_o <= 0;
+                
                 //ifu_valid_o <= 1;
                 //arvalid <= 1; 
                 //rready <= 1;
