@@ -1226,7 +1226,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root___ctor_var_reset(VysyxSoCFull___024root
     vlSelf->__VdfgTmp_h7fb30c92__0 = 0;
     vlSelf->__VdfgTmp_ha17ae98a__0 = 0;
     vlSelf->__Vtask_ysyxSoCFull__DOT__asic__DOT__lmrom__DOT__mrom__DOT__mrom_read__3__rdata = 0;
-    vlSelf->__Vtableidx2 = 0;
+    vlSelf->__Vtableidx1 = 0;
     vlSelf->__Vtableidx3 = 0;
     vlSelf->__Vtableidx4 = 0;
     vlSelf->__Vtableidx5 = 0;
@@ -1234,8 +1234,9 @@ VL_ATTR_COLD void VysyxSoCFull___024root___ctor_var_reset(VysyxSoCFull___024root
     vlSelf->__Vtableidx7 = 0;
     vlSelf->__Vtableidx8 = 0;
     vlSelf->__Vtableidx9 = 0;
-    vlSelf->__Vtableidx12 = 0;
-    vlSelf->__Vtableidx14 = 0;
+    vlSelf->__Vtableidx10 = 0;
+    vlSelf->__Vtableidx13 = 0;
+    vlSelf->__Vtableidx15 = 0;
     vlSelf->__Vdly__ysyxSoCFull__DOT__asic__DOT__axi42apb__DOT__state = VL_RAND_RESET_I(2);
     vlSelf->__Vdly__ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__deq_q__DOT__full = VL_RAND_RESET_I(1);
     vlSelf->__Vdly__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__arvalid = VL_RAND_RESET_I(1);
