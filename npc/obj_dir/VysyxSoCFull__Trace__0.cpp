@@ -1980,49 +1980,48 @@ void VysyxSoCFull___024root__trace_chg_sub_0(VysyxSoCFull___024root* vlSelf, Ver
                                          >> 0xcU))),3);
         bufp->chgCData(oldp+1273,((vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__inst 
                                    >> 0x19U)),7);
-        bufp->chgCData(oldp+1274,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__next_state),3);
     }
-    bufp->chgBit(oldp+1275,(vlSelf->clock));
-    bufp->chgBit(oldp+1276,(vlSelf->reset));
-    bufp->chgSData(oldp+1277,(vlSelf->externalPins_gpio_out),16);
-    bufp->chgSData(oldp+1278,(vlSelf->externalPins_gpio_in),16);
-    bufp->chgCData(oldp+1279,(vlSelf->externalPins_gpio_seg_0),8);
-    bufp->chgCData(oldp+1280,(vlSelf->externalPins_gpio_seg_1),8);
-    bufp->chgCData(oldp+1281,(vlSelf->externalPins_gpio_seg_2),8);
-    bufp->chgCData(oldp+1282,(vlSelf->externalPins_gpio_seg_3),8);
-    bufp->chgCData(oldp+1283,(vlSelf->externalPins_gpio_seg_4),8);
-    bufp->chgCData(oldp+1284,(vlSelf->externalPins_gpio_seg_5),8);
-    bufp->chgCData(oldp+1285,(vlSelf->externalPins_gpio_seg_6),8);
-    bufp->chgCData(oldp+1286,(vlSelf->externalPins_gpio_seg_7),8);
-    bufp->chgBit(oldp+1287,(vlSelf->externalPins_ps2_clk));
-    bufp->chgBit(oldp+1288,(vlSelf->externalPins_ps2_data));
-    bufp->chgCData(oldp+1289,(vlSelf->externalPins_vga_r),8);
-    bufp->chgCData(oldp+1290,(vlSelf->externalPins_vga_g),8);
-    bufp->chgCData(oldp+1291,(vlSelf->externalPins_vga_b),8);
-    bufp->chgBit(oldp+1292,(vlSelf->externalPins_vga_hsync));
-    bufp->chgBit(oldp+1293,(vlSelf->externalPins_vga_vsync));
-    bufp->chgBit(oldp+1294,(vlSelf->externalPins_vga_valid));
-    bufp->chgBit(oldp+1295,(vlSelf->externalPins_uart_rx));
-    bufp->chgBit(oldp+1296,(vlSelf->externalPins_uart_tx));
-    bufp->chgBit(oldp+1297,(((IData)(vlSelf->ysyxSoCFull__DOT___bitrev_miso) 
+    bufp->chgBit(oldp+1274,(vlSelf->clock));
+    bufp->chgBit(oldp+1275,(vlSelf->reset));
+    bufp->chgSData(oldp+1276,(vlSelf->externalPins_gpio_out),16);
+    bufp->chgSData(oldp+1277,(vlSelf->externalPins_gpio_in),16);
+    bufp->chgCData(oldp+1278,(vlSelf->externalPins_gpio_seg_0),8);
+    bufp->chgCData(oldp+1279,(vlSelf->externalPins_gpio_seg_1),8);
+    bufp->chgCData(oldp+1280,(vlSelf->externalPins_gpio_seg_2),8);
+    bufp->chgCData(oldp+1281,(vlSelf->externalPins_gpio_seg_3),8);
+    bufp->chgCData(oldp+1282,(vlSelf->externalPins_gpio_seg_4),8);
+    bufp->chgCData(oldp+1283,(vlSelf->externalPins_gpio_seg_5),8);
+    bufp->chgCData(oldp+1284,(vlSelf->externalPins_gpio_seg_6),8);
+    bufp->chgCData(oldp+1285,(vlSelf->externalPins_gpio_seg_7),8);
+    bufp->chgBit(oldp+1286,(vlSelf->externalPins_ps2_clk));
+    bufp->chgBit(oldp+1287,(vlSelf->externalPins_ps2_data));
+    bufp->chgCData(oldp+1288,(vlSelf->externalPins_vga_r),8);
+    bufp->chgCData(oldp+1289,(vlSelf->externalPins_vga_g),8);
+    bufp->chgCData(oldp+1290,(vlSelf->externalPins_vga_b),8);
+    bufp->chgBit(oldp+1291,(vlSelf->externalPins_vga_hsync));
+    bufp->chgBit(oldp+1292,(vlSelf->externalPins_vga_vsync));
+    bufp->chgBit(oldp+1293,(vlSelf->externalPins_vga_valid));
+    bufp->chgBit(oldp+1294,(vlSelf->externalPins_uart_rx));
+    bufp->chgBit(oldp+1295,(vlSelf->externalPins_uart_tx));
+    bufp->chgBit(oldp+1296,(((IData)(vlSelf->ysyxSoCFull__DOT___bitrev_miso) 
                              & ((IData)(vlSelf->ysyxSoCFull__DOT____Vcellinp__flash__ss) 
                                 | ((((2U == (IData)(vlSelf->ysyxSoCFull__DOT__flash__DOT__state)) 
                                      & (0U == (IData)(vlSelf->ysyxSoCFull__DOT__flash__DOT__counter)))
                                      ? vlSelf->ysyxSoCFull__DOT__flash__DOT__data_bswap
                                      : vlSelf->ysyxSoCFull__DOT__flash__DOT__data) 
                                    >> 0x1fU)))));
-    bufp->chgBit(oldp+1298,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__wb_we)
+    bufp->chgBit(oldp+1297,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__wb_we)
                               ? (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mw_sck)
                               : (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_sck))));
-    bufp->chgBit(oldp+1299,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__wb_we)
+    bufp->chgBit(oldp+1298,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__wb_we)
                               ? (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mw_ce_n)
                               : (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_ce_n))));
-    bufp->chgBit(oldp+1300,((1U & (~ (IData)(vlSelf->clock)))));
-    bufp->chgBit(oldp+1301,((((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__wb_we)
+    bufp->chgBit(oldp+1299,((1U & (~ (IData)(vlSelf->clock)))));
+    bufp->chgBit(oldp+1300,((((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__wb_we)
                                ? (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mw_done)
                                : (0x1cU == (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__MR__DOT__counter))) 
                              & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT___apbxbar_auto_anon_out_2_psel))));
-    bufp->chgIData(oldp+1302,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT___apbxbar_auto_anon_out_1_psel)
+    bufp->chgIData(oldp+1301,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT___apbxbar_auto_anon_out_1_psel)
                                 ? (((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__reg_dat8_r) 
                                     << 0x18U) | (((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__reg_dat8_r) 
                                                   << 0x10U) 
@@ -2030,16 +2029,16 @@ void VysyxSoCFull___024root__trace_chg_sub_0(VysyxSoCFull___024root* vlSelf, Ver
                                                      << 8U) 
                                                     | (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__reg_dat8_r))))
                                 : 0U)),32);
-    bufp->chgIData(oldp+1303,(((1U == (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi42apb__DOT__state))
+    bufp->chgIData(oldp+1302,(((1U == (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi42apb__DOT__state))
                                 ? vlSelf->ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_in_prdata
                                 : vlSelf->ysyxSoCFull__DOT__asic__DOT__axi42apb__DOT__nodeIn_rdata_r)),32);
-    bufp->chgBit(oldp+1304,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT___cpu_auto_master_out_rready) 
+    bufp->chgBit(oldp+1303,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT___cpu_auto_master_out_rready) 
                              & ((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__idle_3)
                                  ? (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__readys_readys)
                                  : (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__state_3_0)))));
-    bufp->chgCData(oldp+1305,((((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi42apb__DOT__bid_reg) 
+    bufp->chgCData(oldp+1304,((((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi42apb__DOT__bid_reg) 
                                 << 2U) | (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi42apb__DOT__resp_hold))),6);
-    bufp->chgQData(oldp+1306,((((QData)((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi42apb__DOT__rid_reg)) 
+    bufp->chgQData(oldp+1305,((((QData)((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi42apb__DOT__rid_reg)) 
                                 << 0x23U) | (((QData)((IData)(
                                                               ((1U 
                                                                 == (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi42apb__DOT__state))
@@ -2050,26 +2049,26 @@ void VysyxSoCFull___024root__trace_chg_sub_0(VysyxSoCFull___024root* vlSelf, Ver
                                                                (1U 
                                                                 | ((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi42apb__DOT__resp_hold) 
                                                                    << 1U))))))),39);
-    bufp->chgBit(oldp+1308,((1U & ((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__in_wdeq_q__DOT__full)
+    bufp->chgBit(oldp+1307,((1U & ((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__in_wdeq_q__DOT__full)
                                     ? (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__in_wdeq_q__DOT__ram)
                                     : (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__axi_wlast)))));
-    bufp->chgBit(oldp+1309,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT___cpu_auto_master_out_rready) 
+    bufp->chgBit(oldp+1308,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT___cpu_auto_master_out_rready) 
                              & ((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__idle_3)
                                  ? ((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__readys_readys) 
                                     >> 1U) : (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__state_3_1)))));
-    bufp->chgBit(oldp+1310,(((IData)(vlSelf->reset) 
+    bufp->chgBit(oldp+1309,(((IData)(vlSelf->reset) 
                              | (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu_reset_chain__DOT__output_chain__DOT__sync_0))));
-    bufp->chgBit(oldp+1311,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__rst_n));
-    bufp->chgBit(oldp+1312,((1U & ((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Xbar__DOT__ar_switch)
+    bufp->chgBit(oldp+1310,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__rst_n));
+    bufp->chgBit(oldp+1311,((1U & ((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Xbar__DOT__ar_switch)
                                     ? (~ (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__deq_q__DOT__full))
                                     : (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__clint_arready)))));
-    bufp->chgIData(oldp+1313,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Rgefile__DOT__rf
+    bufp->chgIData(oldp+1312,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Rgefile__DOT__rf
                               [(0x1fU & (vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__inst 
                                          >> 0xfU))]),32);
-    bufp->chgIData(oldp+1314,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Rgefile__DOT__rf
+    bufp->chgIData(oldp+1313,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Rgefile__DOT__rf
                               [(0x1fU & (vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__inst 
                                          >> 0x14U))]),32);
-    bufp->chgIData(oldp+1315,(((0x73U == (0x7fU & vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__inst))
+    bufp->chgIData(oldp+1314,(((0x73U == (0x7fU & vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__inst))
                                 ? ((0U == (7U & (vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__inst 
                                                  >> 0xcU)))
                                     ? ((0x73U == vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__inst)
@@ -2104,6 +2103,7 @@ void VysyxSoCFull___024root__trace_chg_sub_0(VysyxSoCFull___024root* vlSelf, Ver
                                                   ? vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__CSR__DOT__csr_mcause
                                                   : 0U))))
                                      : 0U)) : 0U)),32);
+    bufp->chgCData(oldp+1315,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__next_state),3);
     bufp->chgBit(oldp+1316,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__wb_we)
                               ? (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mw_done)
                               : (0x1cU == (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__MR__DOT__counter)))));

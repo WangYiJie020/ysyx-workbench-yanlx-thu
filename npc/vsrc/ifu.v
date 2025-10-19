@@ -153,7 +153,7 @@ module ifu(
 
             end else if (current_state == S_WAIT_RECEIVE)begin
                 ifu_valid_o <= 0;
-                arvalid <= 0;
+                arvalid <= 1;
                 rready <= 0;       
 
             end else if(current_state == S_RECEIVE) begin 
