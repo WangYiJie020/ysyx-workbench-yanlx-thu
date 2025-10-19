@@ -197,9 +197,9 @@ module ifu(
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                 end
-                if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
-                    rready <= 0;
-                end
+                //if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
+                //    rready <= 0;
+                //end
             end            
         end
     end
