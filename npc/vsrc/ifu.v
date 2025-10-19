@@ -32,7 +32,6 @@ module ifu(
 );
     
     reg [`PC_WIDTH-1:0] pc;
-    reg [`CPU_WIDTH-1:0] inst;
 
     reg [4:0] LFSR, arvalid_delay, rready_delay;
     reg lfsr_in;
