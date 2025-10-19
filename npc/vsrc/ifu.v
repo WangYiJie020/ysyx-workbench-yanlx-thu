@@ -69,7 +69,7 @@ module ifu(
     always @(*) begin
         case(current_state)
             S_IDLE: begin
-                if (ifu_valid_o == 1 && ifu_ready_i == 1) begin
+                if (rready == 1 && rvalid_i == 1) begin
                     next_state = S_SEND;
                 end else begin
                     next_state = current_state;
