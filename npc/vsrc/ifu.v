@@ -32,6 +32,7 @@ module ifu(
 );
     
     reg [`PC_WIDTH-1:0] pc;
+    reg [`CPU_WIDTH-1:0] inst;
 
     reg [4:0] LFSR, arvalid_delay, rready_delay;
     reg lfsr_in;
@@ -153,7 +154,7 @@ module ifu(
                 ifu_valid_o <= 1;
                 arvalid <= 0;
                 rready <= 0;
-                //inst_o <= inst;
+                inst_o <= inst;
                 pc_o <= pc;     
                 ready_flag <= 0;  
 
@@ -175,7 +176,7 @@ module ifu(
                 
                 if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
                     ifu_valid_o <= 1;
-                    inst_o <= rdata_i;
+                    inst <= rdata_i;
                 end
                 else ifu_valid_o <= 0;
  
