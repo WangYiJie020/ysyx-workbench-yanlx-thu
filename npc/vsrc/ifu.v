@@ -158,7 +158,7 @@ module ifu(
                 if(receive_counter == 2) begin
                     receive_counter <= 0;
                     arvalid <= 1;
-                    rready <= 1;
+                    rready <= 0;
                     araddr <= pc; 
                 end
                 else receive_counter <= receive_counter + 1;
@@ -174,7 +174,7 @@ module ifu(
                 else ifu_valid_o <= 0;
                 //ifu_valid_o <= 1;
                 //arvalid <= 1; 
-                rready <= 0;              
+                rready <= 1;              
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                 end
