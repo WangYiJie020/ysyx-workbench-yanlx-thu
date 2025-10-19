@@ -172,11 +172,12 @@ module ifu(
                 if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
                     ifu_valid_o <= 1;
                     inst_o <= rdata_i;
+                    rready <= 1;
                 end
                 else ifu_valid_o <= 0;
                 //ifu_valid_o <= 1;
                 //arvalid <= 1; 
-                rready <= 1;
+                //rready <= 1;
                 //if(rvalid_i == 0 && ready_flag==0) begin 
                 //    rready <= 0;   
                 //    ready_flag <= 1;
