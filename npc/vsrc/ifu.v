@@ -168,7 +168,7 @@ module ifu(
                 //if(receive_counter == 0) begin
                     //receive_counter <= 0;
                     arvalid <= 1;
-                    rready <= 0;
+                    rready <= 1;
                     araddr <= pc; 
                 //end
                 //else receive_counter <= receive_counter + 1;
@@ -183,11 +183,13 @@ module ifu(
  
             end else if(current_state == S_WAIT_SEND) begin     
                 //receive_counter <= 0;                        
-                if(rready == 1 && rvalid_i == 1)
+                if(rready == 1 && rvalid_i == 1) begin
                     inst <= rdata_i;
+                    rready <= 0;
+                end
                 //ifu_valid_o <= 1;
                 //arvalid <= 1; 
-                rready <= 1;
+                //rready <= 1;
                 //if(rvalid_i == 0 && ready_flag==0) begin 
                 //    rready <= 0;   
                 //    ready_flag <= 1;
