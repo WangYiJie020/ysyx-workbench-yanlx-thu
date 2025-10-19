@@ -3020,7 +3020,8 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+1581,"STATE_GET_CTRL", false,-1, 3,0);
     tracep->declBus(c+1583,"STATE_GET_RX0", false,-1, 3,0);
     tracep->declBus(c+1579,"STATE_GET_RX1", false,-1, 3,0);
-    tracep->declBus(c+1587,"STATE_GET_DONE", false,-1, 3,0);
+    tracep->declBus(c+1587,"STATE_GET_SS", false,-1, 3,0);
+    tracep->declBus(c+1588,"STATE_GET_DONE", false,-1, 3,0);
     tracep->declBus(c+1601,"CMD_READ", false,-1, 31,0);
     tracep->declBus(c+591,"xip_state", false,-1, 3,0);
     tracep->declBus(c+592,"xip_state_next", false,-1, 3,0);
