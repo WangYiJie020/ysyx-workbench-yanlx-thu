@@ -176,12 +176,12 @@ module ifu(
                 else ifu_valid_o <= 0;
                 //ifu_valid_o <= 1;
                 //arvalid <= 1; 
-                
-                if(rvalid_i == 0 && ready_flag==0) begin 
-                    rready <= 0;   
-                    ready_flag <= 1;
-                end    
-                else  rready <= 1; 
+                rready <= 1;
+                //if(rvalid_i == 0 && ready_flag==0) begin 
+                //    rready <= 0;   
+                //    ready_flag <= 1;
+                //end    
+                //else  rready <= 1; 
                          
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
