@@ -193,7 +193,7 @@ module ifu(
                     receive_counter <= 0;
                     rready <= 1; 
                 end
-                else receive_counter = receive_counter + 1;
+                else receive_counter <= receive_counter + 1;
                 //ifu_valid_o <= 1;
                 //arvalid <= 1; 
                 //rready <= 1;
