@@ -3014,8 +3014,8 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBit(c+1296,"spi_miso", false,-1);
     tracep->declBit(c+573,"spi_irq_out", false,-1);
     tracep->declBus(c+1596,"REG_SPI_TX", false,-1, 4,0);
-    tracep->declBus(c+1596,"REG_SPI_RX0", false,-1, 4,0);
-    tracep->declBus(c+1597,"REG_SPI_RX1", false,-1, 4,0);
+    tracep->declBus(c+1597,"REG_SPI_RX0", false,-1, 4,0);
+    tracep->declBus(c+1596,"REG_SPI_RX1", false,-1, 4,0);
     tracep->declBus(c+1598,"REG_SPI_CTRL", false,-1, 4,0);
     tracep->declBus(c+1599,"REG_SPI_DIV", false,-1, 4,0);
     tracep->declBus(c+1600,"REG_SPI_SS", false,-1, 4,0);
@@ -5897,8 +5897,8 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_full_sub_0(VysyxSoCFull___024roo
     bufp->fullIData(oldp+1593,(0x30000000U),32);
     bufp->fullIData(oldp+1594,(0x3fffffffU),32);
     bufp->fullIData(oldp+1595,(8U),32);
-    bufp->fullCData(oldp+1596,(0U),5);
-    bufp->fullCData(oldp+1597,(4U),5);
+    bufp->fullCData(oldp+1596,(4U),5);
+    bufp->fullCData(oldp+1597,(0U),5);
     bufp->fullCData(oldp+1598,(0x10U),5);
     bufp->fullCData(oldp+1599,(0x14U),5);
     bufp->fullCData(oldp+1600,(0x18U),5);
