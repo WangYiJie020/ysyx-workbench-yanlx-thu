@@ -57,7 +57,7 @@ module ifu(
     assign arsize_o = 3'b010; //4bytes
     assign arburst_o = 0;
 
-    //assign inst_o = rdata_i;
+    assign inst_o = rdata_i;
 
     localparam S_IDLE = 3'b000,S_RECEIVE = 3'b001,S_SEND = 3'b010,S_WAIT_RECEIVE = 3'b011;
     localparam S_WAIT_SEND = 3'b100;
@@ -132,7 +132,7 @@ module ifu(
                 araddr <= `PC_INIT;
                 if(rvalid_i == 1 && rready == 1) begin 
                     //ifu_valid_o <= 1;
-                    inst <= rdata_i;
+                    //inst <= rdata_i;
                 end
                 //else ifu_valid_o <= 0;
                 arvalid <= 1;   
@@ -153,7 +153,7 @@ module ifu(
                 ifu_valid_o <= 1;
                 arvalid <= 0;
                 rready <= 0;
-                inst_o <= inst;
+                //inst_o <= inst;
                 pc_o <= pc;     
                 ready_flag <= 0;  
 
