@@ -60,7 +60,7 @@ module ifu(
 
     //assign inst_o = rdata_i;
 
-    localparam S_IDLE = 3'b000,S_RECEIVE = 3'b01,S_SEND = 3'b010,S_WAIT_RECEIVE = 3'b011;
+    localparam S_IDLE = 3'b000,S_RECEIVE = 3'b001,S_SEND = 3'b010,S_WAIT_RECEIVE = 3'b011;
     localparam S_WAIT_SEND = 3'b100;
 
     reg [2:0] current_state,next_state;
@@ -90,7 +90,7 @@ module ifu(
             end
             
             S_RECEIVE: begin  
-                if(receive_counter == 2)  
+                if(receive_counter == 0)  
                     next_state = S_WAIT_SEND;  //wait pc
                 else next_state = current_state; 
             end
