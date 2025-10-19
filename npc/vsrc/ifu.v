@@ -131,8 +131,9 @@ module ifu(
                     inst_o <= rdata_i;
                 end
                 else ifu_valid_o <= 0;
-                //arvalid <= 1;               
-                rready <= 1;
+                //arvalid <= 1;   
+                if(rready == 1 && rvalid_i == 1) rready <= 0;          
+                else rready <= 1;
                 
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
