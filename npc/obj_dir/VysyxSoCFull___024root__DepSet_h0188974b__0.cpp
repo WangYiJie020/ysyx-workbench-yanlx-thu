@@ -2059,7 +2059,7 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__4(VysyxSoCFull___0
                              & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__flag))) {
                             vlSelf->ysyxSoCFull__DOT__asic__DOT___lspi_auto_in_pready = 0U;
                         } else if ((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__flag)))) {
-                            vlSelf->ysyxSoCFull__DOT__asic__DOT___lspi_auto_in_pready = 0U;
+                            vlSelf->ysyxSoCFull__DOT__asic__DOT___lspi_auto_in_pready = 1U;
                             vlSelf->ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__flag = 1U;
                         }
                         vlSelf->ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__wb_sel_i = 0xfU;
@@ -2164,8 +2164,7 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__4(VysyxSoCFull___0
             vlSelf->ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__wb_cyc_i 
                 = ((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__apbxbar__DOT__sel_0) 
                    & (1U == (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi42apb__DOT__state)));
-            vlSelf->ysyxSoCFull__DOT__asic__DOT___lspi_auto_in_pready 
-                = vlSelf->ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__wb_ack_o;
+            vlSelf->ysyxSoCFull__DOT__asic__DOT___lspi_auto_in_pready = 0U;
             vlSelf->ysyxSoCFull__DOT__asic__DOT___lspi_auto_in_pslverr = 0U;
             vlSelf->ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__spi_irq_out 
                 = vlSelf->ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__wb_int_o;
