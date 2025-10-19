@@ -189,7 +189,7 @@ module ifu(
                     //rready <= 0;
                 end
 
-                if(receive_counter == 2) begin
+                if(receive_counter == 3) begin
                     receive_counter <= 0;
                     rready <= 1; 
                 end
