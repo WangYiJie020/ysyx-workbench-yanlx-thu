@@ -177,7 +177,7 @@ module ifu(
                 //ifu_valid_o <= 1;
                 //arvalid <= 1; 
                 
-                if(rvalid_i == 1 && ready_flag==0) begin 
+                if(rvalid_i == 0 && ready_flag==0) begin 
                     rready <= 0;   
                     ready_flag <= 1;
                 end    
