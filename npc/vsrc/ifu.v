@@ -147,6 +147,9 @@ module ifu(
                 //if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
                 //    inst_o <= rdata_i;
                 //end
+                if(arvalid==1 && arready_i==1) begin
+                    arvalid <= 0;
+                end
                 ifu_valid_o <= 1;
                 arvalid <= 0;
                 rready <= 0;
