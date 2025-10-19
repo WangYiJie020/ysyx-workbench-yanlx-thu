@@ -166,14 +166,15 @@ module ifu(
                 //else receive_counter <= receive_counter + 1;
                 ifu_valid_o <= 0;                
                 npc <= npc_i;
- 
-            end else if(current_state == S_WAIT_SEND) begin     
-                receive_counter <= 0;                        
                 if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
                     ifu_valid_o <= 1;
                     inst_o <= rdata_i;
                     rready <= 0;
                 end
+ 
+            end else if(current_state == S_WAIT_SEND) begin     
+                receive_counter <= 0;                        
+                
                 else ifu_valid_o <= 0;
                 //ifu_valid_o <= 1;
                 //arvalid <= 1; 
