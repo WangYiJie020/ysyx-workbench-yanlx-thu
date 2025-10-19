@@ -77,7 +77,11 @@ module ifu(
             end
 
             S_SEND: begin
-                next_state = S_WAIT_RECEIVE;                                 
+                if (ifu_valid_i == 1 && ifu_ready_o == 1) begin //发送成功
+                    next_state = S_WAIT_RECEIVE;   
+                end else begin
+                    next_state = current_state;
+                end                              
             end
 
             S_WAIT_RECEIVE: begin
@@ -127,10 +131,10 @@ module ifu(
             if(current_state == S_IDLE) begin 
                 araddr <= pc;
                 if(rvalid_i == 1 && rready == 1) begin 
-                    ifu_valid_o <= 1;
+                    //ifu_valid_o <= 1;
                     inst_o <= rdata_i;
                 end
-                else ifu_valid_o <= 0;
+                //else ifu_valid_o <= 0;
                 arvalid <= 1;   
                 if(rready == 1 && rvalid_i == 1) rready <= 0;          
                 else rready <= 1;
@@ -140,9 +144,9 @@ module ifu(
                 //end
 
             end else if (current_state == S_SEND)begin
-                if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
-                    inst_o <= rdata_i;
-                end
+                //if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
+                //    inst_o <= rdata_i;
+                //end
                 ifu_valid_o <= 1;
                 arvalid <= 0;
                 rready <= 0;
