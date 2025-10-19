@@ -157,7 +157,7 @@ module ifu(
                 rready <= 0;       
 
             end else if(current_state == S_RECEIVE) begin 
-                if(receive_counter == 0) begin
+                if(receive_counter == 3) begin
                     receive_counter <= 0;
                     arvalid <= 1;
                     rready <= 0;
