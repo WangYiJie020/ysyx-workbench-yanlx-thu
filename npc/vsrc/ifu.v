@@ -159,8 +159,8 @@ module ifu(
 
             end else if (current_state == S_WAIT_RECEIVE)begin
                 ifu_valid_o <= 0;
-                arvalid <= 1;
-                rready <= 1;  
+                arvalid <= 0;
+                rready <= 0;  
                 if (ifu_valid_i == 1 && ifu_ready_o == 1)
                     pc <= npc_i;     
 
