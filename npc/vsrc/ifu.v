@@ -157,7 +157,7 @@ module ifu(
                 rready <= 0;       
 
             end else if(current_state == S_RECEIVE) begin 
-                if(receive_counter == 1) begin
+                if(receive_counter == 2) begin
                     receive_counter <= 0;
                     arvalid <= 1;
                     rready <= 0;
@@ -177,10 +177,10 @@ module ifu(
                 //ifu_valid_o <= 1;
                 //arvalid <= 1; 
                 rready <= 1;  
-                if(rready == 1 && rvalid_i == 1 && ready_flag==0) begin 
-                    rready <= 0;   
-                    ready_flag <= 1;
-                end       
+                //if(rready == 1 && rvalid_i == 1 && ready_flag==0) begin 
+                //    rready <= 0;   
+                //    ready_flag <= 1;
+                //end       
                          
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
