@@ -162,8 +162,9 @@ module ifu(
                 ifu_valid_o <= 0;
                 arvalid <= 0;
                 rready <= 0;  
+                pc <= npc_i;
                 if (ifu_valid_i == 1 && ifu_ready_o == 1)
-                    pc <= npc_i;     
+                    //pc <= npc_i;     
                 
             end else if(current_state == S_RECEIVE) begin 
                 //if(receive_counter == 0) begin
