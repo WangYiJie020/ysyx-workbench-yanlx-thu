@@ -155,7 +155,8 @@ module ifu(
                 rready <= 0;
                 inst_o <= inst;
                 pc_o <= pc;     
-                ready_flag <= 0;  
+                ready_flag <= 0; 
+                receive_counter <= 0; 
 
             end else if (current_state == S_WAIT_RECEIVE)begin
                 ifu_valid_o <= 0;
@@ -187,6 +188,12 @@ module ifu(
                     inst <= rdata_i;
                     //rready <= 0;
                 end
+
+                if(receive_counter == 2) begin
+                    receive_counter <= 0;
+                    rready <= 1; 
+                end
+                else receive_counter = receive_counter + 1;
                 //ifu_valid_o <= 1;
                 //arvalid <= 1; 
                 //rready <= 1;
@@ -199,7 +206,6 @@ module ifu(
                    
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
-                    rready <= 1; 
                 end
                 //if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
                 //    rready <= 0;
