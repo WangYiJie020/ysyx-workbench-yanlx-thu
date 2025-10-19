@@ -129,7 +129,7 @@ module ifu(
             else if(current_state == S_WAIT_SEND) ifu_ready_o <= 0;      
             
             if(current_state == S_IDLE) begin 
-                araddr <= pc;
+                araddr <= `PC_INIT;
                 if(rvalid_i == 1 && rready == 1) begin 
                     //ifu_valid_o <= 1;
                     inst_o <= rdata_i;
