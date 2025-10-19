@@ -77,7 +77,7 @@ module ifu(
             end
 
             S_SEND: begin
-                if (ifu_valid_i == 1 && ifu_ready_o == 1) begin //发送成功
+                if (ifu_valid_o == 1 && ifu_ready_i == 1) begin //发送成功
                     next_state = S_WAIT_RECEIVE;   
                 end else begin
                     next_state = current_state;
