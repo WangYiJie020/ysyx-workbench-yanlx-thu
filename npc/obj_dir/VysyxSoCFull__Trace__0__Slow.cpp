@@ -3047,7 +3047,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBit(c+589,"is_flash_access", false,-1);
     tracep->declBus(c+590,"tmp", false,-1, 31,0);
     tracep->declQuad(c+591,"tmp64", false,-1, 63,0);
-    tracep->declBus(c+593,"counter", false,-1, 6,0);
+    tracep->declBus(c+593,"counter", false,-1, 7,0);
     tracep->declBit(c+594,"flag", false,-1);
     tracep->pushNamePrefix("u0_spi_top ");
     tracep->declBus(c+1603,"Tp", false,-1, 31,0);
@@ -4525,7 +4525,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_full_sub_0(VysyxSoCFull___024roo
                                        >> 1U))),32);
     bufp->fullQData(oldp+591,((vlSelf->ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__data 
                                >> 1U)),64);
-    bufp->fullCData(oldp+593,(vlSelf->ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__counter),7);
+    bufp->fullCData(oldp+593,(vlSelf->ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__counter),8);
     bufp->fullBit(oldp+594,(vlSelf->ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__flag));
     bufp->fullSData(oldp+595,(vlSelf->ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__u0_spi_top__DOT__divider),16);
     bufp->fullSData(oldp+596,(vlSelf->ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__u0_spi_top__DOT__ctrl),14);
