@@ -146,7 +146,7 @@ module ifu(
                 end
                 ifu_valid_o <= 1;
                 arvalid <= 0;
-                rready <= 0;
+                rready <= 1;
                 //inst_o <= inst;
                 pc_o <= pc;     
                 ready_flag <= 0;  
@@ -176,7 +176,7 @@ module ifu(
                 else ifu_valid_o <= 0;
                 //ifu_valid_o <= 1;
                 //arvalid <= 1; 
-                rready <= 1;
+                rready <= 0;
                 //if(rvalid_i == 0 && ready_flag==0) begin 
                 //    rready <= 0;   
                 //    ready_flag <= 1;
