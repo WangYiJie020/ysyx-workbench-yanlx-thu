@@ -45,12 +45,12 @@ module ifu(
     reg [`CPU_WIDTH-1:0] araddr_buffer [31:0];
     reg [31:0] rready_buffer ;
 
-    dff #(`PC_WIDTH,`PC_INIT) PC (
-        .clk(clk),
-        .rst_n(rst_n),
-        .din(npc),
-        .dout(pc)
-    );
+    //dff #(`PC_WIDTH,`PC_INIT) PC (
+    //    .clk(clk),
+    //    .rst_n(rst_n),
+    //    .din(npc),
+    //    .dout(pc)
+    //);
 
     //assign araddr = (current_state == S_IDLE || current_state == S_IDLE ) ? pc :0;
     assign arid_o = 0;
@@ -112,6 +112,7 @@ module ifu(
             current_state <= S_IDLE;
             ifu_valid_o <= 0;
             ifu_ready_o <= 0;
+            pc <= `PC_INIT;
             npc <= `PC_INIT;
             arvalid <= 1;
             rready <= 0;
@@ -155,7 +156,7 @@ module ifu(
                 ifu_valid_o <= 0;
                 arvalid <= 1;
                 rready <= 0;  
-                npc <= npc_i;     
+                pc <= npc_i;     
 
             end else if(current_state == S_RECEIVE) begin 
                 //if(receive_counter == 0) begin
