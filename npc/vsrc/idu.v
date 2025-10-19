@@ -50,7 +50,7 @@ module idu(
 
     assign rs1_o = rdata1;
     assign rs2_o = rdata2;
-    assign pc_o = pc_i;
+    assign pc_o = pc;
     assign waddr_o = inst[11:7];
     assign raddr1 = inst[19:15];
     assign raddr2 = inst[24:20];
@@ -148,7 +148,7 @@ module idu(
             end
             else if(current_state == S_RECEIVE) begin 
                 idu_valid_o <= 1;
-                //pc <= pc_i;
+                pc <= pc_i;
                 inst <= inst_i;
             end else if (current_state == S_SEND)begin
                 idu_valid_o <= 1;
