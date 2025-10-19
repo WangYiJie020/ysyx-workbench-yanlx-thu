@@ -31,8 +31,7 @@ module ifu(
 
 );
     
-    wire [`PC_WIDTH-1:0] pc;
-    reg [`PC_WIDTH-1:0] npc;
+    reg [`PC_WIDTH-1:0] pc;
 
     reg [4:0] LFSR, arvalid_delay, rready_delay;
     reg lfsr_in;
@@ -113,7 +112,6 @@ module ifu(
             ifu_valid_o <= 0;
             ifu_ready_o <= 0;
             pc <= `PC_INIT;
-            npc <= `PC_INIT;
             arvalid <= 1;
             rready <= 0;
             //araddr <= pc;
