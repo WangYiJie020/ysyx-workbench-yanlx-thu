@@ -99,7 +99,7 @@ module ifu(
             end
 
             S_WAIT_SEND: begin
-                if (rready == 1 && rvalid_i == 1 && receive_counter == 3) begin
+                if (rready == 1 && rvalid_i == 1 && receive_counter == 2) begin
                     next_state = S_SEND;  
                 end else begin
                     next_state = current_state;
@@ -189,7 +189,7 @@ module ifu(
                     //rready <= 0;
                 end
 
-                if(receive_counter == 3) begin
+                if(receive_counter == 2) begin
                     receive_counter <= 0;
                     rready <= 1; 
                 end
