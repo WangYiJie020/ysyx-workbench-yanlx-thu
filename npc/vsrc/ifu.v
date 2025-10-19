@@ -167,7 +167,7 @@ module ifu(
                     //pc <= npc_i;     
                 
             end else if(current_state == S_RECEIVE) begin 
-                if(receive_counter == 0) begin
+                if(receive_counter == 2) begin
                     receive_counter <= 0;
                     arvalid <= 1;
                     rready <= 0;
