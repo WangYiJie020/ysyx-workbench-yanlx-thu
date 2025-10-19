@@ -176,7 +176,7 @@ module ifu(
                 
                 if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
                     ifu_valid_o <= 1;
-                    rready <= 0;
+                    //rready <= 0;
                     //inst <= rdata_i;
                 end
                 else ifu_valid_o <= 0;
