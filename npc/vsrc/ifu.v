@@ -85,7 +85,7 @@ module ifu(
             end
 
             S_WAIT_RECEIVE: begin
-                if (ifu_valid_i == 1 && ifu_ready_o == 1) begin
+                if (ifu_valid_i == 1 && ifu_ready_o == 1) begin //收到新NPC
                     next_state = S_RECEIVE;  
                 end else begin
                     next_state = current_state;
@@ -94,12 +94,12 @@ module ifu(
             
             S_RECEIVE: begin  
                 if(rready == 1 && rvalid_i == 1)  
-                    next_state = S_WAIT_SEND;  //wait pc
+                    next_state = S_WAIT_SEND;  
                 else next_state = current_state; 
             end
 
             S_WAIT_SEND: begin
-                if (ifu_valid_o == 1 && ifu_ready_i == 1) begin
+                if (ifu_ready_i == 1) begin
                     next_state = S_SEND;  
                 end else begin
                     next_state = current_state;
