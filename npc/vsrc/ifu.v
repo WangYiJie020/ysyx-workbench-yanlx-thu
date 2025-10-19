@@ -132,7 +132,7 @@ module ifu(
                 araddr <= `PC_INIT;
                 if(rvalid_i == 1 && rready == 1) begin 
                     //ifu_valid_o <= 1;
-                    inst_o <= rdata_i;
+                    inst <= rdata_i;
                 end
                 //else ifu_valid_o <= 0;
                 arvalid <= 1;   
