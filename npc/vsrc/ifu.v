@@ -174,7 +174,7 @@ module ifu(
                 else ifu_valid_o <= 0;
                 //ifu_valid_o <= 1;
                 //arvalid <= 1; 
-                rready <= 1;              
+                rready <= 0;              
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                 end
