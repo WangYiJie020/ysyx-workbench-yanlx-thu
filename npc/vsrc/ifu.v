@@ -163,9 +163,7 @@ module ifu(
                 rready <= 0;  
                 if (ifu_valid_i == 1 && ifu_ready_o == 1)
                     pc <= npc_i;     
-                if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
-                    rready <= 0;
-                end
+                
             end else if(current_state == S_RECEIVE) begin 
                 //if(receive_counter == 0) begin
                     receive_counter <= 0;
@@ -178,6 +176,7 @@ module ifu(
                 
                 if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
                     ifu_valid_o <= 1;
+                    rready <= 0;
                     //inst <= rdata_i;
                 end
                 else ifu_valid_o <= 0;
