@@ -57,7 +57,7 @@ module ifu(
     assign arsize_o = 3'b010; //4bytes
     assign arburst_o = 0;
 
-    assign inst_o = rdata_i;
+    //assign inst_o = rdata_i;
 
     localparam S_IDLE = 3'b000,S_RECEIVE = 3'b001,S_SEND = 3'b010,S_WAIT_RECEIVE = 3'b011;
     localparam S_WAIT_SEND = 3'b100;
@@ -93,13 +93,13 @@ module ifu(
             end
             
             S_RECEIVE: begin  
-                if(rready == 1 && rvalid_i == 1)  
+                if(arvalid==1 && arready_i==1)  
                     next_state = S_WAIT_SEND;  
                 else next_state = current_state; 
             end
 
             S_WAIT_SEND: begin
-                if (ifu_ready_i == 1) begin
+                if (rready == 1 && rvalid_i == 1) begin
                     next_state = S_SEND;  
                 end else begin
                     next_state = current_state;
@@ -125,14 +125,14 @@ module ifu(
             if(current_state == S_IDLE) ifu_ready_o <= 0;
             else if(current_state == S_SEND) ifu_ready_o <= 0;
             else if(current_state == S_WAIT_RECEIVE) ifu_ready_o <= 1;
-            else if(current_state == S_RECEIVE) ifu_ready_o <= 1;
+            else if(current_state == S_RECEIVE) ifu_ready_o <= 0;
             else if(current_state == S_WAIT_SEND) ifu_ready_o <= 0;      
             
             if(current_state == S_IDLE) begin 
                 araddr <= `PC_INIT;
                 if(rvalid_i == 1 && rready == 1) begin 
                     //ifu_valid_o <= 1;
-                    //inst <= rdata_i;
+                    inst <= rdata_i;
                 end
                 //else ifu_valid_o <= 0;
                 arvalid <= 1;   
@@ -153,7 +153,7 @@ module ifu(
                 ifu_valid_o <= 1;
                 arvalid <= 0;
                 rready <= 0;
-                //inst_o <= inst;
+                inst_o <= inst;
                 pc_o <= pc;     
                 ready_flag <= 0;  
 
@@ -166,28 +166,28 @@ module ifu(
                 
             end else if(current_state == S_RECEIVE) begin 
                 //if(receive_counter == 0) begin
-                    receive_counter <= 0;
-                    arvalid <= 1;
-                    rready <= 1;
+                    //receive_counter <= 0;
+                    arvalid <= 0;
+                    rready <= 0;
                     araddr <= pc; 
                 //end
                 //else receive_counter <= receive_counter + 1;
                 ifu_valid_o <= 0;                
                 
-                if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
-                    ifu_valid_o <= 1;
+                //if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
+                //    ifu_valid_o <= 1;
                     //rready <= 0;
                     //inst <= rdata_i;
-                end
-                else ifu_valid_o <= 0;
+                //end
+                //else ifu_valid_o <= 0;
  
             end else if(current_state == S_WAIT_SEND) begin     
-                receive_counter <= 0;                        
-                
-                
+                //receive_counter <= 0;                        
+                if(rready == 1 && rvalid_i == 1)
+                    inst <= rdata_i;
                 //ifu_valid_o <= 1;
                 //arvalid <= 1; 
-                //rready <= 1;
+                rready <= 1;
                 //if(rvalid_i == 0 && ready_flag==0) begin 
                 //    rready <= 0;   
                 //    ready_flag <= 1;
