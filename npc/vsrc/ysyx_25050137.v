@@ -127,7 +127,7 @@ module ysyx_25050137(
     );
 
     assign pc_to_mem = ifu_araddr;
-    assign inst_from_mem = inst_ifu_to_idu;
+    assign inst_from_mem = ifu_rdata;
 
     wire useless1,useless2,useless3,useless4;
 
