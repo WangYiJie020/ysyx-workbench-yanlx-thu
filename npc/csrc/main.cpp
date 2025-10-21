@@ -306,7 +306,7 @@ static long load_img() {
   Log("The image is %s, size = %ld", img_file, size);
 
   fseek(fp, 0, SEEK_SET);
-  int ret = fread(&(mem[0x8000000]), size, 1, fp);
+  int ret = fread(flash, size, 1, fp);
   assert(ret == 1);
 
   //printf("%x\n",mem[0x8000000]);
@@ -315,7 +315,7 @@ static long load_img() {
   //  flash[i] = i;
   //}
   //printf("%c\n",mem[0x18000003]);
-
+/*
   flash[0] = 0x00410413;
   flash[1] = 0x100007b7;
   flash[2] = 0x04100713;
@@ -323,7 +323,7 @@ static long load_img() {
   flash[4] = 0x100007b7;
   flash[5] = 0x00a00713;
   flash[6] = 0x00e78023;
-  flash[7] = 0x0000006f;
+  flash[7] = 0x0000006f;*/
 
   fclose(fp);
   return size;
