@@ -116,8 +116,9 @@ module ifu(
             ifu_valid_o <= 0;
             ifu_ready_o <= 0;
             pc <= `PC_INIT;
-            arvalid <= 1;
+            arvalid <= 0
             rready <= 0;
+            arvalid_flag <= 0;
             //araddr <= pc;
         end else begin
             current_state <= next_state;
@@ -135,11 +136,18 @@ module ifu(
                     inst <= rdata_i;
                 end
                 //else ifu_valid_o <= 0;
-                arvalid <= 1;   
+                //arvalid <= 1;   
                 if(rready == 1 && rvalid_i == 1) rready <= 0;          
                 else rready <= 1;
                 
-                if(arvalid==1 && arready_i==1) begin
+                //if(arvalid==1 && arready_i==1) begin
+                //    arvalid <= 0;
+                //end
+
+                if(arvalid_flag == 0) begin
+                    arvalid <= 1; arvalid_flag <= 1;
+                end
+                else begin
                     arvalid <= 0;
                 end
 
