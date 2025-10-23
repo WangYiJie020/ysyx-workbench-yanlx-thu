@@ -47,6 +47,14 @@ void halt(int code) {
   while (1);
 }
 
+#define UART_DIV   0
+#define UART_LCR   3
+void set_div() {
+  *(volatile char *)(UART_BASE + UART_LCR) = *(volatile char *)(UART_BASE + UART_LCR) | 0x80;
+  *(volatile char *)(UART_BASE + UART_DIV) = 4;
+  *(volatile char *)(UART_BASE + UART_LCR) = *(volatile char *)(UART_BASE + UART_LCR) & 0x7F;
+}
+
 // 内联汇编读取CSR寄存器
 static inline uint32_t read_csr(uint32_t csr_addr) {
     uint32_t value;
@@ -58,6 +66,7 @@ void print_mycsr() {
   // 读取CSR寄存器
   uint32_t mvendorid = read_csr(CSR_MVENDORID);
   uint32_t marchid = read_csr(CSR_MARCHID);
+  set_div();
   putch(mvendorid>>24);
   putch(mvendorid>>16);
   putch(mvendorid>>8);
