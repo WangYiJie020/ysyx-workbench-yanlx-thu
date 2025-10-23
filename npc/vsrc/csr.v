@@ -26,6 +26,8 @@ module csr(
     assign csr_reg[1] = csr_mstatus;
     assign csr_reg[2] = csr_mcause;
     assign csr_reg[3] = csr_mtvec;
+    assign csr_mvendorid = 32'h79737978;
+    assign csr_marchid = 32'h017E3C19;
 
     initial begin
         csr_mstatus = 32'h1800;
@@ -77,6 +79,8 @@ module csr(
                     end
                     3'b001,3'b010: begin //csrrw, csrrs
                         case (inst[31:20])
+                            12'hf11:rdata = csr_mvendorid;
+                            12'hf12:rdata = csr_marchid;
                             12'h300:rdata = csr_mstatus;
                             12'h305:rdata = csr_mtvec;
                             12'h341:rdata = csr_mepc;

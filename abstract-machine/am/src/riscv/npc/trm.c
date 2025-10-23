@@ -1,5 +1,6 @@
 #include <am.h>
 #include <klib-macros.h>
+#include <stdio.h>
 
 
 extern char _heap_start;
@@ -32,6 +33,9 @@ void putch(char ch) {
 #define UART_TX   0
 #define UART_LSR  5
 #define UART_LSR_THRE   0x20    // 发送保持寄存器空
+// CSR寄存器地址定义
+#define CSR_MVENDORID 0xF11
+#define CSR_MARCHID   0xF12
 void putch(char ch) {
   while(!(*(volatile char *)(UART_BASE + UART_LSR) & UART_LSR_THRE)){
   }
@@ -43,7 +47,20 @@ void halt(int code) {
   while (1);
 }
 
+// 内联汇编读取CSR寄存器
+static inline uint32_t read_csr(uint32_t csr_addr) {
+    uint32_t value;
+    asm volatile ("csrr %0, %1" : "=r"(value) : "i"(csr_addr));
+    return value;
+}
+
+
 void _trm_init() {
+  // 读取CSR寄存器
+  uint32_t mvendorid = read_csr(CSR_MVENDORID);
+  uint32_t marchid = read_csr(CSR_MARCHID);
+  printf("%c",mvendorid>>24);
+  printf("%d\n",marchid);
   int ret = main(mainargs);
   halt(ret);
 }
