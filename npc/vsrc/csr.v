@@ -13,6 +13,8 @@ module csr(
     reg [31:0] csr_mstatus;
     reg [31:0] csr_mcause;
     reg [31:0] csr_mtvec;
+    reg [31:0] csr_mvendorid;
+    reg [31:0] csr_marchid;
 
     wire [6:0] opcode;
     wire [2:0] funct3;
