@@ -116,7 +116,7 @@ module ifu(
             ifu_valid_o <= 0;
             ifu_ready_o <= 0;
             pc <= `PC_INIT;
-            arvalid <= 0
+            arvalid <= 0;
             rready <= 0;
             arvalid_flag <= 0;
             //araddr <= pc;
