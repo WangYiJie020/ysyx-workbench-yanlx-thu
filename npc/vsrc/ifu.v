@@ -64,7 +64,7 @@ module ifu(
 
     reg [2:0] current_state,next_state;
     reg [2:0] receive_counter;
-    reg ready_flag;
+    reg ready_flag,arvalid_flag;
 
     always @(*) begin
         case(current_state)
@@ -145,7 +145,8 @@ module ifu(
                 //end
 
                 if(arvalid_flag == 0) begin
-                    arvalid <= 1; arvalid_flag <= 1;
+                    arvalid <= 1; 
+                    arvalid_flag <= 1;
                 end
                 else begin
                     arvalid <= 0;
