@@ -59,7 +59,7 @@ void _trm_init() {
   // 读取CSR寄存器
   uint32_t mvendorid = read_csr(CSR_MVENDORID);
   uint32_t marchid = read_csr(CSR_MARCHID);
-  printf("%c",mvendorid>>24);
+  printf("%s",mvendorid);
   printf("%d\n",marchid);
   int ret = main(mainargs);
   halt(ret);
