@@ -182,6 +182,9 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__2(VysyxSoCFull___0
                                             + vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter));
                         __Vdly__ysyxSoCFull__DOT__psram__DOT__data_byte_counter 
                             = ((IData)(1U) + vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter);
+                        __Vdly__ysyxSoCFull__DOT__psram__DOT__current_byte 
+                            = ((0xf0U & (IData)(__Vdly__ysyxSoCFull__DOT__psram__DOT__current_byte)) 
+                               | (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din));
                     } else if ((1U & (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter))) {
                         __Vdly__ysyxSoCFull__DOT__psram__DOT__current_byte = 0U;
                     } else {
