@@ -2685,9 +2685,12 @@ VL_ATTR_COLD void VysyxSoCFull___024root___stl_sequent__TOP__0(VysyxSoCFull___02
                 ? 0U : 1U);
     } else if ((1U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
         if ((8U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter))) {
-            if (VL_LIKELY(((0xebU == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg)) 
-                           | (0x38U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg))))) {
+            if (((0xebU == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg)) 
+                 | (0x38U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg)))) {
                 vlSelf->ysyxSoCFull__DOT__psram__DOT__next_state = 2U;
+            } else if (VL_LIKELY((0x35U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg)))) {
+                vlSelf->ysyxSoCFull__DOT__psram__DOT__next_state = 0U;
+                vlSelf->ysyxSoCFull__DOT__psram__DOT__qspi_flag = 1U;
             } else {
                 vlSelf->ysyxSoCFull__DOT__psram__DOT__next_state = 0U;
                 VL_FWRITEF(0x80000002U,"Assertion failed: Unsupported command `%xh`\n",
