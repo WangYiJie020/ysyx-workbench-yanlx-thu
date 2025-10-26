@@ -191,8 +191,8 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__2(VysyxSoCFull___0
                         }
                     } else {
                         __Vdlyvval__ysyxSoCFull__DOT__psram__DOT__memory__v0 
-                            = ((0xf0U & ((IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_byte) 
-                                         << 4U)) | (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din));
+                            = ((0xf0U & (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_byte)) 
+                               | (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din));
                         __Vdlyvset__ysyxSoCFull__DOT__psram__DOT__memory__v0 = 1U;
                         __Vdlyvdim0__ysyxSoCFull__DOT__psram__DOT__memory__v0 
                             = (0x7fffffU & (vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg 
