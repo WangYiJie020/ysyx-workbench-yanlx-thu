@@ -76,6 +76,8 @@ VL_ATTR_COLD void VysyxSoCFull___024root___eval_initial(VysyxSoCFull___024root* 
         = vlSelf->ysyxSoCFull__DOT____Vcellinp__flash__ss;
     vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT___asic_spi_sck 
         = vlSelf->ysyxSoCFull__DOT___asic_spi_sck;
+    vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT___asic_psram_ce_n 
+        = vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n;
     vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT___asic_psram_sck 
         = vlSelf->ysyxSoCFull__DOT___asic_psram_sck;
 }
@@ -86,17 +88,6 @@ VL_ATTR_COLD void VysyxSoCFull___024root___eval_initial__TOP(VysyxSoCFull___024r
     VL_DEBUG_IF(VL_DBG_MSGF("+    VysyxSoCFull___024root___eval_initial__TOP\n"); );
     // Body
     vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__CSR__DOT__csr_mstatus = 0x1800U;
-    vlSelf->ysyxSoCFull__DOT__psram__DOT__state = 0U;
-    vlSelf->ysyxSoCFull__DOT__psram__DOT__dio_out = 0U;
-    vlSelf->ysyxSoCFull__DOT__psram__DOT__dio_oe = 0U;
-    vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg = 0U;
-    vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg = 0U;
-    vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter = 0U;
-    vlSelf->ysyxSoCFull__DOT__psram__DOT__dummy_cycle_counter = 0U;
-    vlSelf->ysyxSoCFull__DOT__psram__DOT__is_read_op = 0U;
-    vlSelf->ysyxSoCFull__DOT__psram__DOT__is_write_op = 0U;
-    vlSelf->ysyxSoCFull__DOT__psram__DOT__current_nybble = 0U;
-    vlSelf->ysyxSoCFull__DOT__psram__DOT__current_byte = 0U;
 }
 
 VL_ATTR_COLD void VysyxSoCFull___024root___eval_final(VysyxSoCFull___024root* vlSelf) {
@@ -220,7 +211,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root___dump_triggers__act(VysyxSoCFull___024
         VL_DBG_MSGF("         'act' region trigger index 4 is active: @(posedge ysyxSoCFull._asic_spi_sck)\n");
     }
     if (vlSelf->__VactTriggered.at(5U)) {
-        VL_DBG_MSGF("         'act' region trigger index 5 is active: @(posedge ysyxSoCFull._asic_psram_sck)\n");
+        VL_DBG_MSGF("         'act' region trigger index 5 is active: @(negedge ysyxSoCFull._asic_psram_ce_n or posedge ysyxSoCFull._asic_psram_sck)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -250,7 +241,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root___dump_triggers__nba(VysyxSoCFull___024
         VL_DBG_MSGF("         'nba' region trigger index 4 is active: @(posedge ysyxSoCFull._asic_spi_sck)\n");
     }
     if (vlSelf->__VnbaTriggered.at(5U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 5 is active: @(posedge ysyxSoCFull._asic_psram_sck)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 5 is active: @(negedge ysyxSoCFull._asic_psram_ce_n or posedge ysyxSoCFull._asic_psram_sck)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -1311,6 +1302,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root___ctor_var_reset(VysyxSoCFull___024root
     vlSelf->__Vtrigrprev__TOP__reset = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT____Vcellinp__flash__ss = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT___asic_spi_sck = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT___asic_psram_ce_n = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT___asic_psram_sck = VL_RAND_RESET_I(1);
     for (int __Vi0 = 0; __Vi0 < 15; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = 0;
