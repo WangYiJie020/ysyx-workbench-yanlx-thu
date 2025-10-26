@@ -498,9 +498,7 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__3(VysyxSoCFull___0
     __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_bit_counter 
         = vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_bit_counter;
     if ((0U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
-        if (VL_UNLIKELY((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n))))) {
-            VL_WRITEF("PSRAM: Chip enabled, starting command reception\n");
-            Verilated::runFlushCallbacks();
+        if ((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n)))) {
             __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_bit_counter = 0U;
             __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_reg = 0U;
         }
@@ -512,10 +510,6 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__3(VysyxSoCFull___0
                                  << 1U)) | (1U & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din)));
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_bit_counter 
                     = (7U & ((IData)(1U) + (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_bit_counter)));
-                VL_WRITEF("PSRAM: Receiving command bit %1#: %b\n",
-                          3,vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_bit_counter,
-                          1,(1U & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din)));
-                Verilated::runFlushCallbacks();
             } else {
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_reg 
                     = ((0xfeU & ((IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg) 
@@ -523,25 +517,14 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__3(VysyxSoCFull___0
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_bit_counter = 0U;
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__addr_nybble_counter = 0U;
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__addr_reg = 0U;
-                VL_WRITEF("PSRAM: Command received: 0x%02x\n",
-                          8,vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg);
-                Verilated::runFlushCallbacks();
-                if (VL_UNLIKELY((0xebU == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg)))) {
-                    VL_WRITEF("PSRAM: Quad IO Read command detected\n");
-                    Verilated::runFlushCallbacks();
+                if ((0xebU == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg))) {
                     vlSelf->ysyxSoCFull__DOT__psram__DOT__is_read_op = 1U;
                     vlSelf->ysyxSoCFull__DOT__psram__DOT__is_write_op = 0U;
                     __Vdly__ysyxSoCFull__DOT__psram__DOT__dummy_cycle_counter = 6U;
                 } else if ((0x38U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg))) {
-                    VL_WRITEF("PSRAM: Quad IO Write command detected\n");
-                    Verilated::runFlushCallbacks();
                     vlSelf->ysyxSoCFull__DOT__psram__DOT__is_read_op = 0U;
                     vlSelf->ysyxSoCFull__DOT__psram__DOT__is_write_op = 1U;
                     __Vdly__ysyxSoCFull__DOT__psram__DOT__dummy_cycle_counter = 0U;
-                } else {
-                    VL_WRITEF("PSRAM: Unsupported command 0x%02x\n",
-                              8,vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg);
-                    Verilated::runFlushCallbacks();
                 }
             }
         }
@@ -553,61 +536,31 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__3(VysyxSoCFull___0
                                      << 4U)) | (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din));
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__addr_nybble_counter 
                     = (7U & ((IData)(1U) + (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_nybble_counter)));
-                VL_WRITEF("PSRAM: Receiving address nybble %1#: 0x%01x, addr so far: 0x%06x\n",
-                          3,vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_nybble_counter,
-                          4,(IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din),
-                          24,((0xfffff0U & (vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg 
-                                            << 4U)) 
-                              | (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din)));
-                Verilated::runFlushCallbacks();
-            } else {
-                VL_WRITEF("PSRAM: Address received: 0x%06x\n",
-                          24,vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg);
-                Verilated::runFlushCallbacks();
             }
         }
     } else if ((3U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
         if ((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n)))) {
-            if (VL_UNLIKELY((0U < (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__dummy_cycle_counter)))) {
+            if ((0U < (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__dummy_cycle_counter))) {
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__dummy_cycle_counter 
                     = (7U & ((IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__dummy_cycle_counter) 
                              - (IData)(1U)));
-                VL_WRITEF("PSRAM: Dummy cycle %1#\n",
-                          3,vlSelf->ysyxSoCFull__DOT__psram__DOT__dummy_cycle_counter);
-                Verilated::runFlushCallbacks();
             }
         }
     } else if ((4U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
         if ((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n)))) {
-            if (VL_UNLIKELY((0U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_bit_counter)))) {
+            if ((0U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_bit_counter))) {
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__current_byte 
                     = vlSelf->ysyxSoCFull__DOT__psram__DOT__memory
                     [(0x7fffffU & (vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg 
                                    + vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter))];
-                VL_WRITEF("PSRAM: Reading data from address 0x%06x: 0x%02x\n",
-                          32,(vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg 
-                              + vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter),
-                          8,vlSelf->ysyxSoCFull__DOT__psram__DOT__memory
-                          [(0x7fffffU & (vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg 
-                                         + vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter))]);
-                Verilated::runFlushCallbacks();
-            }
-            if (VL_UNLIKELY((0U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_bit_counter)))) {
                 vlSelf->ysyxSoCFull__DOT__psram__DOT__dio_out 
                     = (0xfU & (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_byte));
-                VL_WRITEF("PSRAM: Output lower nybble: 0x%01x\n",
-                          4,(0xfU & (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_byte)));
-                Verilated::runFlushCallbacks();
-            } else if (VL_UNLIKELY((1U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_bit_counter)))) {
+            } else if ((1U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_bit_counter))) {
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__data_byte_counter 
                     = ((IData)(1U) + vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter);
                 vlSelf->ysyxSoCFull__DOT__psram__DOT__dio_out 
                     = (0xfU & ((IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_byte) 
                                >> 4U));
-                VL_WRITEF("PSRAM: Output upper nybble: 0x%01x\n",
-                          4,(0xfU & ((IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_byte) 
-                                     >> 4U)));
-                Verilated::runFlushCallbacks();
             } else {
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__data_byte_counter = 0U;
             }
@@ -616,13 +569,10 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__3(VysyxSoCFull___0
         }
     } else if ((5U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
         if ((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n)))) {
-            if (VL_UNLIKELY((0U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_bit_counter)))) {
-                VL_WRITEF("PSRAM: Received lower nybble: 0x%01x\n",
-                          4,vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din);
-                Verilated::runFlushCallbacks();
+            if ((0U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_bit_counter))) {
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__current_nybble 
                     = vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din;
-            } else if (VL_UNLIKELY((1U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_bit_counter)))) {
+            } else if ((1U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_bit_counter))) {
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__current_byte 
                     = (((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din) 
                         << 4U) | (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_nybble));
@@ -633,12 +583,6 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__3(VysyxSoCFull___0
                 __Vdlyvdim0__ysyxSoCFull__DOT__psram__DOT__memory__v0 
                     = (0x7fffffU & (vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg 
                                     + vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter));
-                VL_WRITEF("PSRAM: Writing data to address 0x%06x: 0x%02x\n",
-                          32,(vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg 
-                              + vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter),
-                          8,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din) 
-                              << 4U) | (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_nybble)));
-                Verilated::runFlushCallbacks();
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__data_byte_counter 
                     = ((IData)(1U) + vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter);
             } else {
