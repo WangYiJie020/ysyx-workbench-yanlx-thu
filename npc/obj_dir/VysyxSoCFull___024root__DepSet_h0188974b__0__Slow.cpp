@@ -217,7 +217,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root___dump_triggers__act(VysyxSoCFull___024
         VL_DBG_MSGF("         'act' region trigger index 2 is active: @(posedge clock or posedge reset)\n");
     }
     if (vlSelf->__VactTriggered.at(3U)) {
-        VL_DBG_MSGF("         'act' region trigger index 3 is active: @(posedge ysyxSoCFull.asic.lpsram.mpsram.u0.qpi_sck)\n");
+        VL_DBG_MSGF("         'act' region trigger index 3 is active: @(negedge ysyxSoCFull.asic.lpsram.mpsram.u0.qpi_sck)\n");
     }
     if (vlSelf->__VactTriggered.at(4U)) {
         VL_DBG_MSGF("         'act' region trigger index 4 is active: @(posedge clock or negedge reset)\n");
@@ -256,7 +256,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root___dump_triggers__nba(VysyxSoCFull___024
         VL_DBG_MSGF("         'nba' region trigger index 2 is active: @(posedge clock or posedge reset)\n");
     }
     if (vlSelf->__VnbaTriggered.at(3U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 3 is active: @(posedge ysyxSoCFull.asic.lpsram.mpsram.u0.qpi_sck)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 3 is active: @(negedge ysyxSoCFull.asic.lpsram.mpsram.u0.qpi_sck)\n");
     }
     if (vlSelf->__VnbaTriggered.at(4U)) {
         VL_DBG_MSGF("         'nba' region trigger index 4 is active: @(posedge clock or negedge reset)\n");
