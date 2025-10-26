@@ -3542,14 +3542,14 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+1210,"counter", false,-1, 7,0);
     tracep->declBus(c+527,"cmd_reg", false,-1, 7,0);
     tracep->declBus(c+1211,"addr_reg", false,-1, 23,0);
-    tracep->declBus(c+528,"data_byte_counter", false,-1, 2,0);
+    tracep->declBus(c+528,"data_byte_counter", false,-1, 31,0);
     tracep->declBit(c+529,"is_read_op", false,-1);
     tracep->declBit(c+530,"is_write_op", false,-1);
     tracep->declBus(c+531,"current_byte", false,-1, 7,0);
     tracep->declBit(c+1343,"qspi_flag", false,-1);
     tracep->declBus(c+796,"dio_out_p", false,-1, 3,0);
     tracep->declBus(c+797,"current_byte_p", false,-1, 7,0);
-    tracep->declBus(c+798,"data_byte_counter_p", false,-1, 2,0);
+    tracep->declBus(c+798,"data_byte_counter_p", false,-1, 31,0);
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("sdram ");
     tracep->declBit(c+1315,"clk", false,-1);
@@ -4431,7 +4431,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_full_sub_0(VysyxSoCFull___024roo
                                           >> 9U) & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT___in_0_rT_5))))));
     bufp->fullCData(oldp+526,(vlSelf->ysyxSoCFull__DOT__psram__DOT__dio_out),4);
     bufp->fullCData(oldp+527,(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg),8);
-    bufp->fullCData(oldp+528,(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter),3);
+    bufp->fullIData(oldp+528,(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter),32);
     bufp->fullBit(oldp+529,(vlSelf->ysyxSoCFull__DOT__psram__DOT__is_read_op));
     bufp->fullBit(oldp+530,(vlSelf->ysyxSoCFull__DOT__psram__DOT__is_write_op));
     bufp->fullCData(oldp+531,(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_byte),8);
@@ -4838,7 +4838,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_full_sub_0(VysyxSoCFull___024roo
                                        + (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__transmitter__DOT__fifo_tx__DOT__top)))),4);
     bufp->fullCData(oldp+796,(vlSelf->ysyxSoCFull__DOT__psram__DOT__dio_out_p),4);
     bufp->fullCData(oldp+797,(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_byte_p),8);
-    bufp->fullCData(oldp+798,(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter_p),3);
+    bufp->fullIData(oldp+798,(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter_p),32);
     bufp->fullCData(oldp+799,(vlSelf->ysyxSoCFull__DOT__flash__DOT__state),3);
     bufp->fullCData(oldp+800,(vlSelf->ysyxSoCFull__DOT__flash__DOT__counter),8);
     bufp->fullCData(oldp+801,(vlSelf->ysyxSoCFull__DOT__flash__DOT__cmd),8);

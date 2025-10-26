@@ -871,7 +871,7 @@ void VysyxSoCFull___024root__trace_chg_sub_0(VysyxSoCFull___024root* vlSelf, Ver
     if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[4U])) {
         bufp->chgCData(oldp+525,(vlSelf->ysyxSoCFull__DOT__psram__DOT__dio_out),4);
         bufp->chgCData(oldp+526,(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg),8);
-        bufp->chgCData(oldp+527,(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter),3);
+        bufp->chgIData(oldp+527,(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter),32);
         bufp->chgBit(oldp+528,(vlSelf->ysyxSoCFull__DOT__psram__DOT__is_read_op));
         bufp->chgBit(oldp+529,(vlSelf->ysyxSoCFull__DOT__psram__DOT__is_write_op));
         bufp->chgCData(oldp+530,(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_byte),8);
@@ -1289,7 +1289,7 @@ void VysyxSoCFull___024root__trace_chg_sub_0(VysyxSoCFull___024root* vlSelf, Ver
     if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[6U])) {
         bufp->chgCData(oldp+795,(vlSelf->ysyxSoCFull__DOT__psram__DOT__dio_out_p),4);
         bufp->chgCData(oldp+796,(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_byte_p),8);
-        bufp->chgCData(oldp+797,(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter_p),3);
+        bufp->chgIData(oldp+797,(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter_p),32);
     }
     if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[7U])) {
         bufp->chgCData(oldp+798,(vlSelf->ysyxSoCFull__DOT__flash__DOT__state),3);
