@@ -145,6 +145,11 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__2(VysyxSoCFull___0
                     __Vdly__ysyxSoCFull__DOT__psram__DOT__addr_reg 
                         = ((0xfffff0U & (vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg 
                                          << 4U)) | (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din));
+                } else {
+                    __Vdly__ysyxSoCFull__DOT__psram__DOT__current_byte 
+                        = ((0xfU & (IData)(__Vdly__ysyxSoCFull__DOT__psram__DOT__current_byte)) 
+                           | ((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din) 
+                              << 4U));
                 }
             }
         } else if ((3U != (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
