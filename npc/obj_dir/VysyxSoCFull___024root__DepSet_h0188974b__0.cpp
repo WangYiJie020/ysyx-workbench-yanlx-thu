@@ -132,10 +132,12 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__2(VysyxSoCFull___0
                         = ((0xfeU & ((IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg) 
                                      << 1U)) | (1U 
                                                 & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din)));
+                    __Vdly__ysyxSoCFull__DOT__psram__DOT__addr_reg 
+                        = ((0xfffff0U & (vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg 
+                                         << 4U)) | (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din));
                     VL_WRITEF("PSRAM: Command received: 0x%02x\n",
                               8,vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg);
                     Verilated::runFlushCallbacks();
-                    __Vdly__ysyxSoCFull__DOT__psram__DOT__addr_reg = 0U;
                     if ((0xebU == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg))) {
                         vlSelf->ysyxSoCFull__DOT__psram__DOT__is_read_op = 1U;
                         vlSelf->ysyxSoCFull__DOT__psram__DOT__is_write_op = 0U;
@@ -160,12 +162,6 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__2(VysyxSoCFull___0
         } else if ((3U != (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
             if ((4U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
                 if ((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n)))) {
-                    if ((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter)))) {
-                        __Vdly__ysyxSoCFull__DOT__psram__DOT__current_byte 
-                            = vlSelf->ysyxSoCFull__DOT__psram__DOT__memory
-                            [(0x7fffffU & (vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg 
-                                           + vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter))];
-                    }
                     if ((1U & (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter))) {
                         __Vdly__ysyxSoCFull__DOT__psram__DOT__data_byte_counter 
                             = ((IData)(1U) + vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter);
@@ -175,8 +171,15 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__2(VysyxSoCFull___0
                         __Vdly__ysyxSoCFull__DOT__psram__DOT__data_byte_counter = 0U;
                     } else {
                         vlSelf->ysyxSoCFull__DOT__psram__DOT__dio_out 
-                            = (0xfU & ((IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_byte) 
+                            = (0xfU & (vlSelf->ysyxSoCFull__DOT__psram__DOT__memory
+                                       [(0x7fffffU 
+                                         & (vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg 
+                                            + vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter))] 
                                        >> 4U));
+                        __Vdly__ysyxSoCFull__DOT__psram__DOT__current_byte 
+                            = vlSelf->ysyxSoCFull__DOT__psram__DOT__memory
+                            [(0x7fffffU & (vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg 
+                                           + vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter))];
                     }
                 }
             } else if ((5U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
