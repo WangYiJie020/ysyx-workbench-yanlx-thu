@@ -56,28 +56,38 @@ void VysyxSoCFull___024root___eval_triggers__act(VysyxSoCFull___024root* vlSelf)
                                        & (~ (IData)(vlSelf->__Vtrigrprev__TOP__clock))) 
                                       | ((IData)(vlSelf->reset) 
                                          & (~ (IData)(vlSelf->__Vtrigrprev__TOP__reset))));
-    vlSelf->__VactTriggered.at(3U) = (((IData)(vlSelf->clock) 
+    vlSelf->__VactTriggered.at(3U) = ((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__qpi_sck) 
+                                      & (~ (IData)(vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__qpi_sck)));
+    vlSelf->__VactTriggered.at(4U) = (((IData)(vlSelf->clock) 
                                        & (~ (IData)(vlSelf->__Vtrigrprev__TOP__clock))) 
                                       | ((~ (IData)(vlSelf->reset)) 
                                          & (IData)(vlSelf->__Vtrigrprev__TOP__reset)));
-    vlSelf->__VactTriggered.at(4U) = (((IData)(vlSelf->ysyxSoCFull__DOT____Vcellinp__flash__ss) 
+    vlSelf->__VactTriggered.at(5U) = (((IData)(vlSelf->ysyxSoCFull__DOT____Vcellinp__flash__ss) 
                                        & (~ (IData)(vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT____Vcellinp__flash__ss))) 
                                       | ((IData)(vlSelf->ysyxSoCFull__DOT___asic_spi_sck) 
                                          & (~ (IData)(vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT___asic_spi_sck))));
-    vlSelf->__VactTriggered.at(5U) = ((IData)(vlSelf->ysyxSoCFull__DOT___asic_spi_sck) 
+    vlSelf->__VactTriggered.at(6U) = ((IData)(vlSelf->ysyxSoCFull__DOT___asic_spi_sck) 
                                       & (~ (IData)(vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT___asic_spi_sck)));
-    vlSelf->__VactTriggered.at(6U) = (((IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n) 
+    vlSelf->__VactTriggered.at(7U) = (((IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n) 
                                        & (~ (IData)(vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT___asic_psram_ce_n))) 
                                       | ((IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_sck) 
                                          & (~ (IData)(vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT___asic_psram_sck))));
-    vlSelf->__VactTriggered.at(7U) = (((IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n) 
+    vlSelf->__VactTriggered.at(8U) = (((IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n) 
                                        & (~ (IData)(vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT___asic_psram_ce_n))) 
                                       | ((~ (IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_sck)) 
                                          & (IData)(vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT___asic_psram_sck)));
+    vlSelf->__VactTriggered.at(9U) = ((((IData)(vlSelf->clock) 
+                                        & (~ (IData)(vlSelf->__Vtrigrprev__TOP__clock))) 
+                                       | ((IData)(vlSelf->reset) 
+                                          & (~ (IData)(vlSelf->__Vtrigrprev__TOP__reset)))) 
+                                      | ((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__qpi_sck) 
+                                         & (~ (IData)(vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__qpi_sck))));
     vlSelf->__Vtrigrprev__TOP__clock = vlSelf->clock;
     vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__rst_n 
         = vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__rst_n;
     vlSelf->__Vtrigrprev__TOP__reset = vlSelf->reset;
+    vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__qpi_sck 
+        = vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__qpi_sck;
     vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT____Vcellinp__flash__ss 
         = vlSelf->ysyxSoCFull__DOT____Vcellinp__flash__ss;
     vlSelf->__Vtrigrprev__TOP__ysyxSoCFull__DOT___asic_spi_sck 
@@ -4095,10 +4105,10 @@ extern const VlUnpacked<CData/*0:0*/, 32> VysyxSoCFull__ConstPool__TABLE_h7bc682
 extern const VlUnpacked<CData/*1:0*/, 64> VysyxSoCFull__ConstPool__TABLE_hb056201f_0;
 extern const VlUnpacked<CData/*2:0*/, 8> VysyxSoCFull__ConstPool__TABLE_h0332641b_0;
 
-VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__9(VysyxSoCFull___024root* vlSelf) {
+VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__10(VysyxSoCFull___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     VysyxSoCFull__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    VysyxSoCFull___024root___nba_sequent__TOP__9\n"); );
+    VL_DEBUG_IF(VL_DBG_MSGF("+    VysyxSoCFull___024root___nba_sequent__TOP__10\n"); );
     // Init
     CData/*4:0*/ __Vtableidx1;
     __Vtableidx1 = 0;
