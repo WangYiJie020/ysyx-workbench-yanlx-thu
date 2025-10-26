@@ -2640,7 +2640,7 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__5(VysyxSoCFull___0
         }
     } else if ((1U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
         if ((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n)))) {
-            if ((7U > (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_bit_counter))) {
+            if (VL_LIKELY((7U > (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_bit_counter)))) {
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_reg 
                     = ((0xfeU & ((IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg) 
                                  << 1U)) | (1U & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din)));
@@ -2650,6 +2650,9 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__5(VysyxSoCFull___0
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_reg 
                     = ((0xfeU & ((IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg) 
                                  << 1U)) | (1U & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din)));
+                VL_WRITEF("PSRAM: Command received: 0x%02x\n",
+                          8,vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg);
+                Verilated::runFlushCallbacks();
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_bit_counter = 0U;
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__addr_nybble_counter = 0U;
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__addr_reg = 0U;
