@@ -3545,7 +3545,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+13,"data_byte_counter", false,-1, 31,0);
     tracep->declBit(c+14,"is_read_op", false,-1);
     tracep->declBit(c+15,"is_write_op", false,-1);
-    tracep->declBus(c+16,"current_byte", false,-1, 3,0);
+    tracep->declBus(c+16,"current_byte", false,-1, 7,0);
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("sdram ");
     tracep->declBit(c+1312,"clk", false,-1);
@@ -3616,7 +3616,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_full_sub_0(VysyxSoCFull___024roo
     bufp->fullIData(oldp+13,(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter),32);
     bufp->fullBit(oldp+14,(vlSelf->ysyxSoCFull__DOT__psram__DOT__is_read_op));
     bufp->fullBit(oldp+15,(vlSelf->ysyxSoCFull__DOT__psram__DOT__is_write_op));
-    bufp->fullCData(oldp+16,(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_byte),4);
+    bufp->fullCData(oldp+16,(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_byte),8);
     bufp->fullIData(oldp+17,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__araddr),32);
     bufp->fullBit(oldp+18,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__ready_wbu_to_ifu));
     bufp->fullIData(oldp+19,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__pc_ifu_to_idu),32);

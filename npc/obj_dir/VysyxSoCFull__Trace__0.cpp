@@ -42,7 +42,7 @@ void VysyxSoCFull___024root__trace_chg_sub_0(VysyxSoCFull___024root* vlSelf, Ver
         bufp->chgIData(oldp+12,(vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter),32);
         bufp->chgBit(oldp+13,(vlSelf->ysyxSoCFull__DOT__psram__DOT__is_read_op));
         bufp->chgBit(oldp+14,(vlSelf->ysyxSoCFull__DOT__psram__DOT__is_write_op));
-        bufp->chgCData(oldp+15,(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_byte),4);
+        bufp->chgCData(oldp+15,(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_byte),8);
     }
     if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[3U])) {
         bufp->chgIData(oldp+16,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__araddr),32);
