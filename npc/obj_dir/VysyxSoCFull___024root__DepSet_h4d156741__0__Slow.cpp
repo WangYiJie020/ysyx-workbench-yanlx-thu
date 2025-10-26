@@ -2684,7 +2684,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root___stl_sequent__TOP__0(VysyxSoCFull___02
             = ((IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n)
                 ? 0U : 1U);
     } else if ((1U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
-        if ((7U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_bit_counter))) {
+        if ((7U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter))) {
             if (VL_LIKELY(((0xebU == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg)) 
                            | (0x38U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg))))) {
                 vlSelf->ysyxSoCFull__DOT__psram__DOT__next_state = 2U;
@@ -2700,12 +2700,12 @@ VL_ATTR_COLD void VysyxSoCFull___024root___stl_sequent__TOP__0(VysyxSoCFull___02
     } else {
         vlSelf->ysyxSoCFull__DOT__psram__DOT__next_state 
             = ((2U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))
-                ? ((6U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_nybble_counter))
+                ? ((0xdU == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter))
                     ? ((IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__is_read_op)
                         ? 3U : ((IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__is_write_op)
                                  ? 5U : 0U)) : 2U) : 
                ((3U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))
-                 ? ((0U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__dummy_cycle_counter))
+                 ? ((0x13U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter))
                      ? 4U : 3U) : ((4U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))
                                     ? 4U : ((5U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))
                                              ? 5U : 0U))));
