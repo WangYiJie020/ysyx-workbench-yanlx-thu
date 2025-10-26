@@ -2632,7 +2632,9 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__5(VysyxSoCFull___0
     __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_bit_counter 
         = vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_bit_counter;
     if ((0U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
-        if ((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n)))) {
+        if (VL_UNLIKELY((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n))))) {
+            VL_WRITEF("PSRAM: Chip enabled, starting command reception\n");
+            Verilated::runFlushCallbacks();
             __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_bit_counter = 0U;
             __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_reg = 0U;
         }
