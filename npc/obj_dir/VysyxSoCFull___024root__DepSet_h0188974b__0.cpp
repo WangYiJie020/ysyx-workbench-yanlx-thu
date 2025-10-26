@@ -114,6 +114,9 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__2(VysyxSoCFull___0
     } else {
         if ((0U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
             if (VL_UNLIKELY((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n))))) {
+                __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_reg 
+                    = ((0xfeU & ((IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg) 
+                                 << 1U)) | (1U & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din)));
                 VL_WRITEF("PSRAM: Chip enabled, starting command reception\n");
                 Verilated::runFlushCallbacks();
             }
