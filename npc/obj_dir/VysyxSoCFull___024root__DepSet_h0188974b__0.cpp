@@ -72,8 +72,6 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__2(VysyxSoCFull___0
     // Init
     CData/*7:0*/ __Vdly__ysyxSoCFull__DOT__psram__DOT__counter;
     __Vdly__ysyxSoCFull__DOT__psram__DOT__counter = 0;
-    CData/*2:0*/ __Vdly__ysyxSoCFull__DOT__psram__DOT__state;
-    __Vdly__ysyxSoCFull__DOT__psram__DOT__state = 0;
     CData/*7:0*/ __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_reg;
     __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_reg = 0;
     IData/*23:0*/ __Vdly__ysyxSoCFull__DOT__psram__DOT__addr_reg;
@@ -98,12 +96,8 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__2(VysyxSoCFull___0
         = vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg;
     __Vdlyvset__ysyxSoCFull__DOT__psram__DOT__memory__v0 = 0U;
     __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_reg = vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg;
-    __Vdly__ysyxSoCFull__DOT__psram__DOT__state = vlSelf->ysyxSoCFull__DOT__psram__DOT__state;
-    __Vdly__ysyxSoCFull__DOT__psram__DOT__counter = 
-        ((IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n)
-          ? 0U : (0xffU & ((IData)(1U) + (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter))));
     if (vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n) {
-        __Vdly__ysyxSoCFull__DOT__psram__DOT__state = 0U;
+        __Vdly__ysyxSoCFull__DOT__psram__DOT__counter = 0U;
         vlSelf->ysyxSoCFull__DOT__psram__DOT__dio_out = 0U;
         __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_reg = 0U;
         __Vdly__ysyxSoCFull__DOT__psram__DOT__addr_reg = 0U;
@@ -111,18 +105,19 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__2(VysyxSoCFull___0
         vlSelf->ysyxSoCFull__DOT__psram__DOT__is_read_op = 0U;
         vlSelf->ysyxSoCFull__DOT__psram__DOT__is_write_op = 0U;
         __Vdly__ysyxSoCFull__DOT__psram__DOT__current_byte = 0U;
+        vlSelf->ysyxSoCFull__DOT__psram__DOT__state = 0U;
     } else {
+        __Vdly__ysyxSoCFull__DOT__psram__DOT__counter 
+            = (0xffU & ((IData)(1U) + (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter)));
         if ((0U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
-            if (VL_UNLIKELY((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n))))) {
+            if ((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n)))) {
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_reg 
                     = ((0xfeU & ((IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg) 
                                  << 1U)) | (1U & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din)));
-                VL_WRITEF("PSRAM: Chip enabled, starting command reception\n");
-                Verilated::runFlushCallbacks();
             }
         } else if ((1U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
             if ((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n)))) {
-                if (VL_LIKELY((8U > (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter)))) {
+                if ((8U > (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter))) {
                     __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_reg 
                         = ((0xfeU & ((IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg) 
                                      << 1U)) | (1U 
@@ -135,9 +130,6 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__2(VysyxSoCFull___0
                     __Vdly__ysyxSoCFull__DOT__psram__DOT__addr_reg 
                         = ((0xfffff0U & (vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg 
                                          << 4U)) | (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din));
-                    VL_WRITEF("PSRAM: Command received: 0x%02x\n",
-                              8,vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg);
-                    Verilated::runFlushCallbacks();
                     if ((0xebU == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg))) {
                         vlSelf->ysyxSoCFull__DOT__psram__DOT__is_read_op = 1U;
                         vlSelf->ysyxSoCFull__DOT__psram__DOT__is_write_op = 0U;
@@ -149,14 +141,10 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__2(VysyxSoCFull___0
             }
         } else if ((2U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
             if ((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n)))) {
-                if (VL_LIKELY((0xeU > (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter)))) {
+                if ((0xeU > (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter))) {
                     __Vdly__ysyxSoCFull__DOT__psram__DOT__addr_reg 
                         = ((0xfffff0U & (vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg 
                                          << 4U)) | (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din));
-                } else {
-                    VL_WRITEF("PSRAM: Address received: 0x%06x\n",
-                              24,vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg);
-                    Verilated::runFlushCallbacks();
                 }
             }
         } else if ((3U != (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
@@ -205,7 +193,7 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__2(VysyxSoCFull___0
                 }
             }
         }
-        __Vdly__ysyxSoCFull__DOT__psram__DOT__state 
+        vlSelf->ysyxSoCFull__DOT__psram__DOT__state 
             = vlSelf->ysyxSoCFull__DOT__psram__DOT__next_state;
     }
     vlSelf->ysyxSoCFull__DOT__psram__DOT__addr_reg 
@@ -220,7 +208,6 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__2(VysyxSoCFull___0
     }
     vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg = __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_reg;
     vlSelf->ysyxSoCFull__DOT__psram__DOT__counter = __Vdly__ysyxSoCFull__DOT__psram__DOT__counter;
-    vlSelf->ysyxSoCFull__DOT__psram__DOT__state = __Vdly__ysyxSoCFull__DOT__psram__DOT__state;
     vlSelf->__Vtableidx15 = vlSelf->ysyxSoCFull__DOT__psram__DOT__state;
     vlSelf->ysyxSoCFull__DOT__psram__DOT__dio_oe = 
         VysyxSoCFull__ConstPool__TABLE_h45271276_0[vlSelf->__Vtableidx15];
