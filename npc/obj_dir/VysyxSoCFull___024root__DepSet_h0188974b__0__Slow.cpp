@@ -1335,7 +1335,6 @@ VL_ATTR_COLD void VysyxSoCFull___024root___ctor_var_reset(VysyxSoCFull___024root
     vlSelf->__Vdly__ysyxSoCFull__DOT__bitrev__DOT__shift_in = VL_RAND_RESET_I(8);
     vlSelf->__Vdly__ysyxSoCFull__DOT__psram__DOT__counter = VL_RAND_RESET_I(8);
     vlSelf->__Vdly__ysyxSoCFull__DOT__psram__DOT__addr_reg = VL_RAND_RESET_I(24);
-    vlSelf->__Vdly__ysyxSoCFull__DOT__psram__DOT__current_byte = VL_RAND_RESET_I(8);
     vlSelf->__Vdlyvdim0__ysyxSoCFull__DOT__psram__DOT__memory__v0 = 0;
     vlSelf->__Vdlyvval__ysyxSoCFull__DOT__psram__DOT__memory__v0 = VL_RAND_RESET_I(8);
     vlSelf->__Vdlyvset__ysyxSoCFull__DOT__psram__DOT__memory__v0 = 0;
