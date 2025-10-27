@@ -56,9 +56,9 @@ SECTIONS {
   
   /* 栈区在SRAM末尾 */
   .stack : ALIGN(4) {
-      _stack_bottom = .;
-      . = . + 3M;         /* 4KB栈区 */
       _stack_top = .;
+      . = . + 3M;         /* 4KB栈区 */
+      _stack_pointer = .;
   } > sram
   
 }

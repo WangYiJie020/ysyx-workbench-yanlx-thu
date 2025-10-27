@@ -4,7 +4,7 @@
 
 _start:
   mv s0, zero
-  la sp, _stack_top
+  la sp, _stack_pointer
   call load_data_section
   jal _trm_init
 
