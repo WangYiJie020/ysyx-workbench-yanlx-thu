@@ -2765,14 +2765,11 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__6(VysyxSoCFull___0
         __Vdly__ysyxSoCFull__DOT__psram__DOT__current_byte_p = 0U;
     } else if (vlSelf->ysyxSoCFull__DOT__psram__DOT__qspi_flag) {
         if ((4U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
-            if (VL_UNLIKELY((1U & (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter)))) {
+            if ((1U & (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter))) {
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__data_byte_counter_p 
                     = ((IData)(1U) + vlSelf->ysyxSoCFull__DOT__psram__DOT__data_byte_counter_p);
                 vlSelf->ysyxSoCFull__DOT__psram__DOT__dio_out_p 
                     = (0xfU & (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_byte_p));
-                VL_WRITEF("PSRAM: Output lower nybble: 0x%01x\n",
-                          4,(0xfU & (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__current_byte_p)));
-                Verilated::runFlushCallbacks();
             } else if ((1U & (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter))) {
                 __Vdly__ysyxSoCFull__DOT__psram__DOT__data_byte_counter_p = 0U;
             } else {
