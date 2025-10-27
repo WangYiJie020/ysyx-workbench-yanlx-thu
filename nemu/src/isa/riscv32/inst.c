@@ -52,6 +52,8 @@ word_t * csr(word_t imm) {
     case 0x305: return &(cpu.csr_mtvec);break;
     case 0x341: return &(cpu.csr_mepc);break;
     case 0x342: return &(cpu.csr_mcause);break;
+    case 0xf11: return &(cpu.csr_mvendorid);break;
+    case 0xf12: return &(cpu.csr_marchid);break;
     default: assert(0); return NULL;
   }
 } 
