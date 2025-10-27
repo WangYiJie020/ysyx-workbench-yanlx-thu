@@ -4508,7 +4508,7 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_comb__TOP__6(VysyxSoCFull___024r
                         ? 3U : ((IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__is_write_op)
                                  ? 5U : 0U)) : 2U) : 
                ((3U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))
-                 ? ((0x13U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter))
+                 ? ((0x14U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter))
                      ? 4U : 3U) : ((4U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))
                                     ? 4U : ((5U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))
                                              ? 5U : 0U))));
