@@ -33,8 +33,8 @@ VerilatedContext* contextp = new VerilatedContext;
 VysyxSoCFull* top = new VysyxSoCFull{contextp};
 VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
 
-//#define  DIFFTEST_ON
-#define  WAVE_ON
+#define  DIFFTEST_ON
+//#define  WAVE_ON
 #define  TRACE_ON
 
 
@@ -366,7 +366,7 @@ static void trace_and_difftest() {
       //diff_cpdutreg2ref();
     }
     else {
-      //bool check = difftest_check();
+      bool check = difftest_check();
       if(skip_r) {
         diff_cpdutreg2ref();
         //printf("aa\n");
@@ -375,7 +375,7 @@ static void trace_and_difftest() {
       else{
         difftest_step();
       }
-      bool check = difftest_check();
+      //bool check = difftest_check();
       
       if(check==false) {
         cpu_state = NPC_ABORT;
