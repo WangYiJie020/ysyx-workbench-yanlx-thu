@@ -1024,7 +1024,7 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         IData/*31:0*/ ysyxSoCFull__DOT__psram__DOT__data_byte_counter;
         IData/*31:0*/ ysyxSoCFull__DOT__psram__DOT__data_byte_counter_p;
         IData/*31:0*/ __VdfgTmp_hf132a334__0;
-        IData/*31:0*/ __VdfgTmp_h618aa119__0;
+        IData/*31:0*/ __VdfgTmp_hc20ef241__0;
         IData/*31:0*/ __Vtask_ysyxSoCFull__DOT__asic__DOT__lmrom__DOT__mrom__DOT__mrom_read__3__rdata;
         IData/*31:0*/ __Vdly__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__pc;
         IData/*31:0*/ __Vdly__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__inst;
