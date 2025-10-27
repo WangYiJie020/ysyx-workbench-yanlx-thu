@@ -2604,7 +2604,7 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__5(VysyxSoCFull___0
     if (vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n) {
         vlSelf->__Vdly__ysyxSoCFull__DOT__psram__DOT__counter 
             = (0xffU & ((IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__qspi_flag)
-                         ? 4U : 0U));
+                         ? 6U : 0U));
         vlSelf->ysyxSoCFull__DOT__psram__DOT__dio_out = 0U;
         __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_reg = 0U;
         vlSelf->__Vdly__ysyxSoCFull__DOT__psram__DOT__addr_reg = 0U;
@@ -2617,9 +2617,17 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__5(VysyxSoCFull___0
             = (0xffU & ((IData)(1U) + (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__counter)));
         if ((0U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
             if ((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n)))) {
-                __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_reg 
-                    = ((0xfeU & ((IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg) 
-                                 << 1U)) | (1U & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din)));
+                if (vlSelf->ysyxSoCFull__DOT__psram__DOT__qspi_flag) {
+                    __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_reg 
+                        = ((0xfU & (IData)(__Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_reg)) 
+                           | ((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din) 
+                              << 4U));
+                } else {
+                    __Vdly__ysyxSoCFull__DOT__psram__DOT__cmd_reg 
+                        = ((0xfeU & ((IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__cmd_reg) 
+                                     << 1U)) | (1U 
+                                                & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__u0__DOT__mr_din)));
+                }
             }
         } else if ((1U == (IData)(vlSelf->ysyxSoCFull__DOT__psram__DOT__state))) {
             if ((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT___asic_psram_ce_n)))) {
