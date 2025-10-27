@@ -9,6 +9,7 @@ MEMORY {
 SECTIONS {
   
   . = ORIGIN(flash);
+  _pmem_start = .;
   
   .text ALIGN(4) : {
     *(entry)
