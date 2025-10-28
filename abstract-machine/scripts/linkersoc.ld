@@ -13,6 +13,7 @@ SECTIONS {
   _pmem_start = .;
   
   .text ALIGN(4) : {
+    _text_vma_start = .;
     *(entry)
     *(.text*)
     etext = .;
@@ -23,12 +24,13 @@ SECTIONS {
   .rodata ALIGN(4) : {
     *(.rodata*)
     *(.srodata.mainargs)  /* 放在.rodata段中 */
-  } >flash 
+    _rodata_end = .;
+  } > flash AT> flash  
 
   .bootloader ALIGN(4) :{
     *(.bootloader*)
     _sidata = .;
-  } >flash 
+  } > flash AT> flash  
   
   .data :
   {
