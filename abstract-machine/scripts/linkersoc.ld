@@ -23,7 +23,7 @@ SECTIONS {
   .rodata ALIGN(4) : {
     *(.rodata*)
     *(.srodata.mainargs)  /* 放在.rodata段中 */
-    _rodata_end = .;
+
   } > flash AT> flash  
 
   .bootloader ALIGN(4) :{
