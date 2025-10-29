@@ -45,9 +45,9 @@ SECTIONS {
     . = ALIGN(4);
     _data_vma_start = .;
     *(.data)           /* 主要数据段 */
-    *(.data.*)         /* 数据子段 */
+    *(.data*)         /* 数据子段 */
     *(.sdata)          /* 小数据段 */
-    *(.sdata.*)        /* 小数据子段 */
+    *(.sdata*)        /* 小数据子段 */
     _data_vma_end = .;
   } > psram AT>flash
 
