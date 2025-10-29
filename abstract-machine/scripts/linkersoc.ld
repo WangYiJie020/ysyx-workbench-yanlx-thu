@@ -45,6 +45,8 @@ SECTIONS {
     *(.data*)         /* 数据子段 */
     *(.sdata)          /* 小数据段 */
     *(.sdata*)        /* 小数据子段 */
+    *(__am_apps.data*)
+    *(__am_apps.sdata*)
     _data_vma_end = .;
   } > psram AT>flash
 
@@ -56,6 +58,7 @@ SECTIONS {
     *(.bss*)
     *(.sbss)
     *(.sbss*)
+    *(__am_apps.bss*)
   } > psram 
   
   
