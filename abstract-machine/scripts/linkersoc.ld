@@ -28,7 +28,7 @@ SECTIONS {
   } > psram AT> flash 
 
   /* 夹在中间强制对齐 */
-  .rodata ALIGN(4) : {
+  .rodata : {
     _rodata_start = .;
     *(.rodata*)
     *(.srodata.mainargs)  /* 放在.rodata段中 */
