@@ -21,19 +21,20 @@ SECTIONS {
     _sidata = .;
   } > flash AT> flash  
 
+  .text : {
+    _text_start = .;
+    *(.text*)
+    _text_end = .;
+  } > psram AT> flash 
 
   /* 夹在中间强制对齐 */
   .rodata ALIGN(4) : {
     _rodata_start = .;
     *(.rodata*)
     *(.srodata.mainargs)  /* 放在.rodata段中 */
-  } > flash AT> flash  
+  } > psram AT> flash  
   
-  .text : {
-    _text_start = .;
-    *(.text*)
-    _text_end = .;
-  } > psram AT> flash 
+  
 
   _text_lma_start = LOADADDR(.text);
 
