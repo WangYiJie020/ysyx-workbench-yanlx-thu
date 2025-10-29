@@ -18,7 +18,7 @@ SECTIONS {
     *(.text*)
     etext = .;
     _etext = .;
-  } > sram AT> sram 
+  } > sram AT> flash 
 
   /* 夹在中间强制对齐 */
   .rodata ALIGN(4) : {
@@ -40,7 +40,7 @@ SECTIONS {
     *(.sdata)          /* 小数据段 */
     *(.sdata.*)        /* 小数据子段 */
     _data_vma_end = .;
-  } > psram AT>flash
+  } > psram AT>sram
 
   _data_lma_start = LOADADDR(.data);
 
