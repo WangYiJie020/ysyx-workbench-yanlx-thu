@@ -21,6 +21,14 @@ SECTIONS {
     _sidata = .;
   } > flash AT> flash  
 
+  /* 夹在中间强制对齐 */
+  .rodata : {
+    _rodata_start = .;
+    *(.rodata*)
+    *(.srodata.mainargs)  /* 放在.rodata段中 */
+    _rodata_end = .;
+  } > psram AT> flash 
+
   .text : {
     _text_start = .;
     *(.text*)
@@ -29,17 +37,10 @@ SECTIONS {
 
   _text_lma_start = LOADADDR(.text);
 
-  /* 夹在中间强制对齐 */
-  .rodata : {
-    _rodata_start = .;
-    *(.rodata*)
-    *(.srodata.mainargs)  /* 放在.rodata段中 */
-    _rodata_end = .;
-  } > psram AT> flash  
+   
 
   .data :
   {
-    . = ALIGN(4);
     _data_vma_start = .;
     *(.data)           /* 主要数据段 */
     *(.data.*)         /* 数据子段 */
