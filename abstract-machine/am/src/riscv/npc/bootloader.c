@@ -13,6 +13,7 @@ extern uint8_t _rodata_end[];
 
 
 void __attribute__((section(".bootloader"))) _bootloader_init() {
+    printf("%x\n",_trm_init);
     size_t data_size = (size_t)(_data_vma_end - _data_vma_start);
     uint8_t *d = (uint8_t *)_data_vma_start;
     uint8_t *s = (uint8_t *)_data_lma_start;
@@ -37,7 +38,7 @@ void __attribute__((section(".bootloader"))) _bootloader_init() {
         }
     }
 
-    printf("%x\n",_trm_init);
+    
 
     //asm volatile ("jal %0" : : "i"(_trm_init));
     __asm__ volatile ("call 0x0f000000"); 
