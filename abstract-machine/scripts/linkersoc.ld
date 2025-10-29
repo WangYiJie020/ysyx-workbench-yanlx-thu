@@ -29,7 +29,8 @@ SECTIONS {
     _rodata_end = .;
   } > psram AT> flash 
 
-  .text ALIGN(4): {
+  .text : {
+    . = ALIGN(4);
     _text_start = .;
     *(.text*)
     _text_end = .;
