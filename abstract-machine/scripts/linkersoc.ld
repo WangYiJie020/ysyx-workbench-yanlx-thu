@@ -16,7 +16,7 @@ SECTIONS {
     *(entry)
   } > sram AT> flash 
   
-  .text ALIGN(4) : {
+  .text : {
     _text_vma_start = .;
     *(.text*)
     etext = .;
