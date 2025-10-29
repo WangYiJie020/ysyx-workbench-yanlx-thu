@@ -27,6 +27,8 @@ SECTIONS {
     _text_end = .;
   } > psram AT> flash 
 
+  _text_lma_start = LOADADDR(.text);
+
   /* 夹在中间强制对齐 */
   .rodata : {
     _rodata_start = .;
@@ -34,10 +36,6 @@ SECTIONS {
     *(.srodata.mainargs)  /* 放在.rodata段中 */
     _rodata_end = .;
   } > psram AT> flash  
-  
-  
-
-  _text_lma_start = LOADADDR(.text);
 
   .data :
   {
