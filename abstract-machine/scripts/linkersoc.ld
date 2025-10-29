@@ -9,12 +9,15 @@ MEMORY {
 
 SECTIONS {
   
-  . = ORIGIN(sram);
+  . = ORIGIN(flash);
   _pmem_start = .;
+
+  .start :{
+    *(entry)
+  } > sram AT> flash 
   
   .text ALIGN(4) : {
     _text_vma_start = .;
-    *(entry)
     *(.text*)
     etext = .;
     _etext = .;
@@ -25,12 +28,12 @@ SECTIONS {
     *(.rodata*)
     *(.srodata.mainargs)  /* 放在.rodata段中 */
     _rodata_end = .;
-  } > sram AT> sram  
+  } > sram AT> flash  
 
   .bootloader :{
     *(.bootloader*)
     _sidata = .;
-  } > sram AT> sram  
+  } > sram AT> flash  
   
   .data :
   {
@@ -40,7 +43,7 @@ SECTIONS {
     *(.sdata)          /* 小数据段 */
     *(.sdata.*)        /* 小数据子段 */
     _data_vma_end = .;
-  } > psram AT>sram
+  } > psram AT>flash
 
   _data_lma_start = LOADADDR(.data);
 

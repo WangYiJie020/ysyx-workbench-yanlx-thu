@@ -11,6 +11,7 @@ AM_SRCS := riscv/npc/start.S \
 
 
 CFLAGS    += -fdata-sections -ffunction-sections
+CFLAGS += -Os  # 优化代码大小
 LDFLAGS   += -T $(AM_HOME)/scripts/linkersoc.ld 
 LDFLAGS   += --gc-sections -e _start 
 NPCFLAGS  += -h 
