@@ -28,6 +28,10 @@ SECTIONS {
     *(.rodata*)
     *(.srodata)       
     *(.srodata*) 
+    KEEP(*(FSymTab))
+    KEEP(*(VSymTab))
+    
+    KEEP(*(SORT(.rti_fn*)))
     _text_end = .;
   } > psram AT> flash 
 
