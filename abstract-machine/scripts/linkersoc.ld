@@ -32,6 +32,7 @@ SECTIONS {
     _rodata_start = .;
     *(.rodata*)
     *(.srodata.mainargs)  /* 放在.rodata段中 */
+    _rodata_end = .;
   } > psram AT> flash  
   
   
