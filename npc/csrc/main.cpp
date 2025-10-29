@@ -25,7 +25,7 @@
 
 int cpu_state;
 uint32_t mem[0xffffffff];
-uint32_t flash[0xffffffff];
+uint32_t flash[0xfffffff];
 bool is_skip_ref = false;
 bool difftest_check_all = false;
 
