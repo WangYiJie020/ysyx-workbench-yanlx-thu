@@ -36,7 +36,7 @@ void __attribute__((section(".bootloader"))) _bootloader_init() {
     }
     
     size_t code_size = (size_t)(_text_end - _text_start);
-    d = (uint8_t *)0x0f000000;
+    d = (uint8_t *)_text_start;
     s = (uint8_t *)_text_lma_start;
     if(code_size > 0) {
         while(code_size--) {
