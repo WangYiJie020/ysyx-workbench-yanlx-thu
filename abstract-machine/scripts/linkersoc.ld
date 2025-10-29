@@ -33,6 +33,8 @@ SECTIONS {
   .rodata : {
     _rodata_start = .;
     *(.rodata*)
+    *(.srodata)       
+    *(.srodata*) 
     *(.srodata.mainargs)  /* 放在.rodata段中 */
     _rodata_end = .;
   } > psram AT> flash 
