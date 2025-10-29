@@ -14,12 +14,12 @@ SECTIONS {
 
   .start :{
     *(entry)
-  } > sram AT> flash 
+  } > flash AT> flash 
 
   .bootloader :{
     *(.bootloader*)
     _sidata = .;
-  } > sram AT> flash  
+  } > flash AT> flash  
 
 
   /* 夹在中间强制对齐 */
@@ -27,7 +27,7 @@ SECTIONS {
     *(.rodata*)
     *(.srodata.mainargs)  /* 放在.rodata段中 */
     _rodata_end = .;
-  } > sram AT> flash  
+  } > flash AT> flash  
   
   .text : {
     _text_vma_start = .;
