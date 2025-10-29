@@ -25,52 +25,6 @@ SECTIONS {
     _text_start = .;
     *(.text)
     *(.text*)
-    *(.rodata*)
-    *(.srodata)       
-    *(.srodata*) 
-    *(.glue_7)
-        *(.glue_7t)
-        *(.gnu.linkonce.t*)
-
-        /* section information for finsh shell */
-        . = ALIGN(4);
-        __fsymtab_start = .;
-        KEEP(*(FSymTab))
-        __fsymtab_end = .;
-
-        . = ALIGN(4);
-        __vsymtab_start = .;
-        KEEP(*(VSymTab))
-        __vsymtab_end = .;
-
-        /* section information for utest */
-        . = ALIGN(4);
-        __rt_utest_tc_tab_start = .;
-        KEEP(*(UtestTcTab))
-        __rt_utest_tc_tab_end = .;
-
-        /* section information for at server */
-        . = ALIGN(4);
-        __rtatcmdtab_start = .;
-        KEEP(*(RtAtCmdTab))
-        __rtatcmdtab_end = .;
-        . = ALIGN(4);
-
-        /* section information for initial. */
-        . = ALIGN(4);
-        __rt_init_start = .;
-        KEEP(*(SORT(.rti_fn*)))
-        __rt_init_end = .;
-
-        . = ALIGN(4);
-
-        PROVIDE(__ctors_start__ = .);
-        KEEP (*(SORT(.init_array.*)))
-        KEEP (*(.init_array))
-        PROVIDE(__ctors_end__ = .);
-
-        . = ALIGN(4);
-
     _text_end = .;
   } > psram AT> flash 
 
@@ -79,7 +33,10 @@ SECTIONS {
    /* 夹在中间强制对齐 */
   .rodata : {
     _rodata_start = .;
-    
+    *(.rodata*)
+    *(.srodata)       
+    *(.srodata*) 
+    *(.srodata.mainargs)  /* 放在.rodata段中 */
     _rodata_end = .;
   } > psram AT> flash 
 
