@@ -3,12 +3,13 @@ ENTRY(_start)
 
 MEMORY {
   flash : ORIGIN = 0x30000000, LENGTH = 256M
-  sram : ORIGIN = 0x80000000, LENGTH = 8M
+  sram : ORIGIN = 0x0f000000, LENGTH = 8K
+  psram : ORIGIN = 0x80000000, LENGTH = 8M
 }
 
 SECTIONS {
   
-  . = ORIGIN(flash);
+  . = ORIGIN(sram);
   _pmem_start = .;
   
   .text ALIGN(4) : {
@@ -17,19 +18,19 @@ SECTIONS {
     *(.text*)
     etext = .;
     _etext = .;
-  } > flash AT> flash 
+  } > sram AT> sram 
 
   /* 夹在中间强制对齐 */
   .rodata ALIGN(4) : {
     *(.rodata*)
     *(.srodata.mainargs)  /* 放在.rodata段中 */
     _rodata_end = .;
-  } > flash AT> flash  
+  } > sram AT> sram  
 
   .bootloader :{
     *(.bootloader*)
     _sidata = .;
-  } > flash AT> flash  
+  } > sram AT> sram  
   
   .data :
   {
@@ -39,14 +40,14 @@ SECTIONS {
     *(.sdata)          /* 小数据段 */
     *(.sdata.*)        /* 小数据子段 */
     _data_vma_end = .;
-  } > sram AT>flash
+  } > psram AT>flash
 
   _data_lma_start = LOADADDR(.data);
 
   .bss :
   {
     *(.bss)
-  } > sram 
+  } > psram 
   
   
   /* 堆区在数据段和BSS段之后 */
@@ -54,13 +55,13 @@ SECTIONS {
       _heap_start = .;
       . = . + 4M;        /* 16KB堆区 */
       _heap_end = .;
-  } > sram
+  } > psram
   
   /* 栈区在SRAM末尾 */
   .stack : ALIGN(4) {
       _stack_top = .;
       . = . + 3M;         /* 4KB栈区 */
       _stack_pointer = .;
-  } > sram
+  } > psram
   
 }
