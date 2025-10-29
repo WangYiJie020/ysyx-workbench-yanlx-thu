@@ -11,15 +11,6 @@ extern uint8_t _text_start[];
 extern uint8_t _text_end[];
 extern uint8_t _text_lma_start[];
 
-#define UART_BASE 0x10000000L
-#define UART_DIV   0
-#define UART_LCR   3
-void set_div2() {
-  *(volatile char *)(UART_BASE + UART_LCR) = *(volatile char *)(UART_BASE + UART_LCR) | 0x80;
-  *(volatile char *)(UART_BASE + UART_DIV) = 4;
-  *(volatile char *)(UART_BASE + UART_LCR) = *(volatile char *)(UART_BASE + UART_LCR) & 0x7F;
-}
-
 void __attribute__((section(".bootloader"))) _bootloader_init() {
     
     size_t data_size = (size_t)(_data_vma_end - _data_vma_start);
