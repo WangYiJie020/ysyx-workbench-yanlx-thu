@@ -15,6 +15,19 @@ SECTIONS {
   .start :{
     *(entry)
   } > sram AT> flash 
+
+  .bootloader :{
+    *(.bootloader*)
+    _sidata = .;
+  } > sram AT> flash  
+
+
+  /* 夹在中间强制对齐 */
+  .rodata ALIGN(4) : {
+    *(.rodata*)
+    *(.srodata.mainargs)  /* 放在.rodata段中 */
+    _rodata_end = .;
+  } > sram AT> flash  
   
   .text : {
     _text_vma_start = .;
@@ -23,17 +36,9 @@ SECTIONS {
     _etext = .;
   } > sram AT> flash 
 
-  /* 夹在中间强制对齐 */
-  .rodata ALIGN(4) : {
-    *(.rodata*)
-    *(.srodata.mainargs)  /* 放在.rodata段中 */
-    _rodata_end = .;
-  } > sram AT> flash  
+  
 
-  .bootloader :{
-    *(.bootloader*)
-    _sidata = .;
-  } > sram AT> flash  
+  
   
   .data :
   {
