@@ -35,7 +35,7 @@ VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
 
 //#define  DIFFTEST_ON
 //#define  WAVE_ON
-//#define  TRACE_ON
+#define  TRACE_ON
 
 
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
@@ -430,4 +430,63 @@ void cpu_exec(uint64_t num) {
     }
     
     top->clock = 0; top->eval();
-    top->clock = 1; top->ev
+    top->clock = 1; top->eval();
+    counter++;
+    trace_and_difftest();
+
+    tfp->dump(contextp->time()); //dump wave
+    contextp->timeInc(1); //推动仿真时间
+    
+  }
+}
+
+
+
+int main(int argc, char** argv) {
+  Verilated::commandArgs(argc, argv);
+  init_log("npc-log.txt");
+  parse_args(argc, argv);
+  long img_size = load_img();
+
+#ifdef DIFFTEST_ON
+  init_difftest(diff_so_file, img_size, difftest_port);
+#endif
+  init_sdb();
+  cpu_state = NPC_RUNNING;
+
+  contextp->commandArgs(argc, argv);
+  
+#ifdef WAVE_ON
+  contextp->traceEverOn(true); //打开追踪功能
+  top->trace(tfp, 0); //
+  tfp->open("wave.vcd"); //设置输出的文件wave.vcd
+#endif
+
+  int n = 10;
+  top->reset = 1;
+  while (n > 0) {
+    top->clock = 0; top->eval();
+    top->clock = 1; top->eval();
+    tfp->dump(contextp->time()); //dump wave
+    contextp->timeInc(1); //推动仿真时间
+    n--;
+  }
+  top->reset = 0;
+
+  sdb_set_batch_mode();//批处理模式
+  
+  sdb_mainloop();
+
+
+  delete top;
+#ifdef WAVE_ON
+  tfp->close();
+#endif
+  delete contextp;
+  if(cpu_state == NPC_END || cpu_state == NPC_QUIT) {
+    return 0;
+  }
+  else {
+    return 1;
+  }
+}
