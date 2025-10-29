@@ -12,7 +12,7 @@ extern uint8_t _text_start[];
 extern uint8_t _text_lma_start[];
 extern uint8_t _bootloader_start[];
 extern uint8_t _bootloader_end[];
-extern uint8_t _bootloader_vma_start[];
+extern uint8_t _bootloader_lma_start[];
 
 void __attribute__((section(".bootloader"))) _bootloader_init() {
     
@@ -43,7 +43,7 @@ void __attribute__((section(".bootloader"))) _bootloader_init() {
 
 void __attribute__((section(".fsbl"))) _load_bootloader() {
     size_t bootloader_size = (size_t)(_bootloader_end - _bootloader_start);
-    uint8_t *d = (uint8_t *)_bootloader_vma_start;
+    uint8_t *d = (uint8_t *)_bootloader_lma_start;
     uint8_t *s = (uint8_t *)_bootloader_start;
     if (bootloader_size > 0) {               
         while (bootloader_size--) {
