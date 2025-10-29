@@ -3,7 +3,7 @@ ENTRY(_start)
 
 MEMORY {
   flash : ORIGIN = 0x30000000, LENGTH = 256M
-  sram : ORIGIN = 0x0f000000, LENGTH = 8K
+  sram : ORIGIN = 0x80000000, LENGTH = 8M
 }
 
 SECTIONS {
@@ -50,14 +50,14 @@ SECTIONS {
   /* 堆区在数据段和BSS段之后 */
   .heap : ALIGN(4) {
       _heap_start = .;
-      . = . + 4K;        /* 16KB堆区 */
+      . = . + 4M;        /* 16KB堆区 */
       _heap_end = .;
   } > sram
   
   /* 栈区在SRAM末尾 */
   .stack : ALIGN(4) {
       _stack_top = .;
-      . = . + 3K;         /* 4KB栈区 */
+      . = . + 3M;         /* 4KB栈区 */
       _stack_pointer = .;
   } > sram
   
