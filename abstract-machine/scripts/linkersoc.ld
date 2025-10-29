@@ -35,6 +35,8 @@ SECTIONS {
     _text_end = .;
   } > sram AT> flash 
 
+  _text_lma_start = LOADADDR(.text);
+
   .data :
   {
     _data_vma_start = .;

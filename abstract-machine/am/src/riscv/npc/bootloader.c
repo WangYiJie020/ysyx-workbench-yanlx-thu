@@ -9,6 +9,7 @@ extern uint8_t _data_vma_end[];
 extern uint8_t _trm_init[];
 extern uint8_t _text_start[];
 extern uint8_t _text_end[];
+extern uint8_t _text_lma_start[];
 
 #define UART_BASE 0x10000000L
 #define UART_DIV   0
@@ -36,7 +37,7 @@ void __attribute__((section(".bootloader"))) _bootloader_init() {
     
     size_t code_size = (size_t)(_text_end - _text_start);
     d = (uint8_t *)0x0f000000;
-    s = (uint8_t *)_text_start;
+    s = (uint8_t *)_text_lma_start;
     if(code_size > 0) {
         while(code_size--) {
             *d = *s;
