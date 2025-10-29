@@ -30,16 +30,11 @@ SECTIONS {
   } > flash AT> flash  
   
   .text : {
-    _text_vma_start = .;
+    _text_start = .;
     *(.text*)
-    etext = .;
-    _etext = .;
+    _text_end = .;
   } > sram AT> flash 
 
-  
-
-  
-  
   .data :
   {
     _data_vma_start = .;
