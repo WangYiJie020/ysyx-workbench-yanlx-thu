@@ -33,7 +33,7 @@ SECTIONS {
     _text_start = .;
     *(.text*)
     _text_end = .;
-  } > sram AT> flash 
+  } > psram AT> flash 
 
   _text_lma_start = LOADADDR(.text);
 
@@ -65,8 +65,8 @@ SECTIONS {
   /* 栈区在SRAM末尾 */
   .stack : ALIGN(4) {
       _stack_top = .;
-      . = . + 3M;         /* 4KB栈区 */
+      . = . + 8K;         /* 4KB栈区 */
       _stack_pointer = .;
-  } > psram
+  } > sram
   
 }
