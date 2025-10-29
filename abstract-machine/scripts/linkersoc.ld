@@ -21,10 +21,7 @@ SECTIONS {
     _sidata = .;
   } > flash AT> flash  
 
-  
-
   .text : {
-    . = ALIGN(4);
     _text_start = .;
     *(.text*)
     _text_end = .;
@@ -42,6 +39,7 @@ SECTIONS {
 
   .data :
   {
+    . = ALIGN(4);
     _data_vma_start = .;
     *(.data)           /* 主要数据段 */
     *(.data.*)         /* 数据子段 */
