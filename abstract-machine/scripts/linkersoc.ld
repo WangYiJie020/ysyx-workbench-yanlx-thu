@@ -53,6 +53,9 @@ SECTIONS {
   .bss :
   {
     *(.bss)
+    *(.bss*)
+    *(.sbss)
+    *(.sbss*)
   } > psram 
   
   
