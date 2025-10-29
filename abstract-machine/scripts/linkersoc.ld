@@ -24,7 +24,7 @@ SECTIONS {
     *(.srodata.mainargs)  /* 放在.rodata段中 */
   } > flash AT> flash  
 
-  .bootloader ALIGN(4):{
+  .bootloader :{
     *(.bootloader*)
     _sidata = .;
   } > flash AT> flash  
