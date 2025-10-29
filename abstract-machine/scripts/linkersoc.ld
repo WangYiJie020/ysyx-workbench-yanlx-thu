@@ -16,10 +16,18 @@ SECTIONS {
     *(entry)
   } > flash AT> flash 
 
+  .fsbl :{
+    _fsbl_start = .;
+    *(.fsbl*)
+  } > flash AT> flash 
+
   .bootloader :{
+    _bootloader_start = .;
     *(.bootloader*)
-    _sidata = .;
-  } > flash AT> flash  
+    _bootloader_end = .;
+  } > psram AT> flash  
+
+  _bootloader_lma_start = LOADADDR(.bootloader);
 
   .text : {
     _text_start = .;

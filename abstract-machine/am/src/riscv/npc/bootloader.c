@@ -10,6 +10,9 @@ extern uint8_t _trm_init[];
 extern uint8_t _text_end[];
 extern uint8_t _text_start[];
 extern uint8_t _text_lma_start[];
+extern uint8_t _bootloader_start[];
+extern uint8_t _bootloader_end[];
+extern uint8_t _bootloader_vma_start[];
 
 void __attribute__((section(".bootloader"))) _bootloader_init() {
     
@@ -36,11 +39,17 @@ void __attribute__((section(".bootloader"))) _bootloader_init() {
             s++;
         }
     }
+}
 
-    //uint8_t *init = (uint8_t *)_trm_init;
-    //init = init - 0x30000000L + 0x0f000000;
-
-    //asm volatile ("jal %0" : : "i"(_trm_init));
-    //__asm__ volatile ("call 0x0f000000"); 
-    //asm volatile ("call %0" : : "i"(_trm_init));
+void __attribute__((section(".fsbl"))) _load_bootloader() {
+    size_t bootloader_size = (size_t)(_bootloader_end - _bootloader_start);
+    uint8_t *d = (uint8_t *)_bootloader_vma_start;
+    uint8_t *s = (uint8_t *)_bootloader_start;
+    if (bootloader_size > 0) {               
+        while (bootloader_size--) {
+            *d = *s;
+            d++;
+            s++;
+        }
+    }
 }
