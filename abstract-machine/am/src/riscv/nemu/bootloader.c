@@ -19,5 +19,5 @@ void __attribute__((section(".bootloader"))) _bootloader_init() {
             s++;
         }
     }
-    asm volatile ("jal %0" : : "i"(_trm_init));
+    asm volatile ("call %0" : : "i"(_trm_init));
 }
