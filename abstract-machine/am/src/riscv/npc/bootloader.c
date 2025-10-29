@@ -46,10 +46,10 @@ void __attribute__((section(".bootloader"))) _bootloader_init() {
         }
     }
 
-    uint8_t *init = (uint8_t *)_trm_init;
-    init = init - 0x30000000L + 0x0f000000;
+    //uint8_t *init = (uint8_t *)_trm_init;
+    //init = init - 0x30000000L + 0x0f000000;
 
     //asm volatile ("jal %0" : : "i"(_trm_init));
     //__asm__ volatile ("call 0x0f000000"); 
-    asm volatile ("call %0" : : "i"(init));
+    asm volatile ("call %0" : : "i"(_trm_init));
 }
