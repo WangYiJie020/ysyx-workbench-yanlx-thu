@@ -23,6 +23,7 @@ SECTIONS {
 
   .text : {
     _text_start = .;
+    *(.text)
     *(.text*)
     _text_end = .;
   } > psram AT> flash 
