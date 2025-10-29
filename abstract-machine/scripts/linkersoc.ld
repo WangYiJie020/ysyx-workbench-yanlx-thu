@@ -24,9 +24,9 @@ SECTIONS {
 
   /* 夹在中间强制对齐 */
   .rodata ALIGN(4) : {
+    _rodata_start = .;
     *(.rodata*)
     *(.srodata.mainargs)  /* 放在.rodata段中 */
-    _rodata_end = .;
   } > flash AT> flash  
   
   .text : {
@@ -58,7 +58,7 @@ SECTIONS {
   /* 堆区在数据段和BSS段之后 */
   .heap : ALIGN(4) {
       _heap_start = .;
-      . = . + 4M;        /* 16KB堆区 */
+      . = . + 2M;        /* 16KB堆区 */
       _heap_end = .;
   } > psram
   
