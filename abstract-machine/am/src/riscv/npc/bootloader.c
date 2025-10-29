@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <stddef.h>
+#include <stdio.h>
 
 
 extern uint8_t _data_lma_start[];
@@ -35,6 +36,8 @@ void __attribute__((section(".bootloader"))) _bootloader_init() {
             s++;
         }
     }
+
+    printf("%x\n",_trm_init);
 
     //asm volatile ("jal %0" : : "i"(_trm_init));
     __asm__ volatile ("call 0x0f000000"); 
