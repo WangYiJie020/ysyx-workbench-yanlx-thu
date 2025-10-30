@@ -17,11 +17,13 @@ SECTIONS {
   } > flash AT> flash 
 
   .fsbl :{
+    . = ALIGN(4);
     _fsbl_start = .;
     *(.fsbl*)
   } > flash AT> flash 
 
   .bootloader :{
+    . = ALIGN(4);
     _bootloader_start = .;
     *(.bootloader*)
     _bootloader_end = .;
@@ -30,6 +32,7 @@ SECTIONS {
   _bootloader_lma_start = LOADADDR(.bootloader);
 
   .text : {
+    . = ALIGN(4);
     _text_start = .;
     *(.text)
     *(.text*)
@@ -41,7 +44,14 @@ SECTIONS {
 
   _text_lma_start = LOADADDR(.text);
 
-  .data.extra : {
+  .data :
+  {
+    . = ALIGN(4);
+    _data_vma_start = .;
+    *(.data)           /* 主要数据段 */
+    *(.data*)         /* 数据子段 */
+    *(.sdata)          /* 小数据段 */
+    *(.sdata*)        /* 小数据子段 */
     /* section information for finsh shell */
     __fsymtab_start = .;
     KEEP(*(FSymTab))
@@ -69,21 +79,17 @@ SECTIONS {
     *(__am_apps.sdata*)
     __am_apps_data_end = .;
     . = ALIGN(8);
-  } > psram AT>flash
-  .data :
-  {
-    . = ALIGN(4);
-    _data_vma_start = .;
-    *(.data)           /* 主要数据段 */
-    *(.data*)         /* 数据子段 */
-    *(.sdata)          /* 小数据段 */
-    *(.sdata*)        /* 小数据子段 */
     _data_vma_end = .;
   } > psram AT>flash
 
   _data_lma_start = LOADADDR(.data);
 
-  .bss.extra : {
+  .bss :
+  {
+    *(.bss)
+    *(.bss*)
+    *(.sbss)
+    *(.sbss*)
     . = ALIGN(8);
     __am_apps_bss_start = .;
     *(__am_apps.bss*)
@@ -91,13 +97,6 @@ SECTIONS {
     *(__am_apps.scommon*)
     __am_apps_bss_end = .;
     . = ALIGN(8);
-  } > psram 
-  .bss :
-  {
-    *(.bss)
-    *(.bss*)
-    *(.sbss)
-    *(.sbss*)
   } > psram 
   
   
