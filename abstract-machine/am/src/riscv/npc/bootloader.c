@@ -22,10 +22,11 @@ void __attribute__((section(".bootloader"))) _bootloader_init() {
     if (data_size > 0) {
         //memcpy(_data_vma_start, _data_lma_start, data_size); 
                
-        while (data_size--) {
+        while (data_size) {
             *d = *s;
             d++;
             s++;
+            data_size -= 4;
         }
     }
     
@@ -33,10 +34,11 @@ void __attribute__((section(".bootloader"))) _bootloader_init() {
     d = (uint32_t *)_text_start;
     s = (uint32_t *)_text_lma_start;
     if(code_size > 0) {
-        while(code_size--) {
+        while(code_size) {
             *d = *s;
             d++;
             s++;
+            code_size -= 4;
         }
     }
 }
