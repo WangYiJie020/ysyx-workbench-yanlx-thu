@@ -3580,7 +3580,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+791,"current_column", false,-1, 9,0);
     tracep->declBit(c+792,"read_flag", false,-1);
     tracep->declBit(c+793,"write_flag", false,-1);
-    tracep->declBus(c+794,"data_out", false,-1, 15,0);
+    tracep->declBus(c+794,"data_out", false,-1, 31,0);
     tracep->popNamePrefix(2);
 }
 
@@ -4845,7 +4845,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_full_sub_0(VysyxSoCFull___024roo
     bufp->fullSData(oldp+791,(vlSelf->ysyxSoCFull__DOT__sdram__DOT__current_column),10);
     bufp->fullBit(oldp+792,(vlSelf->ysyxSoCFull__DOT__sdram__DOT__read_flag));
     bufp->fullBit(oldp+793,(vlSelf->ysyxSoCFull__DOT__sdram__DOT__write_flag));
-    bufp->fullSData(oldp+794,(vlSelf->ysyxSoCFull__DOT__sdram__DOT__data_out),16);
+    bufp->fullIData(oldp+794,(vlSelf->ysyxSoCFull__DOT__sdram__DOT__data_out),32);
     bufp->fullCData(oldp+795,(vlSelf->ysyxSoCFull__DOT__flash__DOT__state),3);
     bufp->fullCData(oldp+796,(vlSelf->ysyxSoCFull__DOT__flash__DOT__counter),8);
     bufp->fullCData(oldp+797,(vlSelf->ysyxSoCFull__DOT__flash__DOT__cmd),8);

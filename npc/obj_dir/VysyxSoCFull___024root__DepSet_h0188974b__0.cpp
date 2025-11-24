@@ -3431,7 +3431,7 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_comb__TOP__2(VysyxSoCFull___024r
                                       ? 0U : 0xffffU))) 
             & ((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lsdram_apb__DOT__msdram__DOT__u_sdram_ctrl__DOT__data_rd_en_q)
                 ? 0U : 0xffffU)) | ((((IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT____VdfgTmp_hd8970fac__0)
-                                       ? (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__data_out)
+                                       ? vlSelf->ysyxSoCFull__DOT__sdram__DOT__data_out
                                        : 0U) & ((IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT____VdfgTmp_hd8970fac__0)
                                                  ? 0xffffU
                                                  : 0U)) 
