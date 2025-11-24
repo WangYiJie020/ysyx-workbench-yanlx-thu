@@ -49,6 +49,18 @@ time_t start_time;
 time_t currentTimeABS;
 int flag = 0;
 
+int32_t sdram[4][8192][512] = {};
+
+extern "C" void sdram_write(int32_t bank, int32_t row, int32_t column, int32_t data){
+  sdram[bank][row][column] = data;
+  log_write("bank = %d,row = %d, column = %d, data= %08x\n",bank,row,column,data);
+}
+
+extern "C" int sdram_read(int32_t bank, int32_t row, int32_t column){
+  log_write("bank = %d,row = %d, column = %d, data= %08x\n",bank,row,column,sdram[bank][row][column]);
+  return sdram[bank][row][column];
+}
+
 extern "C" void difftest_next_step(char difftest_check) {
   difftest_check_all = difftest_check;
 }
