@@ -4520,7 +4520,7 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__8(VysyxSoCFull___0
         }
     }
     if (vlSelf->ysyxSoCFull__DOT__sdram__DOT__write_flag) {
-        if ((1U == (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__burst_counter))) {
+        if ((0U == (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__burst_counter))) {
             VysyxSoCFull___024unit____Vdpiimwrap_sdram_write_TOP____024unit(vlSelf->ysyxSoCFull__DOT__sdram__DOT__current_bank, (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__current_row), 
                                                                             (((IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__current_column) 
                                                                               + (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__burst_length)) 
