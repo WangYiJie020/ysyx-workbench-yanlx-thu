@@ -4,6 +4,7 @@ ENTRY(_start)
 MEMORY {
   flash : ORIGIN = 0x30000000, LENGTH = 256M
   sram : ORIGIN = 0x0f000000, LENGTH = 8K
+  psram : ORIGIN = 0x80000000, LENGTH = 8M
   sdram : ORIGIN = 0xa0000000, LENGTH = 32M
 }
 
@@ -27,7 +28,7 @@ SECTIONS {
     _bootloader_start = .;
     *(.bootloader*)
     _bootloader_end = .;
-  } > sdram AT> flash  
+  } > psram AT> flash  
 
   _bootloader_lma_start = LOADADDR(.bootloader);
 
