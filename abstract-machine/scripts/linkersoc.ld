@@ -4,7 +4,7 @@ ENTRY(_start)
 MEMORY {
   flash : ORIGIN = 0x30000000, LENGTH = 256M
   sram : ORIGIN = 0x0f000000, LENGTH = 8K
-  psram : ORIGIN = 0xa0000000, LENGTH = 8M
+  psram : ORIGIN = 0x80000000, LENGTH = 4M
   sdram : ORIGIN = 0xa0000000, LENGTH = 8M
 }
 
@@ -28,7 +28,7 @@ SECTIONS {
     _bootloader_start = .;
     *(.bootloader*)
     _bootloader_end = .;
-  } > psram AT> flash  
+  } > sram AT> flash  
 
   _bootloader_lma_start = LOADADDR(.bootloader);
 
@@ -111,7 +111,7 @@ SECTIONS {
   /* 栈区在SRAM末尾 */
   .stack : ALIGN(4) {
       _stack_top = .;
-      . = . + 8K;         /* 4KB栈区 */
+      . = . + 6K;         /* 4KB栈区 */
       _stack_pointer = .;
   } > sram
   
