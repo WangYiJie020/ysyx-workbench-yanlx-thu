@@ -4550,10 +4550,9 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__8(VysyxSoCFull___0
                     vlSelf->ysyxSoCFull__DOT__sdram__DOT__read_flag = 1U;
                     vlSelf->ysyxSoCFull__DOT__sdram__DOT__CAS_counter 
                         = (7U & ((IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__CAS_latency) 
-                                 - (IData)(1U)));
+                                 - (IData)(2U)));
                     __Vdly__ysyxSoCFull__DOT__sdram__DOT__burst_counter 
-                        = (7U & ((IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__burst_length) 
-                                 - (IData)(1U)));
+                        = vlSelf->ysyxSoCFull__DOT__sdram__DOT__burst_length;
                     vlSelf->ysyxSoCFull__DOT__sdram__DOT__data_out = 0U;
                 } else {
                     VysyxSoCFull___024unit____Vdpiimwrap_sdram_write_TOP____024unit(vlSelf->ysyxSoCFull__DOT__asic__DOT__lsdram_apb__DOT__msdram__DOT__u_sdram_ctrl__DOT__bank_q, (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__current_row), 
