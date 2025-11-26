@@ -49,7 +49,7 @@ time_t start_time;
 time_t currentTimeABS;
 int flag = 0;
 
-short sdram[4][8192][512] = {};
+int32_t sdram[4][8192][512] = {};
 
 extern "C" void sdram_write(int32_t bank, int32_t row, int32_t column, int32_t data, char mask){
   switch(mask) {

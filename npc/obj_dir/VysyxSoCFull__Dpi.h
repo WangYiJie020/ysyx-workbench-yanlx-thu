@@ -33,7 +33,7 @@ extern "C" {
     // DPI import at /home/yanlx/ysyx-workbench/ysyxSoC/perip/sdram/sdram.v:2:29
     extern int sdram_read(int bank, int row, int column);
     // DPI import at /home/yanlx/ysyx-workbench/ysyxSoC/perip/sdram/sdram.v:1:30
-    extern void sdram_write(int bank, int row, int column, int data);
+    extern void sdram_write(int bank, int row, int column, int data, char mask);
 
 #ifdef __cplusplus
 }

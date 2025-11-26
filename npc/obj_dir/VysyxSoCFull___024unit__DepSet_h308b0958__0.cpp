@@ -146,9 +146,9 @@ VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_flash_read_TOP____024uni
     data = data__Vcvt;
 }
 
-extern "C" void sdram_write(int bank, int row, int column, int data);
+extern "C" void sdram_write(int bank, int row, int column, int data, char mask);
 
-VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_sdram_write_TOP____024unit(IData/*31:0*/ bank, IData/*31:0*/ row, IData/*31:0*/ column, IData/*31:0*/ data) {
+VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_sdram_write_TOP____024unit(IData/*31:0*/ bank, IData/*31:0*/ row, IData/*31:0*/ column, IData/*31:0*/ data, CData/*7:0*/ mask) {
     VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_sdram_write_TOP____024unit\n"); );
     // Body
     int bank__Vcvt;
@@ -159,7 +159,9 @@ VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_sdram_write_TOP____024un
     for (size_t column__Vidx = 0; column__Vidx < 1; ++column__Vidx) column__Vcvt = column;
     int data__Vcvt;
     for (size_t data__Vidx = 0; data__Vidx < 1; ++data__Vidx) data__Vcvt = data;
-    sdram_write(bank__Vcvt, row__Vcvt, column__Vcvt, data__Vcvt);
+    char mask__Vcvt;
+    for (size_t mask__Vidx = 0; mask__Vidx < 1; ++mask__Vidx) mask__Vcvt = mask;
+    sdram_write(bank__Vcvt, row__Vcvt, column__Vcvt, data__Vcvt, mask__Vcvt);
 }
 
 extern "C" int sdram_read(int bank, int row, int column);
