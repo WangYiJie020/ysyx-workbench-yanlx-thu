@@ -4551,6 +4551,7 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__8(VysyxSoCFull___0
                     vlSelf->ysyxSoCFull__DOT__sdram__DOT__current_column 
                         = (0x3ffU & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lsdram_apb__DOT__msdram__DOT__u_sdram_ctrl__DOT__addr_q));
                     vlSelf->ysyxSoCFull__DOT__sdram__DOT__read_flag = 1U;
+                    vlSelf->ysyxSoCFull__DOT__sdram__DOT__flag = 0U;
                     vlSelf->ysyxSoCFull__DOT__sdram__DOT__CAS_counter 
                         = (7U & ((IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__CAS_latency) 
                                  - (IData)(2U)));
@@ -4566,7 +4567,6 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__8(VysyxSoCFull___0
                     vlSelf->ysyxSoCFull__DOT__sdram__DOT__current_column 
                         = (0x3ffU & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lsdram_apb__DOT__msdram__DOT__u_sdram_ctrl__DOT__addr_q));
                     vlSelf->ysyxSoCFull__DOT__sdram__DOT__write_flag = 1U;
-                    vlSelf->ysyxSoCFull__DOT__sdram__DOT__flag = 0U;
                     __Vdly__ysyxSoCFull__DOT__sdram__DOT__burst_counter 
                         = (7U & ((IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__burst_length) 
                                  - (IData)(1U)));
