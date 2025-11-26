@@ -23,15 +23,6 @@ SECTIONS {
     *(.fsbl*)
   } > flash AT> flash 
 
-  .bootloader :{
-    . = ALIGN(4);
-    _bootloader_start = .;
-    *(.bootloader*)
-    _bootloader_end = .;
-  } > sdram AT> flash  
-
-  _bootloader_lma_start = LOADADDR(.bootloader);
-
   .text : {
     . = ALIGN(4);
     _text_start = .;
@@ -44,6 +35,17 @@ SECTIONS {
   } > sdram AT> flash 
 
   _text_lma_start = LOADADDR(.text);
+
+  .bootloader :{
+    . = ALIGN(4);
+    _bootloader_start = .;
+    *(.bootloader*)
+    _bootloader_end = .;
+  } > sdram AT> flash  
+
+  _bootloader_lma_start = LOADADDR(.bootloader);
+
+  
 
   .data :
   {
