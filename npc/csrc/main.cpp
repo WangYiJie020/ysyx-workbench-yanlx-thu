@@ -51,15 +51,15 @@ int flag = 0;
 
 short sdram[4][8192][512] = {};
 
-extern "C" void sdram_write(int32_t bank, int32_t row, int32_t column, int32_t data, char dqm){
-  switch(dqm) {
+extern "C" void sdram_write(int32_t bank, int32_t row, int32_t column, int32_t data, char mask){
+  switch(mask) {
     case 0: sdram[bank][row][column] = data; break;
     case 1: sdram[bank][row][column] = (sdram[bank][row][column]&0x00ff)+(data&0xff00); break;
     case 2: sdram[bank][row][column] = (sdram[bank][row][column]&0xff00)+(data&0x00ff); break;
     default: break;
   }
-  sdram[bank][row][column] = data;
-  log_write("[write] bank = %d,row = %d, column = %d, data= %04x, sdram= %04x\n",bank,row,column,data,sdram[bank][row][column]);
+  
+  log_write("[write] bank = %d,row = %d, column = %d, mask=%d, data= %04x, sdram= %04x\n",bank,row,column,mask,data,sdram[bank][row][column]);
 }
 
 extern "C" int sdram_read(int32_t bank, int32_t row, int32_t column){
