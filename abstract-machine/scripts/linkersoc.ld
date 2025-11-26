@@ -4,7 +4,6 @@ ENTRY(_start)
 MEMORY {
   flash : ORIGIN = 0x30000000, LENGTH = 256M
   sram : ORIGIN = 0x0f000000, LENGTH = 8K
-  psram : ORIGIN = 0x80000000, LENGTH = 8M
   sdram : ORIGIN = 0xa0000000, LENGTH = 32M
 }
 
@@ -113,6 +112,6 @@ SECTIONS {
       _stack_top = .;
       . = . + 8K;         /* 4KB栈区 */
       _stack_pointer = .;
-  } > sdram
+  } > sram
   
 }
