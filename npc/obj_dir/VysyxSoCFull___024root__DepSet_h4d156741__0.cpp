@@ -4485,6 +4485,8 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__8(VysyxSoCFull___0
     // Init
     IData/*31:0*/ __Vfunc_sdram_read__5__Vfuncout;
     __Vfunc_sdram_read__5__Vfuncout = 0;
+    IData/*31:0*/ __Vfunc_sdram_read__6__Vfuncout;
+    __Vfunc_sdram_read__6__Vfuncout = 0;
     CData/*2:0*/ __Vdly__ysyxSoCFull__DOT__sdram__DOT__burst_counter;
     __Vdly__ysyxSoCFull__DOT__sdram__DOT__burst_counter = 0;
     // Body
@@ -4493,7 +4495,13 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__8(VysyxSoCFull___0
     if (vlSelf->ysyxSoCFull__DOT__sdram__DOT__read_flag) {
         if ((0U == (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__CAS_counter))) {
             if ((0U == (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__burst_counter))) {
+                VysyxSoCFull___024unit____Vdpiimwrap_sdram_read_TOP____024unit(vlSelf->ysyxSoCFull__DOT__sdram__DOT__current_bank, (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__current_row), 
+                                                                               (((IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__current_column) 
+                                                                                + (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__burst_length)) 
+                                                                                - (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__burst_counter)), __Vfunc_sdram_read__5__Vfuncout);
                 vlSelf->ysyxSoCFull__DOT__sdram__DOT__read_flag = 0U;
+                vlSelf->ysyxSoCFull__DOT__sdram__DOT__data_out 
+                    = __Vfunc_sdram_read__5__Vfuncout;
             } else {
                 __Vdly__ysyxSoCFull__DOT__sdram__DOT__burst_counter 
                     = (7U & ((IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__burst_counter) 
@@ -4501,9 +4509,9 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__8(VysyxSoCFull___0
                 VysyxSoCFull___024unit____Vdpiimwrap_sdram_read_TOP____024unit(vlSelf->ysyxSoCFull__DOT__sdram__DOT__current_bank, (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__current_row), 
                                                                                (((IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__current_column) 
                                                                                 + (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__burst_length)) 
-                                                                                - (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__burst_counter)), __Vfunc_sdram_read__5__Vfuncout);
+                                                                                - (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__burst_counter)), __Vfunc_sdram_read__6__Vfuncout);
                 vlSelf->ysyxSoCFull__DOT__sdram__DOT__data_out 
-                    = __Vfunc_sdram_read__5__Vfuncout;
+                    = __Vfunc_sdram_read__6__Vfuncout;
             }
         } else {
             vlSelf->ysyxSoCFull__DOT__sdram__DOT__CAS_counter 
