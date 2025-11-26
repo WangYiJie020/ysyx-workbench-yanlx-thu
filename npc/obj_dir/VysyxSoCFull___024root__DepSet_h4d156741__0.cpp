@@ -4538,7 +4538,7 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__8(VysyxSoCFull___0
                     vlSelf->ysyxSoCFull__DOT__sdram__DOT__read_flag = 1U;
                     vlSelf->ysyxSoCFull__DOT__sdram__DOT__CAS_counter 
                         = (7U & ((IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__CAS_latency) 
-                                 - (IData)(2U)));
+                                 - (IData)(1U)));
                     __Vdly__ysyxSoCFull__DOT__sdram__DOT__burst_counter 
                         = vlSelf->ysyxSoCFull__DOT__sdram__DOT__burst_length;
                     vlSelf->ysyxSoCFull__DOT__sdram__DOT__data_out = 0U;
