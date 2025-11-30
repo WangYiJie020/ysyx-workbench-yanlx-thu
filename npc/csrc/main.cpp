@@ -51,7 +51,7 @@ int flag = 0;
 
 int32_t sdram[4][8192][512] = {};
 
-/*
+
 extern "C" void sdram_write(int32_t bank, int32_t row, int32_t column, int32_t data, char mask){
   switch(mask) {
     case 0: sdram[bank][row][column] = data; break;
@@ -63,11 +63,17 @@ extern "C" void sdram_write(int32_t bank, int32_t row, int32_t column, int32_t d
   log_write("[write] bank = %d,row = %d, column = %d, mask=%d, data= %04x, sdram= %04x\n",bank,row,column,mask,data,sdram[bank][row][column]);
 }
 
-extern "C" int sdram_read(int32_t bank, int32_t row, int32_t column){
-  log_write("[read] bank = %d,row = %d, column = %d, data= %08x\n",bank,row,column,sdram[bank][row][column]);
-  return sdram[bank][row][column];
+extern "C" int sdram_read(int32_t bank, int32_t row, int32_t column, char mask){
+  log_write("[read] bank = %d,row = %d, column = %d, mask=%d, data= %04x\n",bank,row,column,mask,sdram[bank][row][column]);
+  switch(mask) {
+    case 0: return 0; break;
+    case 1: return sdram[bank][row][column]&0xff00; break;
+    case 2: return sdram[bank][row][column]&0x00ff; break;
+    default: return 0; break;
+  }
+  //return sdram[bank][row][column];
 }
-*/
+
 
 extern "C" void difftest_next_step(char difftest_check) {
   difftest_check_all = difftest_check;
