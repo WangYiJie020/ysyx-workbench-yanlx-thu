@@ -145,39 +145,3 @@ VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_flash_read_TOP____024uni
     flash_read(addr__Vcvt, &data__Vcvt);
     data = data__Vcvt;
 }
-
-extern "C" void sdram_write(int bank, int row, int column, int data, char mask);
-
-VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_sdram_write_TOP____024unit(IData/*31:0*/ bank, IData/*31:0*/ row, IData/*31:0*/ column, IData/*31:0*/ data, CData/*7:0*/ mask) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_sdram_write_TOP____024unit\n"); );
-    // Body
-    int bank__Vcvt;
-    for (size_t bank__Vidx = 0; bank__Vidx < 1; ++bank__Vidx) bank__Vcvt = bank;
-    int row__Vcvt;
-    for (size_t row__Vidx = 0; row__Vidx < 1; ++row__Vidx) row__Vcvt = row;
-    int column__Vcvt;
-    for (size_t column__Vidx = 0; column__Vidx < 1; ++column__Vidx) column__Vcvt = column;
-    int data__Vcvt;
-    for (size_t data__Vidx = 0; data__Vidx < 1; ++data__Vidx) data__Vcvt = data;
-    char mask__Vcvt;
-    for (size_t mask__Vidx = 0; mask__Vidx < 1; ++mask__Vidx) mask__Vcvt = mask;
-    sdram_write(bank__Vcvt, row__Vcvt, column__Vcvt, data__Vcvt, mask__Vcvt);
-}
-
-extern "C" int sdram_read(int bank, int row, int column, char mask);
-
-VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_sdram_read_TOP____024unit(IData/*31:0*/ bank, IData/*31:0*/ row, IData/*31:0*/ column, CData/*7:0*/ mask, IData/*31:0*/ &sdram_read__Vfuncrtn) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_sdram_read_TOP____024unit\n"); );
-    // Body
-    int bank__Vcvt;
-    for (size_t bank__Vidx = 0; bank__Vidx < 1; ++bank__Vidx) bank__Vcvt = bank;
-    int row__Vcvt;
-    for (size_t row__Vidx = 0; row__Vidx < 1; ++row__Vidx) row__Vcvt = row;
-    int column__Vcvt;
-    for (size_t column__Vidx = 0; column__Vidx < 1; ++column__Vidx) column__Vcvt = column;
-    char mask__Vcvt;
-    for (size_t mask__Vidx = 0; mask__Vidx < 1; ++mask__Vidx) mask__Vcvt = mask;
-    int sdram_read__Vfuncrtn__Vcvt;
-    sdram_read__Vfuncrtn__Vcvt = sdram_read(bank__Vcvt, row__Vcvt, column__Vcvt, mask__Vcvt);
-    sdram_read__Vfuncrtn = sdram_read__Vfuncrtn__Vcvt;
-}
