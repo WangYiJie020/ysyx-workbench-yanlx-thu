@@ -21,7 +21,7 @@ SECTIONS {
     . = ALIGN(4);
     _fsbl_start = .;
     *(.fsbl*)
-  } > psram AT> flash 
+  } > flash AT> flash 
 
   .bootloader :{
     . = ALIGN(4);
