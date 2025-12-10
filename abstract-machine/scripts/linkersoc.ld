@@ -70,7 +70,7 @@ SECTIONS {
     __am_apps_data_end = .;
     . = ALIGN(8);
     _data_vma_end = .;
-  } > psram AT>flash
+  } > sdram AT>flash
 
   _data_lma_start = LOADADDR(.data);
 
@@ -83,7 +83,7 @@ SECTIONS {
     *(.srodata)       
     *(.srodata*) 
     _text_end = .;
-  } > psram AT> flash 
+  } > sdram AT> flash 
 
   _text_lma_start = LOADADDR(.text);
 
@@ -100,7 +100,7 @@ SECTIONS {
     *(__am_apps.scommon*)
     __am_apps_bss_end = .;
     . = ALIGN(8);
-  } > psram 
+  } > sdram 
   
   
   /* 堆区在数据段和BSS段之后 */
@@ -108,7 +108,7 @@ SECTIONS {
       _heap_start = .;
       . = . + 2M;        /* 16KB堆区 */
       _heap_end = .;
-  } > psram
+  } > sdram
   
   /* 栈区在SRAM末尾 */
   .stack : ALIGN(4) {
