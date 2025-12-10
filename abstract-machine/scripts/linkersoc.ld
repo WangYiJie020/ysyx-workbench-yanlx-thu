@@ -32,18 +32,7 @@ SECTIONS {
 
   _bootloader_lma_start = LOADADDR(.bootloader);
 
-  .text : {
-    . = ALIGN(4);
-    _text_start = .;
-    *(.text)
-    *(.text*)
-    *(.rodata*)
-    *(.srodata)       
-    *(.srodata*) 
-    _text_end = .;
-  } > sdram AT> flash 
-
-  _text_lma_start = LOADADDR(.text);
+  
 
   .data :
   {
@@ -84,6 +73,19 @@ SECTIONS {
   } > sdram AT>flash
 
   _data_lma_start = LOADADDR(.data);
+
+  .text : {
+    . = ALIGN(4);
+    _text_start = .;
+    *(.text)
+    *(.text*)
+    *(.rodata*)
+    *(.srodata)       
+    *(.srodata*) 
+    _text_end = .;
+  } > sdram AT> flash 
+
+  _text_lma_start = LOADADDR(.text);
 
   .bss :
   {
