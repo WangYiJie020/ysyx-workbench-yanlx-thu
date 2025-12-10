@@ -1296,6 +1296,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root___ctor_var_reset(VysyxSoCFull___024root
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__current_bank = VL_RAND_RESET_I(2);
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__current_row = VL_RAND_RESET_I(13);
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__current_column = VL_RAND_RESET_I(10);
+    vlSelf->ysyxSoCFull__DOT__sdram__DOT__current_column_write = VL_RAND_RESET_I(10);
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__read_flag = VL_RAND_RESET_I(1);
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__write_flag = VL_RAND_RESET_I(1);
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__flag = VL_RAND_RESET_I(1);
