@@ -1807,7 +1807,7 @@ void VysyxSoCFull___024root__trace_chg_sub_0(VysyxSoCFull___024root* vlSelf, Ver
                                        >> 7U))));
         bufp->chgBit(oldp+1171,(vlSelf->ysyxSoCFull__DOT____Vcellinp__flash__ss));
         bufp->chgCData(oldp+1172,((7U & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lsdram_apb__DOT__msdram__DOT__u_sdram_ctrl__DOT__command_q))),3);
-        bufp->chgBit(oldp+1173,((1U & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lsdram_apb__DOT__msdram__DOT__u_sdram_ctrl__DOT__addr_q))));
+        bufp->chgSData(oldp+1173,((0x3ffU & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lsdram_apb__DOT__msdram__DOT__u_sdram_ctrl__DOT__addr_q))),10);
     }
     if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[0xeU])) {
         bufp->chgBit(oldp+1174,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT___axi4yank_auto_out_arvalid) 

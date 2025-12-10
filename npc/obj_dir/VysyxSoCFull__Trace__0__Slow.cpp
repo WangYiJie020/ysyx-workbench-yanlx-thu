@@ -3578,12 +3578,12 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+787,"current_bank", false,-1, 1,0);
     tracep->declBus(c+788,"current_row", false,-1, 12,0);
     tracep->declBus(c+789,"current_column", false,-1, 9,0);
+    tracep->declBus(c+1174,"current_column_write", false,-1, 9,0);
     tracep->declBit(c+790,"read_flag", false,-1);
     tracep->declBit(c+791,"write_flag", false,-1);
     tracep->declBit(c+792,"flag", false,-1);
     tracep->declBus(c+793,"data_out", false,-1, 31,0);
     tracep->declBus(c+1639,"current_dqm", false,-1, 1,0);
-    tracep->declBit(c+1174,"current_column_write", false,-1);
     tracep->popNamePrefix(2);
 }
 
@@ -5348,7 +5348,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_full_sub_0(VysyxSoCFull___024roo
                                     >> 7U))));
     bufp->fullBit(oldp+1172,(vlSelf->ysyxSoCFull__DOT____Vcellinp__flash__ss));
     bufp->fullCData(oldp+1173,((7U & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lsdram_apb__DOT__msdram__DOT__u_sdram_ctrl__DOT__command_q))),3);
-    bufp->fullBit(oldp+1174,((1U & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lsdram_apb__DOT__msdram__DOT__u_sdram_ctrl__DOT__addr_q))));
+    bufp->fullSData(oldp+1174,((0x3ffU & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__lsdram_apb__DOT__msdram__DOT__u_sdram_ctrl__DOT__addr_q))),10);
     bufp->fullBit(oldp+1175,(((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT___axi4yank_auto_out_arvalid) 
                               & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__requestARIO_0_0))));
     bufp->fullCData(oldp+1176,(vlSelf->ysyxSoCFull__DOT__asic__DOT___axi4frag_auto_out_arid),4);
