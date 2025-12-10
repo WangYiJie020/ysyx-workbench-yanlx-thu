@@ -1264,7 +1264,8 @@ void VysyxSoCFull___024root__trace_chg_sub_0(VysyxSoCFull___024root* vlSelf, Ver
     }
     if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[6U])) {
         bufp->chgSData(oldp+781,(vlSelf->ysyxSoCFull__DOT__sdram__DOT__mode_register),13);
-        bufp->chgCData(oldp+782,((7U & (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__mode_register))),3);
+        bufp->chgCData(oldp+782,((7U & ((IData)(1U) 
+                                        << (7U & (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__mode_register))))),3);
         bufp->chgCData(oldp+783,(vlSelf->ysyxSoCFull__DOT__sdram__DOT__burst_counter),3);
         bufp->chgCData(oldp+784,((7U & ((IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__mode_register) 
                                         >> 4U))),3);

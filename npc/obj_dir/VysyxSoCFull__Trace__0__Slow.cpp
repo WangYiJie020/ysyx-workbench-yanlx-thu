@@ -4835,7 +4835,8 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_full_sub_0(VysyxSoCFull___024roo
     bufp->fullCData(oldp+781,((0xfU & ((IData)(1U) 
                                        + (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__transmitter__DOT__fifo_tx__DOT__top)))),4);
     bufp->fullSData(oldp+782,(vlSelf->ysyxSoCFull__DOT__sdram__DOT__mode_register),13);
-    bufp->fullCData(oldp+783,((7U & (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__mode_register))),3);
+    bufp->fullCData(oldp+783,((7U & ((IData)(1U) << 
+                                     (7U & (IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__mode_register))))),3);
     bufp->fullCData(oldp+784,(vlSelf->ysyxSoCFull__DOT__sdram__DOT__burst_counter),3);
     bufp->fullCData(oldp+785,((7U & ((IData)(vlSelf->ysyxSoCFull__DOT__sdram__DOT__mode_register) 
                                      >> 4U))),3);
