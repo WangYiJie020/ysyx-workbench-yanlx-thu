@@ -1295,6 +1295,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root___ctor_var_reset(VysyxSoCFull___024root
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__dq__en1 = 0;
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__sdram_0_to_64MB__DOT__dq__out__strong__out2 = 0;
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__sdram_0_to_64MB__DOT__dq__out__strong__out3 = 0;
+    vlSelf->ysyxSoCFull__DOT__sdram__DOT__sdram_0_to_64MB__DOT__sdram_bitex_high__DOT__command = VL_RAND_RESET_I(4);
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__sdram_0_to_64MB__DOT__sdram_bitex_high__DOT__mode_register = VL_RAND_RESET_I(13);
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
         for (int __Vi1 = 0; __Vi1 < 4194304; ++__Vi1) {
@@ -1337,6 +1338,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root___ctor_var_reset(VysyxSoCFull___024root
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__sdram_0_to_64MB__DOT__sdram_bitex_low__DOT____VdfgTmp_h6089aaeb__0 = 0;
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__sdram_64_to_128MB__DOT__dq__out__strong__out2 = 0;
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__sdram_64_to_128MB__DOT__dq__out__strong__out3 = 0;
+    vlSelf->ysyxSoCFull__DOT__sdram__DOT__sdram_64_to_128MB__DOT__sdram_bitex_high__DOT__command = VL_RAND_RESET_I(4);
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__sdram_64_to_128MB__DOT__sdram_bitex_high__DOT__mode_register = VL_RAND_RESET_I(13);
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
         for (int __Vi1 = 0; __Vi1 < 4194304; ++__Vi1) {
