@@ -3558,7 +3558,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBit(c+1174,"ras", false,-1);
     tracep->declBit(c+1175,"cas", false,-1);
     tracep->declBit(c+1176,"we", false,-1);
-    tracep->declBus(c+1182,"a", false,-1, 12,0);
+    tracep->declBus(c+1347,"a", false,-1, 13,0);
     tracep->declBus(c+1177,"ba", false,-1, 1,0);
     tracep->declBus(c+1178,"dqm", false,-1, 3,0);
     tracep->declBus(c+1193,"dq", false,-1, 31,0);
