@@ -23,19 +23,34 @@
 #include <time.h>
 
 
+
+//#define  DIFFTEST_ON
+#define  WAVE_ON
+#define  TRACE_ON
+//#define NVBOARD_ON
+
+
 int cpu_state;
 uint32_t mem[0xffffffff];
 uint32_t flash[0xfffffff];
 bool is_skip_ref = false;
 bool difftest_check_all = false;
 
+
+#ifdef NVBOARD_ON
+#include <nvboard.h>
+static TOP_NAME top;
+void nvboard_bind_all_pins(TOP_NAME* top);
+#else
 VerilatedContext* contextp = new VerilatedContext;
 VysyxSoCFull* top = new VysyxSoCFull{contextp};
 VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
+#endif
 
-//#define  DIFFTEST_ON
-//#define  WAVE_ON
-#define  TRACE_ON
+
+
+
+
 
 
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
@@ -454,7 +469,13 @@ void cpu_exec(uint64_t num) {
       printf("abort! at pc=%x\n",cpu.pc);
       break;
     }
-    
+#ifdef NVBOARD_ON
+    nvboard_update();
+    top.clock = 0; top.eval();
+    top.clock = 1; top.eval();
+    counter++;
+    //trace_and_difftest();
+#else
     top->clock = 0; top->eval();
     top->clock = 1; top->eval();
     counter++;
@@ -462,6 +483,7 @@ void cpu_exec(uint64_t num) {
 
     tfp->dump(contextp->time()); //dump wave
     contextp->timeInc(1); //推动仿真时间
+#endif
     
   }
 }
@@ -469,10 +491,15 @@ void cpu_exec(uint64_t num) {
 
 
 int main(int argc, char** argv) {
+#ifdef NVBOARD_ON
+  nvboard_bind_all_pins(&top);
+  nvboard_init();
+#endif
   Verilated::commandArgs(argc, argv);
   init_log("npc-log.txt");
   parse_args(argc, argv);
   long img_size = load_img();
+
 
 #ifdef DIFFTEST_ON
   init_difftest(diff_so_file, img_size, difftest_port);
@@ -480,6 +507,25 @@ int main(int argc, char** argv) {
   init_sdb();
   cpu_state = NPC_RUNNING;
 
+
+
+#ifdef NVBOARD_ON
+  int n = 10;
+  top.reset = 1;
+  while (n > 0) {
+    nvboard_update();
+    top.clock = 0; top.eval();
+    top.clock = 1; top.eval();
+    //tfp->dump(contextp->time()); //dump wave
+    //contextp->timeInc(1); //推动仿真时间
+    n--;
+  }
+  top.reset = 0;
+
+  sdb_set_batch_mode();//批处理模式
+  
+  sdb_mainloop();
+#else 
   contextp->commandArgs(argc, argv);
   
 #ifdef WAVE_ON
@@ -487,10 +533,9 @@ int main(int argc, char** argv) {
   top->trace(tfp, 0); //
   tfp->open("wave.vcd"); //设置输出的文件wave.vcd
 #endif
-
   int n = 10;
   top->reset = 1;
-  while (n > 0) {
+  while (n > 0) { 
     top->clock = 0; top->eval();
     top->clock = 1; top->eval();
     tfp->dump(contextp->time()); //dump wave
@@ -509,6 +554,8 @@ int main(int argc, char** argv) {
   tfp->close();
 #endif
   delete contextp;
+#endif
+
   if(cpu_state == NPC_END || cpu_state == NPC_QUIT) {
     return 0;
   }

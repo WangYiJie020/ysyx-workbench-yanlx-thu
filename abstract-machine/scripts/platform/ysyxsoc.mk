@@ -24,5 +24,8 @@ image: $(IMAGE).elf
 	@echo + OBJCOPY "->" $(IMAGE_REL).bin
 	@$(OBJCOPY) -S --set-section-flags .bss=alloc,contents -O binary $(IMAGE).elf $(IMAGE).bin
 
+sim: image
+	$(MAKE) -C $(NPC_HOME) ISA=$(ISA) sim ARGS="$('NPCFLAGS')" IMG=$(IMAGE).bin
+
 run: image
 	$(MAKE) -C $(NPC_HOME) ISA=$(ISA) sim ARGS="$('NPCFLAGS')" IMG=$(IMAGE).bin

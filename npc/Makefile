@@ -42,6 +42,9 @@ $(BIN): $(VSRCS) $(CSRCS) $(NVBOARD_ARCHIVE)
 	@rm -rf $(OBJ_DIR)
 	$(VERILATOR) $(VERILATOR_CFLAGS) \
 		--top-module $(TOPNAME) $^ \
+		+incdir+$(YSYX_DIR)/ysyxSoC/perip/uart16550/rtl \
+		+incdir+$(YSYX_DIR)/ysyxSoC/perip/spi/rtl \
+		--timescale "1ns/1ns" --no-timing --autoflush \
 		$(addprefix -CFLAGS , $(CXXFLAGS)) $(addprefix -LDFLAGS , $(LDFLAGS)) \
 		--Mdir $(OBJ_DIR) --exe -o $(abspath $(BIN))
 
