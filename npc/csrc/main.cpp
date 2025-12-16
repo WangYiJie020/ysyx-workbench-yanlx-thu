@@ -11,7 +11,7 @@
 #include <dlfcn.h>
 #include <elf.h>
 #include "VysyxSoCFull.h"
-#include "nvboard.h"
+
 #include "common.h"
 #include "debug.h"
 #include "macro.h"
@@ -440,7 +440,7 @@ static void trace_and_difftest() {
 
 }
 #ifdef NVBOARD_ON
-
+#include "nvboard.h"
 static TOP_NAME dut;
 void nvboard_bind_all_pins(TOP_NAME* top);
 #include "verilated.h"
