@@ -65,15 +65,15 @@ static inline uint32_t read_csr(uint32_t csr_addr) {
 
 void print_mycsr() {
   // 读取CSR寄存器
-  uint32_t mvendorid = read_csr(CSR_MVENDORID);
-  uint32_t marchid = read_csr(CSR_MARCHID);
+  //uint32_t mvendorid = read_csr(CSR_MVENDORID);
+  //uint32_t marchid = read_csr(CSR_MARCHID);
   set_div2();
-  putch(mvendorid>>24);
-  putch(mvendorid>>16);
-  putch(mvendorid>>8);
-  putch(mvendorid);
+  //putch(mvendorid>>24);
+  //p/utch(mvendorid>>16);
+  //putch(mvendorid>>8);
+  //putch(mvendorid);
   //printf("%s",mvendorid);
-  printf("%d\n",marchid);
+  //printf("%d\n",marchid);
 }
 
 void _trm_init() {
