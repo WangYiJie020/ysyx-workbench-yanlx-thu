@@ -45,9 +45,10 @@ $(BIN): $(VSRCS) $(CSRCS) $(NVBOARD_ARCHIVE)
 		+incdir+$(YSYX_DIR)/ysyxSoC/perip/uart16550/rtl \
 		+incdir+$(YSYX_DIR)/ysyxSoC/perip/spi/rtl \
 		--timescale "1ns/1ns" --no-timing --autoflush \
+		-CFLAGS "-mcmodel=medium" -LDFLAGS "-lreadline" \
 		$(addprefix -CFLAGS , $(CXXFLAGS)) $(addprefix -LDFLAGS , $(LDFLAGS)) \
-		--Mdir $(OBJ_DIR) --exe -o $(abspath $(BIN))
-
+		--Mdir $(OBJ_DIR) --exe -o $(abspath $(BIN)) 
+	
 
 
 all:
@@ -67,7 +68,7 @@ sim: $(VSRCS) $(CSRCS)
 include ../Makefile
 
 run: $(BIN)
-	@$^
+	@$^ $(IMG)
 
 clean:
 	rm -rf $(BUILD_DIR)

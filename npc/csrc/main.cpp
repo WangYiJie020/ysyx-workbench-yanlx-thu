@@ -11,9 +11,7 @@
 #include <dlfcn.h>
 #include <elf.h>
 #include "VysyxSoCFull.h"
-#include "verilated.h"
-
-#include "verilated_vcd_c.h" //可选，如果要导出vcd则需要加上
+#include "nvboard.h"
 #include "common.h"
 #include "debug.h"
 #include "macro.h"
@@ -35,18 +33,6 @@ uint32_t mem[0xffffffff];
 uint32_t flash[0xfffffff];
 bool is_skip_ref = false;
 bool difftest_check_all = false;
-
-
-#ifdef NVBOARD_ON
-#include <nvboard.h>
-static TOP_NAME top;
-void nvboard_bind_all_pins(TOP_NAME* top);
-#else
-VerilatedContext* contextp = new VerilatedContext;
-VysyxSoCFull* top = new VysyxSoCFull{contextp};
-VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
-#endif
-
 
 
 
@@ -453,6 +439,22 @@ static void trace_and_difftest() {
   return ;
 
 }
+#ifdef NVBOARD_ON
+
+static TOP_NAME dut;
+void nvboard_bind_all_pins(TOP_NAME* top);
+#include "verilated.h"
+#include "verilated_vcd_c.h" //可选，如果要导出vcd则需要加上
+VerilatedContext* contextp = new VerilatedContext;
+//VysyxSoCFull* top = new VysyxSoCFull{contextp};
+VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
+#else
+#include "verilated.h"
+#include "verilated_vcd_c.h" //可选，如果要导出vcd则需要加上
+VerilatedContext* contextp = new VerilatedContext;
+VysyxSoCFull* top = new VysyxSoCFull{contextp};
+VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
+#endif
 uint64_t counter=0;
 void cpu_exec(uint64_t num) {
   uint64_t i;
@@ -471,10 +473,12 @@ void cpu_exec(uint64_t num) {
     }
 #ifdef NVBOARD_ON
     nvboard_update();
-    top.clock = 0; top.eval();
-    top.clock = 1; top.eval();
+    dut.clock = 0; dut.eval();
+    dut.clock = 1; dut.eval();
     counter++;
     //trace_and_difftest();
+     tfp->dump(contextp->time()); //dump wave
+    contextp->timeInc(1); //推动仿真时间
 #else
     top->clock = 0; top->eval();
     top->clock = 1; top->eval();
@@ -490,9 +494,21 @@ void cpu_exec(uint64_t num) {
 
 
 
+
 int main(int argc, char** argv) {
 #ifdef NVBOARD_ON
-  nvboard_bind_all_pins(&top);
+  //nvboard_bind_all_pins(&dut);
+  nvboard_bind_pin(&dut.externalPins_gpio_out,16,LD15, LD14, LD13, LD12, LD11, LD10, LD9, LD8, LD7, LD6, LD5, LD4, LD3, LD2, LD1, LD0);
+  nvboard_bind_pin(&dut.externalPins_gpio_in,16,SW15, SW14, SW13, SW12, SW11, SW10, SW9, SW8, SW7, SW6, SW5, SW4, SW3, SW2, SW1, SW0);
+  nvboard_bind_pin(&dut.externalPins_gpio_seg_0,8,SEG0A, SEG0B, SEG0C, SEG0D, SEG0E, SEG0F, SEG0G, DEC0P);
+  nvboard_bind_pin(&dut.externalPins_gpio_seg_1,8,SEG1A, SEG1B, SEG1C, SEG1D, SEG1E, SEG1F, SEG1G, DEC1P);
+  nvboard_bind_pin(&dut.externalPins_gpio_seg_2,8,SEG2A, SEG2B, SEG2C, SEG2D, SEG2E, SEG2F, SEG2G, DEC2P);
+  nvboard_bind_pin(&dut.externalPins_gpio_seg_3,8,SEG3A, SEG3B, SEG3C, SEG3D, SEG3E, SEG3F, SEG3G, DEC3P);
+  nvboard_bind_pin(&dut.externalPins_gpio_seg_4,8,SEG4A, SEG4B, SEG4C, SEG4D, SEG4E, SEG4F, SEG4G, DEC4P);
+  nvboard_bind_pin(&dut.externalPins_gpio_seg_5,8,SEG5A, SEG5B, SEG5C, SEG5D, SEG5E, SEG5F, SEG5G, DEC5P);
+  nvboard_bind_pin(&dut.externalPins_gpio_seg_6,8,SEG6A, SEG6B, SEG6C, SEG6D, SEG6E, SEG6F, SEG6G, DEC6P);
+  nvboard_bind_pin(&dut.externalPins_gpio_seg_7,8,SEG7A, SEG7B, SEG7C, SEG7D, SEG7E, SEG7F, SEG7G, DEC7P);
+  nvboard_bind_pin(&dut.externalPins_uart_tx,1,UART_TX);
   nvboard_init();
 #endif
   Verilated::commandArgs(argc, argv);
@@ -510,17 +526,22 @@ int main(int argc, char** argv) {
 
 
 #ifdef NVBOARD_ON
+  #ifdef WAVE_ON
+  contextp->traceEverOn(true); //打开追踪功能
+  //top->trace(tfp, 0); //
+  tfp->open("wave.vcd"); //设置输出的文件wave.vcd
+  #endif
   int n = 10;
-  top.reset = 1;
+  dut.reset = 1;
   while (n > 0) {
     nvboard_update();
-    top.clock = 0; top.eval();
-    top.clock = 1; top.eval();
-    //tfp->dump(contextp->time()); //dump wave
-    //contextp->timeInc(1); //推动仿真时间
+    dut.clock = 0; dut.eval();
+    dut.clock = 1; dut.eval();
+    tfp->dump(contextp->time()); //dump wave
+    contextp->timeInc(1); //推动仿真时间
     n--;
   }
-  top.reset = 0;
+  dut.reset = 0;
 
   sdb_set_batch_mode();//批处理模式
   
@@ -528,11 +549,11 @@ int main(int argc, char** argv) {
 #else 
   contextp->commandArgs(argc, argv);
   
-#ifdef WAVE_ON
+  #ifdef WAVE_ON
   contextp->traceEverOn(true); //打开追踪功能
   top->trace(tfp, 0); //
   tfp->open("wave.vcd"); //设置输出的文件wave.vcd
-#endif
+  #endif
   int n = 10;
   top->reset = 1;
   while (n > 0) { 
@@ -550,9 +571,9 @@ int main(int argc, char** argv) {
 
 
   delete top;
-#ifdef WAVE_ON
+  #ifdef WAVE_ON
   tfp->close();
-#endif
+  #endif
   delete contextp;
 #endif
 

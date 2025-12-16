@@ -35,6 +35,7 @@ VM_PREFIX = VysyxSoCFull
 VM_MODPREFIX = VysyxSoCFull
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
+	-mcmodel=medium \
 	-MMD \
 	-O3 \
 	-I/usr/include/SDL2 \
@@ -45,6 +46,7 @@ VM_USER_CFLAGS = \
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
 	/home/yanlx/ysyx-workbench/nvboard/build/nvboard.a \
+	-lreadline \
 	-lSDL2 \
 	-lSDL2_image \
 	-lSDL2_ttf \
