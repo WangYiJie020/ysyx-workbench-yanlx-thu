@@ -443,11 +443,7 @@ static void trace_and_difftest() {
 #include "nvboard.h"
 static TOP_NAME dut;
 void nvboard_bind_all_pins(TOP_NAME* top);
-#include "verilated.h"
-#include "verilated_vcd_c.h" //可选，如果要导出vcd则需要加上
-VerilatedContext* contextp = new VerilatedContext;
-//VysyxSoCFull* top = new VysyxSoCFull{contextp};
-VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
+
 #else
 #include "verilated.h"
 #include "verilated_vcd_c.h" //可选，如果要导出vcd则需要加上
@@ -477,8 +473,8 @@ void cpu_exec(uint64_t num) {
     dut.clock = 1; dut.eval();
     counter++;
     //trace_and_difftest();
-     tfp->dump(contextp->time()); //dump wave
-    contextp->timeInc(1); //推动仿真时间
+    // tfp->dump(contextp->time()); //dump wave
+    //contextp->timeInc(1); //推动仿真时间
 #else
     top->clock = 0; top->eval();
     top->clock = 1; top->eval();
@@ -509,6 +505,9 @@ int main(int argc, char** argv) {
   nvboard_bind_pin(&dut.externalPins_gpio_seg_6,8,SEG6A, SEG6B, SEG6C, SEG6D, SEG6E, SEG6F, SEG6G, DEC6P);
   nvboard_bind_pin(&dut.externalPins_gpio_seg_7,8,SEG7A, SEG7B, SEG7C, SEG7D, SEG7E, SEG7F, SEG7G, DEC7P);
   nvboard_bind_pin(&dut.externalPins_uart_tx,1,UART_TX);
+  nvboard_bind_pin(&dut.externalPins_uart_rx,1,UART_RX);
+  nvboard_bind_pin(&dut.externalPins_ps2_clk,1,PS2_CLK);
+  nvboard_bind_pin(&dut.externalPins_ps2_data,1,PS2_DAT);
   nvboard_init();
 #endif
   Verilated::commandArgs(argc, argv);
@@ -526,19 +525,15 @@ int main(int argc, char** argv) {
 
 
 #ifdef NVBOARD_ON
-  #ifdef WAVE_ON
-  contextp->traceEverOn(true); //打开追踪功能
-  //top->trace(tfp, 0); //
-  tfp->open("wave.vcd"); //设置输出的文件wave.vcd
-  #endif
+
   int n = 10;
   dut.reset = 1;
   while (n > 0) {
     nvboard_update();
     dut.clock = 0; dut.eval();
     dut.clock = 1; dut.eval();
-    tfp->dump(contextp->time()); //dump wave
-    contextp->timeInc(1); //推动仿真时间
+    //tfp->dump(contextp->time()); //dump wave
+    //contextp->timeInc(1); //推动仿真时间
     n--;
   }
   dut.reset = 0;
