@@ -73,9 +73,9 @@ module clint(
             araddr <= 0;
         end
         else begin
-            if(ar_state == 0 && arvalid_i == 1) begin
+            if(ar_state == 0) begin
                 arready_o <= 1;
-                ar_state <= 1;
+                
             end
             else if(ar_state == 1) begin
                 if(arvalid_i == 0) ar_state <= 0;
@@ -85,6 +85,7 @@ module clint(
             if(arready_o == 1 && arvalid_i == 1) begin
                 araddr <= araddr_i;
                 flag_raddr <= 1;//get read addr
+                ar_state <= 1;
             end
             else 
                 flag_raddr <= 0;
