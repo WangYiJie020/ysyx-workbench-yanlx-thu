@@ -111,7 +111,7 @@ module xbar(
     reg ar_switch,r_switch,aw_switch,w_switch,b_switch;
 
     // Arbiter logic
-    always @(posedge clk or negedge rst_n) begin
+    always @(*) begin
         if (!rst_n) begin
             ar_switch <= 1;
             r_switch <= 1;
