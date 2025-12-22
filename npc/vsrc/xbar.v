@@ -113,20 +113,22 @@ module xbar(
     // Arbiter logic
     always @(*) begin
         if (!rst_n) begin
-            ar_switch <= 1;
-            r_switch <= 1;
-            aw_switch <= 1;
-            w_switch <= 1;
-            b_switch <= 1;
+            ar_switch = 1;
+            r_switch = 1;
+            aw_switch = 1;
+            w_switch = 1;
+            b_switch = 1;
         end else begin
-            
+            aw_switch = 1;
+            w_switch = 1;
+            b_switch = 1;
             if(axi_araddr_i >= 32'h0200_0000 && axi_araddr_i <= 32'h0200_ffff) begin
-                ar_switch <= 0;
-                r_switch <= 0;
+                ar_switch = 0;
+                r_switch = 0;
             end
             else begin
-                ar_switch <= 1;
-                r_switch <= 1;
+                ar_switch = 1;
+                r_switch = 1;
             end
             
         end
