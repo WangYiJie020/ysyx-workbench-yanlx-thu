@@ -109,8 +109,8 @@ module clint(
                     flag_rdata <= 0;
                     r_delay <= LFSR;
                     rlast_o <= 1;
-                    if(araddr == 32'ha0000048) rdata_o <= time_counter[31:0];
-                    else if(araddr == 32'ha000004c) rdata_o <= time_counter[63:32];
+                    if(araddr == 32'h02000048) rdata_o <= time_counter[31:0];
+                    else if(araddr == 32'h0200004c) rdata_o <= time_counter[63:32];
                 end
                 else begin
                     rdata_counter <= rdata_counter + 1;
