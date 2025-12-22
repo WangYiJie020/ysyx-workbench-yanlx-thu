@@ -68,7 +68,7 @@ module clint(
 
     always@(posedge clk, negedge rst_n) begin
         if(rst_n == 0) begin
-            arready_o <= 0;
+            arready_o <= 1;
             ar_state <= 0; //未握手
             araddr <= 0;
         end
