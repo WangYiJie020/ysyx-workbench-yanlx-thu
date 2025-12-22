@@ -10,7 +10,11 @@ static inline void outb(uintptr_t addr, uint8_t  data) { *(volatile uint8_t  *)a
 static inline void outw(uintptr_t addr, uint16_t data) { *(volatile uint16_t *)addr = data; }
 static inline void outl(uintptr_t addr, uint32_t data) { *(volatile uint32_t *)addr = data; }
 
+uint64_t start_time;
 void __am_timer_init() {
+  start_time = inl(RTC_ADDR+4);
+  start_time = start_time << 32;
+  start_time = start_time + inl(RTC_ADDR);
   ///outl(RTC_ADDR,0);
   //outl(RTC_ADDR+4,0);
 }
@@ -19,6 +23,7 @@ void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
   uptime->us = inl(RTC_ADDR+4);
   uptime->us = uptime->us << 32;
   uptime->us = uptime->us + inl(RTC_ADDR);
+  uptime->us = uptime->us - start_time;
   //uptime->us = 0;
 }
 
