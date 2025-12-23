@@ -22,7 +22,7 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
   //uint32_t w = screen_wh >> 16;
   *cfg = (AM_GPU_CONFIG_T) {
     .present = true, .has_accel = false,
-    .width = 512, .height = 640,
+    .width = 640, .height = 480,
     .vmemsz = 0
   };
 }
@@ -32,7 +32,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   if ((w == 0 || h == 0)) return;
   uint32_t *pixels = ctl->pixels;
   uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
-  uint32_t screen_h = 512;
+  uint32_t screen_h = 1024;
   for (int j = x; j < x+w; j++) {
     for (int i = y; i < y+h; i++) {
       fb[screen_h*i+j] = pixels[w*(i-y)+(j-x)];
