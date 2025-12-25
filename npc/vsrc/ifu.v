@@ -1,5 +1,7 @@
 `include "header.v"
 
+import "DPI-C" function return_inst(input int inst);
+
 //`define IFU_DELAY
 module ifu(
     input clk,
@@ -222,6 +224,10 @@ module ifu(
                 //end
             end            
         end
+    end
+
+    always@(posedge clk) begin
+        return_inst(inst);
     end
 
 `ifdef IFU_DELAY

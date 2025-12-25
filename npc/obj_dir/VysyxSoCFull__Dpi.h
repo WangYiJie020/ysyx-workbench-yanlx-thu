@@ -22,7 +22,7 @@ extern "C" {
     extern void ebreak();
     // DPI import at /home/yanlx/ysyx-workbench/ysyxSoC/perip/flash/flash.v:84:30
     extern void flash_read(int addr, int* data);
-    // DPI import at /home/yanlx/ysyx-workbench/ysyxSoC/build/ysyxSoCFull.v:53672:30
+    // DPI import at /home/yanlx/ysyx-workbench/ysyxSoC/build/ysyxSoCFull.v:5402:30
     extern void mrom_read(int raddr, int* rdata);
     // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/data_mem.v:1:29
     extern int pmem_read(int raddr);

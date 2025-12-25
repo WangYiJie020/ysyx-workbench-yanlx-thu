@@ -52,6 +52,16 @@ int flag = 0;
 
 int32_t sdram[4][8192][512] = {};
 
+uint32_t current_inst,last_inst;
+uint64_t inst_counter = 0;
+
+extern "C" void return_inst(uint32_t inst) {
+  last_inst = current_inst;
+  current_inst = inst;
+  if(current_inst != last_inst) {
+    inst_counter++;
+  }
+}
 
 extern "C" void sdram_write(int32_t bank, int32_t row, int32_t column, int32_t data, char mask){
   switch(mask) {
@@ -456,7 +466,7 @@ void cpu_exec(uint64_t num) {
   uint64_t i;
   for(i = 0; i < num; i++) {
     if(cpu_state == NPC_END){ //finish
-      printf("finish,counter=%ld\n",counter);
+      printf("finish,time_counter=%ld,inst_counter=%ld\n",counter,inst_counter);
       break;
     }
     if(cpu_state == NPC_STOP) { //stop
