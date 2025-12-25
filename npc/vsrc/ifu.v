@@ -1,6 +1,6 @@
 `include "header.v"
 
-import "DPI-C" function return_inst(input int inst);
+import "DPI-C" function void return_inst(input int inst);
 
 //`define IFU_DELAY
 module ifu(
