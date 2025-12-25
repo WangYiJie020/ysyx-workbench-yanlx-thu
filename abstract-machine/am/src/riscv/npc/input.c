@@ -10,7 +10,7 @@
 #define KEYDOWN_MASK 0x8000
 #define KBD_ADDR1 0x10011000
 
-uint8_t k;
+
 
 uint8_t exchange(uint8_t num){
   switch(num) {
@@ -89,7 +89,7 @@ uint8_t exchange(uint8_t num){
 }
 
 void __am_input_keybrd(AM_INPUT_KEYBRD_T *kbd) {
-  k = *(volatile uint8_t *)(KBD_ADDR1);
+  uint8_t k = *(volatile uint8_t *)(KBD_ADDR1);
   //printf("%x",k);
   kbd->keydown = (k!= 0xf0 ? true : false);
   kbd->keycode = exchange(k);

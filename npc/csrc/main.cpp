@@ -48,16 +48,16 @@ void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 
 time_t start_time;
 time_t currentTimeABS;
-int flag = 0;
+static int flag = 0;
 
 int32_t sdram[4][8192][512] = {};
 
-uint32_t current_inst,last_inst;
-uint64_t inst_counter = 0;
+static uint32_t current_inst,last_inst;
+static uint64_t inst_counter = 0;
 
-extern "C" void return_inst(uint32_t inst) {
+extern "C" void return_inst(uint32_t inst1) {
   last_inst = current_inst;
-  current_inst = inst;
+  current_inst = inst1;
   if(current_inst != last_inst) {
     inst_counter++;
   }
