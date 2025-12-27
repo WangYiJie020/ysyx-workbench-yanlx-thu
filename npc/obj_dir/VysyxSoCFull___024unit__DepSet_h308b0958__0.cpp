@@ -108,12 +108,12 @@ VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_difftest_next_step_TOP__
     difftest_next_step(difftest_check__Vcvt);
 }
 
-extern "C" void inst_counter();
+extern "C" void inst_counter_add();
 
-VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_inst_counter_TOP____024unit() {
-    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_inst_counter_TOP____024unit\n"); );
+VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_inst_counter_add_TOP____024unit() {
+    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_inst_counter_add_TOP____024unit\n"); );
     // Body
-    inst_counter();
+    inst_counter_add();
 }
 
 extern "C" int pmem_read(int raddr);
