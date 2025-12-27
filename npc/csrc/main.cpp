@@ -61,8 +61,8 @@ extern "C" void idu_counter_return(char inst_opcode) {
     case 0x73: inst_csr++; break;
     case 0x37: inst_other++; break;
     case 0x17: inst_other++; break;
-    case 0x68: inst_other++; break;
-    case 0x67: inst_other++; break;
+    case 0x6f: inst_branch++; break;
+    case 0x67: inst_branch++; break;
     case 0x63: inst_branch++; break;
     case 0x03: inst_mem++; break;
     case 0x23: inst_mem++; break;
