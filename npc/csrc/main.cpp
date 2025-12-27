@@ -56,8 +56,8 @@ int32_t sdram[4][8192][512] = {};
 static uint64_t inst_counter = 0,data_counter = 0;
 static uint64_t inst_calculation=0, inst_branch=0, inst_mem=0, inst_other=0, inst_csr=0, inst_error=0; 
 
-extern "C" void idu_counter_return(char inst) {
-  switch(inst) {
+extern "C" void idu_counter_return(char inst_opcode) {
+  switch(inst_opcode) {
     case 0x73: inst_csr++; break;
     case 0x37,0x17,0x68,0x67: inst_other++; break;
     case 0x63: inst_branch++; break;
