@@ -1,6 +1,8 @@
 `include "header.v"
 
 import "DPI-C" function void data_counter_add();
+import "DPI-C" function void send_data_request();
+import "DPI-C" function void receive_data_back();
 
 //`define LSU_DELAY
 module lsu(
@@ -254,6 +256,7 @@ module lsu(
                         lsu_valid_o <= 1;
                         datamem_readdata_o <= rdata_i;
                         data_counter_add();
+                        receive_data_back();
                     end
                     else lsu_valid_o <= 0;
                 end
@@ -261,14 +264,21 @@ module lsu(
                     if(bready_o == 1 && bvalid_i == 1 && bresp_i == 0) begin 
                         lsu_valid_o <= 1;
                         data_counter_add();
+                        receive_data_back();
                     end
                     else lsu_valid_o <= 0;
                 end
                 else lsu_valid_o <= 1;
 
-                if(awvalid==1 && awready_i==1) awvalid <= 0;
+                if(awvalid==1 && awready_i==1) begin  
+                    awvalid <= 0;
+                    send_data_request();
+                end
                 if(wvalid==1 && wready_i==1) wvalid <= 0;
-                if(arvalid==1 && arready_i==1) arvalid <= 0;
+                if(arvalid==1 && arready_i==1) begin 
+                    arvalid <= 0;
+                    send_data_request();
+                end
                 wlast_o <= 0;
 
             end else if (current_state == S_SEND)begin

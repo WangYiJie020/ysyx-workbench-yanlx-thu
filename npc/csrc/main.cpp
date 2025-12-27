@@ -33,11 +33,7 @@ uint32_t mem[0xffffffff];
 uint32_t flash[0xfffffff];
 bool is_skip_ref = false;
 bool difftest_check_all = false;
-
-
-
-
-
+static uint64_t counter=0;
 
 enum { DIFFTEST_TO_DUT, DIFFTEST_TO_REF };
 
@@ -51,6 +47,18 @@ time_t currentTimeABS;
 static int flag = 0;
 
 uint32_t sdram[4][8192][512] = {};
+
+uint64_t request_num=0,request_time=0,process_time=0,process_time_all=0;
+
+extern "C" void send_data_request(){
+  request_time = counter;
+}
+
+extern "C" void receive_data_back(){
+  process_time = counter - request_time;
+  process_time_all += process_time;
+  request_num++;
+}
 
 static uint64_t inst_length;
 static uint32_t last_inst,current_inst;
@@ -502,7 +510,7 @@ VerilatedContext* contextp = new VerilatedContext;
 VysyxSoCFull* top = new VysyxSoCFull{contextp};
 VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
 #endif
-uint64_t counter=0;
+
 void cpu_exec(uint64_t num) {
   uint64_t i;
   for(i = 0; i < num; i++) {
@@ -510,6 +518,7 @@ void cpu_exec(uint64_t num) {
       printf("finish,time_counter=%ld,inst_counter=%ld,data_counter=%ld\n",counter,inst_counter,data_counter);
       printf("inst type count:\ncalculation:%ld\nbranch:%ld\nmem:%ld\nother:%ld\ncsr:%ld\nerror:%ld\n\n",inst_calculation,inst_branch,inst_mem,inst_other,inst_csr,inst_error);
       printf("avg exec time:\ncalculation:%f\nbranch:%f\nmem:%f\nother:%f\ncsr:%f\n\n",length_calculation/(float)inst_calculation,length_branch/(float)inst_branch,length_mem/(float)inst_mem,length_other/(float)inst_other,length_csr/(float)inst_csr);
+      printf("avg access mem time:%f",process_time_all/(float)request_num)
       break;
     }
     if(cpu_state == NPC_STOP) { //stop
