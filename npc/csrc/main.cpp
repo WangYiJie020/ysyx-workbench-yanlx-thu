@@ -55,7 +55,7 @@ int32_t sdram[4][8192][512] = {};
 static uint32_t current_inst,last_inst;
 static uint64_t inst_counter = 0;
 
-extern "C" void inst_counter() {
+extern "C" void inst_counter_add() {
   inst_counter++;
 }
 
