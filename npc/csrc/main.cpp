@@ -54,6 +54,18 @@ int32_t sdram[4][8192][512] = {};
 
 
 static uint64_t inst_counter = 0,data_counter = 0;
+static uint64_t inst_calculation=0, inst_branch=0, inst_mem=0, inst_other=0, inst_csr=0, inst_error=0; 
+
+extern "C" void idu_counter_return(char inst) {
+  switch(inst) {
+    case 0x73: inst_csr++; break;
+    case 0x37,0x17,0x68,0x67: inst_other++; break;
+    case 0x63: inst_branch++; break;
+    case 0x03,0x23: inst_mem++; break;
+    case 0x13,0x33: inst_calculation++; break;
+    default : inst_error++; break;
+  }
+}
 
 extern "C" void inst_counter_add() {
   inst_counter++;
@@ -467,6 +479,7 @@ void cpu_exec(uint64_t num) {
   for(i = 0; i < num; i++) {
     if(cpu_state == NPC_END){ //finish
       printf("finish,time_counter=%ld,inst_counter=%ld,data_counter=%ld\n",counter,inst_counter,data_counter);
+      printf("inst type:\ncalculation:%ld\tbranch:%ld\tmem:%ld\tother:%ld\tcsr:%ld\terror:%d\n",inst_calculation,inst_branch,inst_mem,inst_other,inst_csr,inst_error);
       break;
     }
     if(cpu_state == NPC_STOP) { //stop

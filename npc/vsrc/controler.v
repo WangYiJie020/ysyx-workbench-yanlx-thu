@@ -147,7 +147,7 @@ module controler(
                 adder_out_src = 1'b0; 
                 csr_wdata_src = 1'b0;
             end
-            7'b01110011:begin
+            7'b1110011:begin
                 case(funct3)
                     3'b000: begin //ecall mret
                         a_in_src = 1'b0; //do not care 

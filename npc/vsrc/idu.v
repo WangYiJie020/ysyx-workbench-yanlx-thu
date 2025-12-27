@@ -1,4 +1,7 @@
 `include "header.v"
+
+import "DPI-C" function void idu_counter_return(input char inst_opcode);
+
 module idu(
     input clk,
     input rst_n,
@@ -150,6 +153,7 @@ module idu(
                 idu_valid_o <= 1;
                 pc <= pc_i;
                 inst <= inst_i;
+                idu_counter_return({1'b0,inst[6:0]});
             end else if (current_state == S_SEND)begin
                 idu_valid_o <= 1;
             end else begin
