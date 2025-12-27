@@ -68,7 +68,7 @@ extern "C" void idu_counter_return(char inst_opcode) {
     case 0x23: inst_mem++; break;
     case 0x13: inst_calculation++; break;
     case 0x33: inst_calculation++; break;
-    default : inst_error++; break;
+    default : printf("%x\n",inst_opcode);inst_error++; break;
   }
 }
 
