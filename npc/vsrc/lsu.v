@@ -1,5 +1,7 @@
 `include "header.v"
 
+import "DPI-C" function void data_counter_add();
+
 //`define LSU_DELAY
 module lsu(
     input clk,
@@ -251,11 +253,15 @@ module lsu(
                     if(rlast_i==1) begin 
                         lsu_valid_o <= 1;
                         datamem_readdata_o <= rdata_i;
+                        data_counter_add();
                     end
                     else lsu_valid_o <= 0;
                 end
                 else if(MemWrite_i)begin
-                    if(bready == 1 && bvalid_i == 1 && bresp_i == 0) lsu_valid_o <= 1;
+                    if(bready == 1 && bvalid_i == 1 && bresp_i == 0) begin 
+                        lsu_valid_o <= 1;
+                        data_counter_add();
+                    end
                     else lsu_valid_o <= 0;
                 end
                 else lsu_valid_o <= 1;
