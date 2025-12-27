@@ -509,7 +509,7 @@ void cpu_exec(uint64_t num) {
     if(cpu_state == NPC_END){ //finish
       printf("finish,time_counter=%ld,inst_counter=%ld,data_counter=%ld\n",counter,inst_counter,data_counter);
       printf("inst type count:\ncalculation:%ld\nbranch:%ld\nmem:%ld\nother:%ld\ncsr:%ld\nerror:%ld\n\n",inst_calculation,inst_branch,inst_mem,inst_other,inst_csr,inst_error);
-      printf("avg exec time:\ncalculation:%f\nbranch:%f\nmem:%f\nother:%f\ncsr:%f\n\n",inst_calculation/(float)length_calculation,inst_branch/(float)length_branch,inst_mem/(float)length_mem,inst_other/(float)length_other,inst_csr/(float)length_csr);
+      printf("avg exec time:\ncalculation:%f\nbranch:%f\nmem:%f\nother:%f\ncsr:%f\n\n",length_calculation/(float)inst_calculation,length_branch/(float)inst_branch,length_mem/(float)inst_mem,length_other/(float)inst_other,length_csr/(float)inst_csr);
       break;
     }
     if(cpu_state == NPC_STOP) { //stop
