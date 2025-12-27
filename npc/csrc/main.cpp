@@ -59,10 +59,15 @@ static uint64_t inst_calculation=0, inst_branch=0, inst_mem=0, inst_other=0, ins
 extern "C" void idu_counter_return(char inst_opcode) {
   switch(inst_opcode) {
     case 0x73: inst_csr++; break;
-    case 0x37,0x17,0x68,0x67: inst_other++; break;
+    case 0x37: inst_other++; break;
+    case 0x17: inst_other++; break;
+    case 0x68: inst_other++; break;
+    case 0x67: inst_other++; break;
     case 0x63: inst_branch++; break;
-    case 0x03,0x23: inst_mem++; break;
-    case 0x13,0x33: inst_calculation++; break;
+    case 0x03: inst_mem++; break;
+    case 0x23: inst_mem++; break;
+    case 0x13: inst_calculation++; break;
+    case 0x33: inst_calculation++; break;
     default : inst_error++; break;
   }
 }
