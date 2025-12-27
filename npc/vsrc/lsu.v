@@ -250,7 +250,7 @@ module lsu(
                 //awaddr_o <= alu_result;
             end else if (current_state == S_WAIT_SEND)begin
                 if(MemRead_i) begin
-                    if(rlast_i==1&& rready==1&& rvalid_i==1) begin 
+                    if(rlast_i==1&& rready_o==1&& rvalid_i==1) begin 
                         lsu_valid_o <= 1;
                         datamem_readdata_o <= rdata_i;
                         data_counter_add();
@@ -258,7 +258,7 @@ module lsu(
                     else lsu_valid_o <= 0;
                 end
                 else if(MemWrite_i)begin
-                    if(bready == 1 && bvalid_i == 1 && bresp_i == 0) begin 
+                    if(bready_o == 1 && bvalid_i == 1 && bresp_i == 0) begin 
                         lsu_valid_o <= 1;
                         data_counter_add();
                     end
