@@ -1,6 +1,6 @@
 `include "header.v"
 
-//import "DPI-C" function void return_inst(input int inst1);
+import "DPI-C" function void return_inst(input int inst1,input byte inst_opcode);
 import "DPI-C" function void inst_counter_add();
 
 //`define IFU_DELAY
@@ -228,6 +228,7 @@ module ifu(
     end
 
     always@(posedge clk) begin
+        return_inst(inst,{1'b0,inst[6:0]});
         if(rvalid_i == 1 && rready_o == 1 && current_state == S_WAIT_SEND)begin //r 通道握手
             inst_counter_add();
         end

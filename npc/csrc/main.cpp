@@ -50,8 +50,32 @@ time_t start_time;
 time_t currentTimeABS;
 static int flag = 0;
 
-int32_t sdram[4][8192][512] = {};
+uint32_t sdram[4][8192][512] = {};
 
+static uint64_t inst_length;
+static uint32_t last_inst,current_inst;
+static uint64_t length_calculation=0, length_branch=0, length_mem=0, length_other=0, length_csr=0, length_error=0; 
+
+extern "C" void return_inst(uint32_t inst1,char inst_opcode){
+  //last_inst = current_inst;
+  //current_inst = inst1;
+  //if(current_inst == last_inst) { //指令没有发生变化
+    switch(inst_opcode) {
+      case 0x73: length_csr++; break;
+      case 0x37: length_other++; break;
+      case 0x17: length_other++; break;
+      case 0x6f: length_branch++; break;
+      case 0x67: length_branch++; break;
+      case 0x63: length_branch++; break;
+      case 0x03: length_mem++; break;
+      case 0x23: length_mem++; break;
+      case 0x13: length_calculation++; break;
+      case 0x33: length_calculation++; break;
+      default :length_error++; break;
+  }
+  //}
+
+}
 
 static uint64_t inst_counter = 0,data_counter = 0;
 static uint64_t inst_calculation=0, inst_branch=0, inst_mem=0, inst_other=0, inst_csr=0, inst_error=0; 
@@ -68,7 +92,7 @@ extern "C" void idu_counter_return(char inst_opcode) {
     case 0x23: inst_mem++; break;
     case 0x13: inst_calculation++; break;
     case 0x33: inst_calculation++; break;
-    default : printf("%x\n",inst_opcode);inst_error++; break;
+    default :inst_error++; break;
   }
 }
 
@@ -484,7 +508,8 @@ void cpu_exec(uint64_t num) {
   for(i = 0; i < num; i++) {
     if(cpu_state == NPC_END){ //finish
       printf("finish,time_counter=%ld,inst_counter=%ld,data_counter=%ld\n",counter,inst_counter,data_counter);
-      printf("inst type:\ncalculation:%ld\tbranch:%ld\tmem:%ld\tother:%ld\tcsr:%ld\terror:%ld\n",inst_calculation,inst_branch,inst_mem,inst_other,inst_csr,inst_error);
+      printf("inst type count:\ncalculation:%ld\nbranch:%ld\nmem:%ld\nother:%ld\ncsr:%ld\nerror:%ld\n\n",inst_calculation,inst_branch,inst_mem,inst_other,inst_csr,inst_error);
+      printf("avg exec time:\ncalculation:%f\nbranch:%f\nmem:%f\nother:%f\ncsr:%f\n\n",inst_calculation/(float)length_calculation,inst_branch/(float)length_branch,inst_mem/(float)length_mem,inst_other/(float)length_other,inst_csr/(float)length_csr);
       break;
     }
     if(cpu_state == NPC_STOP) { //stop
