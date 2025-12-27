@@ -108,14 +108,14 @@ VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_difftest_next_step_TOP__
     difftest_next_step(difftest_check__Vcvt);
 }
 
-extern "C" void return_inst(int inst);
+extern "C" void return_inst(int inst1);
 
-VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_return_inst_TOP____024unit(IData/*31:0*/ inst) {
+VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_return_inst_TOP____024unit(IData/*31:0*/ inst1) {
     VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_return_inst_TOP____024unit\n"); );
     // Body
-    int inst__Vcvt;
-    for (size_t inst__Vidx = 0; inst__Vidx < 1; ++inst__Vidx) inst__Vcvt = inst;
-    return_inst(inst__Vcvt);
+    int inst1__Vcvt;
+    for (size_t inst1__Vidx = 0; inst1__Vidx < 1; ++inst1__Vidx) inst1__Vcvt = inst1;
+    return_inst(inst1__Vcvt);
 }
 
 extern "C" int pmem_read(int raddr);

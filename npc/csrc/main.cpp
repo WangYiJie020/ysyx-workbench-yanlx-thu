@@ -55,12 +55,8 @@ int32_t sdram[4][8192][512] = {};
 static uint32_t current_inst,last_inst;
 static uint64_t inst_counter = 0;
 
-extern "C" void return_inst(uint32_t inst1) {
-  last_inst = current_inst;
-  current_inst = inst1;
-  if(current_inst != last_inst) {
-    inst_counter++;
-  }
+extern "C" void inst_counter() {
+  inst_counter++;
 }
 
 extern "C" void sdram_write(int32_t bank, int32_t row, int32_t column, int32_t data, char mask){
