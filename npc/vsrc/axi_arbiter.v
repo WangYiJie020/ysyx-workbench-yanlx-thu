@@ -170,11 +170,6 @@ module axi_arbiter(
                 rlast_o_b = rlast_i;
                 rid_o_b = rid_i;
                 rvalid_o_b = rvalid_i;
-                rdata_o_a = rdata_i;
-                rresp_o_a = rresp_i;
-                rlast_o_a = rlast_i;
-                rid_o_a = rid_i;
-                rvalid_o_a = rvalid_i;
                 rready_o = rready_i_b;
             end
             default: begin
@@ -183,11 +178,6 @@ module axi_arbiter(
                 rlast_o_a = rlast_i;
                 rid_o_a = rid_i;
                 rvalid_o_a = rvalid_i;
-                rdata_o_b = rdata_i;
-                rresp_o_b = rresp_i;
-                rlast_o_b = rlast_i;
-                rid_o_b = rid_i;
-                rvalid_o_b = rvalid_i;
                 rready_o = rready_i_a;
             end
         endcase
