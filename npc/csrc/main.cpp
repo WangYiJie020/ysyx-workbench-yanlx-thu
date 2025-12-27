@@ -484,7 +484,7 @@ void cpu_exec(uint64_t num) {
   for(i = 0; i < num; i++) {
     if(cpu_state == NPC_END){ //finish
       printf("finish,time_counter=%ld,inst_counter=%ld,data_counter=%ld\n",counter,inst_counter,data_counter);
-      printf("inst type:\ncalculation:%ld\tbranch:%ld\tmem:%ld\tother:%ld\tcsr:%ld\terror:%d\n",inst_calculation,inst_branch,inst_mem,inst_other,inst_csr,inst_error);
+      printf("inst type:\ncalculation:%ld\tbranch:%ld\tmem:%ld\tother:%ld\tcsr:%ld\terror:%ld\n",inst_calculation,inst_branch,inst_mem,inst_other,inst_csr,inst_error);
       break;
     }
     if(cpu_state == NPC_STOP) { //stop
