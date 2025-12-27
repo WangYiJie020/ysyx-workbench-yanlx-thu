@@ -1,6 +1,6 @@
 `include "header.v"
 
-import "DPI-C" function void idu_counter_return(input char inst_opcode);
+import "DPI-C" function void idu_counter_return(input byte inst_opcode);
 
 module idu(
     input clk,
