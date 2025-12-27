@@ -228,7 +228,7 @@ module ifu(
     end
 
     always@(posedge clk) begin
-        if(rvalid_i == 1 && rready_o == 1)begin //r 通道握手
+        if(rvalid_i == 1 && rready_o == 1 && current_state == S_WAIT_SEND)begin //r 通道握手
             inst_counter_add();
         end
     end
