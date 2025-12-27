@@ -172,6 +172,22 @@ VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_data_counter_add_TOP____
     data_counter_add();
 }
 
+extern "C" void send_data_request();
+
+VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_send_data_request_TOP____024unit() {
+    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_send_data_request_TOP____024unit\n"); );
+    // Body
+    send_data_request();
+}
+
+extern "C" void receive_data_back();
+
+VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_receive_data_back_TOP____024unit() {
+    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_receive_data_back_TOP____024unit\n"); );
+    // Body
+    receive_data_back();
+}
+
 extern "C" void flash_read(int addr, int* data);
 
 VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_flash_read_TOP____024unit(IData/*31:0*/ addr, IData/*31:0*/ &data) {
