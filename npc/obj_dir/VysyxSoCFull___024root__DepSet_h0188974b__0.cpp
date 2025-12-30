@@ -5046,7 +5046,7 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__14(VysyxSoCFull___
             if (vlSelf->ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_out_penable) {
                 vlSelf->ysyxSoCFull__DOT__asic__DOT__apbdelay_delayer__DOT__wait_counter 
                     = (((IData)(0xb00U) * (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__apbdelay_delayer__DOT__request_counter)) 
-                       >> 9U);
+                       >> 8U);
             }
             vlSelf->ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_out_paddr 
                 = vlSelf->ysyxSoCFull__DOT__asic__DOT___axi42apb_auto_out_paddr;
