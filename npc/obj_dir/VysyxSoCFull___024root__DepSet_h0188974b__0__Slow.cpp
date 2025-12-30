@@ -335,7 +335,6 @@ VL_ATTR_COLD void VysyxSoCFull___024root___ctor_var_reset(VysyxSoCFull___024root
     vlSelf->ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_in_prdata = VL_RAND_RESET_I(32);
     vlSelf->ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_out_psel = VL_RAND_RESET_I(1);
     vlSelf->ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_out_penable = VL_RAND_RESET_I(1);
-    vlSelf->ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_out_pwrite = VL_RAND_RESET_I(1);
     vlSelf->ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_out_paddr = VL_RAND_RESET_I(32);
     vlSelf->ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_out_pprot = VL_RAND_RESET_I(3);
     vlSelf->ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_out_pwdata = VL_RAND_RESET_I(32);
@@ -1422,9 +1421,9 @@ VL_ATTR_COLD void VysyxSoCFull___024root___ctor_var_reset(VysyxSoCFull___024root
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__read_burst = VL_RAND_RESET_I(1);
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__dout = VL_RAND_RESET_I(16);
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT____VdfgTmp_h6089aaeb__0 = 0;
-    vlSelf->__VdfgTmp_h033d2f5a__0 = 0;
-    vlSelf->__VdfgTmp_haa801935__0 = 0;
     vlSelf->__VdfgTmp_hf132a334__0 = 0;
+    vlSelf->__VdfgTmp_hc00ad2e0__0 = 0;
+    vlSelf->__VdfgTmp_h4520a49b__0 = 0;
     vlSelf->__VdfgTmp_ha17ae98a__0 = 0;
     vlSelf->__Vtask_ysyxSoCFull__DOT__asic__DOT__lmrom__DOT__mrom__DOT__mrom_read__12__rdata = 0;
     vlSelf->__Vtableidx2 = 0;
