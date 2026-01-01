@@ -5077,7 +5077,7 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__14(VysyxSoCFull___
                         : 0U);
             }
         }
-        if (vlSelf->ysyxSoCFull__DOT__asic__DOT__axi42apb__DOT__is_write) {
+        if ((1U & (~ (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi42apb__DOT__is_write)))) {
             vlSelf->ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_out_pwdata = 0U;
             vlSelf->ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_out_pstrb = 0U;
         }
