@@ -35,7 +35,7 @@ module icache #(
     input mem_rlast_i,
     input [3:0] mem_rid_i,
     input mem_rvalid_i,
-    output reg mem_rready_o,
+    output reg mem_rready_o
 );
 
 // ========== 参数计算 ==========
