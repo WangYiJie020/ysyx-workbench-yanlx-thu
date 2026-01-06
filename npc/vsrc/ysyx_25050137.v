@@ -131,6 +131,55 @@ module ysyx_25050137(
 
     wire useless1,useless2,useless3,useless4;
 
+    wire [`CPU_WIDTH-1:0] cache_araddr;
+    wire [3:0] cache_arid;
+    wire [7:0] cache_arlen;
+    wire [2:0] cache_arsize;
+    wire [1:0] cache_arburst;
+    wire cache_arvalid;
+    wire cache_arready;
+    wire [`CPU_WIDTH-1:0] cache_rdata;
+    wire [1:0] cache_rresp;
+    wire cache_rlast;
+    wire [3:0] cache_rid;
+    wire cache_rvalid;
+    wire cache_rready;
+
+    icache ICACHE (
+        .clk(clk),
+        .rst_n(rst_n),
+
+        //CPU
+        .cpu_araddr_i(ifu_araddr),
+        .cpu_arid_i(ifu_arid),
+        .cpu_arlen_i(ifu_arlen),
+        .cpu_arsize_i(ifu_arsize),
+        .cpu_arburst_i(ifu_arburst),
+        .cpu_arvalid_i(ifu_arvalid),
+        .cpu_arready_o(ifu_arready),
+
+        .cpu_rdata_o(ifu_rdata),
+        .cpu_rresp_o(ifu_rresp),
+        .cpu_rlast_o(ifu_rlast),
+        .cpu_rid_o(ifu_rid),
+        .cpu_rvalid_o(ifu_rvalid),
+        .cpu_rready_i(ifu_rready),
+        //mem
+        .mem_araddr_o(cache_araddr),
+        .mem_arid_o(cache_arid),
+        .mem_arlen_o(cache_arlen),
+        .mem_arsize_o(cache_arsize),
+        .mem_arburst_o(cache_arburst),
+        .mem_arvalid_o(cache_arvalid),
+        .mem_arready_i(cache_arready),
+        .mem_rdata_i(cache_rdata),
+        .mem_rresp_i(cache_rresp),
+        .mem_rlast_i(cache_rlast),
+        .mem_rid_i(cache_rid),
+        .mem_rvalid_i(cache_rvalid),
+        .mem_rready_o(cache_rready)
+    );
+
     wire [`CPU_WIDTH-1:0] lsu_araddr;
     wire [3:0] lsu_arid;
     wire [7:0] lsu_arlen;
@@ -226,20 +275,20 @@ module ysyx_25050137(
         .rst_n(rst_n),
 
         //a
-        .araddr_i_a(ifu_araddr),
-        .arid_i_a(ifu_arid),
-        .arlen_i_a(ifu_arlen),
-        .arsize_i_a(ifu_arsize),
-        .arburst_i_a(ifu_arburst),
-        .arvalid_i_a(ifu_arvalid),
-        .arready_o_a(ifu_arready),
+        .araddr_i_a(cache_araddr),
+        .arid_i_a(cache_arid),
+        .arlen_i_a(cache_arlen),
+        .arsize_i_a(cache_arsize),
+        .arburst_i_a(cache_arburst),
+        .arvalid_i_a(cache_arvalid),
+        .arready_o_a(cache_arready),
 
-        .rdata_o_a(ifu_rdata),
-        .rresp_o_a(ifu_rresp),
-        .rlast_o_a(ifu_rlast),
-        .rid_o_a(ifu_rid),
-        .rvalid_o_a(ifu_rvalid),
-        .rready_i_a(ifu_rready),
+        .rdata_o_a(cache_rdata),
+        .rresp_o_a(cache_rresp),
+        .rlast_o_a(cache_rlast),
+        .rid_o_a(cache_rid),
+        .rvalid_o_a(cache_rvalid),
+        .rready_i_a(cache_rready),
 
         .awaddr_i_a(0),
         .awid_i_a(0),
