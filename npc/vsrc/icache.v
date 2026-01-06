@@ -38,6 +38,8 @@ module icache #(
     output reg mem_rready_o
 );
 
+assign mem_arsize_o = 3'b010; 
+
 // ========== 参数计算 ==========
 localparam BLOCK_WORDS = BLOCK_SIZE / (DATA_WIDTH/8);  // 块中的字数
 localparam OFFSET_BITS = $clog2(BLOCK_SIZE);          // offset位宽
