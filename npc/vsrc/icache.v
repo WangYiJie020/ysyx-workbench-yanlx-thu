@@ -91,6 +91,7 @@ always @(*) begin
             if (cpu_arready_o == 1 && cpu_arvalid_i == 1) begin //向cache发出读请求
                 next_state = STATE_CHECK;
             end
+            else next_state = STATE_IDLE;
         end
         
         STATE_CHECK: begin
@@ -116,7 +117,7 @@ always @(*) begin
                 next_state = STATE_IDLE;
             end
             else 
-            next_state = STATE_FILL;
+                next_state = STATE_FILL;
         end
         
         default: begin
