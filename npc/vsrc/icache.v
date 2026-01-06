@@ -158,7 +158,7 @@ always @(posedge clk or negedge rst_n) begin
                     cpu_rdata_o <= data_array[req_index];
                 end else begin
                     // 缺失，准备访问内存
-                    
+                    cpu_rvalid_o <= 1'b0;
                 end
             end
             
