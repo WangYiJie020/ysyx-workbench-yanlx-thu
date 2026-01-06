@@ -140,10 +140,10 @@ always @(posedge clk or negedge rst_n) begin
     end else begin
         case (current_state)
             STATE_IDLE: begin
-                arready_o <= 1;
-                if (arready_o == 1 && arvalid_i == 1) begin
+                cpu_arready_o <= 1;
+                if (cpu_arready_o == 1 && cpu_arvalid_i == 1) begin
                     // 锁存请求地址
-                    cpu_addr <= araddr_i;
+                    cpu_addr <= cpu_araddr_i;
                 end
             end
             
@@ -151,8 +151,8 @@ always @(posedge clk or negedge rst_n) begin
                 // 检查是否命中
                 if (valid_array[req_index] && (tag_array[req_index] == req_tag)) begin
                     // 命中，直接返回数据
-                    rvalid_o <= 1'b1;
-                    rdata_o <= data_array[req_index];
+                    cpu_rvalid_o <= 1'b1;
+                    cpu_rdata_o <= data_array[req_index];
                 end else begin
                     // 缺失，准备访问内存
                     
@@ -161,16 +161,16 @@ always @(posedge clk or negedge rst_n) begin
             
             STATE_MISS: begin
                 // 向内存发送请求
-                arvalid_o <= 1'b1;
-                araddr_o <= {cpu_addr[ADDR_WIDTH-1:OFFSET_BITS], {OFFSET_BITS{1'b0}}};  // 对齐到块边界
+                mem_arvalid_o <= 1'b1;
+                mem_araddr_o <= {cpu_addr[ADDR_WIDTH-1:OFFSET_BITS], {OFFSET_BITS{1'b0}}};  // 对齐到块边界
                 
-                if (arready_i==1) begin
-                    arvalid_o <= 1'b0;
+                if (mem_arready_i==1) begin
+                    mem_arvalid_o <= 1'b0;
                 end
                 // 填充缓存
-                if(rvalid_i == 1 && rready_o == 1) begin
+                if(mem_rvalid_i == 1 && mem_rready_o == 1) begin
 
-                data_array[req_index] <= rdata_i;
+                data_array[req_index] <= mem_rdata_i;
                 tag_array[req_index] <= req_tag;
                 valid_array[req_index] <= 1'b1;
                 end
@@ -178,8 +178,8 @@ always @(posedge clk or negedge rst_n) begin
             
             STATE_FILL: begin 
                 // 返回数据给CPU
-                rdata_o <= data_array[req_index];
-                rvalid_o <= 1;
+                cpu_rdata_o <= data_array[req_index];
+                cpu_rvalid_o <= 1;
             end
             
             default: begin
