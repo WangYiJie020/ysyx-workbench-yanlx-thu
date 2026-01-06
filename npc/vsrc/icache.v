@@ -159,6 +159,7 @@ always @(posedge clk or negedge rst_n) begin
                 end else begin
                     // 缺失，准备访问内存
                     cpu_rvalid_o <= 1'b0;
+                    cpu_rdata_o <= 0;
                 end
             end
             
