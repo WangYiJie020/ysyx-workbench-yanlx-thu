@@ -182,6 +182,7 @@ always @(posedge clk or negedge rst_n) begin
             
             STATE_FILL: begin 
                 // 返回数据给CPU
+                mem_arvalid_o <= 1'b0;
                 cpu_rdata_o <= data_array[req_index];
                 cpu_rvalid_o <= 1;
             end
