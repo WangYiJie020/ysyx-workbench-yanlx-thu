@@ -204,6 +204,9 @@ always @(posedge clk or negedge rst_n) begin
                 mem_arvalid_o <= 1'b0;
                 cpu_rdata_o <= data_array[req_index];
                 cpu_rvalid_o <= 1;
+                if(cpu_rready_i == 1 && cpu_rvalid_o == 1) begin
+                    cpu_rvalid_o <= 0;
+                end
             end
             
             default: begin
