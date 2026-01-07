@@ -144,7 +144,7 @@ module ysyx_25050137(
     wire [3:0] cache_rid;
     wire cache_rvalid;
     wire cache_rready;
-/*
+
     icache ICACHE (
         .clk(clk),
         .rst_n(rst_n),
@@ -179,7 +179,7 @@ module ysyx_25050137(
         .mem_rvalid_i(cache_rvalid),
         .mem_rready_o(cache_rready)
     );
-*/
+
     wire [`CPU_WIDTH-1:0] lsu_araddr;
     wire [3:0] lsu_arid;
     wire [7:0] lsu_arlen;
@@ -273,7 +273,7 @@ module ysyx_25050137(
     axi_arbiter AXI_Arbiter(
         .clk(clk),
         .rst_n(rst_n),
-/*
+
         //a
         .araddr_i_a(cache_araddr),
         .arid_i_a(cache_arid),
@@ -289,7 +289,8 @@ module ysyx_25050137(
         .rid_o_a(cache_rid),
         .rvalid_o_a(cache_rvalid),
         .rready_i_a(cache_rready),
-*/
+
+/*
         //a
         .araddr_i_a(ifu_araddr),
         .arid_i_a(ifu_arid),
@@ -305,7 +306,7 @@ module ysyx_25050137(
         .rid_o_a(ifu_rid),
         .rvalid_o_a(ifu_rvalid),
         .rready_i_a(ifu_rready),
-
+*/
         .awaddr_i_a(0),
         .awid_i_a(0),
         .awlen_i_a(0),
