@@ -179,8 +179,8 @@ always @(posedge clk or negedge rst_n) begin
                 // 向内存发送请求
                 mem_arvalid_o <= 1'b1;
                 mem_rready_o <= 1;
-                mem_araddr_o <= {cpu_addr[ADDR_WIDTH-1:OFFSET_BITS], {OFFSET_BITS{1'b0}}};  // 对齐到块边界
-                
+                //mem_araddr_o <= {cpu_addr[ADDR_WIDTH-1:OFFSET_BITS], {OFFSET_BITS{1'b0}}};  // 对齐到块边界
+                mem_araddr_o <= cpu_addr;
                 if (mem_arready_i==1 && mem_arvalid_o==1) begin
                     mem_arvalid_o <= 1'b0;
                 end
