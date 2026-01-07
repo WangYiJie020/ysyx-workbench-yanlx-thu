@@ -66,10 +66,11 @@ assign req_index = cpu_addr[OFFSET_BITS+INDEX_BITS-1:OFFSET_BITS];
 assign req_offset = cpu_addr[OFFSET_BITS-1:0];
 
 // ========== 状态机定义 ==========
-typedef enum logic [1:0] {
+typedef enum logic [2:0] {
     STATE_IDLE,     // 空闲状态
     STATE_CHECK,    // 检查缓存
     STATE_MISS,     // 缓存缺失，访问内存
+    STATE_MEM,
     STATE_FILL      // 填充缓存
 } state_t;
 
@@ -106,11 +107,20 @@ always @(*) begin
         end
         
         STATE_MISS: begin
+            if (mem_arvalid_i == 1 && mem_arready_i == 1) begin
+                next_state = STATE_MEM;
+            end
+            else begin
+                next_state = STATE_MISS;  
+            end
+        end
+
+        STATE_MEM: begin
             if (mem_rvalid_i == 1 && mem_rready_o == 1) begin
                 next_state = STATE_FILL;
             end
             else begin
-                next_state = STATE_MISS;  
+                next_state = STATE_MEM;  
             end
         end
         
@@ -173,6 +183,10 @@ always @(posedge clk or negedge rst_n) begin
                 //    mem_arvalid_o <= 1'b0;
                 //end
                 // 填充缓存
+                
+            end
+
+            STATE_MEM: begin
                 if(mem_rvalid_i == 1 && mem_rready_o == 1) begin
                 mem_arvalid_o <= 1'b0;
                 mem_rready_o <= 1'b0;
