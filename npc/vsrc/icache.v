@@ -107,7 +107,7 @@ always @(*) begin
         end
         
         STATE_MISS: begin
-            if (mem_arvalid_i == 1 && mem_arready_i == 1) begin
+            if (mem_arvalid_o == 1 && mem_arready_i == 1) begin
                 next_state = STATE_MEM;
             end
             else begin
