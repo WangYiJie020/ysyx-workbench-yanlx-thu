@@ -154,6 +154,8 @@ always @(posedge clk or negedge rst_n) begin
         case (current_state)
             STATE_IDLE: begin
                 cpu_arready_o <= 1;
+                cpu_rvalid_o <= 1'b0;
+                cpu_rdata_o <= 0;
                 if (cpu_arready_o == 1 && cpu_arvalid_i == 1) begin
                     // 锁存请求地址
                     cpu_addr <= cpu_araddr_i;
