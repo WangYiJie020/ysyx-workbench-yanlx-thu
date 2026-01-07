@@ -183,6 +183,7 @@ always @(posedge clk or negedge rst_n) begin
                 mem_araddr_o <= cpu_addr;
                 if (mem_arready_i==1 && mem_arvalid_o==1) begin
                     mem_arvalid_o <= 1'b0;
+                    mem_araddr_o <= 0;
                 end
                 // 填充缓存
                 
