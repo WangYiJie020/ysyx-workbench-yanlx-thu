@@ -108,6 +108,22 @@ VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_difftest_next_step_TOP__
     difftest_next_step(difftest_check__Vcvt);
 }
 
+extern "C" void icache_hit();
+
+VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_icache_hit_TOP____024unit() {
+    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_icache_hit_TOP____024unit\n"); );
+    // Body
+    icache_hit();
+}
+
+extern "C" void icache_miss();
+
+VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_icache_miss_TOP____024unit() {
+    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_icache_miss_TOP____024unit\n"); );
+    // Body
+    icache_miss();
+}
+
 extern "C" void idu_counter_return(char inst_opcode);
 
 VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_idu_counter_return_TOP____024unit(CData/*7:0*/ inst_opcode) {

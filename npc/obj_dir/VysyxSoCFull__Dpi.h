@@ -24,6 +24,10 @@ extern "C" {
     extern void ebreak();
     // DPI import at /home/yanlx/ysyx-workbench/ysyxSoC/perip/flash/flash.v:84:30
     extern void flash_read(int addr, int* data);
+    // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/icache.v:1:30
+    extern void icache_hit();
+    // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/icache.v:2:30
+    extern void icache_miss();
     // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/idu.v:3:30
     extern void idu_counter_return(char inst_opcode);
     // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/ifu.v:4:30

@@ -103,7 +103,7 @@ always @(*) begin
         
         STATE_CHECK: begin
             // 检查是否命中
-            if (valid_array[req_index] && (tag_array[req_index] == req_tag)) begin
+            if (cpu_rready_i==1 && valid_array[req_index] && (tag_array[req_index] == req_tag)) begin
                 next_state = STATE_IDLE;  // 命中，返回空闲
             end else begin
                 next_state = STATE_MISS;  // 缺失，访问内存
@@ -162,6 +162,7 @@ always @(posedge clk or negedge rst_n) begin
                 cpu_rdata_o <= 0;
                 if (cpu_arready_o == 1 && cpu_arvalid_i == 1) begin
                     // 锁存请求地址
+                    //icache_get_addr();
                     cpu_addr <= cpu_araddr_i;
                 end
             end
