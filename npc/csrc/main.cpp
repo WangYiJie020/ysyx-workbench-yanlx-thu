@@ -48,6 +48,16 @@ static int flag = 0;
 
 uint32_t sdram[4][8192][512] = {};
 
+uint64_t icache_hit_counter=0,icache_miss_counter=0;
+
+extern "C" void icache_hit() {
+  icache_hit_counter++;
+}
+
+extern "C" void icache_miss() {
+  icache_miss_counter++;
+}
+
 uint64_t request_num=0,request_time=0,process_time=0,process_time_all=0;
 
 extern "C" void send_data_request(){
@@ -519,6 +529,7 @@ void cpu_exec(uint64_t num) {
       printf("inst type count:\ncalculation:%ld\nbranch:%ld\nmem:%ld\nother:%ld\ncsr:%ld\nerror:%ld\n\n",inst_calculation,inst_branch,inst_mem,inst_other,inst_csr,inst_error);
       printf("avg exec time:\ncalculation:%f\nbranch:%f\nmem:%f\nother:%f\ncsr:%f\n\n",length_calculation/(float)inst_calculation,length_branch/(float)inst_branch,length_mem/(float)inst_mem,length_other/(float)inst_other,length_csr/(float)inst_csr);
       printf("avg access mem time:%f\n",process_time_all/(float)request_num);
+      printf("icache hit:%ld,miss:%ld,p=%f",icache_hit_counter,icache_miss_counter,icache_hit_counter/(float)(icache_hit_counter+icache_miss_counter));
       break;
     }
     if(cpu_state == NPC_STOP) { //stop

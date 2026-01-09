@@ -1,3 +1,6 @@
+
+
+
 module icache #(
     parameter DATA_WIDTH = 32,      // 数据宽度（指令宽度）
     parameter BLOCK_SIZE = 4,       // 块大小（字节）
@@ -168,10 +171,12 @@ always @(posedge clk or negedge rst_n) begin
                     // 命中，直接返回数据
                     cpu_rvalid_o <= 1'b1;
                     cpu_rdata_o <= data_array[req_index];
+                    icache_hit();
                 end else begin
                     // 缺失，准备访问内存
                     cpu_rvalid_o <= 1'b0;
                     cpu_rdata_o <= 0;
+                    icache_miss();
                 end
             end
             
