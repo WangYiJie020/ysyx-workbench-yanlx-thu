@@ -1,4 +1,5 @@
-
+import "DPI-C" function void icache_hit();
+import "DPI-C" function void icache_miss();
 
 
 module icache #(
