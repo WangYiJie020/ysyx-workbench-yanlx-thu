@@ -49,7 +49,7 @@ static int flag = 0;
 uint32_t sdram[4][8192][512] = {};
 
 uint64_t icache_get_addr_time,icache_back_self_inst_time,icache_back_mem_inst_time;
-uint64_t icache_access_time=0,icache_miss_penalty=0,
+uint64_t icache_access_time=0,icache_miss_penalty=0;
 
 extern "C" void icache_get_addr() {
   icache_get_addr_time = counter;
