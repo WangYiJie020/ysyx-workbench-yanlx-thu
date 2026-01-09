@@ -1,5 +1,8 @@
 import "DPI-C" function void icache_hit();
 import "DPI-C" function void icache_miss();
+import "DPI-C" function void icache_get_addr();
+import "DPI-C" function void icache_back_self_inst();
+import "DPI-C" function void icache_back_mem_inst();
 
 
 module icache #(
@@ -162,7 +165,7 @@ always @(posedge clk or negedge rst_n) begin
                 cpu_rdata_o <= 0;
                 if (cpu_arready_o == 1 && cpu_arvalid_i == 1) begin
                     // 锁存请求地址
-                    //icache_get_addr();
+                    icache_get_addr();
                     cpu_addr <= cpu_araddr_i;
                 end
             end
@@ -174,6 +177,9 @@ always @(posedge clk or negedge rst_n) begin
                     cpu_rvalid_o <= 1'b1;
                     cpu_rdata_o <= data_array[req_index];
                     icache_hit();
+                    if(cpu_rready_i==1) begin
+                        icache_back_self_inst();
+                    end
                 end else begin
                     // 缺失，准备访问内存
                     cpu_rvalid_o <= 1'b0;
@@ -213,6 +219,7 @@ always @(posedge clk or negedge rst_n) begin
                 cpu_rdata_o <= data_array[req_index];
                 cpu_rvalid_o <= 1;
                 if(cpu_rready_i == 1 && cpu_rvalid_o == 1) begin
+                    icache_back_mem_inst();
                     cpu_rvalid_o <= 0;
                     cpu_rdata_o <= 0;
                 end

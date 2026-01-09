@@ -48,6 +48,23 @@ static int flag = 0;
 
 uint32_t sdram[4][8192][512] = {};
 
+uint64_t icache_get_addr_time,icache_back_self_inst_time,icache_back_mem_inst_time;
+uint64_t icache_access_time=0,icache_miss_penalty=0,
+
+extern "C" void icache_get_addr() {
+  icache_get_addr_time = counter;
+}
+
+extern "C" void icache_back_self_inst(){
+  icache_back_self_inst_time = counter - icache_get_addr_time;
+  icache_access_time += icache_back_self_inst_time;
+}
+
+extern "C" void icache_back_mem_inst(){
+  icache_back_mem_inst_time = counter - icache_get_addr_time;
+  icache_miss_penalty += icache_back_mem_inst_time;
+}
+
 uint64_t icache_hit_counter=0,icache_miss_counter=0;
 
 extern "C" void icache_hit() {
@@ -530,6 +547,7 @@ void cpu_exec(uint64_t num) {
       printf("avg exec time:\ncalculation:%f\nbranch:%f\nmem:%f\nother:%f\ncsr:%f\n\n",length_calculation/(float)inst_calculation,length_branch/(float)inst_branch,length_mem/(float)inst_mem,length_other/(float)inst_other,length_csr/(float)inst_csr);
       printf("avg access mem time:%f\n",process_time_all/(float)request_num);
       printf("icache hit:%ld,miss:%ld,p=%f\n",icache_hit_counter,icache_miss_counter,icache_hit_counter/(float)(icache_hit_counter+icache_miss_counter));
+      printf("access_time=%f,miss_penalty=%f\n",icache_access_time/(float)icache_hit_counter,icache_miss_penalty/(float)icache_miss_counter);
       break;
     }
     if(cpu_state == NPC_STOP) { //stop
