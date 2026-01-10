@@ -16,6 +16,8 @@ CFLAGS += -Os  # 优化代码大小
 LDFLAGS   += -T $(AM_HOME)/scripts/linkersoc.ld 
 LDFLAGS   += --gc-sections -e _start 
 NPCFLAGS  += -h 
+NEMUFLAGS += -l $(shell dirname $(IMAGE).elf)/nemu-log.txt -b
+NEMUFLAGS += -e $(IMAGE).elf
 
 CFLAGS += -DMAINARGS=\"$(mainargs)\"
 .PHONY: $(AM_HOME)/am/src/riscv/npc/trm.c
@@ -29,4 +31,5 @@ sim: image
 	$(MAKE) -C $(NPC_HOME) ISA=$(ISA) sim ARGS="$('NPCFLAGS')" IMG=$(IMAGE).bin
 
 run: image
-	$(MAKE) -C $(NPC_HOME) ISA=$(ISA) sim ARGS="$('NPCFLAGS')" IMG=$(IMAGE).bin
+	$(MAKE) -C $(NEMU_HOME) ISA=$(ISA) run ARGS="$(NEMUFLAGS)" IMG=$(IMAGE).bin
+# $(MAKE) -C $(NPC_HOME) ISA=$(ISA) sim ARGS="$('NPCFLAGS')" IMG=$(IMAGE).bin
