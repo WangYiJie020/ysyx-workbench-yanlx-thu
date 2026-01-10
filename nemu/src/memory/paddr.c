@@ -106,7 +106,7 @@ word_t paddr_read(paddr_t addr, int len) {
     return sram_read(addr, len);
   else if(likely(in_sdram(addr)))
     return sdram_read(addr, len);
-  return 0;
+  //return 0;
   IFDEF(CONFIG_DEVICE, return mmio_read(addr, len));
   out_of_bound(addr);
   return 0;
