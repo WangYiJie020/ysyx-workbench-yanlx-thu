@@ -26,15 +26,21 @@ static uint8_t *pmem = NULL;
 static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
 #endif
 
-#define CONFIG_SRAMBASE 0xa0000000
+#define CONFIG_SRAMBASE 0x0f000000
+#define CONFIG_SDRAMBASE 0xa0000000
 
-static uint8_t sram[0x30000000] PG_ALIGN = {};
+static uint8_t sram[0x01000000] PG_ALIGN = {};
+
+static uint8_t sdram[0x20000000] PG_ALIGN = {};
 
 uint8_t* guest_to_host(paddr_t paddr) { return pmem + paddr - CONFIG_MBASE; }
 paddr_t host_to_guest(uint8_t *haddr) { return haddr - pmem + CONFIG_MBASE; }
 
 uint8_t* guest_to_host_sram(paddr_t paddr) { return sram + paddr - CONFIG_SRAMBASE; }
 paddr_t host_to_guest_sram(uint8_t *haddr) { return haddr - sram + CONFIG_SRAMBASE; }
+
+uint8_t* guest_to_host_sdram(paddr_t paddr) { return sdram + paddr - CONFIG_SDRAMBASE; }
+paddr_t host_to_guest_sdram(uint8_t *haddr) { return haddr - sdram + CONFIG_SDRAMBASE; }
 
 static word_t pmem_read(paddr_t addr, int len) {
   word_t ret = host_read(guest_to_host(addr), len);
@@ -64,6 +70,21 @@ static void sram_write(paddr_t addr, int len, word_t data) {
   #endif
 }
 
+static word_t sdram_read(paddr_t addr, int len) {
+  word_t ret = host_read(guest_to_host_sdram(addr), len);
+  #ifdef CONFIG_MTRACE
+  log_write("[trace] read addr:%x, len:%d, data=%08x\n",addr,len,ret);
+  #endif
+  return ret;
+}
+
+static void sdram_write(paddr_t addr, int len, word_t data) {
+  host_write(guest_to_host_sdram(addr), len, data);
+  #ifdef CONFIG_MTRACE
+  log_write("[trace] write addr:%x, len:%d, data:%x\n",addr,len,data);
+  #endif
+}
+
 static void out_of_bound(paddr_t addr) {
   panic("address = " FMT_PADDR " is out of bound of pmem [" FMT_PADDR ", " FMT_PADDR "] at pc = " FMT_WORD,
       addr, PMEM_LEFT, PMEM_RIGHT, cpu.pc);
@@ -83,6 +104,8 @@ word_t paddr_read(paddr_t addr, int len) {
     return pmem_read(addr, len);
   else if(likely(in_sram(addr)))
     return sram_read(addr, len);
+  else if(likely(in_sdram(addr)))
+    return sdram_read(addr, len);
   IFDEF(CONFIG_DEVICE, return mmio_read(addr, len));
   out_of_bound(addr);
   return 0;
@@ -95,6 +118,10 @@ void paddr_write(paddr_t addr, int len, word_t data) {
   }
   else if(likely(in_sram(addr))) {
     sram_write(addr, len, data);
+    return;
+  }
+  else if(likely(in_sdram(addr))) {
+    sdram_write(addr, len, data);
     return;
   }
   //else return; //so file used to skip
