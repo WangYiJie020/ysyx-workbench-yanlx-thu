@@ -185,7 +185,7 @@ always @(posedge clk or negedge rst_n) begin
                 if (valid_array[req_index] && (tag_array[req_index] == req_tag)) begin
                     // 命中，直接返回数据
                     cpu_rvalid_o <= 1'b1;
-                    cpu_rdata_o <= data_array[req_index][req_offset*32 +: 32];
+                    cpu_rdata_o <= data_array[req_index][req_offset*8 +: 32];
                     icache_hit();
                     if(cpu_rready_i==1) begin
                         icache_back_self_inst();
@@ -227,7 +227,7 @@ always @(posedge clk or negedge rst_n) begin
             STATE_FILL: begin 
                 // 返回数据给CPU
                 mem_arvalid_o <= 1'b0;
-                cpu_rdata_o <= data_array[req_index][req_offset*32 +: 32];
+                cpu_rdata_o <= data_array[req_index][req_offset*8 +: 32];
                 cpu_rvalid_o <= 1;
                 if(cpu_rready_i == 1 && cpu_rvalid_o == 1) begin
                     icache_back_mem_inst();
