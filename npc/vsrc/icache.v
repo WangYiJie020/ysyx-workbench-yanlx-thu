@@ -127,7 +127,7 @@ always @(*) begin
 
         STATE_MEM: begin
             if (mem_rvalid_i == 1 && mem_rready_o == 1) begin
-                if(counter==COUNTER_SIZE-1) begin
+                if(counter==COUNTER_SIZE) begin
                     next_state = STATE_FILL;
                 end
                 else begin
