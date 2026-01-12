@@ -7,7 +7,7 @@ import "DPI-C" function void icache_back_mem_inst();
 
 module icache #(
     parameter DATA_WIDTH = 32,      // 数据宽度（指令宽度）
-    parameter BLOCK_SIZE = 4,       // 块大小（字节）
+    parameter BLOCK_SIZE = 16,       // 块大小（字节）
     parameter NUM_BLOCKS = 16,      // Cache块数量
     parameter ADDR_WIDTH = 32       // 地址宽度
 ) (
@@ -52,6 +52,7 @@ localparam BLOCK_WORDS = BLOCK_SIZE / (DATA_WIDTH/8);  // 块中的字数
 localparam OFFSET_BITS = $clog2(BLOCK_SIZE);          // offset位宽
 localparam INDEX_BITS = $clog2(NUM_BLOCKS);           // index位宽
 localparam TAG_BITS = ADDR_WIDTH - OFFSET_BITS - INDEX_BITS;  // tag位宽
+localparam COUNTER_SIZE = BLOCK_SIZE / 4; // 块大小
 
 
 //reg [BLOCK_SIZE*8-1:0] icacheL1 [0:NUM_BLOCKS-1];
@@ -59,7 +60,7 @@ localparam TAG_BITS = ADDR_WIDTH - OFFSET_BITS - INDEX_BITS;  // tag位宽
 reg [DATA_WIDTH-1:0] cpu_addr;
 
 // ========== 缓存存储 ==========
-reg [DATA_WIDTH-1:0] data_array [0:NUM_BLOCKS-1];     // 数据存储
+reg [DATA_WIDTH*BLOCK_SIZE-1:0] data_array [0:NUM_BLOCKS-1];     // 数据存储
 reg [TAG_BITS-1:0] tag_array [0:NUM_BLOCKS-1];        // tag存储
 reg valid_array [0:NUM_BLOCKS-1];                     // 有效位
 
@@ -67,6 +68,8 @@ reg valid_array [0:NUM_BLOCKS-1];                     // 有效位
 wire [TAG_BITS-1:0] req_tag;
 wire [INDEX_BITS-1:0] req_index;
 wire [OFFSET_BITS-1:0] req_offset;
+
+reg [OFFSET_BITS-1:0] counter;
 
 assign req_tag = cpu_addr[ADDR_WIDTH-1:ADDR_WIDTH-TAG_BITS];
 assign req_index = cpu_addr[OFFSET_BITS+INDEX_BITS-1:OFFSET_BITS];
@@ -124,7 +127,13 @@ always @(*) begin
 
         STATE_MEM: begin
             if (mem_rvalid_i == 1 && mem_rready_o == 1) begin
-                next_state = STATE_FILL;
+                if(counter==COUNTER_SIZE) begin
+                    next_state = STATE_FILL;
+                end
+                else begin
+                    next_state = STATE_MISS;
+                end
+                
             end
             else begin
                 next_state = STATE_MEM;  
@@ -155,7 +164,7 @@ always @(posedge clk or negedge rst_n) begin
         for (int i = 0; i < NUM_BLOCKS; i = i + 1) begin
             valid_array[i] <= 1'b0;
             tag_array[i] <= {TAG_BITS{1'b0}};
-            data_array[i] <= {DATA_WIDTH{1'b0}};
+            data_array[i] <= {(DATA_WIDTH*BLOCK_SIZE){1'b0}};
         end
     end else begin
         case (current_state)
@@ -163,6 +172,7 @@ always @(posedge clk or negedge rst_n) begin
                 cpu_arready_o <= 1;
                 cpu_rvalid_o <= 1'b0;
                 cpu_rdata_o <= 0;
+                counter <= 0;
                 if (cpu_arready_o == 1 && cpu_arvalid_i == 1) begin
                     // 锁存请求地址
                     icache_get_addr();
@@ -192,11 +202,13 @@ always @(posedge clk or negedge rst_n) begin
                 // 向内存发送请求
                 mem_arvalid_o <= 1'b1;
                 mem_rready_o <= 1;
-                //mem_araddr_o <= {cpu_addr[ADDR_WIDTH-1:OFFSET_BITS], {OFFSET_BITS{1'b0}}};  // 对齐到块边界
-                mem_araddr_o <= cpu_addr;
+                mem_araddr_o <= {cpu_addr[ADDR_WIDTH-1:OFFSET_BITS], {OFFSET_BITS{1'b0}}}+counter;  // 对齐到块边界
+                //mem_araddr_o <= cpu_addr;
+                
                 if (mem_arready_i==1 && mem_arvalid_o==1) begin
                     mem_arvalid_o <= 1'b0;
                     mem_araddr_o <= 0;
+                    counter <= counter + 1;
                 end
                 // 填充缓存
                 
@@ -206,17 +218,16 @@ always @(posedge clk or negedge rst_n) begin
                 mem_arvalid_o <= 1'b0;
                 //mem_rready_o <= 1'b0;
                 if(mem_rvalid_i == 1 && mem_rready_o == 1) begin
-                
-                data_array[req_index] <= mem_rdata_i;
-                tag_array[req_index] <= req_tag;
-                valid_array[req_index] <= 1'b1;
+                    data_array[req_index][(counter+1)*8-1:counter*8] <= mem_rdata_i;
+                    tag_array[req_index] <= req_tag;
+                    valid_array[req_index] <= 1'b1;
                 end
             end
             
             STATE_FILL: begin 
                 // 返回数据给CPU
                 mem_arvalid_o <= 1'b0;
-                cpu_rdata_o <= data_array[req_index];
+                cpu_rdata_o <= data_array[req_index][(req_offset+1)*8-1:req_offset*8];
                 cpu_rvalid_o <= 1;
                 if(cpu_rready_i == 1 && cpu_rvalid_o == 1) begin
                     icache_back_mem_inst();
