@@ -60,7 +60,7 @@ localparam COUNTER_SIZE = BLOCK_SIZE / 4; // 块大小
 reg [DATA_WIDTH-1:0] cpu_addr;
 
 // ========== 缓存存储 ==========
-reg [DATA_WIDTH*BLOCK_SIZE-1:0] data_array [0:NUM_BLOCKS-1];     // 数据存储
+reg [DATA_WIDTH*COUNTER_SIZE-1:0] data_array [0:NUM_BLOCKS-1];     // 数据存储
 reg [TAG_BITS-1:0] tag_array [0:NUM_BLOCKS-1];        // tag存储
 reg valid_array [0:NUM_BLOCKS-1];                     // 有效位
 
@@ -202,7 +202,7 @@ always @(posedge clk or negedge rst_n) begin
                 // 向内存发送请求
                 mem_arvalid_o <= 1'b1;
                 mem_rready_o <= 1;
-                mem_araddr_o <= {cpu_addr[ADDR_WIDTH-1:OFFSET_BITS], {OFFSET_BITS{1'b0}}}+counter;  // 对齐到块边界
+                mem_araddr_o <= {cpu_addr[ADDR_WIDTH-1:OFFSET_BITS], {OFFSET_BITS{1'b0}}}+counter*4;  // 对齐到块边界
                 //mem_araddr_o <= cpu_addr;
                 
                 if (mem_arready_i==1 && mem_arvalid_o==1) begin
@@ -218,7 +218,7 @@ always @(posedge clk or negedge rst_n) begin
                 mem_arvalid_o <= 1'b0;
                 //mem_rready_o <= 1'b0;
                 if(mem_rvalid_i == 1 && mem_rready_o == 1) begin
-                    data_array[req_index][(counter+1)*8-1:counter*8] <= mem_rdata_i;
+                    data_array[req_index][(counter+4)*8-1:counter*8] <= mem_rdata_i;
                     tag_array[req_index] <= req_tag;
                     valid_array[req_index] <= 1'b1;
                 end
@@ -227,7 +227,7 @@ always @(posedge clk or negedge rst_n) begin
             STATE_FILL: begin 
                 // 返回数据给CPU
                 mem_arvalid_o <= 1'b0;
-                cpu_rdata_o <= data_array[req_index][(req_offset+1)*8-1:req_offset*8];
+                cpu_rdata_o <= data_array[req_index][(req_offset+4)*8-1:req_offset*8];
                 cpu_rvalid_o <= 1;
                 if(cpu_rready_i == 1 && cpu_rvalid_o == 1) begin
                     icache_back_mem_inst();
