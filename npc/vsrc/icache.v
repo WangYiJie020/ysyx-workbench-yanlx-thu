@@ -69,7 +69,7 @@ wire [TAG_BITS-1:0] req_tag;
 wire [INDEX_BITS-1:0] req_index;
 wire [OFFSET_BITS-1:0] req_offset;
 
-reg [OFFSET_BITS-1:0] counter;
+reg [31:0] counter;
 
 assign req_tag = cpu_addr[ADDR_WIDTH-1:ADDR_WIDTH-TAG_BITS];
 assign req_index = cpu_addr[OFFSET_BITS+INDEX_BITS-1:OFFSET_BITS];
