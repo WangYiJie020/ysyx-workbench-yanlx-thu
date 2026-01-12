@@ -164,7 +164,7 @@ always @(posedge clk or negedge rst_n) begin
         for (int i = 0; i < NUM_BLOCKS; i = i + 1) begin
             valid_array[i] <= 1'b0;
             tag_array[i] <= {TAG_BITS{1'b0}};
-            data_array[i] <= {(DATA_WIDTH*BLOCK_SIZE){1'b0}};
+            data_array[i] <= {(DATA_WIDTH*COUNTER_SIZE){1'b0}};
         end
     end else begin
         case (current_state)
