@@ -276,12 +276,15 @@ module lsu(
                     awvalid <= 0;
                     send_data_request();
                 end
-                if(wvalid==1 && wready_i==1) wvalid <= 0;
+                if(wvalid==1 && wready_i==1) begin 
+                    wvalid <= 0;
+                    wlast_o <= 1;
+                end
                 if(arvalid==1 && arready_i==1) begin 
                     arvalid <= 0;
                     send_data_request();
                 end
-                wlast_o <= 0;
+                
 
             end else if (current_state == S_SEND)begin
                 lsu_valid_o <= 0;
