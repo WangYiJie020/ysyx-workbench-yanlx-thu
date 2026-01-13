@@ -162,8 +162,9 @@ module ifu(
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                 end
+                
                 ifu_valid_o <= 1;
-                arvalid <= 0;
+                //arvalid <= 0;
                 rready <= 0;
                 inst_o <= inst;
                 pc_o <= pc;     
