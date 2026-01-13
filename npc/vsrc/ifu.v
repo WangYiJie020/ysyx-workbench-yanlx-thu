@@ -96,9 +96,9 @@ module ifu(
             end
             
             S_RECEIVE: begin  
-                if(receive_counter == 2)  
+                ///if(receive_counter == 2)  
                     next_state = S_WAIT_SEND;  
-                else next_state = current_state; 
+                //else next_state = current_state; 
             end
 
             S_WAIT_SEND: begin
@@ -179,13 +179,13 @@ module ifu(
                     pc <= npc_i;     
                 
             end else if(current_state == S_RECEIVE) begin 
-                if(receive_counter == 2) begin
+                //if(receive_counter == 2) begin
                     receive_counter <= 0;
                     arvalid <= 1;
                     rready <= 0;
                     araddr <= pc; 
-                end
-                else receive_counter <= receive_counter + 1;
+                //end
+                //else receive_counter <= receive_counter + 1;
                 ifu_valid_o <= 0;                
                 
                 //if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
