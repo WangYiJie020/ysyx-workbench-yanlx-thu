@@ -278,7 +278,7 @@ module lsu(
                 end
                 if(wvalid==1 && wready_i==1) begin 
                     wvalid <= 0;
-                    wlast_o <= 1;
+                    wlast_o <= 0;
                 end
                 if(arvalid==1 && arready_i==1) begin 
                     arvalid <= 0;
