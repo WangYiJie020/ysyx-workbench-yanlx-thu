@@ -199,9 +199,9 @@ module ifu(
                 //receive_counter <= 0;                        
                 if(rready == 1 && rvalid_i == 1) begin
                     inst <= rdata_i;
-                    //rready <= 0;
+                    rready <= 0; 
                 end
-                rready <= 1; 
+                
                 //if(receive_counter == 2) begin
                 //    receive_counter <= 0;
                     
