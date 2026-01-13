@@ -136,8 +136,8 @@ module axi_arbiter(
             else if(ar_switch == 1 && rlast_i == 1)begin 
                 ar_switch <= 0; r_switch <= 0;arready_o_b <= 0;arready_o_a <= arready_i;
             end
-            else begin
-                arready_o_a <= arready_i;arready_o_b <= arready_i;
+            else if(arready_i==0)begin
+                arready_o_a <= 0;arready_o_b <= 0;
             end
         end
     end

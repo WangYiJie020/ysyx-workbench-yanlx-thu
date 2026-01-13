@@ -5462,10 +5462,10 @@ void VysyxSoCFull___024unit____Vdpiimwrap_data_counter_add_TOP____024unit();
 void VysyxSoCFull___024unit____Vdpiimwrap_receive_data_back_TOP____024unit();
 void VysyxSoCFull___024unit____Vdpiimwrap_send_data_request_TOP____024unit();
 extern const VlUnpacked<CData/*1:0*/, 64> VysyxSoCFull__ConstPool__TABLE_h1dd48d1a_0;
-extern const VlUnpacked<CData/*6:0*/, 32> VysyxSoCFull__ConstPool__TABLE_h04cb58a2_0;
+extern const VlUnpacked<CData/*6:0*/, 32> VysyxSoCFull__ConstPool__TABLE_h6d82bb77_0;
 extern const VlUnpacked<CData/*0:0*/, 32> VysyxSoCFull__ConstPool__TABLE_h67b41c1d_0;
-extern const VlUnpacked<CData/*0:0*/, 32> VysyxSoCFull__ConstPool__TABLE_h3a7b835a_0;
-extern const VlUnpacked<CData/*0:0*/, 32> VysyxSoCFull__ConstPool__TABLE_hd0576e1b_0;
+extern const VlUnpacked<CData/*0:0*/, 32> VysyxSoCFull__ConstPool__TABLE_h9b4e7f07_0;
+extern const VlUnpacked<CData/*0:0*/, 32> VysyxSoCFull__ConstPool__TABLE_h91ea6aeb_0;
 extern const VlUnpacked<CData/*0:0*/, 32> VysyxSoCFull__ConstPool__TABLE_h7bc68247_0;
 extern const VlUnpacked<CData/*1:0*/, 64> VysyxSoCFull__ConstPool__TABLE_hb056201f_0;
 extern const VlUnpacked<CData/*2:0*/, 8> VysyxSoCFull__ConstPool__TABLE_h0332641b_0;
@@ -6264,43 +6264,37 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__7(VysyxSoCFull___0
                                           (((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__arvalid) 
                                             << 1U) 
                                            | (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__rst_n)))));
-    if ((1U & VysyxSoCFull__ConstPool__TABLE_h04cb58a2_0
+    if ((1U & VysyxSoCFull__ConstPool__TABLE_h6d82bb77_0
          [__Vtableidx2])) {
         vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT__ar_switch 
             = VysyxSoCFull__ConstPool__TABLE_h67b41c1d_0
             [__Vtableidx2];
     }
-    if ((2U & VysyxSoCFull__ConstPool__TABLE_h04cb58a2_0
+    if ((2U & VysyxSoCFull__ConstPool__TABLE_h6d82bb77_0
          [__Vtableidx2])) {
         vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT__r_switch 
             = VysyxSoCFull__ConstPool__TABLE_h67b41c1d_0
             [__Vtableidx2];
     }
-    if ((4U & VysyxSoCFull__ConstPool__TABLE_h04cb58a2_0
-         [__Vtableidx2])) {
-        vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__ifu_arready 
-            = VysyxSoCFull__ConstPool__TABLE_h3a7b835a_0
-            [__Vtableidx2];
-    }
-    if ((8U & VysyxSoCFull__ConstPool__TABLE_h04cb58a2_0
-         [__Vtableidx2])) {
-        vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__lsu_arready 
-            = VysyxSoCFull__ConstPool__TABLE_hd0576e1b_0
-            [__Vtableidx2];
-    }
-    if ((0x10U & VysyxSoCFull__ConstPool__TABLE_h04cb58a2_0
+    vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__ifu_arready 
+        = VysyxSoCFull__ConstPool__TABLE_h9b4e7f07_0
+        [__Vtableidx2];
+    vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__lsu_arready 
+        = VysyxSoCFull__ConstPool__TABLE_h91ea6aeb_0
+        [__Vtableidx2];
+    if ((0x10U & VysyxSoCFull__ConstPool__TABLE_h6d82bb77_0
          [__Vtableidx2])) {
         vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT__aw_switch 
             = VysyxSoCFull__ConstPool__TABLE_h7bc68247_0
             [__Vtableidx2];
     }
-    if ((0x20U & VysyxSoCFull__ConstPool__TABLE_h04cb58a2_0
+    if ((0x20U & VysyxSoCFull__ConstPool__TABLE_h6d82bb77_0
          [__Vtableidx2])) {
         vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT__w_switch 
             = VysyxSoCFull__ConstPool__TABLE_h7bc68247_0
             [__Vtableidx2];
     }
-    if ((0x40U & VysyxSoCFull__ConstPool__TABLE_h04cb58a2_0
+    if ((0x40U & VysyxSoCFull__ConstPool__TABLE_h6d82bb77_0
          [__Vtableidx2])) {
         vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT__b_switch 
             = VysyxSoCFull__ConstPool__TABLE_h7bc68247_0
