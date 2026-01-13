@@ -212,8 +212,8 @@ module lsu(
 
             if(current_state == S_IDLE) begin 
                 lsu_valid_o <= 0;
-                awvalid <= MemWrite_i;
-                wvalid <= MemWrite_i;
+                awvalid <= 0;
+                wvalid <= 0;
                 //arvalid <= 0;
                 rready <= 0;
                 bready <= 0;
