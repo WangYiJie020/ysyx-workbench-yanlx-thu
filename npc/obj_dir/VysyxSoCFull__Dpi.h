@@ -38,7 +38,7 @@ extern "C" {
     extern void idu_counter_return(char inst_opcode);
     // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/ifu.v:4:30
     extern void inst_counter_add();
-    // DPI import at /home/yanlx/ysyx-workbench/ysyxSoC/build/ysyxSoCFull.v:5402:30
+    // DPI import at /home/yanlx/ysyx-workbench/ysyxSoC/build/ysyxSoCFull.v:6723:30
     extern void mrom_read(int raddr, int* rdata);
     // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/data_mem.v:1:29
     extern int pmem_read(int raddr);
