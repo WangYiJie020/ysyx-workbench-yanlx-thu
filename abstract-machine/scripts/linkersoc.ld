@@ -28,7 +28,7 @@ SECTIONS {
     _bootloader_start = .;
     *(.bootloader*)
     _bootloader_end = .;
-  } > psram AT> flash  
+  } > sdram AT> flash  
 
   _bootloader_lma_start = LOADADDR(.bootloader);
 
