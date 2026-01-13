@@ -119,7 +119,7 @@ module axi_arbiter(
             aw_switch <= 1;
             w_switch <= 1;
             b_switch <= 1;
-            arready_o_b <= 0;arready_o_a <= arready_i;
+            //arready_o_b <= 0;arready_o_a <= arready_i;
         end else begin
             //if(arvalid_i_a == 1) begin 
             //    ar_switch <= 0; r_switch <= 0;arready_o_b <= 0;arready_o_a <= arready_i;
