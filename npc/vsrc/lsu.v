@@ -115,8 +115,8 @@ module lsu(
     assign rs1_o = rs1;
     assign alu_result_o = alu_result;
     //assign datamem_readdata_o = rdata_i;
-    assign araddr = alu_result;
-    assign awaddr = alu_result;
+    //assign araddr = alu_result;
+    //assign awaddr = alu_result;
     //assign datamem_readdata_o = rdata_i;
     assign arid_o = 0;
     assign arlen_o = 0;
@@ -212,8 +212,8 @@ module lsu(
 
             if(current_state == S_IDLE) begin 
                 lsu_valid_o <= 0;
-                awvalid <= MemWrite_i;
-                wvalid <= MemWrite_i;
+                awvalid <= 0;
+                wvalid <= 0;
                 //arvalid <= 0;
                 rready <= 0;
                 bready <= 0;
@@ -229,13 +229,15 @@ module lsu(
                 rs1 <= rs1_i;
                 if(wmask_i == 4'hf) wdata <= rs2_i; 
                 else wdata <= rs2_i << (8*alu_result_i[1:0]);  
-                
+                araddr <= alu_result_i;
+
                 arvalid <= MemRead_i;
                 rready <= MemRead_i;        
                 
                 bready <= 1;
                 rmask <= rmask_i;
-
+                
+                awaddr <= alu_result_i;
                 awvalid <= MemWrite_i;
                 wvalid <= MemWrite_i;
                 
