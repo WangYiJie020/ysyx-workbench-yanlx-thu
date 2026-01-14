@@ -220,12 +220,13 @@ always @(posedge clk or negedge rst_n) begin
 
             STATE_MEM: begin
                 mem_arvalid_o <= 1'b0;
-                counter <= counter + 1;
+                
                 //mem_rready_o <= 1'b0;
                 if(mem_rvalid_i == 1 && mem_rready_o == 1) begin
                     data_array[req_index][(counter-1)*32 +: 32] <= mem_rdata_i;
                     tag_array[req_index] <= req_tag;
                     valid_array[req_index] <= 1'b1;
+                    counter <= counter + 1;
                 end
             end
             
