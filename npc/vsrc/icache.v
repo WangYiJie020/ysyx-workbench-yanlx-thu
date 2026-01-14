@@ -131,7 +131,7 @@ always @(*) begin
                     next_state = STATE_FILL;
                 end
                 else begin
-                    next_state = STATE_MISS;
+                    next_state = STATE_MEM;
                 end
                 
             end
