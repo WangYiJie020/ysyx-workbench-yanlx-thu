@@ -45,7 +45,7 @@ module icache #(
     output reg mem_rready_o
 );
 
-assign mem_arsize_o = 3'b010; 
+//assign mem_arsize_o = 3'b010; 
 
 // ========== 参数计算 ==========
 localparam BLOCK_WORDS = BLOCK_SIZE / (DATA_WIDTH/8);  // 块中的字数
@@ -127,7 +127,7 @@ always @(*) begin
 
         STATE_MEM: begin
             if (mem_rvalid_i == 1 && mem_rready_o == 1) begin
-                if(counter==COUNTER_SIZE) begin
+                if(mem_rlast_i == 1) begin
                     next_state = STATE_FILL;
                 end
                 else begin
@@ -202,20 +202,25 @@ always @(posedge clk or negedge rst_n) begin
                 // 向内存发送请求
                 mem_arvalid_o <= 1'b1;
                 mem_rready_o <= 1;
-                mem_araddr_o <= {cpu_addr[ADDR_WIDTH-1:OFFSET_BITS], {OFFSET_BITS{1'b0}}}+counter*4;  // 对齐到块边界
+                mem_araddr_o <= {cpu_addr[ADDR_WIDTH-1:OFFSET_BITS], {OFFSET_BITS{1'b0}}};  // 对齐到块边界
                 //mem_araddr_o <= cpu_addr;
+                mem_arlen_o <= 4'b0011;
+                mem_arsize_o <= 3'b010;
+                mem_arburst_o <= 2'b01; //INCR
+                //counter <= counter + 1;
                 
-                if (mem_arready_i==1 && mem_arvalid_o==1) begin
-                    mem_arvalid_o <= 1'b0;
-                    mem_araddr_o <= 0;
-                    counter <= counter + 1;
-                end
+                //if (mem_arready_i==1 && mem_arvalid_o==1) begin
+                //    mem_arvalid_o <= 1'b0;
+                 //   mem_araddr_o <= 0;
+                 //   counter <= counter + 1;
+                //end
                 // 填充缓存
                 
             end
 
             STATE_MEM: begin
                 mem_arvalid_o <= 1'b0;
+                counter <= counter + 1;
                 //mem_rready_o <= 1'b0;
                 if(mem_rvalid_i == 1 && mem_rready_o == 1) begin
                     data_array[req_index][(counter-1)*32 +: 32] <= mem_rdata_i;
