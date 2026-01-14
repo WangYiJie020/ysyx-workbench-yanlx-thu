@@ -7,7 +7,7 @@ import "DPI-C" function void icache_back_mem_inst();
 
 module icache #(
     parameter DATA_WIDTH = 32,      // 数据宽度（指令宽度）
-    parameter BLOCK_SIZE = 16,       // 块大小（字节）
+    parameter BLOCK_SIZE = 4,       // 块大小（字节）
     parameter NUM_BLOCKS = 16,      // Cache块数量
     parameter ADDR_WIDTH = 32       // 地址宽度
 ) (
@@ -204,9 +204,17 @@ always @(posedge clk or negedge rst_n) begin
                 mem_rready_o <= 1;
                 mem_araddr_o <= {cpu_addr[ADDR_WIDTH-1:OFFSET_BITS], {OFFSET_BITS{1'b0}}};  // 对齐到块边界
                 //mem_araddr_o <= cpu_addr;
-                mem_arlen_o <= 8'b00000011;
+                
                 mem_arsize_o <= 3'b010;
-                mem_arburst_o <= 2'b01; //INCR
+                if(COUNTER_SIZE != 1) begin 
+                    mem_arburst_o <= 2'b01; 
+                    mem_arlen_o <= 8'b00000011;
+                end//INCR
+                else begin 
+                    mem_arburst_o <= 2'b00;
+                    mem_arlen_o <= 8'b0; 
+                end
+                
                 //counter <= counter + 1;
                 
                 //if (mem_arready_i==1 && mem_arvalid_o==1) begin
