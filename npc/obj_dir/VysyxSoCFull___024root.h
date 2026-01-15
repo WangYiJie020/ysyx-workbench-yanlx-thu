@@ -1390,12 +1390,16 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         VlUnpacked<CData/*7:0*/, 8388608> ysyxSoCFull__DOT__psram__DOT__memory;
         VlUnpacked<VlUnpacked<SData/*15:0*/, 4194304>, 4> ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_high__DOT__bank;
         VlUnpacked<SData/*11:0*/, 4> ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_high__DOT__bank_active_raw;
+        VlUnpacked<SData/*15:0*/, 4> ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_high__DOT__banktmp;
         VlUnpacked<VlUnpacked<SData/*15:0*/, 4194304>, 4> ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_low__DOT__bank;
         VlUnpacked<SData/*11:0*/, 4> ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_low__DOT__bank_active_raw;
+        VlUnpacked<SData/*15:0*/, 4> ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_low__DOT__banktmp;
         VlUnpacked<VlUnpacked<SData/*15:0*/, 4194304>, 4> ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_high__DOT__bank;
         VlUnpacked<SData/*11:0*/, 4> ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_high__DOT__bank_active_raw;
+        VlUnpacked<SData/*15:0*/, 4> ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_high__DOT__banktmp;
         VlUnpacked<VlUnpacked<SData/*15:0*/, 4194304>, 4> ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__bank;
         VlUnpacked<SData/*11:0*/, 4> ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__bank_active_raw;
+        VlUnpacked<SData/*15:0*/, 4> ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__banktmp;
         VlUnpacked<CData/*0:0*/, 17> __Vm_traceActivity;
     };
     VlTriggerVec<1> __VstlTriggered;
