@@ -1541,7 +1541,6 @@ VL_ATTR_COLD void VysyxSoCFull___024root___ctor_var_reset(VysyxSoCFull___024root
         }
     }
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_high__DOT__r_ba = VL_RAND_RESET_I(2);
-    vlSelf->ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_high__DOT__r_col_addr = VL_RAND_RESET_I(9);
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_high__DOT__bank_addr = VL_RAND_RESET_I(22);
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_high__DOT__r_bank_addr = VL_RAND_RESET_I(22);
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
@@ -1563,7 +1562,6 @@ VL_ATTR_COLD void VysyxSoCFull___024root___ctor_var_reset(VysyxSoCFull___024root
         }
     }
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_low__DOT__r_ba = VL_RAND_RESET_I(2);
-    vlSelf->ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_low__DOT__r_col_addr = VL_RAND_RESET_I(9);
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_low__DOT__bank_addr = VL_RAND_RESET_I(22);
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_low__DOT__r_bank_addr = VL_RAND_RESET_I(22);
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
@@ -1588,7 +1586,6 @@ VL_ATTR_COLD void VysyxSoCFull___024root___ctor_var_reset(VysyxSoCFull___024root
         }
     }
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_high__DOT__r_ba = VL_RAND_RESET_I(2);
-    vlSelf->ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_high__DOT__r_col_addr = VL_RAND_RESET_I(9);
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_high__DOT__bank_addr = VL_RAND_RESET_I(22);
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_high__DOT__r_bank_addr = VL_RAND_RESET_I(22);
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
@@ -1610,7 +1607,6 @@ VL_ATTR_COLD void VysyxSoCFull___024root___ctor_var_reset(VysyxSoCFull___024root
         }
     }
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__r_ba = VL_RAND_RESET_I(2);
-    vlSelf->ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__r_col_addr = VL_RAND_RESET_I(9);
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__bank_addr = VL_RAND_RESET_I(22);
     vlSelf->ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__r_bank_addr = VL_RAND_RESET_I(22);
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
