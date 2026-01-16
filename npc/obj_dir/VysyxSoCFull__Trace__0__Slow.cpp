@@ -4189,6 +4189,8 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+1567,"ba", false,-1, 1,0);
     tracep->declBus(c+1579,"dqm", false,-1, 1,0);
     tracep->declBus(c+1628,"dq", false,-1, 15,0);
+    tracep->declBus(c+2042,"CMD_PRECHARGE", false,-1, 3,0);
+    tracep->declBus(c+2043,"CMD_AUTO_REFRESH", false,-1, 3,0);
     tracep->declBus(c+2069,"BANKSIZE", false,-1, 31,0);
     tracep->declBus(c+2038,"CMD_ACTIVE", false,-1, 3,0);
     tracep->declBus(c+2039,"CMD_READ", false,-1, 3,0);
@@ -4224,6 +4226,8 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+1567,"ba", false,-1, 1,0);
     tracep->declBus(c+1581,"dqm", false,-1, 1,0);
     tracep->declBus(c+1630,"dq", false,-1, 15,0);
+    tracep->declBus(c+2042,"CMD_PRECHARGE", false,-1, 3,0);
+    tracep->declBus(c+2043,"CMD_AUTO_REFRESH", false,-1, 3,0);
     tracep->declBus(c+2069,"BANKSIZE", false,-1, 31,0);
     tracep->declBus(c+2038,"CMD_ACTIVE", false,-1, 3,0);
     tracep->declBus(c+2039,"CMD_READ", false,-1, 3,0);
@@ -4270,6 +4274,8 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+1567,"ba", false,-1, 1,0);
     tracep->declBus(c+1579,"dqm", false,-1, 1,0);
     tracep->declBus(c+1628,"dq", false,-1, 15,0);
+    tracep->declBus(c+2042,"CMD_PRECHARGE", false,-1, 3,0);
+    tracep->declBus(c+2043,"CMD_AUTO_REFRESH", false,-1, 3,0);
     tracep->declBus(c+2069,"BANKSIZE", false,-1, 31,0);
     tracep->declBus(c+2038,"CMD_ACTIVE", false,-1, 3,0);
     tracep->declBus(c+2039,"CMD_READ", false,-1, 3,0);
@@ -4305,6 +4311,8 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->declBus(c+1567,"ba", false,-1, 1,0);
     tracep->declBus(c+1581,"dqm", false,-1, 1,0);
     tracep->declBus(c+1630,"dq", false,-1, 15,0);
+    tracep->declBus(c+2042,"CMD_PRECHARGE", false,-1, 3,0);
+    tracep->declBus(c+2043,"CMD_AUTO_REFRESH", false,-1, 3,0);
     tracep->declBus(c+2069,"BANKSIZE", false,-1, 31,0);
     tracep->declBus(c+2038,"CMD_ACTIVE", false,-1, 3,0);
     tracep->declBus(c+2039,"CMD_READ", false,-1, 3,0);
