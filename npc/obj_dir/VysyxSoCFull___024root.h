@@ -56,6 +56,9 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*1:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_in_bresp;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_in_arready;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_in_rvalid;
+        CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_in_rid;
+        CData/*1:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_in_rresp;
+        CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_in_rlast;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_out_awvalid;
         CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_out_awid;
         CData/*7:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_out_awlen;
@@ -66,6 +69,11 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_out_wlast;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_out_bready;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_out_arvalid;
+        CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_out_arid;
+        CData/*7:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_out_arlen;
+        CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_out_arsize;
+        CData/*1:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_out_arburst;
+        CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_out_rready;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4frag_auto_in_bvalid;
         CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT___axi4frag_auto_out_awid;
         CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT___axi4frag_auto_out_wstrb;
@@ -75,6 +83,8 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4yank_auto_in_wready;
         CData/*1:0*/ ysyxSoCFull__DOT__asic__DOT___axi4yank_auto_in_bresp;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4yank_auto_in_becho_real_last;
+    };
+    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4yank_auto_in_arready;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4yank_auto_out_awvalid;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4yank_auto_out_arvalid;
@@ -83,8 +93,6 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_in_pready;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_in_pslverr;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_out_psel;
-    };
-    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_out_penable;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_out_pwrite;
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_out_pprot;
@@ -92,6 +100,8 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___lsdram_axi_auto_in_awready;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___lsdram_axi_auto_in_wready;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___lsdram_axi_auto_in_bvalid;
+        CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___lsdram_axi_auto_in_arready;
+        CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___lsdram_axi_auto_in_rvalid;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___lspi_auto_in_pready;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___lspi_auto_in_pslverr;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___lvga_auto_in_pslverr;
@@ -118,6 +128,8 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4xbar_auto_anon_out_1_awvalid;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4xbar_auto_anon_out_1_wvalid;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4xbar_auto_anon_out_1_bready;
+        CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4xbar_auto_anon_out_1_arvalid;
+        CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4xbar_auto_anon_out_1_rready;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4xbar_auto_anon_out_0_awvalid;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4xbar_auto_anon_out_0_wvalid;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT___axi4xbar_auto_anon_out_0_arvalid;
@@ -137,6 +149,8 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__arFIFOMap_0_count;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__arFIFOMap_0_last;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT___awFIFOMap_15_T_1;
+    };
+    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT___awFIFOMap_15_T_4;
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__awFIFOMap_0_count;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__awFIFOMap_0_last;
@@ -149,8 +163,6 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__arFIFOMap_2_count;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__arFIFOMap_2_last;
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__awFIFOMap_2_count;
-    };
-    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__awFIFOMap_2_last;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT___arFIFOMap_3_T_2;
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__arFIFOMap_3_count;
@@ -203,6 +215,8 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__awFIFOMap_12_count;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__awFIFOMap_12_last;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT___arFIFOMap_13_T_2;
+    };
+    struct {
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__arFIFOMap_13_count;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__arFIFOMap_13_last;
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__awFIFOMap_13_count;
@@ -215,8 +229,6 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT___arFIFOMap_15_T_2;
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__arFIFOMap_15_count;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__arFIFOMap_15_last;
-    };
-    struct {
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__awFIFOMap_15_count;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__awFIFOMap_15_last;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__in_0_arvalid;
@@ -269,6 +281,8 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT___in_0_bT_9;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__in_0_bvalid;
         CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT___in_0_rT_20;
+    };
+    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT___in_0_rT_5;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__in_0_rvalid;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__in_0_wready;
@@ -281,8 +295,6 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__requestARIO_0_2;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__requestAWIO_0_0;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__requestAWIO_0_2;
-    };
-    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT___arFIFOMap_15_T_1;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT___arFIFOMap_15_T_4;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__arFIFOMap_0_count;
@@ -335,6 +347,8 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__prefixOR_1;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__winner_3_1;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__winner_3_2;
+    };
+    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__state_3_0;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__state_3_1;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__state_3_2;
@@ -347,8 +361,6 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__readys_mask_1;
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT___readys_filter_T_3;
         CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT___GEN_2;
-    };
-    struct {
         CData/*5:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__readys_unready_1;
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__readys_readys_1;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar_1__DOT__winner_4_0;
@@ -400,21 +412,11 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__useless2;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__useless3;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__useless4;
-        CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__cache_arid;
-        CData/*7:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__cache_arlen;
-        CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__cache_arsize;
-        CData/*1:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__cache_arburst;
-        CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__cache_arvalid;
-        CData/*1:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__cache_rresp;
-        CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__cache_rlast;
-        CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__cache_rid;
-        CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__cache_rvalid;
-        CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__cache_rready;
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__lsu_arsize;
-        CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__lsu_arready;
-        CData/*1:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__lsu_rresp;
     };
     struct {
+        CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__lsu_arready;
+        CData/*1:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__lsu_rresp;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__lsu_rlast;
         CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__lsu_rid;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__lsu_rvalid;
@@ -426,10 +428,7 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__lsu_bid;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__lsu_bvalid;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__lsu_bready;
-        CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__axi_arid;
-        CData/*7:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__axi_arlen;
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__axi_arsize;
-        CData/*1:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__axi_arburst;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__axi_arvalid;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__axi_arready;
         CData/*1:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__axi_rresp;
@@ -479,9 +478,9 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__alu_op_idu_to_exu;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__MemRead_idu_to_exu;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__MemWrite_idu_to_exu;
+        CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__rmask_idu_to_exu;
     };
     struct {
-        CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__rmask_idu_to_exu;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__wb_src_idu_to_exu;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__csr_write_idu_to_exu;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__csr_wdata_src_idu_to_exu;
@@ -520,10 +519,6 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__receive_counter;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__ready_flag;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__arvalid_flag;
-        CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__ICACHE__DOT__req_index;
-        CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__ICACHE__DOT__req_offset;
-        CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__ICACHE__DOT__current_state;
-        CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__ICACHE__DOT__next_state;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT__awready_o_a;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT__wready_o_a;
         CData/*1:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT__bresp_o_a;
@@ -545,13 +540,13 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__CLINT__DOT__w_state;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__CLINT__DOT__b_state;
         CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__CLINT__DOT__wstrb;
-    };
-    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__CLINT__DOT__wvalid;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__CLINT__DOT__flag_waddr;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__CLINT__DOT__flag_wdata;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__CLINT__DOT__flag_rdata;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__CLINT__DOT__flag_raddr;
+    };
+    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__CLINT__DOT__flag_write;
         CData/*4:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__CLINT__DOT__rdata_counter;
         CData/*4:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__CLINT__DOT__wdata_counter;
@@ -611,13 +606,13 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*7:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__msr;
         CData/*7:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__scratch;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__start_dlc;
-    };
-    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__lsr_mask_d;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__msi_reset;
         CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__trigger_level;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__rx_reset;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__tx_reset;
+    };
+    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__lsr0;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__lsr5;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__lsr6;
@@ -677,13 +672,13 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__transmitter__DOT__bit_counter;
         CData/*6:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__transmitter__DOT__shift_out;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__transmitter__DOT__stx_o_tmp;
-    };
-    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__transmitter__DOT__parity_xor;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__transmitter__DOT__tf_pop;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__transmitter__DOT__bit_out;
         CData/*7:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__transmitter__DOT__tf_data_in;
         CData/*7:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__transmitter__DOT__tf_data_out;
+    };
+    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__transmitter__DOT__tf_overrun;
         CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__transmitter__DOT__fifo_tx__DOT__top;
         CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__transmitter__DOT__fifo_tx__DOT__bottom;
@@ -743,13 +738,13 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__u0_spi_top__DOT__neg_edge;
         CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__u0_spi_top__DOT____Vcellinp__shift__latch;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__u0_spi_top__DOT____VdfgTmp_h6152756d__0;
-    };
-    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__u0_spi_top__DOT__clgen__DOT__cnt_zero;
         CData/*7:0*/ ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__u0_spi_top__DOT__shift__DOT__cnt;
         CData/*7:0*/ ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__u0_spi_top__DOT__shift__DOT__rx_bit_pos;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__u0_spi_top__DOT__shift__DOT__rx_clk;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__u0_spi_top__DOT__shift__DOT__tx_clk;
+    };
+    struct {
         CData/*7:0*/ ysyxSoCFull__DOT__asic__DOT__lspi__DOT__mspi__DOT__u0_spi_top__DOT__shift__DOT____VdfgTmp_h72d11e0c__0;
         CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__qspi_dio__en0;
         CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__lpsram__DOT__mpsram__DOT__douten;
@@ -809,13 +804,13 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__lsdram_axi__DOT__msdram__DOT__u_sdram_axi__DOT__u_axi__DOT__req_id_q;
         CData/*1:0*/ ysyxSoCFull__DOT__asic__DOT__lsdram_axi__DOT__msdram__DOT__u_sdram_axi__DOT__u_axi__DOT__req_axburst_q;
         CData/*7:0*/ ysyxSoCFull__DOT__asic__DOT__lsdram_axi__DOT__msdram__DOT__u_sdram_axi__DOT__u_axi__DOT__req_axlen_q;
-    };
-    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__lsdram_axi__DOT__msdram__DOT__u_sdram_axi__DOT__u_axi__DOT__req_prio_q;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__lsdram_axi__DOT__msdram__DOT__u_sdram_axi__DOT__u_axi__DOT__req_hold_rd_q;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__lsdram_axi__DOT__msdram__DOT__u_sdram_axi__DOT__u_axi__DOT__req_hold_wr_q;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__lsdram_axi__DOT__msdram__DOT__u_sdram_axi__DOT__u_axi__DOT__req_fifo_accept_w;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__lsdram_axi__DOT__msdram__DOT__u_sdram_axi__DOT__u_axi__DOT__req_push_w;
+    };
+    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__lsdram_axi__DOT__msdram__DOT__u_sdram_axi__DOT__u_axi__DOT__req_out_valid_w;
         CData/*5:0*/ ysyxSoCFull__DOT__asic__DOT__lsdram_axi__DOT__msdram__DOT__u_sdram_axi__DOT__u_axi__DOT__req_out_w;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__lsdram_axi__DOT__msdram__DOT__u_sdram_axi__DOT__u_axi__DOT__resp_accept_w;
@@ -875,13 +870,13 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4buf__DOT__nodeOut_awdeq_q__DOT__do_enq;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4buf__DOT__nodeOut_awdeq_q__DOT__unnamedblk1__DOT__do_deq;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4buf__DOT__nodeOut_wdeq_q__DOT__wrap;
-    };
-    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4buf__DOT__nodeOut_wdeq_q__DOT__wrap_1;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4buf__DOT__nodeOut_wdeq_q__DOT__maybe_full;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4buf__DOT__nodeOut_wdeq_q__DOT__ptr_match;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4buf__DOT__nodeOut_wdeq_q__DOT__empty;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4buf__DOT__nodeOut_wdeq_q__DOT__full;
+    };
+    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4buf__DOT__nodeOut_wdeq_q__DOT__do_enq;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4buf__DOT__nodeOut_wdeq_q__DOT__unnamedblk1__DOT__do_deq;
         CData/*5:0*/ ysyxSoCFull__DOT__asic__DOT__axi4buf__DOT__nodeIn_bdeq_q__DOT___ram_ext_R0_data;
@@ -941,13 +936,13 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT__Queue1_BundleMap_8__DOT__ram_real_last;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT__Queue1_BundleMap_8__DOT__unnamedblk1__DOT__do_enq;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT__Queue1_BundleMap_9__DOT__full;
-    };
-    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT__Queue1_BundleMap_9__DOT__ram_real_last;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT__Queue1_BundleMap_9__DOT__unnamedblk1__DOT__do_enq;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT__Queue1_BundleMap_10__DOT__full;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT__Queue1_BundleMap_10__DOT__ram_real_last;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT__Queue1_BundleMap_10__DOT__unnamedblk1__DOT__do_enq;
+    };
+    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT__Queue1_BundleMap_11__DOT__full;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT__Queue1_BundleMap_11__DOT__ram_real_last;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT__Queue1_BundleMap_11__DOT__unnamedblk1__DOT__do_enq;
@@ -1007,13 +1002,13 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT__Queue1_BundleMap_29__DOT__unnamedblk1__DOT__do_enq;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT__Queue1_BundleMap_30__DOT__full;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT__Queue1_BundleMap_30__DOT__ram_real_last;
-    };
-    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT__Queue1_BundleMap_30__DOT__unnamedblk1__DOT__do_enq;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT__Queue1_BundleMap_31__DOT__full;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT__Queue1_BundleMap_31__DOT__ram_real_last;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4yank__DOT__Queue1_BundleMap_31__DOT__unnamedblk1__DOT__do_enq;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__nodeOut_wvalid;
+    };
+    struct {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__in_awready;
         CData/*7:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT___deq_q_1_io_deq_bits_len;
         CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT___deq_q_1_io_deq_bits_size;
@@ -1062,6 +1057,12 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__in_wdeq_q__DOT__full;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__in_wdeq_q__DOT__io_deq_valid_0;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__in_wdeq_q__DOT__do_enq;
+        CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rvalid;
+        CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rid;
+        CData/*1:0*/ ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rresp;
+        CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rlast;
+        CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__state_rd;
+        CData/*2:0*/ ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__next_state_rd;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__bvalid;
         CData/*3:0*/ ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__bid;
         CData/*1:0*/ ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__bresp;
@@ -1072,9 +1073,9 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu_reset_chain__DOT__output_chain__DOT__sync_2;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu_reset_chain__DOT__output_chain__DOT__sync_3;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu_reset_chain__DOT__output_chain__DOT__sync_4;
-        CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu_reset_chain__DOT__output_chain__DOT__sync_5;
     };
     struct {
+        CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu_reset_chain__DOT__output_chain__DOT__sync_5;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu_reset_chain__DOT__output_chain__DOT__sync_6;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu_reset_chain__DOT__output_chain__DOT__sync_7;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu_reset_chain__DOT__output_chain__DOT__sync_8;
@@ -1138,9 +1139,9 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*2:0*/ __Vtableidx5;
         CData/*5:0*/ __Vtableidx6;
         CData/*5:0*/ __Vtableidx7;
-        CData/*1:0*/ __Vtableidx8;
     };
     struct {
+        CData/*1:0*/ __Vtableidx8;
         CData/*7:0*/ __Vtableidx9;
         CData/*7:0*/ __Vtableidx12;
         CData/*3:0*/ __Vtableidx13;
@@ -1160,6 +1161,9 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*4:0*/ __Vdlyvdim0__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Rgefile__DOT__rf__v0;
         CData/*0:0*/ __Vdlyvset__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Rgefile__DOT__rf__v0;
         CData/*0:0*/ __Vdly__ysyxSoCFull__DOT___asic_spi_mosi;
+        CData/*1:0*/ __Vdly__ysyxSoCFull__DOT__asic__DOT__lsdram_axi__DOT__msdram__DOT__u_sdram_axi__DOT__u_axi__DOT__u_response__DOT__rd_ptr;
+        CData/*1:0*/ __Vdlyvdim0__ysyxSoCFull__DOT__asic__DOT__lsdram_axi__DOT__msdram__DOT__u_sdram_axi__DOT__u_axi__DOT__u_response__DOT__ram__v0;
+        CData/*0:0*/ __Vdlyvset__ysyxSoCFull__DOT__asic__DOT__lsdram_axi__DOT__msdram__DOT__u_sdram_axi__DOT__u_axi__DOT__u_response__DOT__ram__v0;
         CData/*2:0*/ __Vdly__ysyxSoCFull__DOT__flash__DOT__state;
         CData/*7:0*/ __Vdly__ysyxSoCFull__DOT__flash__DOT__counter;
         CData/*7:0*/ __Vdly__ysyxSoCFull__DOT__flash__DOT__cmd;
@@ -1196,17 +1200,18 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         SData/*8:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__w_counter;
         SData/*8:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__w_todo;
         SData/*15:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__unnamedblk1__DOT__unnamedblk2__DOT___GEN_2;
+        SData/*9:0*/ ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__request_counter_rd;
         SData/*9:0*/ ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__request_counter_wt;
         SData/*12:0*/ ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_high__DOT__mode_register;
         SData/*8:0*/ ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_high__DOT__r_col_addr;
         SData/*15:0*/ ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_high__DOT__dout;
+    };
+    struct {
         SData/*12:0*/ ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_low__DOT__mode_register;
         SData/*8:0*/ ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_low__DOT__r_col_addr;
         SData/*15:0*/ ysyxSoCFull__DOT__sdram__DOT__low_addr__DOT__u1_low__DOT__dout;
         SData/*12:0*/ ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_high__DOT__mode_register;
         SData/*8:0*/ ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_high__DOT__r_col_addr;
-    };
-    struct {
         SData/*15:0*/ ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_high__DOT__dout;
         SData/*12:0*/ ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__mode_register;
         SData/*8:0*/ ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__r_col_addr;
@@ -1214,9 +1219,12 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         SData/*8:0*/ __Vtableidx1;
         SData/*9:0*/ __Vtableidx3;
         SData/*9:0*/ __Vdly__ysyxSoCFull__DOT__asic__DOT__apbdelay_delayer__DOT__request_counter;
+        SData/*9:0*/ __Vdly__ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__request_counter_rd;
         SData/*9:0*/ __Vdly__ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__request_counter_wt;
+        IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_in_rdata;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_out_awaddr;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_out_wdata;
+        IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_out_araddr;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT___axi4frag_auto_out_awaddr;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT___axi4frag_auto_out_wdata;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT___axi4frag_auto_out_araddr;
@@ -1235,8 +1243,6 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__pc_ifu_to_idu;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__inst_ifu_to_idu;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__ifu_rdata;
-        IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__cache_araddr;
-        IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__cache_rdata;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__lsu_rdata;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__axi_araddr;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__axi_rdata;
@@ -1256,10 +1262,6 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__inst;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__arvalid_buffer;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__rready_buffer;
-        IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__ICACHE__DOT__cpu_addr;
-        IData/*23:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__ICACHE__DOT__req_tag;
-        IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__ICACHE__DOT__counter;
-        IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__ICACHE__DOT__unnamedblk1__DOT__i;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__CLINT__DOT__araddr;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__CLINT__DOT__awaddr;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__CLINT__DOT__wdata;
@@ -1269,10 +1271,10 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__CSR__DOT__csr_mstatus;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__CSR__DOT__csr_mcause;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__CSR__DOT__csr_mtvec;
-        IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__EXU__DOT__pc;
-        IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__EXU__DOT__rs1;
     };
     struct {
+        IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__EXU__DOT__pc;
+        IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__EXU__DOT__rs1;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__EXU__DOT__rs2;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__EXU__DOT__imm;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__EXU__DOT__csr_rdata;
@@ -1335,13 +1337,15 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__r_addr_1;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__addr_1;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__unnamedblk1__DOT__unnamedblk3__DOT___inc_addr_T_1;
-        IData/*22:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__unnamedblk1__DOT__unnamedblk3__DOT___wrapMask_T_1;
-        IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__unnamedblk1__DOT__unnamedblk3__DOT___mux_addr_T_1;
     };
     struct {
+        IData/*22:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__unnamedblk1__DOT__unnamedblk3__DOT___wrapMask_T_1;
+        IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__unnamedblk1__DOT__unnamedblk3__DOT___mux_addr_T_1;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__unnamedblk1__DOT__unnamedblk4__DOT___inc_addr_T_3;
         IData/*22:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__unnamedblk1__DOT__unnamedblk4__DOT___wrapMask_T_3;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__unnamedblk1__DOT__unnamedblk4__DOT___mux_addr_T_6;
+        IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__wait_counter_rd;
+        IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rdata;
         IData/*31:0*/ ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__wait_counter_wt;
         IData/*23:0*/ ysyxSoCFull__DOT__flash__DOT__addr;
         IData/*31:0*/ ysyxSoCFull__DOT__flash__DOT__data;
@@ -1365,11 +1369,12 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         IData/*21:0*/ ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__r_bank_addr;
         IData/*31:0*/ __VdfgTmp_h81912a5e__0;
         IData/*31:0*/ __VdfgTmp_hf132a334__0;
-        IData/*31:0*/ __Vtask_ysyxSoCFull__DOT__asic__DOT__lmrom__DOT__mrom__DOT__mrom_read__17__rdata;
+        IData/*31:0*/ __Vtask_ysyxSoCFull__DOT__asic__DOT__lmrom__DOT__mrom__DOT__mrom_read__12__rdata;
         IData/*31:0*/ __Vdly__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__pc;
         IData/*31:0*/ __Vdly__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__inst;
         IData/*31:0*/ __Vdly__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__CSR__DOT__csr_mstatus;
         IData/*31:0*/ __Vdlyvval__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Rgefile__DOT__rf__v0;
+        IData/*31:0*/ __Vdlyvval__ysyxSoCFull__DOT__asic__DOT__lsdram_axi__DOT__msdram__DOT__u_sdram_axi__DOT__u_axi__DOT__u_response__DOT__ram__v0;
         IData/*16:0*/ __Vdly__ysyxSoCFull__DOT__asic__DOT__lsdram_axi__DOT__msdram__DOT__u_sdram_axi__DOT__u_core__DOT__refresh_timer_q;
         IData/*23:0*/ __Vdly__ysyxSoCFull__DOT__flash__DOT__addr;
         IData/*31:0*/ __Vdly__ysyxSoCFull__DOT__flash__DOT__data;
@@ -1392,19 +1397,16 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         VlUnpacked<IData/*31:0*/, 32> ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__reg_file;
         VlUnpacked<IData/*31:0*/, 32> ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT____Vcellout__Rgefile__reg_file;
         VlUnpacked<IData/*31:0*/, 32> ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IFU__DOT__araddr_buffer;
-        VlUnpacked<VlWide<4>/*127:0*/, 16> ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__ICACHE__DOT__data_array;
-        VlUnpacked<IData/*23:0*/, 16> ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__ICACHE__DOT__tag_array;
-        VlUnpacked<CData/*0:0*/, 16> ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__ICACHE__DOT__valid_array;
         VlUnpacked<IData/*31:0*/, 4> ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT____Vcellout__CSR__csr_reg;
         VlUnpacked<IData/*31:0*/, 32> ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Rgefile__DOT__rf;
         VlUnpacked<IData/*31:0*/, 32> ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__araddr_buffer;
         VlUnpacked<IData/*31:0*/, 32> ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__awaddr_buffer;
         VlUnpacked<IData/*31:0*/, 32> ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__wdata_buffer;
         VlUnpacked<CData/*3:0*/, 32> ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__wstrb_buffer;
-        VlUnpacked<CData/*7:0*/, 16> ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__transmitter__DOT__fifo_tx__DOT__tfifo__DOT__ram;
-        VlUnpacked<CData/*2:0*/, 16> ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__receiver__DOT__fifo_rx__DOT__fifo;
     };
     struct {
+        VlUnpacked<CData/*7:0*/, 16> ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__transmitter__DOT__fifo_tx__DOT__tfifo__DOT__ram;
+        VlUnpacked<CData/*2:0*/, 16> ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__receiver__DOT__fifo_rx__DOT__fifo;
         VlUnpacked<CData/*7:0*/, 16> ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__receiver__DOT__fifo_rx__DOT__rfifo__DOT__ram;
         VlUnpacked<CData/*7:0*/, 8> ysyxSoCFull__DOT__asic__DOT__lkeyboard__DOT__mps2__DOT__my_keyboard__DOT__fifo;
         VlUnpacked<IData/*23:0*/, 524288> ysyxSoCFull__DOT__asic__DOT__lvga__DOT__mvga__DOT__vga_mem;
@@ -1427,7 +1429,7 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         VlUnpacked<SData/*12:0*/, 4> ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_high__DOT__bank_active_raw;
         VlUnpacked<VlUnpacked<SData/*15:0*/, 4194304>, 4> ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__bank;
         VlUnpacked<SData/*12:0*/, 4> ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__bank_active_raw;
-        VlUnpacked<CData/*0:0*/, 18> __Vm_traceActivity;
+        VlUnpacked<CData/*0:0*/, 17> __Vm_traceActivity;
     };
     VlTriggerVec<1> __VstlTriggered;
     VlTriggerVec<1> __VicoTriggered;
