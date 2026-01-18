@@ -1524,12 +1524,26 @@ VL_ATTR_COLD void VysyxSoCFull___024root___ctor_var_reset(VysyxSoCFull___024root
     vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__in_wdeq_q__DOT__io_deq_valid_0 = VL_RAND_RESET_I(1);
     vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__in_wdeq_q__DOT__do_enq = VL_RAND_RESET_I(1);
     vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__request_counter_rd = VL_RAND_RESET_I(10);
-    vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__wait_counter_rd = VL_RAND_RESET_I(32);
-    vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rvalid = VL_RAND_RESET_I(1);
-    vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rid = VL_RAND_RESET_I(4);
-    vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rdata = VL_RAND_RESET_I(32);
-    vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rresp = VL_RAND_RESET_I(2);
-    vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rlast = VL_RAND_RESET_I(1);
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+        vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__wait_counter_rd[__Vi0] = VL_RAND_RESET_I(32);
+    }
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+        vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rid[__Vi0] = VL_RAND_RESET_I(4);
+    }
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+        vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rdata[__Vi0] = VL_RAND_RESET_I(32);
+    }
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+        vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rresp[__Vi0] = VL_RAND_RESET_I(2);
+    }
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+        vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rlast[__Vi0] = VL_RAND_RESET_I(1);
+    }
+    vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__arlen = VL_RAND_RESET_I(8);
+    vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rlen = VL_RAND_RESET_I(8);
+    vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__arsize = VL_RAND_RESET_I(3);
+    vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__arburst = VL_RAND_RESET_I(2);
+    vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__r_counter = VL_RAND_RESET_I(3);
     vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__state_rd = VL_RAND_RESET_I(3);
     vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__next_state_rd = VL_RAND_RESET_I(3);
     vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__request_counter_wt = VL_RAND_RESET_I(10);
@@ -1698,6 +1712,9 @@ VL_ATTR_COLD void VysyxSoCFull___024root___ctor_var_reset(VysyxSoCFull___024root
     vlSelf->__Vdly__ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_out_penable = VL_RAND_RESET_I(1);
     vlSelf->__Vdly__ysyxSoCFull__DOT__asic__DOT__axi42apb__DOT__state = VL_RAND_RESET_I(2);
     vlSelf->__Vdly__ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__request_counter_rd = VL_RAND_RESET_I(10);
+    vlSelf->__Vdly__ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rlen = VL_RAND_RESET_I(8);
+    vlSelf->__Vdlyvset__ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__wait_counter_rd__v0 = 0;
+    vlSelf->__Vdlyvset__ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rid__v0 = 0;
     vlSelf->__Vdly__ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__request_counter_wt = VL_RAND_RESET_I(10);
     vlSelf->__Vdly__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__pc = VL_RAND_RESET_I(32);
     vlSelf->__Vdly__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__inst = VL_RAND_RESET_I(32);

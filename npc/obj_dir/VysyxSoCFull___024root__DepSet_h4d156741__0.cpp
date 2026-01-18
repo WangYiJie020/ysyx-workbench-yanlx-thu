@@ -639,12 +639,16 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__0(VysyxSoCFull___0
         = vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4frag__DOT__error_0;
     vlSelf->__Vdly__ysyxSoCFull__DOT__asic__DOT__apbdelay_delayer__DOT__request_counter 
         = vlSelf->ysyxSoCFull__DOT__asic__DOT__apbdelay_delayer__DOT__request_counter;
-    __Vdly__ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__idle_2 
-        = vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__idle_2;
     vlSelf->__Vdly__ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_out_penable 
         = vlSelf->ysyxSoCFull__DOT__asic__DOT___apbdelay_delayer_out_penable;
+    __Vdly__ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__idle_2 
+        = vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT__idle_2;
     vlSelf->__Vdly__ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__request_counter_rd 
         = vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__request_counter_rd;
+    vlSelf->__Vdly__ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rlen 
+        = vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rlen;
+    vlSelf->__Vdlyvset__ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__wait_counter_rd__v0 = 0U;
+    vlSelf->__Vdlyvset__ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rid__v0 = 0U;
     vlSelf->__Vdly__ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__request_counter_wt 
         = vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__request_counter_wt;
     if (VL_UNLIKELY((1U & ((~ (IData)(vlSelf->reset)) 
