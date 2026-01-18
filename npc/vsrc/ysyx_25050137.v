@@ -178,7 +178,7 @@ module ysyx_25050137(
         .mem_rlast_i(cache_rlast),
         .mem_rid_i(cache_rid),
         .mem_rvalid_i(cache_rvalid),
-        .mem_rready_o(cache_rready).
+        .mem_rready_o(cache_rready),
 
         .fencei(fencei)
     );
