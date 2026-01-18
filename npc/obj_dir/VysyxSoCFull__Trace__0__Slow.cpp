@@ -610,10 +610,10 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
         tracep->declBit(c+1317+i*1,"rlast", true,(i+0));
     }
     tracep->declBus(c+1325,"arlen", false,-1, 7,0);
-    tracep->declBus(c+1326,"rlen", false,-1, 7,0);
-    tracep->declBus(c+1327,"arsize", false,-1, 2,0);
-    tracep->declBus(c+1328,"arburst", false,-1, 1,0);
-    tracep->declBus(c+1329,"r_counter", false,-1, 2,0);
+    tracep->declBus(c+1326,"arsize", false,-1, 2,0);
+    tracep->declBus(c+1327,"arburst", false,-1, 1,0);
+    tracep->declBus(c+1328,"r_counter", false,-1, 2,0);
+    tracep->declBus(c+1329,"rlen", false,-1, 2,0);
     tracep->declBus(c+1330,"state_rd", false,-1, 2,0);
     tracep->declBus(c+1705,"next_state_rd", false,-1, 2,0);
     tracep->declBus(c+1331,"request_counter_wt", false,-1, 9,0);
@@ -6398,10 +6398,10 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_full_sub_0(VysyxSoCFull___024roo
     bufp->fullBit(oldp+1323,(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rlast[6]));
     bufp->fullBit(oldp+1324,(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rlast[7]));
     bufp->fullCData(oldp+1325,(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__arlen),8);
-    bufp->fullCData(oldp+1326,(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rlen),8);
-    bufp->fullCData(oldp+1327,(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__arsize),3);
-    bufp->fullCData(oldp+1328,(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__arburst),2);
-    bufp->fullCData(oldp+1329,(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__r_counter),3);
+    bufp->fullCData(oldp+1326,(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__arsize),3);
+    bufp->fullCData(oldp+1327,(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__arburst),2);
+    bufp->fullCData(oldp+1328,(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__r_counter),3);
+    bufp->fullCData(oldp+1329,(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rlen),3);
     bufp->fullCData(oldp+1330,(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__state_rd),3);
     bufp->fullSData(oldp+1331,(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__request_counter_wt),10);
     bufp->fullIData(oldp+1332,(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__wait_counter_wt),32);
@@ -6919,9 +6919,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_full_sub_0(VysyxSoCFull___024roo
                                               : ((0U 
                                                   == 
                                                   vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__wait_counter_rd
-                                                  [
-                                                  (7U 
-                                                   & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rlen))])
+                                                  [vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__rlen])
                                                   ? 3U
                                                   : 2U))
                                           : ((1U & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__state_rd))
