@@ -43,6 +43,9 @@ module icache #(
     input [3:0] mem_rid_i,
     input mem_rvalid_i,
     output reg mem_rready_o
+
+    //
+    input fencei;
 );
 
 //assign mem_arsize_o = 3'b010; 
@@ -167,7 +170,15 @@ always @(posedge clk or negedge rst_n) begin
             data_array[i] <= {(DATA_WIDTH*COUNTER_SIZE){1'b0}};
         end
     end else begin
+        if(fencei==1) begin
+            for (int i = 0; i < NUM_BLOCKS; i = i + 1) begin
+                valid_array[i] <= 1'b0;
+                tag_array[i] <= {TAG_BITS{1'b0}};
+                data_array[i] <= {(DATA_WIDTH*COUNTER_SIZE){1'b0}};
+            end
+        end
         case (current_state)
+        
             STATE_IDLE: begin
                 cpu_arready_o <= 1;
                 cpu_rvalid_o <= 1'b0;

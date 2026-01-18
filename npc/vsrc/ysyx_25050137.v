@@ -144,6 +144,7 @@ module ysyx_25050137(
     wire [3:0] cache_rid;
     wire cache_rvalid;
     wire cache_rready;
+    wire fencei;
 
     icache ICACHE (
         .clk(clk),
@@ -177,7 +178,9 @@ module ysyx_25050137(
         .mem_rlast_i(cache_rlast),
         .mem_rid_i(cache_rid),
         .mem_rvalid_i(cache_rvalid),
-        .mem_rready_o(cache_rready)
+        .mem_rready_o(cache_rready).
+
+        .fencei(fencei)
     );
 
     wire [`CPU_WIDTH-1:0] lsu_araddr;
@@ -624,7 +627,9 @@ module ysyx_25050137(
         //write csr
         .csr_write_i(csr_write),
         .csr_wdata_i(csr_wdata),
-        .csr_reg(csr_reg) //difftest
+        .csr_reg(csr_reg), //difftest
+
+        .fencei(fencei)
     );
 
     wire [`CPU_WIDTH-1:0] wdata;
