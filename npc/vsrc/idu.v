@@ -44,9 +44,9 @@ module idu(
     input csr_write_i,
     input [`CPU_WIDTH-1:0] csr_wdata_i,
 
-    output [`CPU_WIDTH-1:0] csr_reg [3:0] //difftest
+    output [`CPU_WIDTH-1:0] csr_reg [3:0], //difftest
 
-    output fencei;
+    output fencei
     
     
 );
@@ -142,7 +142,7 @@ module idu(
             current_state <= next_state;
             if(inst==32'h0000100f) fencei <= 1;
             else fencei <= 0;
-            
+
             if(current_state == S_IDLE) idu_ready_o <= 1;
             else if(current_state == S_RECEIVE) idu_ready_o <= 0;
             else if(current_state == S_SEND) idu_ready_o <= 1;
