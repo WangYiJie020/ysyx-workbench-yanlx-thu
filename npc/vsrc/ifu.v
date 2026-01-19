@@ -91,7 +91,7 @@ module ifu(
                 if (ifu_valid_i == 1 && ifu_ready_o == 1) begin //收到新NPC
                     next_state = S_RECEIVE;  
                 end else begin
-                    next_state = current_state;
+                    next_state = S_RECEIVE;
                 end
             end
             
@@ -177,7 +177,9 @@ module ifu(
                 rready <= 1;  
                 //pc <= npc_i;
                 if (ifu_valid_i == 1 && ifu_ready_o == 1)
-                    pc <= npc_i;     
+                    pc <= npc_i; 
+                else 
+                    pc <= pc + 4;    
                 
             end else if(current_state == S_RECEIVE) begin 
                 //if(receive_counter == 2) begin
