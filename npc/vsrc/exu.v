@@ -45,7 +45,9 @@ module exu(
     output reg [`REG_ADDR-1:0] waddr_o,
 
     output reg exu_valid_o,
-    input exu_ready_i
+    input exu_ready_i,
+
+    output npc_valid
     
 );
 
@@ -165,7 +167,10 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
             else if(current_state == S_RECEIVE) exu_ready_o <= 0;
             else if(current_state == S_SEND) exu_ready_o <= 1;
 
-            if(current_state == S_IDLE) exu_valid_o <= 0;
+            if(current_state == S_IDLE) begin
+                exu_valid_o <= 0;
+                npc_valid <= 0;
+            end
             else if(current_state == S_RECEIVE) begin 
                 exu_valid_o <= 1;
                 pc <= pc_i;
@@ -191,6 +196,7 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
                 waddr_o <= waddr_i;
             end else if (current_state == S_SEND)begin
                 exu_valid_o <= 1;
+                npc_valid <= 1;
             end else begin
                 exu_valid_o <= 0;
             end

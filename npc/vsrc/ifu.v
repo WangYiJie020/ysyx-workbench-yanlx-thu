@@ -23,8 +23,7 @@ module ifu(
     output reg rready_o,
     //wbu to ifu
     input [`PC_WIDTH-1:0] npc_i,
-    input ifu_valid_i,
-    output reg ifu_ready_o,
+    input npc_valid,
     //ifu to idu
     output [`PC_WIDTH-1:0] pc_o,
     output reg [`INST_WIDTH-1:0] inst_o,
@@ -88,11 +87,9 @@ module ifu(
             end
 
             S_WAIT_RECEIVE: begin
-                if (ifu_valid_i == 1 && ifu_ready_o == 1) begin //收到新NPC
-                    next_state = S_RECEIVE;  
-                end else begin
-                    next_state = S_RECEIVE;
-                end
+                //收到新NPC
+                next_state = S_RECEIVE;  
+                
             end
             
             S_RECEIVE: begin  
@@ -176,7 +173,7 @@ module ifu(
                 arvalid <= 0;
                 rready <= 1;  
                 //pc <= npc_i;
-                if (ifu_valid_i == 1 && ifu_ready_o == 1)
+                if (npc_valid==1)
                     pc <= npc_i; 
                 else 
                     pc <= pc + 4;    

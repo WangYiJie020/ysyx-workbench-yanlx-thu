@@ -127,6 +127,7 @@ module ysyx_25050137(
         .rready_o(ifu_rready),
 
         .npc_i(npc),
+        .npc_valid(npc_valid),
 
         .ifu_valid_i(valid_wbu_to_ifu),
         .ifu_ready_o(ready_wbu_to_ifu),
@@ -680,6 +681,8 @@ module ysyx_25050137(
     wire valid_exu_to_lsu;
     wire ready_exu_to_lsu;
 
+    wire npc_valid;
+
     exu EXU(
         .clk(clk),
         .rst_n(rst_n),
@@ -726,7 +729,8 @@ module ysyx_25050137(
         .waddr_o(waddr_exu_to_lsu),
 
         .exu_valid_o(valid_exu_to_lsu),
-        .exu_ready_i(ready_exu_to_lsu)  
+        .exu_ready_i(ready_exu_to_lsu),
+        .npc_valid(npc_valid)
     );
 
     wire [`CPU_WIDTH-1:0] alu_result_lsu_to_wbu;
