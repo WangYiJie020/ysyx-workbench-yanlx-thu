@@ -21,9 +21,11 @@ module ifu(
     input [3:0] rid_i,
     input rvalid_i,
     output reg rready_o,
-    //wbu to ifu
+    //exu to ifu
     input [`PC_WIDTH-1:0] npc_i,
     input npc_valid,
+    //reset
+    output reset_o;
     //ifu to idu
     output [`PC_WIDTH-1:0] pc_o,
     output reg [`INST_WIDTH-1:0] inst_o,
@@ -120,22 +122,15 @@ module ifu(
             arvalid_flag <= 0;
             //araddr <= pc;
         end else begin
-            current_state <= next_state;    
+              
             
             if(current_state == S_IDLE) begin 
                 araddr <= `PC_INIT;
                 if(rvalid_i == 1 && rready == 1) begin 
-                    //ifu_valid_o <= 1;
                     inst <= rdata_i;
                 end
-                //else ifu_valid_o <= 0;
-                //arvalid <= 1;   
                 if(rready == 1 && rvalid_i == 1) rready <= 0;          
                 else rready <= 1;
-                
-                //if(arvalid==1 && arready_i==1) begin
-                //    arvalid <= 0;
-                //end
 
                 if(arvalid_flag == 0) begin
                     arvalid <= 1; 
@@ -146,15 +141,11 @@ module ifu(
                 end
 
             end else if (current_state == S_SEND)begin
-                //if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
-                //    inst_o <= rdata_i;
-                //end
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                 end
                 
                 ifu_valid_o <= 1;
-                //arvalid <= 0;
                 rready <= 0;
                 inst_o <= inst;
                 pc_o <= pc;     
@@ -166,57 +157,36 @@ module ifu(
                 arvalid <= 0;
                 rready <= 1;  
                 //pc <= npc_i;
-                if (npc_valid==1)
-                    pc <= npc_i; 
-                else 
-                    pc <= pc + 4;    
+                pc <= pc + 4;  
                 
             end else if(current_state == S_RECEIVE) begin 
-                //if(receive_counter == 2) begin
-                    receive_counter <= 0;
-                    arvalid <= 1;
-                    rready <= 1;
-                    araddr <= pc; 
-                //end
-                //else receive_counter <= receive_counter + 1;
+                receive_counter <= 0;
+                arvalid <= 1;
+                rready <= 1;
+                araddr <= pc;             
                 ifu_valid_o <= 0;                
-                
-                //if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
-                //    ifu_valid_o <= 1;
-                    //rready <= 0;
-                    //inst <= rdata_i;
-                //end
-                //else ifu_valid_o <= 0;
- 
-            end else if(current_state == S_WAIT_SEND) begin     
-                //receive_counter <= 0;                        
+            end else if(current_state == S_WAIT_SEND) begin                            
                 if(rready == 1 && rvalid_i == 1) begin
                     inst <= rdata_i;
                     rready <= 0; 
                 end
-                
-                //if(receive_counter == 2) begin
-                //    receive_counter <= 0;
-                    
-                //end
-                //else receive_counter <= receive_counter + 1;
-                //ifu_valid_o <= 1;
-                //arvalid <= 1; 
-                //rready <= 1;
-                //if(rvalid_i == 0 && ready_flag==0) begin 
-                //    rready <= 0;   
-                //    ready_flag <= 1;
-                //end    
-                //else  rready <= 1; 
-                //rready <= 1; 
                    
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                 end
-                //if(rlast_i==1 && rvalid_i == 1 && rready == 1) begin
-                //    rready <= 0;
-                //end
-            end            
+                
+            end 
+
+            if(npc_valid==1) begin
+                pc <= npc;
+                current_state <= S_RECEIVE;  
+                reset_o <= 1;
+            end
+            else begin
+                reset_o <= 0;
+                current_state <= next_state;  
+            end 
+                      
         end
     end
 

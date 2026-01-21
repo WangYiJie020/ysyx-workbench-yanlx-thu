@@ -89,7 +89,7 @@ module wbu(
     end
 
     always @(posedge clk or negedge rst_n) begin        
-        if (!rst_n) begin
+        if (!rst_n || reset_ifu==1) begin
             current_state <= S_IDLE;
             wbu_ready_o <= 0;
         end else begin

@@ -5,6 +5,7 @@ import "DPI-C" function void idu_counter_return(input byte inst_opcode);
 module idu(
     input clk,
     input rst_n,
+    input reset_ifu,
     //regfiles
     output [`REG_ADDR-1:0] raddr1,
     output [`REG_ADDR-1:0] raddr2,
@@ -134,7 +135,7 @@ module idu(
     end
 
     always @(posedge clk or negedge rst_n) begin        
-        if (!rst_n) begin
+        if (!rst_n || reset_ifu==1) begin
             current_state <= S_IDLE;
             idu_valid_o <= 0;
             idu_ready_o <= 0;
