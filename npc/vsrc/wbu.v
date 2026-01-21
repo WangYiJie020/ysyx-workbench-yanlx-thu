@@ -5,6 +5,7 @@ import "DPI-C" function void difftest_next_step(input byte difftest_check);
 module wbu(
     input clk,
     input rst_n,
+    input reset_ifu,
     //lsu to wbu
     input [`CPU_WIDTH-1:0] alu_result_i,
     input [`CPU_WIDTH-1:0] rs1_i,
