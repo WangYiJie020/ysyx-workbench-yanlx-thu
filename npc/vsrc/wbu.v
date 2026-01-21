@@ -10,7 +10,6 @@ module wbu(
     input [`CPU_WIDTH-1:0] rs1_i,
     input [`CPU_WIDTH-1:0] csr_rdata_l_rs1_i,
     input [`CPU_WIDTH-1:0] datamem_readdata_i,
-    input [`PC_WIDTH-1:0] npc_i,
     input [2:0] rmask_i,
     input wb_src_i,
     input csr_write_i,
@@ -22,10 +21,6 @@ module wbu(
     output reg wbu_ready_o,
 
     //wbu to ifu
-    output reg [`PC_WIDTH-1:0] npc_o,
-
-    output reg wbu_valid_o,
-    input wbu_ready_i,
 
     //write back
     output [`CPU_WIDTH-1:0] csr_wdata_o,
@@ -80,11 +75,8 @@ module wbu(
             end
             
             S_RECEIVE: begin
-                if (wbu_valid_o == 1 && wbu_ready_i == 1) begin
-                    next_state = S_SEND;  
-                end else begin
-                    next_state = current_state;
-                end
+                next_state = S_SEND;  
+                
             end
             
             S_SEND: begin
@@ -109,17 +101,16 @@ module wbu(
             else if(current_state == S_SEND) wbu_ready_o <= 1;
 
             if(current_state == S_IDLE) begin 
-                wbu_valid_o <= 0; 
+                
                 difftest_check <= 0; 
                 difftest_check_flag <= 0;
             end
             else if(current_state == S_RECEIVE) begin 
-                wbu_valid_o <= 1;
+                
                 alu_result <= alu_result_i;
                 rs1 <= rs1_i;
                 csr_rdata_l_rs1 <= csr_rdata_l_rs1_i;
                 datamem_readdata <= datamem_readdata_i;
-                npc_o <= npc_i;
                 rmask <= rmask_i;
                 wb_src <= wb_src_i;
                 csr_wdata_src <= csr_wdata_src_i;
@@ -137,11 +128,11 @@ module wbu(
             end else if (current_state == S_SEND)begin
                 difftest_check_flag <= 0;
                 
-                wbu_valid_o <= 1;
+                
             end else begin
                 difftest_check <= 0; 
                 difftest_check_flag <= 0;
-                wbu_valid_o <= 0;
+                
             end
             
         end

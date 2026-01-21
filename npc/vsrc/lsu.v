@@ -13,7 +13,6 @@ module lsu(
     input [`CPU_WIDTH-1:0] rs1_i,
     input [`CPU_WIDTH-1:0] rs2_i,
     input [`CPU_WIDTH-1:0] csr_rdata_l_rs1_i,
-    input [`PC_WIDTH-1:0] npc_i,
     input MemRead_i,
     input MemWrite_i,
     input [3:0] wmask_i,
@@ -32,7 +31,6 @@ module lsu(
     output [`CPU_WIDTH-1:0] rs1_o,
     output reg [`CPU_WIDTH-1:0] csr_rdata_l_rs1_o,
     output [`CPU_WIDTH-1:0] datamem_readdata_o,
-    output reg [`PC_WIDTH-1:0] npc_o,
     output [2:0] rmask_o,
     output reg wb_src_o,
     output reg csr_write_o,
@@ -245,7 +243,6 @@ module lsu(
                 csr_write_o <= csr_write_i;
                 csr_wdata_src_o <= csr_wdata_src_i;
                 reg_write_o <= reg_write_i;
-                npc_o <= npc_i;
                 csr_rdata_l_rs1_o <= csr_rdata_l_rs1_i;
                 waddr_o <= waddr_i;
                 wlast_o <= 1;

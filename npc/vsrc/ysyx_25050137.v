@@ -85,7 +85,7 @@ module ysyx_25050137(
     wire [`PC_WIDTH-1:0] pc_to_mem;
     wire [`INST_WIDTH-1:0] inst_from_mem;
     //wbu to ifu
-    wire [`PC_WIDTH-1:0] npc_wbu_to_ifu;
+    wire [`PC_WIDTH-1:0] npc;
     wire valid_wbu_to_ifu;
     wire ready_wbu_to_ifu;
     //ifu to idu
@@ -126,7 +126,7 @@ module ysyx_25050137(
         .rvalid_i(ifu_rvalid),
         .rready_o(ifu_rready),
 
-        .npc_i(npc_wbu_to_ifu),
+        .npc_i(npc),
 
         .ifu_valid_i(valid_wbu_to_ifu),
         .ifu_ready_o(ready_wbu_to_ifu),
@@ -714,7 +714,7 @@ module ysyx_25050137(
         .rs1_o(rs1_exu_to_lsu),
         .rs2_o(rs2_exu_to_lsu),
         .csr_rdata_l_rs1_o(csr_rdata_l_rs1_exu_to_lsu),
-        .npc_o(npc_exu_to_lsu),
+        .npc_o(npc),
         .MemRead_o(MemRead_exu_to_lsu),
         .MemWrite_o(MemWrite_exu_to_lsu),
         .wmask_o(wmask_exu_to_lsu),
@@ -773,7 +773,6 @@ module ysyx_25050137(
         .rs1_o(rs1_lsu_to_wbu),
         .csr_rdata_l_rs1_o(csr_rdata_l_rs1_lsu_to_wbu),
         .datamem_readdata_o(datamem_readdata_lsu_to_wbu),
-        .npc_o(npc_lsu_to_wbu),
         .rmask_o(rmask_lsu_to_wbu),
         .wb_src_o(wb_src_lsu_to_wbu),
         .csr_write_o(csr_write_lsu_to_wbu),
@@ -829,7 +828,6 @@ module ysyx_25050137(
         .rs1_i(rs1_lsu_to_wbu),
         .csr_rdata_l_rs1_i(csr_rdata_l_rs1_lsu_to_wbu),
         .datamem_readdata_i(datamem_readdata_lsu_to_wbu),
-        .npc_i(npc_lsu_to_wbu),
         .rmask_i(rmask_lsu_to_wbu),
         .wb_src_i(wb_src_lsu_to_wbu),
         .csr_write_i(csr_write_lsu_to_wbu),
@@ -841,7 +839,6 @@ module ysyx_25050137(
         .wbu_ready_o(ready_lsu_to_wbu),
 
         //wbu to ifu
-        .npc_o(npc_wbu_to_ifu),
 
         .wbu_valid_o(valid_wbu_to_ifu),
         .wbu_ready_i(ready_wbu_to_ifu),

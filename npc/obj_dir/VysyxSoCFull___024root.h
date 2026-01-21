@@ -1155,6 +1155,7 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__flag;
         CData/*3:0*/ __VdfgTmp_h15e47dd3__0;
         CData/*2:0*/ __VdfgTmp_ha17ae98a__0;
+        CData/*6:0*/ __Vtableidx1;
         CData/*5:0*/ __Vtableidx2;
         CData/*5:0*/ __Vtableidx4;
         CData/*2:0*/ __Vtableidx5;
@@ -1204,9 +1205,9 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         VL_IN16(externalPins_gpio_in,15,0);
         SData/*15:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT___GEN;
         SData/*15:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT___GEN_0;
-        SData/*15:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__dl;
     };
     struct {
+        SData/*15:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__dl;
         SData/*15:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__dlc;
         SData/*9:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__counter_t;
         SData/*10:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__receiver__DOT__rf_data_in;
@@ -1238,7 +1239,6 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         SData/*12:0*/ ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__mode_register;
         SData/*8:0*/ ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__r_col_addr;
         SData/*15:0*/ ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__dout;
-        SData/*8:0*/ __Vtableidx1;
         SData/*9:0*/ __Vtableidx3;
         SData/*9:0*/ __Vdly__ysyxSoCFull__DOT__asic__DOT__apbdelay_delayer__DOT__request_counter;
         SData/*9:0*/ __Vdly__ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__request_counter_rd;
