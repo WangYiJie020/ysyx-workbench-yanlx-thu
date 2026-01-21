@@ -91,7 +91,6 @@ module wbu(
     always @(posedge clk or negedge rst_n) begin        
         if (!rst_n) begin
             current_state <= S_IDLE;
-            wbu_valid_o <= 0;
             wbu_ready_o <= 0;
         end else begin
             current_state <= next_state;

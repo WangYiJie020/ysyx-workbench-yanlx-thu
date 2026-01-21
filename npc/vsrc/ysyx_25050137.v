@@ -754,7 +754,6 @@ module ysyx_25050137(
         .rs1_i(rs1_exu_to_lsu),
         .rs2_i(rs2_exu_to_lsu),
         .csr_rdata_l_rs1_i(csr_rdata_l_rs1_exu_to_lsu),
-        .npc_i(npc_exu_to_lsu),
         .MemRead_i(MemRead_exu_to_lsu),
         .MemWrite_i(MemWrite_exu_to_lsu),
         .wmask_i(wmask_exu_to_lsu),
