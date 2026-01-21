@@ -114,20 +114,13 @@ module ifu(
         if (!rst_n) begin
             current_state <= S_IDLE;
             ifu_valid_o <= 0;
-            ifu_ready_o <= 0;
             pc <= `PC_INIT;
             arvalid <= 0;
             rready <= 0;
             arvalid_flag <= 0;
             //araddr <= pc;
         end else begin
-            current_state <= next_state;
-
-            if(current_state == S_IDLE) ifu_ready_o <= 0;
-            else if(current_state == S_SEND) ifu_ready_o <= 0;
-            else if(current_state == S_WAIT_RECEIVE) ifu_ready_o <= 1;
-            else if(current_state == S_RECEIVE) ifu_ready_o <= 0;
-            else if(current_state == S_WAIT_SEND) ifu_ready_o <= 0;      
+            current_state <= next_state;    
             
             if(current_state == S_IDLE) begin 
                 araddr <= `PC_INIT;

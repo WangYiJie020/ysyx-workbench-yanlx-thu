@@ -129,9 +129,6 @@ module ysyx_25050137(
         .npc_i(npc),
         .npc_valid(npc_valid),
 
-        .ifu_valid_i(valid_wbu_to_ifu),
-        .ifu_ready_o(ready_wbu_to_ifu),
-
         .pc_o(pc_ifu_to_idu),
         .inst_o(inst_ifu_to_idu),
 
