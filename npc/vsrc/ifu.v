@@ -25,7 +25,7 @@ module ifu(
     input [`PC_WIDTH-1:0] npc_i,
     input npc_valid,
     //reset
-    output reset_o;
+    output reset_o,
     //ifu to idu
     output [`PC_WIDTH-1:0] pc_o,
     output reg [`INST_WIDTH-1:0] inst_o,
