@@ -840,8 +840,6 @@ module ysyx_25050137(
 
         //wbu to ifu
 
-        .wbu_valid_o(valid_wbu_to_ifu),
-        .wbu_ready_i(ready_wbu_to_ifu),
 
         //write back
         .csr_wdata_o(csr_wdata),
