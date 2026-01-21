@@ -128,6 +128,7 @@ module ysyx_25050137(
 
         .npc_i(npc),
         .npc_valid(npc_valid),
+        .reset_o(reset_ifu),
 
         .pc_o(pc_ifu_to_idu),
         .inst_o(inst_ifu_to_idu),
