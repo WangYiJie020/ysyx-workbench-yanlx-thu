@@ -1138,7 +1138,7 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__flag;
         CData/*3:0*/ __VdfgTmp_h15e47dd3__0;
         CData/*2:0*/ __VdfgTmp_ha17ae98a__0;
-        CData/*5:0*/ __Vtableidx1;
+        CData/*6:0*/ __Vtableidx1;
     };
     struct {
         CData/*5:0*/ __Vtableidx2;
