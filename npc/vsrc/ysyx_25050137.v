@@ -686,6 +686,7 @@ module ysyx_25050137(
     exu EXU(
         .clk(clk),
         .rst_n(rst_n),
+        .reset_ifu(reset_ifu),
         //idu to exu
         .pc_i(pc_idu_to_exu),
         .rs1_i(rs1_idu_to_exu),
