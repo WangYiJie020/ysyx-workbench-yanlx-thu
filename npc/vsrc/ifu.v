@@ -48,64 +48,39 @@ module ifu(
     reg [`CPU_WIDTH-1:0] araddr_buffer [31:0];
     reg [31:0] rready_buffer ;
 
-    //dff #(`PC_WIDTH,`PC_INIT) PC (
-    //    .clk(clk),
-    //    .rst_n(rst_n),
-    //    .din(npc),
-    //    .dout(pc)
-    //);
-
-    //assign araddr = (current_state == S_IDLE || current_state == S_IDLE ) ? pc :0;
     assign arid_o = 0;
     assign arlen_o = 0;
     assign arsize_o = 3'b010; //4bytes
     assign arburst_o = 0;
 
-    //assign inst_o = rdata_i;
+    localparam S_MEM = 2'b000,S_OUT = 2'b001,S_ADD = 2'b010;
 
-    localparam S_IDLE = 3'b000,S_RECEIVE = 3'b001,S_SEND = 3'b010,S_WAIT_RECEIVE = 3'b011;
-    localparam S_WAIT_SEND = 3'b100;
 
-    reg [2:0] current_state,next_state;
-    reg [2:0] receive_counter;
+    reg [1:0] current_state,next_state;
     reg ready_flag,arvalid_flag;
 
     always @(*) begin
         case(current_state)
-            S_IDLE: begin
+            S_MEM: begin
                 if (rready == 1 && rvalid_i == 1) begin
-                    next_state = S_SEND;
+                    next_state = S_OUT;
                 end else begin
                     next_state = current_state;
                 end
             end
 
-            S_SEND: begin
+            S_OUT: begin
                 if (ifu_valid_o == 1 && ifu_ready_i == 1) begin //发送成功
-                    next_state = S_WAIT_RECEIVE;   
+                    next_state = S_ADD;   
                 end else begin
                     next_state = current_state;
                 end                              
             end
 
-            S_WAIT_RECEIVE: begin
-                //收到新NPC
-                next_state = S_RECEIVE;  
+            S_ADD: begin
                 
-            end
-            
-            S_RECEIVE: begin  
-                ///if(receive_counter == 2)  
-                    next_state = S_WAIT_SEND;  
-                //else next_state = current_state; 
-            end
-
-            S_WAIT_SEND: begin
-                if (rready == 1 && rvalid_i == 1) begin
-                    next_state = S_SEND;  
-                end else begin
-                    next_state = current_state;
-                end
+                    next_state = S_MEM;  
+                
             end             
         
             default: next_state = current_state;
@@ -117,30 +92,34 @@ module ifu(
             current_state <= S_IDLE;
             ifu_valid_o <= 0;
             pc <= `PC_INIT;
-            arvalid <= 0;
-            rready <= 0;
+            arvalid <= 1;
+            rready <= 1;
             arvalid_flag <= 0;
             //araddr <= pc;
         end else begin
               
             
-            if(current_state == S_IDLE) begin 
-                araddr <= `PC_INIT;
+            if(current_state == S_MEM) begin 
+                araddr <= pc;
                 if(rvalid_i == 1 && rready == 1) begin 
                     inst <= rdata_i;
                 end
                 if(rready == 1 && rvalid_i == 1) rready <= 0;          
                 else rready <= 1;
 
-                if(arvalid_flag == 0) begin
+                /*if(arvalid_flag == 0) begin
                     arvalid <= 1; 
                     arvalid_flag <= 1;
                 end
                 else begin
                     arvalid <= 0;
+                end*/
+
+                if(arvalid==1 && arready_i==1) begin
+                    arvalid <= 0;
                 end
 
-            end else if (current_state == S_SEND)begin
+            end else if (current_state == S_OUT)begin
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                 end
@@ -148,34 +127,13 @@ module ifu(
                 ifu_valid_o <= 1;
                 rready <= 0;
                 inst_o <= inst;
-                pc_o <= pc;     
-                ready_flag <= 0; 
-                receive_counter <= 0; 
+                pc_o <= pc;      
 
-            end else if (current_state == S_WAIT_RECEIVE)begin
+            end else if (current_state == S_ADD)begin
                 ifu_valid_o <= 0;
                 arvalid <= 0;
                 rready <= 1;  
-                //pc <= npc_i;
                 pc <= pc + 4;  
-                
-            end else if(current_state == S_RECEIVE) begin 
-                receive_counter <= 0;
-                arvalid <= 1;
-                rready <= 1;
-                araddr <= pc;             
-                ifu_valid_o <= 0;                
-            end else if(current_state == S_WAIT_SEND) begin                            
-                if(rready == 1 && rvalid_i == 1) begin
-                    inst <= rdata_i;
-                    rready <= 0; 
-                end
-                   
-                if(arvalid==1 && arready_i==1) begin
-                    arvalid <= 0;
-                end
-                
-            end 
 
             if(npc_valid==1) begin
                 pc <= npc_i;
