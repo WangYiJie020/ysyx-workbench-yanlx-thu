@@ -133,7 +133,8 @@ module ifu(
                 ifu_valid_o <= 0;
                 arvalid <= 0;
                 rready <= 1;  
-                pc <= pc + 4;  
+                pc <= pc + 4;
+            end  
 
             if(npc_valid==1) begin
                 pc <= npc_i;
