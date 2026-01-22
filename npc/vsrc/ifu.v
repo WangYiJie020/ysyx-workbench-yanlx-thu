@@ -137,7 +137,7 @@ module ifu(
                 arvalid <= 0;
                 rready <= 1;  
                 pc <= pc + 4;
-                arvalid_flag = 0;
+                arvalid_flag <= 0;
             end  
 
             if(npc_valid==1) begin
