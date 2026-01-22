@@ -2314,7 +2314,6 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->pushNamePrefix("EXU ");
     tracep->declBit(c+1787,"clk", false,-1);
     tracep->declBit(c+1826,"rst_n", false,-1);
-    tracep->declBit(c+988,"reset_ifu", false,-1);
     tracep->declBus(c+1673,"pc_i", false,-1, 31,0);
     tracep->declBus(c+1828,"rs1_i", false,-1, 31,0);
     tracep->declBus(c+1829,"rs2_i", false,-1, 31,0);
@@ -2643,7 +2642,6 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->pushNamePrefix("LSU ");
     tracep->declBit(c+1787,"clk", false,-1);
     tracep->declBit(c+1826,"rst_n", false,-1);
-    tracep->declBit(c+988,"reset_ifu", false,-1);
     tracep->declBus(c+1040,"alu_result_i", false,-1, 31,0);
     tracep->declBus(c+1041,"rs1_i", false,-1, 31,0);
     tracep->declBus(c+1042,"rs2_i", false,-1, 31,0);
@@ -2769,7 +2767,6 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->pushNamePrefix("WBU ");
     tracep->declBit(c+1787,"clk", false,-1);
     tracep->declBit(c+1826,"rst_n", false,-1);
-    tracep->declBit(c+988,"reset_ifu", false,-1);
     tracep->declBus(c+1056,"alu_result_i", false,-1, 31,0);
     tracep->declBus(c+1057,"rs1_i", false,-1, 31,0);
     tracep->declBus(c+1058,"csr_rdata_l_rs1_i", false,-1, 31,0);
