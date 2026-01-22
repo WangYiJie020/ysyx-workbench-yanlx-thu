@@ -135,10 +135,10 @@ module ifu(
                 current_state <= S_MEM;  
                 reset_o <= 1;
                 arvalid_flag <= 0;
-                skep <= 1;
+                skip <= 1;
             end
             else begin
-                if(rvalid_i == 1 && rready == 1 && skip == 1) skep <= 0;
+                if(rvalid_i == 1 && rready == 1 && skip == 1) skip <= 0;
                 reset_o <= 0;
                 current_state <= next_state;  
             end 
