@@ -141,6 +141,7 @@ module ysyx_25050137(
     assign inst_from_mem = inst_ifu_to_idu;
 
     wire useless1,useless2,useless3,useless4;
+    wire fencei;
 /*
     wire [`CPU_WIDTH-1:0] cache_araddr;
     wire [3:0] cache_arid;
@@ -155,7 +156,7 @@ module ysyx_25050137(
     wire [3:0] cache_rid;
     wire cache_rvalid;
     wire cache_rready;
-    wire fencei;
+    
 
     icache ICACHE (
         .clk(clk),
