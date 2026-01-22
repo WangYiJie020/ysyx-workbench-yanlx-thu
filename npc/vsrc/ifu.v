@@ -130,7 +130,7 @@ module ifu(
                 arvalid_flag <= 0;
             end  
 
-            if(npc_valid==1 && npc_i != pc + 4) begin
+            if(npc_valid==1 && npc_i != pc) begin
                 pc <= npc_i;
                 current_state <= S_MEM;  
                 reset_o <= 1;
