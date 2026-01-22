@@ -685,7 +685,6 @@ module ysyx_25050137(
     exu EXU(
         .clk(clk),
         .rst_n(rst_n),
-        .reset_ifu(reset_ifu),
         //idu to exu
         .pc_i(pc_idu_to_exu),
         .rs1_i(rs1_idu_to_exu),
@@ -753,7 +752,7 @@ module ysyx_25050137(
     lsu LSU(
         .clk(clk),
         .rst_n(rst_n),
-        .reset_ifu(reset_ifu),
+
         //exu to lsu
         .alu_result_i(alu_result_exu_to_lsu),
         .rs1_i(rs1_exu_to_lsu),
@@ -827,7 +826,6 @@ module ysyx_25050137(
     wbu WBU(
         .clk(clk),
         .rst_n(rst_n),
-        .reset_ifu(reset_ifu),
         //lsu to wbu
         .alu_result_i(alu_result_lsu_to_wbu),
         .rs1_i(rs1_lsu_to_wbu),

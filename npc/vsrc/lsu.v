@@ -8,7 +8,6 @@ import "DPI-C" function void receive_data_back();
 module lsu(
     input clk,
     input rst_n,
-    input reset_ifu,
     //exu to lsu
     input [`CPU_WIDTH-1:0] alu_result_i,
     input [`CPU_WIDTH-1:0] rs1_i,
@@ -196,7 +195,7 @@ module lsu(
     end
 
     always @(posedge clk or negedge rst_n) begin        
-        if (!rst_n || reset_ifu==1) begin
+        if (!rst_n) begin
             current_state <= S_IDLE;
             lsu_valid_o <= 0;
             lsu_ready_o <= 0;
