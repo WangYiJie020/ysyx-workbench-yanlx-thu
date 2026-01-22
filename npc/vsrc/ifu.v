@@ -118,7 +118,8 @@ module ifu(
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                 end
-                else arvalid <= 1;
+                else if(arvalid == 0) arvalid <= 1;
+                
 
             end else if (current_state == S_OUT)begin
                 if(arvalid==1 && arready_i==1) begin
