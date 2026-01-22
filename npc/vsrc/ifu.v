@@ -92,8 +92,8 @@ module ifu(
             current_state <= S_MEM;
             ifu_valid_o <= 0;
             pc <= `PC_INIT;
-            arvalid <= 1;
-            rready <= 1;
+            arvalid <= 0;
+            rready <= 0;
             arvalid_flag <= 0;
             //araddr <= pc;
         end else begin
@@ -118,6 +118,7 @@ module ifu(
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                 end
+                else arvalid <= 1;
 
             end else if (current_state == S_OUT)begin
                 if(arvalid==1 && arready_i==1) begin
