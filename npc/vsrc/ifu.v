@@ -60,7 +60,7 @@ module ifu(
     always @(*) begin
         case(current_state)
             S_MEM: begin
-                if (rready == 1 && rvalid_i == 1) begin
+                if (rready == 1 && rvalid_i == 1 && skip == 0) begin
                     next_state = S_OUT;
                 end else begin
                     next_state = current_state;

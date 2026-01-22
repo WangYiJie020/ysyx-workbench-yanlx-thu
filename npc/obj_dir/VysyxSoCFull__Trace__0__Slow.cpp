@@ -2301,6 +2301,7 @@ VL_ATTR_COLD void VysyxSoCFull___024root__trace_init_sub__TOP__0(VysyxSoCFull___
     tracep->pushNamePrefix("EXU ");
     tracep->declBit(c+1671,"clk", false,-1);
     tracep->declBit(c+1710,"rst_n", false,-1);
+    tracep->declBit(c+990,"reset_ifu", false,-1);
     tracep->declBus(c+1557,"pc_i", false,-1, 31,0);
     tracep->declBus(c+1711,"rs1_i", false,-1, 31,0);
     tracep->declBus(c+1712,"rs2_i", false,-1, 31,0);
