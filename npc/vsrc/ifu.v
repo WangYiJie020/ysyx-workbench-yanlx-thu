@@ -138,7 +138,7 @@ module ifu(
 
             if(npc_valid==1) begin
                 pc <= npc_i;
-                current_state <= S_RECEIVE;  
+                current_state <= S_MEM;  
                 reset_o <= 1;
             end
             else begin
