@@ -44,9 +44,7 @@ module ifu(
     reg [`CPU_WIDTH-1:0] araddr,inst;
     reg rready;
 
-    reg [31:0] arvalid_buffer ;
-    reg [`CPU_WIDTH-1:0] araddr_buffer [31:0];
-    reg [31:0] rready_buffer ;
+    reg skip;
 
     assign arid_o = 0;
     assign arlen_o = 0;
@@ -101,19 +99,11 @@ module ifu(
             
             if(current_state == S_MEM) begin 
                 araddr <= pc;
-                if(rvalid_i == 1 && rready == 1) begin 
+                if(rvalid_i == 1 && rready == 1 && skip == 0 ) begin 
                     inst <= rdata_i;
                 end
                 if(rready == 1 && rvalid_i == 1) rready <= 0;          
                 else rready <= 1;
-
-                /*if(arvalid_flag == 0) begin
-                    arvalid <= 1; 
-                    arvalid_flag <= 1;
-                end
-                else begin
-                    arvalid <= 0;
-                end*/
 
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
@@ -144,8 +134,11 @@ module ifu(
                 pc <= npc_i;
                 current_state <= S_MEM;  
                 reset_o <= 1;
+                arvalid_flag <= 0;
+                skep <= 1;
             end
             else begin
+                if(rvalid_i == 1 && rready == 1 && skip == 1) skep <= 0;
                 reset_o <= 0;
                 current_state <= next_state;  
             end 
