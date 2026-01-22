@@ -89,7 +89,7 @@ module ifu(
 
     always @(posedge clk or negedge rst_n) begin        
         if (!rst_n) begin
-            current_state <= S_IDLE;
+            current_state <= S_MEM;
             ifu_valid_o <= 0;
             pc <= `PC_INIT;
             arvalid <= 1;
@@ -151,7 +151,7 @@ module ifu(
 
     always@(posedge clk) begin
         return_inst(inst,{1'b0,inst[6:0]});
-        if(rvalid_i == 1 && rready_o == 1 && current_state == S_WAIT_SEND)begin //r 通道握手
+        if(rvalid_i == 1 && rready_o == 1)begin //r 通道握手
             inst_counter_add();
         end
     end
