@@ -127,8 +127,6 @@ module axi_arbiter(
                 else begin
                     //arready_o_b <= 0;arready_o_a <= arready_i;
                 end
-                if(ar_switch == 1) arvalid_o <= arvalid_i_b;
-                else arvalid_o <= arvalid_i_a;
                 arready_o_a <= 1;
                 arready_o_b <= 1;
             end
@@ -155,8 +153,7 @@ module axi_arbiter(
         end
     end
 
-    //assign arready_o_a = (ar_switch==0)? arready_i : 0;
-    //assign arready_o_b = (ar_switch==1)? arready_i : 0;
+    assign arvalid_o = (ar_switch==1 && bus_busy == 0) ? arvalid_i_b : arvalid_i_a;
 
     always@(*) begin
         case(ar_switch)
