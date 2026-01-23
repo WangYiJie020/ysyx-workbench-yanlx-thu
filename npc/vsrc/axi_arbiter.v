@@ -119,30 +119,27 @@ module axi_arbiter(
             aw_switch <= 1;
             w_switch <= 1;
             b_switch <= 1;
-            //arready_o_b <= 0;arready_o_a <= arready_i;
         end else begin
-            //if(arvalid_i_a == 1) begin 
-            //    ar_switch <= 0; r_switch <= 0;arready_o_b <= 0;arready_o_a <= arready_i;
-            //end
-            //else if(arvalid_i_b == 1) begin 
-            ///    ar_switch <= 1; r_switch <= 1;arready_o_a <= 0;arready_o_b <= arready_i;
-            //end
-            //else begin arready_o_b <= arready_i; arready_o_a <= arready_i; end
-            //else if(ar_switch == 1 && rlast_o_b == 1) begin ar_switch <= 0; r_switch <= 0;end
-            //else if(ar_switch == 0 && rlast_o_a == 1) begin ar_switch <= 1; r_switch <= 1;end
-            if(arvalid_i_b == 1) begin 
-                ar_switch <= 1; r_switch <= 1;//arready_o_a <= 0;arready_o_b <= arready_i;
-            end
-            else if(ar_switch == 1 && rlast_i == 1)begin 
-                ar_switch <= 0; r_switch <= 0;//arready_o_b <= 0;arready_o_a <= arready_i;
+            if(bus_busy == 0) begin
+                if(arvalid_i_b == 1) begin 
+                    ar_switch <= 1; r_switch <= 1;arready_o_a <= 0;arready_o_b <= arready_i;
+                end
+                else if(ar_switch == 1 && rlast_i == 1)begin 
+                    ar_switch <= 0; r_switch <= 0;arready_o_b <= 0;arready_o_a <= arready_i;
+                end
+                else begin
+                    //arready_o_b <= 0;arready_o_a <= arready_i;
+                end
             end
             else begin
-                //arready_o_b <= 0;arready_o_a <= arready_i;
+                arready_o_a <= 0;
+                arready_o_b <= 0;
             end
         end
     end
 
     reg [1:0] r_counter;
+    reg bus_busy;
 
     always@(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
@@ -150,15 +147,15 @@ module axi_arbiter(
         end
         else begin
             if(arready_i==1 && arvalid_o==1)
-                r_counter <= r_counter + 1;
+                bus_busy <= 1;
             if(rvalid_i==1 && rready_o==1 && rlast_i==1)
-                r_counter <= r_counter - 1;
+                bus_busy <= 0;
 
         end
     end
 
-    assign arready_o_a = (ar_switch==0)? arready_i : 0;
-    assign arready_o_b = (ar_switch==1)? arready_i : 0;
+    //assign arready_o_a = (ar_switch==0)? arready_i : 0;
+    //assign arready_o_b = (ar_switch==1)? arready_i : 0;
 
     always@(*) begin
         case(ar_switch)
@@ -214,65 +211,25 @@ module axi_arbiter(
         endcase
     end
 
-    always@(*) begin
-        case(aw_switch)
-            1: begin
-                awaddr_o = awaddr_i_b;
-                awid_o = awid_i_b;
-                awlen_o = awlen_i_b;
-                awsize_o = awsize_i_b;
-                awburst_o = awburst_i_b;
-                awvalid_o = awvalid_i_b;
-                awready_o_b = awready_i;
-            end
-            default: begin
-                awaddr_o = awaddr_i_a;
-                awid_o = awid_i_a;
-                awlen_o = awlen_i_a;
-                awsize_o = awsize_i_a;
-                awburst_o = awburst_i_a;
-                awvalid_o = awvalid_i_a;
-                awready_o_a = awready_i;
-            end
-        endcase
-    end
+    assign awaddr_o = awaddr_i_b;
+    assign awid_o = awid_i_b;
+    assign awlen_o = awlen_i_b;
+    assign awsize_o = awsize_i_b;
+    assign awburst_o = awburst_i_b;
+    assign awvalid_o = awvalid_i_b;
+    assign awready_o_b = awready_i;
 
-    always@(*) begin
-        case(w_switch)
-            1: begin
-                wdata_o = wdata_i_b;
-                wstrb_o = wstrb_i_b;
-                wlast_o = wlast_i_b;
-                wvalid_o = wvalid_i_b;
-                wready_o_b = wready_i;
-            end
-            default: begin
-                wdata_o = wdata_i_a;
-                wstrb_o = wstrb_i_a;
-                wlast_o = wlast_i_a;
-                wvalid_o = wvalid_i_a;
-                wready_o_a = wready_i;
-            end
-        endcase
-    end
-    
-    always@(*) begin
-        case(b_switch)
-            1: begin
-                bresp_o_b = bresp_i;
-                bid_o_b = bid_i;
-                bvalid_o_b = bvalid_i;
-                bready_o = bready_i_b;
-            end
-            default: begin
-                bresp_o_a = bresp_i;
-                bid_o_a = bid_i;
-                bvalid_o_a = bvalid_i;
-                bready_o = bready_i_a;
-            end
-        endcase
-    end
+    assign wdata_o = wdata_i_b;
+    assign wstrb_o = wstrb_i_b;
+    assign wlast_o = wlast_i_b;
+    assign wvalid_o = wvalid_i_b;
+    assign wready_o_b = wready_i;
 
-    
+    assign bresp_o_b = bresp_i;
+    assign bid_o_b = bid_i;
+    assign bvalid_o_b = bvalid_i;
+    assign bready_o = bready_i_b;
+
+
 
 endmodule
