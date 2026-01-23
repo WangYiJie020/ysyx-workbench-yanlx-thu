@@ -109,16 +109,13 @@ module axi_arbiter(
 );
 
 
-    reg ar_switch,r_switch,aw_switch,w_switch,b_switch;
+    reg ar_switch,r_switch;
 
     // Arbiter logic
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             ar_switch <= 0;
             r_switch <= 0;
-            aw_switch <= 1;
-            w_switch <= 1;
-            b_switch <= 1;
         end else begin
             if(bus_busy == 0) begin
                 if(arvalid_i_b == 1) begin 
