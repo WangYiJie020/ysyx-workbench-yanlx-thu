@@ -127,12 +127,15 @@ module axi_arbiter(
                 else begin
                     //arready_o_b <= 0;arready_o_a <= arready_i;
                 end
+                if(ar_switch == 1) arvalid_o <= arvalid_i_b;
+                else arvalid_o <= arvalid_i_a;
                 arready_o_a <= 1;
                 arready_o_b <= 1;
             end
             else begin
                 arready_o_a <= 0;
                 arready_o_b <= 0;
+                arvalid_o <= 0;
             end
         end
     end
@@ -163,7 +166,7 @@ module axi_arbiter(
                 arlen_o = arlen_i_b;
                 arsize_o = arsize_i_b;
                 arburst_o = arburst_i_b;
-                arvalid_o = arvalid_i_b;
+                //arvalid_o = arvalid_i_b;
                 //arready_o_b = arready_i;
             end
             default: begin
@@ -172,7 +175,7 @@ module axi_arbiter(
                 arlen_o = arlen_i_a;
                 arsize_o = arsize_i_a;
                 arburst_o = arburst_i_a;
-                arvalid_o = arvalid_i_a;
+                //arvalid_o = arvalid_i_a;
                 //arready_o_a = arready_i;
             end
         endcase
