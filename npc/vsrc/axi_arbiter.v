@@ -130,15 +130,32 @@ module axi_arbiter(
             //else begin arready_o_b <= arready_i; arready_o_a <= arready_i; end
             //else if(ar_switch == 1 && rlast_o_b == 1) begin ar_switch <= 0; r_switch <= 0;end
             //else if(ar_switch == 0 && rlast_o_a == 1) begin ar_switch <= 1; r_switch <= 1;end
-            if(arvalid_i_b == 1) begin 
-                ar_switch <= 1; r_switch <= 1;//arready_o_a <= 0;arready_o_b <= arready_i;
+            if(arvalid_i_b == 1 && r_counter==1) begin 
+                ar_switch <= 0; r_switch <= 0;
+
+            end
+            else if(rvalid_i == 1 && r_counter==1)begin 
+                ar_switch <= 1; r_switch <= 1;//arready_o_b <= 0;arready_o_a <= arready_i;
             end
             else if(ar_switch == 1)begin 
                 ar_switch <= 0; r_switch <= 0;//arready_o_b <= 0;arready_o_a <= arready_i;
             end
-            else begin
-                //arready_o_b <= 0;arready_o_a <= arready_i;
-            end
+            
+        end
+    end
+
+    reg [1:0] r_counter;
+
+    always@(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            r_counter <= 0;
+        end
+        else begin
+            if(arready_i==1 && arvalid_o==1)
+                r_counter <= r_counter + 1;
+            if(rvalid_i==1 && rready_o==1 && rlast_i==1)
+                r_counter <= r_counter - 1;
+
         end
     end
 
