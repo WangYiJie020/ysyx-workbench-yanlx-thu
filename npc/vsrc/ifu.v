@@ -60,7 +60,7 @@ module ifu(
     always @(*) begin
         case(current_state)
             S_MEM: begin
-                if (rready == 1 && rvalid_i == 1 && skip == 0) begin
+                if (rready == 1 && rvalid_i == 1) begin
                     next_state = S_OUT;
                 end else begin
                     next_state = current_state;
@@ -99,7 +99,7 @@ module ifu(
             
             if(current_state == S_MEM) begin 
                 araddr <= pc;
-                if(rvalid_i == 1 && rready == 1 && skip == 0 ) begin 
+                if(rvalid_i == 1 && rready == 1) begin 
                     inst <= rdata_i;
                 end
                 if(rready == 1 && rvalid_i == 1) rready <= 0;          
@@ -135,10 +135,10 @@ module ifu(
                 current_state <= S_MEM;  
                 reset_o <= 1;
                 arvalid_flag <= 0;
-                skip <= 1;
+                //skip <= 1;
             end
             else begin
-                if(rvalid_i == 1 && rready == 1 && skip == 1) skip <= 0;
+                //if(rvalid_i == 1 && rready == 1 && skip == 1) skip <= 0;
                 reset_o <= 0;
                 current_state <= next_state;  
             end 
