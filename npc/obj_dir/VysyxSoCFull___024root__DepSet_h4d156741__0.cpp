@@ -5462,8 +5462,8 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__2(VysyxSoCFull___0
     }
 }
 
-extern const VlUnpacked<CData/*4:0*/, 64> VysyxSoCFull__ConstPool__TABLE_h545e4a4b_0;
-extern const VlUnpacked<CData/*0:0*/, 64> VysyxSoCFull__ConstPool__TABLE_hb3daf500_0;
+extern const VlUnpacked<CData/*4:0*/, 64> VysyxSoCFull__ConstPool__TABLE_hf92d327e_0;
+extern const VlUnpacked<CData/*0:0*/, 64> VysyxSoCFull__ConstPool__TABLE_h374b5948_0;
 extern const VlUnpacked<CData/*0:0*/, 64> VysyxSoCFull__ConstPool__TABLE_hb5056493_0;
 void VysyxSoCFull___024unit____Vdpiimwrap_idu_counter_return_TOP____024unit(CData/*7:0*/ inst_opcode);
 void VysyxSoCFull___024unit____Vdpiimwrap_difftest_next_step_TOP____024unit(CData/*7:0*/ difftest_check);
@@ -5595,31 +5595,31 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__6(VysyxSoCFull___0
                                           (((IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__LSU__DOT__arvalid) 
                                             << 1U) 
                                            | (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__rst_n)))));
-    if ((1U & VysyxSoCFull__ConstPool__TABLE_h545e4a4b_0
+    if ((1U & VysyxSoCFull__ConstPool__TABLE_hf92d327e_0
          [__Vtableidx2])) {
         vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT__ar_switch 
-            = VysyxSoCFull__ConstPool__TABLE_hb3daf500_0
+            = VysyxSoCFull__ConstPool__TABLE_h374b5948_0
             [__Vtableidx2];
     }
-    if ((2U & VysyxSoCFull__ConstPool__TABLE_h545e4a4b_0
+    if ((2U & VysyxSoCFull__ConstPool__TABLE_hf92d327e_0
          [__Vtableidx2])) {
         vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT__r_switch 
-            = VysyxSoCFull__ConstPool__TABLE_hb3daf500_0
+            = VysyxSoCFull__ConstPool__TABLE_h374b5948_0
             [__Vtableidx2];
     }
-    if ((4U & VysyxSoCFull__ConstPool__TABLE_h545e4a4b_0
+    if ((4U & VysyxSoCFull__ConstPool__TABLE_hf92d327e_0
          [__Vtableidx2])) {
         vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT__aw_switch 
             = VysyxSoCFull__ConstPool__TABLE_hb5056493_0
             [__Vtableidx2];
     }
-    if ((8U & VysyxSoCFull__ConstPool__TABLE_h545e4a4b_0
+    if ((8U & VysyxSoCFull__ConstPool__TABLE_hf92d327e_0
          [__Vtableidx2])) {
         vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT__w_switch 
             = VysyxSoCFull__ConstPool__TABLE_hb5056493_0
             [__Vtableidx2];
     }
-    if ((0x10U & VysyxSoCFull__ConstPool__TABLE_h545e4a4b_0
+    if ((0x10U & VysyxSoCFull__ConstPool__TABLE_hf92d327e_0
          [__Vtableidx2])) {
         vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT__b_switch 
             = VysyxSoCFull__ConstPool__TABLE_hb5056493_0
