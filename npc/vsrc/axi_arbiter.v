@@ -153,8 +153,7 @@ module axi_arbiter(
         end
     end
 
-    assign arvalid_o = (ar_switch==1 && bus_busy == 0) ? arvalid_i_b : arvalid_i_a;
-    arvalid_o = (bus_busy == 1)? 0: ((ar_switch==1)?arvalid_i_b : arvalid_i_a);
+    assign arvalid_o = (bus_busy == 1)? 0: ((ar_switch==1)?arvalid_i_b : arvalid_i_a);
 
     always@(*) begin
         case(ar_switch)
