@@ -119,14 +119,16 @@ module axi_arbiter(
         end else begin
             if(bus_busy == 0) begin
                 if(arvalid_i_b == 1) begin 
-                    ar_switch <= 1; r_switch <= 1;arready_o_a <= 0;arready_o_b <= arready_i;
+                    ar_switch <= 1; r_switch <= 1;//arready_o_a <= 0;arready_o_b <= arready_i;
                 end
                 else if(ar_switch == 1 && rlast_i == 1)begin 
-                    ar_switch <= 0; r_switch <= 0;arready_o_b <= 0;arready_o_a <= arready_i;
+                    ar_switch <= 0; r_switch <= 0;//arready_o_b <= 0;arready_o_a <= arready_i;
                 end
                 else begin
                     //arready_o_b <= 0;arready_o_a <= arready_i;
                 end
+                arready_o_a <= 1;
+                arready_o_b <= 1;
             end
             else begin
                 arready_o_a <= 0;
@@ -135,12 +137,11 @@ module axi_arbiter(
         end
     end
 
-    reg [1:0] r_counter;
     reg bus_busy;
 
     always@(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            r_counter <= 0;
+            bus_busy <= 0;
         end
         else begin
             if(arready_i==1 && arvalid_o==1)
