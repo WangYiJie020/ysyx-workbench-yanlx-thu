@@ -288,7 +288,13 @@ module lsu(
                     arvalid <= 0;
                     send_data_request();
                 end
-                
+                wb_src_o <= wb_src_i;
+                csr_write_o <= csr_write_i;
+                csr_wdata_src_o <= csr_wdata_src_i;
+                reg_write_o <= reg_write_i;
+                csr_rdata_l_rs1_o <= csr_rdata_l_rs1_i;
+                waddr_o <= waddr_i;
+                wlast_o <= 1;
 
             end 
             
