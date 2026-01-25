@@ -82,6 +82,7 @@ module lsu(
     reg [`CPU_WIDTH-1:0] rs2;
     reg [`CPU_WIDTH-1:0] csr_rdata_l_rs1;
     reg [2:0] rmask;
+    reg [3:0] wmask;
 
     
     reg flag,wvalid_tmp;
@@ -101,6 +102,7 @@ module lsu(
   
 
     assign rmask_o = rmask;
+    assign wmask_o = wmask;
     assign rs1_o = rs1;
     assign alu_result_o = alu_result;
     //assign datamem_readdata_o = rdata_i;
@@ -118,7 +120,7 @@ module lsu(
     //assign wlast_o = 1;
 
     always@(*) begin
-        case(wmask_i)
+        case(wmask)
             4'h1: awsize_o = 3'b000;
             4'h3: awsize_o = 3'b001;
             4'hf: awsize_o = 3'b010;
@@ -127,7 +129,7 @@ module lsu(
     end
 
     always@(*) begin
-        case(rmask_i)
+        case(rmask)
             3'b100,3'b011: arsize_o = 3'b000; //lb,lbu
             3'b010,3'b001: arsize_o = 3'b001; //lh,lhu
             3'b000: arsize_o = 3'b010; //lw
@@ -136,11 +138,11 @@ module lsu(
     end
 
     always@(*) begin
-        case(wmask_i)
-            4'h1: wstrb = wmask_i << alu_result_i[1:0];
-            4'h3: wstrb = wmask_i << alu_result_i[1:0];
-            4'hf: wstrb = wmask_i;
-            default: wstrb = wmask_i;
+        case(wmask)
+            4'h1: wstrb = wmask << alu_result_i[1:0];
+            4'h3: wstrb = wmask << alu_result_i[1:0];
+            4'hf: wstrb = wmask;
+            default: wstrb = wmask;
         endcase
     end
     //assign wstrb = wmask_i << alu_result_i[1:0];
@@ -215,6 +217,8 @@ module lsu(
                     reg_write_o <= reg_write_i;
                     csr_rdata_l_rs1_o <= csr_rdata_l_rs1_i;
                     waddr_o <= waddr_i;
+                    wmask <= wmask_i;
+                    rmask <= rmask_i;
                 end
             end else if(current_state == S_OUT) begin 
                 
