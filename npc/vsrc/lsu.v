@@ -218,17 +218,17 @@ module lsu(
                 rs1 <= rs1_i;
                 if(wmask_i == 4'hf) wdata <= rs2_i; 
                 else wdata <= rs2_i << (8*alu_result_i[1:0]);  
-                //araddr <= alu_result_i;
+                araddr <= 0;
 
-                //arvalid <= MemRead_i;
-                //rready <= MemRead_i;        
+                arvalid <= 0;
+                rready <= 0;        
                 
-                //bready <= 1;
+                bready <= 1;
                 rmask <= rmask_i;
                 
-                //awaddr <= alu_result_i;
-                //awvalid <= MemWrite_i;
-                //wvalid <= MemWrite_i;
+                awaddr <= 0;
+                awvalid <= 0;
+                wvalid <= 0;
                 
                 wb_src_o <= wb_src_i;
                 csr_write_o <= csr_write_i;
@@ -260,6 +260,7 @@ module lsu(
                     if(rlast_i==1&& rready_o==1&& rvalid_i==1) begin 
                         //lsu_valid_o <= 1;
                         datamem_readdata_o <= rdata_i;
+                        read_mem <= 0;
                         data_counter_add();
                         receive_data_back();
                     end
@@ -268,6 +269,7 @@ module lsu(
                 else if(write_mem)begin
                     if(bready_o == 1 && bvalid_i == 1 && bresp_i == 0) begin 
                         //lsu_valid_o <= 1;
+                        write_mem <= 0;
                         data_counter_add();
                         receive_data_back();
                     end
