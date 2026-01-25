@@ -232,7 +232,7 @@ module lsu(
                 rready <= 0;        
                 
                 bready <= 1;
-                rmask <= rmask_i;
+                //rmask <= rmask_i;
                 
                 awaddr <= 0;
                 awvalid <= 0;
