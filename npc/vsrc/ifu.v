@@ -136,7 +136,13 @@ module ifu(
                 current_state <= S_MEM;  
                 reset_o <= 1;
                 arvalid_flag <= 0;
-                skip <= 1;
+                
+                if(bus_busy == 1) begin
+                    skip <= 1;
+                end
+                else begin
+                    skip <= 0;
+                end
             end
             else begin
                 if(rvalid_i == 1 && rready == 1 && skip == 1) skip <= 0;
@@ -144,6 +150,21 @@ module ifu(
                 current_state <= next_state;  
             end 
                       
+        end
+    end
+
+    reg bus_busy;
+
+    always@(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            bus_busy <= 0;
+        end
+        else begin
+            if(arready_i==1 && arvalid_o==1)
+                bus_busy <= 1;
+            if(rvalid_i==1 && rready_o==1 && rlast_i==1)
+                bus_busy <= 0;
+
         end
     end
 
