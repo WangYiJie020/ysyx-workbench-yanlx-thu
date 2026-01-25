@@ -102,7 +102,6 @@ module lsu(
   
 
     assign rmask_o = rmask;
-    assign wmask_o = wmask;
     assign rs1_o = rs1;
     assign alu_result_o = alu_result;
     //assign datamem_readdata_o = rdata_i;
