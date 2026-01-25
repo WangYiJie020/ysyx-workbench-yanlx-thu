@@ -224,8 +224,7 @@ module lsu(
                 
                 alu_result <= alu_result_i;
                 rs1 <= rs1_i;
-                if(wmask_i == 4'hf) wdata <= rs2_i; 
-                else wdata <= rs2_i << (8*alu_result_i[1:0]);  
+                 
                 araddr <= 0;
 
                 arvalid <= 0;
@@ -259,6 +258,8 @@ module lsu(
                     write_mem <= 1;
                     bready <= 1;
                     wlast_o <= 1;
+                    if(wmask_i == 4'hf) wdata <= rs2_i; 
+                    else wdata <= rs2_i << (8*alu_result_i[1:0]); 
                 end
                 if(read_mem) begin
                     if(rlast_i==1&& rready_o==1&& rvalid_i==1) begin 
