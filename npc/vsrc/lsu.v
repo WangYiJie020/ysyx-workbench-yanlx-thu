@@ -212,7 +212,7 @@ module lsu(
                 //datamem_readdata_o <= 0;
                 wlast_o <= 0;
             end else if(current_state == S_OUT) begin 
-                lsu_valid_o <= 0;
+                
                 
                 alu_result <= alu_result_i;
                 rs1 <= rs1_i;
@@ -243,13 +243,13 @@ module lsu(
                 //araddr_o <= alu_result;
                 //awaddr_o <= alu_result;
             end else if (current_state == S_MEM)begin
-                if(MemRead_i) begin
+                if(MemRead_i && read_mem == 0) begin
                     araddr <= alu_result_i;
                     arvalid <= 1;
                     rready <= MemRead_i;
                     read_mem <= 1;
                 end 
-                else if(MemWrite_i)begin
+                else if(MemWrite_i && write_mem == 0)begin
                     awaddr <= alu_result_i;
                     awvalid <= 1;
                     wvalid <= 1;
