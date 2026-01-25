@@ -206,11 +206,16 @@ module lsu(
                 //arvalid <= 0;
                 rready <= 0;
                 bready <= 0;
-                if(arvalid==1 && arready_i==1) begin
-                    arvalid <= 0;
-                end 
                 //datamem_readdata_o <= 0;
                 wlast_o <= 0;
+                if (lsu_valid_i == 1 && lsu_ready_o == 1) begin
+                    wb_src_o <= wb_src_i;
+                    csr_write_o <= csr_write_i;
+                    csr_wdata_src_o <= csr_wdata_src_i;
+                    reg_write_o <= reg_write_i;
+                    csr_rdata_l_rs1_o <= csr_rdata_l_rs1_i;
+                    waddr_o <= waddr_i;
+                end
             end else if(current_state == S_OUT) begin 
                 
                 
@@ -230,12 +235,7 @@ module lsu(
                 awvalid <= 0;
                 wvalid <= 0;
                 
-                wb_src_o <= wb_src_i;
-                csr_write_o <= csr_write_i;
-                csr_wdata_src_o <= csr_wdata_src_i;
-                reg_write_o <= reg_write_i;
-                csr_rdata_l_rs1_o <= csr_rdata_l_rs1_i;
-                waddr_o <= waddr_i;
+                
                 wlast_o <= 1;
 
                 lsu_valid_o <= 1;
@@ -255,6 +255,7 @@ module lsu(
                     wvalid <= 1;
                     write_mem <= 1;
                     bready <= 1;
+                    wlast_o <= 1;
                 end
                 if(read_mem) begin
                     if(rlast_i==1&& rready_o==1&& rvalid_i==1) begin 
@@ -287,14 +288,7 @@ module lsu(
                 if(arvalid==1 && arready_i==1) begin 
                     arvalid <= 0;
                     send_data_request();
-                end
-                wb_src_o <= wb_src_i;
-                csr_write_o <= csr_write_i;
-                csr_wdata_src_o <= csr_wdata_src_i;
-                reg_write_o <= reg_write_i;
-                csr_rdata_l_rs1_o <= csr_rdata_l_rs1_i;
-                waddr_o <= waddr_i;
-                wlast_o <= 1;
+                end              
 
             end 
             
