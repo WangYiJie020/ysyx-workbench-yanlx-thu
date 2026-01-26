@@ -111,7 +111,6 @@ module axi_arbiter(
 );
 
 
-    assign tmp = bus_busy ^ ar_switch;
     reg ar_switch,r_switch;
 
     // Arbiter logic
