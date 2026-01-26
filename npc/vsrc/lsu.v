@@ -107,7 +107,7 @@ module lsu(
     assign rs1_o = rs1;
     assign alu_result_o = alu_result;
     //assign datamem_readdata_o = rdata_i;
-    assign araddr = alu_result;
+    assign araddr = alu_result_i;
     //assign awaddr = alu_result;
     //assign datamem_readdata_o = rdata_i;
     assign arid_o = 0;
