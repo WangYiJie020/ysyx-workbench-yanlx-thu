@@ -108,6 +108,7 @@ module ifu(
                 if(arvalid==1 && arready_i==1) begin
                     arvalid <= 0;
                     arvalid_flag <= 1;
+                    if(araddr_o != npc_i) arvalid_flag <= 0;
                 end
                 else if(arvalid_flag == 0) arvalid <= 1;
                 
@@ -141,6 +142,7 @@ module ifu(
                     skip <= 1;
                 end
                 else begin
+                    if() skip <= 1;
                     skip <= 0;
                 end
             end
