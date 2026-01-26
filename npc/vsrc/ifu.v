@@ -142,8 +142,8 @@ module ifu(
                     skip <= 1;
                 end
                 else begin
-                    if() skip <= 1;
-                    skip <= 0;
+                    if(araddr_o != npc_i) skip <= 1;
+                    else skip <= 0;
                 end
             end
             else begin
