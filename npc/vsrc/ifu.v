@@ -152,6 +152,11 @@ module ifu(
                 reset_o <= 0;
                 current_state <= next_state;  
             end 
+
+            if(arvalid==1 && arready_i==1 && araddr != pc) begin
+                skip <= 1;
+                arvalid <= 1;
+            end
                       
         end
     end
