@@ -110,7 +110,8 @@ module axi_arbiter(
     output bus_busy
 );
 
-
+    wire tmp;
+    assign tmp = bus_busy ^ ar_switch;
     reg ar_switch,r_switch;
 
     // Arbiter logic
