@@ -132,7 +132,7 @@ module ifu(
 
             if(npc_valid==1 && npc_i != pc) begin
                 pc <= npc_i;
-                araddr <= npc_i;
+                //araddr <= npc_i;
                 current_state <= S_MEM;  
                 reset_o <= 1;
                 arvalid_flag <= 0;
