@@ -32,7 +32,7 @@ module ifu(
     output reg ifu_valid_o,
     input ifu_ready_i,
 
-    input bus_busy;
+    input bus_busy
     
 
 );

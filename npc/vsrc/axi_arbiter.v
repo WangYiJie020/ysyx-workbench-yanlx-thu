@@ -107,7 +107,7 @@ module axi_arbiter(
     input bvalid_i,
     output bready_o,
 
-    output bus_busy;
+    output bus_busy
 );
 
 
