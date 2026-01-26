@@ -121,12 +121,12 @@ module axi_arbiter(
         end else begin
             if(bus_busy == 0) begin
                 if(arvalid_i_b == 1 ) begin 
-                    if(arvalid_o==1 && arready_i==1) begin
-                        ar_switch <= 0; r_switch <= 0;
-                    end
-                    else begin
+                    //if(arvalid_o==1 && arready_i==1) begin
+                    //    ar_switch <= 0; r_switch <= 0;
+                    //end
+                    //else begin
                         ar_switch <= 1; r_switch <= 1;
-                    end
+                    //end
                     //arready_o_a <= 0;arready_o_b <= arready_i;
                 end
                 else begin
