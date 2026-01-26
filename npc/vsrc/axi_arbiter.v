@@ -105,7 +105,9 @@ module axi_arbiter(
     input [1:0] bresp_i,
     input [3:0] bid_i,
     input bvalid_i,
-    output bready_o
+    output bready_o,
+
+    output bus_busy;
 );
 
 
@@ -144,8 +146,6 @@ module axi_arbiter(
 
         end
     end
-
-    reg bus_busy;
 
     always@(posedge clk or negedge rst_n) begin
         if (!rst_n) begin

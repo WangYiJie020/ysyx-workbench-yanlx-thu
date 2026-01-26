@@ -30,7 +30,9 @@ module ifu(
     output [`PC_WIDTH-1:0] pc_o,
     output reg [`INST_WIDTH-1:0] inst_o,
     output reg ifu_valid_o,
-    input ifu_ready_i
+    input ifu_ready_i,
+
+    input bus_busy;
     
 
 );
@@ -161,20 +163,6 @@ module ifu(
         end
     end
 
-    reg bus_busy;
-
-    always@(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
-            bus_busy <= 0;
-        end
-        else begin
-            if(arready_i==1 && arvalid_o==1)
-                bus_busy <= 1;
-            if(rvalid_i==1 && rready_o==1 && rlast_i==1)
-                bus_busy <= 0;
-
-        end
-    end
 
     always@(posedge clk) begin
         return_inst(inst,{1'b0,inst[6:0]});

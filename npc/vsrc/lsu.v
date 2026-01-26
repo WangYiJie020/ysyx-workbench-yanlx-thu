@@ -74,7 +74,9 @@ module lsu(
     input [1:0] bresp_i,
     input [3:0] bid_i,
     input bvalid_i,
-    output bready_o
+    output bready_o,
+
+    input bus_busy
 
 );
     reg [`CPU_WIDTH-1:0] alu_result;

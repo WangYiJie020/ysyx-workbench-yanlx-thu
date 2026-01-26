@@ -108,6 +108,8 @@ module ysyx_25050137(
     wire ifu_rvalid;
     wire ifu_rready;
 
+    wire bus_busy;
+
     ifu IFU(
         .clk(clk),
         .rst_n(rst_n),
@@ -134,7 +136,9 @@ module ysyx_25050137(
         .inst_o(inst_ifu_to_idu),
 
         .ifu_valid_o(valid_ifu_to_idu),
-        .ifu_ready_i(ready_ifu_to_idu)
+        .ifu_ready_i(ready_ifu_to_idu),
+
+        .bus_busy(bus_busy)
     );
 
     assign pc_to_mem = pc_ifu_to_idu;
@@ -408,7 +412,9 @@ module ysyx_25050137(
         .bresp_i(axi_bresp),
         .bid_i(axi_bid),
         .bvalid_i(axi_bvalid),
-        .bready_o(axi_bready)
+        .bready_o(axi_bready),
+
+        .bus_busy(bus_busy)
     );
 
     xbar Xbar(
@@ -821,7 +827,9 @@ module ysyx_25050137(
         .bresp_i(lsu_bresp),
         .bid_i(lsu_bid),
         .bvalid_i(lsu_bvalid),
-        .bready_o(lsu_bready)
+        .bready_o(lsu_bready),
+
+        .bus_busy(bus_busy)
     );
 
 
