@@ -100,6 +100,11 @@ module axi_arbiter(
     output [3:0] wstrb_o,
     output wlast_o,
     output wvalid_o,
+    input wready_i,
+
+    input [1:0] bresp_i,
+    input [3:0] bid_i,
+    input bvalid_i,
     output bready_o,
 
     output bus_busy
