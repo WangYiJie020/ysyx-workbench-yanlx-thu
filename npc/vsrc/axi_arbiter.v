@@ -100,11 +100,6 @@ module axi_arbiter(
     output [3:0] wstrb_o,
     output wlast_o,
     output wvalid_o,
-    input wready_i,
-
-    input [1:0] bresp_i,
-    input [3:0] bid_i,
-    input bvalid_i,
     output bready_o,
 
     output bus_busy
@@ -122,7 +117,7 @@ module axi_arbiter(
             if(bus_busy == 0 ) begin
                 arready_o_a <= arready_i;
                 arready_o_b <= arready_i;
-                if(arvalid_i_b == 1 && !(arready_i==1 && arvalid_o==1)) begin 
+                if(arvalid_i_b == 1 && !(arready_i==1 && arvalid_o==1) && ar_switch==0) begin 
                     ar_switch <= 1; r_switch <= 1;
 
                     //arready_o_a <= 0;arready_o_b <= arready_i;
