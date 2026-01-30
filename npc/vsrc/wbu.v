@@ -126,7 +126,7 @@ module wbu(
                 
             end else if (current_state == S_SEND)begin
                 difftest_check_flag <= 1;
-                //difftest_check <= 1; 
+                difftest_check <= 0; 
                 
             end else begin
                 difftest_check <= 0; 
