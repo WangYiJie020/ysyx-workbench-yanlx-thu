@@ -173,7 +173,7 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
                 npc_valid <= 0;
             end
             else if(current_state == S_RECEIVE) begin 
-                exu_valid_o <= 1;
+                exu_valid_o <= 0;
                 pc <= pc_i;
                 rs1 <= rs1_i;
                 rs2 <=rs2_i;
