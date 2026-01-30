@@ -4485,7 +4485,7 @@ VL_INLINE_OPT void VysyxSoCFull___024root___nba_sequent__TOP__11(VysyxSoCFull___
                 vlSelf->ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_out_arburst 
                     = vlSelf->ysyxSoCFull__DOT__asic__DOT___cpu_auto_master_out_arburst;
                 vlSelf->ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_in_rvalid = 0U;
-                vlSelf->ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_in_rlast = 1U;
+                vlSelf->ysyxSoCFull__DOT__asic__DOT___axi4delay_delayer_in_rlast = 0U;
             }
         }
         if ((4U & (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__axi4delay_delayer__DOT__state_wt))) {
