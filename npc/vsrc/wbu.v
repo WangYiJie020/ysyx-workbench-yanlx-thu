@@ -137,7 +137,7 @@ module wbu(
         end
     end
 
-    always@(*) begin
+    always@(posedge clk) begin
         difftest_next_step({7'd0,difftest_check});
     end
 
