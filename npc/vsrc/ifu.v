@@ -32,9 +32,9 @@ module ifu(
     output reg ifu_valid_o,
     input ifu_ready_i,
 
-    input bus_busy
+    input bus_busy,
 
-    output [`CPU_WIDTH-1:0] pc_dbg;
+    output [`CPU_WIDTH-1:0] pc_dbg
     
 
 );
