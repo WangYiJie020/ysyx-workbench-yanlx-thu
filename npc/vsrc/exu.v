@@ -195,7 +195,7 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
                 csr_wdata_src_o <= csr_wdata_src_i;
                 reg_write_o <= reg_write_i;
                 waddr_o <= waddr_i;
-                if(exu_valid_o == 1 && exu_ready_i == 1) exu_valid_o <= 0;
+                //if(exu_valid_o == 1 && exu_ready_i == 1) exu_valid_o <= 0;
             end else if (current_state == S_SEND)begin
                 exu_valid_o <= 0;
                 npc_valid <= 1;

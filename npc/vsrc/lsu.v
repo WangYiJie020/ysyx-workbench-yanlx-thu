@@ -220,11 +220,12 @@ module lsu(
                     waddr_o <= waddr_i;
                     wmask <= wmask_i;
                     rmask <= rmask_i;
+                    alu_result <= alu_result_i;
                 end
             end else if(current_state == S_OUT) begin 
                 
                 
-                alu_result <= alu_result_i;
+                
                 rs1 <= rs1_i;
                  
                 araddr <= 0;
