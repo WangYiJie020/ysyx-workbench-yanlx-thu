@@ -101,7 +101,7 @@ module wbu(
 
             if(current_state == S_IDLE) begin 
                 
-                difftest_check <= 0; 
+                //difftest_check <= 0; 
                 difftest_check_flag <= 0;
             end
             else if(current_state == S_RECEIVE) begin 
@@ -119,17 +119,17 @@ module wbu(
                 difftest_check <= 0; 
                 
                 if(difftest_check == 0 && difftest_check_flag == 0) begin 
-                    difftest_check <= 1; //此时检查寄存器
+                    //difftest_check <= 1; //此时检查寄存器
                     difftest_check_flag <= 1;
                 end
-                else difftest_check <= 0;
+                else //difftest_check <= 0;
                 
             end else if (current_state == S_SEND)begin
                 difftest_check_flag <= 1;
-                difftest_check <= 0; 
+                //difftest_check <= 0; 
                 
             end else begin
-                difftest_check <= 0; 
+                //difftest_check <= 0; 
                 difftest_check_flag <= 0;
                 
             end
@@ -137,6 +137,7 @@ module wbu(
         end
     end
 
+    assign difftest_check = (current_state == S_RECEIVE) ? 1 : 0;
     always@(posedge clk) begin
         difftest_next_step({7'd0,difftest_check});
     end
