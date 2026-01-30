@@ -116,16 +116,16 @@ module wbu(
                 csr_write_o <= csr_write_i;
                 reg_write_o <= reg_write_i;
                 waddr_o <= waddr_i;
-                difftest_check <= 0; 
+                //difftest_check <= 0; 
                 
-                if(difftest_check == 0 && difftest_check_flag == 0) begin 
+                //if(difftest_check == 0 && difftest_check_flag == 0) begin 
                     //difftest_check <= 1; //此时检查寄存器
-                    difftest_check_flag <= 1;
-                end
-                else //difftest_check <= 0;
+                    //difftest_check_flag <= 1;
+                //end
+                //else //difftest_check <= 0;
                 
             end else if (current_state == S_SEND)begin
-                difftest_check_flag <= 1;
+                //difftest_check_flag <= 1;
                 //difftest_check <= 0; 
                 
             end else begin
