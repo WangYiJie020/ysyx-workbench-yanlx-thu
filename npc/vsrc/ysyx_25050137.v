@@ -138,10 +138,11 @@ module ysyx_25050137(
         .ifu_valid_o(valid_ifu_to_idu),
         .ifu_ready_i(ready_ifu_to_idu),
 
-        .bus_busy(bus_busy)
+        .bus_busy(bus_busy),
+        .pc_dbg(pc_to_mem)
     );
 
-    assign pc_to_mem = pc_ifu_to_idu;
+    //assign pc_to_mem = pc_ifu_to_idu;
     assign inst_from_mem = inst_ifu_to_idu;
 
     wire useless1,useless2,useless3,useless4;

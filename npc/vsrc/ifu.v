@@ -33,6 +33,8 @@ module ifu(
     input ifu_ready_i,
 
     input bus_busy
+
+    output [`CPU_WIDTH-1:0] pc_dbg;
     
 
 );
@@ -58,6 +60,8 @@ module ifu(
 
     reg [1:0] current_state,next_state;
     reg ready_flag,arvalid_flag;
+
+    assign pc_dbg = pc;
 
     always @(*) begin
         case(current_state)
