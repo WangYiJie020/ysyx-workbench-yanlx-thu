@@ -131,7 +131,7 @@ module lsu(
 
     always@(*) begin
         case(rmask)
-            3'b100,3'b011: arsize_o = 3'b010; //lb,lbu
+            3'b100,3'b011: arsize_o = 3'b000; //lb,lbu
             3'b010,3'b001: arsize_o = 3'b001; //lh,lhu
             3'b000: arsize_o = 3'b010; //lw
             default: arsize_o = 3'b010;
