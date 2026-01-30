@@ -474,7 +474,7 @@ static void trace_and_difftest() {
   //log_write("%08x,%08x\n", top->pc,top->inst); 
 #ifdef DIFFTEST_ON
   if(difftest_check_all == true) {
-    
+    /*
     if(is_skip_ref) {
       //printf("skip\n");
       //skip_r = is_skip_ref;
@@ -499,6 +499,15 @@ static void trace_and_difftest() {
       }
     }
     skip_r = is_skip_ref;
+    */
+    
+      bool check = difftest_check();
+      difftest_step();
+
+      if(check==false) {
+        cpu_state = NPC_ABORT;
+        return;
+      }
   }
   
 #endif
