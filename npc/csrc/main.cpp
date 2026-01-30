@@ -470,6 +470,7 @@ static int parse_args(int argc, char *argv[]) {
 }
 bool skip_r=false;
 static void trace_and_difftest() {
+  printf("a\n");
   //log_write("%08x,%08x\n", top->pc,top->inst); 
 #ifdef DIFFTEST_ON
   if(difftest_check_all == true) {
