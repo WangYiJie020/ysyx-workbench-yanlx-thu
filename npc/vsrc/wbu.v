@@ -97,7 +97,7 @@ module wbu(
 
             if(current_state == S_IDLE) wbu_ready_o <= 1;
             else if(current_state == S_RECEIVE) wbu_ready_o <= 0;
-            else if(current_state == S_SEND) wbu_ready_o <= 1;
+            else if(current_state == S_SEND) wbu_ready_o <= 0;
 
             if(current_state == S_IDLE) begin 
                 

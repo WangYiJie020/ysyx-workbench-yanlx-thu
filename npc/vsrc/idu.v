@@ -146,7 +146,7 @@ module idu(
 
             if(current_state == S_IDLE) idu_ready_o <= 1;
             else if(current_state == S_RECEIVE) idu_ready_o <= 0;
-            else if(current_state == S_SEND) idu_ready_o <= 1;
+            else if(current_state == S_SEND) idu_ready_o <= 0;
 
             if(current_state == S_IDLE) begin
                 idu_valid_o <= 0;
@@ -168,7 +168,7 @@ module idu(
         end
     end
 
-    
+
 
 
 
