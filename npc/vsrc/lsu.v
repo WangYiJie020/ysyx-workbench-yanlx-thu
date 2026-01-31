@@ -244,7 +244,7 @@ module lsu(
                 wlast_o <= 1;
 
                 lsu_valid_o <= 1;
-
+                if(lsu_valid_o == 1 && lsu_ready_i == 1) lsu_valid_o <=0;
                 //araddr_o <= alu_result;
                 //awaddr_o <= alu_result;
             end else if (current_state == S_MEM)begin
