@@ -82,14 +82,14 @@ module idu(
     assign opcode_u = (opcode == 7'b0110111 || opcode == 7'b0010111) ? 1 : 0;
     assign opcode_uj = (opcode == 7'b1101111) ? 1 : 0; 
 
-    assign exu_raw = opcode_r ? ((raddr1 == exu_rd || raddr2 == exu_rd)? 1 : 0) :
-                                    ((opcode_u || opcode_uj)? 0 : ((raddr1 == exu_rd)? 1 : 0));
+    assign exu_raw = opcode_r ? (((raddr1 == exu_rd && raddr1 != 0) || (raddr2 == exu_rd && raddr2 != 0))? 1 : 0) :
+                                    ((opcode_u || opcode_uj)? 0 : ((raddr1 == exu_rd && raddr1 != 0)? 1 : 0));
 
-    assign lsu_raw = opcode_r ? ((raddr1 == lsu_rd || raddr2 == lsu_rd)? 1 : 0) :
-                                    ((opcode_u || opcode_uj)? 0 : ((raddr1 == lsu_rd)? 1 : 0));
+    assign lsu_raw = opcode_r ? (((raddr1 == lsu_rd && raddr1 != 0) || (raddr2 == lsu_rd && raddr2 != 0))? 1 : 0) :
+                                    ((opcode_u || opcode_uj)? 0 : ((raddr1 == lsu_rd && raddr1 != 0)? 1 : 0));
 
-    assign wbu_raw = opcode_r ? ((raddr1 == wbu_rd || raddr2 == wbu_rd)? 1 : 0) :
-                                    ((opcode_u || opcode_uj)? 0 : ((raddr1 == wbu_rd)? 1 : 0));
+    assign wbu_raw = opcode_r ? (((raddr1 == wbu_rd && raddr1 != 0) || (raddr2 == wbu_rd && raddr2 != 0))? 1 : 0) :
+                                    ((opcode_u || opcode_uj)? 0 : ((raddr1 == wbu_rd && raddr1 != 0)? 1 : 0));
 
     assign isRAW = exu_raw | lsu_raw | wbu_raw;
 
