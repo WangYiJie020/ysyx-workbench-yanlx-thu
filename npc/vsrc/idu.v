@@ -47,12 +47,18 @@ module idu(
 
     output [`CPU_WIDTH-1:0] csr_reg [3:0], //difftest
 
-    output fencei
+    output fencei,
+
+    input [4:0]exu_rd,
+    input [4:0]lsu_rd,
+    input [4:0]wbu_rd
     
     
 );
     reg [`PC_WIDTH-1:0] pc;
     reg [`INST_WIDTH-1:0] inst;
+
+    
 
     assign rs1_o = rdata1;
     assign rs2_o = rdata2;
@@ -60,9 +66,31 @@ module idu(
     assign waddr_o = inst[11:7];
     assign raddr1 = inst[19:15];
     assign raddr2 = inst[24:20];
+    assign opcode = inst[6:0];
 
     wire [7:0] wmask_tmp;
     assign wmask_o = wmask_tmp[3:0];
+
+    wire opcode,opcode_r,opcode_i,opcode_s,opcode_sb,opcode_u,opcode_uj,
+    wire isRAW,exu_raw,lsu_raw,wbu_raw;
+
+    assign opcode_r = (opcode == 7'b0110011) ? 1 : 0;
+    assign opcode_i = (opcode == 7'b0010011 || opcode == 7'b0000011 || opcode == 7'b1100111) ? 1 : 0;
+    assign opcode_s = (opcode == 7'b0100011) ? 1 : 0;
+    assign opcode_sb = (opcode == 7'b1100011) ? 1 : 0;
+    assign opcode_u = (opcode == 7'b0110111 || opcode == 7'b0010111) ? 1 : 0;
+    assign opcode_uj = (opcode == 7'b1101111) ? 1 : 0; 
+
+    assign exu_raw = opcode_r ? ((raddr1 == exu_rd || raddr2 == exu_rd)? 1 : 0) :
+                                    ((opcode_u || opcode_uj)? 0 : ((raddr1 == exu_rd)? 1 : 0));
+
+    assign lsu_raw = opcode_r ? ((raddr1 == lsu_rd || raddr2 == lsu_rd)? 1 : 0) :
+                                    ((opcode_u || opcode_uj)? 0 : ((raddr1 == lsu_rd)? 1 : 0));
+
+    assign wbu_raw = opcode_r ? ((raddr1 == wbu_rd || raddr2 == wbu_rd)? 1 : 0) :
+                                    ((opcode_u || opcode_uj)? 0 : ((raddr1 == wbu_rd)? 1 : 0));
+
+    assign isRAW = exu_raw | lsu_raw | wbu_raw;
 
     controler Controler(
         .inst(inst),
@@ -145,7 +173,9 @@ module idu(
             else fencei <= 0;
 
             if(current_state == S_IDLE) idu_ready_o <= 1;
-            else if(current_state == S_RECEIVE) idu_ready_o <= 0;
+            else if(current_state == S_RECEIVE) begin
+                idu_ready_o <= 0;
+            end
             else if(current_state == S_SEND) idu_ready_o <= 0;
 
             if(current_state == S_IDLE) begin
@@ -156,7 +186,7 @@ module idu(
                 idu_valid_o <= 1;
                 pc <= pc_i;
                 inst <= inst_i;
-                
+                //if(isRAW) idu_valid_o <= 0;
                 
             end else if (current_state == S_SEND)begin
                 idu_valid_o <= 0;

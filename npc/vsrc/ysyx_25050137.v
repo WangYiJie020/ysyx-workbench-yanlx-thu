@@ -649,7 +649,10 @@ module ysyx_25050137(
         .csr_wdata_i(csr_wdata),
         .csr_reg(csr_reg), //difftest
 
-        .fencei(fencei)
+        .fencei(fencei),
+        .exu_rd(reg_write_exu_to_lsu ? waddr_exu_to_lsu : 0),
+        .lsu_rd(reg_write_lsu_to_wbu ? waddr_lsu_to_wbu : 0),
+        .wbu_rd(reg_write ? waddr : 0)
     );
 
     wire [`CPU_WIDTH-1:0] wdata;
