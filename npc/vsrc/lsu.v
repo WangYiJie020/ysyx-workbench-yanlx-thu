@@ -170,7 +170,8 @@ module lsu(
             end
             
             S_MEM: begin
-                if ((rvalid_i == 1 && rready_o == 1 && rlast_i == 1)||(bvalid_i == 1 && bready_o == 1)) begin
+                if ((rvalid_i == 1 && rready_o == 1 && rlast_i == 1 && read_mem==1)||
+                (bvalid_i == 1 && bready_o == 1 && write_mem==1)) begin
                     next_state = S_OUT;  
                 end else begin
                     next_state = S_MEM;
