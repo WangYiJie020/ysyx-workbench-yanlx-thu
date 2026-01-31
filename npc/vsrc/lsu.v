@@ -200,7 +200,7 @@ module lsu(
             current_state <= next_state;
             if(current_state == S_IDLE) lsu_ready_o <= 1;
             else if(current_state == S_MEM) lsu_ready_o <= 0;
-            else if(current_state == S_OUT) lsu_ready_o <= 1;
+            else if(current_state == S_OUT) lsu_ready_o <= 0;
 
             if(current_state == S_IDLE) begin 
                 lsu_valid_o <= 0;
