@@ -224,24 +224,15 @@ module lsu(
                     alu_result <= alu_result_i;
                 end
             end else if(current_state == S_OUT) begin 
-                
-                
-                
-                rs1 <= rs1_i;
-                 
+                rs1 <= rs1_i;               
                 araddr <= 0;
-
                 arvalid <= 0;
-                rready <= 0;        
-                
+                rready <= 0;                       
                 bready <= 1;
-                //rmask <= rmask_i;
-                
+                //rmask <= rmask_i;             
                 awaddr <= 0;
                 awvalid <= 0;
                 wvalid <= 0;
-                
-                
                 wlast_o <= 1;
 
                 lsu_valid_o <= 1;
