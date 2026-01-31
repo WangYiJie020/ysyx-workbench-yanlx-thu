@@ -255,7 +255,7 @@ module lsu(
                     rready <= MemRead_i;
                     read_mem <= 1;
                 end 
-                else if(MemWrite_i && write_mem == 0)begin
+                else if(MemWrite_i && read_mem == 0 && write_mem == 0)begin
                     awaddr <= alu_result_i;
                     awvalid <= 1;
                     wvalid <= 1;
