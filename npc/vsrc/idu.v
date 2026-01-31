@@ -71,7 +71,7 @@ module idu(
     wire [7:0] wmask_tmp;
     assign wmask_o = wmask_tmp[3:0];
 
-    wire opcode,opcode_r,opcode_i,opcode_s,opcode_sb,opcode_u,opcode_uj,
+    wire opcode,opcode_r,opcode_i,opcode_s,opcode_sb,opcode_u,opcode_uj;
     wire isRAW,exu_raw,lsu_raw,wbu_raw;
 
     assign opcode_r = (opcode == 7'b0110011) ? 1 : 0;
