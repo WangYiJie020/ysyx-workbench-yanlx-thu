@@ -58,7 +58,7 @@ module idu(
     reg [`PC_WIDTH-1:0] pc;
     reg [`INST_WIDTH-1:0] inst;
 
-    
+    wire [6:0] opcode;
 
     assign rs1_o = rdata1;
     assign rs2_o = rdata2;
@@ -71,7 +71,8 @@ module idu(
     wire [7:0] wmask_tmp;
     assign wmask_o = wmask_tmp[3:0];
 
-    wire opcode,opcode_r,opcode_i,opcode_s,opcode_sb,opcode_u,opcode_uj;
+   
+    wire opcode_r,opcode_i,opcode_s,opcode_sb,opcode_u,opcode_uj;
     wire isRAW,exu_raw,lsu_raw,wbu_raw;
 
     assign opcode_r = (opcode == 7'b0110011) ? 1 : 0;
