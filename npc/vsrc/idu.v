@@ -153,13 +153,13 @@ module idu(
                 
             end
             else if(current_state == S_RECEIVE) begin 
-                idu_valid_o <= 0;
+                idu_valid_o <= 1;
                 pc <= pc_i;
                 inst <= inst_i;
                 
                 
             end else if (current_state == S_SEND)begin
-                idu_valid_o <= 1;
+                idu_valid_o <= 0;
                 idu_counter_return({1'b0,inst[6:0]});
             end else begin
                 idu_valid_o <= 0;
