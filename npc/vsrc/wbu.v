@@ -77,13 +77,11 @@ module wbu(
             end
             
             S_RECEIVE: begin
-                next_state = S_SEND;  
+                next_state = S_IDLE;  
                 
             end
             
-            S_SEND: begin
-                next_state = S_IDLE;                 
-            end
+            
             
           
             default: next_state = current_state;
@@ -127,10 +125,6 @@ module wbu(
                 //end
                 //else //difftest_check <= 0;
                 rd_wbu_valid <= 1;
-            end else if (current_state == S_SEND)begin
-                //difftest_check_flag <= 1;
-                //difftest_check <= 0; 
-                rd_wbu_valid <= 0;
             end else begin
                 //difftest_check <= 0; 
                 difftest_check_flag <= 0;
