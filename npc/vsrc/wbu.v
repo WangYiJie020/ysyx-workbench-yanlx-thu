@@ -28,6 +28,8 @@ module wbu(
     output csr_write_o,
     output reg_write_o,
     output reg [`REG_ADDR-1:0] waddr_o
+
+    output rd_wbu_valid;
 );
 
     wire [`CPU_WIDTH-1:0] mem_data;
@@ -103,6 +105,7 @@ module wbu(
                 
                 //difftest_check <= 0; 
                 difftest_check_flag <= 0;
+                rd_wbu_valid <= 0;
             end
             else if(current_state == S_RECEIVE) begin 
                 
@@ -123,11 +126,11 @@ module wbu(
                     //difftest_check_flag <= 1;
                 //end
                 //else //difftest_check <= 0;
-                
+                rd_wbu_valid <= 1;
             end else if (current_state == S_SEND)begin
                 //difftest_check_flag <= 1;
                 //difftest_check <= 0; 
-                
+                rd_wbu_valid <= 0;
             end else begin
                 //difftest_check <= 0; 
                 difftest_check_flag <= 0;

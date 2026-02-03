@@ -76,7 +76,8 @@ module lsu(
     input bvalid_i,
     output bready_o,
 
-    input bus_busy
+    input bus_busy,
+    output rd_lsu_valid
 
 );
     reg [`CPU_WIDTH-1:0] alu_result;
@@ -223,6 +224,7 @@ module lsu(
                     rmask <= rmask_i;
                     alu_result <= alu_result_i;
                 end
+                rd_lsu_valid <= 0;
             end else if(current_state == S_OUT) begin 
                 rs1 <= rs1_i;               
                 araddr <= 0;
@@ -236,6 +238,7 @@ module lsu(
                 wlast_o <= 1;
 
                 lsu_valid_o <= 1;
+                rd_lsu_valid <= 1;
                 if(lsu_valid_o == 1 && lsu_ready_i == 1) lsu_valid_o <=0;
                 //araddr_o <= alu_result;
                 //awaddr_o <= alu_result;
