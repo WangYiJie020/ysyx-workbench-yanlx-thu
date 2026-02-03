@@ -27,9 +27,9 @@ module wbu(
     output [`CPU_WIDTH-1:0] wdata_o,
     output csr_write_o,
     output reg_write_o,
-    output reg [`REG_ADDR-1:0] waddr_o
+    output reg [`REG_ADDR-1:0] waddr_o,
 
-    output rd_wbu_valid;
+    output rd_wbu_valid
 );
 
     wire [`CPU_WIDTH-1:0] mem_data;
