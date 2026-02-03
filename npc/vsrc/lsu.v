@@ -278,7 +278,7 @@ module lsu(
                     end
                     //else lsu_valid_o <= 0;
                 end
-
+                rd_lsu_valid <= 1;
                 if(awvalid==1 && awready_i==1) begin  
                     awvalid <= 0;
                     send_data_request();
