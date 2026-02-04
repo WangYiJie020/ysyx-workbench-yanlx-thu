@@ -188,13 +188,13 @@ module idu(
                 //isRAW <= 0;
             end
             else if(current_state == S_RECEIVE) begin 
-                idu_valid_o <= 1;
+                //idu_valid_o <= 1;
                 pc <= pc_i;
                 inst <= inst_i;
                 if(isRAW) begin//current_state <= S_RECEIVE;
                     idu_valid_o <= 0;
                 end
-                else idu_valid_o <= 0;
+                else idu_valid_o <= 1;
                 
                 
             end else if (current_state == S_SEND)begin
