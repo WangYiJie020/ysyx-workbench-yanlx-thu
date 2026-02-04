@@ -190,7 +190,7 @@ module idu(
                 idu_valid_o <= 1;
                 pc <= pc_i;
                 inst <= inst_i;
-                //if(isRAW) idu_valid_o <= 0;
+                if(isRAW) idu_valid_o <= 0;
                 //if(exu_raw | lsu_raw | wbu_raw) isRAW <= 1;
                 //else isRAW <= 0;
                 
