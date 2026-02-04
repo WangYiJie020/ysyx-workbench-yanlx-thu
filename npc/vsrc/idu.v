@@ -92,9 +92,9 @@ module idu(
     assign wbu_raw = opcode_r ? (((raddr1 == wbu_rd && raddr1 != 0) || (raddr2 == wbu_rd && raddr2 != 0))? 1 : 0) :
                                     ((opcode_u || opcode_uj)? 0 : ((raddr1 == wbu_rd && raddr1 != 0)? 1 : 0));
 
-    assign isRAW = ((exu_raw) && (current_state == S_SEND)) |
-                   ((lsu_raw) && (current_state == S_SEND)) |
-                   ((wbu_raw) && (current_state == S_SEND));
+    assign isRAW = ((exu_raw) && (current_state == S_RECEIVE)) |
+                   ((lsu_raw) && (current_state == S_RECEIVE)) |
+                   ((wbu_raw) && (current_state == S_RECEIVE));
 
     controler Controler(
         .inst(inst),
@@ -191,17 +191,15 @@ module idu(
                 idu_valid_o <= 1;
                 pc <= pc_i;
                 inst <= inst_i;
+                if(isRAW) begin//current_state <= S_RECEIVE;
+                    idu_valid_o <= 0;
+                end
                 
-                //if(exu_raw | lsu_raw | wbu_raw) isRAW <= 1;
-                //else isRAW <= 0;
                 
             end else if (current_state == S_SEND)begin
                 idu_valid_o <= 0;
                 idu_counter_return({1'b0,inst[6:0]});
-                if(isRAW) begin//current_state <= S_RECEIVE;
-                    inst <= inst_i;
-                end
-                //isRAW <= 0;
+                
             end else begin
                 idu_valid_o <= 0;
             end
