@@ -158,7 +158,8 @@ module idu(
             end
             
             S_SEND: begin
-                next_state = S_IDLE;                 
+                if(isRAW==1) next_state = current_state;
+                else next_state = S_IDLE;                 
             end
             
           
@@ -197,7 +198,9 @@ module idu(
             end else if (current_state == S_SEND)begin
                 idu_valid_o <= 0;
                 idu_counter_return({1'b0,inst[6:0]});
-                if(isRAW) current_state <= S_RECEIVE;
+                if(isRAW) begin//current_state <= S_RECEIVE;
+                    inst <= inst_i;
+                end
                 //isRAW <= 0;
             end else begin
                 idu_valid_o <= 0;
