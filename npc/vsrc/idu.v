@@ -194,6 +194,7 @@ module idu(
                 if(isRAW) begin//current_state <= S_RECEIVE;
                     idu_valid_o <= 0;
                 end
+                else idu_valid_o <= 0;
                 
                 
             end else if (current_state == S_SEND)begin
