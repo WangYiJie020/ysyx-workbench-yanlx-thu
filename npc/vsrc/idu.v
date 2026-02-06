@@ -150,7 +150,7 @@ module idu(
             end
             
             S_RECEIVE: begin
-                if (idu_valid_o == 1 && idu_ready_i == 1 && isRAW==0) begin
+                if (idu_valid_o == 1 && idu_ready_i == 1) begin
                     next_state = S_SEND;  
                 end else begin
                     next_state = current_state;
@@ -187,24 +187,28 @@ module idu(
 
             if(current_state == S_IDLE) begin
                 idu_valid_o <= 0;
+                flag <= 0;  
                 //isRAW <= 0;
             end
             else if(current_state == S_RECEIVE) begin 
                 //idu_valid_o <= 1;
                 pc <= pc_i;
-                inst <= inst_i;                    
+                inst <= inst_i;    
+                flag <= 1;                
                 //end
                 //else 
                 //if(flag==1 && wbu_submit) begin 
-                
+                if(flag == 1) begin
+                    if(isRAW ) begin//current_state <= S_RECEIVE;
+                        idu_valid_o <= 0;
+                    end
+                    else begin 
+                        idu_valid_o <= 1;
+                        
+                    end
+                end
                // end
-                if(isRAW ) begin//current_state <= S_RECEIVE;
-                    idu_valid_o <= 0;
-                end
-                else begin 
-                    idu_valid_o <= 1;
-                    
-                end
+                
                 
                 
             end else if (current_state == S_SEND)begin
