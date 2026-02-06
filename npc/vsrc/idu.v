@@ -150,7 +150,7 @@ module idu(
             end
             
             S_RECEIVE: begin
-                if (idu_ready_i == 1 && isRAW==0) begin
+                if (idu_valid_o == 1 && idu_ready_i == 1) begin
                     next_state = S_SEND;  
                 end else begin
                     next_state = current_state;
@@ -158,10 +158,10 @@ module idu(
             end
             
             S_SEND: begin
-                if(idu_valid_o == 1 && idu_ready_i == 1) 
+                //if(idu_valid_o == 1 && idu_ready_i == 1) 
                     next_state = S_IDLE;
-                else 
-                    next_state = current_state;                 
+                //else 
+                    //next_state = current_state;                 
             end
             
           
