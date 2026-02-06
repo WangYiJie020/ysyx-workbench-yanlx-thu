@@ -196,15 +196,16 @@ module idu(
                 //end
                 //else 
                 //if(flag==1 && wbu_submit) begin 
-                idu_valid_o <= 0;
+                
                // end
-                
-                
-            end else if (current_state == S_SEND)begin
                 if(isRAW ) begin//current_state <= S_RECEIVE;
                     idu_valid_o <= 0;
                 end
                 else idu_valid_o <= 1;
+                
+                
+            end else if (current_state == S_SEND)begin
+                idu_valid_o <= 0;
                 idu_counter_return({1'b0,inst[6:0]});
                 
             end else begin
