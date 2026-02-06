@@ -73,7 +73,7 @@ module idu(
 
    
     wire opcode_r,opcode_i,opcode_s,opcode_sb,opcode_u,opcode_uj;
-    reg isRAW;
+    reg isRAW,flag;
     wire exu_raw,lsu_raw,wbu_raw;
 
     assign opcode_r = (opcode == 7'b0110011) ? 1 : 0;
