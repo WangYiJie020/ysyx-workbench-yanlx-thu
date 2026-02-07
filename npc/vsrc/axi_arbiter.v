@@ -171,10 +171,28 @@ module axi_arbiter(
         end
     end
 
-    assign arvalid_o = (bus_busy == 1)? 0: ((ar_switch==1)?arvalid_i_b : arvalid_i_a);
+    //assign arvalid_o = (bus_busy == 1)? 0: ((ar_switch==1)?arvalid_i_b : arvalid_i_a);
     //assign arready_o_a = (bus_busy == 1)? 0: arready_i;
     //assign arready_o_b = (bus_busy == 1)? 0: arready_i;
 
+    assign arvalid_o = (bus_busy == 1)? 0: 
+        ((arvalid_i_b==1&& !(arready_i==1 && arvalid_o==1) && ar_switch==0)?arvalid_i_b : arvalid_i_a);
+    
+    assign araddr_o = (bus_busy == 1)? 0: 
+        ((arvalid_i_b==1&& !(arready_i==1 && arvalid_o==1) && ar_switch==0)?araddr_i_b : araddr_i_a);
+    
+    assign arid_o = (bus_busy == 1)? 0: 
+        ((arvalid_i_b==1&& !(arready_i==1 && arvalid_o==1) && ar_switch==0)?arid_i_b : arid_i_a);
+    
+    assign arlen_o = (bus_busy == 1)? 0: 
+        ((arvalid_i_b==1&& !(arready_i==1 && arvalid_o==1) && ar_switch==0)?arlen_i_b : arlen_i_a);
+    
+    assign arsize_o = (bus_busy == 1)? 0: 
+        ((arvalid_i_b==1&& !(arready_i==1 && arvalid_o==1) && ar_switch==0)?arsize_i_b : arsize_i_a);
+    
+    assign arburst_o = (bus_busy == 1)? 0: 
+        ((arvalid_i_b==1&& !(arready_i==1 && arvalid_o==1) && ar_switch==0)?arburst_i_b : arburst_i_a);
+    /*
     always@(*) begin
         case(ar_switch)
             1: begin
@@ -197,7 +215,7 @@ module axi_arbiter(
             end
         endcase
     end
-
+*/
     always@(*) begin
         case(r_switch)
             1: begin
