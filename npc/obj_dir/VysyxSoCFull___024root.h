@@ -496,7 +496,7 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT__bvalid_o_a;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT__ar_switch;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT__r_switch;
-        CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT____VdfgTmp_h2fe94482__0;
+        CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT____VdfgTmp_h52323b30__0;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Xbar__DOT__ar_switch;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Xbar__DOT__r_switch;
         CData/*0:0*/ ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Xbar__DOT__aw_switch;
@@ -1100,6 +1100,7 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__flag;
         CData/*3:0*/ __VdfgTmp_h15e47dd3__0;
         CData/*2:0*/ __VdfgTmp_ha17ae98a__0;
+        CData/*6:0*/ __Vtableidx1;
         CData/*5:0*/ __Vtableidx2;
         CData/*5:0*/ __Vtableidx4;
         CData/*2:0*/ __Vtableidx5;
@@ -1138,18 +1139,16 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ __Vdly__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__csr_write;
         CData/*4:0*/ __Vdlyvdim0__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Rgefile__DOT__rf__v0;
         CData/*0:0*/ __Vdlyvset__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Rgefile__DOT__rf__v0;
-        CData/*0:0*/ __Vdly__ysyxSoCFull__DOT___asic_spi_mosi;
     };
     struct {
+        CData/*0:0*/ __Vdly__ysyxSoCFull__DOT___asic_spi_mosi;
         CData/*2:0*/ __Vdly__ysyxSoCFull__DOT__flash__DOT__state;
         CData/*7:0*/ __Vdly__ysyxSoCFull__DOT__flash__DOT__counter;
         CData/*7:0*/ __Vdly__ysyxSoCFull__DOT__flash__DOT__cmd;
         CData/*4:0*/ __Vdly__ysyxSoCFull__DOT__bitrev__DOT__bit_count;
         CData/*7:0*/ __Vdly__ysyxSoCFull__DOT__bitrev__DOT__shift_in;
-        CData/*0:0*/ __Vtrigrprev__TOP__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__axi_arvalid;
-        CData/*0:0*/ __Vtrigrprev__TOP__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT____VdfgTmp_h2fe94482__0;
+        CData/*0:0*/ __Vtrigrprev__TOP__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__AXI_Arbiter__DOT____VdfgTmp_h52323b30__0;
         CData/*0:0*/ __VstlDidInit;
-        CData/*0:0*/ __VicoDidInit;
         CData/*0:0*/ __Vtrigrprev__TOP__clock;
         CData/*0:0*/ __Vtrigrprev__TOP__ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__rst_n;
         CData/*0:0*/ __Vtrigrprev__TOP__reset;
@@ -1162,6 +1161,7 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         CData/*0:0*/ __VactContinue;
         VL_OUT16(externalPins_gpio_out,15,0);
         VL_IN16(externalPins_gpio_in,15,0);
+        SData/*15:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT___GEN;
         SData/*15:0*/ ysyxSoCFull__DOT__asic__DOT__axi4xbar__DOT___GEN_0;
         SData/*15:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__dl;
         SData/*15:0*/ ysyxSoCFull__DOT__asic__DOT__luart__DOT__muart__DOT__Uregs__DOT__dlc;
@@ -1387,12 +1387,12 @@ class VysyxSoCFull___024root final : public VerilatedModule {
         VlUnpacked<SData/*12:0*/, 4> ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_high__DOT__bank_active_raw;
         VlUnpacked<VlUnpacked<SData/*15:0*/, 4194304>, 4> ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__bank;
         VlUnpacked<SData/*12:0*/, 4> ysyxSoCFull__DOT__sdram__DOT__high_addr__DOT__u1_low__DOT__bank_active_raw;
-        VlUnpacked<CData/*0:0*/, 23> __Vm_traceActivity;
+        VlUnpacked<CData/*0:0*/, 20> __Vm_traceActivity;
     };
-    VlTriggerVec<3> __VstlTriggered;
-    VlTriggerVec<2> __VicoTriggered;
-    VlTriggerVec<11> __VactTriggered;
-    VlTriggerVec<11> __VnbaTriggered;
+    VlTriggerVec<2> __VstlTriggered;
+    VlTriggerVec<1> __VicoTriggered;
+    VlTriggerVec<10> __VactTriggered;
+    VlTriggerVec<10> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     VysyxSoCFull__Syms* const vlSymsp;
