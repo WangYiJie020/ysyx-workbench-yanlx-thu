@@ -176,7 +176,7 @@ module axi_arbiter(
     //assign arready_o_b = (bus_busy == 1)? 0: arready_i;
 
     assign arvalid_o = (bus_busy == 1)? 0: 
-        ((arvalid_i_b==1&& !(arready_i==1 && arvalid_o==1) && ar_switch==0)?arvalid_i_b : arvalid_i_a);
+        ((arvalid_i_b==1&& ar_switch==0)?arvalid_i_b : arvalid_i_a);
     
     assign araddr_o = (bus_busy == 1)? 0: 
         ((arvalid_i_b==1&& !(arready_i==1 && arvalid_o==1) && ar_switch==0)?araddr_i_b : araddr_i_a);
