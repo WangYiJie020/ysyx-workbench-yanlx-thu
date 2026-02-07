@@ -195,6 +195,17 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
                 if(exu_valid_o == 1 && exu_ready_i == 1) exu_valid_o <= 0;
             end else if (current_state == S_SEND)begin
                 exu_valid_o <= 0;
+                pc <= pc_i;
+                rs1 <= rs1_i;
+                rs2 <=rs2_i;
+                imm <= imm_i;
+                csr_rdata <= csr_rdata_i;
+                a_in_src <= a_in_src_i;
+                b_in_src <= b_in_src_i;
+                pc_srcs <= pc_srcs_i;
+                adder_a_src <= adder_a_src_i;
+                adder_out_src <= adder_out_src_i;
+                alu_op <= alu_op_i;
                 npc_valid <= 1;
                 rd_exu_valid <= 0;
             end else begin
