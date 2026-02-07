@@ -117,7 +117,7 @@ module ifu(
                     //if(araddr_o != npc_i) arvalid_flag <= 0;
                 end
                 else if(arvalid_flag == 0) arvalid <= 1;
-                
+                ifu_valid_o <= 0;
 
             end else if (current_state == S_OUT)begin
                 if(arvalid==1 && arready_i==1) begin
