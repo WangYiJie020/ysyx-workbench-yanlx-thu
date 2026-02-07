@@ -194,7 +194,8 @@ module idu(
             end
             else if(current_state == S_RECEIVE) begin 
                 //idu_valid_o <= 1;
-                  
+                pc <= pc_i;
+                inst <= inst_i;   
                 flag <= 1;                
                 //end
                 //else 
