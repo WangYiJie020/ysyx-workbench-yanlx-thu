@@ -173,6 +173,28 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
                 exu_valid_o <= 0;
                 npc_valid <= 0;
                 rd_exu_valid <= 0;
+
+                pc <= pc_i;
+                rs1 <= rs1_i;
+                rs2 <=rs2_i;
+                imm <= imm_i;
+                csr_rdata <= csr_rdata_i;
+                a_in_src <= a_in_src_i;
+                b_in_src <= b_in_src_i;
+                pc_srcs <= pc_srcs_i;
+                adder_a_src <= adder_a_src_i;
+                adder_out_src <= adder_out_src_i;
+                alu_op <= alu_op_i;
+
+                MemRead_o <= MemRead_i;
+                MemWrite_o <= MemWrite_i;
+                wmask_o <= wmask_i;
+                rmask_o <= rmask_i;
+                wb_src_o <= wb_src_i;
+                csr_write_o <= csr_write_i;
+                csr_wdata_src_o <= csr_wdata_src_i;
+                reg_write_o <= reg_write_i;
+                waddr_o <= waddr_i;
             end
             else if(current_state == S_RECEIVE) begin 
                 exu_valid_o <= 1;
