@@ -89,6 +89,7 @@ module lsu(
 
     
     reg flag,wvalid_tmp;
+    reg MemRead,MemWrite;
 
 
     reg arvalid;
@@ -223,6 +224,8 @@ module lsu(
                     wmask <= wmask_i;
                     rmask <= rmask_i;
                     alu_result <= alu_result_i;
+                    MemRead <= MemRead_i;
+                    MemWrite <= MemWrite_i;
                 end
                 rd_lsu_valid <= 0;
             end else if(current_state == S_OUT) begin 
@@ -243,13 +246,13 @@ module lsu(
                 //araddr_o <= alu_result;
                 //awaddr_o <= alu_result;
             end else if (current_state == S_MEM)begin
-                if(MemRead_i && read_mem == 0) begin
+                if(MemRead && read_mem == 0) begin
                     araddr <= alu_result_i;
                     arvalid <= 1;
-                    rready <= MemRead_i;
+                    rready <= 1;
                     read_mem <= 1;
                 end 
-                else if(MemWrite_i && read_mem == 0 && write_mem == 0)begin
+                else if(MemWrite && read_mem == 0 && write_mem == 0)begin
                     awaddr <= alu_result_i;
                     awvalid <= 1;
                     wvalid <= 1;
