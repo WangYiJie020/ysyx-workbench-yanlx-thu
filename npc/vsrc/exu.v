@@ -197,7 +197,7 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
                 adder_out_src <= adder_out_src_i;
                 alu_op <= alu_op_i;
 
-                rd_exu_valid <= 1;
+                rd_exu_valid <= 0;
                 
                 //if(npc_flag==0) begin
                     npc_valid <= 1;
@@ -209,7 +209,7 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
                 if(exu_valid_o == 1 && exu_ready_i == 1) exu_valid_o <= 0;
                 npc_flag <= 0;
                 npc_valid <= 0;
-                rd_exu_valid <= 0;
+                rd_exu_valid <= 1;
             end 
 
             
