@@ -92,9 +92,9 @@ module idu(
     assign wbu_raw = opcode_r ? (((raddr1 == wbu_rd && raddr1 != 0) || (raddr2 == wbu_rd && raddr2 != 0))? 1 : 0) :
                                     ((opcode_u || opcode_uj)? 0 : ((raddr1 == wbu_rd && raddr1 != 0)? 1 : 0));
 
-    assign isRAW = ((exu_raw) && (current_state != S_IDLE)) |
-                   ((lsu_raw) && (current_state != S_IDLE)) |
-                   ((wbu_raw) && (current_state != S_IDLE));
+    assign isRAW = ((exu_raw) && (current_state == S_RECEIVE)) |
+                   ((lsu_raw) && (current_state == S_RECEIVE)) |
+                   ((wbu_raw) && (current_state == S_RECEIVE));
 
     controler Controler(
         .inst(inst),
@@ -150,19 +150,18 @@ module idu(
             end
             
             S_RECEIVE: begin
-                //if (idu_valid_o == 1 && idu_ready_i == 1) begin
+                if (idu_valid_o == 1 && idu_ready_i == 1) begin
                     next_state = S_SEND;  
-                //end else begin
-                    //next_state = current_state;
-                //end
+                end else begin
+                    next_state = current_state;
+                end
             end
             
             S_SEND: begin
-                if (idu_valid_o == 1 && idu_ready_i == 1) begin
-                    next_state = S_IDLE;  
-                end else begin
-                    next_state = current_state;
-                end                 
+                //if(idu_valid_o == 1 && idu_ready_i == 1) 
+                    next_state = S_IDLE;
+                //else 
+                    //next_state = current_state;                 
             end
             
           
@@ -202,22 +201,21 @@ module idu(
                 //else 
                 //if(flag==1 && wbu_submit) begin 
                 //if(flag == 1) begin
-                    
+                    if(isRAW ) begin//current_state <= S_RECEIVE;
+                        idu_valid_o <= 0;
+                    end
+                    else begin 
+                        idu_valid_o <= 1;
+                        
+                    end
                 //end
                // end
-                idu_counter_return({1'b0,inst_i[6:0]});
+                
                 
                 
             end else if (current_state == S_SEND)begin
-                //idu_valid_o <= 0;
-                if(isRAW ) begin//current_state <= S_RECEIVE;
-                        idu_valid_o <= 0;
-                end
-                else begin 
-                    idu_valid_o <= 1;
-                        
-                end
-                
+                idu_valid_o <= 0;
+                idu_counter_return({1'b0,inst[6:0]});
                 
             end else begin
                 idu_valid_o <= 0;
