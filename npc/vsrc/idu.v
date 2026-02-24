@@ -150,18 +150,19 @@ module idu(
             end
             
             S_RECEIVE: begin
-                if (idu_valid_o == 1 && idu_ready_i == 1) begin
+                //if (idu_valid_o == 1 && idu_ready_i == 1) begin
                     next_state = S_SEND;  
-                end else begin
-                    next_state = current_state;
-                end
+                //end else begin
+                    //next_state = current_state;
+                //end
             end
             
             S_SEND: begin
-                //if(idu_valid_o == 1 && idu_ready_i == 1) 
-                    next_state = S_IDLE;
-                //else 
-                    //next_state = current_state;                 
+                if (idu_valid_o == 1 && idu_ready_i == 1) begin
+                    next_state = S_IDLE;  
+                end else begin
+                    next_state = current_state;
+                end                 
             end
             
           
@@ -201,21 +202,22 @@ module idu(
                 //else 
                 //if(flag==1 && wbu_submit) begin 
                 //if(flag == 1) begin
-                    if(isRAW ) begin//current_state <= S_RECEIVE;
-                        idu_valid_o <= 0;
-                    end
-                    else begin 
-                        idu_valid_o <= 1;
-                        
-                    end
+                    
                 //end
                // end
-                
+                idu_counter_return({1'b0,inst_i[6:0]});
                 
                 
             end else if (current_state == S_SEND)begin
                 idu_valid_o <= 0;
-                idu_counter_return({1'b0,inst[6:0]});
+                if(isRAW ) begin//current_state <= S_RECEIVE;
+                        idu_valid_o <= 0;
+                end
+                else begin 
+                    idu_valid_o <= 1;
+                        
+                end
+                
                 
             end else begin
                 idu_valid_o <= 0;
