@@ -163,7 +163,7 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
     end
 
     always @(posedge clk or negedge rst_n) begin        
-        if (!rst_n || reset_ifu == 1) begin
+        if (!rst_n) begin
             current_state <= S_IDLE;
             exu_valid_o <= 0;
             exu_ready_o <= 0;
