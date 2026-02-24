@@ -61,6 +61,7 @@ module exu(
     reg adder_a_src;
     reg adder_out_src;
     reg [3:0] alu_op;
+    reg npc_flag;
 
     wire [`CPU_WIDTH-1:0] a_in,b_in,a_out,add_out,pc_new,alu_result;
     wire [`PC_WIDTH-1:0] npc;
@@ -173,6 +174,7 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
                 exu_valid_o <= 0;
                 npc_valid <= 0;
                 rd_exu_valid <= 0;
+                npc_flag <= 0;
 
                 
             end
@@ -192,11 +194,16 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
                 alu_op <= alu_op_i;
 
                 rd_exu_valid <= 1;
-                npc_valid <= 1;
+                
+                if(npc_flag==0) begin
+                    npc_valid <= 1;
+                    npc_flag <= 1;
+                end
+                else npc_valid <= 0;
                 if(exu_valid_o == 1 && exu_ready_i == 1) exu_valid_o <= 0;
             end else if (current_state == S_SEND)begin
                 exu_valid_o <= 0;
-                
+                npc_flag <= 0;
                 npc_valid <= 0;
                 rd_exu_valid <= 0;
             end else begin
