@@ -1,5 +1,5 @@
 `include "header.v" 
-module axi4_arbiter (
+module axi_arbiter (
     input clk,
     input rst_n,
 
