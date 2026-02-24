@@ -189,14 +189,17 @@ module idu(
                 idu_valid_o <= 0;
                 flag <= 0;  
                 //isRAW <= 0;
-                pc <= pc_i;
-                inst <= inst_i;  
+                  
+                if (idu_valid_i == 1 && idu_ready_o == 1) begin
+                    pc <= pc_i;
+                    inst <= inst_i;
+                end
             end
             else if(current_state == S_RECEIVE) begin 
                 //idu_valid_o <= 1;
-                pc <= pc_i;
-                inst <= inst_i;   
-                flag <= 1;                
+                //pc <= pc_i;
+                //inst <= inst_i;   
+                //flag <= 1;                
                 //end
                 //else 
                 //if(flag==1 && wbu_submit) begin 
