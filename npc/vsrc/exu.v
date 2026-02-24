@@ -142,15 +142,19 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
             end
             
             S_RECEIVE: begin
-                if (exu_valid_o == 1 && exu_ready_i == 1) begin
+                //if (exu_valid_o == 1 && exu_ready_i == 1) begin
                     next_state = S_SEND;  
-                end else begin
-                    next_state = current_state;
-                end
+                //end else begin
+                //    next_state = current_state;
+                //end
             end
             
             S_SEND: begin
-                next_state = S_IDLE;                 
+                if (exu_valid_o == 1 && exu_ready_i == 1) begin
+                    next_state = S_IDLE;  
+                end else begin
+                    next_state = current_state;
+                end                
             end
             
           
