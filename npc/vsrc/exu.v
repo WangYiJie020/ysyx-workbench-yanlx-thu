@@ -198,6 +198,16 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
                 alu_op <= alu_op_i;
 
                 rd_exu_valid <= 0;
+
+                MemRead_o <= MemRead_i;
+                MemWrite_o <= MemWrite_i;
+                wmask_o <= wmask_i;
+                rmask_o <= rmask_i;
+                wb_src_o <= wb_src_i;
+                csr_write_o <= csr_write_i;
+                csr_wdata_src_o <= csr_wdata_src_i;
+                reg_write_o <= reg_write_i;
+                waddr_o <= waddr_i;
                 
                 //if(npc_flag==0) begin
                     npc_valid <= 1;
@@ -214,15 +224,7 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
 
             
 
-            MemRead_o <= MemRead_i;
-            MemWrite_o <= MemWrite_i;
-            wmask_o <= wmask_i;
-            rmask_o <= rmask_i;
-            wb_src_o <= wb_src_i;
-            csr_write_o <= csr_write_i;
-            csr_wdata_src_o <= csr_wdata_src_i;
-            reg_write_o <= reg_write_i;
-            waddr_o <= waddr_i;
+            
             
         end
     end
