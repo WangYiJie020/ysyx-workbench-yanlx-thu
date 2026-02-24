@@ -109,7 +109,9 @@ module axi_arbiter (
     input  [1:0]            bresp_i,
     input  [3:0]            bid_i,
     input                   bvalid_i,
-    output                  bready_o
+    output                  bready_o,
+
+    output reg bus_busy
 );
 
 // ============================================================
@@ -220,7 +222,21 @@ always @(*) begin
     end
 end
 
-assign awaddr_o = awaddr_i_b;
+
+    always@(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            bus_busy <= 0;
+        end
+        else begin
+            if(arready_i==1 && arvalid_o==1)
+                bus_busy <= 1;
+            if(rvalid_i==1 && rready_o==1 && rlast_i==1)
+                bus_busy <= 0;
+
+        end
+    end
+
+    assign awaddr_o = awaddr_i_b;
     assign awid_o = awid_i_b;
     assign awlen_o = awlen_i_b;
     assign awsize_o = awsize_i_b;
