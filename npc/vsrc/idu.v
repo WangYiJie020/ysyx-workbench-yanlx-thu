@@ -92,7 +92,6 @@ module idu(
     assign wbu_raw = (opcode_r | opcode_s | opcode_sb) ? (((raddr1 == wbu_rd && raddr1 != 0) || (raddr2 == wbu_rd && raddr2 != 0))? 1 : 0) :
                                     ((opcode_u || opcode_uj)? 0 : ((raddr1 == wbu_rd && raddr1 != 0)? 1 : 0));
 
-    assign 
     assign isRAW = ((exu_raw) && (current_state == S_RECEIVE)) |
                    ((lsu_raw) && (current_state == S_RECEIVE)) |
                    ((wbu_raw) && (current_state == S_RECEIVE));
