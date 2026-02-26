@@ -95,9 +95,9 @@ always @(posedge clk or negedge rst_n) begin
             pc_fetch    <= npc_i;       // 更新取指PC
 
             // AR通道：撤销未握手的请求
-            if (!(arvalid_o && arready_i)) begin
+            //if (!(arvalid_o && arready_i)) begin
                 arvalid_o <= 0;
-            end
+            //end
 
             if (ar_inflight || (arvalid_o && arready_i)) begin
                 // 总线上有在途请求，需要等待R通道完成后丢弃
