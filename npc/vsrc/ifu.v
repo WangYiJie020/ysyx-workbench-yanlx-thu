@@ -99,7 +99,7 @@ always @(posedge clk or negedge rst_n) begin
                 arvalid_o <= 0;
             //end
 
-            if (ar_inflight || (arvalid_o && arready_i)) begin
+            if ((ar_inflight || (arvalid_o && arready_i) )&& (!(rvalid_i && rready_o))) begin
                 // 总线上有在途请求，需要等待R通道完成后丢弃
                 rready_o  <= 1;         // 保持rready接收数据但丢弃
                 state     <= S_FLUSH;
