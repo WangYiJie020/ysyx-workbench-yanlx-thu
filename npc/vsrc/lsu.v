@@ -160,7 +160,7 @@ module lsu(
         case(current_state)
             S_IDLE: begin
                 if (lsu_valid_i == 1 && lsu_ready_o == 1) begin
-                    if(MemRead_i == 1 || MemWrite_i == 1) begin
+                    if(MemRead == 1 || MemWrite == 1) begin
                         next_state = S_MEM;
                     end
                     else begin
