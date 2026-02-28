@@ -23,8 +23,8 @@
 
 
 //#define  DIFFTEST_ON
-#define  WAVE_ON
-#define  TRACE_ON
+//#define  WAVE_ON
+//#define  TRACE_ON
 //#define NVBOARD_ON
 
 
@@ -663,28 +663,4 @@ int main(int argc, char** argv) {
   while (n > 0) { 
     top->clock = 0; top->eval();
     top->clock = 1; top->eval();
-    tfp->dump(contextp->time()); //dump wave
-    contextp->timeInc(1); //推动仿真时间
-    n--;
-  }
-  top->reset = 0;
-
-  sdb_set_batch_mode();//批处理模式
-  
-  sdb_mainloop();
-
-
-  delete top;
-  #ifdef WAVE_ON
-  tfp->close();
-  #endif
-  delete contextp;
-#endif
-
-  if(cpu_state == NPC_END || cpu_state == NPC_QUIT) {
-    return 0;
-  }
-  else {
-    return 1;
-  }
-}
+    tfp->dump(contextp->time()); //d
