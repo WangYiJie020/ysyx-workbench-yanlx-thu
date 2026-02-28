@@ -67,7 +67,7 @@ void print_mycsr() {
   // 读取CSR寄存器
   uint32_t mvendorid = read_csr(CSR_MVENDORID);
   uint32_t marchid = read_csr(CSR_MARCHID);
-  
+  set_div2();
   putch(mvendorid>>24);
   putch(mvendorid>>16);
   putch(mvendorid>>8);
@@ -77,7 +77,6 @@ void print_mycsr() {
 }
 
 void _trm_init() {
-  set_div2();
   print_mycsr();
   int ret = main(mainargs);
   halt(ret);
