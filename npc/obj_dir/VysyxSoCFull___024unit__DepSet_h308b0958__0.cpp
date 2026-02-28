@@ -228,6 +228,14 @@ VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_receive_data_back_TOP___
     receive_data_back();
 }
 
+extern "C" void difftest_skip();
+
+VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_difftest_skip_TOP____024unit() {
+    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_difftest_skip_TOP____024unit\n"); );
+    // Body
+    difftest_skip();
+}
+
 extern "C" void flash_read(int addr, int* data);
 
 VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_flash_read_TOP____024unit(IData/*31:0*/ addr, IData/*31:0*/ &data) {

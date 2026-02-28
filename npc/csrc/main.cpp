@@ -492,7 +492,7 @@ static void trace_and_difftest() {
         //difftest_step();
       }
       else{
-        printf("a\n");
+        //printf("a\n");
         difftest_step();
       }
       //bool check = difftest_check();
