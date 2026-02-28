@@ -22,7 +22,7 @@
 
 
 
-//#define  DIFFTEST_ON
+#define  DIFFTEST_ON
 #define  WAVE_ON
 #define  TRACE_ON
 //#define NVBOARD_ON
@@ -50,6 +50,10 @@ uint32_t sdram[4][8192][512] = {};
 
 uint64_t icache_get_addr_time,icache_back_self_inst_time,icache_back_mem_inst_time;
 uint64_t icache_access_time=0,icache_miss_penalty=0;
+
+extern "C" void difftest_skip() {
+  is_skip_ref = true;
+}
 
 extern "C" void icache_get_addr() {
   icache_get_addr_time = counter;
@@ -474,7 +478,7 @@ static void trace_and_difftest() {
   //log_write("%08x,%08x\n", top->pc,top->inst); 
 #ifdef DIFFTEST_ON
   if(difftest_check_all == true) {
-    /*
+
     if(is_skip_ref) {
       //printf("skip\n");
       //skip_r = is_skip_ref;
@@ -499,8 +503,8 @@ static void trace_and_difftest() {
       }
     }
     skip_r = is_skip_ref;
-    */
-    
+
+    /*
       bool check = difftest_check();
       difftest_step();
       
@@ -508,6 +512,7 @@ static void trace_and_difftest() {
         cpu_state = NPC_ABORT;
         return;
       }
+      */
   }
   
 #endif

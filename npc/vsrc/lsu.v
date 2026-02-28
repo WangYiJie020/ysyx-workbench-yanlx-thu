@@ -3,6 +3,7 @@
 import "DPI-C" function void data_counter_add();
 import "DPI-C" function void send_data_request();
 import "DPI-C" function void receive_data_back();
+import "DPI-C" function void difftest_skip();
 
 //`define LSU_DELAY
 module lsu(
@@ -251,6 +252,10 @@ module lsu(
                     arvalid <= 1;
                     rready <= 1;
                     read_mem <= 1;
+                    if(alu_result_i >=32'h10000000 && alu_result_i <=32'h10000fff) begin
+                        difftest_skip();
+                    end
+
                 end 
                 else if(MemWrite && read_mem == 0 && write_mem == 0)begin
                     awaddr <= alu_result_i;
