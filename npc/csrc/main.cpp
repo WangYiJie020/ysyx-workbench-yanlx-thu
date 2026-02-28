@@ -22,9 +22,9 @@
 
 
 
-//#define  DIFFTEST_ON
-//#define  WAVE_ON
-//#define  TRACE_ON
+#define  DIFFTEST_ON
+#define  WAVE_ON
+#define  TRACE_ON
 //#define NVBOARD_ON
 
 
