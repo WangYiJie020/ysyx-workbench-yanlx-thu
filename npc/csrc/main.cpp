@@ -551,10 +551,11 @@ void nvboard_bind_all_pins(TOP_NAME* top);
 #else
 #include "verilated.h"
 //#include "verilated_vcd_c.h" //可选，如果要导出vcd则需要加上
+#include "verilated_fst_c.h"            //波形文件所需的头文件
 VerilatedContext* contextp = new VerilatedContext;
 VysyxSoCFull* top = new VysyxSoCFull{contextp};
 //VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
-#include "verilated_fst_c.h"            //波形文件所需的头文件
+
 VerilatedFstC *tfp = new VerilatedFstC; // 创建一个波形文件指针
 #endif
 
