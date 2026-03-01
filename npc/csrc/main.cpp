@@ -508,17 +508,14 @@ static void trace_and_difftest() {
 */
       if(skip_r==true) {
         diff_cpdutreg2ref();
-        
-        
+
       }
       bool check = difftest_check();
 
       if(is_skip_ref==false) {
         difftest_step();
       }
-      else {
-        is_skip_ref = false;
-      }      
+           
 
       
       if(check==false) {
@@ -526,6 +523,9 @@ static void trace_and_difftest() {
         return;
       }
       skip_r = is_skip_ref;
+      if(is_skip_ref==true) {
+        is_skip_ref = false;
+      } 
   }
   
 #endif
