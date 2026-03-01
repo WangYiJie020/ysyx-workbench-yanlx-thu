@@ -694,6 +694,8 @@ module ysyx_25050137(
     wire npc_valid;
     wire rd_exu_valid;
 
+    wire [`PC_WIDTH-1:0] pc_exu_to_lsu;
+
     exu EXU(
         .clk(clk),
         .rst_n(rst_n),
@@ -743,7 +745,9 @@ module ysyx_25050137(
         .exu_valid_o(valid_exu_to_lsu),
         .exu_ready_i(ready_exu_to_lsu),
         .npc_valid(npc_valid),
-        .rd_exu_valid(rd_exu_valid)
+        .rd_exu_valid(rd_exu_valid),
+        
+        .pc_o(pc_exu_to_lsu)
     );
 
     wire [`CPU_WIDTH-1:0] alu_result_lsu_to_wbu;
@@ -762,6 +766,8 @@ module ysyx_25050137(
     wire ready_lsu_to_wbu;
 
     wire rd_lsu_valid;
+
+    wire [`PC_WIDTH-1:0] pc_lsu_to_wbu;
 
     lsu LSU(
         .clk(clk),
@@ -836,10 +842,15 @@ module ysyx_25050137(
         .bready_o(lsu_bready),
 
         .bus_busy(bus_busy),
-        .rd_lsu_valid(rd_lsu_valid)
+        .rd_lsu_valid(rd_lsu_valid),
+
+        .pc_i(pc_exu_to_lsu),
+        .pc_o(pc_lsu_to_wbu)
     );
 
     wire rd_wbu_valid;
+
+    wire [`PC_WIDTH-1:0] pc_wbu_out;
     
     wbu WBU(
         .clk(clk),
@@ -869,7 +880,9 @@ module ysyx_25050137(
         .reg_write_o(reg_write),
         .waddr_o(waddr),
 
-        .rd_wbu_valid(rd_wbu_valid)
+        .rd_wbu_valid(rd_wbu_valid),
+        .pc_i(pc_lsu_to_wbu),
+        .pc_o(pc_wbu_out)
     );
 
 
@@ -885,7 +898,7 @@ module ysyx_25050137(
         reg_file[7],reg_file[8],reg_file[9],reg_file[10],reg_file[11],reg_file[12],reg_file[13],reg_file[14],
         reg_file[15],reg_file[16],reg_file[17],reg_file[18],reg_file[19],reg_file[20],reg_file[21],reg_file[22],
         reg_file[23],reg_file[24],reg_file[25],reg_file[26],reg_file[27],reg_file[28],reg_file[29],reg_file[30],
-        reg_file[31],pc_to_mem,csr_reg[0],csr_reg[1],csr_reg[2],csr_reg[3]);
+        reg_file[31],pc_wbu_out,csr_reg[0],csr_reg[1],csr_reg[2],csr_reg[3]);
     end
     
 endmodule

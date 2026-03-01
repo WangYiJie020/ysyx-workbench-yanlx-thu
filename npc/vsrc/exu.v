@@ -49,7 +49,9 @@ module exu(
     input exu_ready_i,
 
     output npc_valid,
-    output rd_exu_valid
+    output rd_exu_valid,
+    
+    output [`CPU_WIDTH-1:0] pc_o; //difftest
     
 );
 
@@ -201,6 +203,7 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
                     csr_wdata_src_o <= csr_wdata_src_i;
                     reg_write_o <= reg_write_i;
                     waddr_o <= waddr_i;
+                    pc_o <= pc_i;
                 end
                 
             end

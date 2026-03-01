@@ -29,7 +29,10 @@ module wbu(
     output reg_write_o,
     output reg [`REG_ADDR-1:0] waddr_o,
 
-    output rd_wbu_valid
+    output rd_wbu_valid,
+     
+    input [`CPU_WIDTH-1:0] pc_i;
+    output [`CPU_WIDTH-1:0] pc_o;
 );
 
     wire [`CPU_WIDTH-1:0] mem_data;
@@ -117,6 +120,8 @@ module wbu(
                 csr_write_o <= csr_write_i;
                 reg_write_o <= reg_write_i;
                 waddr_o <= waddr_i;
+
+                pc_o <= pc_i;
                 //difftest_check <= 0; 
                 
                 //if(difftest_check == 0 && difftest_check_flag == 0) begin 

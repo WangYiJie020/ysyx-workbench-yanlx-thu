@@ -78,7 +78,10 @@ module lsu(
     output bready_o,
 
     input bus_busy,
-    output rd_lsu_valid
+    output rd_lsu_valid,
+
+    input [`CPU_WIDTH-1:0] pc_i;
+    output [`CPU_WIDTH-1:0] pc_o;
 
 );
     reg [`CPU_WIDTH-1:0] alu_result;
@@ -227,6 +230,7 @@ module lsu(
                     alu_result <= alu_result_i;
                     MemRead <= MemRead_i;
                     MemWrite <= MemWrite_i;
+                    pc_o <= pc_i;
                 end
                 rd_lsu_valid <= 0;
             end else if(current_state == S_OUT) begin 
