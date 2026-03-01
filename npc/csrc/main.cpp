@@ -550,10 +550,12 @@ void nvboard_bind_all_pins(TOP_NAME* top);
 
 #else
 #include "verilated.h"
-#include "verilated_vcd_c.h" //可选，如果要导出vcd则需要加上
+//#include "verilated_vcd_c.h" //可选，如果要导出vcd则需要加上
 VerilatedContext* contextp = new VerilatedContext;
 VysyxSoCFull* top = new VysyxSoCFull{contextp};
-VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
+//VerilatedVcdC* tfp = new VerilatedVcdC; //初始化VCD对象指针
+#include "verilated_fst_c.h"            //波形文件所需的头文件
+VerilatedFstC *tfp = new VerilatedFstC; // 创建一个波形文件指针
 #endif
 
 void cpu_exec(uint64_t num) {
@@ -662,7 +664,8 @@ int main(int argc, char** argv) {
   #ifdef WAVE_ON
   contextp->traceEverOn(true); //打开追踪功能
   top->trace(tfp, 0); //
-  tfp->open("wave.vcd"); //设置输出的文件wave.vcd
+  //tfp->open("wave.vcd"); //设置输出的文件wave.vcd
+  tfp->open("wave.fst"); //设置输出的文件wave.vcd
   #endif
   int n = 10;
   top->reset = 1;
