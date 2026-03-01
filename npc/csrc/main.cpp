@@ -508,7 +508,7 @@ static void trace_and_difftest() {
 */
       if(skip_r==true) {
         diff_cpdutreg2ref();
-        is_skip_ref = false;
+        
         
       }
       bool check = difftest_check();
@@ -516,7 +516,9 @@ static void trace_and_difftest() {
       if(is_skip_ref==false) {
         difftest_step();
       }
-      
+      else {
+        is_skip_ref = false;
+      }      
 
       
       if(check==false) {

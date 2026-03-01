@@ -256,8 +256,7 @@ module lsu(
                     arvalid <= 1;
                     rready <= 1;
                     read_mem <= 1;
-                    if((alu_result_i >=32'h10000000 && alu_result_i <=32'h10000fff)
-                    ||(alu_result_i >=32'h02000000 && alu_result_i <=32'h0200ffff)) begin
+                    if((alu_result_i >=32'h10000000 && alu_result_i <=32'h10000fff)||(alu_result_i >=32'h02000000 && alu_result_i <=32'h0200ffff)) begin
                         difftest_skip();
                     end
 
