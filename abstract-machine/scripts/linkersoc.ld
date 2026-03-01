@@ -28,7 +28,7 @@ SECTIONS {
     _bootloader_start = .;
     *(.bootloader*)
     _bootloader_end = .;
-  } > sdram AT> flash  
+  } > psram AT> flash  
 
   _bootloader_lma_start = LOADADDR(.bootloader);
 
@@ -70,7 +70,7 @@ SECTIONS {
     __am_apps_data_end = .;
     . = ALIGN(8);
     _data_vma_end = .;
-  } > sdram AT>flash
+  } > psram AT>flash
 
   _data_lma_start = LOADADDR(.data);
 
@@ -83,7 +83,7 @@ SECTIONS {
     *(.srodata)       
     *(.srodata*) 
     _text_end = .;
-  } > sdram AT> flash 
+  } > psram AT> flash 
 
   _text_lma_start = LOADADDR(.text);
 
@@ -100,15 +100,15 @@ SECTIONS {
     *(__am_apps.scommon*)
     __am_apps_bss_end = .;
     . = ALIGN(8);
-  } > sdram 
+  } > psram 
   
   
   /* 堆区在数据段和BSS段之后 */
   .heap : ALIGN(4) {
       _heap_start = .;
-      . = . + 4M;        /* 16KB堆区 */
+      . = . + 2M;        /* 16KB堆区 */
       _heap_end = .;
-  } > sdram
+  } > psram
   
   /* 栈区在SRAM末尾 */
   .stack : ALIGN(4) {
