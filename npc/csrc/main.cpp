@@ -505,16 +505,14 @@ static void trace_and_difftest() {
     }
     skip_r = is_skip_ref;
 */
-
-      bool check = difftest_check();
-      
       if(skip_r==true) {
         diff_cpdutreg2ref();
         is_skip_ref = false;
       }
-      else {
-        difftest_step();
-      }
+      bool check = difftest_check();
+
+      difftest_step();
+
       
       if(check==false) {
         cpu_state = NPC_ABORT;
