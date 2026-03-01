@@ -31,8 +31,8 @@ module wbu(
 
     output rd_wbu_valid,
      
-    input [`CPU_WIDTH-1:0] pc_i;
-    output [`CPU_WIDTH-1:0] pc_o;
+    input [`CPU_WIDTH-1:0] pc_i,
+    output [`CPU_WIDTH-1:0] pc_o
 );
 
     wire [`CPU_WIDTH-1:0] mem_data;
