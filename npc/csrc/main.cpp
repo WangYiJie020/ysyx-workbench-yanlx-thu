@@ -396,7 +396,7 @@ bool difftest_check() {
 }
 void diff_cpdutreg2ref() {
   ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
-  printf("%x\n",cpu.pc);
+  //printf("%x\n",cpu.pc);
 }
 void difftest_step() { 
   ref_difftest_exec(1);
