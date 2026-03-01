@@ -663,7 +663,7 @@ int main(int argc, char** argv) {
   
   #ifdef WAVE_ON
   contextp->traceEverOn(true); //打开追踪功能
-  top->trace(tfp, 0); //
+  top->trace(tfp, 99); //
   //tfp->open("wave.vcd"); //设置输出的文件wave.vcd
   tfp->open("wave.fst"); //设置输出的文件wave.vcd
   #endif
