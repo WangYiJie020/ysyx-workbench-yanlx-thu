@@ -485,7 +485,7 @@ static void trace_and_difftest() {
       //diff_cpdutreg2ref();
     }
     else {
-      bool check = difftest_check();
+      //bool check = difftest_check();
       if(skip_r) {
         diff_cpdutreg2ref();
         is_skip_ref = false;
@@ -496,7 +496,7 @@ static void trace_and_difftest() {
         //printf("a\n");
         difftest_step();
       }
-      //bool check = difftest_check();
+      bool check = difftest_check();
       
       if(check==false) {
         cpu_state = NPC_ABORT;
