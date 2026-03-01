@@ -80,8 +80,8 @@ module lsu(
     input bus_busy,
     output rd_lsu_valid,
 
-    input [`CPU_WIDTH-1:0] pc_i;
-    output [`CPU_WIDTH-1:0] pc_o;
+    input [`CPU_WIDTH-1:0] pc_i,
+    output [`CPU_WIDTH-1:0] pc_o
 
 );
     reg [`CPU_WIDTH-1:0] alu_result;
