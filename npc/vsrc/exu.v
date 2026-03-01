@@ -51,7 +51,7 @@ module exu(
     output npc_valid,
     output rd_exu_valid,
     
-    output [`CPU_WIDTH-1:0] pc_o; //difftest
+    output [`CPU_WIDTH-1:0] pc_o //difftest
     
 );
 
