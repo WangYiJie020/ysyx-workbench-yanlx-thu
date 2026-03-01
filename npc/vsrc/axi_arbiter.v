@@ -136,7 +136,7 @@ wire arb_grant_next;
 assign arb_grant_next = arb_locked                          ? arb_grant   :
                         ( arvalid_i_a & ~arvalid_i_b)       ? MASTER_A    :
                         (~arvalid_i_a &  arvalid_i_b)       ? MASTER_B    :
-                        ( arvalid_i_a &  arvalid_i_b)       ? ~arb_grant  : // 轮转
+                        //( arvalid_i_a &  arvalid_i_b)       ? ~arb_grant  : // 轮转
                                                                arb_grant;   // 都没请求，保持
 
 // ---- 仲裁寄存器更新 ----
