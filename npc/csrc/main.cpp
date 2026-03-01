@@ -22,8 +22,8 @@
 
 
 
-#define  DIFFTEST_ON
-#define  WAVE_ON
+//#define  DIFFTEST_ON
+//#define  WAVE_ON
 //#define  TRACE_ON
 //#define NVBOARD_ON
 
@@ -515,9 +515,7 @@ static void trace_and_difftest() {
       if(is_skip_ref==false) {
         difftest_step();
       }
-           
 
-      
       if(check==false) {
         cpu_state = NPC_ABORT;
         return;
