@@ -106,7 +106,7 @@ SECTIONS {
   /* 堆区在数据段和BSS段之后 */
   .heap : ALIGN(4) {
       _heap_start = .;
-      . = . + 2M;        /* 16KB堆区 */
+      . = . + 4M;        /* 16KB堆区 */
       _heap_end = .;
   } > sdram
   
