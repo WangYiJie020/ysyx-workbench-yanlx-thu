@@ -511,7 +511,10 @@ static void trace_and_difftest() {
       }
       bool check = difftest_check();
 
-      difftest_step();
+      if(skip_r==false) {
+        difftest_step();
+      }
+      
 
       
       if(check==false) {
