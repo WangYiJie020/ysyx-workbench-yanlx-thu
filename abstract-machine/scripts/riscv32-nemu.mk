@@ -5,6 +5,7 @@ COMMON_CFLAGS += -march=rv32im_zicsr -mabi=ilp32   # overwrite
 LDFLAGS       += -melf32lriscv                     # overwrite
 
 AM_SRCS += riscv/nemu/start.S \
+           riscv/nemu/bootloader.c \
            riscv/nemu/cte.c \
            riscv/nemu/trap.S \
            riscv/nemu/vme.c
