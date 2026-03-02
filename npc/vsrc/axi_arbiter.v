@@ -7,7 +7,7 @@
 
 // `define CPU_WIDTH 32   // 若顶层已定义请删除此行
 
-module axi4_arbiter (
+module axi_arbiter (
     input clk,
     input rst_n,
 
