@@ -77,8 +77,8 @@ void print_mycsr() {
 }
 
 void _trm_init() {
-  print_mycsr();
   set_div2();
+  print_mycsr();
   int ret = main(mainargs);
   halt(ret);
 }
