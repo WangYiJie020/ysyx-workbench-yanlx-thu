@@ -1,9 +1,9 @@
 module csr(
     input clk,
     input [31:0] inst,
-    output [2:0] raddr_csr,
-    output [1:0] waddr_csr,
-    output ecall    
+    output reg [2:0] raddr_csr,
+    output reg [1:0] waddr_csr,
+    output reg ecall    
     
 );
     wire [6:0] opcode;
