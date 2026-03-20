@@ -665,7 +665,7 @@ module ysyx_25050137(
 
     //write csr
     wire csr_write;
-    wire [2:0] waddr_csr;
+    wire [1:0] waddr_csr;
     wire [`CPU_WIDTH-1:0] csr_wdata;
     wire ecall;
     wire [`CPU_WIDTH-1:0] csr_reg [3:0]; //difftest
