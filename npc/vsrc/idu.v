@@ -12,9 +12,7 @@ module idu(
     input [`CPU_WIDTH-1:0] rdata1,
     input [`CPU_WIDTH-1:0] rdata2,
 
-    output [2:0] raddr_csr;
-    
-
+    output [2:0] raddr_csr,
     input [`CPU_WIDTH-1:0] rdata_csr,
 
     //ifu to idu
@@ -44,8 +42,8 @@ module idu(
     output csr_wdata_src_o,
     output reg_write_o,
     output [`REG_ADDR-1:0] waddr_o,
-    output ecall_o;
-    output [1:0] waddr_csr_o;
+    output ecall_o,
+    output [1:0] waddr_csr_o,
 
     output reg idu_valid_o,
     input idu_ready_i,
@@ -62,6 +60,9 @@ module idu(
     reg [`INST_WIDTH-1:0] inst;
 
     wire [6:0] opcode;
+    wire [2:0] raddr_csr;
+    wire ecall;
+    wire [1:0] waddr_csr;
 
     assign rs1_o = rdata1;
     assign rs2_o = rdata2;
@@ -126,9 +127,7 @@ module idu(
         .data(imm_o)
     );
 
-    wire [2:0] raddr_csr;
-    wire ecall;
-    wire [1:0] waddr_csr;
+    
 
     csr CSR( //解码用
         .clk(clk),

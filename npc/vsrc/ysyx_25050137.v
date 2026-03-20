@@ -601,7 +601,7 @@ module ysyx_25050137(
     wire ready_idu_to_exu;
 
     wire [2:0] raddr_csr;
-    wire [`CPU_WIDTH-1:0] rdata_csr,
+    wire [`CPU_WIDTH-1:0] rdata_csr;
 
     idu IDU(
         .clk(clk),
@@ -682,7 +682,7 @@ module ysyx_25050137(
         .raddr2(raddr2), //rs2
         .rdata2(rdata2),
         .value1(a5),
-        .reg_file(reg_file)  //for difftest
+        .reg_file(reg_file),  //for difftest
 
         .raddr_csr(raddr_csr),
         .rdata_csr(rdata_csr),
