@@ -1,70 +1,49 @@
 module csr(
     input clk,
-    input wen,
     input [31:0] inst,
-    input [31:0] wdata,
-    input [31:0] NO,
-    input [31:0] pc,
-    output reg [31:0] rdata,
-    output [31:0] csr_reg [3:0]
+    output [2:0] raddr_csr,
+    output [1:0] waddr_csr,
+    output ecall    
+    
 );
-
-    reg [31:0] csr_mepc;
-    reg [31:0] csr_mstatus;
-    reg [31:0] csr_mcause;
-    reg [31:0] csr_mtvec;
-    reg [31:0] csr_mvendorid;
-    reg [31:0] csr_marchid;
-
     wire [6:0] opcode;
     wire [2:0] funct3;
 
     assign opcode = inst[6:0];
     assign funct3 = inst[14:12];
 
-    assign csr_reg[0] = csr_mepc;
-    assign csr_reg[1] = csr_mstatus;
-    assign csr_reg[2] = csr_mcause;
-    assign csr_reg[3] = csr_mtvec;
-    assign csr_mvendorid = 32'h79737978;
-    assign csr_marchid = 32'h017E3C19;
-
-    initial begin
-        csr_mstatus = 32'h1800;
-    end
-
-    always@(posedge clk) begin
+    always@(*) begin
+        waddr_csr = 2'b00;
         case (opcode)
             7'b1110011:begin
                 case (funct3)
                     3'b000:begin 
                         if(inst==32'h00000073) begin //ecall
-                            csr_mepc <= pc;
-                            csr_mcause <= NO;
+                            ecall = 1'b1;
                             //csr_mstatus[7] <= csr_mstatus[3];//MPIE = MIE
                             //csr_mstatus[3] <= 1'b0;//MIE set 0
                             //csr_mstatus[12:11] <= 2'b11;//MPP=11
                         end
-                        else if(inst==32'h30200073) begin //mret
+                        else begin 
+                            ecall = 1'b0;
                             //csr_mstatus[3] <= csr_mstatus[7]; //MIE = MPIE
                             //csr_mstatus[7] <= 1'b0;//MPIE set 0
                         end
                     end
                     3'b001, 3'b010: begin //csrrw, csrrs
-                        if(wen)begin
-                            case (inst[31:20])
-                                12'h300:csr_mstatus <= wdata;
-                                12'h305:csr_mtvec <= wdata;
-                                12'h341:csr_mepc <= wdata;
-                                12'h342:csr_mcause <= wdata;
-                                default:csr_mstatus <= csr_mstatus;
-                            endcase
-                        end
+                        ecall = 1'b0;
+                        case (inst[31:20])
+                            12'h300:waddr_csr = 2'b00;
+                            12'h305:waddr_csr = 2'b01;
+                            12'h341:waddr_csr = 2'b10;
+                            12'h342:waddr_csr = 2'b11;
+                            default:waddr_csr = 2'b00;
+                        endcase
                     end
-                    default:csr_mstatus <= csr_mstatus;
+                    default:ecall = 1'b0;
                 endcase
             end
-            default:csr_mstatus <= csr_mstatus;
+            default:ecall = 1'b0;;
         endcase
     end
 
@@ -73,25 +52,25 @@ module csr(
             7'b1110011:begin
                 case (funct3)
                     3'b000:begin 
-                        if(inst==32'h00000073) rdata = csr_mtvec; //ecall
-                        else if(inst==32'h30200073) rdata = csr_mepc; //mret
-                        else rdata = 0;
+                        if(inst==32'h00000073) raddr_csr = 3'b110; //ecall
+                        else if(inst==32'h30200073) raddr_csr = 3'b111; //mret
+                        else raddr_csr = 0;
                     end
                     3'b001,3'b010: begin //csrrw, csrrs
                         case (inst[31:20])
-                            12'hf11:rdata = csr_mvendorid;
-                            12'hf12:rdata = csr_marchid;
-                            12'h300:rdata = csr_mstatus;
-                            12'h305:rdata = csr_mtvec;
-                            12'h341:rdata = csr_mepc;
-                            12'h342:rdata = csr_mcause;
-                            default:rdata = 0;
+                            12'hf11:raddr_csr = 3'b100;
+                            12'hf12:raddr_csr = 3'b101;
+                            12'h300:raddr_csr = 3'b000;
+                            12'h305:raddr_csr = 3'b001;
+                            12'h341:raddr_csr = 3'b010;
+                            12'h342:raddr_csr = 3'b011;
+                            default:raddr_csr = 0;
                         endcase
                     end
-                    default:rdata = 0;
+                    default:raddr_csr = 0;
                 endcase
             end
-            default:rdata = 0;
+            default:raddr_csr = 0;
         endcase
     end
 

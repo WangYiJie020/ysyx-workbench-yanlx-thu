@@ -23,6 +23,8 @@ module lsu(
     input csr_wdata_src_i,
     input reg_write_i,
     input [`REG_ADDR-1:0] waddr_i,
+    input ecall_i,
+    input [1:0] waddr_csr_i,
 
     input lsu_valid_i,
     output reg lsu_ready_o,
@@ -38,6 +40,8 @@ module lsu(
     output reg csr_wdata_src_o,
     output reg reg_write_o,
     output reg [`REG_ADDR-1:0] waddr_o,
+    output ecall_o,
+    output [1:0] waddr_csr_o,
 
     output reg lsu_valid_o,
     input lsu_ready_i,
@@ -231,6 +235,8 @@ module lsu(
                     MemRead <= MemRead_i;
                     MemWrite <= MemWrite_i;
                     pc_o <= pc_i;
+                    ecall_o <= ecall_i;
+                    waddr_csr_o <= waddr_csr_i;
                 end
                 rd_lsu_valid <= 0;
             end else if(current_state == S_OUT) begin 

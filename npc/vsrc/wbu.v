@@ -16,6 +16,8 @@ module wbu(
     input csr_wdata_src_i,
     input reg_write_i,
     input [`REG_ADDR-1:0] waddr_i,
+    input ecall_i,
+    input [1:0] waddr_csr_i,
 
     input wbu_valid_i,
     output reg wbu_ready_o,
@@ -28,6 +30,8 @@ module wbu(
     output csr_write_o,
     output reg_write_o,
     output reg [`REG_ADDR-1:0] waddr_o,
+    output ecall_o,
+    output [1:0] waddr_csr_o,
 
     output rd_wbu_valid,
      
@@ -120,6 +124,8 @@ module wbu(
                 csr_write_o <= csr_write_i;
                 reg_write_o <= reg_write_i;
                 waddr_o <= waddr_i;
+                ecall_o <= ecall_i;
+                waddr_csr_o <= waddr_csr_i;
 
                 pc_o <= pc_i;
                 //difftest_check <= 0; 

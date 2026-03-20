@@ -11,7 +11,12 @@ module idu(
     output [`REG_ADDR-1:0] raddr2,
     input [`CPU_WIDTH-1:0] rdata1,
     input [`CPU_WIDTH-1:0] rdata2,
-    input [`CPU_WIDTH-1:0] a5,
+
+    output [2:0] raddr_csr;
+    
+
+    input [`CPU_WIDTH-1:0] rdata_csr,
+
     //ifu to idu
     input [`PC_WIDTH-1:0] pc_i,
     input [`INST_WIDTH-1:0] inst_i,
@@ -39,13 +44,11 @@ module idu(
     output csr_wdata_src_o,
     output reg_write_o,
     output [`REG_ADDR-1:0] waddr_o,
+    output ecall_o;
+    output [1:0] waddr_csr_o;
+
     output reg idu_valid_o,
     input idu_ready_i,
-    //write csr
-    input csr_write_i,
-    input [`CPU_WIDTH-1:0] csr_wdata_i,
-
-    output [`CPU_WIDTH-1:0] csr_reg [3:0], //difftest
 
     output fencei,
 
@@ -67,6 +70,10 @@ module idu(
     assign raddr1 = inst[19:15];
     assign raddr2 = inst[24:20];
     assign opcode = inst[6:0];
+    
+    assign csr_rdata_o = rdata_csr;
+    assign ecall_o = ecall;
+    assign waddr_csr_o = waddr_csr;
 
     wire [7:0] wmask_tmp;
     assign wmask_o = wmask_tmp[3:0];
@@ -119,15 +126,19 @@ module idu(
         .data(imm_o)
     );
 
-    csr CSR(
+    wire [2:0] raddr_csr;
+    wire ecall;
+    wire [1:0] waddr_csr;
+
+    csr CSR( //解码用
         .clk(clk),
-        .wen(csr_write_i),
+        //.wen(csr_write_i),
         .inst(inst),
-        .wdata(csr_wdata_i),
-        .NO(a5),
-        .pc(pc),
-        .rdata(csr_rdata_o),
-        .csr_reg(csr_reg) //for difftest
+        //.wdata(csr_wdata_i),
+        .raddr_csr(raddr_csr),
+        //.rdata(csr_rdata_o),
+        .waddr_csr(waddr_csr),
+        .ecall(ecall)
     );
     
     alu_control ALU_Control(

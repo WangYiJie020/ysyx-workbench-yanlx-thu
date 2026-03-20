@@ -25,6 +25,8 @@ module exu(
     input csr_wdata_src_i,
     input reg_write_i,
     input [`REG_ADDR-1:0] waddr_i,
+    input ecall_i,
+    input [1:0] waddr_csr_i,
 
     input exu_valid_i,
     output reg exu_ready_o,
@@ -44,6 +46,8 @@ module exu(
     output reg csr_wdata_src_o,
     output reg reg_write_o,
     output reg [`REG_ADDR-1:0] waddr_o,
+    output ecall_o,
+    output [1:0] waddr_csr_o,
 
     output reg exu_valid_o,
     input exu_ready_i,
@@ -204,6 +208,8 @@ localparam S_IDLE = 2'b00,S_RECEIVE = 2'b01,S_SEND = 2'b10;
                     reg_write_o <= reg_write_i;
                     waddr_o <= waddr_i;
                     pc_o <= pc_i;
+                    ecall_o <= ecall_i;
+                    waddr_csr_o <= waddr_csr_i;
                 end
                 
             end
