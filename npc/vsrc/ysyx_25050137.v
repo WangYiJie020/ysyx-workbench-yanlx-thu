@@ -612,11 +612,7 @@ module ysyx_25050137(
         .raddr2(raddr2),
         .rdata1(rdata1),
         .rdata2(rdata2),
-
-        .raddr_csr(raddr_csr);
-        //.ecall(ecall);
-        //.waddr_csr(waddr_csr);
-
+        .raddr_csr(raddr_csr),
         .rdata_csr(rdata_csr),
 
         //ifu to idu

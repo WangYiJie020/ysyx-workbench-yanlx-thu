@@ -43,7 +43,7 @@ module csr(
                     default:ecall = 1'b0;
                 endcase
             end
-            default:ecall = 1'b0;;
+            default:ecall = 1'b0;
         endcase
     end
 
