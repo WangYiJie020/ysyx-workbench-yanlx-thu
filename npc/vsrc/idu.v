@@ -59,7 +59,7 @@ module idu(
     reg [`PC_WIDTH-1:0] pc;
     reg [`INST_WIDTH-1:0] inst;
 
-    wire [6:0] opcode;
+    reg [6:0] opcode;
     wire ecall;
     wire [1:0] waddr_csr;
 
