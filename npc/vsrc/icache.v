@@ -144,7 +144,7 @@ always @(*) begin
         end
         
         STATE_FILL: begin
-            if(cpu_rready_i == 1 && cpu_rvalid_o == 1 && cpu_rlast_o == 1'b1;)begin
+            if(cpu_rready_i == 1 && cpu_rvalid_o == 1 && cpu_rlast_o == 1'b1)begin
                 next_state = STATE_IDLE;
             end
             else 
