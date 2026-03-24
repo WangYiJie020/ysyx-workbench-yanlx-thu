@@ -168,6 +168,7 @@ always @(posedge clk or negedge rst_n) begin
                         rready_o      <= 1'b0;
                         ar_inflight   <= 1'b0;
                         flush_pending <= 1'b0;
+                        inst_counter_sub();//该指令无效，不记数
                         pc_fetch      <= npc_i;  // 用当拍npc_i，更及时
                         state         <= S_IDLE;
                     end else begin
