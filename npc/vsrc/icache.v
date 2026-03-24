@@ -144,7 +144,7 @@ always @(*) begin
         end
         
         STATE_FILL: begin
-            if(cpu_rready_i == 1 && cpu_rvalid_o == 1)begin
+            if(cpu_rready_i == 1 && cpu_rvalid_o == 1 && cpu_rlast_o == 1'b1;)begin
                 next_state = STATE_IDLE;
             end
             else 
@@ -182,6 +182,7 @@ always @(posedge clk or negedge rst_n) begin
             STATE_IDLE: begin
                 cpu_arready_o <= 1;
                 cpu_rvalid_o <= 1'b0;
+                cpu_rlast_o <= 1'b0;
                 cpu_rdata_o <= 0;
                 counter <= 0;
                 if (cpu_arready_o == 1 && cpu_arvalid_i == 1) begin
@@ -196,6 +197,7 @@ always @(posedge clk or negedge rst_n) begin
                 if (valid_array[req_index] && (tag_array[req_index] == req_tag)) begin
                     // 命中，直接返回数据
                     cpu_rvalid_o <= 1'b1;
+                    cpu_rlast_o <= 1'b1;
                     cpu_rdata_o <= data_array[req_index][req_offset*8 +: 32];
                     icache_hit();
                     if(cpu_rready_i==1) begin
@@ -255,9 +257,11 @@ always @(posedge clk or negedge rst_n) begin
                 mem_arvalid_o <= 1'b0;
                 cpu_rdata_o <= data_array[req_index][req_offset*8 +: 32];
                 cpu_rvalid_o <= 1;
+                cpu_rlast_o <= 1'b1;
                 if(cpu_rready_i == 1 && cpu_rvalid_o == 1) begin
                     icache_back_mem_inst();
                     cpu_rvalid_o <= 0;
+                    cpu_rlast_o <= 1'b0;
                     cpu_rdata_o <= 0;
                 end
             end
