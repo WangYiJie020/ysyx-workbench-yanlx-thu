@@ -667,13 +667,13 @@ module ysyx_25050137(
 
     // LSU级前递
     .lsu_rd(waddr_lsu_to_wbu),
-    .exu_rd_valid(rd_lsu_valid),
+    .lsu_rd_valid(rd_lsu_valid),
     .lsu_reg_write(reg_write_lsu_to_wbu),    // 新增: LSU级是否写寄存器
     .lsu_fwd_data(alu_result_lsu_to_wbu),     // 新增: LSU级前递数据 (ALU结果或Mem读取结果)
 
     // WBU级前递
     .wbu_rd(waddr),
-    .exu_rd_valid(rd_wbu_valid),
+    .wbu_rd_valid(rd_wbu_valid),
     .wbu_reg_write(reg_write),    // 新增: WBU级是否写寄存器
     .wbu_fwd_data(wdata)      // 新增: WBU级前递数据 (最终写回数据)
     );
