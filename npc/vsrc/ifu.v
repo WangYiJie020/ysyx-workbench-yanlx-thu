@@ -1,6 +1,7 @@
 `include "header.v"
 import "DPI-C" function void return_inst(input int inst1, input byte inst_opcode);
 import "DPI-C" function void inst_counter_add();
+import "DPI-C" function void inst_counter_sub();
 
 // =============================================================================
 // IFU (Instruction Fetch Unit)
@@ -181,6 +182,7 @@ always @(posedge clk or negedge rst_n) begin
                     flush_pending <= 1'b0;
                     pc_fetch      <= npc_i;
                     state         <= S_IDLE;
+                    inst_counter_sub();
                 end
 
                 S_FLUSH: begin

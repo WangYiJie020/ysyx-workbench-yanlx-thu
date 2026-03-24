@@ -135,6 +135,10 @@ extern "C" void idu_counter_return(char inst_opcode) {
   }
 }
 
+extern "C" void inst_counter_sub() {
+  inst_counter--;
+}
+
 extern "C" void inst_counter_add() {
   inst_counter++;
 }
