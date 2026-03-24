@@ -53,17 +53,20 @@ module idu(
     // ======== Forwarding接口 (新增/修改) ========
     // EXU级前递
     input [4:0]             exu_rd,
+    input                   exu_rd_valid,
     input                   exu_reg_write,    // 新增: EXU级是否写寄存器
     input                   exu_MemRead,      // 新增: EXU级是否为Load指令 (load-use需要stall)
     input [`CPU_WIDTH-1:0]  exu_fwd_data,     // 新增: EXU级前递数据 (ALU结果)
 
     // LSU级前递
     input [4:0]             lsu_rd,
+    input                   lsu_rd_valid,
     input                   lsu_reg_write,    // 新增: LSU级是否写寄存器
     input [`CPU_WIDTH-1:0]  lsu_fwd_data,     // 新增: LSU级前递数据 (ALU结果或Mem读取结果)
 
     // WBU级前递
     input [4:0]             wbu_rd,
+    input                   wbu_rd_valid,
     input                   wbu_reg_write,    // 新增: WBU级是否写寄存器
     input [`CPU_WIDTH-1:0]  wbu_fwd_data      // 新增: WBU级前递数据 (最终写回数据)
 );
@@ -160,7 +163,7 @@ module idu(
     assign load_use_hazard = exu_MemRead && exu_reg_write && (
         (use_rs1 && (raddr1 != 5'd0) && (raddr1 == exu_rd)) ||
         (use_rs2 && (raddr2 != 5'd0) && (raddr2 == exu_rd))
-    );
+    ) &&(exu_rd_valid || lsu_rd_valid || wbu_rd_valid);
 
     // ======== RAW冒险 (仅load-use需要stall, 其余通过forwarding解决) ========
     wire isRAW;
