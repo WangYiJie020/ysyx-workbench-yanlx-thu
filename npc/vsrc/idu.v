@@ -115,9 +115,9 @@ module idu(
     reg rs1_fwd_from_exu, rs1_fwd_from_lsu, rs1_fwd_from_wbu;
 
     always @(*) begin
-        rs1_fwd_from_exu = use_rs1 && (raddr1 != 5'd0) && (raddr1 == exu_rd) && exu_reg_write;
-        rs1_fwd_from_lsu = use_rs1 && (raddr1 != 5'd0) && (raddr1 == lsu_rd) && lsu_reg_write;
-        rs1_fwd_from_wbu = use_rs1 && (raddr1 != 5'd0) && (raddr1 == wbu_rd) && wbu_reg_write;
+        rs1_fwd_from_exu = use_rs1 && (raddr1 != 5'd0) && (raddr1 == exu_rd) && exu_reg_write && exu_rd_valid;
+        rs1_fwd_from_lsu = use_rs1 && (raddr1 != 5'd0) && (raddr1 == lsu_rd) && lsu_reg_write && lsu_rd_valid;
+        rs1_fwd_from_wbu = use_rs1 && (raddr1 != 5'd0) && (raddr1 == wbu_rd) && wbu_reg_write && wbu_rd_valid;
     end
 
     always @(*) begin
@@ -136,9 +136,9 @@ module idu(
     reg rs2_fwd_from_exu, rs2_fwd_from_lsu, rs2_fwd_from_wbu;
 
     always @(*) begin
-        rs2_fwd_from_exu = use_rs2 && (raddr2 != 5'd0) && (raddr2 == exu_rd) && exu_reg_write;
-        rs2_fwd_from_lsu = use_rs2 && (raddr2 != 5'd0) && (raddr2 == lsu_rd) && lsu_reg_write;
-        rs2_fwd_from_wbu = use_rs2 && (raddr2 != 5'd0) && (raddr2 == wbu_rd) && wbu_reg_write;
+        rs2_fwd_from_exu = use_rs2 && (raddr2 != 5'd0) && (raddr2 == exu_rd) && exu_reg_write && exu_rd_valid;
+        rs2_fwd_from_lsu = use_rs2 && (raddr2 != 5'd0) && (raddr2 == lsu_rd) && lsu_reg_write && lsu_rd_valid;
+        rs2_fwd_from_wbu = use_rs2 && (raddr2 != 5'd0) && (raddr2 == wbu_rd) && wbu_reg_write && wbu_rd_valid;
     end
 
     always @(*) begin
