@@ -653,9 +653,26 @@ module ysyx_25050137(
         
 
         .fencei(fencei),
-        .exu_rd(reg_write_exu_to_lsu && rd_exu_valid ? waddr_exu_to_lsu : 0),
-        .lsu_rd(reg_write_lsu_to_wbu && rd_lsu_valid ? waddr_lsu_to_wbu : 0),
-        .wbu_rd(reg_write && rd_wbu_valid ? waddr : 0)
+        //.exu_rd(reg_write_exu_to_lsu && rd_exu_valid ? waddr_exu_to_lsu : 0),
+        //.lsu_rd(reg_write_lsu_to_wbu && rd_lsu_valid ? waddr_lsu_to_wbu : 0),
+        //.wbu_rd(reg_write && rd_wbu_valid ? waddr : 0)
+
+        // ======== Forwarding接口 (新增/修改) ========
+    // EXU级前递
+    .exu_rd(waddr_exu_to_lsu),
+    .exu_reg_write(reg_write_exu_to_lsu),    // 新增: EXU级是否写寄存器
+    .exu_MemRead(MemRead_exu_to_lsu),      // 新增: EXU级是否为Load指令 (load-use需要stall)
+    .exu_fwd_data(alu_result_exu_to_lsu),     // 新增: EXU级前递数据 (ALU结果)
+
+    // LSU级前递
+    .lsu_rd(waddr_lsu_to_wbu),
+    .lsu_reg_write(reg_write_lsu_to_wbu),    // 新增: LSU级是否写寄存器
+    .lsu_fwd_data(alu_result_lsu_to_wbu),     // 新增: LSU级前递数据 (ALU结果或Mem读取结果)
+
+    // WBU级前递
+    .wbu_rd(waddr),
+    .wbu_reg_write(reg_write),    // 新增: WBU级是否写寄存器
+    .wbu_fwd_data(wdata)      // 新增: WBU级前递数据 (最终写回数据)
     );
 
     wire [`CPU_WIDTH-1:0] wdata;
