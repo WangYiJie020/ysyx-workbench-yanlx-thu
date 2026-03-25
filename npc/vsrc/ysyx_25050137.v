@@ -138,8 +138,7 @@ module ysyx_25050137(
         .ifu_valid_o(valid_ifu_to_idu),
         .ifu_ready_i(ready_ifu_to_idu),
 
-        .bus_busy(bus_busy),
-        .pc_dbg()
+        .bus_busy(bus_busy)
     );
 
     assign pc_to_mem = pc_ifu_to_idu;
