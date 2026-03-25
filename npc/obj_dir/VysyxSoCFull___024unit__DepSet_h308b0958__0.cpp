@@ -98,16 +98,6 @@ VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_reg_return_value_TOP____
     reg_return_value(gpr_0__Vcvt, gpr_1__Vcvt, gpr_2__Vcvt, gpr_3__Vcvt, gpr_4__Vcvt, gpr_5__Vcvt, gpr_6__Vcvt, gpr_7__Vcvt, gpr_8__Vcvt, gpr_9__Vcvt, gpr_10__Vcvt, gpr_11__Vcvt, gpr_12__Vcvt, gpr_13__Vcvt, gpr_14__Vcvt, gpr_15__Vcvt, gpr_16__Vcvt, gpr_17__Vcvt, gpr_18__Vcvt, gpr_19__Vcvt, gpr_20__Vcvt, gpr_21__Vcvt, gpr_22__Vcvt, gpr_23__Vcvt, gpr_24__Vcvt, gpr_25__Vcvt, gpr_26__Vcvt, gpr_27__Vcvt, gpr_28__Vcvt, gpr_29__Vcvt, gpr_30__Vcvt, gpr_31__Vcvt, pc__Vcvt, csr_reg_0__Vcvt, csr_reg_1__Vcvt, csr_reg_2__Vcvt, csr_reg_3__Vcvt);
 }
 
-extern "C" void difftest_next_step(char difftest_check);
-
-VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_difftest_next_step_TOP____024unit(CData/*7:0*/ difftest_check) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_difftest_next_step_TOP____024unit\n"); );
-    // Body
-    char difftest_check__Vcvt;
-    for (size_t difftest_check__Vidx = 0; difftest_check__Vidx < 1; ++difftest_check__Vidx) difftest_check__Vcvt = difftest_check;
-    difftest_next_step(difftest_check__Vcvt);
-}
-
 extern "C" void idu_counter_return(char inst_opcode);
 
 VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_idu_counter_return_TOP____024unit(CData/*7:0*/ inst_opcode) {
