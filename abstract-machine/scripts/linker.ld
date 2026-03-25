@@ -115,6 +115,6 @@ SECTIONS {
       _stack_top = .;
       . = . + 8K;         /* 4KB栈区 */
       _stack_pointer = .;
-  } > psram
+  } > sram
   
 }
