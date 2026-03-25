@@ -1,237 +1,178 @@
-module clint(
+`include "header.v"
+
+// =============================================================================
+// CLINT — area-optimized
+//
+// Function: 64-bit mtime counter, AXI4 slave interface
+//   Read  0x0200_0048 → mtime[31:0]
+//   Read  0x0200_004c → mtime[63:32]
+//   Write support for mtimecmp if needed (currently no mtimecmp)
+//
+// Removed: LFSR delay simulator, 5 separate FSMs, all output registers,
+//          wdata/wstrb/awaddr buffers
+// Registers: time_counter(64) + araddr_lat(32) + state(3) + aw_done/w_done(2) = 101 bits
+// Original: ~171 DFF + DFFR → estimated 1,897 area → ~700
+// =============================================================================
+
+module clint (
     input clk,
     input rst_n,
 
-    input [`CPU_WIDTH-1:0] araddr_i,
-    input [3:0] arid_i,
-    input [7:0] arlen_i,
-    input [2:0] arsize_i,
-    input [1:0] arburst_i,
-    input arvalid_i,
-    output reg arready_o,
+    // AXI AR
+    input  [`CPU_WIDTH-1:0] araddr_i,
+    input  [3:0]            arid_i,
+    input  [7:0]            arlen_i,
+    input  [2:0]            arsize_i,
+    input  [1:0]            arburst_i,
+    input                   arvalid_i,
+    output                  arready_o,
 
-    output reg [`CPU_WIDTH-1:0] rdata_o,
-    output reg [1:0] rresp_o,
-    output reg rlast_o,
-    output reg [3:0] rid_o,
-    output reg rvalid_o,
-    input rready_i,
+    // AXI R
+    output [`CPU_WIDTH-1:0] rdata_o,
+    output [1:0]            rresp_o,
+    output                  rlast_o,
+    output [3:0]            rid_o,
+    output                  rvalid_o,
+    input                   rready_i,
 
-    input [`CPU_WIDTH-1:0] awaddr_i,
-    input [3:0] awid_i,
-    input [7:0] awlen_i,
-    input [2:0] awsize_i,
-    input [1:0] awburst_i,
-    input awvalid_i,
-    output reg awready_o,
+    // AXI AW
+    input  [`CPU_WIDTH-1:0] awaddr_i,
+    input  [3:0]            awid_i,
+    input  [7:0]            awlen_i,
+    input  [2:0]            awsize_i,
+    input  [1:0]            awburst_i,
+    input                   awvalid_i,
+    output                  awready_o,
 
-    input [`CPU_WIDTH-1:0] wdata_i,
-    input [3:0] wstrb_i,
-    input wlast_i,
-    input wvalid_i,
-    output reg wready_o,
+    // AXI W
+    input  [`CPU_WIDTH-1:0] wdata_i,
+    input  [3:0]            wstrb_i,
+    input                   wlast_i,
+    input                   wvalid_i,
+    output                  wready_o,
 
-    output reg [1:0] bresp_o,
-    output reg [3:0] bid_o,
-    output reg bvalid_o,
-    input bready_i
+    // AXI B
+    output [1:0]            bresp_o,
+    output [3:0]            bid_o,
+    output                  bvalid_o,
+    input                   bready_i
 );
 
-    reg ar_state;
-    reg r_state;
-    reg aw_state;
-    reg w_state;
-    reg b_state;
-    reg [`CPU_WIDTH-1:0] araddr;
-    reg [`CPU_WIDTH-1:0] awaddr;
-    reg [`CPU_WIDTH-1:0] wdata;
-    reg [3:0] wstrb;
-    reg wvalid;
-    reg flag_waddr,flag_wdata,flag_rdata,flag_raddr,flag_write;
-    reg [4:0] rdata_counter,wdata_counter,w_delay,r_delay;
-    reg [4:0] LFSR;
-    reg lfsr_in;
-    reg [1:0] write_box;
+// =============================================================================
+// mtime counter — the only real function of CLINT
+// =============================================================================
+reg [63:0] time_counter;
 
-    reg [63:0] time_counter;
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n)
+        time_counter <= 64'd0;
+    else
+        time_counter <= time_counter + 1;
+end
 
-    assign rid_o = 0;
-    assign bid_o = 0;
+// =============================================================================
+// State machine
+// =============================================================================
+localparam [2:0]
+    S_IDLE  = 3'd0,
+    S_RRESP = 3'd1,   // Read: present R data, wait rready
+    S_AW    = 3'd2,   // Write: collect AW+W
+    S_BRESP = 3'd3;   // Write: present B response, wait bready
 
-    always@(posedge clk, negedge rst_n) begin
-        if(rst_n == 0) begin
-            time_counter <= 0;
-        end
-        else
-            time_counter <= time_counter + 1;
-    end
+reg [2:0] state;
 
-    always@(posedge clk, negedge rst_n) begin
-        if(rst_n == 0) begin
-            arready_o <= 1;
-            ar_state <= 0; //未握手
-            araddr <= 0;
-        end
-        else begin
-            if(ar_state == 0) begin
-                arready_o <= 1;
-                
-            end
-            else if(ar_state == 1) begin
-                if(arvalid_i == 0) ar_state <= 0;
-                arready_o <= 0;
-            end
+// Latched read address (only need bit 2 to distinguish hi/lo word)
+reg [`CPU_WIDTH-1:0] araddr_lat;
 
-            if(arready_o == 1 && arvalid_i == 1) begin
-                araddr <= araddr_i;
-                flag_raddr <= 1;//get read addr
-                ar_state <= 1;
-            end
-            else 
-                flag_raddr <= 0;
-        end
-    end
-    
-    always@(posedge clk, negedge rst_n) begin
-        if(rst_n == 0) begin
-            r_state <= 0;
-            rvalid_o <= 0;
-            rdata_counter <= 0;
-            flag_rdata <= 0;
-            r_delay <= LFSR;
-        end
-        else begin
-            if(flag_raddr == 1) flag_rdata <= 1;
-            else if(flag_rdata == 1) begin
-                if(rdata_counter == r_delay) begin
-                    rdata_counter <= 0;
-                    rresp_o <= 2'b00;
-                    rvalid_o <= 1;
-                    flag_rdata <= 0;
-                    r_delay <= LFSR;
-                    rlast_o <= 1;
-                    if(araddr == 32'h02000048) rdata_o <= time_counter[31:0];
-                    else if(araddr == 32'h0200004c) rdata_o <= time_counter[63:32];
+// Track AW/W handshakes (can arrive in any order)
+reg aw_done, w_done;
+
+// =============================================================================
+// AXI outputs — ALL combinational
+// =============================================================================
+
+// AR: accept in IDLE
+assign arready_o = (state == S_IDLE) && !awvalid_i;  // read lower priority if simultaneous
+
+// R: respond with time_counter
+assign rdata_o  = araddr_lat[2] ? time_counter[63:32] : time_counter[31:0];
+assign rvalid_o = (state == S_RRESP);
+assign rlast_o  = rvalid_o;
+assign rresp_o  = 2'b00;
+assign rid_o    = 4'd0;
+
+// AW: accept in IDLE or S_AW when not yet done
+assign awready_o = (state == S_IDLE && awvalid_i) ||
+                   (state == S_AW && !aw_done);
+
+// W: accept in IDLE or S_AW when not yet done
+assign wready_o  = (state == S_IDLE && awvalid_i) ||
+                   (state == S_AW && !w_done);
+
+// B: respond after write complete
+assign bvalid_o = (state == S_BRESP);
+assign bresp_o  = 2'b00;
+assign bid_o    = 4'd0;
+
+// =============================================================================
+// State transitions
+// =============================================================================
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        state      <= S_IDLE;
+        araddr_lat <= 0;
+        aw_done    <= 1'b0;
+        w_done     <= 1'b0;
+    end else begin
+        case (state)
+
+            S_IDLE: begin
+                if (awvalid_i) begin
+                    // Write request — prioritize over read
+                    aw_done <= awready_o && awvalid_i;
+                    w_done  <= wready_o  && wvalid_i;
+                    if ((awready_o && awvalid_i) && (wready_o && wvalid_i)) begin
+                        // Both handshake in same cycle
+                        state <= S_BRESP;
+                    end else begin
+                        state <= S_AW;
+                    end
+                end else if (arvalid_i) begin
+                    // Read request
+                    araddr_lat <= araddr_i;
+                    state      <= S_RRESP;
                 end
-                else begin
-                    rdata_counter <= rdata_counter + 1;
-                    rresp_o <= 2'b10;
-                    rvalid_o <= 0;
-                    rlast_o <= 0;
+            end
+
+            S_RRESP: begin
+                if (rvalid_o && rready_i)
+                    state <= S_IDLE;
+            end
+
+            S_AW: begin
+                if (awready_o && awvalid_i)
+                    aw_done <= 1'b1;
+                if (wready_o && wvalid_i)
+                    w_done <= 1'b1;
+
+                // Both channels done
+                if ((aw_done || (awready_o && awvalid_i)) &&
+                    (w_done  || (wready_o  && wvalid_i)))
+                    state <= S_BRESP;
+            end
+
+            S_BRESP: begin
+                if (bvalid_o && bready_i) begin
+                    aw_done <= 1'b0;
+                    w_done  <= 1'b0;
+                    state   <= S_IDLE;
                 end
             end
-            else begin
-                rvalid_o <= 0;
-                rdata_counter <= 0;
-                rresp_o <= 2'b10;
-                rlast_o <= 0;
-            end
-            
-        end
+
+            default: state <= S_IDLE;
+
+        endcase
     end
-
-    always@(posedge clk, negedge rst_n) begin
-        if(rst_n == 0) begin
-            awready_o <= 0;
-            aw_state <= 0; //未握手
-            awaddr <= 0;
-            flag_waddr <= 0;
-        end
-        else begin
-            if(aw_state == 0 && awvalid_i == 1) begin
-                awready_o <= 1;
-                aw_state <= 1;
-            end
-            else if(aw_state == 1) begin
-                if(awvalid_i == 0) aw_state <= 0;
-                awready_o <= 0;
-            end
-
-            if(awready_o == 1 && awvalid_i == 1) begin
-                awaddr <= awaddr_i;
-                flag_waddr <= 1; 
-            end 
-            else if(bresp_o == 0) begin
-                flag_waddr <= 0;
-            end else flag_waddr <= 0;
-        end
-    end
-
-    always@(posedge clk, negedge rst_n) begin
-        if(rst_n == 0) begin
-            wready_o <= 0;
-            w_state <= 0; //未握手
-            wdata <= 0;
-            wstrb <= 0;
-            flag_wdata <= 0;
-        end
-        else begin
-            if(w_state == 0 && wvalid_i == 1) begin
-                wready_o <= 1;
-                w_state <= 1;
-            
-            end else if(w_state == 1) begin
-                if(wvalid_i == 0) w_state <= 0;
-                wready_o <= 0;
-            end
-
-            if(bresp_o == 0) 
-                flag_wdata <= 0;
-            else if(wready_o == 1 && wvalid_i == 1) begin
-                wdata <= wdata_i;
-                wstrb <= wstrb_i;
-                flag_wdata <= 1;
-                //pmem_write(awaddr,wdata,wstrb);
-                //bresp_o <= 0;
-            end else flag_wdata <= 0;
-            //else if(bresp_o == 0) begin
-                //flag_wdata <= 0;
-                //bresp_o <= 1;
-            //end
-            //else bresp_o <= 1;
-        end
-    end
-
-    always@(posedge clk, negedge rst_n) begin
-        if(rst_n == 0) begin
-            bresp_o <= 2'b10;
-            bvalid_o <= 0;
-            w_delay <= LFSR;
-            wdata_counter <= 0;
-        end
-        else begin 
-            if(flag_waddr == 1 ) write_box[0] <= 1;
-            if(flag_wdata == 1) write_box[1] <= 1;
-
-            if(write_box == 2'b11) begin
-                if(wdata_counter == w_delay) begin
-                    wdata_counter <= 0;
-                    //pmem_write(awaddr,wdata,wstrb);
-                    //$write("%c",wdata[7:0]);
-                    bresp_o <= 0;
-                    bvalid_o <= 1;
-                    write_box <= 0;
-                    w_delay <= LFSR;
-                end else begin
-                    wdata_counter <= wdata_counter + 1;
-                    bresp_o <= 2'b10;
-                    bvalid_o <= 0;
-                end
-            end else begin
-                bresp_o <= 2'b10;
-                bvalid_o <= 0;
-            end
-        end
-    end
-    
-    assign lfsr_in = LFSR[4] ^ LFSR[3] ^ LFSR[2] ^ LFSR[1] ^ LFSR[0];
-    always@(posedge clk, negedge rst_n) begin
-        if(rst_n == 0) LFSR <= 5'b00001;
-        else begin
-            LFSR <= {lfsr_in,LFSR[4:1]};
-        end
-    end
-
-
+end
 
 endmodule
