@@ -8,7 +8,7 @@ import "DPI-C" function void icache_back_mem_inst();
 module icache #(
     parameter DATA_WIDTH = 32,      // 数据宽度（指令宽度）
     parameter BLOCK_SIZE = 4,       // 块大小（字节）
-    parameter NUM_BLOCKS = 16,      // Cache块数量
+    parameter NUM_BLOCKS = 4,      // Cache块数量
     parameter ADDR_WIDTH = 32       // 地址宽度
 ) (
     input clk,
