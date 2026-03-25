@@ -74,6 +74,8 @@ wire [OFFSET_BITS-1:0] req_offset;
 
 reg [31:0] counter;
 
+reg flag;
+
 assign req_tag = cpu_addr[ADDR_WIDTH-1:ADDR_WIDTH-TAG_BITS];
 assign req_index = cpu_addr[OFFSET_BITS+INDEX_BITS-1:OFFSET_BITS];
 assign req_offset = cpu_addr[OFFSET_BITS-1:0];
@@ -190,6 +192,7 @@ always @(posedge clk or negedge rst_n) begin
                     icache_get_addr();
                     cpu_addr <= cpu_araddr_i;
                 end
+                flag <= 0;
             end
             
             STATE_CHECK: begin
@@ -209,11 +212,12 @@ always @(posedge clk or negedge rst_n) begin
                     cpu_rdata_o <= 0;
                     icache_miss();
                 end
+                flag <= 0;
             end
             
             STATE_MISS: begin
                 // 向内存发送请求
-                mem_arvalid_o <= 1'b1;
+                //mem_arvalid_o <= 1'b1;
                 mem_rready_o <= 1;
                 mem_araddr_o <= {cpu_addr[ADDR_WIDTH-1:OFFSET_BITS], {OFFSET_BITS{1'b0}}};  // 对齐到块边界
                 //mem_araddr_o <= cpu_addr;
@@ -229,12 +233,15 @@ always @(posedge clk or negedge rst_n) begin
                 end
                 
                 //counter <= counter + 1;
-                
-                //if (mem_arready_i==1 && mem_arvalid_o==1) begin
-                //    mem_arvalid_o <= 1'b0;
+                if(flag==0) begin 
+                    mem_arvalid_o <= 1'b1;
+                end
+                if (mem_arready_i==1 && mem_arvalid_o==1) begin
+                    mem_arvalid_o <= 1'b0;
+                    flag <= 1;
                  //   mem_araddr_o <= 0;
                  //   counter <= counter + 1;
-                //end
+                end
                 // 填充缓存
                 
             end
