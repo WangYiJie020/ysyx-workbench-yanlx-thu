@@ -38,10 +38,6 @@ extern "C" {
     extern void icache_miss();
     // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/idu.v:3:30
     extern void idu_counter_return(char inst_opcode);
-    // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/ifu.v:3:30
-    extern void inst_counter_add();
-    // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/ifu.v:4:30
-    extern void inst_counter_sub();
     // DPI import at /home/yanlx/ysyx-workbench/ysyxSoC/build/ysyxSoCFull.v:6723:30
     extern void mrom_read(int raddr, int* rdata);
     // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/data_mem.v:1:29
@@ -52,8 +48,6 @@ extern "C" {
     extern void receive_data_back();
     // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/ysyx_25050137.v:4:30
     extern void reg_return_value(int gpr_0, int gpr_1, int gpr_2, int gpr_3, int gpr_4, int gpr_5, int gpr_6, int gpr_7, int gpr_8, int gpr_9, int gpr_10, int gpr_11, int gpr_12, int gpr_13, int gpr_14, int gpr_15, int gpr_16, int gpr_17, int gpr_18, int gpr_19, int gpr_20, int gpr_21, int gpr_22, int gpr_23, int gpr_24, int gpr_25, int gpr_26, int gpr_27, int gpr_28, int gpr_29, int gpr_30, int gpr_31, int pc, int csr_reg_0, int csr_reg_1, int csr_reg_2, int csr_reg_3);
-    // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/ifu.v:2:30
-    extern void return_inst(int inst1, char inst_opcode);
     // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/lsu.v:4:30
     extern void send_data_request();
 
