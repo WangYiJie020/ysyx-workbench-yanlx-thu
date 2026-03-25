@@ -1,203 +1,285 @@
+import "DPI-C" function void icache_hit();
+import "DPI-C" function void icache_miss();
+import "DPI-C" function void icache_get_addr();
+import "DPI-C" function void icache_back_self_inst();
+import "DPI-C" function void icache_back_mem_inst();
+
+
 module icache #(
-    parameter DATA_WIDTH  = 32,
-    parameter BLOCK_SIZE  = 4,
-    parameter NUM_BLOCKS  = 8,
-    parameter ADDR_WIDTH  = 32
+    parameter DATA_WIDTH = 32,      // 数据宽度（指令宽度）
+    parameter BLOCK_SIZE = 4,       // 块大小（字节）
+    parameter NUM_BLOCKS = 8,      // Cache块数量
+    parameter ADDR_WIDTH = 32       // 地址宽度
 ) (
     input clk,
     input rst_n,
 
-    // CPU side (AR)
-    input  [DATA_WIDTH-1:0] cpu_araddr_i,
-    input  [3:0]            cpu_arid_i,
-    input  [7:0]            cpu_arlen_i,
-    input  [2:0]            cpu_arsize_i,
-    input  [1:0]            cpu_arburst_i,
-    input                   cpu_arvalid_i,
-    output                  cpu_arready_o,
+    //CPU
+    input [DATA_WIDTH-1:0] cpu_araddr_i,
+    input [3:0] cpu_arid_i,
+    input [7:0] cpu_arlen_i,
+    input [2:0] cpu_arsize_i,
+    input [1:0] cpu_arburst_i,
+    input cpu_arvalid_i,
+    output reg cpu_arready_o,
 
-    // CPU side (R)
-    output [DATA_WIDTH-1:0] cpu_rdata_o,
-    output [1:0]            cpu_rresp_o,
-    output                  cpu_rlast_o,
-    output [3:0]            cpu_rid_o,
-    output                  cpu_rvalid_o,
-    input                   cpu_rready_i,
+    output reg [DATA_WIDTH-1:0] cpu_rdata_o,
+    output reg [1:0] cpu_rresp_o,
+    output reg cpu_rlast_o,
+    output reg [3:0] cpu_rid_o,
+    output reg cpu_rvalid_o,
+    input cpu_rready_i,
+    //mem
+    output reg [DATA_WIDTH-1:0] mem_araddr_o,
+    output reg [3:0] mem_arid_o,
+    output reg [7:0] mem_arlen_o,
+    output reg [2:0] mem_arsize_o,
+    output reg [1:0] mem_arburst_o,
+    output reg mem_arvalid_o,
+    input mem_arready_i,
+    input [DATA_WIDTH-1:0] mem_rdata_i,
+    input [1:0] mem_rresp_i,
+    input mem_rlast_i,
+    input [3:0] mem_rid_i,
+    input mem_rvalid_i,
+    output reg mem_rready_o,
 
-    // Memory side (AR)
-    output [DATA_WIDTH-1:0] mem_araddr_o,
-    output [3:0]            mem_arid_o,
-    output [7:0]            mem_arlen_o,
-    output [2:0]            mem_arsize_o,
-    output [1:0]            mem_arburst_o,
-    output                  mem_arvalid_o,
-    input                   mem_arready_i,
-
-    // Memory side (R)
-    input  [DATA_WIDTH-1:0] mem_rdata_i,
-    input  [1:0]            mem_rresp_i,
-    input                   mem_rlast_i,
-    input  [3:0]            mem_rid_i,
-    input                   mem_rvalid_i,
-    output                  mem_rready_o,
-
-    input                   fencei
+    //
+    input fencei
 );
 
-// =============================================================================
-// Parameters
-// =============================================================================
-localparam BLOCK_WORDS  = BLOCK_SIZE / (DATA_WIDTH / 8);
-localparam OFFSET_BITS  = $clog2(BLOCK_SIZE);
-localparam INDEX_BITS   = $clog2(NUM_BLOCKS);
-localparam TAG_BITS     = ADDR_WIDTH - OFFSET_BITS - INDEX_BITS;
-localparam COUNTER_SIZE = BLOCK_SIZE / 4;
-localparam CNT_BITS     = (COUNTER_SIZE <= 1) ? 1 : $clog2(COUNTER_SIZE);
+//assign mem_arsize_o = 3'b010; 
 
-// =============================================================================
-// Cache storage
-//   - data_array & tag_array: NO RESET (use plain DFF, not DFFR)
-//     Only valid_array needs reset — valid=0 means the line is invalid,
-//     so garbage in tag/data doesn't matter.
-//   - fencei: only clear valid bits, not tag/data
-// =============================================================================
-reg [DATA_WIDTH*COUNTER_SIZE-1:0] data_array [0:NUM_BLOCKS-1];  // NO reset
-reg [TAG_BITS-1:0]                tag_array  [0:NUM_BLOCKS-1];  // NO reset
-reg                               valid_array[0:NUM_BLOCKS-1];  // NEEDS reset
+// ========== 参数计算 ==========
+localparam BLOCK_WORDS = BLOCK_SIZE / (DATA_WIDTH/8);  // 块中的字数
+localparam OFFSET_BITS = $clog2(BLOCK_SIZE);          // offset位宽
+localparam INDEX_BITS = $clog2(NUM_BLOCKS);           // index位宽
+localparam TAG_BITS = ADDR_WIDTH - OFFSET_BITS - INDEX_BITS;  // tag位宽
+localparam COUNTER_SIZE = BLOCK_SIZE / 4; // 块大小
 
-// =============================================================================
-// State encoding
-// =============================================================================
-localparam [2:0]
-    S_IDLE  = 3'd0,  // Accept CPU AR request
-    S_CHECK = 3'd1,  // Compare tag, hit or miss?
-    S_AR    = 3'd2,  // Send memory AR, wait arready
-    S_MEM   = 3'd3,  // Receive memory R data (burst fill)
-    S_RESP  = 3'd4;  // Return data to CPU
 
-reg [2:0] state;
+//reg [BLOCK_SIZE*8-1:0] icacheL1 [0:NUM_BLOCKS-1];
+//reg [NUM_BLOCKS-1:0] icache_valid;
+reg [DATA_WIDTH-1:0] cpu_addr;
 
-// =============================================================================
-// Internal registers — minimal set
-// =============================================================================
-reg [ADDR_WIDTH-1:0]  cpu_addr;                 // Latched request address
-reg [CNT_BITS-1:0]    burst_cnt;                // Burst word counter (tiny!)
+// ========== 缓存存储 ==========
+reg [DATA_WIDTH*COUNTER_SIZE-1:0] data_array [0:NUM_BLOCKS-1];     // 数据存储
+reg [TAG_BITS-1:0] tag_array [0:NUM_BLOCKS-1];        // tag存储
+reg valid_array [0:NUM_BLOCKS-1];                     // 有效位
 
-// =============================================================================
-// Address decomposition (combinational from latched cpu_addr)
-// =============================================================================
-wire [TAG_BITS-1:0]    req_tag    = cpu_addr[ADDR_WIDTH-1 : ADDR_WIDTH-TAG_BITS];
-wire [INDEX_BITS-1:0]  req_index  = cpu_addr[OFFSET_BITS+INDEX_BITS-1 : OFFSET_BITS];
-wire [OFFSET_BITS-1:0] req_offset = cpu_addr[OFFSET_BITS-1 : 0];
+// ========== 地址分解 ==========
+wire [TAG_BITS-1:0] req_tag;
+wire [INDEX_BITS-1:0] req_index;
+wire [OFFSET_BITS-1:0] req_offset;
 
-// Hit detection
-wire cache_hit = valid_array[req_index] && (tag_array[req_index] == req_tag);
+reg [31:0] counter;
 
-// =============================================================================
-// ALL outputs are combinational — no output registers!
-// =============================================================================
+reg flag;
 
-// CPU AR channel
-assign cpu_arready_o = (state == S_IDLE);
+assign req_tag = cpu_addr[ADDR_WIDTH-1:ADDR_WIDTH-TAG_BITS];
+assign req_index = cpu_addr[OFFSET_BITS+INDEX_BITS-1:OFFSET_BITS];
+assign req_offset = cpu_addr[OFFSET_BITS-1:0];
 
-// CPU R channel — read directly from data_array
-assign cpu_rdata_o  = data_array[req_index][req_offset*8 +: DATA_WIDTH];
-assign cpu_rvalid_o = (state == S_CHECK && cache_hit && cpu_rready_i) ||
-                      (state == S_RESP);
-assign cpu_rlast_o  = cpu_rvalid_o;
-assign cpu_rresp_o  = 2'b00;
-assign cpu_rid_o    = 4'd0;
+// ========== 状态机定义 ==========
+typedef enum logic [2:0] {
+    STATE_IDLE,     // 空闲状态
+    STATE_CHECK,    // 检查缓存
+    STATE_MISS,     // 缓存缺失，访问内存
+    STATE_MEM,
+    STATE_FILL      // 填充缓存
+} state_t;
 
-// Memory AR channel — address aligned to block boundary
-assign mem_araddr_o  = {cpu_addr[ADDR_WIDTH-1:OFFSET_BITS], {OFFSET_BITS{1'b0}}};
-assign mem_arvalid_o = (state == S_AR);
-assign mem_rready_o  = (state == S_MEM);
+state_t current_state, next_state;
 
-// Memory AR fixed parameters
-assign mem_arid_o    = 4'd0;
-assign mem_arsize_o  = 3'b010;
-generate
-    if (COUNTER_SIZE > 1) begin : g_burst
-        assign mem_arlen_o   = COUNTER_SIZE - 1;
-        assign mem_arburst_o = 2'b01;  // INCR
-    end else begin : g_single
-        assign mem_arlen_o   = 8'd0;
-        assign mem_arburst_o = 2'b00;  // FIXED
-    end
-endgenerate
-
-// =============================================================================
-// State machine + cache update
-// =============================================================================
-integer i;
-
+// ========== 状态寄存器 ==========
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-        state     <= S_IDLE;
-        burst_cnt <= 0;
-        for (i = 0; i < NUM_BLOCKS; i = i + 1)
-            valid_array[i] <= 1'b0;
-        // NOTE: tag_array and data_array are NOT reset — saves DFFR → DFF
+        current_state <= STATE_IDLE;
     end else begin
+        current_state <= next_state;
+    end
+end
 
-        // fencei: invalidate all lines (only valid bits, not tag/data)
-        if (fencei) begin
-            for (i = 0; i < NUM_BLOCKS; i = i + 1)
-                valid_array[i] <= 1'b0;
+// ========== 状态转移逻辑 ==========
+always @(*) begin
+    //next_state = current_state;
+    
+    case (current_state)
+        STATE_IDLE: begin
+            if (cpu_arready_o == 1 && cpu_arvalid_i == 1) begin //向cache发出读请求
+                next_state = STATE_CHECK;
+            end
+            else next_state = STATE_IDLE;
+        end
+        
+        STATE_CHECK: begin
+            // 检查是否命中
+            if (cpu_rready_i==1 && valid_array[req_index] && (tag_array[req_index] == req_tag)) begin
+                next_state = STATE_IDLE;  // 命中，返回空闲
+            end else begin
+                next_state = STATE_MISS;  // 缺失，访问内存
+            end
+        end
+        
+        STATE_MISS: begin
+            if (mem_arvalid_o == 1 && mem_arready_i == 1) begin
+                next_state = STATE_MEM;
+            end
+            else begin
+                next_state = STATE_MISS;  
+            end
         end
 
-        case (state)
-
-            S_IDLE: begin
-                if (cpu_arvalid_i && cpu_arready_o) begin
-                    cpu_addr  <= cpu_araddr_i;
-                    state     <= S_CHECK;
+        STATE_MEM: begin
+            if (mem_rvalid_i == 1 && mem_rready_o == 1) begin
+                if(mem_rlast_i == 1) begin
+                    next_state = STATE_FILL;
                 end
-            end
-
-            S_CHECK: begin
-                if (cache_hit) begin
-                    // Hit — data is already on cpu_rdata_o combinationally
-                    if (cpu_rready_i)
-                        state <= S_IDLE;
-                    // else stay in S_CHECK until cpu_rready_i
-                end else begin
-                    // Miss — go fetch from memory
-                    burst_cnt <= 0;
-                    state     <= S_AR;
+                else begin
+                    next_state = STATE_MEM;
                 end
+                
             end
-
-            S_AR: begin
-                if (mem_arvalid_o && mem_arready_i)
-                    state <= S_MEM;
+            else begin
+                next_state = STATE_MEM;  
             end
+        end
+        
+        STATE_FILL: begin
+            if(cpu_rready_i == 1 && cpu_rvalid_o == 1 && cpu_rlast_o == 1'b1)begin
+                next_state = STATE_IDLE;
+            end
+            else 
+                next_state = STATE_FILL;
+        end
+        
+        default: begin
+            next_state = STATE_IDLE;
+        end
+    endcase
+end
 
-            S_MEM: begin
-                if (mem_rvalid_i && mem_rready_o) begin
-                    // Write incoming word into data array
-                    data_array[req_index][burst_cnt * DATA_WIDTH +: DATA_WIDTH] <= mem_rdata_i;
-                    tag_array[req_index]  <= req_tag;
-                    valid_array[req_index] <= 1'b1;
-
-                    if (mem_rlast_i) begin
-                        state <= S_RESP;
-                    end else begin
-                        burst_cnt <= burst_cnt + 1;
+// ========== 输出逻辑 ==========
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        // 复位所有信号
+        
+        
+        // 复位缓存内容
+        for (int i = 0; i < NUM_BLOCKS; i = i + 1) begin
+            valid_array[i] <= 1'b0;
+            tag_array[i] <= {TAG_BITS{1'b0}};
+            data_array[i] <= {(DATA_WIDTH*COUNTER_SIZE){1'b0}};
+        end
+    end else begin
+        if(fencei==1) begin
+            for (int i = 0; i < NUM_BLOCKS; i = i + 1) begin
+                valid_array[i] <= 1'b0;
+                tag_array[i] <= {TAG_BITS{1'b0}};
+                data_array[i] <= {(DATA_WIDTH*COUNTER_SIZE){1'b0}};
+            end
+        end
+        case (current_state)
+        
+            STATE_IDLE: begin
+                cpu_arready_o <= 1;
+                cpu_rvalid_o <= 1'b0;
+                cpu_rlast_o <= 1'b0;
+                cpu_rdata_o <= 0;
+                counter <= 0;
+                if (cpu_arready_o == 1 && cpu_arvalid_i == 1) begin
+                    // 锁存请求地址
+                    icache_get_addr();
+                    cpu_addr <= cpu_araddr_i;
+                end
+                flag <= 0;
+            end
+            
+            STATE_CHECK: begin
+                // 检查是否命中
+                if (valid_array[req_index] && (tag_array[req_index] == req_tag)) begin
+                    // 命中，直接返回数据
+                    cpu_rvalid_o <= 1'b1;
+                    cpu_rlast_o <= 1'b1;
+                    cpu_rdata_o <= data_array[req_index][req_offset*8 +: 32];
+                    icache_hit();
+                    if(cpu_rready_i==1) begin
+                        icache_back_self_inst();
                     end
+                end else begin
+                    // 缺失，准备访问内存
+                    cpu_rvalid_o <= 1'b0;
+                    cpu_rdata_o <= 0;
+                    icache_miss();
+                end
+                flag <= 0;
+            end
+            
+            STATE_MISS: begin
+                // 向内存发送请求
+                //mem_arvalid_o <= 1'b1;
+                mem_rready_o <= 1;
+                mem_araddr_o <= {cpu_addr[ADDR_WIDTH-1:OFFSET_BITS], {OFFSET_BITS{1'b0}}};  // 对齐到块边界
+                //mem_araddr_o <= cpu_addr;
+                
+                mem_arsize_o <= 3'b010;
+                if(COUNTER_SIZE != 1) begin 
+                    mem_arburst_o <= 2'b01; 
+                    mem_arlen_o <= 8'b00000011;
+                end//INCR
+                else begin 
+                    mem_arburst_o <= 2'b00;
+                    mem_arlen_o <= 8'b0; 
+                end
+                
+                //counter <= counter + 1;
+                if(flag==0) begin 
+                    mem_arvalid_o <= 1'b1;
+                end
+                if (mem_arready_i==1 && mem_arvalid_o==1) begin
+                    mem_arvalid_o <= 1'b0;
+                    flag <= 1;
+                 //   mem_araddr_o <= 0;
+                 //   counter <= counter + 1;
+                end
+                // 填充缓存
+                
+            end
+
+            STATE_MEM: begin
+                mem_arvalid_o <= 1'b0;
+                //mem_arburst_o <= 2'b00;
+                //mem_arlen_o <= 8'b0;
+                //mem_rready_o <= 1'b0;
+                if(mem_rvalid_i == 1 && mem_rready_o == 1) begin
+                    data_array[req_index][(counter)*32 +: 32] <= mem_rdata_i;
+                    tag_array[req_index] <= req_tag;
+                    valid_array[req_index] <= 1'b1;
+                    counter <= counter + 1;
                 end
             end
-
-            S_RESP: begin
-                // Return filled data to CPU
-                if (cpu_rready_i)
-                    state <= S_IDLE;
+            
+            STATE_FILL: begin 
+                // 返回数据给CPU
+                mem_arvalid_o <= 1'b0;
+                cpu_rdata_o <= data_array[req_index][req_offset*8 +: 32];
+                cpu_rvalid_o <= 1;
+                cpu_rlast_o <= 1'b1;
+                if(cpu_rready_i == 1 && cpu_rvalid_o == 1) begin
+                    icache_back_mem_inst();
+                    cpu_rvalid_o <= 0;
+                    cpu_rlast_o <= 1'b0;
+                    cpu_rdata_o <= 0;
+                end
             end
-
-            default: state <= S_IDLE;
-
+            
+            default: begin
+                
+            end
         endcase
     end
 end
+
+
 
 endmodule
