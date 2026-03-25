@@ -1,7 +1,4 @@
 `include "header.v"
-import "DPI-C" function void return_inst(input int inst1, input byte inst_opcode);
-import "DPI-C" function void inst_counter_add();
-import "DPI-C" function void inst_counter_sub();
 
 // =============================================================================
 // IFU (Instruction Fetch Unit)
@@ -60,7 +57,7 @@ module ifu (
     // -------------------------------------------------------------------
     // 其他
     // -------------------------------------------------------------------
-    input  wire                    bus_busy
+    input  wire                    bus_busy,
 );
 
 // =============================================================================
@@ -165,7 +162,6 @@ always @(posedge clk or negedge rst_n) begin
                         rready_o      <= 1'b0;
                         ar_inflight   <= 1'b0;
                         flush_pending <= 1'b0;
-                        inst_counter_sub();//该指令无效，不记数
                         pc_fetch      <= npc_i;  // 用当拍npc_i，更及时
                         state         <= S_IDLE;
                     end else begin
@@ -180,7 +176,6 @@ always @(posedge clk or negedge rst_n) begin
                     flush_pending <= 1'b0;
                     pc_fetch      <= npc_i;
                     state         <= S_IDLE;
-                    inst_counter_sub();
                 end
 
                 S_FLUSH: begin
@@ -289,17 +284,6 @@ always @(posedge clk or negedge rst_n) begin
                 default: state <= S_IDLE;
             endcase
         end
-    end
-end
-
-// =============================================================================
-// DPI-C 调试接口
-// =============================================================================
-always @(posedge clk) begin
-    return_inst(inst_buf, {1'b0, inst_buf[6:0]});
-    // 仅在正常取指握手时计数，flush丢弃的数据不计
-    if (rvalid_i && rready_o && state == S_WAIT_R && !flush_pending) begin
-        inst_counter_add();
     end
 end
 

@@ -80,16 +80,12 @@ assign req_tag = cpu_addr[ADDR_WIDTH-1:ADDR_WIDTH-TAG_BITS];
 assign req_index = cpu_addr[OFFSET_BITS+INDEX_BITS-1:OFFSET_BITS];
 assign req_offset = cpu_addr[OFFSET_BITS-1:0];
 
-// ========== 状态机定义 ==========
-typedef enum logic [2:0] {
-    STATE_IDLE,     // 空闲状态
-    STATE_CHECK,    // 检查缓存
-    STATE_MISS,     // 缓存缺失，访问内存
-    STATE_MEM,
-    STATE_FILL      // 填充缓存
-} state_t;
-
-state_t current_state, next_state;
+localparam STATE_IDLE = 3'b000;
+localparam STATE_CHECK = 3'b001;
+localparam STATE_MISS = 3'b010;
+localparam STATE_MEM = 3'b011;
+localparam STATE_FILL = 3'b100;
+reg [2:0] current_state, next_state;
 
 // ========== 状态寄存器 ==========
 always @(posedge clk or negedge rst_n) begin
@@ -158,7 +154,7 @@ always @(*) begin
         end
     endcase
 end
-
+integer i;
 // ========== 输出逻辑 ==========
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
@@ -166,14 +162,14 @@ always @(posedge clk or negedge rst_n) begin
         
         
         // 复位缓存内容
-        for (int i = 0; i < NUM_BLOCKS; i = i + 1) begin
+        for (i = 0; i < NUM_BLOCKS; i = i + 1) begin
             valid_array[i] <= 1'b0;
             tag_array[i] <= {TAG_BITS{1'b0}};
             data_array[i] <= {(DATA_WIDTH*COUNTER_SIZE){1'b0}};
         end
     end else begin
         if(fencei==1) begin
-            for (int i = 0; i < NUM_BLOCKS; i = i + 1) begin
+            for (i = 0; i < NUM_BLOCKS; i = i + 1) begin
                 valid_array[i] <= 1'b0;
                 tag_array[i] <= {TAG_BITS{1'b0}};
                 data_array[i] <= {(DATA_WIDTH*COUNTER_SIZE){1'b0}};
@@ -189,7 +185,6 @@ always @(posedge clk or negedge rst_n) begin
                 counter <= 0;
                 if (cpu_arready_o == 1 && cpu_arvalid_i == 1) begin
                     // 锁存请求地址
-                    icache_get_addr();
                     cpu_addr <= cpu_araddr_i;
                 end
                 flag <= 0;
@@ -202,15 +197,12 @@ always @(posedge clk or negedge rst_n) begin
                     cpu_rvalid_o <= 1'b1;
                     cpu_rlast_o <= 1'b1;
                     cpu_rdata_o <= data_array[req_index][req_offset*8 +: 32];
-                    icache_hit();
-                    if(cpu_rready_i==1) begin
-                        icache_back_self_inst();
-                    end
+
                 end else begin
                     // 缺失，准备访问内存
                     cpu_rvalid_o <= 1'b0;
                     cpu_rdata_o <= 0;
-                    icache_miss();
+
                 end
                 flag <= 0;
             end
@@ -266,7 +258,6 @@ always @(posedge clk or negedge rst_n) begin
                 cpu_rvalid_o <= 1;
                 cpu_rlast_o <= 1'b1;
                 if(cpu_rready_i == 1 && cpu_rvalid_o == 1) begin
-                    icache_back_mem_inst();
                     cpu_rvalid_o <= 0;
                     cpu_rlast_o <= 1'b0;
                     cpu_rdata_o <= 0;
