@@ -13,13 +13,6 @@ import "DPI-C" function void inst_counter_sub();
 //   等当前在途的AXI事务自然完成后，丢弃结果，再用新PC重新取指。
 // =============================================================================
 
-`include "header.v"
-import "DPI-C" function void return_inst(input int inst1, input byte inst_opcode);
-import "DPI-C" function void inst_counter_add();
-import "DPI-C" function void inst_counter_sub();
-
-`include "header.v"
-
 // =============================================================================
 // IFU (Instruction Fetch Unit) — area-optimized
 //
