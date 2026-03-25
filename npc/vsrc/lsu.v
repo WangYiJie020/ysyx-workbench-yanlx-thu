@@ -5,11 +5,29 @@ import "DPI-C" function void send_data_request();
 import "DPI-C" function void receive_data_back();
 import "DPI-C" function void difftest_skip();
 
-//`define LSU_DELAY
+// =============================================================================
+// LSU — area-optimized
+//
+// Removed registers:
+//   - araddr (32) → combo from alu_result
+//   - awaddr (32) → combo from alu_result
+//   - wdata  (32) → combo from rs2 + shift
+//   - rs2    (32) → was declared but never assigned in always block
+//   - csr_rdata_l_rs1 (32) → was declared but never read
+//   - rs1    (32) → latch at S_IDLE with others, not S_OUT
+//   - arvalid/awvalid/wvalid/rready/bready (5) → from state
+//   - read_mem/write_mem/flag/wvalid_tmp (4) → encoded in state
+//   - lsu_valid_o/lsu_ready_o/rd_lsu_valid (3) → from state
+//   - wlast_o (1) → combo
+//
+// Estimated: 285 DFF → ~120 DFF
+// =============================================================================
+
 module lsu(
     input clk,
     input rst_n,
-    //exu to lsu
+
+    // EXU → LSU
     input [`CPU_WIDTH-1:0] alu_result_i,
     input [`CPU_WIDTH-1:0] rs1_i,
     input [`CPU_WIDTH-1:0] rs2_i,
@@ -27,9 +45,9 @@ module lsu(
     input [1:0] waddr_csr_i,
 
     input lsu_valid_i,
-    output reg lsu_ready_o,
-    
-    //lsu to wbu
+    output wire lsu_ready_o,
+
+    // LSU → WBU
     output [`CPU_WIDTH-1:0] alu_result_o,
     output [`CPU_WIDTH-1:0] rs1_o,
     output reg [`CPU_WIDTH-1:0] csr_rdata_l_rs1_o,
@@ -43,10 +61,10 @@ module lsu(
     output ecall_o,
     output [1:0] waddr_csr_o,
 
-    output reg lsu_valid_o,
+    output wire lsu_valid_o,
     input lsu_ready_i,
 
-    //to mem
+    // AXI AR
     output [`CPU_WIDTH-1:0] araddr_o,
     output [3:0] arid_o,
     output [7:0] arlen_o,
@@ -55,6 +73,7 @@ module lsu(
     output arvalid_o,
     input arready_i,
 
+    // AXI R
     input [`CPU_WIDTH-1:0] rdata_i,
     input [1:0] rresp_i,
     input rlast_i,
@@ -62,6 +81,7 @@ module lsu(
     input rvalid_i,
     output rready_o,
 
+    // AXI AW
     output [`CPU_WIDTH-1:0] awaddr_o,
     output [3:0] awid_o,
     output [7:0] awlen_o,
@@ -70,12 +90,14 @@ module lsu(
     output awvalid_o,
     input awready_i,
 
+    // AXI W
     output [`CPU_WIDTH-1:0] wdata_o,
     output [3:0] wstrb_o,
     output wlast_o,
     output wvalid_o,
     input wready_i,
 
+    // AXI B
     input [1:0] bresp_i,
     input [3:0] bid_i,
     input bvalid_i,
@@ -86,246 +108,208 @@ module lsu(
 
     input [`CPU_WIDTH-1:0] pc_i,
     output [`CPU_WIDTH-1:0] pc_o
-
 );
-    reg [`CPU_WIDTH-1:0] alu_result;
-    reg [`CPU_WIDTH-1:0] rs1;
-    reg [`CPU_WIDTH-1:0] rs2;
-    reg [`CPU_WIDTH-1:0] csr_rdata_l_rs1;
-    reg [2:0] rmask;
-    reg [3:0] wmask;
 
-    
-    reg flag,wvalid_tmp;
-    reg MemRead,MemWrite;
+// =============================================================================
+// State encoding
+// =============================================================================
+localparam [2:0]
+    S_IDLE   = 3'd0,   // Wait for EXU handshake
+    S_AR     = 3'd1,   // Read: send AR, wait arready
+    S_R      = 3'd2,   // Read: wait R data
+    S_AW     = 3'd3,   // Write: send AW+W, wait handshakes
+    S_B      = 3'd4,   // Write: wait B response
+    S_OUT    = 3'd5;   // Output to WBU
 
+reg [2:0] state;
 
-    reg arvalid;
-    reg [`CPU_WIDTH-1:0] araddr;
-    reg rready;
-    reg [`CPU_WIDTH-1:0] awaddr;
-    reg awvalid;
-    reg [`CPU_WIDTH-1:0] wdata;
-    reg [3:0] wstrb;
-    reg wvalid;
-    reg bready;
+// =============================================================================
+// Pipeline registers — only what we truly need
+// =============================================================================
+reg [`CPU_WIDTH-1:0]  alu_result;    // Latched address / ALU result
+reg [`CPU_WIDTH-1:0]  rs1_lat;       // Latched rs1 (for CSR writeback)
+reg [`CPU_WIDTH-1:0]  rs2_lat;       // Latched rs2 (store data)
+reg [3:0]             wmask;         // Write byte mask
+reg [2:0]             rmask;         // Read type encoding
+reg                   aw_done;       // AW channel handshake completed
+reg                   w_done;        // W channel handshake completed
 
-    reg read_mem,write_mem;
-  
+// Read data output — needs to hold until WBU consumes
+reg [`CPU_WIDTH-1:0]  rdata_buf;
 
-    assign rmask_o = rmask;
-    assign rs1_o = rs1;
-    assign alu_result_o = alu_result;
-    //assign datamem_readdata_o = rdata_i;
-    //assign araddr = alu_result_i;
-    //assign awaddr = alu_result;
-    //assign datamem_readdata_o = rdata_i;
-    assign arid_o = 0;
-    assign arlen_o = 0;
-    //assign arsize_o = 3'b010;
-    assign arburst_o = 0;
-    assign awid_o = 0;
-    assign awlen_o = 0;
-    //assign awsize_o = 3'b010;
-    assign awburst_o = 0;
-    //assign wlast_o = 1;
+// Pass-through pipeline registers (latched at S_IDLE handshake)
+reg [`CPU_WIDTH-1:0]  pc_lat;
+reg                   ecall_lat;
+reg [1:0]             waddr_csr_lat;
 
-    always@(*) begin
-        case(wmask)
-            4'h1: awsize_o = 3'b000;
-            4'h3: awsize_o = 3'b001;
-            4'hf: awsize_o = 3'b010;
-            default: awsize_o = 3'b010;
-        endcase
-    end
+// =============================================================================
+// AXI fixed parameters
+// =============================================================================
+assign arid_o    = 4'd0;
+assign arlen_o   = 8'd0;
+assign arburst_o = 2'd0;
+assign awid_o    = 4'd0;
+assign awlen_o   = 8'd0;
+assign awburst_o = 2'd0;
 
-    always@(*) begin
-        case(rmask)
-            3'b100,3'b011: arsize_o = 3'b000; //lb,lbu
-            3'b010,3'b001: arsize_o = 3'b001; //lh,lhu
-            3'b000: arsize_o = 3'b010; //lw
-            default: arsize_o = 3'b010;
-        endcase
-    end
+// =============================================================================
+// AXI outputs — ALL combinational, derived from state + latched data
+// =============================================================================
 
-    always@(*) begin
-        case(wmask)
-            4'h1: wstrb = wmask << alu_result[1:0];
-            4'h3: wstrb = wmask << alu_result[1:0];
-            4'hf: wstrb = wmask;
-            default: wstrb = wmask;
-        endcase
-    end
-    //assign wstrb = wmask_i << alu_result_i[1:0];
+// AR channel
+assign araddr_o  = alu_result;
+assign arvalid_o = (state == S_AR);
+assign rready_o  = (state == S_R);
 
+// AW channel
+assign awaddr_o  = alu_result;
+assign awvalid_o = (state == S_AW) && !aw_done;
 
-    localparam S_IDLE = 2'b00,S_MEM = 2'b01,S_OUT = 2'b10;
+// W channel — shift store data by byte offset
+assign wdata_o   = (wmask == 4'hf) ? rs2_lat : (rs2_lat << (8 * alu_result[1:0]));
+assign wstrb_o   = (wmask == 4'hf || wmask == 4'h0) ? wmask : (wmask << alu_result[1:0]);
+assign wvalid_o  = (state == S_AW) && !w_done;
+assign wlast_o   = wvalid_o;
 
-    reg [1:0] current_state,next_state;
+// B channel
+assign bready_o  = (state == S_B);
 
-    always @(*) begin
-        case(current_state)
+// AXI size encoding
+reg [2:0] arsize_r, awsize_r;
+always @(*) begin
+    case (rmask)
+        3'b100, 3'b011: arsize_r = 3'b000;  // lb, lbu
+        3'b010, 3'b001: arsize_r = 3'b001;  // lh, lhu
+        default:        arsize_r = 3'b010;   // lw
+    endcase
+end
+always @(*) begin
+    case (wmask)
+        4'h1:    awsize_r = 3'b000;
+        4'h3:    awsize_r = 3'b001;
+        default: awsize_r = 3'b010;
+    endcase
+end
+assign arsize_o = arsize_r;
+assign awsize_o = awsize_r;
+
+// =============================================================================
+// Handshake outputs — combinational from state
+// =============================================================================
+assign lsu_ready_o  = (state == S_IDLE);
+assign lsu_valid_o  = (state == S_OUT);
+assign rd_lsu_valid = (state != S_IDLE);
+
+// Pipeline outputs
+assign alu_result_o        = alu_result;
+assign rs1_o               = rs1_lat;
+assign rmask_o             = rmask;
+assign datamem_readdata_o  = rdata_buf;
+assign pc_o                = pc_lat;
+assign ecall_o             = ecall_lat;
+assign waddr_csr_o         = waddr_csr_lat;
+
+// =============================================================================
+// State machine
+// =============================================================================
+wire idle_handshake = (state == S_IDLE) && lsu_valid_i;
+
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        state    <= S_IDLE;
+        aw_done  <= 1'b0;
+        w_done   <= 1'b0;
+    end else begin
+        case (state)
+
             S_IDLE: begin
-                if (lsu_valid_i == 1 && lsu_ready_o == 1) begin
-                    if(MemRead_i == 1 || MemWrite_i == 1) begin
-                        next_state = S_MEM;
+                if (lsu_valid_i) begin
+                    // Latch all pipeline signals at handshake
+                    alu_result        <= alu_result_i;
+                    rs1_lat           <= rs1_i;
+                    rs2_lat           <= rs2_i;
+                    wmask             <= wmask_i;
+                    rmask             <= rmask_i;
+                    wb_src_o          <= wb_src_i;
+                    csr_write_o       <= csr_write_i;
+                    csr_wdata_src_o   <= csr_wdata_src_i;
+                    reg_write_o       <= reg_write_i;
+                    csr_rdata_l_rs1_o <= csr_rdata_l_rs1_i;
+                    waddr_o           <= waddr_i;
+                    pc_lat            <= pc_i;
+                    ecall_lat         <= ecall_i;
+                    waddr_csr_lat     <= waddr_csr_i;
+
+                    // DPI-C: difftest skip for MMIO
+                    if (MemRead_i || MemWrite_i) begin
+                        if ((alu_result_i >= 32'h10000000 && alu_result_i <= 32'h10000fff) ||
+                            (alu_result_i >= 32'h02000000 && alu_result_i <= 32'h0200ffff)) begin
+                            difftest_skip();
+                        end
                     end
-                    else begin
-                        next_state = S_OUT;
-                    end
-                    
-                end else begin
-                    next_state = current_state;
+
+                    // Decide next state
+                    if (MemRead_i)
+                        state <= S_AR;
+                    else if (MemWrite_i) begin
+                        state   <= S_AW;
+                        aw_done <= 1'b0;
+                        w_done  <= 1'b0;
+                    end else
+                        state <= S_OUT;
                 end
             end
-            
-            S_MEM: begin
-                if ((rvalid_i == 1 && rready_o == 1 && rlast_i == 1 && read_mem==1)||
-                (bvalid_i == 1 && bready_o == 1 && write_mem==1)) begin
-                    next_state = S_OUT;  
-                end else begin
-                    next_state = S_MEM;
+
+            S_AR: begin
+                // Wait for AR handshake
+                if (arvalid_o && arready_i) begin
+                    state <= S_R;
+                    send_data_request();
+                end
+            end
+
+            S_R: begin
+                // Wait for R data
+                if (rvalid_i && rlast_i) begin
+                    rdata_buf <= rdata_i;
+                    state     <= S_OUT;
+                    data_counter_add();
+                    receive_data_back();
+                end
+            end
+
+            S_AW: begin
+                // AW and W can handshake independently
+                if (awvalid_o && awready_i) begin
+                    aw_done <= 1'b1;
+                    send_data_request();
+                end
+                if (wvalid_o && wready_i)
+                    w_done <= 1'b1;
+
+                // Both done → wait for B
+                if ((aw_done || (awvalid_o && awready_i)) &&
+                    (w_done  || (wvalid_o  && wready_i)))
+                    state <= S_B;
+            end
+
+            S_B: begin
+                if (bvalid_i) begin
+                    state <= S_OUT;
+                    data_counter_add();
+                    receive_data_back();
                 end
             end
 
             S_OUT: begin
-                if (lsu_valid_o == 1 && lsu_ready_i == 1) begin
-                    next_state = S_IDLE;  
-                end else begin
-                    next_state = S_OUT;
-                end
+                if (lsu_valid_o && lsu_ready_i)
+                    state <= S_IDLE;
             end
-          
-            default: next_state = current_state;
+
+            default: state <= S_IDLE;
+
         endcase
     end
-
-    always @(posedge clk or negedge rst_n) begin        
-        if (!rst_n) begin
-            current_state <= S_IDLE;
-            lsu_valid_o <= 0;
-            lsu_ready_o <= 0;
-            flag <= 0;
-            arvalid <= 0;
-        end else begin
-            current_state <= next_state;
-            if(current_state == S_IDLE) lsu_ready_o <= 1;
-            else if(current_state == S_MEM) lsu_ready_o <= 0;
-            else if(current_state == S_OUT) lsu_ready_o <= 0;
-
-            if(current_state == S_IDLE) begin 
-                lsu_valid_o <= 0;
-                awvalid <= 0;
-                wvalid <= 0;
-                //arvalid <= 0;
-                rready <= 0;
-                bready <= 0;
-                //datamem_readdata_o <= 0;
-                wlast_o <= 0;
-                if (lsu_valid_i == 1 && lsu_ready_o == 1) begin
-                    wb_src_o <= wb_src_i;
-                    csr_write_o <= csr_write_i;
-                    csr_wdata_src_o <= csr_wdata_src_i;
-                    reg_write_o <= reg_write_i;
-                    csr_rdata_l_rs1_o <= csr_rdata_l_rs1_i;
-                    waddr_o <= waddr_i;
-                    wmask <= wmask_i;
-                    rmask <= rmask_i;
-                    alu_result <= alu_result_i;
-                    MemRead <= MemRead_i;
-                    MemWrite <= MemWrite_i;
-                    pc_o <= pc_i;
-                    ecall_o <= ecall_i;
-                    waddr_csr_o <= waddr_csr_i;
-                end
-                rd_lsu_valid <= 0;
-            end else if(current_state == S_OUT) begin 
-                rs1 <= rs1_i;               
-                araddr <= 0;
-                arvalid <= 0;
-                rready <= 0;                       
-                bready <= 1;
-                //rmask <= rmask_i;             
-                awaddr <= 0;
-                awvalid <= 0;
-                wvalid <= 0;
-                wlast_o <= 1;
-
-                lsu_valid_o <= 1;
-                rd_lsu_valid <= 1;
-                if(lsu_valid_o == 1 && lsu_ready_i == 1) lsu_valid_o <=0;
-                //araddr_o <= alu_result;
-                //awaddr_o <= alu_result;
-            end else if (current_state == S_MEM)begin
-                if(MemRead && read_mem == 0) begin
-                    araddr <= alu_result_i;
-                    arvalid <= 1;
-                    rready <= 1;
-                    read_mem <= 1;
-                    if((alu_result_i >=32'h10000000 && alu_result_i <=32'h10000fff)||(alu_result_i >=32'h02000000 && alu_result_i <=32'h0200ffff)) begin
-                        difftest_skip();
-                    end
-
-                end 
-                else if(MemWrite && read_mem == 0 && write_mem == 0)begin
-                    awaddr <= alu_result_i;
-                    awvalid <= 1;
-                    wvalid <= 1;
-                    write_mem <= 1;
-                    bready <= 1;
-                    wlast_o <= 1;
-                    if(wmask_i == 4'hf) wdata <= rs2_i; 
-                    else wdata <= rs2_i << (8*alu_result_i[1:0]); 
-                end
-                if(read_mem) begin
-                    if(rlast_i==1&& rready_o==1&& rvalid_i==1) begin 
-                        //lsu_valid_o <= 1;
-                        datamem_readdata_o <= rdata_i;
-                        read_mem <= 0;
-                        data_counter_add();
-                        receive_data_back();
-                    end
-                    //else lsu_valid_o <= 0;
-                end
-                else if(write_mem)begin
-                    if(bready_o == 1 && bvalid_i == 1 && bresp_i == 0) begin 
-                        //lsu_valid_o <= 1;
-                        write_mem <= 0;
-                        data_counter_add();
-                        receive_data_back();
-                    end
-                    //else lsu_valid_o <= 0;
-                end
-                rd_lsu_valid <= 1;
-                if(awvalid==1 && awready_i==1) begin  
-                    awvalid <= 0;
-                    send_data_request();
-                end
-                if(wvalid==1 && wready_i==1) begin 
-                    wvalid <= 0;
-                    wlast_o <= 0;
-                end
-                if(arvalid==1 && arready_i==1) begin 
-                    arvalid <= 0;
-                    send_data_request();
-                end              
-
-            end 
-            
-        end
-    end
-
-
-
-    assign arvalid_o = arvalid;
-    assign araddr_o = araddr;
-    assign rready_o = rready;
-    assign awaddr_o = awaddr;
-    assign awvalid_o = awvalid;
-    assign wvalid_o = wvalid;
-    assign wdata_o = wdata;
-    assign wstrb_o = wstrb;
-    assign bready_o = bready;
-
+end
 
 endmodule
