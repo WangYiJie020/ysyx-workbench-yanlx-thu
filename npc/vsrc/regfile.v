@@ -134,8 +134,8 @@ module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
 
   always @(posedge clk) begin
     if(ecall) begin
-      csr_mepc <= pc;
-      csr_mcause <= regs[15];
+      csr[2] <= pc;
+      csr[3] <= regs[15];
     end
   end
 
