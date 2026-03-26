@@ -131,7 +131,7 @@ module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
           assign c[i] = {32{csel[i]}} & csr[i];
       end
   endgenerate
-  assign csr_rdata = c[0] | c[1] | c[2] | c[3];
+  assign rdata_csr = c[0] | c[1] | c[2] | c[3];
 
   always @(posedge clk) begin
     if(ecall) begin
