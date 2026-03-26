@@ -117,6 +117,10 @@ module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
       //  2'b11: csr_mcause <= wdata_csr;
       //endcase
     end
+    else if(ecall) begin
+      csr[2] <= pc;
+      csr[3] <= regs[15];
+    end
   end
 
   wire [3:0] csel = (4'b1 << raddr_csr);
@@ -130,12 +134,6 @@ module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
   endgenerate
   assign rdata_csr = c[0] | c[1] | c[2] | c[3];
 
-  always @(posedge clk) begin
-    if(ecall) begin
-      csr[2] <= pc;
-      csr[3] <= regs[15];
-    end
-  end
 
 endmodule
 
