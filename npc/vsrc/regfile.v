@@ -1,5 +1,6 @@
 module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
   input clk,
+  input rst_n,
   input [DATA_WIDTH-1:0] wdata,
   input [ADDR_WIDTH-1:0] waddr,
   input wen,
@@ -121,7 +122,7 @@ module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
     end
   end
 
-  wire [3:0] csel = (4'b1 << csr_raddr);
+  wire [3:0] csel = (4'b1 << raddr_csr);
 
   wire [31:0] c [0:3];
   genvar i;

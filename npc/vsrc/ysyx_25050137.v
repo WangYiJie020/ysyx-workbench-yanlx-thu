@@ -691,6 +691,7 @@ module ysyx_25050137(
     
     regfile Rgefile (
         .clk(clk),
+        .rst_n(rst_n),
         .wdata(wdata),
         .waddr(waddr), //rd
         .wen(reg_write),
