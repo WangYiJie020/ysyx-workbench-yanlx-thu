@@ -104,8 +104,11 @@ module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
                     m2_8  | m2_9  | m2_10 | m2_11 |
                     m2_12 | m2_13 | m2_14 | m2_15;
 
-  always @(posedge clk) begin
-    if(wen_csr) begin
+  always @(posedge clk, negedge rst_n) begin
+    if(!rst_n) begin
+      csr[0] <= 32'h1800;
+    end
+    else if(wen_csr) begin
       csr[waddr_csr] <= wdata_csr;
       //case (waddr_csr)
       //  2'b00: csr_mstatus <= wdata_csr;
@@ -113,12 +116,6 @@ module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
       //  2'b10: csr_mepc <= wdata_csr;
       //  2'b11: csr_mcause <= wdata_csr;
       //endcase
-    end
-  end
-
-  always @(posedge clk, negedge rst_n) begin
-    if(!rst_n) begin
-      csr[0] <= 32'h1800;
     end
   end
 
