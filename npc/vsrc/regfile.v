@@ -24,7 +24,7 @@ module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
 
   genvar gv_i;
   generate
-    for(gv_i=0;gv_i<32;gv_i++) begin
+    for(gv_i=0;gv_i<16;gv_i++) begin
         assign reg_file[gv_i] = regs[gv_i];
     end
   endgenerate
