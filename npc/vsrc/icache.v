@@ -1,7 +1,7 @@
 module icache #(
     parameter DATA_WIDTH  = 32,
     parameter BLOCK_SIZE  = 4,
-    parameter NUM_BLOCKS  = 8,
+    parameter NUM_BLOCKS  = 4,
     parameter ADDR_WIDTH  = 32
 ) (
     input clk,
