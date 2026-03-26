@@ -112,7 +112,7 @@ module ysyx_25050137(
 
     ifu IFU(
         .clk(clk),
-        .rst_n(rst_n || !fencei),
+        .rst_n(rst_n),
 
         .araddr_o(ifu_araddr),
         .arid_o(ifu_arid),
