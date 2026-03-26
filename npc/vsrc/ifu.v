@@ -19,6 +19,7 @@
 module ifu (
     input  wire                    clk,
     input  wire                    rst_n,
+    input  wire                    fencei,
 
     // AXI AR channel
     output wire [`CPU_WIDTH-1:0]   araddr_o,
@@ -94,7 +95,7 @@ assign reset_o = ctrl_hazard;
 // State machine
 // =============================================================================
 always @(posedge clk or negedge rst_n) begin
-    if (!rst_n) begin
+    if (!rst_n || fencei==1) begin
         state      <= S_ADDR;
         pc_fetch   <= `PC_INIT;
         pc_o       <= `PC_INIT;
