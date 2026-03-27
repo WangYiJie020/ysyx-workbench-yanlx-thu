@@ -2480,34 +2480,43 @@ void VysyxSoCFull___024root__trace_chg_sub_0(VysyxSoCFull___024root* vlSelf, Ver
                                             >> 0x14U))),5);
         bufp->chgIData(oldp+1242,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__IDU__DOT__pc),32);
         bufp->chgIData(oldp+1243,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__imm_idu_to_exu),32);
-        bufp->chgIData(oldp+1244,((0x797f7d79U | ((
-                                                   (- (IData)(
-                                                              (1U 
-                                                               & ((IData)(1U) 
-                                                                  << (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__raddr_csr))))) 
-                                                   & vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Rgefile__DOT__csr
-                                                   [0U]) 
-                                                  | (((- (IData)(
-                                                                 (1U 
-                                                                  & (((IData)(1U) 
-                                                                      << (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__raddr_csr)) 
-                                                                     >> 1U)))) 
-                                                      & vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Rgefile__DOT__csr
-                                                      [1U]) 
-                                                     | (((- (IData)(
+        bufp->chgIData(oldp+1244,((((- (IData)((1U 
+                                                & ((IData)(1U) 
+                                                   << (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__raddr_csr))))) 
+                                    & vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Rgefile__DOT__csr
+                                    [0U]) | (((- (IData)(
+                                                         (1U 
+                                                          & (((IData)(1U) 
+                                                              << (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__raddr_csr)) 
+                                                             >> 1U)))) 
+                                              & vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Rgefile__DOT__csr
+                                              [1U]) 
+                                             | (((- (IData)(
+                                                            (1U 
+                                                             & (((IData)(1U) 
+                                                                 << (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__raddr_csr)) 
+                                                                >> 2U)))) 
+                                                 & vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Rgefile__DOT__csr
+                                                 [2U]) 
+                                                | (((- (IData)(
+                                                               (1U 
+                                                                & (((IData)(1U) 
+                                                                    << (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__raddr_csr)) 
+                                                                   >> 3U)))) 
+                                                    & vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Rgefile__DOT__csr
+                                                    [3U]) 
+                                                   | ((0x79737978U 
+                                                       & (- (IData)(
                                                                     (1U 
                                                                      & (((IData)(1U) 
                                                                          << (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__raddr_csr)) 
-                                                                        >> 2U)))) 
-                                                         & vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Rgefile__DOT__csr
-                                                         [2U]) 
-                                                        | ((- (IData)(
+                                                                        >> 4U))))) 
+                                                      | (0x17e3c19U 
+                                                         & (- (IData)(
                                                                       (1U 
                                                                        & (((IData)(1U) 
                                                                            << (IData)(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__raddr_csr)) 
-                                                                          >> 3U)))) 
-                                                           & vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__Rgefile__DOT__csr
-                                                           [3U])))))),32);
+                                                                          >> 5U))))))))))),32);
         bufp->chgBit(oldp+1245,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__a_in_src_idu_to_exu));
         bufp->chgCData(oldp+1246,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__b_in_src_idu_to_exu),2);
         bufp->chgCData(oldp+1247,(vlSelf->ysyxSoCFull__DOT__asic__DOT__cpu__DOT__cpu__DOT__pc_srcs_idu_to_exu),3);
