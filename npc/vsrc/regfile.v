@@ -133,8 +133,8 @@ module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
           assign c[i] = {32{csel[i]}} & csr[i];
       end
   endgenerate
-  assign c[4] = 32'h79737978;
-  assign c[5] = 32'h017E3C19;
+  assign c[4] = {32{csel[4]}} & 32'h79737978;
+  assign c[5] = {32{csel[5]}} & 32'h017E3C19;
 
   assign rdata_csr = c[0] | c[1] | c[2] | c[3] | c[4] | c[5];
 
