@@ -123,16 +123,20 @@ module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
     end
   end
 
-  wire [3:0] csel = (4'b1 << raddr_csr);
+  wire [5:0] csel = (6'b1 << raddr_csr);
 
-  wire [31:0] c [0:3];
+  
+  wire [31:0] c [0:5];
   genvar i;
   generate
       for (i = 0; i < 4; i = i + 1) begin : gen_csr_r
           assign c[i] = {32{csel[i]}} & csr[i];
       end
   endgenerate
-  assign rdata_csr = c[0] | c[1] | c[2] | c[3];
+  assign c[4] = 32'h79737978;
+  assign c[5] = 32'h017E3C19;
+
+  assign rdata_csr = c[0] | c[1] | c[2] | c[3] | c[4] | c[5];
 
 
 endmodule
