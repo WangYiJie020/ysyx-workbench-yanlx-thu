@@ -481,7 +481,7 @@ module branch_control(
 
 endmodule
 
-`include "header.v"
+
 
 // =============================================================================
 // CLINT — area-optimized
@@ -952,7 +952,7 @@ module csr(
 
 endmodule
 
-`include "header.v"
+
 
 // =============================================================================
 // EXU — area-optimized
@@ -1402,7 +1402,7 @@ end
 
 endmodule
 
-`include "header.v"
+
 
 import "DPI-C" function void idu_counter_return(input byte inst_opcode);
 
@@ -1686,7 +1686,7 @@ module idu(
 
 endmodule
 
-`include "header.v"
+
 
 // =============================================================================
 // IFU (Instruction Fetch Unit) — area-optimized
@@ -1865,7 +1865,7 @@ end
 
 endmodule
 
-`include "header.v"
+
 
 import "DPI-C" function void data_counter_add();
 import "DPI-C" function void send_data_request();
@@ -2469,7 +2469,7 @@ module sext #(DATA_WIDTH = 32)(
 endmodule
 
 
-`include "header.v"
+
 
 // =============================================================================
 // WBU — area-optimized
