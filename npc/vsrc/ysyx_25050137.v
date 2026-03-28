@@ -2178,18 +2178,6 @@ module ysyx_25050137_regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
 
 );
 
-  genvar gv_i;
-  generate
-    for(gv_i=1;gv_i<16;gv_i++) begin
-        assign reg_file[gv_i] = regs[gv_i];
-    end
-  endgenerate
-
-  generate
-    for(gv_i=0;gv_i<4;gv_i++) begin
-        assign csr_reg[gv_i] = csr[gv_i];
-    end
-  endgenerate
 
   reg [DATA_WIDTH-1:0] regs [1:15];
   reg [DATA_WIDTH-1:0] csr [0:3];
