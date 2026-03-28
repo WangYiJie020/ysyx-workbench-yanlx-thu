@@ -168,7 +168,7 @@ endmodule
 //  - AW + W + B 通道: 直通
 // ============================================================
 
-// `define CPU_WIDTH 32   // 若顶层已定义请删除此行
+// `define ysyx_25050137_CPU_WIDTH 32   // 若顶层已定义请删除此行
 
 module ysyx_25050137_axi_arbiter (
     input clk,
@@ -176,7 +176,7 @@ module ysyx_25050137_axi_arbiter (
 
     // ========== Master A (e.g. IFU) ==========
     // AR
-    input  [`CPU_WIDTH-1:0] araddr_i_a,
+    input  [`ysyx_25050137_CPU_WIDTH-1:0] araddr_i_a,
     input  [3:0]            arid_i_a,
     input  [7:0]            arlen_i_a,
     input  [2:0]            arsize_i_a,
@@ -184,14 +184,14 @@ module ysyx_25050137_axi_arbiter (
     input                   arvalid_i_a,
     output reg              arready_o_a,
     // R
-    output reg [`CPU_WIDTH-1:0] rdata_o_a,
+    output reg [`ysyx_25050137_CPU_WIDTH-1:0] rdata_o_a,
     output reg [1:0]            rresp_o_a,
     output reg                  rlast_o_a,
     output reg [3:0]            rid_o_a,
     output reg                  rvalid_o_a,
     input                       rready_i_a,
     // AW
-    input  [`CPU_WIDTH-1:0] awaddr_i_a,
+    input  [`ysyx_25050137_CPU_WIDTH-1:0] awaddr_i_a,
     input  [3:0]            awid_i_a,
     input  [7:0]            awlen_i_a,
     input  [2:0]            awsize_i_a,
@@ -199,7 +199,7 @@ module ysyx_25050137_axi_arbiter (
     input                   awvalid_i_a,
     output reg              awready_o_a,
     // W
-    input  [`CPU_WIDTH-1:0] wdata_i_a,
+    input  [`ysyx_25050137_CPU_WIDTH-1:0] wdata_i_a,
     input  [3:0]            wstrb_i_a,
     input                   wlast_i_a,
     input                   wvalid_i_a,
@@ -212,7 +212,7 @@ module ysyx_25050137_axi_arbiter (
 
     // ========== Master B (e.g. LSU) ==========
     // AR
-    input  [`CPU_WIDTH-1:0] araddr_i_b,
+    input  [`ysyx_25050137_CPU_WIDTH-1:0] araddr_i_b,
     input  [3:0]            arid_i_b,
     input  [7:0]            arlen_i_b,
     input  [2:0]            arsize_i_b,
@@ -220,14 +220,14 @@ module ysyx_25050137_axi_arbiter (
     input                   arvalid_i_b,
     output reg              arready_o_b,
     // R
-    output reg [`CPU_WIDTH-1:0] rdata_o_b,
+    output reg [`ysyx_25050137_CPU_WIDTH-1:0] rdata_o_b,
     output reg [1:0]            rresp_o_b,
     output reg                  rlast_o_b,
     output reg [3:0]            rid_o_b,
     output reg                  rvalid_o_b,
     input                       rready_i_b,
     // AW
-    input  [`CPU_WIDTH-1:0] awaddr_i_b,
+    input  [`ysyx_25050137_CPU_WIDTH-1:0] awaddr_i_b,
     input  [3:0]            awid_i_b,
     input  [7:0]            awlen_i_b,
     input  [2:0]            awsize_i_b,
@@ -235,7 +235,7 @@ module ysyx_25050137_axi_arbiter (
     input                   awvalid_i_b,
     output reg              awready_o_b,
     // W
-    input  [`CPU_WIDTH-1:0] wdata_i_b,
+    input  [`ysyx_25050137_CPU_WIDTH-1:0] wdata_i_b,
     input  [3:0]            wstrb_i_b,
     input                   wlast_i_b,
     input                   wvalid_i_b,
@@ -248,7 +248,7 @@ module ysyx_25050137_axi_arbiter (
 
     // ========== Slave (Memory) ==========
     // AR
-    output [`CPU_WIDTH-1:0] araddr_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] araddr_o,
     output [3:0]            arid_o,
     output [7:0]            arlen_o,
     output [2:0]            arsize_o,
@@ -256,14 +256,14 @@ module ysyx_25050137_axi_arbiter (
     output                  arvalid_o,
     input                   arready_i,
     // R
-    input  [`CPU_WIDTH-1:0] rdata_i,
+    input  [`ysyx_25050137_CPU_WIDTH-1:0] rdata_i,
     input  [1:0]            rresp_i,
     input                   rlast_i,
     input  [3:0]            rid_i,
     input                   rvalid_i,
     output                  rready_o,
     // AW
-    output [`CPU_WIDTH-1:0] awaddr_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] awaddr_o,
     output [3:0]            awid_o,
     output [7:0]            awlen_o,
     output [2:0]            awsize_o,
@@ -271,7 +271,7 @@ module ysyx_25050137_axi_arbiter (
     output                  awvalid_o,
     input                   awready_i,
     // W
-    output [`CPU_WIDTH-1:0] wdata_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] wdata_o,
     output [3:0]            wstrb_o,
     output                  wlast_o,
     output                  wvalid_o,
@@ -370,12 +370,12 @@ assign rready_o = (current_master == MASTER_A) ? rready_i_a : rready_i_b;
 
 always @(*) begin
     // 默认清零，防止 latch
-    rdata_o_a  = {`CPU_WIDTH{1'b0}};
+    rdata_o_a  = {`ysyx_25050137_CPU_WIDTH{1'b0}};
     rresp_o_a  = 2'b0;
     rlast_o_a  = 1'b0;
     rid_o_a    = 4'b0;
     rvalid_o_a = 1'b0;
-    rdata_o_b  = {`CPU_WIDTH{1'b0}};
+    rdata_o_b  = {`ysyx_25050137_CPU_WIDTH{1'b0}};
     rresp_o_b  = 2'b0;
     rlast_o_b  = 1'b0;
     rid_o_b    = 4'b0;
@@ -492,7 +492,7 @@ module ysyx_25050137_clint (
     input rst_n,
 
     // AXI AR
-    input  [`CPU_WIDTH-1:0] araddr_i,
+    input  [`ysyx_25050137_CPU_WIDTH-1:0] araddr_i,
     input  [3:0]            arid_i,
     input  [7:0]            arlen_i,
     input  [2:0]            arsize_i,
@@ -501,7 +501,7 @@ module ysyx_25050137_clint (
     output                  arready_o,
 
     // AXI R
-    output [`CPU_WIDTH-1:0] rdata_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] rdata_o,
     output [1:0]            rresp_o,
     output                  rlast_o,
     output [3:0]            rid_o,
@@ -509,7 +509,7 @@ module ysyx_25050137_clint (
     input                   rready_i,
 
     // AXI AW
-    input  [`CPU_WIDTH-1:0] awaddr_i,
+    input  [`ysyx_25050137_CPU_WIDTH-1:0] awaddr_i,
     input  [3:0]            awid_i,
     input  [7:0]            awlen_i,
     input  [2:0]            awsize_i,
@@ -518,7 +518,7 @@ module ysyx_25050137_clint (
     output                  awready_o,
 
     // AXI W
-    input  [`CPU_WIDTH-1:0] wdata_i,
+    input  [`ysyx_25050137_CPU_WIDTH-1:0] wdata_i,
     input  [3:0]            wstrb_i,
     input                   wlast_i,
     input                   wvalid_i,
@@ -555,7 +555,7 @@ localparam [2:0]
 reg [2:0] state;
 
 // Latched read address (only need bit 2 to distinguish hi/lo word)
-reg [`CPU_WIDTH-1:0] araddr_lat;
+reg [`ysyx_25050137_CPU_WIDTH-1:0] araddr_lat;
 
 // Track AW/W handshakes (can arrive in any order)
 reg aw_done, w_done;
@@ -966,11 +966,11 @@ module ysyx_25050137_exu (
     input reset_ifu,
 
     // IDU → EXU
-    input [`PC_WIDTH-1:0]   pc_i,
-    input [`CPU_WIDTH-1:0]  rs1_i,
-    input [`CPU_WIDTH-1:0]  rs2_i,
-    input [`CPU_WIDTH-1:0]  imm_i,
-    input [`CPU_WIDTH-1:0]  csr_rdata_i,
+    input [`ysyx_25050137_PC_WIDTH-1:0]   pc_i,
+    input [`ysyx_25050137_CPU_WIDTH-1:0]  rs1_i,
+    input [`ysyx_25050137_CPU_WIDTH-1:0]  rs2_i,
+    input [`ysyx_25050137_CPU_WIDTH-1:0]  imm_i,
+    input [`ysyx_25050137_CPU_WIDTH-1:0]  csr_rdata_i,
     input                   a_in_src_i,
     input [1:0]             b_in_src_i,
     input [2:0]             pc_srcs_i,
@@ -987,7 +987,7 @@ module ysyx_25050137_exu (
     input                   csr_write_i,
     input                   csr_wdata_src_i,
     input                   reg_write_i,
-    input [`REG_ADDR-1:0]   waddr_i,
+    input [`ysyx_25050137_REG_ADDR-1:0]   waddr_i,
     input                   ecall_i,
     input [1:0]             waddr_csr_i,
 
@@ -995,11 +995,11 @@ module ysyx_25050137_exu (
     output                  exu_ready_o,
 
     // EXU → LSU
-    output [`CPU_WIDTH-1:0] alu_result_o,
-    output [`CPU_WIDTH-1:0] rs1_o,
-    output [`CPU_WIDTH-1:0] rs2_o,
-    output [`CPU_WIDTH-1:0] csr_rdata_l_rs1_o,
-    output [`PC_WIDTH-1:0]  npc_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] alu_result_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] rs1_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] rs2_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] csr_rdata_l_rs1_o,
+    output [`ysyx_25050137_PC_WIDTH-1:0]  npc_o,
     output reg              MemRead_o,
     output reg              MemWrite_o,
     output reg [3:0]        wmask_o,
@@ -1008,7 +1008,7 @@ module ysyx_25050137_exu (
     output reg              csr_write_o,
     output reg              csr_wdata_src_o,
     output reg              reg_write_o,
-    output reg [`REG_ADDR-1:0] waddr_o,
+    output reg [`ysyx_25050137_REG_ADDR-1:0] waddr_o,
     output                  ecall_o,
     output [1:0]            waddr_csr_o,
 
@@ -1018,7 +1018,7 @@ module ysyx_25050137_exu (
     output                  npc_valid,
     output                  rd_exu_valid,
 
-    output [`CPU_WIDTH-1:0] pc_o
+    output [`ysyx_25050137_CPU_WIDTH-1:0] pc_o
 );
 
 // =============================================================================
@@ -1032,8 +1032,8 @@ reg state;
 // =============================================================================
 // Pipeline registers — only data that must survive across cycles
 // =============================================================================
-reg [`PC_WIDTH-1:0]   pc;
-reg [`CPU_WIDTH-1:0]  rs1, rs2, imm, csr_rdata;
+reg [`ysyx_25050137_PC_WIDTH-1:0]   pc;
+reg [`ysyx_25050137_CPU_WIDTH-1:0]  rs1, rs2, imm, csr_rdata;
 
 // Pass-through pipeline control (latched at handshake, held until LSU accepts)
 reg                   ecall_lat;
@@ -1075,8 +1075,8 @@ assign waddr_csr_o        = waddr_csr_lat;
 // =============================================================================
 // Submodule interconnect (all combinational)
 // =============================================================================
-wire [`CPU_WIDTH-1:0] a_in, b_in, a_out, add_out, pc_new, alu_result;
-wire [`PC_WIDTH-1:0]  npc;
+wire [`ysyx_25050137_CPU_WIDTH-1:0] a_in, b_in, a_out, add_out, pc_new, alu_result;
+wire [`ysyx_25050137_PC_WIDTH-1:0]  npc;
 wire                  zero;
 
 ysyx_25050137_mux21 Adder_A_Src (
@@ -1401,25 +1401,25 @@ module ysyx_25050137_idu(
     input rst_n,
     input reset_ifu,
     //regfiles
-    output [`REG_ADDR-1:0] raddr1,
-    output [`REG_ADDR-1:0] raddr2,
-    input [`CPU_WIDTH-1:0] rdata1,
-    input [`CPU_WIDTH-1:0] rdata2,
+    output [`ysyx_25050137_REG_ADDR-1:0] raddr1,
+    output [`ysyx_25050137_REG_ADDR-1:0] raddr2,
+    input [`ysyx_25050137_CPU_WIDTH-1:0] rdata1,
+    input [`ysyx_25050137_CPU_WIDTH-1:0] rdata2,
 
     output [2:0] raddr_csr,
-    input [`CPU_WIDTH-1:0] rdata_csr,
+    input [`ysyx_25050137_CPU_WIDTH-1:0] rdata_csr,
 
     //ifu to idu
-    input [`PC_WIDTH-1:0] pc_i,
-    input [`INST_WIDTH-1:0] inst_i,
+    input [`ysyx_25050137_PC_WIDTH-1:0] pc_i,
+    input [`ysyx_25050137_INST_WIDTH-1:0] inst_i,
     input idu_valid_i,
     output reg idu_ready_o,
     //idu to exu
-    output [`PC_WIDTH-1:0] pc_o,
-    output [`CPU_WIDTH-1:0] rs1_o,
-    output [`CPU_WIDTH-1:0] rs2_o,
-    output [`CPU_WIDTH-1:0] imm_o,
-    output [`CPU_WIDTH-1:0] csr_rdata_o,
+    output [`ysyx_25050137_PC_WIDTH-1:0] pc_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] rs1_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] rs2_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] imm_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] csr_rdata_o,
     output a_in_src_o,
     output [1:0] b_in_src_o,
     output [2:0] pc_srcs_o,
@@ -1435,7 +1435,7 @@ module ysyx_25050137_idu(
     output csr_write_o,
     output csr_wdata_src_o,
     output reg_write_o,
-    output [`REG_ADDR-1:0] waddr_o,
+    output [`ysyx_25050137_REG_ADDR-1:0] waddr_o,
     output ecall_o,
     output [1:0] waddr_csr_o,
 
@@ -1450,23 +1450,23 @@ module ysyx_25050137_idu(
     input                   exu_rd_valid,
     input                   exu_reg_write,    // 新增: EXU级是否写寄存器
     input                   exu_MemRead,      // 新增: EXU级是否为Load指令 (load-use需要stall)
-    input [`CPU_WIDTH-1:0]  exu_fwd_data,     // 新增: EXU级前递数据 (ALU结果)
+    input [`ysyx_25050137_CPU_WIDTH-1:0]  exu_fwd_data,     // 新增: EXU级前递数据 (ALU结果)
 
     // LSU级前递
     input [4:0]             lsu_rd,
     input                   lsu_rd_valid,
     input                   lsu_reg_write,    // 新增: LSU级是否写寄存器
-    input [`CPU_WIDTH-1:0]  lsu_fwd_data,     // 新增: LSU级前递数据 (ALU结果或Mem读取结果)
+    input [`ysyx_25050137_CPU_WIDTH-1:0]  lsu_fwd_data,     // 新增: LSU级前递数据 (ALU结果或Mem读取结果)
 
     // WBU级前递
     input [4:0]             wbu_rd,
     input                   wbu_rd_valid,
     input                   wbu_reg_write,    // 新增: WBU级是否写寄存器
-    input [`CPU_WIDTH-1:0]  wbu_fwd_data      // 新增: WBU级前递数据 (最终写回数据)
+    input [`ysyx_25050137_CPU_WIDTH-1:0]  wbu_fwd_data      // 新增: WBU级前递数据 (最终写回数据)
 );
 
-    reg [`PC_WIDTH-1:0] pc;
-    reg [`INST_WIDTH-1:0] inst;
+    reg [`ysyx_25050137_PC_WIDTH-1:0] pc;
+    reg [`ysyx_25050137_INST_WIDTH-1:0] inst;
 
     wire [6:0] opcode;
     wire ecall;
@@ -1505,7 +1505,7 @@ module ysyx_25050137_idu(
     // ======== Forwarding MUX for rs1 ========
     // 优先级: EXU > LSU > WBU > regfile
     // 如果EXU级是load指令且有rs1依赖, 必须stall, 不能前递
-    reg [`CPU_WIDTH-1:0] rs1_forwarded;
+    reg [`ysyx_25050137_CPU_WIDTH-1:0] rs1_forwarded;
     reg rs1_fwd_from_exu, rs1_fwd_from_lsu, rs1_fwd_from_wbu;
 
     always @(*) begin
@@ -1526,7 +1526,7 @@ module ysyx_25050137_idu(
     end
 
     // ======== Forwarding MUX for rs2 ========
-    reg [`CPU_WIDTH-1:0] rs2_forwarded;
+    reg [`ysyx_25050137_CPU_WIDTH-1:0] rs2_forwarded;
     reg rs2_fwd_from_exu, rs2_fwd_from_lsu, rs2_fwd_from_wbu;
 
     always @(*) begin
@@ -1700,7 +1700,7 @@ module ysyx_25050137_ifu (
     input  wire                    fencei,
 
     // AXI AR channel
-    output wire [`CPU_WIDTH-1:0]   araddr_o,
+    output wire [`ysyx_25050137_CPU_WIDTH-1:0]   araddr_o,
     output wire [3:0]              arid_o,
     output wire [7:0]              arlen_o,
     output wire [2:0]              arsize_o,
@@ -1709,7 +1709,7 @@ module ysyx_25050137_ifu (
     input  wire                    arready_i,
 
     // AXI R channel
-    input  wire [`CPU_WIDTH-1:0]   rdata_i,
+    input  wire [`ysyx_25050137_CPU_WIDTH-1:0]   rdata_i,
     input  wire [1:0]              rresp_i,
     input  wire                    rlast_i,
     input  wire [3:0]              rid_i,
@@ -1717,15 +1717,15 @@ module ysyx_25050137_ifu (
     output wire                    rready_o,
 
     // Branch from EXU
-    input  wire [`PC_WIDTH-1:0]    npc_i,
+    input  wire [`ysyx_25050137_PC_WIDTH-1:0]    npc_i,
     input  wire                    npc_valid,
 
     // Flush downstream
     output wire                    reset_o,
 
     // IFU → IDU handshake
-    output reg  [`PC_WIDTH-1:0]    pc_o,
-    output reg  [`INST_WIDTH-1:0]  inst_o,
+    output reg  [`ysyx_25050137_PC_WIDTH-1:0]    pc_o,
+    output reg  [`ysyx_25050137_INST_WIDTH-1:0]  inst_o,
     output wire                    ifu_valid_o,
     input  wire                    ifu_ready_i,
 
@@ -1753,7 +1753,7 @@ localparam [1:0]
 // Registers — only what's truly needed
 // =============================================================================
 reg [1:0]            state;
-reg [`PC_WIDTH-1:0]  pc_fetch;     // The one true PC register
+reg [`ysyx_25050137_PC_WIDTH-1:0]  pc_fetch;     // The one true PC register
 reg                  flush_pend;   // Jump request waiting to be served
 
 // =============================================================================
@@ -1775,9 +1775,9 @@ assign reset_o = ctrl_hazard;
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n || fencei==1) begin
         state      <= S_ADDR;
-        pc_fetch   <= `PC_INIT;
-        pc_o       <= `PC_INIT;
-        inst_o     <= {`INST_WIDTH{1'b0}};
+        pc_fetch   <= `ysyx_25050137_PC_INIT;
+        pc_o       <= `ysyx_25050137_PC_INIT;
+        inst_o     <= {`ysyx_25050137_INST_WIDTH{1'b0}};
         flush_pend <= 1'b0;
     end else begin
 
@@ -1885,10 +1885,10 @@ module ysyx_25050137_lsu(
     input rst_n,
 
     // EXU → LSU
-    input [`CPU_WIDTH-1:0] alu_result_i,
-    input [`CPU_WIDTH-1:0] rs1_i,
-    input [`CPU_WIDTH-1:0] rs2_i,
-    input [`CPU_WIDTH-1:0] csr_rdata_l_rs1_i,
+    input [`ysyx_25050137_CPU_WIDTH-1:0] alu_result_i,
+    input [`ysyx_25050137_CPU_WIDTH-1:0] rs1_i,
+    input [`ysyx_25050137_CPU_WIDTH-1:0] rs2_i,
+    input [`ysyx_25050137_CPU_WIDTH-1:0] csr_rdata_l_rs1_i,
     input MemRead_i,
     input MemWrite_i,
     input [3:0] wmask_i,
@@ -1897,7 +1897,7 @@ module ysyx_25050137_lsu(
     input csr_write_i,
     input csr_wdata_src_i,
     input reg_write_i,
-    input [`REG_ADDR-1:0] waddr_i,
+    input [`ysyx_25050137_REG_ADDR-1:0] waddr_i,
     input ecall_i,
     input [1:0] waddr_csr_i,
 
@@ -1905,16 +1905,16 @@ module ysyx_25050137_lsu(
     output wire lsu_ready_o,
 
     // LSU → WBU
-    output [`CPU_WIDTH-1:0] alu_result_o,
-    output [`CPU_WIDTH-1:0] rs1_o,
-    output reg [`CPU_WIDTH-1:0] csr_rdata_l_rs1_o,
-    output [`CPU_WIDTH-1:0] datamem_readdata_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] alu_result_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] rs1_o,
+    output reg [`ysyx_25050137_CPU_WIDTH-1:0] csr_rdata_l_rs1_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] datamem_readdata_o,
     output [2:0] rmask_o,
     output reg wb_src_o,
     output reg csr_write_o,
     output reg csr_wdata_src_o,
     output reg reg_write_o,
-    output reg [`REG_ADDR-1:0] waddr_o,
+    output reg [`ysyx_25050137_REG_ADDR-1:0] waddr_o,
     output ecall_o,
     output [1:0] waddr_csr_o,
 
@@ -1922,7 +1922,7 @@ module ysyx_25050137_lsu(
     input lsu_ready_i,
 
     // AXI AR
-    output [`CPU_WIDTH-1:0] araddr_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] araddr_o,
     output [3:0] arid_o,
     output [7:0] arlen_o,
     output [2:0] arsize_o,
@@ -1931,7 +1931,7 @@ module ysyx_25050137_lsu(
     input arready_i,
 
     // AXI R
-    input [`CPU_WIDTH-1:0] rdata_i,
+    input [`ysyx_25050137_CPU_WIDTH-1:0] rdata_i,
     input [1:0] rresp_i,
     input rlast_i,
     input [3:0] rid_i,
@@ -1939,7 +1939,7 @@ module ysyx_25050137_lsu(
     output rready_o,
 
     // AXI AW
-    output [`CPU_WIDTH-1:0] awaddr_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] awaddr_o,
     output [3:0] awid_o,
     output [7:0] awlen_o,
     output [2:0] awsize_o,
@@ -1948,7 +1948,7 @@ module ysyx_25050137_lsu(
     input awready_i,
 
     // AXI W
-    output [`CPU_WIDTH-1:0] wdata_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] wdata_o,
     output [3:0] wstrb_o,
     output wlast_o,
     output wvalid_o,
@@ -1963,8 +1963,8 @@ module ysyx_25050137_lsu(
     input bus_busy,
     output rd_lsu_valid,
 
-    input [`CPU_WIDTH-1:0] pc_i,
-    output [`CPU_WIDTH-1:0] pc_o
+    input [`ysyx_25050137_CPU_WIDTH-1:0] pc_i,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] pc_o
 );
 
 // =============================================================================
@@ -1983,19 +1983,19 @@ reg [2:0] state;
 // =============================================================================
 // Pipeline registers — only what we truly need
 // =============================================================================
-reg [`CPU_WIDTH-1:0]  alu_result;    // Latched address / ALU result
-reg [`CPU_WIDTH-1:0]  rs1_lat;       // Latched rs1 (for CSR writeback)
-reg [`CPU_WIDTH-1:0]  rs2_lat;       // Latched rs2 (store data)
+reg [`ysyx_25050137_CPU_WIDTH-1:0]  alu_result;    // Latched address / ALU result
+reg [`ysyx_25050137_CPU_WIDTH-1:0]  rs1_lat;       // Latched rs1 (for CSR writeback)
+reg [`ysyx_25050137_CPU_WIDTH-1:0]  rs2_lat;       // Latched rs2 (store data)
 reg [3:0]             wmask;         // Write byte mask
 reg [2:0]             rmask;         // Read type encoding
 reg                   aw_done;       // AW channel handshake completed
 reg                   w_done;        // W channel handshake completed
 
 // Read data output — needs to hold until WBU consumes
-reg [`CPU_WIDTH-1:0]  rdata_buf;
+reg [`ysyx_25050137_CPU_WIDTH-1:0]  rdata_buf;
 
 // Pass-through pipeline registers (latched at S_IDLE handshake)
-reg [`CPU_WIDTH-1:0]  pc_lat;
+reg [`ysyx_25050137_CPU_WIDTH-1:0]  pc_lat;
 reg                   ecall_lat;
 reg [1:0]             waddr_csr_lat;
 
@@ -2487,16 +2487,16 @@ module ysyx_25050137_wbu (
     input rst_n,
 
     // LSU → WBU
-    input [`CPU_WIDTH-1:0]  alu_result_i,
-    input [`CPU_WIDTH-1:0]  rs1_i,
-    input [`CPU_WIDTH-1:0]  csr_rdata_l_rs1_i,
-    input [`CPU_WIDTH-1:0]  datamem_readdata_i,
+    input [`ysyx_25050137_CPU_WIDTH-1:0]  alu_result_i,
+    input [`ysyx_25050137_CPU_WIDTH-1:0]  rs1_i,
+    input [`ysyx_25050137_CPU_WIDTH-1:0]  csr_rdata_l_rs1_i,
+    input [`ysyx_25050137_CPU_WIDTH-1:0]  datamem_readdata_i,
     input [2:0]             rmask_i,
     input                   wb_src_i,
     input                   csr_write_i,
     input                   csr_wdata_src_i,
     input                   reg_write_i,
-    input [`REG_ADDR-1:0]   waddr_i,
+    input [`ysyx_25050137_REG_ADDR-1:0]   waddr_i,
     input                   ecall_i,
     input [1:0]             waddr_csr_i,
 
@@ -2504,18 +2504,18 @@ module ysyx_25050137_wbu (
     output                  wbu_ready_o,
 
     // Write-back outputs
-    output [`CPU_WIDTH-1:0] csr_wdata_o,
-    output [`CPU_WIDTH-1:0] wdata_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] csr_wdata_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] wdata_o,
     output reg              csr_write_o,
     output reg              reg_write_o,
-    output reg [`REG_ADDR-1:0] waddr_o,
+    output reg [`ysyx_25050137_REG_ADDR-1:0] waddr_o,
     output reg              ecall_o,
     output reg [1:0]        waddr_csr_o,
 
     output                  rd_wbu_valid,
 
-    input [`CPU_WIDTH-1:0]  pc_i,
-    output reg [`CPU_WIDTH-1:0] pc_o
+    input [`ysyx_25050137_CPU_WIDTH-1:0]  pc_i,
+    output reg [`ysyx_25050137_CPU_WIDTH-1:0] pc_o
 );
 
 // =============================================================================
@@ -2529,10 +2529,10 @@ assign rd_wbu_valid = active;
 // =============================================================================
 // Latched data — only what submodules need in the writeback cycle
 // =============================================================================
-reg [`CPU_WIDTH-1:0]  alu_result;
-reg [`CPU_WIDTH-1:0]  datamem_readdata;
-reg [`CPU_WIDTH-1:0]  rs1_lat;
-reg [`CPU_WIDTH-1:0]  csr_rdata_l_rs1_lat;
+reg [`ysyx_25050137_CPU_WIDTH-1:0]  alu_result;
+reg [`ysyx_25050137_CPU_WIDTH-1:0]  datamem_readdata;
+reg [`ysyx_25050137_CPU_WIDTH-1:0]  rs1_lat;
+reg [`ysyx_25050137_CPU_WIDTH-1:0]  csr_rdata_l_rs1_lat;
 reg [2:0]             rmask;
 reg                   wb_src;
 reg                   csr_wdata_src;
@@ -2540,7 +2540,7 @@ reg                   csr_wdata_src;
 // =============================================================================
 // Submodules (combinational)
 // =============================================================================
-wire [`CPU_WIDTH-1:0] mem_data;
+wire [`ysyx_25050137_CPU_WIDTH-1:0] mem_data;
 
 ysyx_25050137_sext_mem SEXT_Mem (
     .read_data (datamem_readdata),
@@ -2616,7 +2616,7 @@ module ysyx_25050137_xbar (
     input rst_n,
 
     // Upstream (from arbiter)
-    input  [`CPU_WIDTH-1:0] axi_araddr_i,
+    input  [`ysyx_25050137_CPU_WIDTH-1:0] axi_araddr_i,
     input  [3:0]            axi_arid_i,
     input  [7:0]            axi_arlen_i,
     input  [2:0]            axi_arsize_i,
@@ -2624,14 +2624,14 @@ module ysyx_25050137_xbar (
     input                   axi_arvalid_i,
     output                  axi_arready_o,
 
-    output [`CPU_WIDTH-1:0] axi_rdata_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] axi_rdata_o,
     output [1:0]            axi_rresp_o,
     output                  axi_rlast_o,
     output [3:0]            axi_rid_o,
     output                  axi_rvalid_o,
     input                   axi_rready_i,
 
-    input  [`CPU_WIDTH-1:0] axi_awaddr_i,
+    input  [`ysyx_25050137_CPU_WIDTH-1:0] axi_awaddr_i,
     input  [3:0]            axi_awid_i,
     input  [7:0]            axi_awlen_i,
     input  [2:0]            axi_awsize_i,
@@ -2639,7 +2639,7 @@ module ysyx_25050137_xbar (
     input                   axi_awvalid_i,
     output                  axi_awready_o,
 
-    input  [`CPU_WIDTH-1:0] axi_wdata_i,
+    input  [`ysyx_25050137_CPU_WIDTH-1:0] axi_wdata_i,
     input  [3:0]            axi_wstrb_i,
     input                   axi_wlast_i,
     input                   axi_wvalid_i,
@@ -2651,7 +2651,7 @@ module ysyx_25050137_xbar (
     input                   axi_bready_i,
 
     // Downstream: SRAM
-    output [`CPU_WIDTH-1:0] sram_araddr_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] sram_araddr_o,
     output [3:0]            sram_arid_o,
     output [7:0]            sram_arlen_o,
     output [2:0]            sram_arsize_o,
@@ -2659,14 +2659,14 @@ module ysyx_25050137_xbar (
     output                  sram_arvalid_o,
     input                   sram_arready_i,
 
-    input  [`CPU_WIDTH-1:0] sram_rdata_i,
+    input  [`ysyx_25050137_CPU_WIDTH-1:0] sram_rdata_i,
     input  [1:0]            sram_rresp_i,
     input                   sram_rlast_i,
     input  [3:0]            sram_rid_i,
     input                   sram_rvalid_i,
     output                  sram_rready_o,
 
-    output [`CPU_WIDTH-1:0] sram_awaddr_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] sram_awaddr_o,
     output [3:0]            sram_awid_o,
     output [7:0]            sram_awlen_o,
     output [2:0]            sram_awsize_o,
@@ -2674,7 +2674,7 @@ module ysyx_25050137_xbar (
     output                  sram_awvalid_o,
     input                   sram_awready_i,
 
-    output [`CPU_WIDTH-1:0] sram_wdata_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] sram_wdata_o,
     output [3:0]            sram_wstrb_o,
     output                  sram_wlast_o,
     output                  sram_wvalid_o,
@@ -2686,7 +2686,7 @@ module ysyx_25050137_xbar (
     output                  sram_bready_o,
 
     // Downstream: CLINT
-    output [`CPU_WIDTH-1:0] clint_araddr_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] clint_araddr_o,
     output [3:0]            clint_arid_o,
     output [7:0]            clint_arlen_o,
     output [2:0]            clint_arsize_o,
@@ -2694,14 +2694,14 @@ module ysyx_25050137_xbar (
     output                  clint_arvalid_o,
     input                   clint_arready_i,
 
-    input  [`CPU_WIDTH-1:0] clint_rdata_i,
+    input  [`ysyx_25050137_CPU_WIDTH-1:0] clint_rdata_i,
     input  [1:0]            clint_rresp_i,
     input                   clint_rlast_i,
     input  [3:0]            clint_rid_i,
     input                   clint_rvalid_i,
     output                  clint_rready_o,
 
-    output [`CPU_WIDTH-1:0] clint_awaddr_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] clint_awaddr_o,
     output [3:0]            clint_awid_o,
     output [7:0]            clint_awlen_o,
     output [2:0]            clint_awsize_o,
@@ -2709,7 +2709,7 @@ module ysyx_25050137_xbar (
     output                  clint_awvalid_o,
     input                   clint_awready_i,
 
-    output [`CPU_WIDTH-1:0] clint_wdata_o,
+    output [`ysyx_25050137_CPU_WIDTH-1:0] clint_wdata_o,
     output [3:0]            clint_wstrb_o,
     output                  clint_wlast_o,
     output                  clint_wvalid_o,
@@ -2879,26 +2879,26 @@ module ysyx_25050137(
     assign clk = clock;
     assign rst_n = !reset;
 
-    wire [`PC_WIDTH-1:0] pc_to_mem;
-    wire [`INST_WIDTH-1:0] inst_from_mem;
+    wire [`ysyx_25050137_PC_WIDTH-1:0] pc_to_mem;
+    wire [`ysyx_25050137_INST_WIDTH-1:0] inst_from_mem;
     //wbu to ifu
-    wire [`PC_WIDTH-1:0] npc;
+    wire [`ysyx_25050137_PC_WIDTH-1:0] npc;
     wire valid_wbu_to_ifu;
     wire ready_wbu_to_ifu;
     //ifu to idu
-    wire [`PC_WIDTH-1:0] pc_ifu_to_idu;
-    wire [`INST_WIDTH-1:0] inst_ifu_to_idu;
+    wire [`ysyx_25050137_PC_WIDTH-1:0] pc_ifu_to_idu;
+    wire [`ysyx_25050137_INST_WIDTH-1:0] inst_ifu_to_idu;
     wire valid_ifu_to_idu;
     wire ready_ifu_to_idu;
 
-    wire [`CPU_WIDTH-1:0] ifu_araddr;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] ifu_araddr;
     wire [3:0] ifu_arid;
     wire [7:0] ifu_arlen;
     wire [2:0] ifu_arsize;
     wire [1:0] ifu_arburst;
     wire ifu_arvalid;
     wire ifu_arready;
-    wire [`CPU_WIDTH-1:0] ifu_rdata;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] ifu_rdata;
     wire [1:0] ifu_rresp;
     wire ifu_rlast;
     wire [3:0] ifu_rid;
@@ -2945,14 +2945,14 @@ module ysyx_25050137(
     wire useless1,useless2,useless3,useless4;
     wire fencei;
 
-    wire [`CPU_WIDTH-1:0] cache_araddr;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] cache_araddr;
     wire [3:0] cache_arid;
     wire [7:0] cache_arlen;
     wire [2:0] cache_arsize;
     wire [1:0] cache_arburst;
     wire cache_arvalid;
     wire cache_arready;
-    wire [`CPU_WIDTH-1:0] cache_rdata;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] cache_rdata;
     wire [1:0] cache_rresp;
     wire cache_rlast;
     wire [3:0] cache_rid;
@@ -2997,27 +2997,27 @@ module ysyx_25050137(
         .fencei(fencei)
     );
 
-    wire [`CPU_WIDTH-1:0] lsu_araddr;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] lsu_araddr;
     wire [3:0] lsu_arid;
     wire [7:0] lsu_arlen;
     wire [2:0] lsu_arsize;
     wire [1:0] lsu_arburst;
     wire lsu_arvalid;
     wire lsu_arready;
-    wire [`CPU_WIDTH-1:0] lsu_rdata;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] lsu_rdata;
     wire [1:0] lsu_rresp;
     wire lsu_rlast;
     wire [3:0] lsu_rid;
     wire lsu_rvalid;
     wire lsu_rready;
-    wire [`CPU_WIDTH-1:0] lsu_awaddr;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] lsu_awaddr;
     wire [3:0] lsu_awid;
     wire [7:0] lsu_awlen;
     wire [2:0] lsu_awsize;
     wire [1:0] lsu_awburst;
     wire lsu_awvalid;
     wire lsu_awready;
-    wire [`CPU_WIDTH-1:0] lsu_wdata;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] lsu_wdata;
     wire [3:0] lsu_wstrb;
     wire lsu_wlast;
     wire lsu_wvalid;
@@ -3027,27 +3027,27 @@ module ysyx_25050137(
     wire lsu_bvalid;
     wire lsu_bready;
 
-    wire [`CPU_WIDTH-1:0] axi_araddr;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] axi_araddr;
     wire [3:0] axi_arid;
     wire [7:0] axi_arlen;
     wire [2:0] axi_arsize;
     wire [1:0] axi_arburst;
     wire axi_arvalid;
     wire axi_arready;
-    wire [`CPU_WIDTH-1:0] axi_rdata;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] axi_rdata;
     wire [1:0] axi_rresp;
     wire axi_rlast;
     wire [3:0] axi_rid;
     wire axi_rvalid;
     wire axi_rready;
-    wire [`CPU_WIDTH-1:0] axi_awaddr;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] axi_awaddr;
     wire [3:0] axi_awid;
     wire [7:0] axi_awlen;
     wire [2:0] axi_awsize;
     wire [1:0] axi_awburst;
     wire axi_awvalid;
     wire axi_awready;
-    wire [`CPU_WIDTH-1:0] axi_wdata;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] axi_wdata;
     wire [3:0] axi_wstrb;
     wire axi_wlast;
     wire axi_wvalid;
@@ -3057,27 +3057,27 @@ module ysyx_25050137(
     wire axi_bvalid;
     wire axi_bready;
 
-    wire [`CPU_WIDTH-1:0] clint_araddr;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] clint_araddr;
     wire [3:0] clint_arid;
     wire [7:0] clint_arlen;
     wire [2:0] clint_arsize;
     wire [1:0] clint_arburst;
     wire clint_arvalid;
     wire clint_arready;
-    wire [`CPU_WIDTH-1:0] clint_rdata;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] clint_rdata;
     wire [1:0] clint_rresp;
     wire clint_rlast;
     wire [3:0] clint_rid;
     wire clint_rvalid;
     wire clint_rready;
-    wire [`CPU_WIDTH-1:0] clint_awaddr;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] clint_awaddr;
     wire [3:0] clint_awid;
     wire [7:0] clint_awlen;
     wire [2:0] clint_awsize;
     wire [1:0] clint_awburst;
     wire clint_awvalid;
     wire clint_awready;
-    wire [`CPU_WIDTH-1:0] clint_wdata;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] clint_wdata;
     wire [3:0] clint_wstrb;
     wire clint_wlast;
     wire clint_wvalid;
@@ -3365,16 +3365,16 @@ module ysyx_25050137(
         .bready_i(clint_bready)
     );
 
-    wire [`REG_ADDR-1:0] raddr1;
-    wire [`REG_ADDR-1:0] raddr2;
-    wire [`CPU_WIDTH-1:0] rdata1;
-    wire [`CPU_WIDTH-1:0] rdata2;
-    wire [`CPU_WIDTH-1:0] a5;
-    wire [`PC_WIDTH-1:0] pc_idu_to_exu;
-    wire [`CPU_WIDTH-1:0] rs1_idu_to_exu;
-    wire [`CPU_WIDTH-1:0] rs2_idu_to_exu;
-    wire [`CPU_WIDTH-1:0] imm_idu_to_exu;
-    wire [`CPU_WIDTH-1:0] csr_rdata_idu_to_exu;
+    wire [`ysyx_25050137_REG_ADDR-1:0] raddr1;
+    wire [`ysyx_25050137_REG_ADDR-1:0] raddr2;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] rdata1;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] rdata2;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] a5;
+    wire [`ysyx_25050137_PC_WIDTH-1:0] pc_idu_to_exu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] rs1_idu_to_exu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] rs2_idu_to_exu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] imm_idu_to_exu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_rdata_idu_to_exu;
     wire a_in_src_idu_to_exu;
     wire [1:0] b_in_src_idu_to_exu;
     wire [2:0] pc_srcs_idu_to_exu;
@@ -3390,7 +3390,7 @@ module ysyx_25050137(
     wire csr_write_idu_to_exu;
     wire csr_wdata_src_idu_to_exu;
     wire reg_write_idu_to_exu;
-    wire [`REG_ADDR-1:0] waddr_idu_to_exu;
+    wire [`ysyx_25050137_REG_ADDR-1:0] waddr_idu_to_exu;
     wire ecall_idu_to_exu;
     wire [1:0] waddr_csr_idu_to_exu;
 
@@ -3398,7 +3398,7 @@ module ysyx_25050137(
     wire ready_idu_to_exu;
 
     wire [2:0] raddr_csr;
-    wire [`CPU_WIDTH-1:0] rdata_csr;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] rdata_csr;
 
     ysyx_25050137_idu IDU(
         .clk(clk),
@@ -3475,17 +3475,17 @@ module ysyx_25050137(
         .wbu_fwd_data(wdata)      // 新增: WBU级前递数据 (最终写回数据)
     );
 
-    wire [`CPU_WIDTH-1:0] wdata;
-    wire [`REG_ADDR-1:0] waddr;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] wdata;
+    wire [`ysyx_25050137_REG_ADDR-1:0] waddr;
     wire reg_write;
-    reg [`CPU_WIDTH-1:0] reg_file [31:0];
+    reg [`ysyx_25050137_CPU_WIDTH-1:0] reg_file [31:0];
 
     //write csr
     wire csr_write;
     wire [1:0] waddr_csr;
-    wire [`CPU_WIDTH-1:0] csr_wdata;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_wdata;
     wire ecall;
-    wire [`CPU_WIDTH-1:0] csr_reg [3:0]; //difftest
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_reg [3:0]; //difftest
     
     ysyx_25050137_regfile Rgefile (
         .clk(clk),
@@ -3512,11 +3512,11 @@ module ysyx_25050137(
         
     );
 
-    wire [`CPU_WIDTH-1:0] alu_result_exu_to_lsu;
-    wire [`CPU_WIDTH-1:0] rs1_exu_to_lsu;
-    wire [`CPU_WIDTH-1:0] rs2_exu_to_lsu;
-    wire [`CPU_WIDTH-1:0] csr_rdata_l_rs1_exu_to_lsu;
-    wire [`PC_WIDTH-1:0] npc_exu_to_lsu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] alu_result_exu_to_lsu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] rs1_exu_to_lsu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] rs2_exu_to_lsu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_rdata_l_rs1_exu_to_lsu;
+    wire [`ysyx_25050137_PC_WIDTH-1:0] npc_exu_to_lsu;
     wire MemRead_exu_to_lsu;
     wire MemWrite_exu_to_lsu;
     wire [3:0] wmask_exu_to_lsu;
@@ -3525,7 +3525,7 @@ module ysyx_25050137(
     wire csr_write_exu_to_lsu;
     wire csr_wdta_src_exu_to_lsu;
     wire reg_write_exu_to_lsu;
-    wire [`REG_ADDR-1:0] waddr_exu_to_lsu;
+    wire [`ysyx_25050137_REG_ADDR-1:0] waddr_exu_to_lsu;
     wire ecall_exu_to_lsu;
     wire [1:0] waddr_csr_exu_to_lsu;
 
@@ -3535,7 +3535,7 @@ module ysyx_25050137(
     wire npc_valid;
     wire rd_exu_valid;
 
-    wire [`PC_WIDTH-1:0] pc_exu_to_lsu;
+    wire [`ysyx_25050137_PC_WIDTH-1:0] pc_exu_to_lsu;
 
     ysyx_25050137_exu EXU(
         .clk(clk),
@@ -3595,17 +3595,17 @@ module ysyx_25050137(
         .pc_o(pc_exu_to_lsu)
     );
 
-    wire [`CPU_WIDTH-1:0] alu_result_lsu_to_wbu;
-    wire [`CPU_WIDTH-1:0] rs1_lsu_to_wbu;
-    wire [`CPU_WIDTH-1:0] csr_rdata_l_rs1_lsu_to_wbu;
-    wire [`CPU_WIDTH-1:0] datamem_readdata_lsu_to_wbu;
-    wire [`PC_WIDTH-1:0] npc_lsu_to_wbu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] alu_result_lsu_to_wbu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] rs1_lsu_to_wbu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_rdata_l_rs1_lsu_to_wbu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] datamem_readdata_lsu_to_wbu;
+    wire [`ysyx_25050137_PC_WIDTH-1:0] npc_lsu_to_wbu;
     wire [2:0] rmask_lsu_to_wbu;
     wire wb_src_lsu_to_wbu;
     wire csr_write_lsu_to_wbu;
     wire csr_wdata_src_lsu_to_wbu;
     wire reg_write_lsu_to_wbu;
-    wire [`REG_ADDR-1:0] waddr_lsu_to_wbu;
+    wire [`ysyx_25050137_REG_ADDR-1:0] waddr_lsu_to_wbu;
     wire ecall_lsu_to_wbu;
     wire [1:0] waddr_csr_lsu_to_wbu;
 
@@ -3614,7 +3614,7 @@ module ysyx_25050137(
 
     wire rd_lsu_valid;
 
-    wire [`PC_WIDTH-1:0] pc_lsu_to_wbu;
+    wire [`ysyx_25050137_PC_WIDTH-1:0] pc_lsu_to_wbu;
 
     ysyx_25050137_lsu LSU(
         .clk(clk),
@@ -3701,7 +3701,7 @@ module ysyx_25050137(
 
     wire rd_wbu_valid;
 
-    wire [`PC_WIDTH-1:0] pc_wbu_out;
+    wire [`ysyx_25050137_PC_WIDTH-1:0] pc_wbu_out;
     
     ysyx_25050137_wbu WBU(
         .clk(clk),
