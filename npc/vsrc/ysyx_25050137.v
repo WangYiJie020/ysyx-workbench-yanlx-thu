@@ -162,7 +162,7 @@ module ysyx_25050137(
     wire cache_rvalid;
     wire cache_rready;
     
-
+/*
     icache ICACHE (
         .clk(clk),
         .rst_n(rst_n),
@@ -199,7 +199,7 @@ module ysyx_25050137(
 
         .fencei(fencei)
     );
-
+*/
     wire [`CPU_WIDTH-1:0] lsu_araddr;
     wire [3:0] lsu_arid;
     wire [7:0] lsu_arlen;
@@ -293,7 +293,7 @@ module ysyx_25050137(
     axi_arbiter AXI_Arbiter(
         .clk(clk),
         .rst_n(rst_n),
-
+/*
  //a
         .araddr_i_a(cache_araddr),
         .arid_i_a(cache_arid),
@@ -309,8 +309,8 @@ module ysyx_25050137(
         .rid_o_a(cache_rid),
         .rvalid_o_a(cache_rvalid),
         .rready_i_a(cache_rready),
-
- /* //a
+*/
+ //a
         .araddr_i_a(ifu_araddr),
         .arid_i_a(ifu_arid),
         .arlen_i_a(ifu_arlen),
@@ -325,7 +325,7 @@ module ysyx_25050137(
         .rid_o_a(ifu_rid),
         .rvalid_o_a(ifu_rvalid),
         .rready_i_a(ifu_rready),
-*/
+
         .awaddr_i_a(0),
         .awid_i_a(0),
         .awlen_i_a(0),
@@ -959,4 +959,650 @@ module ysyx_25050137(
         reg_file[31],pc_wbu_out,csr_reg[2],csr_reg[0],csr_reg[3],csr_reg[1]);
     end
     
+endmodule
+
+module adder(
+    input [31:0]a,
+    input [31:0]b,
+    output [31:0]out
+);
+
+assign out = a + b;
+
+endmodule
+
+module alu_control(
+    input [31:0] inst,
+    output reg [3:0] alu_op
+);
+    wire [6:0] opcode;
+    wire [2:0] funct3;
+    wire [6:0] funct7;
+    assign opcode = inst[6:0];
+    assign funct3 = inst[14:12];
+    assign funct7 = inst[31:25];
+
+    always@(*)begin
+        case(opcode)          
+            7'b0110111: begin //lui
+                alu_op = 4'b0000; //pass b
+            end
+            7'b0010111: begin //auipc
+                alu_op = 4'b0100; //+
+            end
+            7'b1101111: begin //jal
+                alu_op = 4'b0100; //+
+            end
+            7'b1100111: begin
+                case(funct3)
+                    3'b000: alu_op = 4'b0100; //+ //jalr
+                    default: alu_op = 0;
+                endcase
+            end
+            7'b1100011: begin
+                case(funct3)
+                    3'b000: alu_op = 4'b0101;//- //beq
+                    3'b001: alu_op = 4'b0101;//- //bne
+                    3'b100: alu_op = 4'b1010;//s<s //blt
+                    3'b101: alu_op = 4'b1010;//s<s //bge
+                    3'b110: alu_op = 4'b1001;//u<u //bltu
+                    3'b111: alu_op = 4'b1001;//u<u //bgeu
+                    default: alu_op = 4'b0101;//- 
+                endcase
+            end
+            7'b0000011: begin //+ //lb lh lw lbu lhu
+                case(funct3)
+                    3'b000: alu_op = 4'b0100; //+ //lb
+                    3'b001: alu_op = 4'b0100; //+ //lh
+                    3'b010: alu_op = 4'b0100; //+ //lw
+                    3'b100: alu_op = 4'b0100; //+ //lbu
+                    3'b101: alu_op = 4'b0100; //+ //lhu
+                    default: alu_op = 4'b0100;
+                endcase
+            end
+            7'b0100011: begin
+                case(funct3)
+                    3'b000: alu_op = 4'b0100; //+ //sb
+                    3'b001: alu_op = 4'b0100; //+ //sh
+                    3'b010: alu_op = 4'b0100; //+ //sw
+                    default: alu_op = 4'b0100;
+                endcase
+            end
+            
+            7'b0010011: begin
+                case(funct3)
+                    3'b000: alu_op = 4'b0100; //+ //addi
+                    3'b010: alu_op = 4'b1010; //s<s //slti
+                    3'b011: alu_op = 4'b1001; //u<u //sltiu
+                    3'b100: alu_op = 4'b0011; //^ //xori
+                    3'b110: alu_op = 4'b0010; //| //ori
+                    3'b111: alu_op = 4'b0001; //& //andi
+                    3'b001: alu_op = 4'b0110; //<< //slli
+                    3'b101: begin
+                        case(funct7)
+                            7'b0000000: alu_op = 4'b0111; //>> //srli
+                            7'b0100000: alu_op = 4'b1000; //>> //srai
+                            default: alu_op = 4'b0111; //>> //srli
+                        endcase
+                    end
+                    default: alu_op = 0;
+                endcase
+            end
+            7'b0110011: begin
+                case(funct3)
+                    3'b000: begin
+                        case(funct7)
+                            7'b0000000: alu_op = 4'b0100;//+ //add
+                            7'b0100000: alu_op = 4'b0101;//- //sub
+                            default: alu_op = 0;
+                        endcase
+                    end
+                    3'b001: alu_op = 4'b0110; //<< //sll
+                    3'b010: alu_op = 4'b1010; //s<s //slt
+                    3'b011: alu_op = 4'b1001; //u<u //sltu
+                    3'b100: alu_op = 4'b0011; //^ //xor
+                    3'b101: begin
+                        case(funct7)
+                            7'b0000000: alu_op = 4'b0111; //>> //srl
+                            7'b0100000: alu_op = 4'b1000; //>> //sra
+                            default: alu_op = 0;
+                        endcase
+                    end
+                    3'b110: alu_op = 4'b0010; //| //or
+                    3'b111: alu_op = 4'b0001; //& //and
+                    default:alu_op = 0;
+                endcase
+            end
+            7'b1110011: begin
+                alu_op = 4'b0000;//pass b
+            end
+            default: alu_op = 0;
+        endcase
+    end
+
+endmodule
+
+module alu(
+    input [31:0]a,
+    input [31:0]b,
+    input [3:0]op,
+    output reg [31:0]alu_result,
+    output zero
+);
+
+assign zero = ~(| alu_result);
+
+//wire [63:0] mux_tmp;
+//assign mux_tmp = a*b;
+
+always@(*) begin
+    case(op)
+        4'b0000: alu_result = b; 
+        4'b0001: alu_result = a & b;
+        4'b0010: alu_result = a | b;
+        4'b0011: alu_result = a ^ b;
+        4'b0100: alu_result = a + b;
+        4'b0101: alu_result = a - b;
+        4'b0110: alu_result = a << b[4:0];
+        4'b0111: alu_result = a >> b[4:0];
+        4'b1000: alu_result = ($signed(a)) >>> ($signed(b[4:0]));
+        4'b1001: alu_result = (a < b) ? 32'd1 : 32'd0;
+        4'b1010: alu_result = ($signed(a) < $signed(b)) ? 32'd1 : 32'd0;
+        //4'b1011: alu_result = mux_tmp[31:0];
+        //4'b1100: alu_result = mux_tmp[63:32];
+        
+        default: alu_result = b; 
+    endcase
+
+end
+
+endmodule
+
+// ============================================================
+//  AXI4 总线仲裁器
+//  - AR + R 通道: 先到先得，同时到达则轮询
+//    锁定时机: arvalid出现即锁定（而非等待AR握手）
+//  - AW + W + B 通道: 直通
+// ============================================================
+
+// `define CPU_WIDTH 32   // 若顶层已定义请删除此行
+
+module axi_arbiter (
+    input clk,
+    input rst_n,
+
+    // ========== Master A (e.g. IFU) ==========
+    // AR
+    input  [`CPU_WIDTH-1:0] araddr_i_a,
+    input  [3:0]            arid_i_a,
+    input  [7:0]            arlen_i_a,
+    input  [2:0]            arsize_i_a,
+    input  [1:0]            arburst_i_a,
+    input                   arvalid_i_a,
+    output reg              arready_o_a,
+    // R
+    output reg [`CPU_WIDTH-1:0] rdata_o_a,
+    output reg [1:0]            rresp_o_a,
+    output reg                  rlast_o_a,
+    output reg [3:0]            rid_o_a,
+    output reg                  rvalid_o_a,
+    input                       rready_i_a,
+    // AW
+    input  [`CPU_WIDTH-1:0] awaddr_i_a,
+    input  [3:0]            awid_i_a,
+    input  [7:0]            awlen_i_a,
+    input  [2:0]            awsize_i_a,
+    input  [1:0]            awburst_i_a,
+    input                   awvalid_i_a,
+    output reg              awready_o_a,
+    // W
+    input  [`CPU_WIDTH-1:0] wdata_i_a,
+    input  [3:0]            wstrb_i_a,
+    input                   wlast_i_a,
+    input                   wvalid_i_a,
+    output reg              wready_o_a,
+    // B
+    output reg [1:0]        bresp_o_a,
+    output reg [3:0]        bid_o_a,
+    output reg              bvalid_o_a,
+    input                   bready_i_a,
+
+    // ========== Master B (e.g. LSU) ==========
+    // AR
+    input  [`CPU_WIDTH-1:0] araddr_i_b,
+    input  [3:0]            arid_i_b,
+    input  [7:0]            arlen_i_b,
+    input  [2:0]            arsize_i_b,
+    input  [1:0]            arburst_i_b,
+    input                   arvalid_i_b,
+    output reg              arready_o_b,
+    // R
+    output reg [`CPU_WIDTH-1:0] rdata_o_b,
+    output reg [1:0]            rresp_o_b,
+    output reg                  rlast_o_b,
+    output reg [3:0]            rid_o_b,
+    output reg                  rvalid_o_b,
+    input                       rready_i_b,
+    // AW
+    input  [`CPU_WIDTH-1:0] awaddr_i_b,
+    input  [3:0]            awid_i_b,
+    input  [7:0]            awlen_i_b,
+    input  [2:0]            awsize_i_b,
+    input  [1:0]            awburst_i_b,
+    input                   awvalid_i_b,
+    output reg              awready_o_b,
+    // W
+    input  [`CPU_WIDTH-1:0] wdata_i_b,
+    input  [3:0]            wstrb_i_b,
+    input                   wlast_i_b,
+    input                   wvalid_i_b,
+    output reg              wready_o_b,
+    // B
+    output reg [1:0]        bresp_o_b,
+    output reg [3:0]        bid_o_b,
+    output reg              bvalid_o_b,
+    input                   bready_i_b,
+
+    // ========== Slave (Memory) ==========
+    // AR
+    output [`CPU_WIDTH-1:0] araddr_o,
+    output [3:0]            arid_o,
+    output [7:0]            arlen_o,
+    output [2:0]            arsize_o,
+    output [1:0]            arburst_o,
+    output                  arvalid_o,
+    input                   arready_i,
+    // R
+    input  [`CPU_WIDTH-1:0] rdata_i,
+    input  [1:0]            rresp_i,
+    input                   rlast_i,
+    input  [3:0]            rid_i,
+    input                   rvalid_i,
+    output                  rready_o,
+    // AW
+    output [`CPU_WIDTH-1:0] awaddr_o,
+    output [3:0]            awid_o,
+    output [7:0]            awlen_o,
+    output [2:0]            awsize_o,
+    output [1:0]            awburst_o,
+    output                  awvalid_o,
+    input                   awready_i,
+    // W
+    output [`CPU_WIDTH-1:0] wdata_o,
+    output [3:0]            wstrb_o,
+    output                  wlast_o,
+    output                  wvalid_o,
+    input                   wready_i,
+    // B
+    input  [1:0]            bresp_i,
+    input  [3:0]            bid_i,
+    input                   bvalid_i,
+    output                  bready_o,
+
+    output bus_busy
+);
+
+// ============================================================
+// 参数
+// ============================================================
+localparam MASTER_A = 1'b0;
+localparam MASTER_B = 1'b1;
+
+// ============================================================
+// AR/R 仲裁内部寄存器
+// ============================================================
+reg  arb_grant;       // 上一次仲裁结果（用于同时到达时的轮询参考）
+reg  arb_locked;      // 仲裁锁：arvalid出现即置1，rlast握手后清0
+reg  current_master;  // 本次事务R通道路由目标
+
+// ============================================================
+// 关键握手信号
+// ============================================================
+wire r_last_handshake = rvalid_i & rready_o & rlast_i;  // R通道最后一拍完成
+
+// 任意一方出现arvalid，视为有新请求到来
+wire ar_req_appear = arvalid_i_a | arvalid_i_b;
+
+// ============================================================
+// 仲裁决策（组合逻辑）
+// ============================================================
+// 策略：先到先得；同时到达则切换（基于上次 arb_grant 轮转）
+// 锁定期间输出维持 arb_grant 不变，由 current_master 接管路由
+wire arb_grant_next;
+assign arb_grant_next = arb_locked                        ? arb_grant   : // 锁定中，不重新仲裁
+                        ( arvalid_i_a & ~arvalid_i_b)     ? MASTER_A    : // 只有A：A先到
+                        (~arvalid_i_a &  arvalid_i_b)     ? MASTER_B    : // 只有B：B先到
+                        ( arvalid_i_a &  arvalid_i_b)     ? ~arb_grant  : // 同时到达：轮转
+                                                             arb_grant;    // 都无请求：保持
+
+// ============================================================
+// 仲裁寄存器时序逻辑
+// ============================================================
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        arb_grant      <= MASTER_A;
+        arb_locked     <= 1'b0;
+        current_master <= MASTER_A;
+    end else begin
+        // rlast握手：解锁，下一拍可重新仲裁
+        // arvalid出现且当前未锁定：立即锁定并记录仲裁结果
+        // 同一拍 rlast 握手 + 新 arvalid：优先解锁，新请求下一拍再仲裁
+        if (r_last_handshake) begin
+            arb_locked <= 1'b0;
+        end else if (!arb_locked & ar_req_appear) begin
+            arb_locked     <= 1'b1;
+            arb_grant      <= arb_grant_next;   // 更新轮询指针
+            current_master <= arb_grant_next;   // 锁定本次事务的路由目标
+        end
+    end
+end
+
+// ============================================================
+// AR 通道 MUX → Memory
+// 使用 current_master（寄存器）保证锁定后地址信号稳定
+// ============================================================
+assign araddr_o  = (current_master == MASTER_A) ? araddr_i_a  : araddr_i_b;
+assign arid_o    = (current_master == MASTER_A) ? arid_i_a    : arid_i_b;
+assign arlen_o   = (current_master == MASTER_A) ? arlen_i_a   : arlen_i_b;
+assign arsize_o  = (current_master == MASTER_A) ? arsize_i_a  : arsize_i_b;
+assign arburst_o = (current_master == MASTER_A) ? arburst_i_a : arburst_i_b;
+
+// arvalid：只透传被授权 master 的请求
+assign arvalid_o = (current_master == MASTER_A) ? arvalid_i_a : arvalid_i_b;
+
+// arready：只反馈给被授权的 master，另一方阻塞等待
+always @(*) begin
+    arready_o_a = 1'b0;
+    arready_o_b = 1'b0;
+    if (current_master == MASTER_A)
+        arready_o_a = arready_i;
+    else
+        arready_o_b = arready_i;
+end
+
+// ============================================================
+// R 通道路由 Memory → 正确的 Master
+// ============================================================
+assign rready_o = (current_master == MASTER_A) ? rready_i_a : rready_i_b;
+
+always @(*) begin
+    // 默认清零，防止 latch
+    rdata_o_a  = {`CPU_WIDTH{1'b0}};
+    rresp_o_a  = 2'b0;
+    rlast_o_a  = 1'b0;
+    rid_o_a    = 4'b0;
+    rvalid_o_a = 1'b0;
+    rdata_o_b  = {`CPU_WIDTH{1'b0}};
+    rresp_o_b  = 2'b0;
+    rlast_o_b  = 1'b0;
+    rid_o_b    = 4'b0;
+    rvalid_o_b = 1'b0;
+
+    if (current_master == MASTER_A) begin
+        rdata_o_a  = rdata_i;
+        rresp_o_a  = rresp_i;
+        rlast_o_a  = rlast_i;
+        rid_o_a    = rid_i;
+        rvalid_o_a = rvalid_i;
+    end else begin
+        rdata_o_b  = rdata_i;
+        rresp_o_b  = rresp_i;
+        rlast_o_b  = rlast_i;
+        rid_o_b    = rid_i;
+        rvalid_o_b = rvalid_i;
+    end
+end
+    always@(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            bus_busy <= 0;
+        end
+        else begin
+            if(arready_i==1 && arvalid_o==1)
+                bus_busy <= 1;
+            if(rvalid_i==1 && rready_o==1 && rlast_i==1)
+                bus_busy <= 0;
+
+        end
+    end
+    assign awaddr_o = awaddr_i_b;
+    assign awid_o = awid_i_b;
+    assign awlen_o = awlen_i_b;
+    assign awsize_o = awsize_i_b;
+    assign awburst_o = awburst_i_b;
+    assign awvalid_o = awvalid_i_b;
+    assign awready_o_b = awready_i;
+
+    assign wdata_o = wdata_i_b;
+    assign wstrb_o = wstrb_i_b;
+    assign wlast_o = wlast_i_b;
+    assign wvalid_o = wvalid_i_b;
+    assign wready_o_b = wready_i;
+
+    assign bresp_o_b = bresp_i;
+    assign bid_o_b = bid_i;
+    assign bvalid_o_b = bvalid_i;
+    assign bready_o = bready_i_b;
+
+endmodule
+
+module branch_control(
+    input [31:0] pc4,
+    input [31:0] pc_new,
+    input [2:0] pc_srcs,
+    input zero,
+    input [31:0] alu_result,
+    output reg [31:0] npc
+);
+    always@(*) begin
+        case(pc_srcs)
+            3'b000: npc = pc4; //pc=pc+4
+            3'b001: npc = pc_new; //pc=pc+imm or pc=rs1+imm
+            3'b010: begin //beq
+                if(zero==1'b1) npc = pc_new; //sub is zero,equal,jump
+                else npc = pc4;
+            end
+            3'b011: begin //bne
+                if(zero==1'b0) npc = pc_new; //sub is not zero,unequal,jump
+                else npc = pc4;
+            end
+            3'b100: begin //blt
+                if(alu_result==32'd1) npc = pc_new;
+                else npc = pc4;
+            end
+            3'b101: begin //bge
+                if(alu_result==32'd0) npc = pc_new;
+                else npc = pc4;
+            end
+            3'b110: begin //bltu
+                if(alu_result==32'd1) npc = pc_new;
+                else npc = pc4;
+            end
+            3'b111: begin //bgeu
+                if(alu_result==32'd0) npc = pc_new;
+                else npc = pc4;
+            end
+            default: npc = pc4; //pc=pc+4
+        endcase
+
+    end
+
+endmodule
+
+`include "header.v"
+
+// =============================================================================
+// CLINT — area-optimized
+//
+// Function: 64-bit mtime counter, AXI4 slave interface
+//   Read  0x0200_0048 → mtime[31:0]
+//   Read  0x0200_004c → mtime[63:32]
+//   Write support for mtimecmp if needed (currently no mtimecmp)
+//
+// Removed: LFSR delay simulator, 5 separate FSMs, all output registers,
+//          wdata/wstrb/awaddr buffers
+// Registers: time_counter(64) + araddr_lat(32) + state(3) + aw_done/w_done(2) = 101 bits
+// Original: ~171 DFF + DFFR → estimated 1,897 area → ~700
+// =============================================================================
+
+module clint (
+    input clk,
+    input rst_n,
+
+    // AXI AR
+    input  [`CPU_WIDTH-1:0] araddr_i,
+    input  [3:0]            arid_i,
+    input  [7:0]            arlen_i,
+    input  [2:0]            arsize_i,
+    input  [1:0]            arburst_i,
+    input                   arvalid_i,
+    output                  arready_o,
+
+    // AXI R
+    output [`CPU_WIDTH-1:0] rdata_o,
+    output [1:0]            rresp_o,
+    output                  rlast_o,
+    output [3:0]            rid_o,
+    output                  rvalid_o,
+    input                   rready_i,
+
+    // AXI AW
+    input  [`CPU_WIDTH-1:0] awaddr_i,
+    input  [3:0]            awid_i,
+    input  [7:0]            awlen_i,
+    input  [2:0]            awsize_i,
+    input  [1:0]            awburst_i,
+    input                   awvalid_i,
+    output                  awready_o,
+
+    // AXI W
+    input  [`CPU_WIDTH-1:0] wdata_i,
+    input  [3:0]            wstrb_i,
+    input                   wlast_i,
+    input                   wvalid_i,
+    output                  wready_o,
+
+    // AXI B
+    output [1:0]            bresp_o,
+    output [3:0]            bid_o,
+    output                  bvalid_o,
+    input                   bready_i
+);
+
+// =============================================================================
+// mtime counter — the only real function of CLINT
+// =============================================================================
+reg [63:0] time_counter;
+
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n)
+        time_counter <= 64'd0;
+    else
+        time_counter <= time_counter + 1;
+end
+
+// =============================================================================
+// State machine
+// =============================================================================
+localparam [2:0]
+    S_IDLE  = 3'd0,
+    S_RRESP = 3'd1,   // Read: present R data, wait rready
+    S_AW    = 3'd2,   // Write: collect AW+W
+    S_BRESP = 3'd3;   // Write: present B response, wait bready
+
+reg [2:0] state;
+
+// Latched read address (only need bit 2 to distinguish hi/lo word)
+reg [`CPU_WIDTH-1:0] araddr_lat;
+
+// Track AW/W handshakes (can arrive in any order)
+reg aw_done, w_done;
+
+// =============================================================================
+// AXI outputs — ALL combinational
+// =============================================================================
+
+// AR: accept in IDLE
+assign arready_o = (state == S_IDLE) && !awvalid_i;  // read lower priority if simultaneous
+
+// R: respond with time_counter
+assign rdata_o  = araddr_lat[2] ? time_counter[63:32] : time_counter[31:0];
+assign rvalid_o = (state == S_RRESP);
+assign rlast_o  = rvalid_o;
+assign rresp_o  = 2'b00;
+assign rid_o    = 4'd0;
+
+// AW: accept in IDLE or S_AW when not yet done
+assign awready_o = (state == S_IDLE && awvalid_i) ||
+                   (state == S_AW && !aw_done);
+
+// W: accept in IDLE or S_AW when not yet done
+assign wready_o  = (state == S_IDLE && awvalid_i) ||
+                   (state == S_AW && !w_done);
+
+// B: respond after write complete
+assign bvalid_o = (state == S_BRESP);
+assign bresp_o  = 2'b00;
+assign bid_o    = 4'd0;
+
+// =============================================================================
+// State transitions
+// =============================================================================
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        state      <= S_IDLE;
+        araddr_lat <= 0;
+        aw_done    <= 1'b0;
+        w_done     <= 1'b0;
+    end else begin
+        case (state)
+
+            S_IDLE: begin
+                if (awvalid_i) begin
+                    // Write request — prioritize over read
+                    aw_done <= awready_o && awvalid_i;
+                    w_done  <= wready_o  && wvalid_i;
+                    if ((awready_o && awvalid_i) && (wready_o && wvalid_i)) begin
+                        // Both handshake in same cycle
+                        state <= S_BRESP;
+                    end else begin
+                        state <= S_AW;
+                    end
+                end else if (arvalid_i) begin
+                    // Read request
+                    araddr_lat <= araddr_i;
+                    state      <= S_RRESP;
+                end
+            end
+
+            S_RRESP: begin
+                if (rvalid_o && rready_i)
+                    state <= S_IDLE;
+            end
+
+            S_AW: begin
+                if (awready_o && awvalid_i)
+                    aw_done <= 1'b1;
+                if (wready_o && wvalid_i)
+                    w_done <= 1'b1;
+
+                // Both channels done
+                if ((aw_done || (awready_o && awvalid_i)) &&
+                    (w_done  || (wready_o  && wvalid_i)))
+                    state <= S_BRESP;
+            end
+
+            S_BRESP: begin
+                if (bvalid_o && bready_i) begin
+                    aw_done <= 1'b0;
+                    w_done  <= 1'b0;
+                    state   <= S_IDLE;
+                end
+            end
+
+            default: state <= S_IDLE;
+
+        endcase
+    end
+end
+
 endmodule
