@@ -1925,7 +1925,6 @@ module ysyx_25050137_lsu(
     input bvalid_i,
     output bready_o,
 
-    input bus_busy,
     output rd_lsu_valid,
 
     input [`ysyx_25050137_CPU_WIDTH-1:0] pc_i,
@@ -3579,7 +3578,6 @@ module ysyx_25050137(
         .bvalid_i(lsu_bvalid),
         .bready_o(lsu_bready),
 
-        .bus_busy(bus_busy),
         .rd_lsu_valid(rd_lsu_valid),
 
         .pc_i(pc_exu_to_lsu),
