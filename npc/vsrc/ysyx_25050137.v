@@ -2725,7 +2725,8 @@ assign clint_bready_o  = 1'b0;
 
 endmodule
 
-module ysyx_25050137(
+module ysyx_25050137
+(
     input           clock,
     input           reset,
     input           io_interrupt,
