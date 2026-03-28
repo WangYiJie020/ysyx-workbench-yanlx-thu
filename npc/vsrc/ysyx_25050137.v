@@ -268,9 +268,8 @@ module ysyx_25050137_axi_arbiter (
     input  [1:0]            bresp_i,
     input  [3:0]            bid_i,
     input                   bvalid_i,
-    output                  bready_o,
+    output                  bready_o
 
-    output bus_busy
 );
 
 // ============================================================
@@ -3119,9 +3118,8 @@ module ysyx_25050137(
         .bresp_i(axi_bresp),
         .bid_i(axi_bid),
         .bvalid_i(axi_bvalid),
-        .bready_o(axi_bready),
+        .bready_o(axi_bready)
 
-        .bus_busy(bus_busy)
     );
 
     ysyx_25050137_xbar Xbar(
