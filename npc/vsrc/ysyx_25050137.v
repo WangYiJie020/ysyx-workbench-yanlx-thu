@@ -1783,7 +1783,7 @@ assign reset_o = ctrl_hazard;
 // State machine
 // =============================================================================
 always @(posedge clk or negedge rst_n) begin
-    if (!rst_n || fencei==1) begin
+    if (!rst_n) begin
         state      <= S_ADDR;
         pc_fetch   <= `PC_INIT;
         pc_o       <= `PC_INIT;
