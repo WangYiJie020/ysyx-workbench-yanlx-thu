@@ -1,6 +1,10 @@
-`include "header.v"
+`define ysyx_25050137_CPU_WIDTH 32
+`define ysyx_25050137_PC_WIDTH 32
+`define ysyx_25050137_INST_WIDTH 32
+`define ysyx_25050137_REG_ADDR 5
+`define ysyx_25050137_PC_INIT 32'h30000000
 
-module adder(
+module ysyx_25050137_adder(
     input [31:0]a,
     input [31:0]b,
     output [31:0]out
@@ -10,7 +14,7 @@ assign out = a + b;
 
 endmodule
 
-module alu_control(
+module ysyx_25050137_alu_control(
     input [31:0] inst,
     output reg [3:0] alu_op
 );
@@ -121,7 +125,7 @@ module alu_control(
 
 endmodule
 
-module alu(
+module ysyx_25050137_alu(
     input [31:0]a,
     input [31:0]b,
     input [3:0]op,
@@ -166,7 +170,7 @@ endmodule
 
 // `define CPU_WIDTH 32   // 若顶层已定义请删除此行
 
-module axi_arbiter (
+module ysyx_25050137_axi_arbiter (
     input clk,
     input rst_n,
 
@@ -424,7 +428,7 @@ end
 
 endmodule
 
-module branch_control(
+module ysyx_25050137_branch_control(
     input [31:0] pc4,
     input [31:0] pc_new,
     input [2:0] pc_srcs,
@@ -467,7 +471,7 @@ module branch_control(
 
 endmodule
 
-`include "header.v"
+
 
 // =============================================================================
 // CLINT — area-optimized
@@ -483,7 +487,7 @@ endmodule
 // Original: ~171 DFF + DFFR → estimated 1,897 area → ~700
 // =============================================================================
 
-module clint (
+module ysyx_25050137_clint (
     input clk,
     input rst_n,
 
@@ -646,7 +650,7 @@ end
 
 endmodule
 
-module controler(
+module ysyx_25050137_controler(
     input [31:0] inst,
     output reg a_in_src,
     output reg [1:0] b_in_src,
@@ -860,7 +864,7 @@ module controler(
 
 endmodule
 
-module csr(
+module ysyx_25050137_csr(
     input clk,
     input [31:0] inst,
     output reg [2:0] raddr_csr,
@@ -938,7 +942,7 @@ module csr(
 
 endmodule
 
-`include "header.v"
+
 
 // =============================================================================
 // EXU — area-optimized
@@ -956,7 +960,7 @@ endmodule
 // Estimated: 227 DFF → ~175 DFF, plus significant MUX/BUF reduction
 // =============================================================================
 
-module exu (
+module ysyx_25050137_exu (
     input clk,
     input rst_n,
     input reset_ifu,
@@ -1075,27 +1079,27 @@ wire [`CPU_WIDTH-1:0] a_in, b_in, a_out, add_out, pc_new, alu_result;
 wire [`PC_WIDTH-1:0]  npc;
 wire                  zero;
 
-mux21 Adder_A_Src (
+ysyx_25050137_mux21 Adder_A_Src (
     .d0  (pc),
     .d1  (rs1),
     .sel (adder_a_src_lat),
     .out (a_out)
 );
 
-adder Adder (
+ysyx_25050137_adder Adder (
     .a   (a_out),
     .b   (imm),
     .out (add_out)
 );
 
-mux21 Adder_Out (
+ysyx_25050137_mux21 Adder_Out (
     .d0  (add_out),
     .d1  (csr_rdata),
     .sel (adder_out_src_lat),
     .out (pc_new)
 );
 
-branch_control Branch_Control (
+ysyx_25050137_branch_control Branch_Control (
     .pc4        (pc + 4),
     .pc_new     (pc_new),
     .pc_srcs    (pc_srcs_lat),
@@ -1104,14 +1108,14 @@ branch_control Branch_Control (
     .npc        (npc)
 );
 
-mux21 ALU_A_Src (
+ysyx_25050137_mux21 ALU_A_Src (
     .d0  (rs1),
     .d1  (pc),
     .sel (a_in_src_lat),
     .out (a_in)
 );
 
-mux41 ALU_B_Src (
+ysyx_25050137_mux41 ALU_B_Src (
     .d0  (rs2),
     .d1  (imm),
     .d2  (32'd4),
@@ -1120,7 +1124,7 @@ mux41 ALU_B_Src (
     .out (b_in)
 );
 
-alu ALU (
+ysyx_25050137_alu ALU (
     .a          (a_in),
     .b          (b_in),
     .op         (alu_op_lat),
@@ -1184,7 +1188,7 @@ end
 
 endmodule
 
-module icache #(
+module ysyx_25050137_icache #(
     parameter DATA_WIDTH  = 32,
     parameter BLOCK_SIZE  = 4,
     parameter NUM_BLOCKS  = 2,
@@ -1388,11 +1392,11 @@ end
 
 endmodule
 
-`include "header.v"
+
 
 import "DPI-C" function void idu_counter_return(input byte inst_opcode);
 
-module idu(
+module ysyx_25050137_idu(
     input clk,
     input rst_n,
     input reset_ifu,
@@ -1560,7 +1564,7 @@ module idu(
     assign isRAW = load_use_hazard && (current_state == S_RECEIVE);
 
     // ======== 子模块实例化 ========
-    controler Controler(
+    ysyx_25050137_controler Controler(
         .inst(inst),
         .a_in_src(a_in_src_o),
         .b_in_src(b_in_src_o),
@@ -1577,12 +1581,12 @@ module idu(
         .csr_wdata_src(csr_wdata_src_o)
     );
 
-    sext SEXT (
+    ysyx_25050137_sext SEXT (
         .inst(inst),
         .data(imm_o)
     );
 
-    csr CSR(
+    ysyx_25050137_csr CSR(
         .clk(clk),
         .inst(inst),
         .raddr_csr(raddr_csr),
@@ -1590,7 +1594,7 @@ module idu(
         .ecall(ecall)
     );
     
-    alu_control ALU_Control(
+    ysyx_25050137_alu_control ALU_Control(
         .inst(inst),
         .alu_op(alu_op)
     );
@@ -1672,7 +1676,7 @@ module idu(
 
 endmodule
 
-`include "header.v"
+
 
 // =============================================================================
 // IFU (Instruction Fetch Unit) — area-optimized
@@ -1690,7 +1694,7 @@ endmodule
 //   - flush_pending kept as 1-bit flag (simplest approach)
 // =============================================================================
 
-module ifu (
+module ysyx_25050137_ifu (
     input  wire                    clk,
     input  wire                    rst_n,
     input  wire                    fencei,
@@ -1851,7 +1855,7 @@ end
 
 endmodule
 
-`include "header.v"
+
 
 import "DPI-C" function void data_counter_add();
 import "DPI-C" function void send_data_request();
@@ -1876,7 +1880,7 @@ import "DPI-C" function void difftest_skip();
 // Estimated: 285 DFF → ~120 DFF
 // =============================================================================
 
-module lsu(
+module ysyx_25050137_lsu(
     input clk,
     input rst_n,
 
@@ -2167,7 +2171,7 @@ end
 
 endmodule
 
-module mux21#(WIDTH = 32)(
+module ysyx_25050137_mux21#(WIDTH = 32)(
     input [WIDTH-1:0] d0,
     input [WIDTH-1:0] d1,
     input sel,
@@ -2178,7 +2182,7 @@ module mux21#(WIDTH = 32)(
 
 endmodule
 
-module mux41#(WIDTH = 32)(
+module ysyx_25050137_mux41#(WIDTH = 32)(
     input [WIDTH-1:0] d0,
     input [WIDTH-1:0] d1,
     input [WIDTH-1:0] d2,
@@ -2190,7 +2194,7 @@ module mux41#(WIDTH = 32)(
     assign out = sel[1] ? (sel[0] ? d3 : d2) : (sel[0] ? d1 : d0);
 endmodule
 
-module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
+module ysyx_25050137_regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
   input clk,
   input rst_n,
   input [DATA_WIDTH-1:0] wdata,
@@ -2334,7 +2338,7 @@ module regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
 
 endmodule
 
-module sext_mem(
+module ysyx_25050137_sext_mem(
     input [31:0] read_data,
     input [1:0] addr_low2,
     input [2:0] rmask,
@@ -2372,7 +2376,7 @@ module sext_mem(
 
 endmodule
 
-module sext #(DATA_WIDTH = 32)(
+module ysyx_25050137_sext #(DATA_WIDTH = 32)(
     input [31:0] inst,
     output reg [DATA_WIDTH-1:0]data
 );
@@ -2454,7 +2458,7 @@ module sext #(DATA_WIDTH = 32)(
 
 endmodule
 
-`include "header.v"
+
 
 // =============================================================================
 // WBU — area-optimized
@@ -2478,7 +2482,7 @@ endmodule
 //   - csr_write_o, reg_write_o, waddr_o, ecall_o, waddr_csr_o, pc_o
 // =============================================================================
 
-module wbu (
+module ysyx_25050137_wbu (
     input clk,
     input rst_n,
 
@@ -2538,21 +2542,21 @@ reg                   csr_wdata_src;
 // =============================================================================
 wire [`CPU_WIDTH-1:0] mem_data;
 
-sext_mem SEXT_Mem (
+ysyx_25050137_sext_mem SEXT_Mem (
     .read_data (datamem_readdata),
     .addr_low2 (alu_result[1:0]),
     .rmask     (rmask),
     .mem_data  (mem_data)
 );
 
-mux21 WB (
+ysyx_25050137_mux21 WB (
     .d0  (alu_result),
     .d1  (mem_data),
     .sel (wb_src),
     .out (wdata_o)
 );
 
-mux21 Csr_Wdata (
+ysyx_25050137_mux21 Csr_Wdata (
     .d0  (rs1_lat),
     .d1  (csr_rdata_l_rs1_lat),
     .sel (csr_wdata_src),
@@ -2594,7 +2598,7 @@ end
 
 endmodule
 
-`include "header.v"
+
 
 // =============================================================================
 // XBAR — latch-free, pure combinational crossbar
@@ -2607,7 +2611,7 @@ endmodule
 //          Write channel always goes to sram (no CLINT write needed)
 // =============================================================================
 
-module xbar (
+module ysyx_25050137_xbar (
     input clk,
     input rst_n,
 
@@ -2903,7 +2907,7 @@ module ysyx_25050137(
 
     wire bus_busy;
 
-    ifu IFU(
+    ysyx_25050137_ifu IFU(
         .clk(clk),
         .rst_n(rst_n),
         .fencei(fencei),
@@ -2956,7 +2960,7 @@ module ysyx_25050137(
     wire cache_rready;
     
 
-    icache ICACHE (
+    ysyx_25050137_icache ICACHE (
         .clk(clk),
         .rst_n(rst_n),
 
@@ -3083,7 +3087,7 @@ module ysyx_25050137(
     wire clint_bvalid;
     wire clint_bready;
 
-    axi_arbiter AXI_Arbiter(
+    ysyx_25050137_axi_arbiter AXI_Arbiter(
         .clk(clk),
         .rst_n(rst_n),
 
@@ -3211,7 +3215,7 @@ module ysyx_25050137(
         .bus_busy(bus_busy)
     );
 
-    xbar Xbar(
+    ysyx_25050137_xbar Xbar(
         .clk(clk),
         .rst_n(rst_n),
 
@@ -3322,7 +3326,7 @@ module ysyx_25050137(
     );
 
 
-    clint CLINT(
+    ysyx_25050137_clint CLINT(
         .clk(clk),
         .rst_n(rst_n),
 
@@ -3396,7 +3400,7 @@ module ysyx_25050137(
     wire [2:0] raddr_csr;
     wire [`CPU_WIDTH-1:0] rdata_csr;
 
-    idu IDU(
+    ysyx_25050137_idu IDU(
         .clk(clk),
         .rst_n(rst_n),
         .reset_ifu(reset_ifu),
@@ -3451,24 +3455,24 @@ module ysyx_25050137(
         //.wbu_rd(reg_write && rd_wbu_valid ? waddr : 0)
 
         // ======== Forwarding接口 (新增/修改) ========
-    // EXU级前递
-    .exu_rd(waddr_exu_to_lsu),
-    .exu_rd_valid(rd_exu_valid),
-    .exu_reg_write(reg_write_exu_to_lsu),    // 新增: EXU级是否写寄存器
-    .exu_MemRead(MemRead_exu_to_lsu),      // 新增: EXU级是否为Load指令 (load-use需要stall)
-    .exu_fwd_data(alu_result_exu_to_lsu),     // 新增: EXU级前递数据 (ALU结果)
+        // EXU级前递
+        .exu_rd(waddr_exu_to_lsu),
+        .exu_rd_valid(rd_exu_valid),
+        .exu_reg_write(reg_write_exu_to_lsu),    // 新增: EXU级是否写寄存器
+        .exu_MemRead(MemRead_exu_to_lsu),      // 新增: EXU级是否为Load指令 (load-use需要stall)
+        .exu_fwd_data(alu_result_exu_to_lsu),     // 新增: EXU级前递数据 (ALU结果)
 
-    // LSU级前递
-    .lsu_rd(waddr_lsu_to_wbu),
-    .lsu_rd_valid(rd_lsu_valid),
-    .lsu_reg_write(reg_write_lsu_to_wbu),    // 新增: LSU级是否写寄存器
-    .lsu_fwd_data(alu_result_lsu_to_wbu),     // 新增: LSU级前递数据 (ALU结果或Mem读取结果)
+        // LSU级前递
+        .lsu_rd(waddr_lsu_to_wbu),
+        .lsu_rd_valid(rd_lsu_valid),
+        .lsu_reg_write(reg_write_lsu_to_wbu),    // 新增: LSU级是否写寄存器
+        .lsu_fwd_data(alu_result_lsu_to_wbu),     // 新增: LSU级前递数据 (ALU结果或Mem读取结果)
 
-    // WBU级前递
-    .wbu_rd(waddr),
-    .wbu_rd_valid(rd_wbu_valid),
-    .wbu_reg_write(reg_write),    // 新增: WBU级是否写寄存器
-    .wbu_fwd_data(wdata)      // 新增: WBU级前递数据 (最终写回数据)
+        // WBU级前递
+        .wbu_rd(waddr),
+        .wbu_rd_valid(rd_wbu_valid),
+        .wbu_reg_write(reg_write),    // 新增: WBU级是否写寄存器
+        .wbu_fwd_data(wdata)      // 新增: WBU级前递数据 (最终写回数据)
     );
 
     wire [`CPU_WIDTH-1:0] wdata;
@@ -3483,7 +3487,7 @@ module ysyx_25050137(
     wire ecall;
     wire [`CPU_WIDTH-1:0] csr_reg [3:0]; //difftest
     
-    regfile Rgefile (
+    ysyx_25050137_regfile Rgefile (
         .clk(clk),
         .rst_n(rst_n),
         .wdata(wdata),
@@ -3533,7 +3537,7 @@ module ysyx_25050137(
 
     wire [`PC_WIDTH-1:0] pc_exu_to_lsu;
 
-    exu EXU(
+    ysyx_25050137_exu EXU(
         .clk(clk),
         .rst_n(rst_n),
         .reset_ifu(reset_ifu),
@@ -3612,7 +3616,7 @@ module ysyx_25050137(
 
     wire [`PC_WIDTH-1:0] pc_lsu_to_wbu;
 
-    lsu LSU(
+    ysyx_25050137_lsu LSU(
         .clk(clk),
         .rst_n(rst_n),
 
@@ -3699,7 +3703,7 @@ module ysyx_25050137(
 
     wire [`PC_WIDTH-1:0] pc_wbu_out;
     
-    wbu WBU(
+    ysyx_25050137_wbu WBU(
         .clk(clk),
         .rst_n(rst_n),
         //lsu to wbu

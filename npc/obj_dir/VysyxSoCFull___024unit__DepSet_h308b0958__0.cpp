@@ -8,6 +8,48 @@
 #include "VysyxSoCFull__Syms.h"
 #include "VysyxSoCFull___024unit.h"
 
+extern "C" void idu_counter_return(char inst_opcode);
+
+VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_idu_counter_return_TOP____024unit(CData/*7:0*/ inst_opcode) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_idu_counter_return_TOP____024unit\n"); );
+    // Body
+    char inst_opcode__Vcvt;
+    for (size_t inst_opcode__Vidx = 0; inst_opcode__Vidx < 1; ++inst_opcode__Vidx) inst_opcode__Vcvt = inst_opcode;
+    idu_counter_return(inst_opcode__Vcvt);
+}
+
+extern "C" void data_counter_add();
+
+VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_data_counter_add_TOP____024unit() {
+    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_data_counter_add_TOP____024unit\n"); );
+    // Body
+    data_counter_add();
+}
+
+extern "C" void send_data_request();
+
+VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_send_data_request_TOP____024unit() {
+    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_send_data_request_TOP____024unit\n"); );
+    // Body
+    send_data_request();
+}
+
+extern "C" void receive_data_back();
+
+VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_receive_data_back_TOP____024unit() {
+    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_receive_data_back_TOP____024unit\n"); );
+    // Body
+    receive_data_back();
+}
+
+extern "C" void difftest_skip();
+
+VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_difftest_skip_TOP____024unit() {
+    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_difftest_skip_TOP____024unit\n"); );
+    // Body
+    difftest_skip();
+}
+
 extern "C" void ebreak();
 
 VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_ebreak_TOP____024unit() {
@@ -96,74 +138,6 @@ VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_reg_return_value_TOP____
     int csr_reg_3__Vcvt;
     for (size_t csr_reg_3__Vidx = 0; csr_reg_3__Vidx < 1; ++csr_reg_3__Vidx) csr_reg_3__Vcvt = csr_reg_3;
     reg_return_value(gpr_0__Vcvt, gpr_1__Vcvt, gpr_2__Vcvt, gpr_3__Vcvt, gpr_4__Vcvt, gpr_5__Vcvt, gpr_6__Vcvt, gpr_7__Vcvt, gpr_8__Vcvt, gpr_9__Vcvt, gpr_10__Vcvt, gpr_11__Vcvt, gpr_12__Vcvt, gpr_13__Vcvt, gpr_14__Vcvt, gpr_15__Vcvt, gpr_16__Vcvt, gpr_17__Vcvt, gpr_18__Vcvt, gpr_19__Vcvt, gpr_20__Vcvt, gpr_21__Vcvt, gpr_22__Vcvt, gpr_23__Vcvt, gpr_24__Vcvt, gpr_25__Vcvt, gpr_26__Vcvt, gpr_27__Vcvt, gpr_28__Vcvt, gpr_29__Vcvt, gpr_30__Vcvt, gpr_31__Vcvt, pc__Vcvt, csr_reg_0__Vcvt, csr_reg_1__Vcvt, csr_reg_2__Vcvt, csr_reg_3__Vcvt);
-}
-
-extern "C" void idu_counter_return(char inst_opcode);
-
-VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_idu_counter_return_TOP____024unit(CData/*7:0*/ inst_opcode) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_idu_counter_return_TOP____024unit\n"); );
-    // Body
-    char inst_opcode__Vcvt;
-    for (size_t inst_opcode__Vidx = 0; inst_opcode__Vidx < 1; ++inst_opcode__Vidx) inst_opcode__Vcvt = inst_opcode;
-    idu_counter_return(inst_opcode__Vcvt);
-}
-
-extern "C" int pmem_read(int raddr);
-
-VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_pmem_read_TOP____024unit(IData/*31:0*/ raddr, IData/*31:0*/ &pmem_read__Vfuncrtn) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_pmem_read_TOP____024unit\n"); );
-    // Body
-    int raddr__Vcvt;
-    for (size_t raddr__Vidx = 0; raddr__Vidx < 1; ++raddr__Vidx) raddr__Vcvt = raddr;
-    int pmem_read__Vfuncrtn__Vcvt;
-    pmem_read__Vfuncrtn__Vcvt = pmem_read(raddr__Vcvt);
-    pmem_read__Vfuncrtn = pmem_read__Vfuncrtn__Vcvt;
-}
-
-extern "C" void pmem_write(int waddr, int wdata, char wmask);
-
-VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_pmem_write_TOP____024unit(IData/*31:0*/ waddr, IData/*31:0*/ wdata, CData/*7:0*/ wmask) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_pmem_write_TOP____024unit\n"); );
-    // Body
-    int waddr__Vcvt;
-    for (size_t waddr__Vidx = 0; waddr__Vidx < 1; ++waddr__Vidx) waddr__Vcvt = waddr;
-    int wdata__Vcvt;
-    for (size_t wdata__Vidx = 0; wdata__Vidx < 1; ++wdata__Vidx) wdata__Vcvt = wdata;
-    char wmask__Vcvt;
-    for (size_t wmask__Vidx = 0; wmask__Vidx < 1; ++wmask__Vidx) wmask__Vcvt = wmask;
-    pmem_write(waddr__Vcvt, wdata__Vcvt, wmask__Vcvt);
-}
-
-extern "C" void data_counter_add();
-
-VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_data_counter_add_TOP____024unit() {
-    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_data_counter_add_TOP____024unit\n"); );
-    // Body
-    data_counter_add();
-}
-
-extern "C" void send_data_request();
-
-VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_send_data_request_TOP____024unit() {
-    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_send_data_request_TOP____024unit\n"); );
-    // Body
-    send_data_request();
-}
-
-extern "C" void receive_data_back();
-
-VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_receive_data_back_TOP____024unit() {
-    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_receive_data_back_TOP____024unit\n"); );
-    // Body
-    receive_data_back();
-}
-
-extern "C" void difftest_skip();
-
-VL_INLINE_OPT void VysyxSoCFull___024unit____Vdpiimwrap_difftest_skip_TOP____024unit() {
-    VL_DEBUG_IF(VL_DBG_MSGF("+        VysyxSoCFull___024unit____Vdpiimwrap_difftest_skip_TOP____024unit\n"); );
-    // Body
-    difftest_skip();
 }
 
 extern "C" void flash_read(int addr, int* data);
