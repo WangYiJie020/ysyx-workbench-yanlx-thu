@@ -2204,7 +2204,6 @@ module ysyx_25050137_regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
   output [DATA_WIDTH-1:0] rdata1,
   input [ADDR_WIDTH-1:0] raddr2,
   output [DATA_WIDTH-1:0] rdata2,
-  output [DATA_WIDTH-1:0] value1,
   output reg [31:0] reg_file [31:0],
 
   input [2:0] raddr_csr,
@@ -2942,7 +2941,6 @@ module ysyx_25050137(
     assign pc_to_mem = pc_ifu_to_idu;
     assign inst_from_mem = inst_ifu_to_idu;
 
-    wire useless1,useless2,useless3,useless4;
     wire fencei;
 
     wire [`ysyx_25050137_CPU_WIDTH-1:0] cache_araddr;
@@ -3369,7 +3367,6 @@ module ysyx_25050137(
     wire [`ysyx_25050137_REG_ADDR-1:0] raddr2;
     wire [`ysyx_25050137_CPU_WIDTH-1:0] rdata1;
     wire [`ysyx_25050137_CPU_WIDTH-1:0] rdata2;
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] a5;
     wire [`ysyx_25050137_PC_WIDTH-1:0] pc_idu_to_exu;
     wire [`ysyx_25050137_CPU_WIDTH-1:0] rs1_idu_to_exu;
     wire [`ysyx_25050137_CPU_WIDTH-1:0] rs2_idu_to_exu;
@@ -3497,7 +3494,6 @@ module ysyx_25050137(
         .rdata1(rdata1),
         .raddr2(raddr2), //rs2
         .rdata2(rdata2),
-        .value1(a5),
         .reg_file(reg_file),  //for difftest
 
         .raddr_csr(raddr_csr),
@@ -3516,7 +3512,6 @@ module ysyx_25050137(
     wire [`ysyx_25050137_CPU_WIDTH-1:0] rs1_exu_to_lsu;
     wire [`ysyx_25050137_CPU_WIDTH-1:0] rs2_exu_to_lsu;
     wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_rdata_l_rs1_exu_to_lsu;
-    wire [`ysyx_25050137_PC_WIDTH-1:0] npc_exu_to_lsu;
     wire MemRead_exu_to_lsu;
     wire MemWrite_exu_to_lsu;
     wire [3:0] wmask_exu_to_lsu;
@@ -3599,7 +3594,6 @@ module ysyx_25050137(
     wire [`ysyx_25050137_CPU_WIDTH-1:0] rs1_lsu_to_wbu;
     wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_rdata_l_rs1_lsu_to_wbu;
     wire [`ysyx_25050137_CPU_WIDTH-1:0] datamem_readdata_lsu_to_wbu;
-    wire [`ysyx_25050137_PC_WIDTH-1:0] npc_lsu_to_wbu;
     wire [2:0] rmask_lsu_to_wbu;
     wire wb_src_lsu_to_wbu;
     wire csr_write_lsu_to_wbu;
