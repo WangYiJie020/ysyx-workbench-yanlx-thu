@@ -3626,10 +3626,10 @@ module ysyx_25050137
         .pc_o(pc_wbu_out)
     );
 
-import "DPI-C" function void ebreak();
+//import "DPI-C" function void ebreak();
     always@(*) begin       
         if(inst_from_mem == 32'h00100073) begin
-            ebreak();
+            //ebreak();
             $finish;
         end
     end
