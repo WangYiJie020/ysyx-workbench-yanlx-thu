@@ -135,9 +135,6 @@ module ysyx_25050137_alu(
 
 assign zero = ~(| alu_result);
 
-//wire [63:0] mux_tmp;
-//assign mux_tmp = a*b;
-
 always@(*) begin
     case(op)
         4'b0000: alu_result = b; 
@@ -160,15 +157,6 @@ always@(*) begin
 end
 
 endmodule
-
-// ============================================================
-//  AXI4 总线仲裁器
-//  - AR + R 通道: 先到先得，同时到达则轮询
-//    锁定时机: arvalid出现即锁定（而非等待AR握手）
-//  - AW + W + B 通道: 直通
-// ============================================================
-
-// `define ysyx_25050137_CPU_WIDTH 32   // 若顶层已定义请删除此行
 
 module ysyx_25050137_axi_arbiter (
     input clk,
@@ -1394,8 +1382,6 @@ endmodule
 
 
 
-import "DPI-C" function void idu_counter_return(input byte inst_opcode);
-
 module ysyx_25050137_idu(
     input clk,
     input rst_n,
@@ -1666,7 +1652,6 @@ module ysyx_25050137_idu(
             end
             else if (current_state == S_SEND) begin
                 idu_valid_o <= 0;
-                idu_counter_return({1'b0, inst[6:0]});
             end
             else begin
                 idu_valid_o <= 0;
@@ -1727,9 +1712,8 @@ module ysyx_25050137_ifu (
     output reg  [`ysyx_25050137_PC_WIDTH-1:0]    pc_o,
     output reg  [`ysyx_25050137_INST_WIDTH-1:0]  inst_o,
     output wire                    ifu_valid_o,
-    input  wire                    ifu_ready_i,
+    input  wire                    ifu_ready_i
 
-    input  wire                    bus_busy
 );
 
 // =============================================================================
@@ -1854,13 +1838,6 @@ always @(posedge clk or negedge rst_n) begin
 end
 
 endmodule
-
-
-
-import "DPI-C" function void data_counter_add();
-import "DPI-C" function void send_data_request();
-import "DPI-C" function void receive_data_back();
-import "DPI-C" function void difftest_skip();
 
 // =============================================================================
 // LSU — area-optimized
@@ -2097,14 +2074,6 @@ always @(posedge clk or negedge rst_n) begin
                     ecall_lat         <= ecall_i;
                     waddr_csr_lat     <= waddr_csr_i;
 
-                    // DPI-C: difftest skip for MMIO
-                    if (MemRead_i || MemWrite_i) begin
-                        if ((alu_result_i >= 32'h10000000 && alu_result_i <= 32'h10000fff) ||
-                            (alu_result_i >= 32'h02000000 && alu_result_i <= 32'h0200ffff)) begin
-                            difftest_skip();
-                        end
-                    end
-
                     // Decide next state
                     if (MemRead_i)
                         state <= S_AR;
@@ -2121,7 +2090,6 @@ always @(posedge clk or negedge rst_n) begin
                 // Wait for AR handshake
                 if (arvalid_o && arready_i) begin
                     state <= S_R;
-                    send_data_request();
                 end
             end
 
@@ -2130,8 +2098,6 @@ always @(posedge clk or negedge rst_n) begin
                 if (rvalid_i && rlast_i) begin
                     rdata_buf <= rdata_i;
                     state     <= S_OUT;
-                    data_counter_add();
-                    receive_data_back();
                 end
             end
 
@@ -2139,7 +2105,6 @@ always @(posedge clk or negedge rst_n) begin
                 // AW and W can handshake independently
                 if (awvalid_o && awready_i) begin
                     aw_done <= 1'b1;
-                    send_data_request();
                 end
                 if (wvalid_o && wready_i)
                     w_done <= 1'b1;
@@ -2153,8 +2118,6 @@ always @(posedge clk or negedge rst_n) begin
             S_B: begin
                 if (bvalid_i) begin
                     state <= S_OUT;
-                    data_counter_add();
-                    receive_data_back();
                 end
             end
 
@@ -2204,7 +2167,6 @@ module ysyx_25050137_regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
   output [DATA_WIDTH-1:0] rdata1,
   input [ADDR_WIDTH-1:0] raddr2,
   output [DATA_WIDTH-1:0] rdata2,
-  output reg [31:0] reg_file [31:0],
 
   input [2:0] raddr_csr,
   output [DATA_WIDTH-1:0] rdata_csr,
@@ -2212,9 +2174,8 @@ module ysyx_25050137_regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
   input [DATA_WIDTH-1:0] wdata_csr,
   input wen_csr,
   input ecall,
-  input [DATA_WIDTH-1:0] pc,
+  input [DATA_WIDTH-1:0] pc
 
-  output reg [31:0] csr_reg [3:0]
 );
 
   genvar gv_i;
@@ -2232,13 +2193,6 @@ module ysyx_25050137_regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
 
   reg [DATA_WIDTH-1:0] regs [1:15];
   reg [DATA_WIDTH-1:0] csr [0:3];
-
-  //assign rdata1 = rf[raddr1_mid];
-  //assign rdata2 = rf[raddr2_mid];
-  //assign value1 = rf[15]; //value1 = a5;
-
-  //assign rdata_csr = (raddr_csr[2]) ? (raddr_csr[1] ? (raddr_csr[0] ? csr_mepc : csr_mtvec) : (raddr_csr[0] ? 0 : 0)) 
-  //                    : (raddr_csr[1] ? (raddr_csr[0] ? csr_mcause: csr_mepc) : (raddr_csr[0] ? csr_mtvec: csr_mstatus));
 
   always @(posedge clk) begin
     if (wen && waddr != 0) regs[waddr] <= wdata;
@@ -2796,18 +2750,6 @@ assign clint_bready_o  = 1'b0;
 
 endmodule
 
-import "DPI-C" function void ebreak();
-import "DPI-C" function void reg_return_value(input int gpr_0,input int gpr_1,
-input int gpr_2,input int gpr_3,input int gpr_4,input int gpr_5,
-input int gpr_6,input int gpr_7,input int gpr_8,input int gpr_9,
-input int gpr_10,input int gpr_11,input int gpr_12,input int gpr_13,
-input int gpr_14,input int gpr_15,input int gpr_16,input int gpr_17,
-input int gpr_18,input int gpr_19,input int gpr_20,input int gpr_21,
-input int gpr_22,input int gpr_23,input int gpr_24,input int gpr_25,
-input int gpr_26,input int gpr_27,input int gpr_28,input int gpr_29,
-input int gpr_30,input int gpr_31,input int pc,input int csr_reg_0,
-input int csr_reg_1,input int csr_reg_2,input int csr_reg_3);
-
 module ysyx_25050137(
     input           clock,
     input           reset,
@@ -2904,8 +2846,6 @@ module ysyx_25050137(
     wire ifu_rvalid;
     wire ifu_rready;
 
-    wire bus_busy;
-
     ysyx_25050137_ifu IFU(
         .clk(clk),
         .rst_n(rst_n),
@@ -2933,9 +2873,8 @@ module ysyx_25050137(
         .inst_o(inst_ifu_to_idu),
 
         .ifu_valid_o(valid_ifu_to_idu),
-        .ifu_ready_i(ready_ifu_to_idu),
+        .ifu_ready_i(ready_ifu_to_idu)
 
-        .bus_busy(bus_busy)
     );
 
     assign pc_to_mem = pc_ifu_to_idu;
@@ -3104,23 +3043,7 @@ module ysyx_25050137(
         .rid_o_a(cache_rid),
         .rvalid_o_a(cache_rvalid),
         .rready_i_a(cache_rready),
-/*
- //a
-        .araddr_i_a(ifu_araddr),
-        .arid_i_a(ifu_arid),
-        .arlen_i_a(ifu_arlen),
-        .arsize_i_a(ifu_arsize),
-        .arburst_i_a(ifu_arburst),
-        .arvalid_i_a(ifu_arvalid),
-        .arready_o_a(ifu_arready),
 
-        .rdata_o_a(ifu_rdata),
-        .rresp_o_a(ifu_rresp),
-        .rlast_o_a(ifu_rlast),
-        .rid_o_a(ifu_rid),
-        .rvalid_o_a(ifu_rvalid),
-        .rready_i_a(ifu_rready),
-*/
         .awaddr_i_a(0),
         .awid_i_a(0),
         .awlen_i_a(0),
@@ -3475,14 +3398,12 @@ module ysyx_25050137(
     wire [`ysyx_25050137_CPU_WIDTH-1:0] wdata;
     wire [`ysyx_25050137_REG_ADDR-1:0] waddr;
     wire reg_write;
-    reg [`ysyx_25050137_CPU_WIDTH-1:0] reg_file [31:0];
 
     //write csr
     wire csr_write;
     wire [1:0] waddr_csr;
     wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_wdata;
     wire ecall;
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_reg [3:0]; //difftest
     
     ysyx_25050137_regfile Rgefile (
         .clk(clk),
@@ -3494,7 +3415,6 @@ module ysyx_25050137(
         .rdata1(rdata1),
         .raddr2(raddr2), //rs2
         .rdata2(rdata2),
-        .reg_file(reg_file),  //for difftest
 
         .raddr_csr(raddr_csr),
         .rdata_csr(rdata_csr),
@@ -3502,9 +3422,7 @@ module ysyx_25050137(
         .wdata_csr(csr_wdata),
         .wen_csr(csr_write),
         .ecall(ecall),
-        .pc(pc_wbu_out),
-
-        .csr_reg(csr_reg) //for difftest
+        .pc(pc_wbu_out)
         
     );
 
@@ -3737,17 +3655,9 @@ module ysyx_25050137(
 
     always@(*) begin       
         if(inst_from_mem == 32'h00100073) begin
-            ebreak();
             $finish;
         end
     end
     
-    always@(*) begin
-        reg_return_value(reg_file[0],reg_file[1],reg_file[2],reg_file[3],reg_file[4],reg_file[5],reg_file[6],
-        reg_file[7],reg_file[8],reg_file[9],reg_file[10],reg_file[11],reg_file[12],reg_file[13],reg_file[14],
-        reg_file[15],reg_file[16],reg_file[17],reg_file[18],reg_file[19],reg_file[20],reg_file[21],reg_file[22],
-        reg_file[23],reg_file[24],reg_file[25],reg_file[26],reg_file[27],reg_file[28],reg_file[29],reg_file[30],
-        reg_file[31],pc_wbu_out,csr_reg[2],csr_reg[0],csr_reg[3],csr_reg[1]);
-    end
     
 endmodule
