@@ -3633,7 +3633,7 @@ import "DPI-C" function void ebreak();
     always@(*) begin       
         if(inst_from_mem == 32'h00100073) begin
             ebreak();
-            $finish;
+            //$finish;
         end
     end
 `endif 
