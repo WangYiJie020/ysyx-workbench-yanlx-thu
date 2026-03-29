@@ -894,18 +894,18 @@ module ysyx_25050137_csr(
             7'b1110011:begin
                 case (funct3)
                     3'b000:begin 
-                        if(inst==32'h00000073) raddr_csr = 3'b110; //ecall
-                        else if(inst==32'h30200073) raddr_csr = 3'b111; //mret
+                        if(inst==32'h00000073) raddr_csr = 3'b001; //ecall csr_mtvec
+                        else if(inst==32'h30200073) raddr_csr = 3'b010; //mret csr_mepc
                         else raddr_csr = 0;
                     end
                     3'b001,3'b010: begin //csrrw, csrrs
                         case (inst[31:20])
-                            12'hf11:raddr_csr = 3'b100;
-                            12'hf12:raddr_csr = 3'b101;
-                            12'h300:raddr_csr = 3'b000;
-                            12'h305:raddr_csr = 3'b001;
-                            12'h341:raddr_csr = 3'b010;
-                            12'h342:raddr_csr = 3'b011;
+                            12'hf11:raddr_csr = 3'b100; //csr_mvendorid
+                            12'hf12:raddr_csr = 3'b101; //csr_marchid
+                            12'h300:raddr_csr = 3'b000; //csr_mstatus
+                            12'h305:raddr_csr = 3'b001; //csr_mtvec
+                            12'h341:raddr_csr = 3'b010; //csr_mepc
+                            12'h342:raddr_csr = 3'b011; //csr_mcause
                             default:raddr_csr = 0;
                         endcase
                     end
