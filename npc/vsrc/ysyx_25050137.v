@@ -2,7 +2,10 @@
 `define ysyx_25050137_PC_WIDTH 32
 `define ysyx_25050137_INST_WIDTH 32
 `define ysyx_25050137_REG_ADDR 5
+
+`ifndef ysyx_25050137_PC_INIT
 `define ysyx_25050137_PC_INIT 32'h30000000
+`endif
 
 module ysyx_25050137_adder(
     input [31:0]a,
@@ -160,7 +163,7 @@ endmodule
 
 module ysyx_25050137_axi_arbiter (
     input clk,
-    input rst_n,
+    input reset,
 
     // ========== Master A (e.g. IFU) ==========
     // AR
@@ -308,8 +311,8 @@ assign arb_grant_next = arb_locked                        ? arb_grant   : // 锁
 // ============================================================
 // 仲裁寄存器时序逻辑
 // ============================================================
-always @(posedge clk or negedge rst_n) begin
-    if (!rst_n) begin
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
         arb_grant      <= MASTER_A;
         arb_locked     <= 1'b0;
         current_master <= MASTER_A;
@@ -465,7 +468,7 @@ endmodule
 
 module ysyx_25050137_clint (
     input clk,
-    input rst_n,
+    input reset,
 
     // AXI AR
     input  [`ysyx_25050137_CPU_WIDTH-1:0] araddr_i,
@@ -512,8 +515,8 @@ module ysyx_25050137_clint (
 // =============================================================================
 reg [63:0] time_counter;
 
-always @(posedge clk or negedge rst_n) begin
-    if (!rst_n)
+always @(posedge clk or posedge reset) begin
+    if (reset)
         time_counter <= 64'd0;
     else
         time_counter <= time_counter + 1;
@@ -566,8 +569,8 @@ assign bid_o    = 4'd0;
 // =============================================================================
 // State transitions
 // =============================================================================
-always @(posedge clk or negedge rst_n) begin
-    if (!rst_n) begin
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
         state      <= S_IDLE;
         araddr_lat <= 0;
         aw_done    <= 1'b0;
@@ -938,7 +941,7 @@ endmodule
 
 module ysyx_25050137_exu (
     input clk,
-    input rst_n,
+    input reset,
     input reset_ifu,
 
     // IDU → EXU
@@ -1111,8 +1114,8 @@ ysyx_25050137_alu ALU (
 // =============================================================================
 // State machine
 // =============================================================================
-always @(posedge clk or negedge rst_n) begin
-    if (!rst_n) begin
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
         state <= S_IDLE;
     end else begin
         case (state)
@@ -1171,7 +1174,7 @@ module ysyx_25050137_icache #(
     parameter ADDR_WIDTH  = 32
 ) (
     input clk,
-    input rst_n,
+    input reset,
 
     // CPU side (AR)
     input  [DATA_WIDTH-1:0] cpu_araddr_i,
@@ -1297,8 +1300,8 @@ endgenerate
 // =============================================================================
 integer i;
 
-always @(posedge clk or negedge rst_n) begin
-    if (!rst_n) begin
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
         state     <= S_IDLE;
         burst_cnt <= 0;
         for (i = 0; i < NUM_BLOCKS; i = i + 1)
@@ -1372,7 +1375,7 @@ endmodule
 
 module ysyx_25050137_idu(
     input clk,
-    input rst_n,
+    input reset,
     input reset_ifu,
     //regfiles
     output [`ysyx_25050137_REG_ADDR-1:0] raddr1,
@@ -1416,7 +1419,7 @@ module ysyx_25050137_idu(
     output reg idu_valid_o,
     input idu_ready_i,
 
-    output fencei,
+    output reg fencei,
 
     // ======== Forwarding接口 (新增/修改) ========
     // EXU级前递
@@ -1603,8 +1606,8 @@ module ysyx_25050137_idu(
         endcase
     end
 
-    always @(posedge clk or negedge rst_n) begin        
-        if (!rst_n || reset_ifu == 1) begin
+    always @(posedge clk or posedge reset) begin        
+        if (reset || reset_ifu == 1) begin
             current_state <= S_IDLE;
             idu_valid_o <= 0;
             idu_ready_o <= 0;
@@ -1669,7 +1672,7 @@ endmodule
 
 module ysyx_25050137_ifu (
     input  wire                    clk,
-    input  wire                    rst_n,
+    input  wire                    reset,
     input  wire                    fencei,
 
     // AXI AR channel
@@ -1744,8 +1747,8 @@ assign reset_o = ctrl_hazard;
 // =============================================================================
 // State machine
 // =============================================================================
-always @(posedge clk or negedge rst_n) begin
-    if (!rst_n || fencei==1) begin
+always @(posedge clk or posedge reset) begin
+    if (reset || fencei==1) begin
         state      <= S_ADDR;
         pc_fetch   <= `ysyx_25050137_PC_INIT;
         pc_o       <= `ysyx_25050137_PC_INIT;
@@ -1847,7 +1850,7 @@ endmodule
 
 module ysyx_25050137_lsu(
     input clk,
-    input rst_n,
+    input reset,
 
     // EXU → LSU
     input [`ysyx_25050137_CPU_WIDTH-1:0] alu_result_i,
@@ -2035,8 +2038,8 @@ assign waddr_csr_o         = waddr_csr_lat;
 // =============================================================================
 wire idle_handshake = (state == S_IDLE) && lsu_valid_i;
 
-always @(posedge clk or negedge rst_n) begin
-    if (!rst_n) begin
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
         state    <= S_IDLE;
         aw_done  <= 1'b0;
         w_done   <= 1'b0;
@@ -2121,7 +2124,7 @@ end
 
 endmodule
 
-module ysyx_25050137_mux21#(WIDTH = 32)(
+module ysyx_25050137_mux21 # (parameter WIDTH = 32)(
     input [WIDTH-1:0] d0,
     input [WIDTH-1:0] d1,
     input sel,
@@ -2132,7 +2135,7 @@ module ysyx_25050137_mux21#(WIDTH = 32)(
 
 endmodule
 
-module ysyx_25050137_mux41#(WIDTH = 32)(
+module ysyx_25050137_mux41#(parameter WIDTH = 32)(
     input [WIDTH-1:0] d0,
     input [WIDTH-1:0] d1,
     input [WIDTH-1:0] d2,
@@ -2144,9 +2147,9 @@ module ysyx_25050137_mux41#(WIDTH = 32)(
     assign out = sel[1] ? (sel[0] ? d3 : d2) : (sel[0] ? d1 : d0);
 endmodule
 
-module ysyx_25050137_regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
+module ysyx_25050137_regfile #(parameter ADDR_WIDTH = 5, parameter DATA_WIDTH = 32) (
   input clk,
-  input rst_n,
+  input reset,
   input [DATA_WIDTH-1:0] wdata,
   input [ADDR_WIDTH-1:0] waddr,
   input wen,
@@ -2228,8 +2231,8 @@ module ysyx_25050137_regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
                     m2_8  | m2_9  | m2_10 | m2_11 |
                     m2_12 | m2_13 | m2_14 | m2_15;
 
-  always @(posedge clk, negedge rst_n) begin
-    if(!rst_n) begin
+  always @(posedge clk, posedge reset) begin
+    if(reset) begin
       csr[0] <= 32'h1800;
     end
     else if(wen_csr) begin
@@ -2304,7 +2307,7 @@ module ysyx_25050137_sext_mem(
 
 endmodule
 
-module ysyx_25050137_sext #(DATA_WIDTH = 32)(
+module ysyx_25050137_sext #(parameter DATA_WIDTH = 32)(
     input [31:0] inst,
     output reg [DATA_WIDTH-1:0]data
 );
@@ -2412,7 +2415,7 @@ endmodule
 
 module ysyx_25050137_wbu (
     input clk,
-    input rst_n,
+    input reset,
 
     // LSU → WBU
     input [`ysyx_25050137_CPU_WIDTH-1:0]  alu_result_i,
@@ -2494,8 +2497,8 @@ ysyx_25050137_mux21 Csr_Wdata (
 // =============================================================================
 // State machine
 // =============================================================================
-always @(posedge clk or negedge rst_n) begin
-    if (!rst_n) begin
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
         active <= 1'b0;
     end else begin
         if (!active) begin
@@ -2541,7 +2544,7 @@ endmodule
 
 module ysyx_25050137_xbar (
     input clk,
-    input rst_n,
+    input reset,
 
     // Upstream (from arbiter)
     input  [`ysyx_25050137_CPU_WIDTH-1:0] axi_araddr_i,
@@ -2792,9 +2795,8 @@ module ysyx_25050137
 
 );
 
-    wire clk,rst_n,reset_ifu;
+    wire clk,reset_ifu;
     assign clk = clock;
-    assign rst_n = !reset;
 
     wire [`ysyx_25050137_PC_WIDTH-1:0] pc_to_mem;
     wire [`ysyx_25050137_INST_WIDTH-1:0] inst_from_mem;
@@ -2824,7 +2826,7 @@ module ysyx_25050137
 
     ysyx_25050137_ifu IFU(
         .clk(clk),
-        .rst_n(rst_n),
+        .reset(reset),
         .fencei(fencei),
 
         .araddr_o(ifu_araddr),
@@ -2875,7 +2877,7 @@ module ysyx_25050137
 
     ysyx_25050137_icache ICACHE (
         .clk(clk),
-        .rst_n(rst_n),
+        .reset(reset),
 
         //CPU
         .cpu_araddr_i(ifu_araddr),
@@ -3002,7 +3004,7 @@ module ysyx_25050137
 
     ysyx_25050137_axi_arbiter AXI_Arbiter(
         .clk(clk),
-        .rst_n(rst_n),
+        .reset(reset),
 
  //a
         .araddr_i_a(cache_araddr),
@@ -3021,23 +3023,23 @@ module ysyx_25050137
         .rready_i_a(cache_rready),
 
         .awaddr_i_a(0),
-        .awid_i_a(0),
-        .awlen_i_a(0),
-        .awsize_i_a(0),
-        .awburst_i_a(0),
-        .awvalid_i_a(0),
+        .awid_i_a(4'b0),
+        .awlen_i_a(8'b0),
+        .awsize_i_a(3'b0),
+        .awburst_i_a(2'b0),
+        .awvalid_i_a(1'b0),
         .awready_o_a(),
 
         .wdata_i_a(0),
-        .wstrb_i_a(0),
-        .wlast_i_a(0),
-        .wvalid_i_a(0),
+        .wstrb_i_a(4'b0),
+        .wlast_i_a(1'b0),
+        .wvalid_i_a(1'b0),
         .wready_o_a(),
 
         .bresp_o_a(),
         .bid_o_a(),
         .bvalid_o_a(),
-        .bready_i_a(0),
+        .bready_i_a(1'b0),
 
         //b
         .araddr_i_b(lsu_araddr),
@@ -3113,7 +3115,7 @@ module ysyx_25050137
 
     ysyx_25050137_xbar Xbar(
         .clk(clk),
-        .rst_n(rst_n),
+        .reset(reset),
 
         //in
         .axi_araddr_i(axi_araddr),
@@ -3224,7 +3226,7 @@ module ysyx_25050137
 
     ysyx_25050137_clint CLINT(
         .clk(clk),
-        .rst_n(rst_n),
+        .reset(reset),
 
         .araddr_i(clint_araddr),
         .arid_i(clint_arid),
@@ -3297,7 +3299,7 @@ module ysyx_25050137
 
     ysyx_25050137_idu IDU(
         .clk(clk),
-        .rst_n(rst_n),
+        .reset(reset),
         .reset_ifu(reset_ifu),
         //regfiles
         .raddr1(raddr1),
@@ -3382,7 +3384,7 @@ module ysyx_25050137
     
     ysyx_25050137_regfile Rgefile (
         .clk(clk),
-        .rst_n(rst_n),
+        .reset(reset),
         .wdata(wdata),
         .waddr(waddr), //rd
         .wen(reg_write),
@@ -3427,7 +3429,7 @@ module ysyx_25050137
 
     ysyx_25050137_exu EXU(
         .clk(clk),
-        .rst_n(rst_n),
+        .reset(reset),
         .reset_ifu(reset_ifu),
         //idu to exu
         .pc_i(pc_idu_to_exu),
@@ -3505,7 +3507,7 @@ module ysyx_25050137
 
     ysyx_25050137_lsu LSU(
         .clk(clk),
-        .rst_n(rst_n),
+        .reset(reset),
 
         //exu to lsu
         .alu_result_i(alu_result_exu_to_lsu),
@@ -3591,7 +3593,7 @@ module ysyx_25050137
     
     ysyx_25050137_wbu WBU(
         .clk(clk),
-        .rst_n(rst_n),
+        .reset(reset),
         //lsu to wbu
         .alu_result_i(alu_result_lsu_to_wbu),
         .rs1_i(rs1_lsu_to_wbu),
@@ -3627,12 +3629,12 @@ module ysyx_25050137
     );
 
 //import "DPI-C" function void ebreak();
-    always@(*) begin       
+/*    always@(*) begin       
         if(inst_from_mem == 32'h00100073) begin
             //ebreak();
             $finish;
         end
     end
-    
+  */  
     
 endmodule

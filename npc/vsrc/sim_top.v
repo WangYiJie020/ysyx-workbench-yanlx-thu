@@ -117,7 +117,7 @@ module sim_top;
     // ---------- 内存模型 ----------
     // 256KB 内存, 基地址 0x80000000
     localparam MEM_BASE = 32'h80000000;
-    localparam MEM_SIZE = 256 * 1024; // 256KB
+    localparam MEM_SIZE = 8 * 1024 * 1024; // 8MB
     reg [7:0] mem [0:MEM_SIZE-1];
 
     // 加载程序
@@ -125,6 +125,12 @@ module sim_top;
     initial begin
         for (i = 0; i < MEM_SIZE; i = i + 1) mem[i] = 8'h0;
         $readmemh("mem.hex", mem);
+    end
+
+    initial
+    begin            
+        $dumpfile("wave.vcd");        //生成的vcd文件名称
+        $dumpvars(0, sim_top);    //tb模块名称
     end
 
     // 地址转换: AXI地址 -> 内存偏移
