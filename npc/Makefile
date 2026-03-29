@@ -63,7 +63,30 @@ sim: $(VSRCS) $(CSRCS)
 		-CFLAGS "-mcmodel=medium" -LDFLAGS "-lreadline" 
 	./obj_dir/V$(TOPNAME) --diff=${DIFFTEST} $(IMG) 
 #./obj_dir/V$(TOPNAME) --diff=${DIFFTEST} char-test2.bin
-# ./obj_dir/V$(TOPNAME) --diff=${DIFFTEST} $(IMG) 
+# ./obj_dir/V$(TOPNAME) --diff=${DIFFTEST} $(IMG)
+
+verilog:
+	mkdir -p build
+	cp vsrc/ysyx_25050137.v build/ysyx_25050137.v
+
+
+sim-iverilog: verilog
+	mkdir -p build
+	python3 -c "\
+	  data=open('$(IMG)','rb').read(); \
+	  f=open('build/mem.hex','w'); \
+	  [f.write('@%08x %02x\n'%(i,data[i])) for i in range(len(data))]" 
+	iverilog -o build/sim_out -g2012 -Dysyx_25050137_PC_INIT=32\'h80000000 build/ysyx_25050137.v vsrc/sim_top.v
+	cd build && vvp sim_out
+
+sim-iverilog-netlist:
+	mkdir -p build
+	python3 -c "\
+	  data=open('$(IMG)','rb').read(); \
+	  f=open('build/mem.hex','w'); \
+	  [f.write('@%08x %02x\n'%(i,data[i])) for i in range(len(data))]"
+	iverilog -o build/sim_out -g2012 $(NETLIST) $(CELLS) vsrc/sim_top.v
+	cd build && vvp sim_out
 
 include ../Makefile
 
@@ -73,5 +96,4 @@ run: $(BIN)
 clean:
 	rm -rf $(BUILD_DIR)
 
-.PHONY: default all clean run
-
+.PHONY: default all clean run verilog sim-iverilog sim-iverilog-netlist
