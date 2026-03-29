@@ -254,7 +254,7 @@ module sim_top;
         rst = 1;
         #30;
         rst = 0;
-      #10000000000000; // 超时退出
+        #100000000000; // 超时退出
         $display("TIMEOUT");
         $finish;
     end
