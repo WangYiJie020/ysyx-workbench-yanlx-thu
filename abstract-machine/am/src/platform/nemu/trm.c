@@ -6,10 +6,7 @@ extern char _heap_end;
 int main(const char *args);
 
 Area heap = RANGE(&_heap_start, &_heap_end);
-#ifndef MAINARGS
-#define MAINARGS "test"
-#endif
-static const char mainargs[] = MAINARGS;
+static const char mainargs[MAINARGS_MAX_LEN] = MAINARGS_PLACEHOLDER; // defined in CFLAGS
 
 void putch(char ch) {
   outb(SERIAL_PORT, ch);
