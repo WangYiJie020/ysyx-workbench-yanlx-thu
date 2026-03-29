@@ -2,7 +2,10 @@
 `define ysyx_25050137_PC_WIDTH 32
 `define ysyx_25050137_INST_WIDTH 32
 `define ysyx_25050137_REG_ADDR 5
+
+`ifndef ysyx_25050137_PC_INIT
 `define ysyx_25050137_PC_INIT 32'h30000000
+`endif
 
 module ysyx_25050137_adder(
     input [31:0]a,
@@ -1416,7 +1419,7 @@ module ysyx_25050137_idu(
     output reg idu_valid_o,
     input idu_ready_i,
 
-    output fencei,
+    output reg fencei,
 
     // ======== Forwarding接口 (新增/修改) ========
     // EXU级前递
@@ -2121,7 +2124,7 @@ end
 
 endmodule
 
-module ysyx_25050137_mux21#(WIDTH = 32)(
+module ysyx_25050137_mux21 # (parameter WIDTH = 32)(
     input [WIDTH-1:0] d0,
     input [WIDTH-1:0] d1,
     input sel,
@@ -2132,7 +2135,7 @@ module ysyx_25050137_mux21#(WIDTH = 32)(
 
 endmodule
 
-module ysyx_25050137_mux41#(WIDTH = 32)(
+module ysyx_25050137_mux41#(parameter WIDTH = 32)(
     input [WIDTH-1:0] d0,
     input [WIDTH-1:0] d1,
     input [WIDTH-1:0] d2,
@@ -2144,7 +2147,7 @@ module ysyx_25050137_mux41#(WIDTH = 32)(
     assign out = sel[1] ? (sel[0] ? d3 : d2) : (sel[0] ? d1 : d0);
 endmodule
 
-module ysyx_25050137_regfile #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
+module ysyx_25050137_regfile #(parameter ADDR_WIDTH = 5, parameter DATA_WIDTH = 32) (
   input clk,
   input rst_n,
   input [DATA_WIDTH-1:0] wdata,
@@ -2304,7 +2307,7 @@ module ysyx_25050137_sext_mem(
 
 endmodule
 
-module ysyx_25050137_sext #(DATA_WIDTH = 32)(
+module ysyx_25050137_sext #(parameter DATA_WIDTH = 32)(
     input [31:0] inst,
     output reg [DATA_WIDTH-1:0]data
 );
@@ -3021,23 +3024,23 @@ module ysyx_25050137
         .rready_i_a(cache_rready),
 
         .awaddr_i_a(0),
-        .awid_i_a(0),
-        .awlen_i_a(0),
-        .awsize_i_a(0),
-        .awburst_i_a(0),
-        .awvalid_i_a(0),
+        .awid_i_a(4'b0),
+        .awlen_i_a(8'b0),
+        .awsize_i_a(3'b0),
+        .awburst_i_a(2'b0),
+        .awvalid_i_a(1'b0),
         .awready_o_a(),
 
         .wdata_i_a(0),
-        .wstrb_i_a(0),
-        .wlast_i_a(0),
-        .wvalid_i_a(0),
+        .wstrb_i_a(4'b0),
+        .wlast_i_a(1'b0),
+        .wvalid_i_a(1'b0),
         .wready_o_a(),
 
         .bresp_o_a(),
         .bid_o_a(),
         .bvalid_o_a(),
-        .bready_i_a(0),
+        .bready_i_a(1'b0),
 
         //b
         .araddr_i_b(lsu_araddr),

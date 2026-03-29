@@ -23,34 +23,18 @@ extern char _pmem_start;
 
 Area heap = RANGE(&_heap_start, &_heap_end);
 static const char mainargs[MAINARGS_MAX_LEN] = MAINARGS_PLACEHOLDER; // defined in CFLAGS
-/* npc版
+
 void putch(char ch) {
   outb(SERIAL_PORT, ch);
-}*/
-#define UART_BASE 0x10000000L
-#define UART_TX   0
-#define UART_LSR  5
-#define UART_LSR_THRE   0x20    // 发送保持寄存器空
+}
+
+
 // CSR寄存器地址定义
 #define CSR_MVENDORID 0xF11
 #define CSR_MARCHID   0xF12
-void putch(char ch) {
-  while(!(*(volatile char *)(UART_BASE + UART_LSR) & UART_LSR_THRE)){
-  }
-  *(volatile char *)(UART_BASE + UART_TX) = ch;
-}
-
 void halt(int code) {
   asm volatile("mv a0, %0; ebreak" : :"r"(code));
   while (1);
-}
-
-#define UART_DIV   0
-#define UART_LCR   3
-void set_div2() {
-  *(volatile char *)(UART_BASE + UART_LCR) = *(volatile char *)(UART_BASE + UART_LCR) | 0x80;
-  *(volatile char *)(UART_BASE + UART_DIV) = 20;
-  *(volatile char *)(UART_BASE + UART_LCR) = *(volatile char *)(UART_BASE + UART_LCR) & 0x7F;
 }
 
 // 内联汇编读取CSR寄存器
@@ -64,17 +48,14 @@ void print_mycsr() {
   // 读取CSR寄存器
   uint32_t mvendorid = read_csr(CSR_MVENDORID);
   uint32_t marchid = read_csr(CSR_MARCHID);
-  //set_div2();
   putch(mvendorid>>24);
   putch(mvendorid>>16);
   putch(mvendorid>>8);
   putch(mvendorid);
-  //printf("%s",mvendorid);
   printf("%d\n",marchid);
 }
 
 void _trm_init() {
-  set_div2();
   print_mycsr();
   int ret = main(mainargs);
   halt(ret);
