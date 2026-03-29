@@ -1,7 +1,7 @@
 From 4ed06d69b28f875f31c2e9341a3d6e761778ed6f Mon Sep 17 00:00:00 2001
 From: 201101121-Lingxiao Yan <3599153691@qq.com>
 Date: Sun, 29 Mar 2026 23:17:17 +0800
-Subject: [PATCH 3/3] end0329
+Subject: [PATCH 2/2] end0329
 
 ---
  perip/psram/psram.v | 5 +++--
