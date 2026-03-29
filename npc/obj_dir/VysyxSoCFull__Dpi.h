@@ -16,8 +16,6 @@ extern "C" {
 
 
     // DPI IMPORTS
-    // DPI import at /home/yanlx/ysyx-workbench/npc/vsrc/ysyx_25050137.v:3629:30
-    extern void ebreak();
     // DPI import at /home/yanlx/ysyx-workbench/ysyxSoC/perip/flash/flash.v:84:30
     extern void flash_read(int addr, int* data);
     // DPI import at /home/yanlx/ysyx-workbench/ysyxSoC/build/ysyxSoCFull.v:6723:30
