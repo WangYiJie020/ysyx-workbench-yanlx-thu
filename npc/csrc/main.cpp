@@ -570,11 +570,11 @@ void cpu_exec(uint64_t num) {
   for(i = 0; i < num; i++) {
     if(cpu_state == NPC_END){ //finish
       printf("finish,time_counter=%ld,inst_counter=%ld,data_counter=%ld\n",counter,inst_counter,data_counter);
-      printf("inst type count:\ncalculation:%ld\nbranch:%ld\nmem:%ld\nother:%ld\ncsr:%ld\nerror:%ld\n\n",inst_calculation,inst_branch,inst_mem,inst_other,inst_csr,inst_error);
-      printf("avg exec time:\ncalculation:%f\nbranch:%f\nmem:%f\nother:%f\ncsr:%f\n\n",length_calculation/(float)inst_calculation,length_branch/(float)inst_branch,length_mem/(float)inst_mem,length_other/(float)inst_other,length_csr/(float)inst_csr);
-      printf("avg access mem time:%f\n",process_time_all/(float)request_num);
-      printf("icache hit:%ld,miss:%ld,p=%f\n",icache_hit_counter,icache_miss_counter,icache_hit_counter/(float)(icache_hit_counter+icache_miss_counter));
-      printf("access_time=%f,miss_penalty=%f\n",icache_access_time/(float)icache_hit_counter,icache_miss_penalty/(float)icache_miss_counter);
+      //printf("inst type count:\ncalculation:%ld\nbranch:%ld\nmem:%ld\nother:%ld\ncsr:%ld\nerror:%ld\n\n",inst_calculation,inst_branch,inst_mem,inst_other,inst_csr,inst_error);
+      //printf("avg exec time:\ncalculation:%f\nbranch:%f\nmem:%f\nother:%f\ncsr:%f\n\n",length_calculation/(float)inst_calculation,length_branch/(float)inst_branch,length_mem/(float)inst_mem,length_other/(float)inst_other,length_csr/(float)inst_csr);
+      //printf("avg access mem time:%f\n",process_time_all/(float)request_num);
+      //printf("icache hit:%ld,miss:%ld,p=%f\n",icache_hit_counter,icache_miss_counter,icache_hit_counter/(float)(icache_hit_counter+icache_miss_counter));
+      //printf("access_time=%f,miss_penalty=%f\n",icache_access_time/(float)icache_hit_counter,icache_miss_penalty/(float)icache_miss_counter);
       break;
     }
     if(cpu_state == NPC_STOP) { //stop

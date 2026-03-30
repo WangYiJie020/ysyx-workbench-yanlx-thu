@@ -1046,6 +1046,10 @@ reg                   adder_a_src_lat;
 reg                   adder_out_src_lat;
 reg [3:0]             alu_op_lat;
 
+wire [`ysyx_25050137_CPU_WIDTH-1:0] a_in, b_in, a_out, add_out, pc_new, alu_result;
+wire [`ysyx_25050137_PC_WIDTH-1:0]  npc;
+wire                  zero;
+
 // =============================================================================
 // Combinational outputs from state
 // =============================================================================
@@ -1067,9 +1071,7 @@ assign waddr_csr_o        = waddr_csr_lat;
 // =============================================================================
 // Submodule interconnect (all combinational)
 // =============================================================================
-wire [`ysyx_25050137_CPU_WIDTH-1:0] a_in, b_in, a_out, add_out, pc_new, alu_result;
-wire [`ysyx_25050137_PC_WIDTH-1:0]  npc;
-wire                  zero;
+
 
 ysyx_25050137_mux21 Adder_A_Src (
     .d0  (pc),
@@ -1549,6 +1551,12 @@ module ysyx_25050137_idu(
         (use_rs2 && (raddr2 != 5'd0) && (raddr2 == exu_rd))
     ) &&(exu_rd_valid || lsu_rd_valid || wbu_rd_valid);
 
+    // ======== 状态机 ========
+    localparam S_IDLE = 2'b00, S_RECEIVE = 2'b01, S_SEND = 2'b10;
+
+    reg [1:0] current_state, next_state;
+    reg flag;
+
     // ======== RAW冒险 (仅load-use需要stall, 其余通过forwarding解决) ========
     wire isRAW;
     assign isRAW = load_use_hazard && (current_state == S_RECEIVE);
@@ -1589,11 +1597,7 @@ module ysyx_25050137_idu(
         .alu_op(alu_op)
     );
 
-    // ======== 状态机 ========
-    localparam S_IDLE = 2'b00, S_RECEIVE = 2'b01, S_SEND = 2'b10;
-
-    reg [1:0] current_state, next_state;
-    reg flag;
+    
 
     always @(*) begin
         case(current_state)
