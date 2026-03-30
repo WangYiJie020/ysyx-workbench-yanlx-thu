@@ -492,15 +492,17 @@ static void trace_and_difftest() {
     }
     skip_r = is_skip_ref;
 */
+/*
       if(skip_r==true) {
         diff_cpdutreg2ref();
 
       }
-      bool check = difftest_check();
+      
 
       if(is_skip_ref==false) {
         difftest_step();
       }
+      bool check = difftest_check();
 
       if(check==false) {
         cpu_state = NPC_ABORT;
@@ -511,7 +513,14 @@ static void trace_and_difftest() {
         is_skip_ref = false;
       } 
   }
-  
+  */
+      difftest_step();//ref exc once
+      bool check = difftest_check(); 
+
+      if(check==false) {
+        cpu_state = NPC_ABORT;
+        return;
+      }
 #endif
   WP * p = head;
   word_t expr(char *e, bool *success);
