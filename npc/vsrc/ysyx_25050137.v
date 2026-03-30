@@ -1175,8 +1175,13 @@ always @(posedge clk or posedge reset) begin
             default: state <= S_IDLE;
 
         endcase
+`ifdef VERILATOR_SIM
+        difftest_next_step({7'd0,npc_valid});
+`endif 
     end
 end
+
+
 
 endmodule
 
@@ -2568,9 +2573,7 @@ always @(posedge clk or posedge reset) begin
             // Single cycle, go back to idle           
             active <= 1'b0;
         end
-`ifdef VERILATOR_SIM
-        difftest_next_step({7'd0,active});
-`endif 
+
     end
 end
 
@@ -3712,7 +3715,7 @@ module ysyx_25050137
     always@(*) begin
         reg_return_value(reg_file[0],reg_file[1],reg_file[2],reg_file[3],reg_file[4],reg_file[5],reg_file[6],
         reg_file[7],reg_file[8],reg_file[9],reg_file[10],reg_file[11],reg_file[12],reg_file[13],reg_file[14],
-        reg_file[15],pc_lsu_to_wbu,csr_reg[2],csr_reg[0],csr_reg[3],csr_reg[1]);
+        reg_file[15],npc,csr_reg[2],csr_reg[0],csr_reg[3],csr_reg[1]);
     end
 `endif 
     
