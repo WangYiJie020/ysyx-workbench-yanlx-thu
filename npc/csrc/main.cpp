@@ -512,7 +512,7 @@ static void trace_and_difftest() {
       if(is_skip_ref==true) {
         is_skip_ref = false;
       } 
-  }
+  
   */
       difftest_step();//ref exc once
       bool check = difftest_check(); 
@@ -521,6 +521,7 @@ static void trace_and_difftest() {
         cpu_state = NPC_ABORT;
         return;
       }
+  }
 #endif
   WP * p = head;
   word_t expr(char *e, bool *success);
