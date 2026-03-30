@@ -64,7 +64,7 @@ bool checkregs(regfile *ref, regfile *dut) {
     printf("next reg pc is diff: ref = 0x%x, dut = 0x%x\n",ref->pc,dut->pc);
     check = false;
   }
-  for (int i = 0; i < ARRLEN(regs); i++) {
+  for (int i = 0; i < 16; i++) {
     if(ref->gpr[i] != dut->gpr[i]){
       printf("difftest error at nextpc = 0x%x, ",dut->pc);
       printf("reg %s is diff: ref = 0x%x, dut = 0x%x\n",regs[i],ref->gpr[i],dut->gpr[i]);
