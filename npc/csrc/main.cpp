@@ -381,9 +381,8 @@ bool difftest_check() {
   return checkregs(&ref, &cpu);
 }
 void diff_cpdutreg2ref() {
-  //cpu.pc = cpu.pc + 4;
   ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
-  printf("%x\n",cpu.pc);
+  //printf("%x\n",cpu.pc);
 }
 void difftest_step() { 
   ref_difftest_exec(1);
@@ -466,23 +465,43 @@ static void trace_and_difftest() {
   //log_write("%08x,%08x\n", top->pc,top->inst); 
 #ifdef DIFFTEST_ON
   if(difftest_check_all == true) {
-    /*
-    bool check;
+/*
+    if(is_skip_ref) {
+      //printf("skip\n");
+      //skip_r = is_skip_ref;
+      //diff_cpdutreg2ref();
+    }
+    else {
+      bool check = difftest_check();
+      if(skip_r) {
+        diff_cpdutreg2ref();
+        is_skip_ref = false;
+        printf("aa\n");
+        //difftest_step();
+      }
+      else{
+        //printf("a\n");
+        difftest_step();
+      }
+      //bool check = difftest_check();
+      
+      if(check==false) {
+        cpu_state = NPC_ABORT;
+        return;
+      }
+    }
+    skip_r = is_skip_ref;
+*/
       if(skip_r==true) {
         diff_cpdutreg2ref();
-        //skip_r = false;
+
       }
+      
 
       if(is_skip_ref==false) {
         difftest_step();
-        check = difftest_check();
       }
-      else  {
-        printf("a\n");
-        //skip_r = true;
-        //diff_cpdutreg2ref();
-      }
-      
+      bool check = difftest_check();
 
       if(check==false) {
         cpu_state = NPC_ABORT;
@@ -492,21 +511,7 @@ static void trace_and_difftest() {
       if(is_skip_ref==true) {
         is_skip_ref = false;
       } 
-  */
-
-    if (is_skip_ref) {
-        printf("difftest_skip at pc = 0x%x\n", cpu.pc);
-        diff_cpdutreg2ref();
-        //difftest_step();
-        is_skip_ref = false;
-    } else {
-        difftest_step();
-        if (!difftest_check()) {
-            cpu_state = NPC_ABORT;
-            return;
-        }
-    }
-    
+  
 
   /*
       difftest_step();//ref exc once
