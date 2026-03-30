@@ -468,7 +468,7 @@ static void trace_and_difftest() {
     bool check;
       if(skip_r==true) {
         diff_cpdutreg2ref();
-        skip_r = false;
+        //skip_r = false;
       }
 
       if(is_skip_ref==false) {
@@ -477,7 +477,7 @@ static void trace_and_difftest() {
       }
       else  {
         printf("a\n");
-        skip_r = true;
+        //skip_r = true;
         //diff_cpdutreg2ref();
       }
       
@@ -486,7 +486,7 @@ static void trace_and_difftest() {
         cpu_state = NPC_ABORT;
         return;
       }
-      //skip_r = is_skip_ref;
+      skip_r = is_skip_ref;
       if(is_skip_ref==true) {
         is_skip_ref = false;
       } 
