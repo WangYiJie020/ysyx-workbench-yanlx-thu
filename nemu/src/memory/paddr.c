@@ -27,7 +27,7 @@ static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
 #endif
 
 #define CONFIG_SRAMBASE 0x0f000000
-#define CONFIG_SDRAMBASE 0x80000000
+#define CONFIG_SDRAMBASE 0xa0000000
 
 static uint8_t sram[0x01000000] PG_ALIGN = {};
 
