@@ -10,6 +10,7 @@
 `ifdef VERILATOR_SIM
     import "DPI-C" function void ebreak();
     import "DPI-C" function void difftest_next_step(input byte difftest_check);
+    import "DPI-C" function void difftest_skip();
     import "DPI-C" function void reg_return_value(input int gpr_0,input int gpr_1,
     input int gpr_2,input int gpr_3,input int gpr_4,input int gpr_5,
     input int gpr_6,input int gpr_7,input int gpr_8,input int gpr_9,
@@ -2076,6 +2077,15 @@ always @(posedge clk or posedge reset) begin
                     ecall_lat         <= ecall_i;
                     waddr_csr_lat     <= waddr_csr_i;
 
+`ifdef VERILATOR_SIM
+                    // DPI-C: difftest skip for MMIO
+                    if (MemRead_i || MemWrite_i) begin
+                        if ((alu_result_i >= 32'h10000000 && alu_result_i <= 32'h10000fff) ||
+                            (alu_result_i >= 32'h02000000 && alu_result_i <= 32'h0200ffff)) begin
+                            difftest_skip();
+                        end
+                    end
+`endif 
                     // Decide next state
                     if (MemRead_i)
                         state <= S_AR;
