@@ -7,6 +7,22 @@
 `define ysyx_25050137_PC_INIT 32'h30000000
 `endif
 
+`ifdef VERILATOR_SIM
+    import "DPI-C" function void ebreak();
+    import "DPI-C" function void difftest_next_step(input byte difftest_check);
+    import "DPI-C" function void reg_return_value(input int gpr_0,input int gpr_1,
+    input int gpr_2,input int gpr_3,input int gpr_4,input int gpr_5,
+    input int gpr_6,input int gpr_7,input int gpr_8,input int gpr_9,
+    input int gpr_10,input int gpr_11,input int gpr_12,input int gpr_13,
+    input int gpr_14,input int gpr_15,input int gpr_16,input int gpr_17,
+    input int gpr_18,input int gpr_19,input int gpr_20,input int gpr_21,
+    input int gpr_22,input int gpr_23,input int gpr_24,input int gpr_25,
+    input int gpr_26,input int gpr_27,input int gpr_28,input int gpr_29,
+    input int gpr_30,input int gpr_31,input int pc,input int csr_reg_0,
+    input int csr_reg_1,input int csr_reg_2,input int csr_reg_3);
+`endif 
+
+
 module ysyx_25050137_adder(
     input [31:0]a,
     input [31:0]b,
@@ -2158,6 +2174,11 @@ module ysyx_25050137_regfile #(parameter ADDR_WIDTH = 5, parameter DATA_WIDTH = 
   input [ADDR_WIDTH-1:0] raddr2,
   output [DATA_WIDTH-1:0] rdata2,
 
+`ifdef VERILATOR_SIM
+  output [31:0] reg_file [0:15],
+  output [31:0] csr_reg [0:3],
+`endif 
+
   input [2:0] raddr_csr,
   output [DATA_WIDTH-1:0] rdata_csr,
   input [1:0] waddr_csr,
@@ -2168,9 +2189,25 @@ module ysyx_25050137_regfile #(parameter ADDR_WIDTH = 5, parameter DATA_WIDTH = 
 
 );
 
-
   reg [DATA_WIDTH-1:0] regs [1:15];
   reg [DATA_WIDTH-1:0] csr [0:3];
+
+`ifdef VERILATOR_SIM
+  genvar gv_i;
+  generate
+    for(gv_i=1;gv_i<16;gv_i++) begin
+        assign reg_file[gv_i] = regs[gv_i];
+    end
+  endgenerate
+
+  assign reg_file[0] = 0;
+
+  generate
+    for(gv_i=0;gv_i<4;gv_i++) begin
+        assign csr_reg[gv_i] = csr[gv_i];
+    end
+  endgenerate
+`endif 
 
   always @(posedge clk) begin
     if (wen && waddr != 0) regs[waddr] <= wdata;
@@ -2521,9 +2558,12 @@ always @(posedge clk or posedge reset) begin
             end
         end else begin
             // Writeback cycle — submodules output results combinationally
-            // Single cycle, go back to idle
+            // Single cycle, go back to idle           
             active <= 1'b0;
         end
+`ifdef VERILATOR_SIM
+        difftest_next_step(active);
+`endif 
     end
 end
 
@@ -3630,11 +3670,30 @@ module ysyx_25050137
 
 `ifdef VERILATOR_SIM
 import "DPI-C" function void ebreak();
+import "DPI-C" function void reg_return_value(input int gpr_0,input int gpr_1,
+input int gpr_2,input int gpr_3,input int gpr_4,input int gpr_5,
+input int gpr_6,input int gpr_7,input int gpr_8,input int gpr_9,
+input int gpr_10,input int gpr_11,input int gpr_12,input int gpr_13,
+input int gpr_14,input int gpr_15,input int gpr_16,input int gpr_17,
+input int gpr_18,input int gpr_19,input int gpr_20,input int gpr_21,
+input int gpr_22,input int gpr_23,input int gpr_24,input int gpr_25,
+input int gpr_26,input int gpr_27,input int gpr_28,input int gpr_29,
+input int gpr_30,input int gpr_31,input int pc,input int csr_reg_0,
+input int csr_reg_1,input int csr_reg_2,input int csr_reg_3);
+
     always@(*) begin       
         if(inst_from_mem == 32'h00100073) begin
             ebreak();
             //$finish;
         end
+    end
+
+    always@(*) begin
+        reg_return_value(reg_file[0],reg_file[1],reg_file[2],reg_file[3],reg_file[4],reg_file[5],reg_file[6],
+        reg_file[7],reg_file[8],reg_file[9],reg_file[10],reg_file[11],reg_file[12],reg_file[13],reg_file[14],
+        reg_file[15],reg_file[16],reg_file[17],reg_file[18],reg_file[19],reg_file[20],reg_file[21],reg_file[22],
+        reg_file[23],reg_file[24],reg_file[25],reg_file[26],reg_file[27],reg_file[28],reg_file[29],reg_file[30],
+        reg_file[31],pc_wbu_out,csr_reg[2],csr_reg[0],csr_reg[3],csr_reg[1]);
     end
 `endif 
     
