@@ -473,13 +473,14 @@ static void trace_and_difftest() {
 
       if(is_skip_ref==false) {
         difftest_step();
+        bool check = difftest_check();
       }
       else  {
         printf("a\n");
         skip_r = true;
         //diff_cpdutreg2ref();
       }
-      bool check = difftest_check();
+      
 
       if(check==false) {
         cpu_state = NPC_ABORT;

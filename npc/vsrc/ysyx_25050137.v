@@ -2079,7 +2079,7 @@ always @(posedge clk or posedge reset) begin
 
 `ifdef VERILATOR_SIM
                     // DPI-C: difftest skip for MMIO
-                    if (MemRead_i || MemWrite_i) begin
+                    if (MemRead_i) begin
                         if ((alu_result_i >= 32'h10000000 && alu_result_i <= 32'h10000fff) ||
                             (alu_result_i >= 32'h02000000 && alu_result_i <= 32'h0200ffff)) begin
                             difftest_skip();
