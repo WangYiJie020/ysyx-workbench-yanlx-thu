@@ -466,7 +466,7 @@ static void trace_and_difftest() {
 #ifdef DIFFTEST_ON
   if(difftest_check_all == true) {
 
-      if(skip_r==false) {
+      if(skip_r==true) {
         diff_cpdutreg2ref();
       }
 
