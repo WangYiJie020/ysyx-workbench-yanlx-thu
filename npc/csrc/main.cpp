@@ -465,42 +465,12 @@ static void trace_and_difftest() {
   //log_write("%08x,%08x\n", top->pc,top->inst); 
 #ifdef DIFFTEST_ON
   if(difftest_check_all == true) {
-/*
-    if(is_skip_ref) {
-      //printf("skip\n");
-      //skip_r = is_skip_ref;
-      //diff_cpdutreg2ref();
-    }
-    else {
-      bool check = difftest_check();
-      if(skip_r) {
-        diff_cpdutreg2ref();
-        is_skip_ref = false;
-        printf("aa\n");
-        //difftest_step();
-      }
-      else{
-        //printf("a\n");
-        difftest_step();
-      }
-      //bool check = difftest_check();
-      
-      if(check==false) {
-        cpu_state = NPC_ABORT;
-        return;
-      }
-    }
-    skip_r = is_skip_ref;
-*/
-/*
-      if(skip_r==true) {
-        diff_cpdutreg2ref();
-
-      }
-      
 
       if(is_skip_ref==false) {
         difftest_step();
+      }
+      else  {
+        diff_cpdutreg2ref();
       }
       bool check = difftest_check();
 
@@ -513,7 +483,8 @@ static void trace_and_difftest() {
         is_skip_ref = false;
       } 
   
-  */
+
+  /*
       difftest_step();//ref exc once
       bool check = difftest_check(); 
 
@@ -521,6 +492,7 @@ static void trace_and_difftest() {
         cpu_state = NPC_ABORT;
         return;
       }
+      */
   }
 #endif
   WP * p = head;
