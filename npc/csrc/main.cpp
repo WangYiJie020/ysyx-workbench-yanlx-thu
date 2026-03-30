@@ -494,7 +494,7 @@ static void trace_and_difftest() {
   */
 
   if (is_skip_ref) {
-        // 这条指令ref无法执行，跳过比对，把DUT状态同步给ref
+        printf("difftest_skip at pc = 0x%x\n", cpu.pc);
         diff_cpdutreg2ref();
         is_skip_ref = false;
     } else {
