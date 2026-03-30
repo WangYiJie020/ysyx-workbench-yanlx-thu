@@ -3421,7 +3421,10 @@ module ysyx_25050137
     wire [1:0] waddr_csr;
     wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_wdata;
     wire ecall;
-    
+
+`ifdef VERILATOR_SIM
+    wire [31:0] reg_file [0:15];
+    wire [31:0] csr_reg [0:3];
     ysyx_25050137_regfile Rgefile (
         .clk(clk),
         .reset(reset),
@@ -3432,7 +3435,27 @@ module ysyx_25050137
         .rdata1(rdata1),
         .raddr2(raddr2), //rs2
         .rdata2(rdata2),
-
+        .raddr_csr(raddr_csr),
+        .rdata_csr(rdata_csr),
+        .waddr_csr(waddr_csr),
+        .wdata_csr(csr_wdata),
+        .wen_csr(csr_write),
+        .ecall(ecall),
+        .pc(pc_wbu_out),
+        .reg_file(reg_file),//difftest
+        .csr_reg(csr_reg)//difftest
+    );
+`else 
+    ysyx_25050137_regfile Rgefile (
+        .clk(clk),
+        .reset(reset),
+        .wdata(wdata),
+        .waddr(waddr), //rd
+        .wen(reg_write),
+        .raddr1(raddr1), //rs1
+        .rdata1(rdata1),
+        .raddr2(raddr2), //rs2
+        .rdata2(rdata2),
         .raddr_csr(raddr_csr),
         .rdata_csr(rdata_csr),
         .waddr_csr(waddr_csr),
@@ -3442,6 +3465,8 @@ module ysyx_25050137
         .pc(pc_wbu_out)
         
     );
+`endif    
+    
 
     wire [`ysyx_25050137_CPU_WIDTH-1:0] alu_result_exu_to_lsu;
     wire [`ysyx_25050137_CPU_WIDTH-1:0] rs1_exu_to_lsu;
