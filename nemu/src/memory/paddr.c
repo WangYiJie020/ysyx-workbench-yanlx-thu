@@ -124,7 +124,7 @@ void paddr_write(paddr_t addr, int len, word_t data) {
     sdram_write(addr, len, data);
     return;
   }
-  //else return; //so file used to skip
+  else return; //so file used to skip
   IFDEF(CONFIG_DEVICE, mmio_write(addr, len, data); return);
   out_of_bound(addr);
 }

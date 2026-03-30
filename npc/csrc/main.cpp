@@ -22,7 +22,7 @@
 
 
 
-//#define  DIFFTEST_ON
+#define  DIFFTEST_ON
 #define  WAVE_ON
 //#define  TRACE_ON
 //#define NVBOARD_ON
@@ -296,9 +296,7 @@ void init_log(const char *log_file) {
 }
 extern "C" void reg_return_value(uint32_t gpr_0,uint32_t gpr_1,uint32_t gpr_2,uint32_t gpr_3,uint32_t gpr_4,\
 uint32_t gpr_5,uint32_t gpr_6,uint32_t gpr_7,uint32_t gpr_8,uint32_t gpr_9,uint32_t gpr_10,uint32_t gpr_11,uint32_t gpr_12,\
-uint32_t gpr_13,uint32_t gpr_14,uint32_t gpr_15,uint32_t gpr_16,uint32_t gpr_17,uint32_t gpr_18,uint32_t gpr_19,uint32_t gpr_20,\
-uint32_t gpr_21,uint32_t gpr_22,uint32_t gpr_23,uint32_t gpr_24,uint32_t gpr_25,uint32_t gpr_26,uint32_t gpr_27,uint32_t gpr_28,\
-uint32_t gpr_29,uint32_t gpr_30,uint32_t gpr_31,uint32_t pc,uint32_t csr_reg_0,uint32_t csr_reg_1,uint32_t csr_reg_2,uint32_t csr_reg_3){
+uint32_t gpr_13,uint32_t gpr_14,uint32_t gpr_15,uint32_t pc,uint32_t csr_reg_0,uint32_t csr_reg_1,uint32_t csr_reg_2,uint32_t csr_reg_3){
   cpu.gpr[0] = gpr_0;
   cpu.gpr[1] = gpr_1;
   cpu.gpr[2] = gpr_2;
@@ -315,22 +313,6 @@ uint32_t gpr_29,uint32_t gpr_30,uint32_t gpr_31,uint32_t pc,uint32_t csr_reg_0,u
   cpu.gpr[13] = gpr_13;
   cpu.gpr[14] = gpr_14;
   cpu.gpr[15] = gpr_15;
-  cpu.gpr[16] = gpr_16;
-  cpu.gpr[17] = gpr_17;
-  cpu.gpr[18] = gpr_18;
-  cpu.gpr[19] = gpr_19;
-  cpu.gpr[20] = gpr_20;
-  cpu.gpr[21] = gpr_21;
-  cpu.gpr[22] = gpr_22;
-  cpu.gpr[23] = gpr_23;
-  cpu.gpr[24] = gpr_24;
-  cpu.gpr[25] = gpr_25;
-  cpu.gpr[26] = gpr_26;
-  cpu.gpr[27] = gpr_27;
-  cpu.gpr[28] = gpr_28;
-  cpu.gpr[29] = gpr_29;
-  cpu.gpr[30] = gpr_30;
-  cpu.gpr[31] = gpr_31;
   cpu.pc = pc;
   cpu.csr_mepc = csr_reg_0;
   cpu.csr_mstatus = csr_reg_1;
@@ -483,14 +465,14 @@ static void trace_and_difftest() {
   //log_write("%08x,%08x\n", top->pc,top->inst); 
 #ifdef DIFFTEST_ON
   if(difftest_check_all == true) {
-/*
+
     if(is_skip_ref) {
       //printf("skip\n");
       //skip_r = is_skip_ref;
       //diff_cpdutreg2ref();
     }
     else {
-      bool check = difftest_check();
+      //bool check = difftest_check();
       if(skip_r) {
         diff_cpdutreg2ref();
         is_skip_ref = false;
@@ -501,7 +483,7 @@ static void trace_and_difftest() {
         //printf("a\n");
         difftest_step();
       }
-      //bool check = difftest_check();
+      bool check = difftest_check();
       
       if(check==false) {
         cpu_state = NPC_ABORT;
@@ -509,27 +491,37 @@ static void trace_and_difftest() {
       }
     }
     skip_r = is_skip_ref;
-*/
+
+/*
       if(skip_r==true) {
         diff_cpdutreg2ref();
 
       }
+      
       bool check = difftest_check();
-
       if(is_skip_ref==false) {
         difftest_step();
       }
+      
 
       if(check==false) {
         cpu_state = NPC_ABORT;
         return;
       }
       skip_r = is_skip_ref;
-      if(is_skip_ref==true) {
-        is_skip_ref = false;
-      } 
-  }
+     */  
   
+
+  /*
+      difftest_step();//ref exc once
+      bool check = difftest_check(); 
+
+      if(check==false) {
+        cpu_state = NPC_ABORT;
+        return;
+      }
+      */
+  }
 #endif
   WP * p = head;
   word_t expr(char *e, bool *success);

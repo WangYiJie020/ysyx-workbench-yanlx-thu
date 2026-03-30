@@ -57,6 +57,7 @@ all:
 sim: $(VSRCS) $(CSRCS) 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	verilator $(VSRCS) $(CSRCS) --cc --trace-fst --exe --build -Wno-DECLFILENAME --top-module $(TOPNAME) \
+		+define+VERILATOR_SIM \
 		+incdir+$(YSYX_DIR)/ysyxSoC/perip/uart16550/rtl \
 		+incdir+$(YSYX_DIR)/ysyxSoC/perip/spi/rtl \
 		--timescale "1ns/1ns" --no-timing --autoflush\
@@ -73,13 +74,13 @@ verilog:
 sim-iverilog: verilog
 	mkdir -p build
 	python3 -c "data=open('$(IMG)','rb').read(); f=open('build/mem.hex','w'); [f.write('@%08x %02x\n'%(i,data[i])) for i in range(len(data))]"
-	iverilog -o build/sim_out -g2012 -Dysyx_25050137_PC_INIT=32\'h80000000 build/ysyx_25050137.v vsrc/sim_top.v
+	iverilog -o build/sim_out -g2012 -Dysyx_25050137_PC_INIT=32\'h80000000 build/ysyx_25050137.v sim_top.v
 	cd build && vvp sim_out
 
 sim-iverilog-netlist:
 	mkdir -p build
 	python3 -c "data=open('$(IMG)','rb').read(); f=open('build/mem.hex','w'); [f.write('@%08x %02x\n'%(i,data[i])) for i in range(len(data))]"
-	iverilog -o build/sim_out -g2012 $(NETLIST) $(CELLS) vsrc/sim_top.v
+	iverilog -o build/sim_out -g2012 $(NETLIST) $(CELLS) sim_top.v
 	cd build && vvp sim_out
 
 include ../Makefile

@@ -7,6 +7,19 @@
 `define ysyx_25050137_PC_INIT 32'h30000000
 `endif
 
+`ifdef VERILATOR_SIM
+    import "DPI-C" function void ebreak();
+    import "DPI-C" function void difftest_next_step(input byte difftest_check);
+    import "DPI-C" function void difftest_skip();
+    import "DPI-C" function void reg_return_value(input int gpr_0,input int gpr_1,
+    input int gpr_2,input int gpr_3,input int gpr_4,input int gpr_5,
+    input int gpr_6,input int gpr_7,input int gpr_8,input int gpr_9,
+    input int gpr_10,input int gpr_11,input int gpr_12,input int gpr_13,
+    input int gpr_14,input int gpr_15,input int pc,input int csr_reg_0,
+    input int csr_reg_1,input int csr_reg_2,input int csr_reg_3);
+`endif 
+
+
 module ysyx_25050137_adder(
     input [31:0]a,
     input [31:0]b,
@@ -2064,6 +2077,16 @@ always @(posedge clk or posedge reset) begin
                     ecall_lat         <= ecall_i;
                     waddr_csr_lat     <= waddr_csr_i;
 
+`ifdef VERILATOR_SIM
+                    // DPI-C: difftest skip for MMIO
+                    if (MemRead_i) begin
+                        if ((alu_result_i >= 32'h10000000 && alu_result_i <= 32'h10000fff) ||
+                            (alu_result_i >= 32'h02000000 && alu_result_i <= 32'h0200ffff)) begin
+                            difftest_skip();
+                            //$display("difftest_skip\n");
+                        end
+                    end
+`endif 
                     // Decide next state
                     if (MemRead_i)
                         state <= S_AR;
@@ -2158,6 +2181,11 @@ module ysyx_25050137_regfile #(parameter ADDR_WIDTH = 5, parameter DATA_WIDTH = 
   input [ADDR_WIDTH-1:0] raddr2,
   output [DATA_WIDTH-1:0] rdata2,
 
+`ifdef VERILATOR_SIM
+  output [31:0] reg_file [0:15],
+  output [31:0] csr_reg [0:3],
+`endif 
+
   input [2:0] raddr_csr,
   output [DATA_WIDTH-1:0] rdata_csr,
   input [1:0] waddr_csr,
@@ -2168,9 +2196,25 @@ module ysyx_25050137_regfile #(parameter ADDR_WIDTH = 5, parameter DATA_WIDTH = 
 
 );
 
-
   reg [DATA_WIDTH-1:0] regs [1:15];
   reg [DATA_WIDTH-1:0] csr [0:3];
+
+`ifdef VERILATOR_SIM
+  genvar gv_i;
+  generate
+    for(gv_i=1;gv_i<16;gv_i++) begin
+        assign reg_file[gv_i] = regs[gv_i];
+    end
+  endgenerate
+
+  assign reg_file[0] = 0;
+
+  generate
+    for(gv_i=0;gv_i<4;gv_i++) begin
+        assign csr_reg[gv_i] = csr[gv_i];
+    end
+  endgenerate
+`endif 
 
   always @(posedge clk) begin
     if (wen && waddr != 0) regs[waddr] <= wdata;
@@ -2521,9 +2565,12 @@ always @(posedge clk or posedge reset) begin
             end
         end else begin
             // Writeback cycle — submodules output results combinationally
-            // Single cycle, go back to idle
+            // Single cycle, go back to idle           
             active <= 1'b0;
         end
+`ifdef VERILATOR_SIM
+        difftest_next_step({7'd0,active});
+`endif 
     end
 end
 
@@ -3381,7 +3428,10 @@ module ysyx_25050137
     wire [1:0] waddr_csr;
     wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_wdata;
     wire ecall;
-    
+
+`ifdef VERILATOR_SIM
+    wire [31:0] reg_file [0:15];
+    wire [31:0] csr_reg [0:3];
     ysyx_25050137_regfile Rgefile (
         .clk(clk),
         .reset(reset),
@@ -3392,7 +3442,27 @@ module ysyx_25050137
         .rdata1(rdata1),
         .raddr2(raddr2), //rs2
         .rdata2(rdata2),
-
+        .raddr_csr(raddr_csr),
+        .rdata_csr(rdata_csr),
+        .waddr_csr(waddr_csr),
+        .wdata_csr(csr_wdata),
+        .wen_csr(csr_write),
+        .ecall(ecall),
+        .pc(pc_wbu_out),
+        .reg_file(reg_file),//difftest
+        .csr_reg(csr_reg)//difftest
+    );
+`else 
+    ysyx_25050137_regfile Rgefile (
+        .clk(clk),
+        .reset(reset),
+        .wdata(wdata),
+        .waddr(waddr), //rd
+        .wen(reg_write),
+        .raddr1(raddr1), //rs1
+        .rdata1(rdata1),
+        .raddr2(raddr2), //rs2
+        .rdata2(rdata2),
         .raddr_csr(raddr_csr),
         .rdata_csr(rdata_csr),
         .waddr_csr(waddr_csr),
@@ -3402,6 +3472,8 @@ module ysyx_25050137
         .pc(pc_wbu_out)
         
     );
+`endif    
+    
 
     wire [`ysyx_25050137_CPU_WIDTH-1:0] alu_result_exu_to_lsu;
     wire [`ysyx_25050137_CPU_WIDTH-1:0] rs1_exu_to_lsu;
@@ -3628,13 +3700,20 @@ module ysyx_25050137
         .pc_o(pc_wbu_out)
     );
 
-//import "DPI-C" function void ebreak();
+`ifdef VERILATOR_SIM
+
     always@(*) begin       
         if(inst_from_mem == 32'h00100073) begin
-            //ebreak();
-            $finish;
+            ebreak();
+            //$finish;
         end
     end
-    
+
+    always@(*) begin
+        reg_return_value(reg_file[0],reg_file[1],reg_file[2],reg_file[3],reg_file[4],reg_file[5],reg_file[6],
+        reg_file[7],reg_file[8],reg_file[9],reg_file[10],reg_file[11],reg_file[12],reg_file[13],reg_file[14],
+        reg_file[15],pc_lsu_to_wbu,csr_reg[2],csr_reg[0],csr_reg[3],csr_reg[1]);
+    end
+`endif 
     
 endmodule
