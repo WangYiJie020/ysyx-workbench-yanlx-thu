@@ -497,11 +497,11 @@ static void trace_and_difftest() {
 
       }
       
-
+      bool check = difftest_check();
       if(is_skip_ref==false) {
         difftest_step();
       }
-      bool check = difftest_check();
+      
 
       if(check==false) {
         cpu_state = NPC_ABORT;
