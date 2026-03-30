@@ -497,6 +497,7 @@ static void trace_and_difftest() {
     if (is_skip_ref) {
         printf("difftest_skip at pc = 0x%x\n", cpu.pc);
         diff_cpdutreg2ref();
+        difftest_step();
         is_skip_ref = false;
     } else {
         difftest_step();
