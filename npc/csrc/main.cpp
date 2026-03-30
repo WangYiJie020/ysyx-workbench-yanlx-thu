@@ -465,6 +465,7 @@ static void trace_and_difftest() {
   //log_write("%08x,%08x\n", top->pc,top->inst); 
 #ifdef DIFFTEST_ON
   if(difftest_check_all == true) {
+    /*
     bool check;
       if(skip_r==true) {
         diff_cpdutreg2ref();
@@ -490,7 +491,19 @@ static void trace_and_difftest() {
       if(is_skip_ref==true) {
         is_skip_ref = false;
       } 
-  
+  */
+
+  if (is_skip_ref) {
+        // 这条指令ref无法执行，跳过比对，把DUT状态同步给ref
+        diff_cpdutreg2ref();
+        is_skip_ref = false;
+    } else {
+        difftest_step();
+        if (!difftest_check()) {
+            cpu_state = NPC_ABORT;
+            return;
+        }
+    }
 
   /*
       difftest_step();//ref exc once
