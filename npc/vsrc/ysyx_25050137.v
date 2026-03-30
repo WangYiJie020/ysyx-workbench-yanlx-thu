@@ -2562,7 +2562,7 @@ always @(posedge clk or posedge reset) begin
             active <= 1'b0;
         end
 `ifdef VERILATOR_SIM
-        difftest_next_step(active);
+        difftest_next_step({7'd0,active});
 `endif 
     end
 end
