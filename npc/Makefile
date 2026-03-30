@@ -58,7 +58,7 @@ sim: $(VSRCS) $(CSRCS)
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	verilator $(VSRCS) $(CSRCS) --cc --trace-fst --exe --build -Wno-DECLFILENAME --top-module $(TOPNAME) \
 		+define+VERILATOR_SIM \
-		-Dysyx_25050137_PC_INIT=32'h30000000 \
+		-Dysyx_25050137_PC_INIT="32'h30000000" \
 		+incdir+$(YSYX_DIR)/ysyxSoC/perip/uart16550/rtl \
 		+incdir+$(YSYX_DIR)/ysyxSoC/perip/spi/rtl \
 		--timescale "1ns/1ns" --no-timing --autoflush\
