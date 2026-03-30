@@ -127,11 +127,11 @@ module sim_top;
         $readmemh("mem.hex", mem);
     end
 
-    initial
-    begin            
-        $dumpfile("wave.vcd");        //生成的vcd文件名称
-        $dumpvars(0, sim_top);    //tb模块名称
-    end
+    //initial
+    //begin            
+    //    $dumpfile("wave.vcd");        //生成的vcd文件名称
+    //    $dumpvars(0, sim_top);    //tb模块名称
+    //end
 
     // 地址转换: AXI地址 -> 内存偏移
     function [31:0] addr2offset;
@@ -260,9 +260,9 @@ module sim_top;
         rst = 1;
         #30;
         rst = 0;
-        #1000000000; // 超时退出
-        $display("TIMEOUT");
-        $finish;
+        //#1000000000; // 超时退出
+        //$display("TIMEOUT");
+        //$finish;
     end
 
 endmodule

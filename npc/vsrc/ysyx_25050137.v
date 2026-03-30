@@ -4,7 +4,7 @@
 `define ysyx_25050137_REG_ADDR 5
 
 `ifndef ysyx_25050137_PC_INIT
-`define ysyx_25050137_PC_INIT 32'h30000000
+`define ysyx_25050137_PC_INIT 32'h80000000
 `endif
 
 `ifdef VERILATOR_SIM
@@ -1046,6 +1046,10 @@ reg                   adder_a_src_lat;
 reg                   adder_out_src_lat;
 reg [3:0]             alu_op_lat;
 
+wire [`ysyx_25050137_CPU_WIDTH-1:0] a_in, b_in, a_out, add_out, pc_new, alu_result;
+wire [`ysyx_25050137_PC_WIDTH-1:0]  npc;
+wire                  zero;
+
 // =============================================================================
 // Combinational outputs from state
 // =============================================================================
@@ -1067,9 +1071,7 @@ assign waddr_csr_o        = waddr_csr_lat;
 // =============================================================================
 // Submodule interconnect (all combinational)
 // =============================================================================
-wire [`ysyx_25050137_CPU_WIDTH-1:0] a_in, b_in, a_out, add_out, pc_new, alu_result;
-wire [`ysyx_25050137_PC_WIDTH-1:0]  npc;
-wire                  zero;
+
 
 ysyx_25050137_mux21 Adder_A_Src (
     .d0  (pc),
@@ -1549,6 +1551,12 @@ module ysyx_25050137_idu(
         (use_rs2 && (raddr2 != 5'd0) && (raddr2 == exu_rd))
     ) &&(exu_rd_valid || lsu_rd_valid || wbu_rd_valid);
 
+    // ======== 状态机 ========
+    localparam S_IDLE = 2'b00, S_RECEIVE = 2'b01, S_SEND = 2'b10;
+
+    reg [1:0] current_state, next_state;
+    reg flag;
+
     // ======== RAW冒险 (仅load-use需要stall, 其余通过forwarding解决) ========
     wire isRAW;
     assign isRAW = load_use_hazard && (current_state == S_RECEIVE);
@@ -1589,11 +1597,7 @@ module ysyx_25050137_idu(
         .alu_op(alu_op)
     );
 
-    // ======== 状态机 ========
-    localparam S_IDLE = 2'b00, S_RECEIVE = 2'b01, S_SEND = 2'b10;
-
-    reg [1:0] current_state, next_state;
-    reg flag;
+    
 
     always @(*) begin
         case(current_state)
@@ -1620,45 +1624,52 @@ module ysyx_25050137_idu(
     end
 
     always @(posedge clk or posedge reset) begin        
-        if (reset || reset_ifu == 1) begin
+        if (reset) begin
             current_state <= S_IDLE;
             idu_valid_o <= 0;
             idu_ready_o <= 0;
         end else begin
-            current_state <= next_state;
-
-            if (inst == 32'h0000100f)
-                fencei <= 1;
-            else
-                fencei <= 0;
-
-            if (current_state == S_IDLE)
-                idu_ready_o <= 1;
-            else
+            if(reset_ifu == 1'b1) begin
+                current_state <= S_IDLE;
+                idu_valid_o <= 0;
                 idu_ready_o <= 0;
-
-            if (current_state == S_IDLE) begin
-                idu_valid_o <= 0;
-                flag <= 0;
-                if (idu_valid_i == 1 && idu_ready_o == 1) begin
-                    pc <= pc_i;
-                    inst <= inst_i;
-                end
-            end
-            else if (current_state == S_RECEIVE) begin
-                // 只有load-use冒险才stall, 其它RAW通过forwarding解决
-                if (isRAW) begin
-                    idu_valid_o <= 0;   // stall: 等待load数据从memory返回
-                end
-                else begin 
-                    idu_valid_o <= 1;   // 无冒险或可forwarding, 正常发射
-                end
-            end
-            else if (current_state == S_SEND) begin
-                idu_valid_o <= 0;
             end
             else begin
-                idu_valid_o <= 0;
+                current_state <= next_state;
+
+                if (inst == 32'h0000100f)
+                    fencei <= 1;
+                else
+                    fencei <= 0;
+
+                if (current_state == S_IDLE)
+                    idu_ready_o <= 1;
+                else
+                    idu_ready_o <= 0;
+
+                if (current_state == S_IDLE) begin
+                    idu_valid_o <= 0;
+                    flag <= 0;
+                    if (idu_valid_i == 1 && idu_ready_o == 1) begin
+                        pc <= pc_i;
+                        inst <= inst_i;
+                    end
+                end
+                else if (current_state == S_RECEIVE) begin
+                    // 只有load-use冒险才stall, 其它RAW通过forwarding解决
+                    if (isRAW) begin
+                        idu_valid_o <= 0;   // stall: 等待load数据从memory返回
+                    end
+                    else begin 
+                        idu_valid_o <= 1;   // 无冒险或可forwarding, 正常发射
+                    end
+                end
+                else if (current_state == S_SEND) begin
+                    idu_valid_o <= 0;
+                end
+                else begin
+                    idu_valid_o <= 0;
+                end
             end
         end
     end
@@ -1761,83 +1772,92 @@ assign reset_o = ctrl_hazard;
 // State machine
 // =============================================================================
 always @(posedge clk or posedge reset) begin
-    if (reset || fencei==1) begin
+    if (reset) begin
         state      <= S_ADDR;
         pc_fetch   <= `ysyx_25050137_PC_INIT;
         pc_o       <= `ysyx_25050137_PC_INIT;
         inst_o     <= {`ysyx_25050137_INST_WIDTH{1'b0}};
         flush_pend <= 1'b0;
     end else begin
-
-        // ---- Latch jump request at any time ----
-        if (ctrl_hazard) begin
-            pc_fetch   <= npc_i;     // Immediately update PC (no npc_buf!)
-            flush_pend <= 1'b1;
+        if(fencei==1) begin
+            state      <= S_ADDR;
+            pc_fetch   <= `ysyx_25050137_PC_INIT;
+            pc_o       <= `ysyx_25050137_PC_INIT;
+            inst_o     <= {`ysyx_25050137_INST_WIDTH{1'b0}};
+            flush_pend <= 1'b0;
         end
+        else begin
 
-        // ---- State transitions ----
-        case (state)
-
-            // ----------------------------------------------------------
-            // S_ADDR: AR request on the bus, wait for arready
-            // ----------------------------------------------------------
-            S_ADDR: begin
-                if (arvalid_o && arready_i) begin
-                    // AR handshake done
-                    if (ctrl_hazard || flush_pend) begin
-                        // This address is stale, go flush and discard R data
-                        state <= S_FLUSH;
-                    end else begin
-                        state <= S_DATA;
-                    end
-                end
-                // else: keep arvalid high, wait for arready
+            // ---- Latch jump request at any time ----
+            if (ctrl_hazard) begin
+                pc_fetch   <= npc_i;     // Immediately update PC (no npc_buf!)
+                flush_pend <= 1'b1;
             end
 
-            // ----------------------------------------------------------
-            // S_DATA: Wait for R channel data
-            // ----------------------------------------------------------
-            S_DATA: begin
-                if (rvalid_i) begin
-                    if (ctrl_hazard || flush_pend) begin
-                        // Data arrived but stale, discard
+            // ---- State transitions ----
+            case (state)
+
+                // ----------------------------------------------------------
+                // S_ADDR: AR request on the bus, wait for arready
+                // ----------------------------------------------------------
+                S_ADDR: begin
+                    if (arvalid_o && arready_i) begin
+                        // AR handshake done
+                        if (ctrl_hazard || flush_pend) begin
+                            // This address is stale, go flush and discard R data
+                            state <= S_FLUSH;
+                        end else begin
+                            state <= S_DATA;
+                        end
+                    end
+                    // else: keep arvalid high, wait for arready
+                end
+
+                // ----------------------------------------------------------
+                // S_DATA: Wait for R channel data
+                // ----------------------------------------------------------
+                S_DATA: begin
+                    if (rvalid_i) begin
+                        if (ctrl_hazard || flush_pend) begin
+                            // Data arrived but stale, discard
+                            flush_pend <= 1'b0;
+                            state      <= S_ADDR;
+                        end else begin
+                            // Good data! Latch instruction and PC, go to output
+                            inst_o <= rdata_i;
+                            pc_o   <= pc_fetch;
+                            state  <= S_OUT;
+                        end
+                    end
+                end
+
+                // ----------------------------------------------------------
+                // S_OUT: Present instruction to IDU
+                // ----------------------------------------------------------
+                S_OUT: begin
+                    if (ctrl_hazard) begin
+                        // Jump! Discard current output, refetch
+                        state <= S_ADDR;
+                    end else if (ifu_valid_o && ifu_ready_i) begin
+                        // IDU accepted, advance to next instruction
+                        pc_fetch <= pc_fetch + 4;
+                        state    <= S_ADDR;
+                    end
+                end
+
+                // ----------------------------------------------------------
+                // S_FLUSH: Drain in-flight R data and discard
+                // ----------------------------------------------------------
+                S_FLUSH: begin
+                    if (rvalid_i) begin
+                        // Data arrived, discard it, restart fetch
                         flush_pend <= 1'b0;
                         state      <= S_ADDR;
-                    end else begin
-                        // Good data! Latch instruction and PC, go to output
-                        inst_o <= rdata_i;
-                        pc_o   <= pc_fetch;
-                        state  <= S_OUT;
                     end
                 end
-            end
 
-            // ----------------------------------------------------------
-            // S_OUT: Present instruction to IDU
-            // ----------------------------------------------------------
-            S_OUT: begin
-                if (ctrl_hazard) begin
-                    // Jump! Discard current output, refetch
-                    state <= S_ADDR;
-                end else if (ifu_valid_o && ifu_ready_i) begin
-                    // IDU accepted, advance to next instruction
-                    pc_fetch <= pc_fetch + 4;
-                    state    <= S_ADDR;
-                end
-            end
-
-            // ----------------------------------------------------------
-            // S_FLUSH: Drain in-flight R data and discard
-            // ----------------------------------------------------------
-            S_FLUSH: begin
-                if (rvalid_i) begin
-                    // Data arrived, discard it, restart fetch
-                    flush_pend <= 1'b0;
-                    state      <= S_ADDR;
-                end
-            end
-
-        endcase
+            endcase
+        end
     end
 end
 
@@ -2871,40 +2891,6 @@ module ysyx_25050137
     wire ifu_rvalid;
     wire ifu_rready;
 
-    ysyx_25050137_ifu IFU(
-        .clk(clk),
-        .reset(reset),
-        .fencei(fencei),
-
-        .araddr_o(ifu_araddr),
-        .arid_o(ifu_arid),
-        .arlen_o(ifu_arlen),
-        .arsize_o(ifu_arsize),
-        .arburst_o(ifu_arburst),
-        .arvalid_o(ifu_arvalid),
-        .arready_i(ifu_arready),
-        .rdata_i(ifu_rdata),
-        .rresp_i(ifu_rresp),
-        .rlast_i(ifu_rlast),
-        .rid_i(ifu_rid),
-        .rvalid_i(ifu_rvalid),
-        .rready_o(ifu_rready),
-
-        .npc_i(npc),
-        .npc_valid(npc_valid),
-        .reset_o(reset_ifu),
-
-        .pc_o(pc_ifu_to_idu),
-        .inst_o(inst_ifu_to_idu),
-
-        .ifu_valid_o(valid_ifu_to_idu),
-        .ifu_ready_i(ready_ifu_to_idu)
-
-    );
-
-    assign pc_to_mem = pc_ifu_to_idu;
-    assign inst_from_mem = inst_ifu_to_idu;
-
     wire fencei;
 
     wire [`ysyx_25050137_CPU_WIDTH-1:0] cache_araddr;
@@ -2920,44 +2906,6 @@ module ysyx_25050137
     wire [3:0] cache_rid;
     wire cache_rvalid;
     wire cache_rready;
-    
-
-    ysyx_25050137_icache ICACHE (
-        .clk(clk),
-        .reset(reset),
-
-        //CPU
-        .cpu_araddr_i(ifu_araddr),
-        .cpu_arid_i(ifu_arid),
-        .cpu_arlen_i(ifu_arlen),
-        .cpu_arsize_i(ifu_arsize),
-        .cpu_arburst_i(ifu_arburst),
-        .cpu_arvalid_i(ifu_arvalid),
-        .cpu_arready_o(ifu_arready),
-
-        .cpu_rdata_o(ifu_rdata),
-        .cpu_rresp_o(ifu_rresp),
-        .cpu_rlast_o(ifu_rlast),
-        .cpu_rid_o(ifu_rid),
-        .cpu_rvalid_o(ifu_rvalid),
-        .cpu_rready_i(ifu_rready),
-        //mem
-        .mem_araddr_o(cache_araddr),
-        .mem_arid_o(cache_arid),
-        .mem_arlen_o(cache_arlen),
-        .mem_arsize_o(cache_arsize),
-        .mem_arburst_o(cache_arburst),
-        .mem_arvalid_o(cache_arvalid),
-        .mem_arready_i(cache_arready),
-        .mem_rdata_i(cache_rdata),
-        .mem_rresp_i(cache_rresp),
-        .mem_rlast_i(cache_rlast),
-        .mem_rid_i(cache_rid),
-        .mem_rvalid_i(cache_rvalid),
-        .mem_rready_o(cache_rready),
-
-        .fencei(fencei)
-    );
 
     wire [`ysyx_25050137_CPU_WIDTH-1:0] lsu_araddr;
     wire [3:0] lsu_arid;
@@ -3048,6 +2996,171 @@ module ysyx_25050137
     wire [3:0] clint_bid;
     wire clint_bvalid;
     wire clint_bready;
+
+    wire [`ysyx_25050137_REG_ADDR-1:0] raddr1;
+    wire [`ysyx_25050137_REG_ADDR-1:0] raddr2;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] rdata1;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] rdata2;
+    wire [`ysyx_25050137_PC_WIDTH-1:0] pc_idu_to_exu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] rs1_idu_to_exu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] rs2_idu_to_exu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] imm_idu_to_exu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_rdata_idu_to_exu;
+    wire a_in_src_idu_to_exu;
+    wire [1:0] b_in_src_idu_to_exu;
+    wire [2:0] pc_srcs_idu_to_exu;
+    wire adder_a_src_idu_to_exu;
+    wire adder_out_src_idu_to_exu;
+    wire [3:0] alu_op_idu_to_exu;
+    //idu to exu to lsu or wbu
+    wire MemRead_idu_to_exu;
+    wire MemWrite_idu_to_exu;
+    wire [3:0] wmask_idu_to_exu;
+    wire [2:0] rmask_idu_to_exu;
+    wire wb_src_idu_to_exu;
+    wire csr_write_idu_to_exu;
+    wire csr_wdata_src_idu_to_exu;
+    wire reg_write_idu_to_exu;
+    wire [`ysyx_25050137_REG_ADDR-1:0] waddr_idu_to_exu;
+    wire ecall_idu_to_exu;
+    wire [1:0] waddr_csr_idu_to_exu;
+
+    wire valid_idu_to_exu;
+    wire ready_idu_to_exu;
+
+    wire [2:0] raddr_csr;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] rdata_csr;
+
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] wdata;
+    wire [`ysyx_25050137_REG_ADDR-1:0] waddr;
+    wire reg_write;
+
+    //write csr
+    wire csr_write;
+    wire [1:0] waddr_csr;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_wdata;
+    wire ecall;
+
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] alu_result_exu_to_lsu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] rs1_exu_to_lsu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] rs2_exu_to_lsu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_rdata_l_rs1_exu_to_lsu;
+    wire MemRead_exu_to_lsu;
+    wire MemWrite_exu_to_lsu;
+    wire [3:0] wmask_exu_to_lsu;
+    wire [2:0] rmask_exu_to_lsu;
+    wire wb_src_exu_to_lsu;
+    wire csr_write_exu_to_lsu;
+    wire csr_wdta_src_exu_to_lsu;
+    wire reg_write_exu_to_lsu;
+    wire [`ysyx_25050137_REG_ADDR-1:0] waddr_exu_to_lsu;
+    wire ecall_exu_to_lsu;
+    wire [1:0] waddr_csr_exu_to_lsu;
+
+    wire valid_exu_to_lsu;
+    wire ready_exu_to_lsu;
+
+    wire npc_valid;
+    wire rd_exu_valid;
+
+    wire [`ysyx_25050137_PC_WIDTH-1:0] pc_exu_to_lsu;
+
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] alu_result_lsu_to_wbu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] rs1_lsu_to_wbu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_rdata_l_rs1_lsu_to_wbu;
+    wire [`ysyx_25050137_CPU_WIDTH-1:0] datamem_readdata_lsu_to_wbu;
+    wire [2:0] rmask_lsu_to_wbu;
+    wire wb_src_lsu_to_wbu;
+    wire csr_write_lsu_to_wbu;
+    wire csr_wdata_src_lsu_to_wbu;
+    wire reg_write_lsu_to_wbu;
+    wire [`ysyx_25050137_REG_ADDR-1:0] waddr_lsu_to_wbu;
+    wire ecall_lsu_to_wbu;
+    wire [1:0] waddr_csr_lsu_to_wbu;
+
+    wire valid_lsu_to_wbu;
+    wire ready_lsu_to_wbu;
+
+    wire rd_lsu_valid;
+
+    wire [`ysyx_25050137_PC_WIDTH-1:0] pc_lsu_to_wbu;
+
+    wire rd_wbu_valid;
+
+    wire [`ysyx_25050137_PC_WIDTH-1:0] pc_wbu_out;
+
+    ysyx_25050137_ifu IFU(
+        .clk(clk),
+        .reset(reset),
+        .fencei(fencei),
+
+        .araddr_o(ifu_araddr),
+        .arid_o(ifu_arid),
+        .arlen_o(ifu_arlen),
+        .arsize_o(ifu_arsize),
+        .arburst_o(ifu_arburst),
+        .arvalid_o(ifu_arvalid),
+        .arready_i(ifu_arready),
+        .rdata_i(ifu_rdata),
+        .rresp_i(ifu_rresp),
+        .rlast_i(ifu_rlast),
+        .rid_i(ifu_rid),
+        .rvalid_i(ifu_rvalid),
+        .rready_o(ifu_rready),
+
+        .npc_i(npc),
+        .npc_valid(npc_valid),
+        .reset_o(reset_ifu),
+
+        .pc_o(pc_ifu_to_idu),
+        .inst_o(inst_ifu_to_idu),
+
+        .ifu_valid_o(valid_ifu_to_idu),
+        .ifu_ready_i(ready_ifu_to_idu)
+
+    );
+
+    assign pc_to_mem = pc_ifu_to_idu;
+    assign inst_from_mem = inst_ifu_to_idu;
+
+    ysyx_25050137_icache ICACHE (
+        .clk(clk),
+        .reset(reset),
+
+        //CPU
+        .cpu_araddr_i(ifu_araddr),
+        .cpu_arid_i(ifu_arid),
+        .cpu_arlen_i(ifu_arlen),
+        .cpu_arsize_i(ifu_arsize),
+        .cpu_arburst_i(ifu_arburst),
+        .cpu_arvalid_i(ifu_arvalid),
+        .cpu_arready_o(ifu_arready),
+
+        .cpu_rdata_o(ifu_rdata),
+        .cpu_rresp_o(ifu_rresp),
+        .cpu_rlast_o(ifu_rlast),
+        .cpu_rid_o(ifu_rid),
+        .cpu_rvalid_o(ifu_rvalid),
+        .cpu_rready_i(ifu_rready),
+        //mem
+        .mem_araddr_o(cache_araddr),
+        .mem_arid_o(cache_arid),
+        .mem_arlen_o(cache_arlen),
+        .mem_arsize_o(cache_arsize),
+        .mem_arburst_o(cache_arburst),
+        .mem_arvalid_o(cache_arvalid),
+        .mem_arready_i(cache_arready),
+        .mem_rdata_i(cache_rdata),
+        .mem_rresp_i(cache_rresp),
+        .mem_rlast_i(cache_rlast),
+        .mem_rid_i(cache_rid),
+        .mem_rvalid_i(cache_rvalid),
+        .mem_rready_o(cache_rready),
+
+        .fencei(fencei)
+    );
+
+    
 
     ysyx_25050137_axi_arbiter AXI_Arbiter(
         .clk(clk),
@@ -3310,39 +3423,7 @@ module ysyx_25050137
         .bready_i(clint_bready)
     );
 
-    wire [`ysyx_25050137_REG_ADDR-1:0] raddr1;
-    wire [`ysyx_25050137_REG_ADDR-1:0] raddr2;
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] rdata1;
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] rdata2;
-    wire [`ysyx_25050137_PC_WIDTH-1:0] pc_idu_to_exu;
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] rs1_idu_to_exu;
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] rs2_idu_to_exu;
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] imm_idu_to_exu;
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_rdata_idu_to_exu;
-    wire a_in_src_idu_to_exu;
-    wire [1:0] b_in_src_idu_to_exu;
-    wire [2:0] pc_srcs_idu_to_exu;
-    wire adder_a_src_idu_to_exu;
-    wire adder_out_src_idu_to_exu;
-    wire [3:0] alu_op_idu_to_exu;
-    //idu to exu to lsu or wbu
-    wire MemRead_idu_to_exu;
-    wire MemWrite_idu_to_exu;
-    wire [3:0] wmask_idu_to_exu;
-    wire [2:0] rmask_idu_to_exu;
-    wire wb_src_idu_to_exu;
-    wire csr_write_idu_to_exu;
-    wire csr_wdata_src_idu_to_exu;
-    wire reg_write_idu_to_exu;
-    wire [`ysyx_25050137_REG_ADDR-1:0] waddr_idu_to_exu;
-    wire ecall_idu_to_exu;
-    wire [1:0] waddr_csr_idu_to_exu;
-
-    wire valid_idu_to_exu;
-    wire ready_idu_to_exu;
-
-    wire [2:0] raddr_csr;
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] rdata_csr;
+    
 
     ysyx_25050137_idu IDU(
         .clk(clk),
@@ -3419,15 +3500,7 @@ module ysyx_25050137
         .wbu_fwd_data(wdata)      // 新增: WBU级前递数据 (最终写回数据)
     );
 
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] wdata;
-    wire [`ysyx_25050137_REG_ADDR-1:0] waddr;
-    wire reg_write;
-
-    //write csr
-    wire csr_write;
-    wire [1:0] waddr_csr;
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_wdata;
-    wire ecall;
+    
 
 `ifdef VERILATOR_SIM
     wire [31:0] reg_file [0:15];
@@ -3474,30 +3547,6 @@ module ysyx_25050137
     );
 `endif    
     
-
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] alu_result_exu_to_lsu;
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] rs1_exu_to_lsu;
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] rs2_exu_to_lsu;
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_rdata_l_rs1_exu_to_lsu;
-    wire MemRead_exu_to_lsu;
-    wire MemWrite_exu_to_lsu;
-    wire [3:0] wmask_exu_to_lsu;
-    wire [2:0] rmask_exu_to_lsu;
-    wire wb_src_exu_to_lsu;
-    wire csr_write_exu_to_lsu;
-    wire csr_wdta_src_exu_to_lsu;
-    wire reg_write_exu_to_lsu;
-    wire [`ysyx_25050137_REG_ADDR-1:0] waddr_exu_to_lsu;
-    wire ecall_exu_to_lsu;
-    wire [1:0] waddr_csr_exu_to_lsu;
-
-    wire valid_exu_to_lsu;
-    wire ready_exu_to_lsu;
-
-    wire npc_valid;
-    wire rd_exu_valid;
-
-    wire [`ysyx_25050137_PC_WIDTH-1:0] pc_exu_to_lsu;
 
     ysyx_25050137_exu EXU(
         .clk(clk),
@@ -3557,25 +3606,7 @@ module ysyx_25050137
         .pc_o(pc_exu_to_lsu)
     );
 
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] alu_result_lsu_to_wbu;
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] rs1_lsu_to_wbu;
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] csr_rdata_l_rs1_lsu_to_wbu;
-    wire [`ysyx_25050137_CPU_WIDTH-1:0] datamem_readdata_lsu_to_wbu;
-    wire [2:0] rmask_lsu_to_wbu;
-    wire wb_src_lsu_to_wbu;
-    wire csr_write_lsu_to_wbu;
-    wire csr_wdata_src_lsu_to_wbu;
-    wire reg_write_lsu_to_wbu;
-    wire [`ysyx_25050137_REG_ADDR-1:0] waddr_lsu_to_wbu;
-    wire ecall_lsu_to_wbu;
-    wire [1:0] waddr_csr_lsu_to_wbu;
-
-    wire valid_lsu_to_wbu;
-    wire ready_lsu_to_wbu;
-
-    wire rd_lsu_valid;
-
-    wire [`ysyx_25050137_PC_WIDTH-1:0] pc_lsu_to_wbu;
+    
 
     ysyx_25050137_lsu LSU(
         .clk(clk),
@@ -3659,9 +3690,7 @@ module ysyx_25050137
         .pc_o(pc_lsu_to_wbu)
     );
 
-    wire rd_wbu_valid;
-
-    wire [`ysyx_25050137_PC_WIDTH-1:0] pc_wbu_out;
+    
     
     ysyx_25050137_wbu WBU(
         .clk(clk),
