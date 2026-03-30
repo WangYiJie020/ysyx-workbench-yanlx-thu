@@ -182,7 +182,7 @@ static int decode_exec(Decode *s) {
             );); 
 #else
   INSTPAT("0000000 00000 00000 000 00000 11100 11", ecall  , N, bool a; \
-            s->dnpc = isa_raise_intr(isa_reg_str2val("a5",&a),s->pc);\
+            s->dnpc = isa_raise_intr(isa_reg_str2val("a7",&a),s->pc);\
             IFDEF(CONFIG_ETRACE,\
               Log("mepc="FMT_PADDR", mcause="FMT_PADDR,cpu.csr_mepc,cpu.csr_mcause)\
             );); 
