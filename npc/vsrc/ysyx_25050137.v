@@ -3628,7 +3628,7 @@ module ysyx_25050137
         .pc_o(pc_wbu_out)
     );
 
-`ifndef __ICARUS__
+`ifdef VERILATOR_SIM
 import "DPI-C" function void ebreak();
     always@(*) begin       
         if(inst_from_mem == 32'h00100073) begin
