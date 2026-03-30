@@ -22,8 +22,8 @@
 
 
 
-#define  DIFFTEST_ON
-#define  WAVE_ON
+//#define  DIFFTEST_ON
+//#define  WAVE_ON
 //#define  TRACE_ON
 //#define NVBOARD_ON
 
@@ -476,7 +476,7 @@ static void trace_and_difftest() {
       if(skip_r) {
         diff_cpdutreg2ref();
         is_skip_ref = false;
-        printf("aa\n");
+        //printf("aa\n");
         //difftest_step();
       }
       else{
