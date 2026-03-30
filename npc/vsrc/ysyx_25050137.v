@@ -2083,7 +2083,7 @@ always @(posedge clk or posedge reset) begin
                         if ((alu_result_i >= 32'h10000000 && alu_result_i <= 32'h10000fff) ||
                             (alu_result_i >= 32'h02000000 && alu_result_i <= 32'h0200ffff)) begin
                             difftest_skip();
-                            $display("difftest_skip\n");
+                            //$display("difftest_skip\n");
                         end
                     end
 `endif 
