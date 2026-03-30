@@ -493,6 +493,12 @@ static void trace_and_difftest() {
         is_skip_ref = false;
       } 
   */
+    if(is_skip_ref == false) {
+      if (!difftest_check()) {
+            cpu_state = NPC_ABORT;
+            return;
+        }
+    }
 
     if (is_skip_ref) {
         printf("difftest_skip at pc = 0x%x\n", cpu.pc);
@@ -501,11 +507,9 @@ static void trace_and_difftest() {
         is_skip_ref = false;
     } else {
         difftest_step();
-        if (!difftest_check()) {
-            cpu_state = NPC_ABORT;
-            return;
-        }
+        
     }
+    
 
   /*
       difftest_step();//ref exc once
@@ -589,10 +593,11 @@ void cpu_exec(uint64_t num) {
     // tfp->dump(contextp->time()); //dump wave
     //contextp->timeInc(1); //推动仿真时间
 #else
+    trace_and_difftest();
     top->clock = 0; top->eval();
     top->clock = 1; top->eval();
     counter++;
-    trace_and_difftest();
+    
 
     tfp->dump(contextp->time()); //dump wave
     contextp->timeInc(1); //推动仿真时间
