@@ -50,16 +50,6 @@ module sram #(
     // 在模块顶部声明
     reg [63:0] sim_time_us;
 
-    // 字对齐地址（去掉低2位）
-    wire [19:0] rd_base = {araddr[31:2], 2'b00} - MEM_BASE;  // 低2位清零，字对齐
-    wire [19:0] wr_base = {awaddr[31:2], 2'b00} - MEM_BASE;  // 低2位清零，字对齐
-
-    wire write_uart;
-    wire read_clint_low,read_clint_high;
-    assign write_uart = (awaddr==32'ha00003f8);
-    assign read_clint_low = (araddr==32'h02000048);
-    assign read_clint_high = (araddr==32'h0200004c);
-
     reg ar_state;
     reg r_state;
     reg aw_state;
@@ -78,6 +68,16 @@ module sram #(
 
     assign rid_o = 0;
     assign bid_o = 0;
+
+    // 字对齐地址（去掉低2位）
+    wire [19:0] rd_base = {araddr[31:2], 2'b00} - MEM_BASE;  // 低2位清零，字对齐
+    wire [19:0] wr_base = {awaddr[31:2], 2'b00} - MEM_BASE;  // 低2位清零，字对齐
+
+    wire write_uart;
+    wire read_clint_low,read_clint_high;
+    assign write_uart = (awaddr==32'ha00003f8);
+    assign read_clint_low = (araddr==32'h02000048);
+    assign read_clint_high = (araddr==32'h0200004c);
 
     // ============ AR 通道 ============
     always@(posedge clk, negedge rst_n) begin
