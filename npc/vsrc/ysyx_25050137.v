@@ -4,7 +4,7 @@
 `define ysyx_25050137_REG_ADDR 5
 
 `ifndef ysyx_25050137_PC_INIT
-`define ysyx_25050137_PC_INIT 32'h30000000
+`define ysyx_25050137_PC_INIT 32'h80000000
 `endif
 
 `ifdef VERILATOR_SIM
@@ -3742,6 +3742,15 @@ module ysyx_25050137
         reg_return_value(reg_file[0],reg_file[1],reg_file[2],reg_file[3],reg_file[4],reg_file[5],reg_file[6],
         reg_file[7],reg_file[8],reg_file[9],reg_file[10],reg_file[11],reg_file[12],reg_file[13],reg_file[14],
         reg_file[15],pc_lsu_to_wbu,csr_reg[2],csr_reg[0],csr_reg[3],csr_reg[1]);
+    end
+`endif 
+
+`ifdef __ICARUS__
+    always@(*) begin       
+        if(inst_from_mem == 32'h00100073) begin
+            //ebreak();
+            $finish;
+        end
     end
 `endif 
     
