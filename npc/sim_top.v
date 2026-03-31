@@ -1,5 +1,273 @@
 `timescale 1ns/1ns
 
+module sram #(
+    parameter MEM_BASE = 32'h8000_0000,
+    parameter CPU_WIDTH = 32,
+    parameter R_DELAY = 1,
+    parameter W_DELAY = 1,
+    parameter MEM_SIZE = 2**20         // 1MB
+)(
+    input clk,
+    input rst_n,
+
+    input [CPU_WIDTH-1:0] araddr_i,
+    input [3:0] arid_i,
+    input [7:0] arlen_i,
+    input [2:0] arsize_i,
+    input [1:0] arburst_i,
+    input arvalid_i,
+    output reg arready_o,
+
+    output reg [CPU_WIDTH-1:0] rdata_o,
+    output reg [1:0] rresp_o,
+    output reg rlast_o,
+    output reg [3:0] rid_o,
+    output reg rvalid_o,
+    input rready_i,
+
+    input [CPU_WIDTH-1:0] awaddr_i,
+    input [3:0] awid_i,
+    input [7:0] awlen_i,
+    input [2:0] awsize_i,
+    input [1:0] awburst_i,
+    input awvalid_i,
+    output reg awready_o,
+
+    input [CPU_WIDTH-1:0] wdata_i,
+    input [3:0] wstrb_i,
+    input wlast_i,
+    input wvalid_i,
+    output reg wready_o,
+
+    output reg [1:0] bresp_o,
+    output reg [3:0] bid_o,
+    output reg bvalid_o,
+    input bready_i
+);
+
+    // ============ 内存定义 ============
+    reg [7:0] mem [0:2**20-1];  // 1MB 字节寻址内存，按需调整大小
+    // 在模块顶部声明
+    reg [63:0] sim_time_us;
+
+    reg ar_state;
+    reg r_state;
+    reg aw_state;
+    reg w_state;
+    reg b_state;
+    reg [CPU_WIDTH-1:0] araddr;
+    reg [CPU_WIDTH-1:0] awaddr;
+    reg [CPU_WIDTH-1:0] wdata;
+    reg [3:0] wstrb;
+    reg wvalid;
+    reg flag_waddr,flag_wdata,flag_rdata,flag_raddr,flag_write;
+    reg [4:0] rdata_counter,wdata_counter,w_delay,r_delay;
+    reg [4:0] LFSR;
+    reg lfsr_in;
+    reg [1:0] write_box;
+
+    assign rid_o = 0;
+    assign bid_o = 0;
+
+    // 字对齐地址（去掉低2位）
+    wire [19:0] rd_base = {araddr[31:2], 2'b00} - MEM_BASE;  // 低2位清零，字对齐
+    wire [19:0] wr_base = {awaddr[31:2], 2'b00} - MEM_BASE;  // 低2位清零，字对齐
+
+    wire write_uart;
+    wire read_clint_low,read_clint_high;
+    assign write_uart = (awaddr==32'ha00003f8);
+    assign read_clint_low = (araddr==32'h02000048);
+    assign read_clint_high = (araddr==32'h0200004c);
+
+    // ============ AR 通道 ============
+    always@(posedge clk, negedge rst_n) begin
+        if(rst_n == 0) begin
+            arready_o <= 0;
+            ar_state <= 0;
+            araddr <= 0;
+        end
+        else begin
+            if(ar_state == 0 && arvalid_i == 1) begin
+                arready_o <= 1;
+                ar_state <= 1;
+            end
+            else if(ar_state == 1) begin
+                if(arvalid_i == 0) ar_state <= 0;
+                arready_o <= 0;
+            end
+
+            if(arready_o == 1 && arvalid_i == 1) begin
+                araddr <= araddr_i;
+                flag_raddr <= 1;
+            end
+            else 
+                flag_raddr <= 0;
+        end
+    end
+    
+    // ============ R 通道 — 用 mem[] 读取 ============
+    always@(posedge clk, negedge rst_n) begin
+        if(rst_n == 0) begin
+            r_state <= 0;
+            rvalid_o <= 0;
+            rdata_counter <= 0;
+            flag_rdata <= 0;
+            rlast_o <= 0;
+            r_delay <= LFSR;
+        end
+        else begin
+            if(flag_raddr == 1) flag_rdata <= 1;
+            else if(flag_rdata == 1) begin
+                if(rdata_counter == r_delay) begin
+                    rdata_counter <= 0;
+                    if (read_clint_low) begin
+                        sim_time_us = $time / 1000;
+                        rdata_o <= sim_time_us[31:0];  // 
+                    end else if (read_clint_high) begin
+                        sim_time_us = $time / 1000;
+                        rdata_o <= sim_time_us[63:32];       // 
+                    end else begin
+                    // ==== 替换 pmem_read：小端序拼接4字节 ====
+                        rdata_o <= {mem[rd_base+3], mem[rd_base+2],
+                                    mem[rd_base+1], mem[rd_base+0]};
+                    end
+                    rresp_o <= 2'b00;
+                    rlast_o <= 1;
+                    rvalid_o <= 1;
+                    flag_rdata <= 0;
+                    r_delay <= LFSR;
+                end
+                else begin
+                    rdata_counter <= rdata_counter + 1;
+                    rresp_o <= 2'b10;
+                    rlast_o <= 0;
+                    rvalid_o <= 0;
+                end
+            end
+            else begin
+                rvalid_o <= 0;
+                rdata_counter <= 0;
+                rresp_o <= 2'b10;
+                rlast_o <= 0;
+            end
+        end
+    end
+
+    // ============ AW 通道 ============
+    always@(posedge clk, negedge rst_n) begin
+        if(rst_n == 0) begin
+            awready_o <= 0;
+            aw_state <= 0;
+            awaddr <= 0;
+            flag_waddr <= 0;
+        end
+        else begin
+            if(aw_state == 0 && awvalid_i == 1) begin
+                awready_o <= 1;
+                aw_state <= 1;
+            end
+            else if(aw_state == 1) begin
+                if(awvalid_i == 0) aw_state <= 0;
+                awready_o <= 0;
+            end
+
+            if(awready_o == 1 && awvalid_i == 1) begin
+                awaddr <= awaddr_i;
+                flag_waddr <= 1; 
+            end 
+            else if(bresp_o == 0) begin
+                flag_waddr <= 0;
+            end else flag_waddr <= 0;
+        end
+    end
+
+    // ============ W 通道 ============
+    always@(posedge clk, negedge rst_n) begin
+        if(rst_n == 0) begin
+            wready_o <= 0;
+            w_state <= 0;
+            wdata <= 0;
+            wstrb <= 0;
+            flag_wdata <= 0;
+        end
+        else begin
+            if(w_state == 0 && wvalid_i == 1) begin
+                wready_o <= 1;
+                w_state <= 1;
+            end else if(w_state == 1) begin
+                if(wvalid_i == 0) w_state <= 0;
+                wready_o <= 0;
+            end
+
+            if(bresp_o == 0) 
+                flag_wdata <= 0;
+            else if(wready_o == 1 && wvalid_i == 1) begin
+                wdata <= wdata_i;
+                wstrb <= wstrb_i;
+                flag_wdata <= 1;
+            end else flag_wdata <= 0;
+        end
+    end
+
+    // ============ B 通道 — 用 mem[] 写入（带 wstrb 掩码） ============
+    always@(posedge clk, negedge rst_n) begin
+        if(rst_n == 0) begin
+            bresp_o <= 2'b10;
+            bvalid_o <= 0;
+            w_delay <= LFSR;
+            wdata_counter <= 0;
+        end
+        else begin 
+            if(flag_waddr == 1) write_box[0] <= 1;
+            if(flag_wdata == 1) write_box[1] <= 1;
+
+            if(write_box == 2'b11) begin
+                if(wdata_counter == w_delay) begin
+                    wdata_counter <= 0;
+                    // ==== 替换 pmem_write：按 wstrb 逐字节写入 ====
+                    if(write_uart) begin
+                        $write("%c", wdata[7:0]);
+                    end
+                    else begin
+                        if(wstrb[0]) mem[wr_base+0] <= wdata[ 7: 0];
+                        if(wstrb[1]) mem[wr_base+1] <= wdata[15: 8];
+                        if(wstrb[2]) mem[wr_base+2] <= wdata[23:16];
+                        if(wstrb[3]) mem[wr_base+3] <= wdata[31:24];
+                    end
+                    bresp_o <= 0;
+                    bvalid_o <= 1;
+                    write_box <= 0;
+                    w_delay <= LFSR;
+                end else begin
+                    wdata_counter <= wdata_counter + 1;
+                    bresp_o <= 2'b10;
+                    bvalid_o <= 0;
+                end
+            end else begin
+                bresp_o <= 2'b10;
+                bvalid_o <= 0;
+            end
+        end
+    end
+
+    // 加载程序
+    integer i;
+    initial begin
+        //for (i = 0; i < MEM_SIZE; i = i + 1) mem[i] = 8'h0;
+        $readmemh("mem.hex", mem);
+    end
+    
+    // ============ LFSR 随机延迟 ============
+    assign lfsr_in = LFSR[4] ^ LFSR[3] ^ LFSR[2] ^ LFSR[1] ^ LFSR[0];
+    always@(posedge clk, negedge rst_n) begin
+        if(rst_n == 0) LFSR <= 5'b00001;
+        else begin
+            LFSR <= {lfsr_in,LFSR[4:1]};
+        end
+    end
+
+endmodule
+
 module sim_top;
 
     reg clk = 0;
@@ -114,146 +382,55 @@ module sim_top;
         .io_slave_rid       ()
     );
 
-    // ---------- 内存模型 ----------
-    // 256KB 内存, 基地址 0x80000000
-    localparam MEM_BASE = 32'h80000000;
-    localparam MEM_SIZE = 8 * 1024 * 1024; // 8MB
-    reg [7:0] mem [0:MEM_SIZE-1];
+    sram u_sram(
+        .clk        (clk        ),
+        .rst_n      (!rst      ),
 
-    // 加载程序
-    integer i;
-    initial begin
-        for (i = 0; i < MEM_SIZE; i = i + 1) mem[i] = 8'h0;
-        $readmemh("mem.hex", mem);
+        // AR channel
+        .araddr_i   (araddr     ),
+        .arid_i     (arid       ),
+        .arlen_i    (arlen      ),
+        .arsize_i   (arsize     ),
+        .arburst_i  (arburst    ),
+        .arvalid_i  (arvalid    ),
+        .arready_o  (arready    ),
+
+        // R channel
+        .rdata_o    (rdata      ),
+        .rresp_o    (rresp      ),
+        .rlast_o    (rlast      ),
+        .rid_o      (rid        ),
+        .rvalid_o   (rvalid     ),
+        .rready_i   (rready     ),
+
+        // AW channel
+        .awaddr_i   (awaddr     ),
+        .awid_i     (awid       ),
+        .awlen_i    (awlen      ),
+        .awsize_i   (awsize     ),
+        .awburst_i  (awburst    ),
+        .awvalid_i  (awvalid    ),
+        .awready_o  (awready    ),
+
+        // W channel
+        .wdata_i    (wdata      ),
+        .wstrb_i    (wstrb      ),
+        .wlast_i    (wlast      ),
+        .wvalid_i   (wvalid     ),
+        .wready_o   (wready     ),
+
+        // B channel
+        .bresp_o    (bresp      ),
+        .bid_o      (bid        ),
+        .bvalid_o   (bvalid     ),
+        .bready_i   (bready     )
+    );
+
+    initial
+    begin            
+        $dumpfile("wave.vcd");        //生成的vcd文件名称
+        $dumpvars(0, sim_top);    //tb模块名称
     end
-
-    //initial
-    //begin            
-    //    $dumpfile("wave.vcd");        //生成的vcd文件名称
-    //    $dumpvars(0, sim_top);    //tb模块名称
-    //end
-
-    // 地址转换: AXI地址 -> 内存偏移
-    function [31:0] addr2offset;
-        input [31:0] addr;
-        begin
-            addr2offset = addr - MEM_BASE;
-        end
-    endfunction
-
-    // ---------- AXI4 读通道 ----------
-    reg [31:0] ar_addr_reg;
-    reg [3:0]  ar_id_reg;
-    reg [7:0]  ar_len_reg;
-    reg [2:0]  ar_size_reg;
-    reg [7:0]  ar_cnt;
-    reg        ar_active;
-
-    initial begin
-        arready  = 1'b0;
-        rvalid   = 1'b0;
-        rdata    = 32'b0;
-        rresp    = 2'b0;
-        rlast    = 1'b0;
-        rid      = 4'b0;
-        ar_active = 1'b0;
-    end
-
-    always @(posedge clk) begin
-        if (rst) begin
-            arready  <= 1'b1;
-            rvalid   <= 1'b0;
-            ar_active <= 1'b0;
-        end else if (!ar_active && arvalid && arready) begin
-            // 接收读地址
-            ar_addr_reg <= araddr;
-            ar_id_reg   <= arid;
-            ar_len_reg  <= arlen;
-            ar_size_reg <= arsize;
-            ar_cnt      <= 8'd0;
-            ar_active   <= 1'b1;
-            arready     <= 1'b0;
-        end else if (ar_active) begin
-            // 返回读数据
-            if (!rvalid || rready) begin
-                rvalid <= 1'b1;
-                rid    <= ar_id_reg;
-                rresp  <= 2'b00;
-                begin : read_mem_block
-                    reg [31:0] offset;
-                    offset = addr2offset(ar_addr_reg);
-                    rdata <= {mem[offset+3], mem[offset+2], mem[offset+1], mem[offset]};
-                end
-                rlast <= (ar_cnt == ar_len_reg);
-                if (ar_cnt == ar_len_reg) begin
-                    ar_active <= 1'b0;
-                    arready   <= 1'b1;
-                end else begin
-                    ar_cnt      <= ar_cnt + 1;
-                    ar_addr_reg <= ar_addr_reg + (1 << ar_size_reg);
-                end
-            end
-        end else begin
-            if (rvalid && rready) begin
-                rvalid <= 1'b0;
-                rlast  <= 1'b0;
-            end
-        end
-    end
-
-    // ---------- AXI4 写通道 ----------
-    reg [31:0] aw_addr_reg;
-    reg [3:0]  aw_id_reg;
-    reg        aw_active;
-
-    initial begin
-        awready  = 1'b0;
-        wready   = 1'b0;
-        bvalid   = 1'b0;
-        bresp    = 2'b0;
-        bid      = 4'b0;
-        aw_active = 1'b0;
-    end
-
-    always @(posedge clk) begin
-        if (rst) begin
-            awready   <= 1'b1;
-            wready    <= 1'b0;
-            bvalid    <= 1'b0;
-            aw_active <= 1'b0;
-        end else if (!aw_active && awvalid && awready) begin
-            aw_addr_reg <= awaddr;
-            aw_id_reg   <= awid;
-            aw_active   <= 1'b1;
-            awready     <= 1'b0;
-            wready      <= 1'b1;
-        end else if (aw_active && wvalid && wready) begin
-            // 写入内存
-            begin : write_mem_block
-                reg [31:0] offset;
-                offset = addr2offset(aw_addr_reg);
-                if (wstrb[0]) mem[offset+0] <= wdata[7:0];
-                if (wstrb[1]) mem[offset+1] <= wdata[15:8];
-                if (wstrb[2]) mem[offset+2] <= wdata[23:16];
-                if (wstrb[3]) mem[offset+3] <= wdata[31:24];
-            end
-            aw_addr_reg <= aw_addr_reg + 4;
-            if (wlast) begin
-                wready    <= 1'b0;
-                bvalid    <= 1'b1;
-                bid       <= aw_id_reg;
-                bresp     <= 2'b00;
-                aw_active <= 1'b0;
-            end
-        end else if (bvalid && bready) begin
-            bvalid  <= 1'b0;
-            awready <= 1'b1;
-        end
-    end
-
-    // ---------- ebreak 检测 (可选) ----------
-    // 如果处理器遇到 ebreak 指令, 可以通过某种方式通知仿真结束
-    // 你可以根据需要修改这部分
 
     // ---------- 控制 ----------
     initial begin

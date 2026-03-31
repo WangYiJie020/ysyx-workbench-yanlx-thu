@@ -3744,5 +3744,14 @@ module ysyx_25050137
         reg_file[15],pc_lsu_to_wbu,csr_reg[2],csr_reg[0],csr_reg[3],csr_reg[1]);
     end
 `endif 
+
+`ifdef __ICARUS__
+    always@(*) begin       
+        if(inst_from_mem == 32'h00100073) begin
+            //ebreak();
+            $finish;
+        end
+    end
+`endif 
     
 endmodule
