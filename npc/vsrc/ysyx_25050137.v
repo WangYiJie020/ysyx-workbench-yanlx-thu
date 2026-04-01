@@ -1655,7 +1655,6 @@ module ysyx_25050137_idu(
 
                 if (current_state == S_IDLE) begin
                     idu_valid_o <= 0;
-                    flag <= 0;
                     if (idu_valid_i == 1 && idu_ready_o == 1) begin
                         pc <= pc_i;
                         inst <= inst_i;
@@ -2234,7 +2233,12 @@ module ysyx_25050137_regfile #(parameter ADDR_WIDTH = 5, parameter DATA_WIDTH = 
 );
 
   reg [DATA_WIDTH-1:0] regs [1:15];
-  reg [DATA_WIDTH-1:0] csr [0:3];
+  //reg [DATA_WIDTH-1:0] csr [0:3];
+
+  reg [DATA_WIDTH-1:0] csr_mstatus;
+  reg [DATA_WIDTH-1:0] csr_mtvec;
+  reg [DATA_WIDTH-1:0] csr_mepc;
+  reg [DATA_WIDTH-1:0] csr_mcause;
 
 `ifdef VERILATOR_SIM
   genvar gv_i;
@@ -2245,12 +2249,11 @@ module ysyx_25050137_regfile #(parameter ADDR_WIDTH = 5, parameter DATA_WIDTH = 
   endgenerate
 
   assign reg_file[0] = 0;
-
-  generate
-    for(gv_i=0;gv_i<4;gv_i++) begin
-        assign csr_reg[gv_i] = csr[gv_i];
-    end
-  endgenerate
+  assign csr_reg[0] = csr_mstatus;
+  assign csr_reg[1] = csr_mtvec;
+  assign csr_reg[2] = csr_mepc;
+  assign csr_reg[3] = csr_mcause;
+  
 `endif 
 
   always @(posedge clk) begin
@@ -2312,41 +2315,49 @@ module ysyx_25050137_regfile #(parameter ADDR_WIDTH = 5, parameter DATA_WIDTH = 
                     m2_8  | m2_9  | m2_10 | m2_11 |
                     m2_12 | m2_13 | m2_14 | m2_15;
 
-  always @(posedge clk, posedge reset) begin
-    if(reset) begin
-      csr[0] <= 32'h1800;
-    end
-    else if(wen_csr) begin
-      csr[waddr_csr] <= wdata_csr;
-      //case (waddr_csr)
-      //  2'b00: csr_mstatus <= wdata_csr;
-      // 2'b01: csr_mtvec <= wdata_csr;
-      //  2'b10: csr_mepc <= wdata_csr;
-      //  2'b11: csr_mcause <= wdata_csr;
-      //endcase
-    end
-    else if(ecall) begin
-      csr[2] <= pc;
-      csr[3] <= regs[15];
-    end
+    // mstatus — only CSR with reset value
+  always @(posedge clk or posedge reset) begin
+    if (reset)
+      csr_mstatus <= 32'h1800;
+    else if (wen_csr && waddr_csr == 2'd0)
+      csr_mstatus <= wdata_csr;
+  end
+ 
+  // mtvec — no reset needed
+  always @(posedge clk) begin
+    if (wen_csr && waddr_csr == 2'd1)
+      csr_mtvec <= wdata_csr;
+  end
+ 
+  // mepc — ecall or CSR write
+  always @(posedge clk) begin
+    if (ecall)
+      csr_mepc <= pc;
+    else if (wen_csr && waddr_csr == 2'd2)
+      csr_mepc <= wdata_csr;
+  end
+ 
+  // mcause — ecall or CSR write
+  always @(posedge clk) begin
+    if (ecall)
+      csr_mcause <= regs[15];
+    else if (wen_csr && waddr_csr == 2'd3)
+      csr_mcause <= wdata_csr;
   end
 
-  // CSR read: 4 writable + 2 constants, selected by raddr_csr[2:0]
-  // Use a small decode-and-OR for the 4 writable CSRs,
-  // then mux in the constants at the top level.
-  wire [3:0] csel = (4'b1 << raddr_csr[1:0]);
+  // 替换掉 AND-OR 读端口，用简单的 case MUX
+  reg [31:0] csr_reg_data;
+  always @(*) begin
+    case (raddr_csr[1:0])
+      2'd0: csr_reg_data = csr_mstatus;
+      2'd1: csr_reg_data = csr_mtvec;
+      2'd2: csr_reg_data = csr_mepc;
+      2'd3: csr_reg_data = csr_mcause;
+    endcase
+  end
 
-  wire [31:0] c0 = {32{csel[0]}} & csr[0];
-  wire [31:0] c1 = {32{csel[1]}} & csr[1];
-  wire [31:0] c2 = {32{csel[2]}} & csr[2];
-  wire [31:0] c3 = {32{csel[3]}} & csr[3];
-
-  wire [31:0] csr_reg_data = c0 | c1 | c2 | c3;
-
-  // Final output: if raddr_csr[2]=1, use constants; else use writable CSRs
   assign rdata_csr = raddr_csr[2] ? (raddr_csr[0] ? 32'h017E3C19 : 32'h79737978)
                                   : csr_reg_data;
-
 
 endmodule
 
@@ -3137,8 +3148,10 @@ module ysyx_25050137
 
     );
 
+`ifdef VERILATOR_SIM
     assign pc_to_mem = pc_ifu_to_idu;
     assign inst_from_mem = inst_ifu_to_idu;
+`endif 
 
     ysyx_25050137_icache ICACHE (
         .clk(clk),

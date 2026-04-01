@@ -79,7 +79,7 @@ sim-iverilog: verilog
 sim-iverilog-netlist:
 	mkdir -p build
 	python3 -c "data=open('$(IMG)','rb').read(); f=open('build/mem.hex','w'); [f.write('@%08x %02x\n'%(i,data[i])) for i in range(len(data))]"
-	iverilog -o build/sim_out -g2012 ysyx_25050137.v $(NETLIST) $(CELLS) sim_top.v
+	iverilog -o build/sim_out -g2012 $(NETLIST) $(CELLS) sim_top.v
 	cd build && vvp sim_out
 
 include ../Makefile
