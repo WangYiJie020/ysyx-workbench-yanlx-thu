@@ -1,7 +1,7 @@
 From 809bfc9728fa24419377ab6a42b9c16785feb417 Mon Sep 17 00:00:00 2001
 From: 201101121-Lingxiao Yan <3599153691@qq.com>
 Date: Wed, 1 Apr 2026 13:08:18 +0800
-Subject: [PATCH 6/6] again0401
+Subject: [PATCH 6/7] again0401
 
 ---
  bsp/abstract-machine/src/uart.c | 1 +
