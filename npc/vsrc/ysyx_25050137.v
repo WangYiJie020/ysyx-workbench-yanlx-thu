@@ -3151,9 +3151,8 @@ module ysyx_25050137
 `ifdef VERILATOR_SIM
     assign pc_to_mem = pc_ifu_to_idu;
     assign inst_from_mem = inst_ifu_to_idu;
-`endif 
 
-    ysyx_25050137_icache ICACHE (
+    ysyx_25050137_icache #(.NUM_BLOCKS(32)) ICACHE (
         .clk(clk),
         .reset(reset),
 
@@ -3190,7 +3189,44 @@ module ysyx_25050137
         .fencei(fencei)
     );
 
-    
+`else
+    ysyx_25050137_icache ICACHE(
+        .clk(clk),
+        .reset(reset),
+
+        //CPU
+        .cpu_araddr_i(ifu_araddr),
+        .cpu_arid_i(ifu_arid),
+        .cpu_arlen_i(ifu_arlen),
+        .cpu_arsize_i(ifu_arsize),
+        .cpu_arburst_i(ifu_arburst),
+        .cpu_arvalid_i(ifu_arvalid),
+        .cpu_arready_o(ifu_arready),
+
+        .cpu_rdata_o(ifu_rdata),
+        .cpu_rresp_o(ifu_rresp),
+        .cpu_rlast_o(ifu_rlast),
+        .cpu_rid_o(ifu_rid),
+        .cpu_rvalid_o(ifu_rvalid),
+        .cpu_rready_i(ifu_rready),
+        //mem
+        .mem_araddr_o(cache_araddr),
+        .mem_arid_o(cache_arid),
+        .mem_arlen_o(cache_arlen),
+        .mem_arsize_o(cache_arsize),
+        .mem_arburst_o(cache_arburst),
+        .mem_arvalid_o(cache_arvalid),
+        .mem_arready_i(cache_arready),
+        .mem_rdata_i(cache_rdata),
+        .mem_rresp_i(cache_rresp),
+        .mem_rlast_i(cache_rlast),
+        .mem_rid_i(cache_rid),
+        .mem_rvalid_i(cache_rvalid),
+        .mem_rready_o(cache_rready),
+
+        .fencei(fencei)
+    );
+`endif 
 
     ysyx_25050137_axi_arbiter AXI_Arbiter(
         .clk(clk),
