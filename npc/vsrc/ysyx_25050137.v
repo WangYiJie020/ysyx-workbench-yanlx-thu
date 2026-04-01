@@ -1323,7 +1323,6 @@ always @(posedge clk or posedge reset) begin
         cpu_addr <= 0;
         for (i = 0; i < NUM_BLOCKS; i = i + 1) begin
             valid_array[i] <= 1'b0;
-            tag_array[i] <= 1'b0;
         end
         // NOTE: tag_array and data_array are NOT reset — saves DFFR → DFF
     end else begin
@@ -1769,9 +1768,9 @@ reg init;
 // =============================================================================
 assign araddr_o   = pc_fetch;
 //assign arvalid_o  = (state == S_ADDR);
-assign arvalid_o = (state == S_ADDR);
-assign rready_o   = (state == S_DATA) || (state == S_FLUSH);
-assign ifu_valid_o = (state == S_OUT);
+assign arvalid_o = (state === S_ADDR);
+assign rready_o   = (state === S_DATA) || (state === S_FLUSH);
+assign ifu_valid_o = (state === S_OUT);
 
 // reset_o: pulse high for one cycle when ctrl_hazard detected
 // Drives downstream flush — combinational from npc_valid
