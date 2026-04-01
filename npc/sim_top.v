@@ -426,11 +426,11 @@ module sim_top;
         .bready_i   (bready     )
     );
 
-    initial
-    begin            
-        $dumpfile("wave.vcd");        //生成的vcd文件名称
-        $dumpvars(0, sim_top);    //tb模块名称
-    end
+    //initial
+    //begin            
+    //    $dumpfile("wave.vcd");        //生成的vcd文件名称
+    //    $dumpvars(0, sim_top);    //tb模块名称
+   // end
 
     // ---------- 控制 ----------
     initial begin

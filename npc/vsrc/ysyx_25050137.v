@@ -1132,6 +1132,7 @@ ysyx_25050137_alu ALU (
 always @(posedge clk or posedge reset) begin
     if (reset) begin
         state <= S_IDLE;
+        //pc <= `ysyx_25050137_PC_INIT;
     end else begin
         case (state)
 
@@ -1275,7 +1276,7 @@ wire [INDEX_BITS-1:0]  req_index  = cpu_addr[OFFSET_BITS+INDEX_BITS-1 : OFFSET_B
 wire [OFFSET_BITS-1:0] req_offset = cpu_addr[OFFSET_BITS-1 : 0];
 
 // Hit detection
-wire cache_hit = valid_array[req_index] && (tag_array[req_index] == req_tag);
+wire cache_hit = valid_array[req_index] && (tag_array[req_index] === req_tag);
 
 // =============================================================================
 // ALL outputs are combinational — no output registers!
@@ -1286,7 +1287,7 @@ assign cpu_arready_o = (state == S_IDLE);
 
 // CPU R channel — read directly from data_array
 assign cpu_rdata_o  = data_array[req_index][req_offset*8 +: DATA_WIDTH];
-assign cpu_rvalid_o = (state == S_CHECK && cache_hit && cpu_rready_i) ||
+assign cpu_rvalid_o = (state == S_CHECK && cache_hit) ||
                       (state == S_RESP);
 assign cpu_rlast_o  = cpu_rvalid_o;
 assign cpu_rresp_o  = 2'b00;
@@ -1319,8 +1320,11 @@ always @(posedge clk or posedge reset) begin
     if (reset) begin
         state     <= S_IDLE;
         burst_cnt <= 0;
-        for (i = 0; i < NUM_BLOCKS; i = i + 1)
+        cpu_addr <= 0;
+        for (i = 0; i < NUM_BLOCKS; i = i + 1) begin
             valid_array[i] <= 1'b0;
+            tag_array[i] <= 1'b0;
+        end
         // NOTE: tag_array and data_array are NOT reset — saves DFFR → DFF
     end else begin
 
@@ -1628,11 +1632,14 @@ module ysyx_25050137_idu(
             current_state <= S_IDLE;
             idu_valid_o <= 0;
             idu_ready_o <= 0;
+            fencei <= 0;
+            inst <= 32'h00000013;  // NOP (addi x0, x0, 0)
         end else begin
             if(reset_ifu == 1'b1) begin
                 current_state <= S_IDLE;
                 idu_valid_o <= 0;
                 idu_ready_o <= 0;
+                fencei <= 0;
             end
             else begin
                 current_state <= next_state;
@@ -1755,17 +1762,20 @@ reg [1:0]            state;
 reg [`ysyx_25050137_PC_WIDTH-1:0]  pc_fetch;     // The one true PC register
 reg                  flush_pend;   // Jump request waiting to be served
 
+reg init;
+
 // =============================================================================
 // Combinational outputs derived from state (no output registers!)
 // =============================================================================
 assign araddr_o   = pc_fetch;
-assign arvalid_o  = (state == S_ADDR);
-assign rready_o   = (state == S_DATA) || (state == S_FLUSH);
-assign ifu_valid_o = (state == S_OUT);
+//assign arvalid_o  = (state == S_ADDR);
+assign arvalid_o = (state === S_ADDR);
+assign rready_o   = (state === S_DATA) || (state === S_FLUSH);
+assign ifu_valid_o = (state === S_OUT);
 
 // reset_o: pulse high for one cycle when ctrl_hazard detected
 // Drives downstream flush — combinational from npc_valid
-wire ctrl_hazard = npc_valid && (npc_i != pc_fetch);
+wire ctrl_hazard = npc_valid && (npc_i !== pc_fetch);
 assign reset_o = ctrl_hazard;
 
 // =============================================================================
@@ -1778,6 +1788,7 @@ always @(posedge clk or posedge reset) begin
         pc_o       <= `ysyx_25050137_PC_INIT;
         inst_o     <= {`ysyx_25050137_INST_WIDTH{1'b0}};
         flush_pend <= 1'b0;
+        init <= 1'b1;
     end else begin
         if(fencei==1) begin
             state      <= S_ADDR;
@@ -1817,8 +1828,14 @@ always @(posedge clk or posedge reset) begin
                 // S_DATA: Wait for R channel data
                 // ----------------------------------------------------------
                 S_DATA: begin
-                    if (rvalid_i) begin
-                        if (ctrl_hazard || flush_pend) begin
+                    if (rvalid_i===1'b1) begin
+                        if(init == 1'b1) begin
+                            inst_o <= rdata_i;
+                            pc_o   <= pc_fetch;
+                            state  <= S_OUT;
+                            init <= 1'b0;
+                        end
+                        else if (ctrl_hazard===1'b1 || flush_pend===1'b1) begin
                             // Data arrived but stale, discard
                             flush_pend <= 1'b0;
                             state      <= S_ADDR;
@@ -1829,6 +1846,7 @@ always @(posedge clk or posedge reset) begin
                             state  <= S_OUT;
                         end
                     end
+                    else state <= S_DATA;
                 end
 
                 // ----------------------------------------------------------
