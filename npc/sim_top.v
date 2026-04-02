@@ -1,4 +1,4 @@
-`timescale 1ns/1ns
+`timescale 1ps/1ps
 
 module sram #(
     parameter MEM_BASE = 32'h8000_0000,
@@ -435,7 +435,7 @@ module sim_top;
     // ---------- 控制 ----------
     initial begin
         rst = 1;
-        #30;
+        #10;
         rst = 0;
         //#1000000000; // 超时退出
         //$display("TIMEOUT");
