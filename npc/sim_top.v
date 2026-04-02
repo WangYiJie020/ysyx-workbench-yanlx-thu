@@ -273,7 +273,7 @@ module sim_top;
     reg clk = 0;
     reg rst = 1;
 
-    always #5 clk = ~clk;
+    always #1 clk = ~clk;
 
     // AXI4 信号
     // AW 通道
