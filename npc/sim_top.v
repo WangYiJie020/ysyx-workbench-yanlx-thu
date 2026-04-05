@@ -227,7 +227,7 @@ module sram #(
                     // ==== 替换 pmem_write：按 wstrb 逐字节写入 ====
                     if(write_uart) begin
                         $write("%c", wdata[7:0]);
-                        $fflush();
+                        //$fflush();
                     end
                     else begin
                         if(wstrb[0]) mem[wr_base+0] <= wdata[ 7: 0];
@@ -428,10 +428,10 @@ module sim_top;
     );
 
     //initial
-    //begin            
+    ///begin            
     //    $dumpfile("wave.vcd");        //生成的vcd文件名称
     //    $dumpvars(0, sim_top);    //tb模块名称
-   // end
+    //end
 
     // ---------- 控制 ----------
     initial begin
@@ -442,5 +442,18 @@ module sim_top;
         //$display("TIMEOUT");
         //$finish;
     end
+
+//`ifdef __ICARUS__
+    // 路径根据你的层级: sim_top -> u_cpu -> Rgefile -> regs
+//    always@(*) begin       
+//        if(u_cpu.inst_ifu_to_idu == 32'h00100073) begin
+//            $display("EBREAK hit!");
+//            $display("  a0 (x10) = 0x%h", u_cpu.Rgefile.regs[10]);
+//            $display("  PC (IFU) = 0x%h", u_cpu.pc_ifu_to_idu);
+//            $display("  ra (x1) = 0x%h", u_cpu.Rgefile.regs[1]);
+ //           $finish;
+ //       end
+ //   end
+//`endif
 
 endmodule

@@ -12,6 +12,7 @@ SECTIONS {
   _etext = .;
   .rodata : {
     *(.rodata*)
+     *(.data.rel.ro .data.rel.ro.*)    /* ← 这行很可能缺失 */
   }
   .data :
   {

@@ -22,8 +22,8 @@
 
 
 
-//#define  DIFFTEST_ON
-//#define  WAVE_ON
+#define  DIFFTEST_ON
+#define  WAVE_ON
 //#define  TRACE_ON
 //#define NVBOARD_ON
 
@@ -171,7 +171,7 @@ extern "C" int sdram_read(int32_t bank, int32_t row, int32_t column, char mask){
 
 
 extern "C" void difftest_next_step(char difftest_check) {
-  difftest_check_all = difftest_check;
+  difftest_check_all = (bool)difftest_check;
 }
 extern "C" void flash_read(int32_t addr, int32_t *data) { 
   uint32_t tmp = (uint32_t)addr / 4;

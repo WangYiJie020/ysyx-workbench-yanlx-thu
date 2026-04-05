@@ -18,7 +18,7 @@ LDFLAGS   += --gc-sections -e _start
 NPCFLAGS  += -h 
 
 MAINARGS_MAX_LEN = 64
-MAINARGS_PLACEHOLDER = test
+MAINARGS_PLACEHOLDER = The insert-arg rule in Makefile will insert mainargs here.
 CFLAGS += -DMAINARGS_MAX_LEN=$(MAINARGS_MAX_LEN) -DMAINARGS_PLACEHOLDER=\""$(MAINARGS_PLACEHOLDER)"\"
 
 insert-arg: image

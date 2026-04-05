@@ -201,17 +201,17 @@ module ysyx_25050137_axi_arbiter (
     input  [2:0]            awsize_i_a,
     input  [1:0]            awburst_i_a,
     input                   awvalid_i_a,
-    output reg              awready_o_a,
+    output               awready_o_a,
     // W
     input  [`ysyx_25050137_CPU_WIDTH-1:0] wdata_i_a,
     input  [3:0]            wstrb_i_a,
     input                   wlast_i_a,
     input                   wvalid_i_a,
-    output reg              wready_o_a,
+    output               wready_o_a,
     // B
-    output reg [1:0]        bresp_o_a,
-    output reg [3:0]        bid_o_a,
-    output reg              bvalid_o_a,
+    output  [1:0]        bresp_o_a,
+    output  [3:0]        bid_o_a,
+    output               bvalid_o_a,
     input                   bready_i_a,
 
     // ========== Master B (e.g. LSU) ==========
@@ -237,17 +237,17 @@ module ysyx_25050137_axi_arbiter (
     input  [2:0]            awsize_i_b,
     input  [1:0]            awburst_i_b,
     input                   awvalid_i_b,
-    output reg              awready_o_b,
+    output               awready_o_b,
     // W
     input  [`ysyx_25050137_CPU_WIDTH-1:0] wdata_i_b,
     input  [3:0]            wstrb_i_b,
     input                   wlast_i_b,
     input                   wvalid_i_b,
-    output reg              wready_o_b,
+    output               wready_o_b,
     // B
-    output reg [1:0]        bresp_o_b,
-    output reg [3:0]        bid_o_b,
-    output reg              bvalid_o_b,
+    output  [1:0]        bresp_o_b,
+    output  [3:0]        bid_o_b,
+    output               bvalid_o_b,
     input                   bready_i_b,
 
     // ========== Slave (Memory) ==========
@@ -2260,6 +2260,8 @@ module ysyx_25050137_regfile #(parameter ADDR_WIDTH = 5, parameter DATA_WIDTH = 
     if (wen && waddr != 0) regs[waddr] <= wdata;
   end
 
+    integer i;
+
     // ============================================================
     // 读端口 1：decode-and-OR
     // ============================================================
@@ -2893,8 +2895,8 @@ module ysyx_25050137
     wire clk,reset_ifu;
     assign clk = clock;
 
-    wire [`ysyx_25050137_PC_WIDTH-1:0] pc_to_mem;
-    wire [`ysyx_25050137_INST_WIDTH-1:0] inst_from_mem;
+    //wire [`ysyx_25050137_PC_WIDTH-1:0] pc_to_mem;
+    //wire [`ysyx_25050137_INST_WIDTH-1:0] inst_from_mem;
     //wbu to ifu
     wire [`ysyx_25050137_PC_WIDTH-1:0] npc;
     wire valid_wbu_to_ifu;
@@ -3147,10 +3149,11 @@ module ysyx_25050137
         .ifu_ready_i(ready_ifu_to_idu)
 
     );
+    //assign pc_to_mem = pc_ifu_to_idu;
+    //assign inst_from_mem = inst_ifu_to_idu;
 
 `ifdef VERILATOR_SIM
-    assign pc_to_mem = pc_ifu_to_idu;
-    assign inst_from_mem = inst_ifu_to_idu;
+    
 
     ysyx_25050137_icache #(.NUM_BLOCKS(32)) ICACHE (
         .clk(clk),
@@ -3798,7 +3801,7 @@ module ysyx_25050137
 `ifdef VERILATOR_SIM
 
     always@(*) begin       
-        if(inst_from_mem == 32'h00100073) begin
+        if(inst_ifu_to_idu == 32'h00100073) begin
             ebreak();
             //$finish;
         end
@@ -3811,13 +3814,13 @@ module ysyx_25050137
     end
 `endif 
 
-`ifdef __ICARUS__
-    always@(*) begin       
-        if(inst_from_mem == 32'h00100073) begin
-            //ebreak();
-            $finish;
-        end
-    end
-`endif 
+//`ifdef __ICARUS__
+//    always@(*) begin       
+//        if(inst_ifu_to_idu == 32'h00100073) begin
+ //           //ebreak();
+ //           $finish;
+  //      end
+  //  end
+//`endif 
     
 endmodule
