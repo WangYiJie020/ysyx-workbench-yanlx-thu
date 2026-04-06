@@ -443,17 +443,17 @@ module sim_top;
         //$finish;
     end
 
-//`ifdef __ICARUS__
+`ifdef __ICARUS__
     // 路径根据你的层级: sim_top -> u_cpu -> Rgefile -> regs
-//    always@(*) begin       
-//        if(u_cpu.inst_ifu_to_idu == 32'h00100073) begin
-//            $display("EBREAK hit!");
-//            $display("  a0 (x10) = 0x%h", u_cpu.Rgefile.regs[10]);
-//            $display("  PC (IFU) = 0x%h", u_cpu.pc_ifu_to_idu);
-//            $display("  ra (x1) = 0x%h", u_cpu.Rgefile.regs[1]);
- //           $finish;
- //       end
- //   end
-//`endif
+   always@(*) begin       
+       if(u_cpu.inst_ifu_to_idu == 32'h00100073) begin
+           $display("EBREAK hit!");
+           // $display("  a0 (x10) = 0x%h", u_cpu.Rgefile.regs[10]);
+           // $display("  PC (IFU) = 0x%h", u_cpu.pc_ifu_to_idu);
+           // $display("  ra (x1) = 0x%h", u_cpu.Rgefile.regs[1]);
+           $finish;
+       end
+   end
+`endif
 
 endmodule
