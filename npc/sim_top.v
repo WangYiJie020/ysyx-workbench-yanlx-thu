@@ -227,7 +227,7 @@ module sram #(
                     // ==== 替换 pmem_write：按 wstrb 逐字节写入 ====
                     if(write_uart) begin
                         $write("%c", wdata[7:0]);
-                        //$fflush();
+                        $fflush();
                     end
                     else begin
                         if(wstrb[0]) mem[wr_base+0] <= wdata[ 7: 0];
